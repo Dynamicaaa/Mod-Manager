@@ -30,17 +30,6 @@ if (!app.isPackaged) {
 
 console.dir(global.ddmm_constants);
 
-import * as Sentry from "@sentry/electron";
-
-if (!global.ddmm_constants.sentry_disabled) {
-    Sentry.init({
-        dsn: "https://bf0edf3f287344d4969e3171c33af4ea@sentry.io/1297252",
-        onFatalError: () => {
-            // workaround for stacktrace being displayed (see getsentry/sentry-electron#146)
-        }
-    });
-}
-
 import {copyFileSync, existsSync, mkdirpSync, move, readdirSync, removeSync, unlinkSync} from "fs-extra";
 import {join as joinPath} from "path";
 
@@ -68,12 +57,12 @@ import SpecialCaseManager from "./mod/SpecialCaseManager";
 import IDiscordManager from "./discord/IDiscordManager";
 import BundledUIServer from "./utils/BundledUIServer";
 
-const DISCORD_ID = "453299645725016074";
+const DISCORD_ID = "1181746042056753216";
 
 // region Flags and references
 
 // User agent for API requests
-app.userAgentFallback = "DokiDokiModManager/" + app.getVersion() + " (zudo@doki.space)";
+app.userAgentFallback = "DokiDokiModManager/" + app.getVersion() + " (CanaryZen@proton.me)";
 
 // The last argument, might be a ddmm:// url
 const lastArg: string = process.argv.pop();

@@ -1,42 +1,78 @@
-# Doki Doki Mod Manager [![Build Status](https://travis-ci.org/DokiDokiModManager/Mod-Manager.svg?branch=master)](https://travis-ci.org/DokiDokiModManager/Mod-Manager) [![Build status](https://ci.appveyor.com/api/projects/status/s0ka71b7ascljkcy?svg=true)](https://ci.appveyor.com/project/ZudoMC/mod-manager) [![Translation status](https://hosted.weblate.org/widgets/doki-doki-mod-manager/-/doki-doki-mod-manager/svg-badge.svg)](https://hosted.weblate.org/engage/doki-doki-mod-manager/?utm_source=widget)
+# Doki Doki Mod Manager  
+![Build Status](https://img.shields.io/badge/Build-Success-ffffff?logo=yarn&style=for-the-badge&color=008556&logoColor=ff0000) ![Translation Status](https://img.shields.io/badge/Translated-80%25-ffffff?logo=googletranslate&style=for-the-badge&color=ffe000&logoColor=ffffff)
 
-Doki Doki Mod Manager is a mod manager for Doki Doki Literature Club!
+Doki Doki Mod Manager is a mod manager for *Doki Doki Literature Club!*  
 
-## Discord
+## Disclaimer  
 
-Got any questions, suggestions or complaints? Join the Discord server!
+This repository is a fork that maintains the original Doki Doki Mod Manager.  
 
-[DDMM Discord](https://discord.me/modmanager)
+## Contact  
 
-## IP Guidelines
+Got any questions, suggestions, or complaints? Reach out via email:  
+**CanaryZen@duck.com**  
 
-Doki Doki Mod Manager is a fan work of Doki Doki Literature Club, as defined by Team Salvato's [IP Guidelines](http://teamsalvato.com/ip-guidelines/).
+## IP Guidelines  
 
-## Download
+Doki Doki Mod Manager is a fan work of *Doki Doki Literature Club*, as defined by Team Salvato's [IP Guidelines](http://teamsalvato.com/ip-guidelines/).  
 
-Builds are available on the [Releases page](https://github.com/DokiDokiModManager/Mod-Manager/releases) for Windows, macOS and Linux.
+## Download  
 
-## Debug tools
+Builds are available on the [Releases page](https://github.com/Dynamicaaa/Mod-Manager/releases) for Windows, macOS, and Linux.  
 
-Set the following environment variables to enable debugging features.
+## Debug Tools  
 
-* `DDMM_LANG_PROOF` - adds prefixes to all localised strings.
-* `DDMM_DEVTOOLS` - opens devtools on launch.
-* `DDMM_INCOGNITO` - removes app name from titlebar, so people don't judge you.
-* `DDMM_LANG` - sets the language, see the `lang` folder.
-* `DDMM_DISCORD_ID` - change the Discord rich presence app ID.
+Enable debugging features by setting the following environment variables:  
 
-## Run from source
+- `DDMM_LANG_PROOF` - Adds prefixes to all localized strings.  
+- `DDMM_DEVTOOLS` - Opens developer tools on launch.  
+- `DDMM_INCOGNITO` - Removes the app name from the title bar to avoid judgment.  
+- `DDMM_LANG` - Sets the language (refer to the `lang` folder).  
+- `DDMM_DISCORD_ID` - Changes the Discord Rich Presence app ID.  
 
-For the latest changes, or if you want to contribute, you can run DDMM from source.
+## Run From Source  
 
-    $ git clone https://github.com/DokiDokiModManager/Mod-Manager
-    $ yarn && yarn start
+For the latest changes or to contribute, you can run Doki Doki Mod Manager from source:  
 
-## Licenses and Acknowledgements
+### Build Guide  
 
-Doki Doki Mod Manager is licensed under the [MIT License](LICENSE.txt). Contributions are welcomed!
+To build the project from source, follow these steps:
 
-[Sayonika assets](https://github.com/Sayo-nika/Press) licensed under [CC BY-NC-SA](https://github.com/Sayo-nika/Press/blob/master/LICENSE).
+1. **Install required software**  
+   You need the following to build the project:  
+   - **Python 3.9.x**: Make sure you have Python version 3.9.x installed. You can download it from [here](https://www.python.org/downloads/release/python-3910/).  
+   - **Node.js 18.x (LTS or Current)**: Make sure you have Node.js version 18.x installed (either LTS or Current). You can download it from [here](https://nodejs.org/).  
+   - **Yarn**: Install Yarn, the package manager, from [here](https://yarnpkg.com/getting-started/install/).
 
-[7-Zip (7za.exe)](https://www.7-zip.org/) licensed under [GNU LGPL](https://www.7-zip.org/license.txt).
+2. **Clone the repository**  
+   Clone the repository to your local machine using the following command:  
+   ```bash
+   git clone https://github.com/Dynamicaaa/Mod-Manager
+   ```
+
+3. **Navigate into the project directory**  
+   Change into the `Mod-Manager` directory:  
+   ```bash
+   cd Mod-Manager
+   ```
+
+4. **Install dependencies**  
+   Run the following command to install all the necessary dependencies for the project:  
+   ```bash
+   npm install
+   ```
+
+5. **Build the project**  
+   After the dependencies are installed, you can build the project by running:  
+   ```bash
+   yarn global-release
+   ```
+
+Now, your build should be ready to run!
+
+## Licenses and Acknowledgements  
+
+Doki Doki Mod Manager is licensed under the [MIT License](LICENSE.txt). Contributions are welcomed!  
+
+- [Sayonika assets](https://github.com/Sayo-nika/Press) licensed under [CC BY-NC-SA](https://github.com/Sayo-nika/Press/blob/master/LICENSE).  
+- [7-Zip (7za.exe)](https://www.7-zip.org/) licensed under [GNU LGPL](https://www.7-zip.org/license.txt). 

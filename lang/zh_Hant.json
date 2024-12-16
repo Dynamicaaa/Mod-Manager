@@ -373,19 +373,19 @@
         },
         "tab_about": {
             "title": "關於",
-            "description": "",
-            "title_disclaimer": "",
-            "disclaimer_1": "",
-            "disclaimer_2": "",
-            "title_socials": "",
+            "description": "Doki Doki Mod Manager 是一個由社群開發的專案，幫助你搜尋、安裝並遊玩 Doki Doki Literature Club 的模組，這是一款由 Team Salvato 開發的免費視覺小說遊戲。此專案也在 Dynamicaaa 的協助下維護。",
+            "title_disclaimer": "免責聲明",
+            "disclaimer_1": "Doki Doki Mod Manager 是基於 Doki Doki Literature Club 的粉絲作品，與 Team Salvato 無關。它是一個粉絲作品，如同 Team Salvato 的智慧財產權指導方針所定義的。",
+            "disclaimer_2": "Doki Doki Mod Manager 不對因為玩 mod 或其他原因所造成的任何檔案或電腦損壞負責。確保 mod 安全可玩是你的責任。",
+            "title_socials": "聯繫我們",
             "social_discord": "加入 Discord 伺服器",
-            "social_reddit": "",
-            "social_email": "",
-            "title_translators": "",
-            "title_v4_beta": "",
-            "title_patreon": "",
-            "link_patreon": "",
-            "link_weblate": ""
+            "social_reddit": "在 Reddit 上傳送訊息給我",
+            "social_email": "寄送電子郵件給我",
+            "title_translators": "翻譯由以下貢獻者慷慨提供",
+            "title_v4_beta": "Doki Doki Mod Manager 4 的 Beta 測試人員",
+            "title_patreon": "感謝以下 Patreon 贊助者的慷慨支持",
+            "link_patreon": "在 Patreon 上支持 Doki Doki Mod Manager 的進一步開發",
+            "link_weblate": "幫助將 Doki Doki Mod Manager 翻譯成你的母語 - 訪問專案首頁"
         },
         "tab_downloads": {
             "list": {

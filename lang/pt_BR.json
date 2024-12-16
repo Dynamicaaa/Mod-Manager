@@ -373,19 +373,19 @@
         },
         "tab_about": {
             "title": "Sobre",
-            "description": "Doki Doki Mod manager é um projeto feito pela comunidade que ajuda você a encontrar, instalar e jogar mods de Doki Doki Literature Club, um jogo de Novela Visual de Team Salvato.",
-            "title_disclaimer": "Aviso Legal",
-            "disclaimer_1": "Doki Doki Mod Manager é um projeto feito por fãs e não é afiliado com o Team Salvato. É um trabalho de fãs, assim definido pelas diretrizes de Team Salvato's IP.",
-            "disclaimer_2": "Doki Doki Mod Manager não assume nenhuma responsabilidade por qualquer dano causado em seus arquivos ou seu computador, como resultado de jogar um mod ou outro. Cabe a você garantir que os mods sejam seguros para jogar.",
-            "title_socials": "",
-            "social_discord": "",
-            "social_reddit": "",
-            "social_email": "",
-            "title_translators": "",
-            "title_v4_beta": "",
-            "title_patreon": "",
-            "link_patreon": "",
-            "link_weblate": ""
+            "description": "O Doki Doki Mod Manager é um projeto desenvolvido pela comunidade que ajuda você a encontrar, instalar e jogar mods para Doki Doki Literature Club, um jogo gratuito do tipo Visual Novel criado pela Team Salvato. Este projeto também é mantido com a ajuda de Dynamicaaa.",
+            "title_disclaimer": "Isenção de responsabilidade",
+            "disclaimer_1": "O Doki Doki Mod Manager é um trabalho de fã baseado em Doki Doki Literature Club e não é afiliado à Team Salvato. É um trabalho de fã, conforme definido nas diretrizes de IP da Team Salvato.",
+            "disclaimer_2": "O Doki Doki Mod Manager não se responsabiliza por danos aos seus arquivos ou computador causados por jogar um mod ou de outra forma. É sua responsabilidade garantir que os mods sejam seguros para jogar.",
+            "title_socials": "Entre em contato",
+            "social_discord": "Participe do servidor do Discord",
+            "social_reddit": "Envie-me uma mensagem no Reddit",
+            "social_email": "Envie-me um e-mail",
+            "title_translators": "Traduções generosamente contribuídas por",
+            "title_v4_beta": "Testadores da versão beta do Doki Doki Mod Manager 4",
+            "title_patreon": "Agradecimentos ao apoio gentil dos seguintes patrocinadores do Patreon",
+            "link_patreon": "Apoie o desenvolvimento contínuo do Doki Doki Mod Manager no Patreon",
+            "link_weblate": "Ajude a traduzir o Doki Doki Mod Manager para o seu idioma nativo - visite a página do projeto"
         },
         "tab_downloads": {
             "list": {

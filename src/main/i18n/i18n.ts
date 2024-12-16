@@ -4,7 +4,7 @@ import {readFileSync, existsSync} from "fs";
 import Config from "../utils/Config";
 import Logger from "../utils/Logger";
 
-const DEFAULT_LOCALE: string = joinPath(__dirname, "../../../lang/", "en-GB" + ".json");
+const DEFAULT_LOCALE: string = joinPath(__dirname, "../../../lang/", "en-US" + ".json");
 
 export default class I18n {
     private readonly language: string;
@@ -13,7 +13,7 @@ export default class I18n {
     private readonly defaultLanguageData: object;
 
     constructor() {
-        this.language = process.env.DDMM_LANG || Config.readConfigValue("language") || "en-GB";
+        this.language = process.env.DDMM_LANG || Config.readConfigValue("language") || "en-US";
         this.langFile = joinPath(app.getPath("userData"), "language", this.language + ".json");
 
         this.defaultLanguageData = JSON.parse(readFileSync(DEFAULT_LOCALE).toString("utf-8"));

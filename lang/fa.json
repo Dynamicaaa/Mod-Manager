@@ -196,89 +196,103 @@
         },
         "tab_options": {
             "list": {
-                "header_appearance": "",
-                "link_background": "",
-                "link_advanced_appearance": "",
-                "header_enhancements": "",
-                "link_sdk": "",
-                "link_discord": "",
-                "header_application": "",
-                "link_updates": "",
-                "link_storage": "",
-                "header_developers": "",
-                "link_testing": "",
-                "link_debug": ""
+                "header_appearance": "ظاهر",
+                "link_background": "پس‌زمینه",
+                "link_advanced_appearance": "پیشرفته",
+                "header_account": "حساب کاربری",
+                "link_cloudsaves": "ذخیره‌سازی ابری",
+                "link_accmanagement": "مدیریت حساب کاربری",
+                "header_enhancements": "بهبودها",
+                "link_sdk": "دستاوردها و SDK",
+                "link_discord": "Discord",
+                "header_application": "برنامه",
+                "link_updates": "بروزرسانی‌ها",
+                "link_storage": "مکان ذخیره‌سازی",
+                "link_language": "زبان",
+                "header_developers": "توسعه‌دهندگان",
+                "link_testing": "گزینه‌های اشکال‌زدایی"
             },
             "section_backgrounds": {
-                "title": "",
-                "subtitle": "",
-                "button_none": "",
-                "description_credit": ""
+                "title": "پس‌زمینه",
+                "subtitle": "نسخه Doki Doki Mod Manager خود را با یکی از این پس‌زمینه‌ها سفارشی کنید.",
+                "button_none": "بدون پس‌زمینه",
+                "button_custom": "پس‌زمینه سفارشی",
+                "checkbox_modbg": "اجازه دادن به مدها برای نمایش پس‌زمینه‌های سفارشی (از اسکرین‌شات‌ها یا از نویسندگان مد)",
+                "description_credit": "پس‌زمینه‌های اصلی DDLC با همکاری Team Salvato.",
+                "description_custom": "اگر تصویر پس‌زمینه سفارشی را جابجا یا حذف کنید، پس‌زمینه شما بازنشانی خواهد شد."
             },
             "section_advanced_appearance": {
-                "title": "",
-                "subtitle": "",
-                "button_enable_sysborders": "",
-                "button_disable_sysborders": ""
+                "title": "پیشرفته",
+                "subtitle": "اینجا می‌توانید گزینه‌های دیگری برای رابط کاربری پیدا کنید.",
+                "button_enable_sysborders": "استفاده از حاشیه‌های سیستم (نیاز به راه‌اندازی مجدد)"
             },
             "section_storage": {
-                "title": "",
-                "subtitle": "",
-                "description_moving": "",
-                "description_current": "",
-                "button_change": ""
+                "title": "مکان ذخیره‌سازی",
+                "subtitle": "مکان ذخیره‌سازی داده‌های بازی خود را تغییر دهید.",
+                "description": "شما می‌توانید انتخاب کنید که داده‌های نصب Doki Doki Mod Manager در کجا ذخیره شوند، برای مثال اگر بخواهید از هارد دیسک دیگری استفاده کنید. یک پوشه خالی را انتخاب کنید تا داده‌های نصب خود را منتقل کنید.",
+                "description_moving": "هشدار! اگر مکان نصب را تغییر دهید، تمام مدها، نصب‌ها و داده‌های ذخیره‌شده شما منتقل خواهند شد. این ممکن است چند دقیقه طول بکشد و نمی‌توان آن را متوقف کرد.",
+                "button_confirm": "تغییر"
             },
             "section_updates": {
-                "title": "",
-                "subtitle": "",
-                "description_current_version": "",
-                "label_channel": "",
-                "option_stable": "",
-                "option_beta": "",
-                "button_check": ""
+                "title": "بروزرسانی‌ها",
+                "subtitle": "آخرین نسخه Doki Doki Mod Manager را دریافت کنید.",
+                "description_current_version": "نسخه فعلی: {0}",
+                "description_latest_version": "آخرین نسخه: {0}",
+                "description_has_update": "نسخه جدیدی از Doki Doki Mod Manager در دسترس است!",
+                "description_no_update": "شما از آخرین نسخه Doki Doki Mod Manager استفاده می‌کنید.",
+                "description_downloading": "در حال دانلود بروزرسانی - می‌توانید به استفاده از برنامه ادامه دهید تا زمانی که منتظر باشید.",
+                "description_downloaded": "بروزرسانی دانلود شده است و پس از بستن برنامه نصب خواهد شد.",
+                "description_error": "در حال حاضر قادر به بررسی بروزرسانی‌ها نیستیم، لطفاً بعداً دوباره امتحان کنید.",
+                "button_check": "دوباره بررسی کنید",
+                "button_download": "دانلود بروزرسانی"
+            },
+            "section_language": {
+                "title": "زبان",
+                "subtitle": "زبان مورد نظر خود را انتخاب کنید. ترجمه‌ها ممکن است 100% دقیق یا کامل نباشند.",
+                "link_contribute": "آیا می‌توانید به ترجمه Doki Doki Mod Manager کمک کنید؟ برای پیوستن به پروژه ترجمه جامعه کلیک کنید.",
+                "label_language": "زبان"
             },
             "section_sdk": {
-                "title": "",
-                "subtitle": "",
-                "description_mode": "",
-                "checkbox_always": "",
-                "checkbox_specified": "",
-                "checkbox_never": ""
+                "title": "دستاوردها و SDK",
+                "subtitle": "نحوه برخورد با دستاوردها را تغییر دهید.",
+                "description_mode": "فعال‌سازی دستاوردها:",
+                "checkbox_always": "همیشه (توصیه شده)",
+                "checkbox_specified": "زمانی که مد مشخص می‌کند که از آن‌ها پشتیبانی می‌کند",
+                "checkbox_never": "هیچ‌گاه"
             },
             "section_discord": {
-                "title": "",
-                "subtitle": "",
-                "description": "",
-                "button_enable": "",
-                "button_disable": ""
+                "title": "حضور غنی Discord",
+                "subtitle": "با دوستان خود در Discord به اشتراک بگذارید که کدام مد را بازی می‌کنید.",
+                "description": "تغییرات پس از راه‌اندازی مجدد Doki Doki Mod Manager اعمال خواهند شد.",
+                "button_enable": "فعال‌سازی حضور غنی"
             },
             "section_testing": {
-                "title": "",
-                "subtitle": "",
-                "button_enable": "",
-                "button_disable": ""
-            },
-            "section_debug": {
-                "title": "",
-                "subtitle": ""
+                "title": "گزینه‌های اشکال‌زدایی",
+                "subtitle": "فعال‌سازی گزینه‌های اشکال‌زدایی برای توسعه‌دهندگان.",
+                "checkbox_logging": "فعال‌سازی ثبت اشکال‌زدایی",
+                "header_mod_debug": "اشکال‌زدایی مد",
+                "description_mod_debug": "نمایش پنجره اشکال‌زدایی با خروجی کنسول از مد شما. برای تست SDK DDMM مفید است.",
+                "header_renpy": "گزینه‌های راه‌اندازی Ren'Py",
+                "description_renpy": "تنظیم گزینه‌های اشکال‌زدایی ویژه برای Ren'Py.",
+                "checkbox_renpy_skipsplash": "اسکرین اسپلش را رد کن",
+                "checkbox_renpy_skipmenu": "منو را رد کن"
             }
         },
         "tab_about": {
-            "title": "",
-            "description": "",
-            "title_disclaimer": "",
-            "disclaimer_1": "",
-            "disclaimer_2": "",
-            "title_socials": "",
-            "social_discord": "",
-            "social_twitter": "",
-            "social_reddit": "",
-            "social_email": "",
-            "title_support": "",
-            "description_support": "",
-            "support_donate": "",
-            "support_steelseries": "",
-            "support_code": ""
+            "title": "درباره",
+            "description": "Doki Doki Mod Manager یک پروژه توسعه‌یافته توسط جامعه است که به شما کمک می‌کند تا مودهای Doki Doki Literature Club، یک بازی رایگان از نوع رمان تصویری ساخته شده توسط تیم Salvato، را پیدا کرده، نصب کنید و بازی کنید. این پروژه همچنین با کمک Dynamicaaa حفظ و نگهداری می‌شود.",
+            "title_disclaimer": "سلب مسئولیت",
+            "disclaimer_1": "Doki Doki Mod Manager یک اثر طرفداری از Doki Doki Literature Club است و با تیم Salvato ارتباطی ندارد. این یک اثر طرفداری است، همان‌طور که در دستورالعمل‌های مالکیت معنوی تیم Salvato تعریف شده است.",
+            "disclaimer_2": "Doki Doki Mod Manager مسئولیتی در قبال هرگونه آسیبی که به فایل‌ها یا کامپیوتر شما وارد شود به دلیل بازی کردن یک مود یا به هر دلیل دیگری ندارد. مسئولیت اطمینان از ایمن بودن مودها برای بازی بر عهده شماست.",
+            "title_socials": "تماس با ما",
+            "social_discord": "به سرور Discord بپیوندید",
+            "social_reddit": "به من در Reddit پیام دهید",
+            "social_email": "برای من ایمیل ارسال کنید",
+            "title_translators": "ترجمه‌ها با کمک سخاوتمندانه توسط",
+            "title_v4_beta": "آزمایش‌کنندگان نسخه بتای Doki Doki Mod Manager 4",
+            "title_patreon": "با تشکر از حمایت مهربانانه حامیان زیر در Patreon",
+            "link_patreon": "از توسعه بیشتر Doki Doki Mod Manager در Patreon حمایت کنید",
+            "link_weblate": "به ترجمه Doki Doki Mod Manager به زبان مادری خود کمک کنید - به صفحه پروژه مراجعه کنید"
         },
         "online_error": {
             "body": "برنامه برای اجرای اولیه نیاز به اتصال اینترنت دارد. لطفا ارتباط خود را چک کرده و برنامه را مجددا اجرا کنید.",

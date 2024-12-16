@@ -6,20 +6,20 @@ Thanks for your interest in helping Doki Doki Mod Manager support more languages
 
 ### i18n Manager
 
-If you `git clone` or [download](https://github.com/DokiDokiModManager/Mod-Manager/archive/master.zip) the repo, then point [i18n Manager](https://github.com/gilmarsquinelato/i18n-manager/releases) at the `lang` folder, it should work out of the box.
+If you `git clone` or [download](https://github.com/Dynamicaaa/Mod-Manager/archive/master.zip) the repo, then point [i18n Manager](https://github.com/gilmarsquinelato/i18n-manager/releases) at the `lang` folder, it should work out of the box.
 
 ### Translating - the basics
 
-Every currently available language has its own `.json` file. For example, English (UK) is `en-GB.json` and Russian is `ru.json`.
-If the language you're looking to translate into doesn't have one, download `en-GB.json`, as that will be your basis for translation.
-Rename it to a valid language code from [this list](https://electronjs.org/docs/api/locales).
+Every currently available language has its own `.json` file. For example, English (US) is `en-US.json` and Russian is `ru.json`.
+If the language you're looking to translate into doesn't have one, download `en-US.json`, as that will be your basis for translation.
+Rename it to a valid language code from [this list](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
 
 Once this is done, you can begin translating! If you are familiar with JSON, you should be mostly good to go. If not, read on.
 
 ### File Format
 
 Translation files are in the JSON file format. This means they have to be syntactically valid in order for DDMM to be able to understand
-them. Here's a small sample from the English (UK) translation file.
+them. Here's a small sample from the English (US) translation file.
 
 ```json
 {
@@ -77,6 +77,6 @@ Downloading filename.zip - 50% complete
 
 1. If you're creating a new language file, make sure you use a language code from [here](https://electronjs.org/docs/api/locales). 
 Anything else will be rejected.
-2. Use [English (UK)](en-GB.json) as the basis for your translations.
+2. Use [English (US)](en-US.json) as the basis for your translations.
 3. Please don't use a machine translator to create translations. Native speakers are preferred.
 4. If possible, avoid making your strings significantly longer or shorter than the original English.
