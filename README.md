@@ -10,7 +10,7 @@ This repository is a fork that maintains the original Doki Doki Mod Manager.
 ## Contact  
 
 Got any questions, suggestions, or complaints? Reach out via email:  
-**CanaryZen@proton.me**  
+**Dynamicaaa@reconvial.dev**  
 
 ## IP Guidelines  
 
