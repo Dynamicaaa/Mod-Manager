@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#444"/>
+  
+  <!-- User icon -->
+  <g fill="#ccc">
+    <!-- Head -->
+    <circle cx="32" cy="24" r="8"/>
+    
+    <!-- Body -->
+    <path d="M32 36c-8 0-14 4-14 10v6h28v-6c0-6-6-10-14-10z"/>
+  </g>
+</svg>

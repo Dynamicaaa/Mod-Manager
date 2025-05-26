@@ -1,6 +1,6 @@
-import * as unzip from "@zudo/unzipper";
+import * as yauzl from "yauzl";
 import * as chmodr from "chmodr";
-import {createWriteStream, writeFileSync} from "fs";
+import {createWriteStream, writeFileSync, existsSync, accessSync, constants} from "fs";
 import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
 import Config from "../utils/Config";
@@ -8,13 +8,50 @@ import Config from "../utils/Config";
 export default class InstallCreator {
 
     /**
+     * Ensures DDLC.sh is executable on Linux systems
+     * @param installPath The path to the install directory
+     * @returns Promise that resolves with success status and error message if any
+     */
+    private static ensureDDLCExecutable(installPath: string): Promise<{success: boolean, error?: string}> {
+        return new Promise((resolve) => {
+            if (process.platform !== "linux") {
+                resolve({success: true});
+                return;
+            }
+
+            const ddlcShPath = joinPath(installPath, "DDLC.sh");
+
+            if (!existsSync(ddlcShPath)) {
+                resolve({success: false, error: "DDLC.sh not found"});
+                return;
+            }
+
+            try {
+                // Check if file is already executable
+                accessSync(ddlcShPath, constants.F_OK | constants.X_OK);
+                resolve({success: true});
+            } catch (e) {
+                // File is not executable, try to make it executable
+                chmodr(ddlcShPath, 0o755, (err) => {
+                    if (err) {
+                        console.error("Failed to make DDLC.sh executable:", err);
+                        resolve({success: false, error: err.toString()});
+                    } else {
+                        console.log("Successfully made DDLC.sh executable");
+                        resolve({success: true});
+                    }
+                });
+            }
+        });
+    }
+
+    /**
      * Creates a install of vanilla DDLC
      * @param folderName The folder name to store the install in
      * @param installName The user facing name of the install
      * @param globalSave Whether it should use the global save
-     * @param cloudSave The filename for cloud saves
      */
-    public static createInstall(folderName: string, installName: string, globalSave: boolean, cloudSave?: string): Promise<null> {
+    public static createInstall(folderName: string, installName: string, globalSave: boolean): Promise<null> {
         return new Promise((ff, rj) => {
             console.log("Creating clean install in " + folderName);
             const canonicalPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
@@ -32,59 +69,118 @@ export default class InstallCreator {
                     mkdirsSync(joinPath(canonicalPath, "appdata", ".renpy"));
                 }
 
-                // extract the game from the zip file
-                const zip = unzip(joinPath(Config.readConfigValue("installFolder"), "ddlc.zip"));
+                // Extract DDLC zip file to install directory
+                const ddlcZipPath = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
+                console.log("Extracting DDLC from:", ddlcZipPath);
 
-                zip.on("file", (file) => {
-                    console.log("Extracting " + file.path);
-
-                    // get the new path
-                    const pathParts = file.path.split("/");
-
-                    console.log(pathParts);
-
-                    pathParts.shift(); // remove the base ddlc directory
-                    if (pathParts.length == 0) return;
-
-                    if (process.platform === "darwin") {
-                        pathParts.shift();
-                        if (pathParts.length < 1) return; // remove macOS folders
+                yauzl.open(ddlcZipPath, {lazyEntries: true}, (err, zipfile) => {
+                    if (err) {
+                        console.error("Failed to open DDLC zip file:", err);
+                        rj(err);
+                        return;
                     }
 
-                    const fileName = pathParts.pop();
-                    mkdirsSync(joinPath(canonicalPath, "install", pathParts.join(pathSep)));
+                    let topLevelDir: string = null;
 
-                    // write the file
-                    file.openStream((err, stream) => {
-                        if (err) {
-                            rj(err);
+                    zipfile.readEntry();
+                    zipfile.on("entry", (entry) => {
+                        // Detect and strip the top-level directory (e.g., "DDLC-1.1.1-pc/")
+                        if (!topLevelDir) {
+                            const firstSlash = entry.fileName.indexOf("/");
+                            if (firstSlash > 0) {
+                                topLevelDir = entry.fileName.substring(0, firstSlash + 1);
+                                console.log("Detected top-level directory in zip:", topLevelDir);
+                            }
                         }
-                        stream.pipe(createWriteStream(joinPath(
-                            canonicalPath,
-                            "install",
-                            pathParts.join(pathSep), fileName)));
+
+                        // Strip the top-level directory from the path
+                        let relativePath = entry.fileName;
+                        if (topLevelDir && relativePath.startsWith(topLevelDir)) {
+                            relativePath = relativePath.substring(topLevelDir.length);
+                        }
+
+                        // Skip empty paths (top-level directory itself)
+                        if (!relativePath) {
+                            zipfile.readEntry();
+                            return;
+                        }
+
+                        if (/\/$/.test(entry.fileName)) {
+                            // Directory entry
+                            mkdirsSync(joinPath(canonicalPath, "install", relativePath));
+                            zipfile.readEntry();
+                        } else {
+                            // File entry
+                            const pathParts = relativePath.split("/");
+                            const fileName = pathParts.pop();
+                            const dirPath = joinPath(canonicalPath, "install", pathParts.join(pathSep));
+
+                            mkdirsSync(dirPath);
+
+                            zipfile.openReadStream(entry, (err, readStream) => {
+                                if (err) {
+                                    rj(err);
+                                    return;
+                                }
+
+                                const writeStream = createWriteStream(joinPath(dirPath, fileName));
+                                readStream.pipe(writeStream);
+
+                                writeStream.on('close', () => {
+                                    // Make shell scripts and binary files executable on Unix systems
+                                    const shouldMakeExecutable = process.platform !== "win32" && (
+                                        fileName.endsWith(".sh") ||
+                                        fileName === "DDLC" ||
+                                        fileName === "python" ||
+                                        fileName === "pythonw" ||
+                                        (relativePath.includes("lib/linux-x86_64/") &&
+                                         (fileName === "zsync" || fileName === "zsyncmake"))
+                                    );
+
+                                    if (shouldMakeExecutable) {
+                                        const filePath = joinPath(dirPath, fileName);
+                                        chmodr(filePath, 0o755, (err) => {
+                                            if (err) {
+                                                console.warn("Failed to make file executable:", err);
+                                            }
+                                            zipfile.readEntry();
+                                        });
+                                    } else {
+                                        zipfile.readEntry();
+                                    }
+                                });
+
+                                writeStream.on('error', rj);
+                            });
+                        }
                     });
-                });
 
-                zip.on("close", () => {
-                    console.log("Install completed.");
+                    zipfile.on("end", () => {
+                        console.log("DDLC extraction completed successfully");
 
-                    // write the install data file
-                    writeFileSync(joinPath(canonicalPath, "install.json"), JSON.stringify({
-                        globalSave,
-                        cloudSave,
-                        mod: null,
-                        name: installName,
-                    }));
+                        // write the install data file
+                        writeFileSync(joinPath(canonicalPath, "install.json"), JSON.stringify({
+                            globalSave,
+                            mod: null,
+                            name: installName,
+                        }));
 
-                    if (process.platform !== "win32") {
-                        // make the directory executable for *nix users
-                        chmodr(joinPath(canonicalPath, "install"), 0o774, () => { // it needs to be octal!
-                            ff();
+                        // Ensure DDLC.sh is executable on Linux
+                        this.ensureDDLCExecutable(joinPath(canonicalPath, "install")).then((result) => {
+                            if (!result.success) {
+                                console.warn("Warning: Could not make DDLC.sh executable:", result.error);
+                                // We don't reject here because the install was created successfully,
+                                // but we log the warning for potential runtime issues
+                            }
+                            ff(undefined);
+                        }).catch((error) => {
+                            console.warn("Warning: Error checking DDLC.sh executable status:", error);
+                            // Still resolve successfully as the install was created
+                            ff(undefined);
                         });
-                    } else {
-                        ff();
-                    }
+                    });
+
+                    zipfile.on("error", rj);
                 });
             } catch (e) {
                 rj(e);

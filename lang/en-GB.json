@@ -10,11 +10,7 @@
     "version": {
       "link_changelog": "what's new?"
     },
-    "help_menu": {
-      "option_help": "View help site",
-      "option_feedback": "Send private feedback",
-      "option_discord": "Join the Discord server"
-    },
+
     "user_menu": {
       "option_rename": "Change Username",
       "option_logout": "Log out"
@@ -23,9 +19,11 @@
       "close": "Close",
       "maximise": "Maximise",
       "minimise": "Minimise",
-      "help": "Get Help",
+      "devtools": "Toggle Developer Tools (F12)",
+
       "announcement": "Read the latest announcement",
       "login": "Log In",
+      "sayonika_login": "Sayonika Login",
       "update": {
         "checking": "Checking for updates in the background...",
         "available": "An update is available. Click here to download it.",
@@ -99,24 +97,6 @@
         "button_affirmative": "Rename",
         "button_negative": "Cancel"
       },
-      "launch_lock_confirmation": {
-        "message": "The cloud save file is in use!",
-        "details": "If you launch now, you may lose your progress.",
-        "button_affirmative": "Launch Anyway",
-        "button_negative": "Cancel"
-      },
-      "launch_noauth_confirmation": {
-        "message": "You are not logged in!",
-        "details": "If you launch now, your save file will not sync to the cloud.",
-        "button_affirmative": "Launch Anyway",
-        "button_negative": "Cancel"
-      },
-      "launch_offline_confirmation": {
-        "message": "You are offline!",
-        "details": "If you launch now, your save file will not sync to the cloud.",
-        "button_affirmative": "Launch Anyway",
-        "button_negative": "Cancel"
-      },
       "mod_delete_confirmation": {
         "message": "Are you sure you want to delete the mod?",
         "details": "You will need to download another copy of the mod to install it again.",
@@ -134,8 +114,8 @@
         "button_settings": "Settings",
         "tag_global_save": "Global Save",
         "tag_sdk": "SDK",
-        "tag_cloud": "Cloud Save",
-        "description_locked": "You are playing with this cloud save file on a different computer. To continue here, stop playing on the other computer.",
+
+
         "title_achievements": "Achievements ({0} / {1})",
         "description_achievements": "Keep playing to unlock more achievements.",
         "description_achievements_complete": "You've unlocked all achievements. Congratulations!",
@@ -145,7 +125,7 @@
         "description_screenshots": "Press S while playing to take a screenshot.",
         "description_sdk": "This mod supports special features with the Doki Doki Mod Manager SDK!",
         "description_author": "Created by {0}",
-        "link_discord": "Discord ({0})",
+
         "link_website": "Website ({0})",
         "description_external": "Show in folder"
       },
@@ -161,18 +141,16 @@
         "label_global_save": "Global Save",
         "label_has_mod": "Install Mod",
         "label_mod": "Mod",
-        "label_has_cloudsave": "Cloud Save (beta)",
-        "label_cloudsave": "Cloud Save File",
-        "option_new_cloudsave": "Create new save file",
+
         "label_existing_saves": "Existing Save Files",
         "description_mod": "Click to browse for a mod.",
         "header_summary": "Summary",
         "description_vanilla": "A clean copy of DDLC will be created. The save data will be separate from any other copy of the game.",
         "description_vanilla_global_save": "A clean copy of DDLC will be created. The save data will be shared with other copies of the game (e.g. Steam)",
-        "description_vanilla_cloudsave": "A clean copy of DDLC will be created. The save data will be stored in the cloud.",
+
         "description_modded": "A copy of DDLC will be created, and the mod will be installed.  The save data will be separate from any other copy of the game.",
         "description_modded_global_save": "A copy of DDLC will be created, and the mod will be installed.  The save data will be shared with other copies of the game (e.g. Steam)",
-        "description_modded_cloudsave": "A copy of DDLC will be created, and the mod will be installed. The save data will be stored in the cloud.",
+
         "button_install": "Install",
         "button_installing": "Installing...",
         "status_exists": "That folder already exists. Pick another folder name."
@@ -192,7 +170,7 @@
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
         "link_sdk": "Achievements & SDK",
-        "link_discord": "Discord",
+
         "header_application": "Application",
         "link_updates": "Updates",
         "link_storage": "Storage Location",
@@ -236,13 +214,7 @@
         "checkbox_specified": "When the mod specifies it supports them",
         "checkbox_never": "Never"
       },
-      "section_discord": {
-        "title": "Discord Rich Presence",
-        "subtitle": "Share which mod you're playing with your Discord friends.",
-        "description": "Changes will take effect after restarting Doki Doki Mod Manager.",
-        "button_enable": "Enable Rich Presence",
-        "button_disable": "Disable Rich Presence"
-      },
+
       "section_testing": {
         "title": "SDK Debug",
         "subtitle": "Enable debug logging to test your mods with the Doki Doki Mod Manager SDK.",
@@ -261,7 +233,7 @@
       "disclaimer_1": "Doki Doki Mod Manager is a fan work of Doki Doki Literature Club and is not affiliated with Team Salvato. It is a fan work, as defined by Team Salvato's IP Guidelines.",
       "disclaimer_2": "Doki Doki Mod Manager does not take responsibility for any damage caused to your files or computer, as a result of playing a mod or otherwise. It is up to you to ensure mods are safe to play.",
       "title_socials": "Get in touch",
-      "social_discord": "Join the DDMM Discord Server",
+
       "social_twitter": "Follow @DokiMod on Twitter",
       "social_reddit": "Message me on Reddit",
       "social_email": "Send me an email",
@@ -337,6 +309,10 @@
       "renderer_freeze": {
         "title": "Doki Doki Mod Manager stopped responding",
         "body": "If this issue lasts for a long time, close the app and start again."
+      },
+      "executable_permission": {
+        "title": "Failed to make game executable",
+        "body": "Could not make DDLC.sh executable on Linux. The game may not launch properly."
       }
     }
   }

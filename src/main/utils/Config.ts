@@ -54,9 +54,9 @@ export default class Config {
     private static defaultConfig = {
         installFolder: joinPath(app.getPath("userData"), "GameData"),
         background: "default.png",
-        discordEnabled: true,
         sdkMode: "always",
-        updateChannel: "latest"
+        updateChannel: "latest",
+        sayonikaServerUrl: "https://sayonika.reconvial.dev"
     };
 
     private static configPath = joinPath(app.getPath("userData"), "config.json");

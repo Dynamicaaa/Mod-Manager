@@ -2,44 +2,52 @@
   "name": "doki-doki-mod-manager",
   "productName": "Doki Doki Mod Manager",
   "description": "Mod Manager for Doki Doki Literature Club",
-  "author": "u/zuudo",
-  "version": "3.2.5",
-  "homepage": "https://doki.space",
+  "author": "Dynamicaaa",
+  "version": "5.0.0",
   "license": "MIT",
-  "main": "lib/main/index.js",
-  "repository": "https://github.com/DokiDokiModManager/Mod-Manager",
-  "bugs": "zudo@doki.space",
+  "main": "lib/src/main/index.js",
+  "repository": "https://github.com/Dynamicaaa/Mod-Manager",
+  "bugs": "CanaryZen@proton.me",
   "scripts": {
-    "start": "tsc && electron . --enable-sandbox",
-    "start-dev": "tsc && electron --inspect=5858 . --enable-sandbox",
-    "release": "tsc && electron-builder",
-    "test": "tsc && mocha"
+    "start": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron .",
+    "start-dev": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --inspect=5858 .",
+    "release": "npm run clean && npm run build-css-prod && tsc && npm run copy-assets && electron-builder",
+    "test": "npm run clean && tsc && mocha",
+    "build-css": "sass src/renderer/css:src/renderer/css --no-source-map",
+    "build-css-watch": "sass src/renderer/css:src/renderer/css --watch --no-source-map",
+    "build-css-prod": "sass src/renderer/css:src/renderer/css --style compressed --no-source-map",
+    "build-css-once": "sass src/renderer/css:src/renderer/css --no-source-map",
+    "rebuild-css": "npm run build-css-once",
+    "clean": "rm -rf lib",
+    "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.js lib/vendor/ && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
+    "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets"
   },
   "dependencies": {
-    "7zip-bin": "^4.1.0",
-    "@fortawesome/fontawesome-free": "^5.9.0",
-    "@sentry/electron": "^0.17.1",
-    "@zudo/unzipper": "^0.0.4",
-    "archiver": "^3.0.0",
+    "@electron/remote": "^2.1.2",
+    "@fortawesome/fontawesome-free": "^6.5.0",
+    "@sentry/electron": "^4.15.0",
+    "7zip-bin": "^5.2.0",
+    "archiver": "^6.0.0",
+    "axios": "^1.6.0",
     "chmodr": "^1.2.0",
-    "discord-rich-presence": "^0.0.8",
-    "electron-updater": "^4.0.6",
-    "file-url": "^3.0.0",
-    "fs-extra": "^8.0.1",
-    "fuse.js": "^3.4.5",
-    "request": "^2.88.0",
-    "semver": "^6.2.0",
-    "vue": "^2.6.10"
+    "electron-updater": "^6.1.0",
+    "file-url": "^4.0.0",
+    "fs-extra": "^11.2.0",
+    "fuse.js": "^7.0.0",
+    "semver": "^7.5.0",
+    "vue": "^2.7.0",
+    "yauzl": "^3.0.0"
   },
   "devDependencies": {
-    "@sentry/cli": "^1.44.3",
-    "electron": "^5.0.2",
-    "electron-builder": "^21.0.15",
-    "mocha": "^6.1.4",
-    "typescript": "^3.5.3"
+    "@sentry/cli": "^2.25.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.0",
+    "mocha": "^10.2.0",
+    "sass": "^1.69.0",
+    "typescript": "^5.3.0"
   },
   "build": {
-    "appId": "space.doki.modmanager",
+    "appId": "dynamicaaa.dokidokimodmanager",
     "artifactName": "ddmm-${version}-${os}-${arch}.${ext}",
     "files": [
       "!**/*.ts",
@@ -64,7 +72,7 @@
       {
         "provider": "github",
         "repo": "Mod-Manager",
-        "owner": "DokiDokiModManager"
+        "owner": "Dynamicaaa"
       }
     ],
     "win": {

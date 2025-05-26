@@ -1,4 +1,4 @@
-import * as unzip from "@zudo/unzipper";
+import * as yauzl from "yauzl";
 import {createWriteStream, unlinkSync, removeSync, readFileSync, writeFileSync} from "fs-extra";
 import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
@@ -23,7 +23,7 @@ export default class ModInstaller {
                 ArchiveConverter.convertToZip(modPath, tempZipPath).then(() => {
                     ModInstaller.installZip(tempZipPath, installPath).then(() => {
                         removeSync(tempZipPath);
-                        ff();
+                        ff(undefined);
                     }).catch(e => {
                         rj(e);
                     });
@@ -49,82 +49,146 @@ export default class ModInstaller {
                 // delete files that need to be removed (e.g. with DDLCtVN)
                 for (const file of mapper.getFilesToDelete()) {
                     console.log("Deleting " + file);
-                    unlinkSync(joinPath(installPath, "game", file));
+                    try {
+                        unlinkSync(joinPath(installPath, "game", file));
+                    } catch (e) {
+                        console.warn("Could not delete file " + file + ":", e.message);
+                    }
                 }
-
-                // extract the mod
-                const zip = unzip(modPath);
 
                 console.log("Installing with mapper: " + mapper.getFriendlyName());
 
-                zip.on("file", (file) => {
-                    // mod metadata loading
-                    if (file.path.endsWith("ddmm-mod.json")) {
-                        if (hasReadMetadata) {
-                            console.warn("Warning: more than one ddmm-mod.json file was found. Skipping.");
-                            return;
-                        }
-                        console.log("Writing metadata to install.json");
-                        file.openStream((err, stream) => {
+                // Extract the zip file using yauzl
+                yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
+                    if (err) {
+                        console.error("Failed to open mod zip file:", err);
+                        rj(err);
+                        return;
+                    }
+
+                    let entriesProcessed = 0;
+                    let totalEntries = 0;
+
+                    // First pass: count total entries (files and directories)
+                    zipfile.readEntry();
+                    zipfile.on("entry", (entry) => {
+                        totalEntries++;
+                        zipfile.readEntry();
+                    });
+
+                    zipfile.on("end", () => {
+                        console.log("Total entries to process:", totalEntries);
+
+                        // Second pass: extract files
+                        yauzl.open(modPath, {lazyEntries: true}, (err, zipfile2) => {
                             if (err) {
+                                console.error("Failed to reopen mod zip file:", err);
                                 rj(err);
+                                return;
                             }
-                            let fileContents = "";
-                            stream.on("data", chunk => {
-                                fileContents += chunk.toString();
-                            });
-                            stream.on("end", () => {
-                                hasReadMetadata = true;
+
+                            const processNextEntry = () => {
+                                zipfile2.readEntry();
+                            };
+
+                            zipfile2.readEntry();
+                            zipfile2.on("entry", (entry) => {
+                                const fileName = entry.fileName;
+                                entriesProcessed++;
+
+                                if (/\/$/.test(fileName)) {
+                                    // Directory entry - skip
+                                    console.log("Skipping directory:", fileName);
+                                    if (entriesProcessed >= totalEntries) {
+                                        console.log("Mod installation completed successfully");
+                                        ff(undefined);
+                                    } else {
+                                        processNextEntry();
+                                    }
+                                    return;
+                                }
+
+                                // Use mapper to determine where this file should go
+                                const mappedPath = mapper.mapFile(fileName);
+
+                                if (mappedPath === null) {
+                                    // Mapper says to ignore this file
+                                    console.log("Ignoring file:", fileName);
+                                    if (entriesProcessed >= totalEntries) {
+                                        console.log("Mod installation completed successfully");
+                                        ff(undefined);
+                                    } else {
+                                        processNextEntry();
+                                    }
+                                    return;
+                                }
+
+                                const outputPath = joinPath(installPath, mappedPath);
+                                console.log("Extracting:", fileName, "->", mappedPath);
+
+                                // Ensure directory exists
+                                const outputDir = outputPath.split(pathSep).slice(0, -1).join(pathSep);
                                 try {
-                                    const modDataPath: string = joinPath(installPath, "../install.json");
-                                    const oldInstallContents: any = JSON.parse(readFileSync(modDataPath));
-                                    oldInstallContents.mod = JSON.parse(fileContents);
-                                    writeFileSync(modDataPath, JSON.stringify(oldInstallContents));
-                                } catch (err) {
-                                    console.log(err);
-                                    rj(err);
+                                    mkdirsSync(outputDir);
+                                } catch (e) {
+                                    console.warn("Could not create directory " + outputDir + ":", e.message);
+                                }
+
+                                // Extract the file
+                                zipfile2.openReadStream(entry, (err, readStream) => {
+                                    if (err) {
+                                        console.error("Failed to open read stream for " + fileName + ":", err);
+                                        rj(err);
+                                        return;
+                                    }
+
+                                    const writeStream = createWriteStream(outputPath);
+                                    readStream.pipe(writeStream);
+
+                                    writeStream.on('close', () => {
+                                        console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
+
+                                        if (entriesProcessed >= totalEntries) {
+                                            console.log("Mod installation completed successfully");
+                                            ff(undefined);
+                                        } else {
+                                            processNextEntry();
+                                        }
+                                    });
+
+                                    writeStream.on('error', (err) => {
+                                        console.error("Failed to write file " + outputPath + ":", err);
+                                        rj(err);
+                                    });
+
+                                    readStream.on('error', (err) => {
+                                        console.error("Failed to read from zip stream for " + fileName + ":", err);
+                                        rj(err);
+                                    });
+                                });
+                            });
+
+                            zipfile2.on("end", () => {
+                                if (totalEntries === 0) {
+                                    console.log("No entries to process - mod installation completed");
+                                    ff(undefined);
                                 }
                             });
-                        });
-                        return;
-                    }
-                    // get the new relative path
-                    const newPath = mapper.mapFile(file.path);
-                    if (!newPath) {
-                        return;
-                    }
-                    // console.log("Mapping " + file.path + " to " + newPath);
-                    // convert the relative path to an absolute path
-                    let newPathFull;
 
-                    if (process.platform === "darwin") {
-                        newPathFull = joinPath(installPath, "Resources", "autorun", newPath);
-                    } else {
-                        newPathFull = joinPath(installPath, newPath);
-                    }
-                    const newPathParts = newPathFull.split(pathSep);
-                    newPathParts.pop();
-                    mkdirsSync(newPathParts.join(pathSep));
-                    // write the file to disk
-                    file.openStream((err, stream) => {
-                        if (err) {
-                            rj(err);
-                        }
-                        stream.pipe(createWriteStream(newPathFull));
+                            zipfile2.on("error", (err) => {
+                                console.error("Error during mod extraction:", err);
+                                rj(err);
+                            });
+                        });
+                    });
+
+                    zipfile.on("error", (err) => {
+                        console.error("Error counting files in zip:", err);
+                        rj(err);
                     });
                 });
-
-                zip.on("close", () => {
-                    ff();
-                    console.log("Install completed.");
-                });
-
-                zip.on("error", (e) => {
-                    console.log("ZIP ERROR: " + e);
-                    rj(e);
-                });
             }).catch((err) => {
-                console.log(err);
+                console.error("Error during mod installation:", err);
                 rj(err);
             });
         });

@@ -1,0 +1,26 @@
+<svg width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a2a2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="180" fill="url(#bg)" />
+  
+  <!-- Border -->
+  <rect x="2" y="2" width="296" height="176" fill="none" stroke="#444" stroke-width="2" />
+  
+  <!-- Icon -->
+  <circle cx="150" cy="70" r="25" fill="#ff69b4" opacity="0.3" />
+  <path d="M135 65 L150 50 L165 65 L150 80 Z" fill="#ff69b4" />
+  
+  <!-- Text -->
+  <text x="150" y="120" text-anchor="middle" fill="#888" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
+    DDLC MOD
+  </text>
+  <text x="150" y="140" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">
+    No Thumbnail
+  </text>
+</svg>

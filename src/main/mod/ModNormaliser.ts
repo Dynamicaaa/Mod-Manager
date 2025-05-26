@@ -1,4 +1,4 @@
-import * as unzip from "@zudo/unzipper";
+import * as yauzl from "yauzl";
 import {ModMapper} from "./ModMapper";
 import ModManagerFormat from "./mappers/ModManagerFormat";
 import NestedGameFolder from "./mappers/NestedGameFolder";
@@ -17,65 +17,106 @@ import DumpAndHopeForTheBest from "./mappers/DumpAndHopeForTheBest";
  */
 export function inferMapper(zipPath: string): Promise<ModMapper> {
     return new Promise((ff, rj) => {
-        const zip = unzip(zipPath);
-        const structure = [];
-
-        zip.on("file", (file) => {
-            structure.push(file.path);
-        });
-
-        zip.on("directory", (dir) => {
-            structure.push(dir.path);
-        });
-
-        zip.on("error", (err) => {
-            rj(err);
-        });
-
-        zip.on("close", () => {
-            if (structure.indexOf("mod.json") !== -1
-                || structure.indexOf("game/") !== -1) {
-                ff(new ModManagerFormat());
+        yauzl.open(zipPath, {lazyEntries: true}, (err, zipfile) => {
+            if (err) {
+                console.error("Failed to open mod zip file for analysis:", err);
+                rj(err);
                 return;
             }
 
-            // DDLCtVN special case
-            if (structure.find((file) => file.startsWith("DDLCtVN"))) {
-                ff(new NestedGameFolder(["scripts.rpa"]));
-                return;
-            }
+            const fileList: string[] = [];
+            let hasModJson = false;
+            let hasGameFolder = false;
+            let hasCharactersFolder = false;
+            let hasNestedStructure = false;
+            let topLevelDirs = new Set<string>();
+            let gameFiles = 0;
+            let characterFiles = 0;
 
-            let isNested: boolean = false;
-            let isModTemplate: boolean = false;
-            let onlyRenpy: boolean = true;
+            zipfile.readEntry();
+            zipfile.on("entry", (entry) => {
+                const fileName = entry.fileName;
+                fileList.push(fileName);
 
-            for (const path of structure) {
-                const pathParts = path.split("/");
-
-                if (pathParts[1] === "game") {
-                    isModTemplate = true;
+                // Check for mod.json (indicates ModManagerFormat)
+                if (fileName === "mod.json" || fileName.endsWith("/mod.json")) {
+                    hasModJson = true;
                 }
 
-                if (["mod_assets", "python-packages", "saves", "audio.rpa"].indexOf(pathParts[1]) !== -1) {
-                    isNested = true;
+                // Analyze directory structure
+                const pathParts = fileName.split("/");
+                if (pathParts.length > 1) {
+                    topLevelDirs.add(pathParts[0]);
+
+                    // Check for direct game/characters folders
+                    if (pathParts[0] === "game") {
+                        hasGameFolder = true;
+                    }
+                    if (pathParts[0] === "characters") {
+                        hasCharactersFolder = true;
+                    }
+
+                    // Check for nested structure (folder/game/ or folder/characters/)
+                    if (pathParts.length > 2 && (pathParts[1] === "game" || pathParts[1] === "characters")) {
+                        hasNestedStructure = true;
+                    }
                 }
 
-                if (!path.endsWith("/") &&
-                    !path.match(/\.rp(y|yc|a)$/i) &&
-                    !path.match(/\.(txt|md|html|pdf|docx)$/i)) {
-                    onlyRenpy = false;
+                // Count file types
+                const fileExtension = fileName.split(".").pop()?.toLowerCase();
+                if (fileExtension === "rpy" || fileExtension === "rpyc" || fileExtension === "rpa") {
+                    gameFiles++;
                 }
-            }
+                if (fileExtension === "chr") {
+                    characterFiles++;
+                }
 
-            if (isModTemplate) {
-                ff(new ModTemplateFormat());
-            } else if (isNested) {
-                ff(new NestedGameFolder());
-            } else if (!onlyRenpy) {
-                ff(new DumpAndHopeForTheBest());
-            } else {
-                ff(new InstallAppropriateFiles());
-            }
+                zipfile.readEntry();
+            });
+
+            zipfile.on("end", () => {
+                console.log("Analyzing mod structure:", {
+                    hasModJson,
+                    hasGameFolder,
+                    hasCharactersFolder,
+                    hasNestedStructure,
+                    topLevelDirs: Array.from(topLevelDirs),
+                    gameFiles,
+                    characterFiles,
+                    totalFiles: fileList.length
+                });
+
+                let mapper: ModMapper;
+
+                // Decision logic for mapper selection
+                if (hasModJson && (hasGameFolder || hasCharactersFolder)) {
+                    // ModManagerFormat: has mod.json and proper folder structure
+                    mapper = new ModManagerFormat();
+                } else if (hasNestedStructure && topLevelDirs.size === 1) {
+                    // ModTemplateFormat: single top-level folder containing game/characters
+                    mapper = new ModTemplateFormat();
+                } else if (hasGameFolder || hasCharactersFolder) {
+                    // ModManagerFormat: has proper folder structure but no mod.json
+                    mapper = new ModManagerFormat();
+                } else if (topLevelDirs.size === 1 && !hasGameFolder && !hasCharactersFolder) {
+                    // NestedGameFolder: single folder that should be treated as game folder
+                    mapper = new NestedGameFolder();
+                } else if (gameFiles > 0 || characterFiles > 0) {
+                    // InstallAppropriateFiles: has game files but no clear structure
+                    mapper = new InstallAppropriateFiles();
+                } else {
+                    // DumpAndHopeForTheBest: last resort
+                    mapper = new DumpAndHopeForTheBest();
+                }
+
+                console.log("Selected mapper:", mapper.getFriendlyName());
+                ff(mapper);
+            });
+
+            zipfile.on("error", (err) => {
+                console.error("Error reading zip file:", err);
+                rj(err);
+            });
         });
     });
 }

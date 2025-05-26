@@ -10,17 +10,14 @@
     "version": {
       "link_changelog": "¿Qué hay de nuevo?"
     },
-    "help_menu": {
-      "option_help": "Ve al sitio de ayuda",
-      "option_feedback": "Envía tus comentarios",
-      "option_discord": "Únete al servidor de Discord"
-    },
+
     "window_controls": {
       "close": "Cerrar",
       "maximise": "Maximizar",
       "minimise": "Minimizar",
-      "help": "Ayuda",
+
       "announcement": "Lee los últimos anuncios",
+      "sayonika_login": "Iniciar Sesión en Sayonika",
       "update": {
         "checking": "Buscando actualizaciones en segundo plano...",
         "available": "Hay una actualización disponible. Haz click aquí para bajarla.",
@@ -92,7 +89,7 @@
         "description_screenshots": "Presiona S mientras juegas para tomar una captura de pantalla.",
         "description_sdk": "¡Este mod utiliza características especiales del SDK de Doki Doki Mod Manager!",
         "description_author": "Creado por {0}",
-        "link_discord": "Discord ({0})",
+
         "link_website": "Sitio Web ({0})",
         "description_external": "Mostrar en carpeta"
       },
@@ -133,7 +130,7 @@
         "link_advanced_appearance": "Avanzado",
         "header_enhancements": "Mejoras",
         "link_sdk": "Logros y SDK",
-        "link_discord": "Discord",
+
         "header_application": "Aplicación",
         "link_updates": "Actualizaciones",
         "link_storage": "Carpeta de Instalación",
@@ -177,13 +174,7 @@
         "checkbox_specified": "Sólo si el mod dice que los tiene",
         "checkbox_never": "Nunca"
       },
-      "section_discord": {
-        "title": "Rich Presence de Discord",
-        "subtitle": "Comparte el mod que estás jugando con tus amigos de Discord.",
-        "description": "Los cambios se aplicarán después de reiniciar Doki Doki Mod Manager.",
-        "button_enable": "Activar Rich Presence",
-        "button_disable": "Desactivar Rich Presence"
-      },
+
       "section_testing": {
         "title": "Depuración SDK",
         "subtitle": "Activa los logs de depuración y prueba tus mods con el SDK de Doki Doki Mod Manager.",
@@ -202,7 +193,7 @@
       "disclaimer_1": "Doki Doki Mod Manager es un proyecto hecho por fans de Doki Doki Literature Club y no está afiliado con Team Salvato. Es un proyecto hecho por fans, tal como se define en las Guías de Propiedad Intelectual de Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager no se hace responsable por ningún daño causado a tus archivos o a tu computadora, como resultado de jugar algún mod o por otros medios. Es tu deber asegurarte que los mods que juegas sean seguros.",
       "title_socials": "Contáctanos",
-      "social_discord": "Únete al servidor de Discord de DDMM",
+
       "social_twitter": "Sigue a @DokiMod en Twitter",
       "social_reddit": "Escríbeme en Reddit",
       "social_email": "Envíame un email",
@@ -278,6 +269,10 @@
       "renderer_freeze": {
         "title": "Doki Doki Mod Manager no responde",
         "body": "Si el problema persiste un largo tiempo, cierra el programa e intenta nuevamente."
+      },
+      "executable_permission": {
+        "title": "No se pudo hacer el juego ejecutable",
+        "body": "No se pudo hacer DDLC.sh ejecutable en Linux. El juego puede no ejecutarse correctamente."
       }
     }
   }

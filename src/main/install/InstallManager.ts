@@ -25,7 +25,7 @@ export default class InstallManager {
                 const data: any = JSON.parse(readFileSync(installDataPath, "utf8"));
                 data.name = newName;
                 writeFileSync(installDataPath, JSON.stringify(data));
-                ff();
+                ff(undefined);
             } else {
                 rj();
             }
@@ -36,11 +36,11 @@ export default class InstallManager {
      * Deletes an install of the game, including save files.
      * @param folderName The folder containing the install
      */
-    public static deleteInstall(folderName: string): Promise<null> {
+    public static deleteInstall(folderName: string): Promise<void> {
         return new Promise((ff, rj) => {
             const dirPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
             if (existsSync(dirPath)) {
-                remove(dirPath).then(ff).catch(rj);
+                remove(dirPath).then(() => ff(undefined)).catch(rj);
             } else {
                 rj(new Error("Install does not exist."))
             }
@@ -51,16 +51,16 @@ export default class InstallManager {
      * Deletes the save file of an install.
      * @param folderName The folder containing the install
      */
-    public static deleteSaveData(folderName: string): Promise<null> {
+    public static deleteSaveData(folderName: string): Promise<void> {
         return new Promise((ff, rj) => {
             const dirPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
             if (existsSync(dirPath)) {
                 if (process.platform === "win32") {
-                    emptyDir(joinPath(dirPath, "appdata")).then(ff).catch(rj);
+                    emptyDir(joinPath(dirPath, "appdata")).then(() => ff(undefined)).catch(rj);
                 } else if (process.platform === "darwin") {
-                    emptyDir(joinPath(dirPath, "appdata", "Library", "RenPy")).then(ff).catch(rj);
+                    emptyDir(joinPath(dirPath, "appdata", "Library", "RenPy")).then(() => ff(undefined)).catch(rj);
                 } else {
-                    emptyDir(joinPath(dirPath, "appdata", ".renpy")).then(ff).catch(rj);
+                    emptyDir(joinPath(dirPath, "appdata", ".renpy")).then(() => ff(undefined)).catch(rj);
                 }
             } else {
                 rj(new Error("Install does not exist."))

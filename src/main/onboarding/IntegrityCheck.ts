@@ -23,7 +23,7 @@ export default class IntegrityCheck {
            fileStream.on("end", () => {
               const testHash: string = hash.digest().toString("hex");
               if (testHash === IntegrityCheck.DDLC_WIN_SHA256 || testHash === IntegrityCheck.DDLC_MAC_SHA256) {
-                  ff();
+                  ff(undefined);
               } else {
                   unlinkSync(path);
                   rj("Integrity check failed");

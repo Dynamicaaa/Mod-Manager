@@ -1,9 +1,10 @@
-import {app, BrowserWindow, ipcMain, IpcMessageEvent, shell, dialog, Notification} from "electron";
+import {app, BrowserWindow, ipcMain, IpcMainEvent, shell, dialog, Notification} from "electron";
 import {move, existsSync, mkdirpSync, readdirSync, removeSync, copyFileSync} from "fs-extra";
 import {join as joinPath} from "path";
 import {autoUpdater} from "electron-updater";
 import * as Sentry from "@sentry/electron";
 import * as semver from "semver";
+import * as remoteMain from "@electron/remote/main";
 
 // Check if running from Windows Store
 const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
@@ -26,25 +27,25 @@ if (existsSync(joinPath(app.getPath("appData"), "Doki Doki Mod Manager!"))) {
 
 import ModList from "./mod/ModList";
 import I18n from "./utils/i18n";
+import AppConfig from "./utils/AppConfig";
 import InstallList from "./install/InstallList";
 import InstallLauncher from "./install/InstallLauncher";
 import Config from "./utils/Config";
 import InstallCreator from "./install/InstallCreator";
 import ModInstaller from "./mod/ModInstaller";
 import InstallManager from "./install/InstallManager";
-import DiscordManager from "./discord/DiscordManager";
+
 import DownloadManager from "./net/DownloadManager";
 import OnboardingManager from "./onboarding/OnboardingManager";
-import {readFileSync, unlinkSync} from "fs";
-import InstallSync from "./cloud/InstallSync";
-import Timeout = NodeJS.Timeout;
-
-const DISCORD_ID = "453299645725016074";
+import {unlinkSync} from "fs";
 
 // region Flags and references
 
-// User agent for API requests
-const USER_AGENT = "DokiDokiModManager/" + app.getVersion() + " (zudo@doki.space)";
+// Initialize app config
+const appConfig = AppConfig.getInstance();
+
+// User agent for API requests - will be updated after config loads
+let USER_AGENT = "DokiDokiModManager/0.0.0 (CanaryZen@proton.me)";
 
 // The last argument, might be a ddmm:// url
 const lastArg: string = process.argv.pop();
@@ -52,10 +53,7 @@ const lastArg: string = process.argv.pop();
 // Permanent reference to the main app window
 let appWindow: BrowserWindow;
 
-// Discord rich presence
-let richPresence: DiscordManager = new DiscordManager(process.env.DDMM_DISCORD_ID || DISCORD_ID);
 
-richPresence.setIdleStatus();
 
 // Mod list
 let modList: ModList;
@@ -88,47 +86,16 @@ function showError(title: string, body: string, stacktrace: string, fatal: boole
     appWindow.setClosable(true);
 }
 
-function getCloudSaveData(folderName: string): Promise<{url: string, name: string}> {
-    return new Promise((ff, rj) => {
-        const installDataFile: string = joinPath(Config.readConfigValue("installFolder"), "installs", folderName, "install.json");
-        let installData: any;
-        try {
-            installData =
-                JSON.parse(readFileSync(installDataFile).toString("utf8"));
-
-            if (installData.cloudSave) {
-                appWindow.webContents.send("get save url", installData.cloudSave);
-                ipcMain.once("got save url", (_, url) => {
-                    ff({url, name: installData.cloudSave});
-                });
-            } else {
-                ff(null);
-            }
-        } catch (e) {
-            rj();
-            return;
-        }
-    });
-}
+// Cloud save function removed
 
 /**
  * Launches an install, handling frontend functionality automatically
  * @param folderName The folder containing the install
  */
-async function launchInstall(folderName): Promise<void> {
-    let lockTimer: Timeout;
+async function launchInstall(folderName: string): Promise<void> {
     Config.saveConfigValue("lastLaunchedInstall", folderName);
     appWindow.minimize(); // minimise the window to draw attention to the fact another window will be appearing
-    const saveData: {url: string, name: string} = await getCloudSaveData(folderName);
-    if (saveData) {
-        appWindow.webContents.send("lock save", saveData.name);
-        lockTimer = setInterval(() => {
-            appWindow.webContents.send("lock save", saveData.name);
-        }, 30000);
-    }
-    if (saveData && saveData.url) {
-        await InstallSync.installSaveData(folderName, saveData.url);
-    }
+
     appWindow.webContents.send("running cover", {
         display: true,
         dismissable: false,
@@ -136,28 +103,15 @@ async function launchInstall(folderName): Promise<void> {
         description: lang.translate("main.running_cover.description_running"),
         folder_path: joinPath(Config.readConfigValue("installFolder"), "installs", folderName)
     });
-    InstallLauncher.launchInstall(folderName, richPresence).then(() => {
+
+    InstallLauncher.launchInstall(folderName).then(() => {
         appWindow.restore(); // show DDMM again
         appWindow.focus();
         appWindow.webContents.send("running cover", {display: false});
         appWindow.webContents.send("got installs", InstallList.getInstallList());
-        if (saveData) {
-            console.log("Compressing save data");
-            InstallSync.compressSaveData(folderName).then(pathToSave => {
-                appWindow.webContents.send("upload save", {
-                    localURL: pathToSave,
-                    filename: saveData.name
-                });
-                clearTimeout(lockTimer);
-            }).catch(e => {
-                // TODO: talk about the error
-            });
-        }
     }).catch(err => {
         appWindow.restore();
         appWindow.focus();
-        clearTimeout(lockTimer);
-        appWindow.webContents.send("unlock save", saveData.name);
         appWindow.webContents.send("running cover", {
             display: true,
             dismissable: true,
@@ -185,60 +139,79 @@ ipcMain.on("get installs", () => {
 });
 
 // Handler for renderer process localisation functions
-ipcMain.on("translate", (ev: IpcMessageEvent, query: { key: string, args: string[] }) => {
+ipcMain.on("translate", (ev: IpcMainEvent, query: { key: string, args: string[] }) => {
     let passArgs: string[] = query.args;
     passArgs.unshift(query.key);
     ev.returnValue = lang.translate.apply(lang, passArgs);
 });
 
 // Open external URLs
-ipcMain.on("open url", (ev: IpcMessageEvent, url: string) => {
+ipcMain.on("open url", (ev: IpcMainEvent, url: string) => {
     shell.openExternal(url);
 });
 
 // Show file in file manager
-ipcMain.on("show file", (ev: IpcMessageEvent, path: string) => {
+ipcMain.on("show file", (ev: IpcMainEvent, path: string) => {
     shell.showItemInFolder(path);
 });
 
 // Config IPC functions
-ipcMain.on("save config", (ev: IpcMessageEvent, configData: { key: string, value: any }) => {
+ipcMain.on("save config", (ev: IpcMainEvent, configData: { key: string, value: any }) => {
     Config.saveConfigValue(configData.key, configData.value);
 });
 
-ipcMain.on("read config", (ev: IpcMessageEvent, key: string) => {
+ipcMain.on("read config", (ev: IpcMainEvent, key: string) => {
     ev.returnValue = Config.readConfigValue(key);
 });
 
+// App config IPC functions
+ipcMain.on("get app version", (ev: IpcMainEvent) => {
+    const version = appConfig.getVersion();
+    console.log("IPC get app version called, returning:", version);
+    ev.returnValue = version;
+});
+
+ipcMain.on("get app name", (ev: IpcMainEvent) => {
+    const name = appConfig.getName();
+    console.log("IPC get app name called, returning:", name);
+    ev.returnValue = name;
+});
+
+ipcMain.on("get app config", (ev: IpcMainEvent) => {
+    const config = appConfig.getFullConfig();
+    console.log("IPC get app config called, returning full config");
+    ev.returnValue = config;
+});
+
 // Launch install
-ipcMain.on("launch install", (ev: IpcMessageEvent, folderName: string) => {
+ipcMain.on("launch install", (ev: IpcMainEvent, folderName: string) => {
     launchInstall(folderName);
 });
 
 // Browse for a mod
-ipcMain.on("browse mods", (ev: IpcMessageEvent) => {
+ipcMain.on("browse mods", async (ev: IpcMainEvent) => {
     const extensions = ["zip", "gz", "tar", "rar", "7z"];
-    dialog.showOpenDialog(appWindow, {
+    const result = await dialog.showOpenDialog(appWindow, {
         title: lang.translate("main.mod_browse_dialog.title"),
         filters: [{
             extensions: extensions,
             name: lang.translate("main.mod_browse_dialog.file_format_name")
         }],
-    }, (filePaths: string[]) => {
-        if (filePaths && filePaths[0] && extensions.find(ext => (filePaths[0].endsWith("." + ext)))) {
-            ev.returnValue = filePaths[0];
-        } else {
-            ev.returnValue = null;
-        }
     });
+
+    if (result.filePaths && result.filePaths[0] && extensions.find(ext => (result.filePaths[0].endsWith("." + ext)))) {
+        ev.returnValue = result.filePaths[0];
+    } else {
+        ev.returnValue = null;
+    }
 });
 
 // Trigger install creation
-ipcMain.on("create install", (ev: IpcMessageEvent, install: { folderName: string, installName: string, globalSave: boolean, mod: string, cloudSave: string }) => {
+ipcMain.on("create install", (ev: IpcMainEvent, install: { folderName: string, installName: string, globalSave: boolean, mod: string }) => {
     windowClosable = false;
     appWindow.setClosable(false);
     console.log("[IPC create install] Creating install in " + install.folderName);
-    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave, install.cloudSave).then(() => {
+    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave).then(() => {
         if (!install.mod) {
             appWindow.webContents.send("got installs", InstallList.getInstallList());
             windowClosable = true;
@@ -271,7 +244,7 @@ ipcMain.on("create install", (ev: IpcMessageEvent, install: { folderName: string
 });
 
 // Rename an install
-ipcMain.on("rename install", (ev: IpcMessageEvent, options: { folderName: string, newName: string }) => {
+ipcMain.on("rename install", (ev: IpcMainEvent, options: { folderName: string, newName: string }) => {
     console.log("[IPC rename install] Renaming " + options.folderName);
     InstallManager.renameInstall(options.folderName, options.newName).then(() => {
         console.log("[IPC rename install] Renamed " + options.folderName);
@@ -287,7 +260,7 @@ ipcMain.on("rename install", (ev: IpcMessageEvent, options: { folderName: string
 });
 
 // Delete an install permanently
-ipcMain.on("delete install", (ev: IpcMessageEvent, folderName: string) => {
+ipcMain.on("delete install", (ev: IpcMainEvent, folderName: string) => {
     console.log("[IPC delete install] Deleting " + folderName);
     InstallManager.deleteInstall(folderName).then(() => {
         console.log("[IPC delete install] Deleted " + folderName);
@@ -303,7 +276,7 @@ ipcMain.on("delete install", (ev: IpcMessageEvent, folderName: string) => {
 });
 
 // Delete a mod
-ipcMain.on("delete mod", (ev: IpcMessageEvent, fileName: string) => {
+ipcMain.on("delete mod", (ev: IpcMainEvent, fileName: string) => {
     console.log("[IPC delete mod] Deleting " + fileName);
     try {
         unlinkSync(joinPath(Config.readConfigValue("installFolder"), "mods", fileName));
@@ -320,7 +293,7 @@ ipcMain.on("delete mod", (ev: IpcMessageEvent, fileName: string) => {
 });
 
 // Delete a save file for an install
-ipcMain.on("delete save", (ev: IpcMessageEvent, folderName: string) => {
+ipcMain.on("delete save", (ev: IpcMainEvent, folderName: string) => {
     console.log("[IPC delete save] Deleting save data for " + folderName);
     InstallManager.deleteSaveData(folderName).then(() => {
         console.log("[IPC delete save] Deleted save data for " + folderName);
@@ -336,41 +309,41 @@ ipcMain.on("delete save", (ev: IpcMessageEvent, folderName: string) => {
 });
 
 // desktop shortcut creation
-ipcMain.on("create shortcut", (ev: IpcMessageEvent, options: { folderName: string, installName: string }) => {
+ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: string, installName: string }) => {
     if (process.platform !== "win32") {
         dialog.showErrorBox("Shortcut creation is only supported on Windows", "Nice try.");
         return;
     }
 
-    dialog.showSaveDialog(appWindow, {
+    const result = await dialog.showSaveDialog(appWindow, {
         title: lang.translate("main.shortcut_dialog.title"),
         defaultPath: options.installName,
         filters: [
             {name: lang.translate("main.shortcut_dialog.file_format_name"), extensions: ["lnk"]}
         ]
-    }, (file) => {
-        if (file) {
-            console.log("[IPC create shortcut] Writing shortcut to " + file);
-            if (!shell.writeShortcutLink(file, "create", {
-                target: "ddmm://launch-install/" + options.folderName,
-                icon: process.execPath,
-                iconIndex: 0
-            })) {
-                showError(
-                    lang.translate("main.errors.shortcut.title"),
-                    lang.translate("main.errors.shortcut.body"),
-                    null,
-                    false
-                );
-            } else {
-                console.log("[IPC create shortcut] Written shortcut to " + file);
-            }
-        }
     });
+
+    if (result.filePath) {
+        console.log("[IPC create shortcut] Writing shortcut to " + result.filePath);
+        if (!shell.writeShortcutLink(result.filePath, "create", {
+            target: "ddmm://launch-install/" + options.folderName,
+            icon: process.execPath,
+            iconIndex: 0
+        })) {
+            showError(
+                lang.translate("main.errors.shortcut.title"),
+                lang.translate("main.errors.shortcut.body"),
+                null,
+                false
+            );
+        } else {
+            console.log("[IPC create shortcut] Written shortcut to " + result.filePath);
+        }
+    }
 });
 
 // Check if install exists
-ipcMain.on("install exists", (ev: IpcMessageEvent, folderName: string) => {
+ipcMain.on("install exists", (ev: IpcMainEvent, folderName: string) => {
     if (!folderName || typeof folderName !== "string") {
         console.warn("[IPC install exists] Folder name should be a string, received " + typeof folderName);
         ev.returnValue = false;
@@ -380,64 +353,114 @@ ipcMain.on("install exists", (ev: IpcMessageEvent, folderName: string) => {
 });
 
 // move installation folder
-ipcMain.on("move install", () => {
-    dialog.showOpenDialog(appWindow, {
+ipcMain.on("move install", async () => {
+    const result = await dialog.showOpenDialog(appWindow, {
         title: lang.translate("main.move_install.title"),
         properties: ["openDirectory"]
-    }, filePaths => {
-        if (filePaths && filePaths[0]) {
-            appWindow.hide();
-            const oldInstallFolder: string = Config.readConfigValue("installFolder");
-            const newInstallFolder: string = joinPath(filePaths[0], "DDMM_GameData");
-            move(oldInstallFolder, newInstallFolder, {overwrite: false}, e => {
-                if (e) {
-                    console.log(e);
-                    dialog.showErrorBox(lang.translate("main.errors.move_install.title"), lang.translate("main.errors.move_install.body"));
-                } else {
-                    Config.saveConfigValue("installFolder", newInstallFolder);
-                }
-                app.relaunch();
-                app.quit();
-            });
-        }
     });
+
+    if (result.filePaths && result.filePaths[0]) {
+        appWindow.hide();
+        const oldInstallFolder: string = Config.readConfigValue("installFolder");
+        const newInstallFolder: string = joinPath(result.filePaths[0], "DDMM_GameData");
+        move(oldInstallFolder, newInstallFolder, {overwrite: false}, e => {
+            if (e) {
+                console.log(e);
+                dialog.showErrorBox(lang.translate("main.errors.move_install.title"), lang.translate("main.errors.move_install.body"));
+            } else {
+                Config.saveConfigValue("installFolder", newInstallFolder);
+            }
+            app.relaunch();
+            app.quit();
+        });
+    }
 });
 
 // Get available backgrounds
-ipcMain.on("get backgrounds", (ev: IpcMessageEvent) => {
+ipcMain.on("get backgrounds", (ev: IpcMainEvent) => {
     ev.returnValue = readdirSync(joinPath(__dirname, "../../src/renderer/images/backgrounds"));
 });
+
+
 
 // Crash for debugging
 ipcMain.on("debug crash", () => {
     throw new Error("User forced debug crash with DevTools")
 });
 
+// Toggle DevTools
+ipcMain.on("toggle devtools", () => {
+    if (appWindow && appWindow.webContents) {
+        if (appWindow.webContents.isDevToolsOpened()) {
+            appWindow.webContents.closeDevTools();
+        } else {
+            appWindow.webContents.openDevTools({mode: "detach"});
+        }
+    }
+});
+
 // endregion
 
 // region Onboarding
 
+// Manual onboarding trigger for testing
+ipcMain.on("trigger onboarding", () => {
+    console.log("Main: Manual onboarding trigger received");
+    appWindow.webContents.send("start onboarding");
+});
+
+// Check onboarding status
+ipcMain.on("check onboarding", (event) => {
+    const needsOnboarding = OnboardingManager.isOnboardingRequired();
+    console.log("Main: Onboarding check requested, result:", needsOnboarding);
+    event.returnValue = needsOnboarding;
+});
+
 // Import start
-ipcMain.on("onboarding browse", () => {
-    dialog.showOpenDialog(appWindow, {
+ipcMain.on("onboarding browse", async () => {
+    console.log("Main: Onboarding browse dialog requested");
+    const result = await dialog.showOpenDialog(appWindow, {
         filters: [
             {name: lang.translate("main.game_browse_dialog.file_format_name"), extensions: ["zip"]}
         ],
         title: lang.translate("main.game_browse_dialog.title")
-    }, (files: string[]) => {
-        if (files && files[0] && files[0].endsWith(".zip")) {
-            try {
-                copyFileSync(files[0], joinPath(Config.readConfigValue("installFolder"), "ddlc.zip"));
-                OnboardingManager.requiresOnboarding().then(() => {
-                    appWindow.webContents.send("onboarding downloaded");
-                }).catch(() => {
-                    // TODO: show a message and try again
-                });
-            } catch (e) {
-                // TODO: catch any FS errors
-            }
-        }
     });
+
+    if (result.filePaths && result.filePaths[0] && result.filePaths[0].endsWith(".zip")) {
+        try {
+            console.log("Main: Copying selected DDLC file:", result.filePaths[0]);
+            copyFileSync(result.filePaths[0], joinPath(Config.readConfigValue("installFolder"), "ddlc.zip"));
+
+            // Check if onboarding is still required after copying
+            const stillNeedsOnboarding = OnboardingManager.isOnboardingRequired();
+            console.log("Main: After copying, still needs onboarding:", stillNeedsOnboarding);
+
+            if (!stillNeedsOnboarding) {
+                console.log("Main: Onboarding completed successfully");
+
+                // Automatically create a default DDLC install
+                console.log("Main: Creating default DDLC install...");
+                InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false).then(() => {
+                    console.log("Main: Default DDLC install created successfully");
+                    appWindow.webContents.send("onboarding downloaded");
+                    // Refresh the install list
+                    appWindow.webContents.send("got installs", InstallList.getInstallList());
+                }).catch((error) => {
+                    console.error("Main: Failed to create default DDLC install:", error);
+                    // Still send onboarding completed event even if install creation fails
+                    appWindow.webContents.send("onboarding downloaded");
+                });
+            } else {
+                console.log("Main: Onboarding still required after file copy");
+                // TODO: show a message and try again
+            }
+        } catch (e) {
+            console.error("Main: Error copying DDLC file:", e);
+            // TODO: catch any FS errors
+        }
+    } else {
+        console.log("Main: No valid file selected for onboarding");
+    }
 });
 
 ipcMain.on("download mod", (ev, url) => {
@@ -512,7 +535,7 @@ function handleURL(forcedArg?: string) {
             const installFolder: string = command.split("launch-install/")[1];
             launchInstall(installFolder);
         } else if (command.startsWith("auth-handoff/")) {
-            const url = new Buffer(command.split("auth-handoff/")[1], "base64").toString("utf8");
+            const url = Buffer.from(command.split("auth-handoff/")[1], "base64").toString("utf8");
             appWindow.webContents.send("auth handoff", url);
         }
     }
@@ -524,9 +547,24 @@ app.on("second-instance", (ev: Event, argv: string[]) => {
     handleURL(argv.pop());
 });
 
-app.on("ready", () => {
-    if (!app.requestSingleInstanceLock()) {
+app.on("ready", async () => {
+    console.log("App ready, loading configuration...");
 
+    // Load remote configuration first
+    try {
+        await appConfig.loadConfig();
+        USER_AGENT = `DokiDokiModManager/${appConfig.getVersion()} (${appConfig.get('author')})`;
+        console.log("Configuration loaded successfully");
+        console.log("USER_AGENT set to:", USER_AGENT);
+
+    } catch (error) {
+        console.error("Failed to load configuration:", error);
+    }
+
+    // Initialize remote module
+    remoteMain.initialize();
+
+    if (!app.requestSingleInstanceLock()) {
         // we should quit, as another instance is running
         console.log("App already running.");
         app.quit();
@@ -546,8 +584,13 @@ app.on("ready", () => {
     app.setAsDefaultProtocolClient("ddmm");
 
     // create browser window
+    const preloadPath = joinPath(__dirname, "../../src/renderer/js-preload/preload.js");
+    console.log("Main: Preload script path:", preloadPath);
+    console.log("Main: Preload script exists:", existsSync(preloadPath));
+    console.log("Main: __dirname:", __dirname);
+
     appWindow = new BrowserWindow({
-        title: "Doki Doki Mod Manager",
+        title: `${appConfig.getName()} v${appConfig.getVersion()}`,
         width: 1024,
         height: 600,
         minWidth: 1000,
@@ -555,14 +598,25 @@ app.on("ready", () => {
         maximizable: true,
         frame: !!Config.readConfigValue("systemBorders"),
         useContentSize: true,
+        transparent: true, // Enable transparency for rounded corners
+        backgroundColor: '#00000000', // Transparent background
         webPreferences: {
             contextIsolation: false,
-            sandbox: true,
+            sandbox: false,
             nodeIntegration: false,
-            preload: joinPath(__dirname, "../../src/renderer/js-preload/preload.js") // contains all the IPC scripts
+            webSecurity: false, // Allow loading images from localhost
+            preload: preloadPath // contains all the IPC scripts
         },
         titleBarStyle: "hiddenInset",
         show: false
+    });
+
+    // Enable remote module for this window
+    remoteMain.enable(appWindow.webContents);
+
+    // Listen for console messages from renderer process
+    appWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+        console.log(`Renderer Console [${level}]: ${message} (${sourceId}:${line})`);
     });
 
     // Activate download manager
@@ -592,6 +646,7 @@ app.on("ready", () => {
     });
 
     // set user agent so web services can contact me if necessary
+    console.log("Setting User-Agent to:", USER_AGENT);
     appWindow.webContents.setUserAgent(USER_AGENT);
 
     appWindow.webContents.on("will-navigate", (ev, url) => {
@@ -600,14 +655,29 @@ app.on("ready", () => {
     });
 
     appWindow.webContents.on("did-finish-load", () => {
+        console.log("Main: Window did-finish-load event fired");
+
+        // Check if preload script executed successfully
+        appWindow.webContents.executeJavaScript('typeof ddmm !== "undefined"')
+            .then(ddmmExists => {
+                console.log("Main: DDMM object exists in renderer:", ddmmExists);
+                if (!ddmmExists) {
+                    console.error("Main: DDMM object not found - preload script may have failed");
+                }
+            })
+            .catch(err => {
+                console.error("Main: Failed to check DDMM object:", err);
+            });
+
         if (!appWindow.isVisible()) {
             appWindow.show();
         }
+
         appWindow.webContents.send("is appx", isAppx);
         appWindow.webContents.send("debug info", {
             "Platform": process.platform,
             "Node Environment": process.env.NODE_ENV || "none",
-            "Discord Client ID": process.env.DDMM_DISCORD_ID || DISCORD_ID,
+
             "Background": Config.readConfigValue("background"),
             "Node Version": process.version,
             "Electron Version": process.versions.electron,
@@ -617,10 +687,23 @@ app.on("ready", () => {
             "AppX": isAppx
         });
 
-        OnboardingManager.requiresOnboarding().catch(e => {
-            console.warn("Onboarding required - reason: " + e);
+        // Check onboarding requirements immediately
+        console.log("Main: Checking onboarding requirements...");
+        const needsOnboarding = OnboardingManager.isOnboardingRequired();
+        console.log("Main: Onboarding required:", needsOnboarding);
+
+        if (needsOnboarding) {
+            console.log("Main: Sending 'start onboarding' event to renderer");
             appWindow.webContents.send("start onboarding");
-        });
+
+            // Also send it with a delay as a backup
+            setTimeout(() => {
+                console.log("Main: Sending backup 'start onboarding' event");
+                appWindow.webContents.send("start onboarding");
+            }, 1000);
+        } else {
+            console.log("Main: No onboarding required, proceeding normally");
+        }
     });
 
     appWindow.webContents.on("crashed", () => {

@@ -13,13 +13,13 @@ export default class ArchiveConverter {
             console.log("Converting " + tempDir);
 
             // run 7zip to extract the archive
-            const extractOut: SpawnSyncReturns<string> = spawnSync(path7za, ["x", pathToArchive, "-y", "-o" + tempDir]);
+            const extractOut = spawnSync(path7za, ["x", pathToArchive, "-y", "-o" + tempDir]);
 
             if (extractOut.error) { rj(extractOut.error); return; }
             if (extractOut.status !== 0) { rj(new Error("7-Zip exited with a non-zero exit code (" + extractOut.status + ")")); return; }
 
             // run 7zip to compress to zip
-            const compressOut: SpawnSyncReturns<string> = spawnSync(path7za, ["a", output, "-y", tempDir + "\\*"]);
+            const compressOut = spawnSync(path7za, ["a", output, "-y", tempDir + "\\*"]);
 
             if (compressOut.error) { rj(compressOut.error); return; }
             if (compressOut.status !== 0) { rj(new Error("7-Zip exited with a non-zero exit code (" + compressOut.status + ")")); return; }
@@ -27,7 +27,7 @@ export default class ArchiveConverter {
             // delete the temp directory
             removeSync(tempDir);
 
-            ff();
+            ff(undefined);
         });
 
     }

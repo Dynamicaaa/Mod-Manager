@@ -1,7 +1,8 @@
 node_modules/
 dist/
-src/main/**/*.js
 *.map
 lib/
 .idea/
 yarn-error.log
+yarn.lock
+package-lock.json

@@ -5,13 +5,77 @@
     THIS CODE HAS FULL ACCESS TO THE NODE.JS RUNTIME! Be careful.
  */
 
-const {ipcRenderer, remote} = require("electron");
+const {ipcRenderer} = require("electron");
+const remote = require("@electron/remote");
 const EventEmitter = remote.require("events");
-const packageData = remote.require("../../package");
+// Get app config from main process via IPC
+let appConfig;
+let fullConfig;
+try {
+    // Get the full config from the main process via IPC
+    console.log("Preload: Requesting full config from main process...");
+    fullConfig = ipcRenderer.sendSync("get app config");
+    console.log("Preload: Received full config:", fullConfig);
+
+    // Also get individual values for backwards compatibility
+    console.log("Preload: Requesting version from main process...");
+    const version = ipcRenderer.sendSync("get app version");
+    console.log("Preload: Received version:", version);
+
+    console.log("Preload: Requesting name from main process...");
+    const name = ipcRenderer.sendSync("get app name");
+    console.log("Preload: Received name:", name);
+
+    appConfig = {
+        getVersion: () => version || "0.0.0",
+        getName: () => name || "Doki Doki Mod Manager"
+    };
+
+    // Expose full config as window.APP_CONFIG for renderer compatibility
+    if (fullConfig) {
+        window.APP_CONFIG = fullConfig;
+        console.log("Exposed full config as window.APP_CONFIG:", window.APP_CONFIG);
+    }
+
+    console.log("Loaded app config via IPC successfully");
+    console.log("Final appConfig.getVersion():", appConfig.getVersion());
+} catch (e) {
+    console.warn("Could not load app config via IPC:", e);
+    // Fallback
+    appConfig = {
+        getVersion: () => "0.0.0",
+        getName: () => "Doki Doki Mod Manager"
+    };
+    // Fallback config
+    window.APP_CONFIG = {
+        name: "Doki Doki Mod Manager",
+        version: "0.0.0",
+        description: "Mod Manager for Doki Doki Literature Club",
+        author: "Dynamicaaa"
+    };
+}
 const path = remote.require("path");
-const fileUrl = remote.require("file-url");
+
+// Try to require file-url, but provide fallback if it fails (ES module issue)
+let fileUrl;
+try {
+    fileUrl = remote.require("file-url");
+} catch (e) {
+    console.warn("Could not load file-url module:", e.message);
+    // Provide a simple fallback implementation
+    fileUrl = (filePath) => {
+        if (process.platform === 'win32') {
+            return 'file:///' + filePath.replace(/\\/g, '/');
+        } else {
+            return 'file://' + filePath;
+        }
+    };
+}
 
 const api = new EventEmitter();
+
+// Ready flag for Firebase auth state
+let ready = false;
 
 api.mods = {};
 api.app = {};
@@ -94,10 +158,17 @@ api.app.crash = function () {
 
 // Localisation function
 api.translate = function (key, ...args) {
-    return ipcRenderer.sendSync("translate", {
-        "key": key,
-        "args": args
-    });
+    try {
+        const result = ipcRenderer.sendSync("translate", {
+            "key": key,
+            "args": args
+        });
+        console.log(`Translation for "${key}":`, result);
+        return result || key; // fallback to key if translation fails
+    } catch (e) {
+        console.warn(`Translation failed for "${key}":`, e);
+        return key; // fallback to key if IPC fails
+    }
 };
 
 // Path to URL conversion
@@ -105,21 +176,34 @@ api.pathToFile = fileUrl;
 
 // Close window
 api.window.close = function () {
-    remote.getCurrentWindow().close();
+    try {
+        remote.getCurrentWindow().close();
+    } catch (e) {
+        console.error("Failed to close window:", e);
+    }
 };
 
 // Maximise or restore window
 api.window.maximise = function () {
-    if (remote.getCurrentWindow().isMaximized()) {
-        remote.getCurrentWindow().restore();
-    } else {
-        remote.getCurrentWindow().maximize();
+    try {
+        const currentWindow = remote.getCurrentWindow();
+        if (currentWindow.isMaximized()) {
+            currentWindow.restore();
+        } else {
+            currentWindow.maximize();
+        }
+    } catch (e) {
+        console.error("Failed to maximize/restore window:", e);
     }
 };
 
 // Minimise window
 api.window.minimise = function () {
-    remote.getCurrentWindow().minimize();
+    try {
+        remote.getCurrentWindow().minimize();
+    } catch (e) {
+        console.error("Failed to minimize window:", e);
+    }
 };
 
 // Prompt
@@ -273,26 +357,7 @@ api.mods.createShortcut = function (folderName, installName) {
     ipcRenderer.send("create shortcut", {folderName, installName});
 };
 
-// Help meny
-api.app.showHelpMenu = function (x, y) {
-    remote.Menu.buildFromTemplate([
-        {
-            label: api.translate("renderer.help_menu.option_help"), click: () => {
-                api.app.openURL("https://help.doki.space");
-            }
-        },
-        {
-            label: api.translate("renderer.help_menu.option_discord"), click: () => {
-                api.app.openURL("https://doki.space/discord");
-            }
-        },
-        {
-            label: api.translate("renderer.help_menu.option_feedback"), click: () => {
-                api.app.openURL("mailto:zudo@doki.space");
-            }
-        }
-    ]).popup({x, y})
-};
+
 
 // User menu
 api.app.showUserMenu = function (x, y) {
@@ -319,6 +384,13 @@ api.app.beginMoveInstall = function () {
 api.app.getBackgrounds = function () {
     return ipcRenderer.sendSync("get backgrounds");
 };
+
+// Toggle DevTools
+api.app.toggleDevTools = function () {
+    ipcRenderer.send("toggle devtools");
+};
+
+
 
 // Handler for crashes / errors
 ipcRenderer.on("error message", (ev, data) => {
@@ -353,6 +425,14 @@ api.app.update = function () {
 
 api.onboarding.browseForGame = function () {
     ipcRenderer.send("onboarding browse");
+};
+
+api.onboarding.triggerOnboarding = function () {
+    ipcRenderer.send("trigger onboarding");
+};
+
+api.onboarding.checkOnboarding = function () {
+    return ipcRenderer.sendSync("check onboarding");
 };
 
 ipcRenderer.on("download progress", (_, data) => {
@@ -400,7 +480,10 @@ ipcRenderer.on("is appx", (_, is) => {
 });
 
 // Application version
-api.version = packageData.version;
+api.version = appConfig.getVersion();
+
+// Application name
+api.appName = appConfig.getName();
 
 // System platform
 api.platform = process.platform;
@@ -414,8 +497,55 @@ api.joinPath = path.join;
 // Is absolute
 api.isAbsolute = path.isAbsolute;
 
+// Set ready flag when Firebase auth is ready
+api.setReady = function(isReady) {
+    ready = isReady;
+};
+
 // make the API visible to the renderer
 global.ddmm = api;
+
+console.log("DDMM preload script loaded successfully");
+console.log("DDMM API object:", api);
+console.log("App config loaded:", {
+    name: appConfig.getName(),
+    version: appConfig.getVersion()
+});
+
+// Emit a custom event to notify that ddmm is ready
+setTimeout(() => {
+    const version = appConfig.getVersion();
+    const event = new CustomEvent('ddmm-ready', {
+        detail: {
+            version: version,
+            name: appConfig.getName()
+        }
+    });
+    window.dispatchEvent(event);
+    console.log("Dispatched ddmm-ready event with version:", version);
+
+    // Also try to update Vue app version directly if the app is available
+    if (typeof window.app !== 'undefined' && window.app.app_version !== undefined) {
+        console.log("Directly updating Vue app version to:", version);
+        window.app.app_version = version;
+    } else {
+        console.log("Vue app not available yet, will retry...");
+        // Retry a few times in case the Vue app isn't available yet
+        let retries = 0;
+        const maxRetries = 10;
+        const retryInterval = setInterval(() => {
+            retries++;
+            if (typeof window.app !== 'undefined' && window.app.app_version !== undefined) {
+                console.log("Directly updating Vue app version to:", version, "(retry", retries, ")");
+                window.app.app_version = version;
+                clearInterval(retryInterval);
+            } else if (retries >= maxRetries) {
+                console.warn("Failed to update Vue app version after", maxRetries, "retries");
+                clearInterval(retryInterval);
+            }
+        }, 100);
+    }
+}, 0);
 
 console.info(`%cWarning! This is the developer console!
 

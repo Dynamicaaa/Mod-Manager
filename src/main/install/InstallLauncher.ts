@@ -1,10 +1,11 @@
 import {join as joinPath} from "path";
-import {readFileSync} from "fs";
+import {readFileSync, existsSync, accessSync, constants} from "fs";
 import {app} from "electron";
 import {spawn} from "child_process";
+import * as chmodr from "chmodr";
 import I18n from "../utils/i18n";
 import Config from "../utils/Config";
-import DiscordManager from "../discord/DiscordManager";
+
 import SDKDebugConsole from "../sdk/SDKDebugConsole";
 import {LogClass} from "../sdk/LogClass";
 import SDKServer from "../sdk/SDKServer";
@@ -19,11 +20,46 @@ export default class InstallLauncher {
     private static debugConsole: SDKDebugConsole;
 
     /**
+     * Ensures DDLC.sh is executable on Linux systems before launching
+     * @param gameExecutable The path to the game executable
+     * @returns Promise that resolves with success status and error message if any
+     */
+    private static ensureExecutableBeforeLaunch(gameExecutable: string): Promise<{success: boolean, error?: string}> {
+        return new Promise((resolve) => {
+            if (process.platform !== "linux" || !gameExecutable.endsWith("DDLC.sh")) {
+                resolve({success: true});
+                return;
+            }
+
+            if (!existsSync(gameExecutable)) {
+                resolve({success: false, error: "DDLC.sh not found"});
+                return;
+            }
+
+            try {
+                // Check if file is already executable
+                accessSync(gameExecutable, constants.F_OK | constants.X_OK);
+                resolve({success: true});
+            } catch (e) {
+                // File is not executable, try to make it executable
+                chmodr(gameExecutable, 0o755, (err) => {
+                    if (err) {
+                        console.error("Failed to make DDLC.sh executable:", err);
+                        resolve({success: false, error: err.toString()});
+                    } else {
+                        console.log("Successfully made DDLC.sh executable");
+                        resolve({success: true});
+                    }
+                });
+            }
+        });
+    }
+
+    /**
      * Launches an install by the folder name
      * @param folderName The folder of the install to be launched
-     * @param richPresence The Discord rich presence instance to be updated
      */
-    static launchInstall(folderName: string, richPresence?: DiscordManager): Promise<any> {
+    static launchInstall(folderName: string): Promise<any> {
         return new Promise((ff, rj) => {
             const installFolder: string = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
             let installData: any;
@@ -54,7 +90,7 @@ export default class InstallLauncher {
                 return;
             }
 
-            if (richPresence) richPresence.setPlayingStatus(installData.name);
+
 
             if (Config.readConfigValue("sdkMode") !== "never") {
                 if (installData.mod && installData.mod.hasOwnProperty("uses_sdk")) {
@@ -118,35 +154,45 @@ export default class InstallLauncher {
 
             logToConsole("Launching game...");
 
-            const procHandle = spawn(gameExecutable, [], {
-                // Overwrite the environment variables to force Ren'Py to save where we want it to.
-                // On Windows, the save location is determined by the value of %appdata% but on macOS / Linux
-                // it saves based on the home directory location. This can be changed with $HOME but means the save
-                // files cannot be directly ported between operating systems.
-                cwd: joinPath(installFolder, "install"),
-                env,
-            });
+            // Ensure the game executable is executable before launching
+            this.ensureExecutableBeforeLaunch(gameExecutable).then((result) => {
+                if (!result.success) {
+                    logToConsole("Failed to make game executable: " + result.error, LogClass.ERROR);
+                    rj(lang.translate("main.errors.executable_permission.body") + " " + result.error);
+                    return;
+                }
 
-            procHandle.stdout.on("data", data => {
-                logToConsole("[STDOUT] " + data.toString());
-            });
+                const procHandle = spawn(gameExecutable, [], {
+                    // Overwrite the environment variables to force Ren'Py to save where we want it to.
+                    // On Windows, the save location is determined by the value of %appdata% but on macOS / Linux
+                    // it saves based on the home directory location. This can be changed with $HOME but means the save
+                    // files cannot be directly ported between operating systems.
+                    cwd: joinPath(installFolder, "install"),
+                    env,
+                });
 
-            procHandle.stderr.on("data", data => {
-                logToConsole("[STDERR] " + data.toString(), LogClass.ERROR);
-            });
+                procHandle.stdout.on("data", data => {
+                    logToConsole("[STDOUT] " + data.toString());
+                });
 
-            procHandle.on("error", e => {
-                console.log(e);
-                if (sdkServer) { sdkServer.shutdown(); }
-                richPresence.setIdleStatus();
-                rj(lang.translate("main.running_cover.install_crashed"))
-            });
+                procHandle.stderr.on("data", data => {
+                    logToConsole("[STDERR] " + data.toString(), LogClass.ERROR);
+                });
 
-            procHandle.on("close", () => {
-                if (sdkServer) { sdkServer.shutdown(); }
-                logToConsole("Game has closed.");
-                richPresence.setIdleStatus();
-                ff();
+                procHandle.on("error", e => {
+                    console.log(e);
+                    if (sdkServer) { sdkServer.shutdown(); }
+                    rj(lang.translate("main.running_cover.install_crashed"))
+                });
+
+                procHandle.on("close", () => {
+                    if (sdkServer) { sdkServer.shutdown(); }
+                    logToConsole("Game has closed.");
+                    ff(undefined);
+                });
+            }).catch((error) => {
+                logToConsole("Error checking executable permissions: " + error, LogClass.ERROR);
+                rj(lang.translate("main.errors.executable_permission.body") + " " + error);
             });
         });
     }

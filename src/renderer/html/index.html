@@ -5,8 +5,9 @@
 
     <title>Doki Doki Mod Manager</title>
 
-    <link rel="stylesheet" href="../../../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../../vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/sayonika-store.css">
 </head>
 <body>
 <div id="app" :class="['os-'+system_platform, appx ? 'is-appx': 'is-standard']"
@@ -84,9 +85,7 @@
     <div class="titlebar">
         <div class="app-title">
             <span>{{app_name}}</span>
-            <small>v{{app_version}} (<a href="javascript:;"
-                                        @click="openURL('https://help.doki.space/changelog/v' + app_version.replace(/\./g, '_'))">{{_("renderer.version.link_changelog")}}</a>)
-            </small>
+            <small>v{{app_version}}</small>
         </div>
         <div class="window-buttons">
             <div v-if="app_updating === 'checking'" :title="_('renderer.window_controls.update.checking')">
@@ -109,10 +108,13 @@
                     :class="{'fas': true, 'fa-bell': true, 'window-button-draw-attention': flashAnnouncement}"></i>
             </div>
 
-            <div @click="showHelpMenu" :title="_('renderer.window_controls.help')"><i class="fas fa-question"></i></div>
 
-            <div @click="login" v-if="!getLoggedInUsername()">{{_('renderer.window_controls.login')}}</div>
-            <div @click="showUserMenu" v-else style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{getLoggedInUsername()}}</div>
+
+            <div @click="showSayonikaLogin" v-if="!getSayonikaUser()">{{_('renderer.window_controls.sayonika_login')}}</div>
+            <div @click="showSayonikaUserMenu" v-else style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{getSayonikaUser().display_name || getSayonikaUser().username}}</div>
+
+            <div @click="toggleDevTools" :title="_('renderer.window_controls.devtools')"><i
+                    class="fas fa-code fa-fw"></i></div>
 
             <template v-if="!system_borders">
                 <div @click="windowMinimise" :title="_('renderer.window_controls.minimise')"><i
@@ -124,31 +126,35 @@
             </template>
         </div>
     </div>
-    <component
-            :is="currentTabComponent"
-            @set_background="setBackground"
-    ></component>
+    <transition :name="pageTransition" mode="out-in">
+        <component
+                :is="currentTabComponent"
+                :key="tab"
+                @set_background="setBackground"
+        ></component>
+    </transition>
     <div class="navbar">
         <div class="nav-links">
-            <div v-for="t in tabs" :class="{'active': t.id === tab}" @click="tab = t.id">{{t.name}}</div>
+            <div v-for="t in tabs" v-if="!t.hidden" :class="{'active': t.id === tab}" @click="navigateToTab(t.id, 'fade')">{{t.name}}</div>
         </div>
     </div>
 </div>
 
 
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+<!-- Firebase app script removed - cloud saves disabled -->
 
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-storage.js"></script>
-<script src="../../../node_modules/fuse.js/dist/fuse.js"></script>
-<script src="../../../node_modules/vue/dist/vue.js"></script>
+<!-- Firebase scripts removed - cloud saves disabled -->
+<script src="../../../vendor/fuse.js"></script>
+<script src="../../../vendor/vue.js"></script>
+<script src="../js/sayonika-config.js"></script>
+<script src="../js/sayonika-auth.js"></script>
 <script src="../js/components/OnboardingOverlay.js"></script>
 <script src="../js/components/DropOverlay.js"></script>
 <script src="../js/components/tabs/ModsTab.js"></script>
 <script src="../js/components/tabs/StorePlaceholderTab.js"></script>
 <script src="../js/components/tabs/OptionsTab.js"></script>
 <script src="../js/components/tabs/AboutTab.js"></script>
+<script src="../js/components/tabs/EditInstanceTab.js"></script>
 <script src="../js/app.js"></script>
 </body>
 </html>
