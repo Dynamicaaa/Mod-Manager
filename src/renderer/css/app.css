@@ -1427,7 +1427,7 @@ input[type=radio]:focus {
   background: transparent !important;
 }
 .ddlc-options-container .mod-viewer-mod-list {
-  background: linear-gradient(145deg, rgba(30, 30, 30, 0.2), rgba(40, 40, 40, 0.15));
+  background: transparent;
   border: 2px solid rgba(168, 85, 247, 0.4);
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
   backdrop-filter: blur(25px);
@@ -1447,7 +1447,7 @@ input[type=radio]:focus {
   background: transparent;
 }
 .ddlc-options-container .mod-viewer-mod-display {
-  background: linear-gradient(145deg, rgba(30, 30, 30, 0.2), rgba(40, 40, 40, 0.15));
+  background: transparent;
   border: 2px solid rgba(168, 85, 247, 0.4);
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
   backdrop-filter: blur(25px);
@@ -1491,11 +1491,6 @@ input[type=radio]:focus {
   border-color: #a855f7;
   box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
   color: white;
-}
-.ddlc-options-container .mod-viewer-mod-display {
-  background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
-  border: 2px solid rgba(168, 85, 247, 0.2);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
 }
 
 .ddlc-about-container .text-container {
