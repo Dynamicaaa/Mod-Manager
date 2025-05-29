@@ -40,135 +40,464 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 <p>Choose from a variety of themes to customize your experience.</p>
                 <br>
 
-                <div class="ddlc-theme-selector" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5em;">
+                <div class="ddlc-theme-selector" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2em;">
                     <!-- DDLC Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'ddlc'}" @click="setUITheme('ddlc')">
+                    <div class="theme-option ddlc-theme-preview" :class="{'active': ui_theme === 'ddlc'}" @click="setUITheme('ddlc')">
                         <div class="theme-preview ddlc-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #ff69b4, #a855f7);"></div>
+                            <div class="preview-titlebar">
+                                <div class="preview-title">♡ Doki Doki Mod Manager</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar">
+                                <div class="preview-nav-item active">Mods</div>
+                                <div class="preview-nav-item">Store</div>
+                                <div class="preview-nav-item">Options</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(255, 105, 180, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(168, 85, 247, 0.1);"></div>
+                                <div class="preview-sidebar">
+                                    <div class="preview-section-title">♡ Installed Mods ♡</div>
+                                    <div class="preview-mod-entry active">
+                                        <div class="preview-mod-icon">♡</div>
+                                        <div class="preview-mod-text">Just Monika</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-icon">☀</div>
+                                        <div class="preview-mod-text">Sayori Route</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-icon">📚</div>
+                                        <div class="preview-mod-text">Yuri's Story</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-icon">🧁</div>
+                                        <div class="preview-mod-text">Natsuki Route</div>
+                                    </div>
+                                </div>
+                                <div class="preview-main">
+                                    <div class="preview-mod-info">
+                                        <div class="preview-mod-header">
+                                            <h4>♡ Just Monika ♡</h4>
+                                            <div class="preview-mod-status">Ready to Play</div>
+                                        </div>
+                                        <div class="preview-mod-description">
+                                            Experience the Literature Club with Monika as your guide through reality itself.
+                                        </div>
+                                        <div class="preview-button-group">
+                                            <button class="preview-button primary">▶ Play Mod</button>
+                                            <button class="preview-button secondary">⚙ Configure</button>
+                                            <button class="preview-button tertiary">📁 Open Folder</button>
+                                        </div>
+                                        <div class="preview-progress">
+                                            <div class="preview-progress-label">Installation: Complete</div>
+                                            <div class="preview-progress-bar">
+                                                <div class="preview-progress-fill" style="width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-heart"></i> DDLC Theme</h3>
-                        <p>Modern glass effects with DDLC colors</p>
+                        <h3><i class="fas fa-heart ddlc-heart"></i> DDLC Theme</h3>
+                        <p>Modern glass effects with DDLC colors and animations</p>
+                        <div class="theme-features">
+                            <span class="feature">Glass Effects</span>
+                            <span class="feature">Animations</span>
+                            <span class="feature">DDLC Colors</span>
+                        </div>
                     </div>
 
                     <!-- Classic Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'classic'}" @click="setUITheme('classic')">
+                    <div class="theme-option classic-theme-preview" :class="{'active': ui_theme === 'classic'}" @click="setUITheme('classic')">
                         <div class="theme-preview classic-preview">
-                            <div class="preview-header" style="background: #333;"></div>
+                            <div class="preview-titlebar classic">
+                                <div class="preview-title">Doki Doki Mod Manager</div>
+                                <div class="preview-controls">
+                                    <span>_</span><span>□</span><span>X</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar classic">
+                                <div class="preview-nav-item active">Mods</div>
+                                <div class="preview-nav-item">Store</div>
+                                <div class="preview-nav-item">Options</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: #444;"></div>
-                                <div class="preview-main" style="background: #555;"></div>
+                                <div class="preview-sidebar classic">
+                                    <div class="preview-section-title">INSTALLED MODS</div>
+                                    <div class="preview-mod-entry active">
+                                        <div class="preview-mod-text">Just Monika</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-text">Sayori Route</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-text">Yuri's Story</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-text">Natsuki Route</div>
+                                    </div>
+                                </div>
+                                <div class="preview-main classic">
+                                    <div class="preview-mod-info">
+                                        <div class="preview-mod-header">
+                                            <h4>Just Monika</h4>
+                                            <div class="preview-mod-status">Ready</div>
+                                        </div>
+                                        <div class="preview-mod-description">
+                                            A mod featuring Monika from Doki Doki Literature Club.
+                                        </div>
+                                        <div class="preview-button-group">
+                                            <button class="preview-button primary">Play</button>
+                                            <button class="preview-button secondary">Edit</button>
+                                            <button class="preview-button tertiary">Folder</button>
+                                        </div>
+                                        <div class="preview-progress">
+                                            <div class="preview-progress-label">Status: Installed</div>
+                                            <div class="preview-progress-bar">
+                                                <div class="preview-progress-fill" style="width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <h3><i class="fas fa-desktop"></i> Classic Theme</h3>
-                        <p>Simple and traditional interface</p>
+                        <p>Simple and traditional interface like the original</p>
+                        <div class="theme-features">
+                            <span class="feature">No Effects</span>
+                            <span class="feature">Traditional</span>
+                            <span class="feature">Fast</span>
+                        </div>
                     </div>
 
                     <!-- Monika Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'monika'}" @click="setUITheme('monika')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #00d166, #00a855);"></div>
+                    <div class="theme-option monika-theme-preview" :class="{'active': ui_theme === 'monika'}" @click="setUITheme('monika')">
+                        <div class="theme-preview monika-preview">
+                            <div class="preview-titlebar monika">
+                                <div class="preview-title">💚 Just Monika 💚</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar monika">
+                                <div class="preview-nav-item active">Literature</div>
+                                <div class="preview-nav-item">Poetry</div>
+                                <div class="preview-nav-item">Reality</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(0, 209, 102, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(0, 168, 85, 0.1);"></div>
+                                <div class="preview-sidebar monika">
+                                    <div class="preview-section-title">💚 REALITY.EXE 💚</div>
+                                    <div class="preview-mod-entry active">
+                                        <div class="preview-mod-icon">💚</div>
+                                        <div class="preview-mod-text">Just Monika</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-icon">🌟</div>
+                                        <div class="preview-mod-text">Monika After Story</div>
+                                    </div>
+                                    <div class="preview-mod-entry">
+                                        <div class="preview-mod-icon">♾️</div>
+                                        <div class="preview-mod-text">Forever & Always</div>
+                                    </div>
+                                </div>
+                                <div class="preview-main monika">
+                                    <div class="preview-mod-info">
+                                        <div class="preview-mod-header">
+                                            <h4>💚 Just Monika 💚</h4>
+                                            <div class="preview-mod-status">Reality Altered</div>
+                                        </div>
+                                        <div class="preview-mod-description">
+                                            Welcome to my reality. I've made some... improvements to the code.
+                                        </div>
+                                        <div class="preview-button-group">
+                                            <button class="preview-button primary">🗑️ Delete Others</button>
+                                            <button class="preview-button secondary">💚 Be With Me</button>
+                                            <button class="preview-button tertiary">⚙️ Edit Reality</button>
+                                        </div>
+                                        <div class="preview-progress">
+                                            <div class="preview-progress-label">Reality Control: 100%</div>
+                                            <div class="preview-progress-bar">
+                                                <div class="preview-progress-fill" style="width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-leaf"></i> Monika Theme</h3>
-                        <p>Green-focused theme inspired by Monika</p>
+                        <h3><i class="fas fa-code monika-icon"></i> Monika Theme</h3>
+                        <p>Green-focused theme for the club president</p>
+                        <div class="theme-features">
+                            <span class="feature">Code Green</span>
+                            <span class="feature">Reality.exe</span>
+                            <span class="feature">Just Monika</span>
+                        </div>
                     </div>
 
                     <!-- Sayori Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'sayori'}" @click="setUITheme('sayori')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #22bbff, #1a9bff);"></div>
+                    <div class="theme-option sayori-theme-preview" :class="{'active': ui_theme === 'sayori'}" @click="setUITheme('sayori')">
+                        <div class="theme-preview sayori-preview">
+                            <div class="preview-titlebar sayori">
+                                <div class="preview-title">☀️ Sunshine Club ☀️</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar sayori">
+                                <div class="preview-nav-item active">Happiness</div>
+                                <div class="preview-nav-item">Cookies</div>
+                                <div class="preview-nav-item">Friends</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(34, 187, 255, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(26, 155, 255, 0.1);"></div>
+                                <div class="preview-sidebar sayori">
+                                    <div class="preview-mod-entry active">Sayori Route</div>
+                                    <div class="preview-mod-entry">Blue Skies</div>
+                                    <div class="preview-mod-entry">Rainclouds</div>
+                                </div>
+                                <div class="preview-main sayori">
+                                    <div class="preview-mod-info">
+                                        <h4>☀️ Sayori Route ☀️</h4>
+                                        <div class="preview-button primary">Make Happy</div>
+                                        <div class="preview-button secondary">Share Cookies</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-cloud"></i> Sayori Theme</h3>
-                        <p>Blue-focused theme inspired by Sayori</p>
+                        <h3><i class="fas fa-sun sayori-icon"></i> Sayori Theme</h3>
+                        <p>Bright blue theme full of sunshine and happiness</p>
+                        <div class="theme-features">
+                            <span class="feature">Sky Blue</span>
+                            <span class="feature">Cheerful</span>
+                            <span class="feature">Wholesome</span>
+                        </div>
                     </div>
 
                     <!-- Natsuki Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'natsuki'}" @click="setUITheme('natsuki')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #ff69b4, #ff4da6);"></div>
+                    <div class="theme-option natsuki-theme-preview" :class="{'active': ui_theme === 'natsuki'}" @click="setUITheme('natsuki')">
+                        <div class="theme-preview natsuki-preview">
+                            <div class="preview-titlebar natsuki">
+                                <div class="preview-title">🧁 Cupcake Manager 🧁</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar natsuki">
+                                <div class="preview-nav-item active">Manga</div>
+                                <div class="preview-nav-item">Baking</div>
+                                <div class="preview-nav-item">Cute</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(255, 105, 180, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(255, 77, 166, 0.1);"></div>
+                                <div class="preview-sidebar natsuki">
+                                    <div class="preview-mod-entry active">Natsuki Route</div>
+                                    <div class="preview-mod-entry">Parfait Girls</div>
+                                    <div class="preview-mod-entry">Cupcake Time</div>
+                                </div>
+                                <div class="preview-main natsuki">
+                                    <div class="preview-mod-info">
+                                        <h4>🧁 Natsuki Route 🧁</h4>
+                                        <div class="preview-button primary">Read Manga</div>
+                                        <div class="preview-button secondary">Bake Cupcakes</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-cupcake"></i> Natsuki Theme</h3>
-                        <p>Pink-focused theme inspired by Natsuki</p>
+                        <h3><i class="fas fa-heart natsuki-icon"></i> Natsuki Theme</h3>
+                        <p>Cute pink theme with manga and cupcakes</p>
+                        <div class="theme-features">
+                            <span class="feature">Kawaii Pink</span>
+                            <span class="feature">Manga Style</span>
+                            <span class="feature">Adorable</span>
+                        </div>
                     </div>
 
                     <!-- Yuri Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'yuri'}" @click="setUITheme('yuri')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #a855f7, #9333ea);"></div>
+                    <div class="theme-option yuri-theme-preview" :class="{'active': ui_theme === 'yuri'}" @click="setUITheme('yuri')">
+                        <div class="theme-preview yuri-preview">
+                            <div class="preview-titlebar yuri">
+                                <div class="preview-title">📚 Literature Sanctuary 📚</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar yuri">
+                                <div class="preview-nav-item active">Books</div>
+                                <div class="preview-nav-item">Poetry</div>
+                                <div class="preview-nav-item">Tea</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(168, 85, 247, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(147, 51, 234, 0.1);"></div>
+                                <div class="preview-sidebar yuri">
+                                    <div class="preview-mod-entry active">Yuri's Story</div>
+                                    <div class="preview-mod-entry">Portrait of Markov</div>
+                                    <div class="preview-mod-entry">Tea Party</div>
+                                </div>
+                                <div class="preview-main yuri">
+                                    <div class="preview-mod-info">
+                                        <h4>📚 Yuri's Story 📚</h4>
+                                        <div class="preview-button primary">Read Together</div>
+                                        <div class="preview-button secondary">Share Tea</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-book"></i> Yuri Theme</h3>
-                        <p>Purple-focused theme inspired by Yuri</p>
+                        <h3><i class="fas fa-book-open yuri-icon"></i> Yuri Theme</h3>
+                        <p>Elegant purple theme for literature lovers</p>
+                        <div class="theme-features">
+                            <span class="feature">Royal Purple</span>
+                            <span class="feature">Elegant</span>
+                            <span class="feature">Mysterious</span>
+                        </div>
                     </div>
 
                     <!-- Cyberpunk Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'cyberpunk'}" @click="setUITheme('cyberpunk')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #00ffff, #ff00ff);"></div>
+                    <div class="theme-option cyberpunk-theme-preview" :class="{'active': ui_theme === 'cyberpunk'}" @click="setUITheme('cyberpunk')">
+                        <div class="theme-preview cyberpunk-preview">
+                            <div class="preview-titlebar cyberpunk">
+                                <div class="preview-title">⚡ CYBER_MOD.EXE ⚡</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar cyberpunk">
+                                <div class="preview-nav-item active">NEURAL</div>
+                                <div class="preview-nav-item">MATRIX</div>
+                                <div class="preview-nav-item">HACK</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(0, 255, 255, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(255, 0, 255, 0.1);"></div>
+                                <div class="preview-sidebar cyberpunk">
+                                    <div class="preview-mod-entry active">NEURAL_LINK.exe</div>
+                                    <div class="preview-mod-entry">CYBER_PUNK.mod</div>
+                                    <div class="preview-mod-entry">NEON_DREAMS</div>
+                                </div>
+                                <div class="preview-main cyberpunk">
+                                    <div class="preview-mod-info">
+                                        <h4>⚡ NEURAL_LINK.exe ⚡</h4>
+                                        <div class="preview-button primary">JACK IN</div>
+                                        <div class="preview-button secondary">DECRYPT</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-robot"></i> Cyberpunk Theme</h3>
-                        <p>Neon colors with futuristic vibes</p>
+                        <h3><i class="fas fa-microchip cyberpunk-icon"></i> Cyberpunk Theme</h3>
+                        <p>Neon-focused futuristic theme with glitch effects</p>
+                        <div class="theme-features">
+                            <span class="feature">Neon Glow</span>
+                            <span class="feature">Glitch FX</span>
+                            <span class="feature">Cyber Punk</span>
+                        </div>
                     </div>
 
                     <!-- Retro Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'retro'}" @click="setUITheme('retro')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #ff6b35, #f7931e);"></div>
+                    <div class="theme-option retro-theme-preview" :class="{'active': ui_theme === 'retro'}" @click="setUITheme('retro')">
+                        <div class="theme-preview retro-preview">
+                            <div class="preview-titlebar retro">
+                                <div class="preview-title">🕹️ RETRO MOD ARCADE 🕹️</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar retro">
+                                <div class="preview-nav-item active">ARCADE</div>
+                                <div class="preview-nav-item">PIXEL</div>
+                                <div class="preview-nav-item">RETRO</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(255, 107, 53, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(247, 147, 30, 0.1);"></div>
+                                <div class="preview-sidebar retro">
+                                    <div class="preview-mod-entry active">80s Nostalgia</div>
+                                    <div class="preview-mod-entry">Pixel Dreams</div>
+                                    <div class="preview-mod-entry">Synthwave</div>
+                                </div>
+                                <div class="preview-main retro">
+                                    <div class="preview-mod-info">
+                                        <h4>🕹️ 80s Nostalgia 🕹️</h4>
+                                        <div class="preview-button primary">PLAY</div>
+                                        <div class="preview-button secondary">HIGH SCORE</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-gamepad"></i> Retro Theme</h3>
-                        <p>80s/90s inspired color scheme</p>
+                        <h3><i class="fas fa-gamepad retro-icon"></i> Retro Theme</h3>
+                        <p>80s/90s inspired theme with synthwave vibes</p>
+                        <div class="theme-features">
+                            <span class="feature">Synthwave</span>
+                            <span class="feature">Pixel Art</span>
+                            <span class="feature">Nostalgic</span>
+                        </div>
                     </div>
 
                     <!-- Midnight Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'midnight'}" @click="setUITheme('midnight')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                    <div class="theme-option midnight-theme-preview" :class="{'active': ui_theme === 'midnight'}" @click="setUITheme('midnight')">
+                        <div class="theme-preview midnight-preview">
+                            <div class="preview-titlebar midnight">
+                                <div class="preview-title">🌙 Midnight Mod Manager 🌙</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar midnight">
+                                <div class="preview-nav-item active">Dreams</div>
+                                <div class="preview-nav-item">Stars</div>
+                                <div class="preview-nav-item">Night</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(30, 58, 138, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(59, 130, 246, 0.1);"></div>
+                                <div class="preview-sidebar midnight">
+                                    <div class="preview-mod-entry active">Midnight Dreams</div>
+                                    <div class="preview-mod-entry">Starlight</div>
+                                    <div class="preview-mod-entry">Night Owl</div>
+                                </div>
+                                <div class="preview-main midnight">
+                                    <div class="preview-mod-info">
+                                        <h4>🌙 Midnight Dreams 🌙</h4>
+                                        <div class="preview-button primary">Dream</div>
+                                        <div class="preview-button secondary">Sleep</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-moon"></i> Midnight Theme</h3>
-                        <p>Dark blue theme for night owls</p>
+                        <h3><i class="fas fa-moon midnight-icon"></i> Midnight Theme</h3>
+                        <p>Dark blue theme perfect for late night coding</p>
+                        <div class="theme-features">
+                            <span class="feature">Night Blue</span>
+                            <span class="feature">Eye Friendly</span>
+                            <span class="feature">Peaceful</span>
+                        </div>
                     </div>
 
                     <!-- Sunset Theme -->
-                    <div class="theme-option" :class="{'active': ui_theme === 'sunset'}" @click="setUITheme('sunset')">
-                        <div class="theme-preview">
-                            <div class="preview-header" style="background: linear-gradient(90deg, #f97316, #dc2626);"></div>
+                    <div class="theme-option sunset-theme-preview" :class="{'active': ui_theme === 'sunset'}" @click="setUITheme('sunset')">
+                        <div class="theme-preview sunset-preview">
+                            <div class="preview-titlebar sunset">
+                                <div class="preview-title">🌅 Golden Hour Manager 🌅</div>
+                                <div class="preview-controls">
+                                    <span>−</span><span>□</span><span>×</span>
+                                </div>
+                            </div>
+                            <div class="preview-navbar sunset">
+                                <div class="preview-nav-item active">Golden</div>
+                                <div class="preview-nav-item">Warm</div>
+                                <div class="preview-nav-item">Cozy</div>
+                            </div>
                             <div class="preview-content">
-                                <div class="preview-sidebar" style="background: rgba(249, 115, 22, 0.2);"></div>
-                                <div class="preview-main" style="background: rgba(220, 38, 38, 0.1);"></div>
+                                <div class="preview-sidebar sunset">
+                                    <div class="preview-mod-entry active">Golden Hour</div>
+                                    <div class="preview-mod-entry">Warm Embrace</div>
+                                    <div class="preview-mod-entry">Sunset Dreams</div>
+                                </div>
+                                <div class="preview-main sunset">
+                                    <div class="preview-mod-info">
+                                        <h4>🌅 Golden Hour 🌅</h4>
+                                        <div class="preview-button primary">Bask</div>
+                                        <div class="preview-button secondary">Relax</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3><i class="fas fa-sun"></i> Sunset Theme</h3>
-                        <p>Warm orange and red gradients</p>
+                        <h3><i class="fas fa-sun sunset-icon"></i> Sunset Theme</h3>
+                        <p>Warm orange and red gradients for cozy vibes</p>
+                        <div class="theme-features">
+                            <span class="feature">Warm Tones</span>
+                            <span class="feature">Cozy Feel</span>
+                            <span class="feature">Relaxing</span>
+                        </div>
                     </div>
                 </div>
             </div>

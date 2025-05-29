@@ -11,7 +11,6 @@
   "scripts": {
     "start": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron .",
     "start-dev": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --inspect=5858 .",
-    "release": "npm run clean && npm run build-css-prod && tsc && npm run copy-assets && electron-builder",
     "test": "npm run clean && tsc && mocha",
     "build-css": "sass src/renderer/css:src/renderer/css --no-source-map",
     "build-css-watch": "sass src/renderer/css:src/renderer/css --watch --no-source-map",
@@ -20,7 +19,14 @@
     "rebuild-css": "npm run build-css-once",
     "clean": "rm -rf lib",
     "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.js lib/vendor/ && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
-    "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets"
+    "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:all": "npm run build && electron-builder --win --mac --linux",
+    "pack": "npm run build && electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
@@ -41,24 +47,42 @@
   "devDependencies": {
     "@sentry/cli": "^2.25.0",
     "electron": "^28.0.0",
-    "electron-builder": "^24.9.0",
+    "electron-builder": "^24.13.3",
     "mocha": "^10.2.0",
     "sass": "^1.69.0",
     "typescript": "^5.3.0"
   },
   "build": {
     "appId": "dynamicaaa.dokidokimodmanager",
+    "productName": "Doki Doki Mod Manager",
     "artifactName": "ddmm-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
     "files": [
+      "lib/**/*",
+      "node_modules/**/*",
+      "package.json",
       "!**/*.ts",
       "!**/*.map",
       "!**/fontawesome-free/svgs",
       "!**/fontawesome-free/sprites",
-      "!**/fontawesome-free/svgs",
       "!**/fontawesome-free/js",
       "!**/fontawesome-free/less",
       "!**/fontawesome-free/scss",
-      "!**/vue/src"
+      "!**/vue/src",
+      "!src/**/*",
+      "!.git/**/*",
+      "!.vscode/**/*",
+      "!*.md",
+      "!tsconfig.json"
+    ],
+    "extraResources": [
+      {
+        "from": "lang",
+        "to": "lang"
+      }
     ],
     "protocols": [
       {
@@ -76,6 +100,7 @@
       }
     ],
     "win": {
+      "icon": "build/icon.ico",
       "target": [
         {
           "target": "nsis",
@@ -83,8 +108,27 @@
             "x64",
             "ia32"
           ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
-      ]
+      ],
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "ddmm-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Doki Doki Mod Manager"
+    },
+    "portable": {
+      "artifactName": "ddmm-${version}-win-${arch}-portable.${ext}"
     },
     "linux": {
       "category": "Game",
@@ -93,16 +137,72 @@
         {
           "target": "AppImage",
           "arch": [
-            "x64",
-            "ia32"
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64"
           ]
         }
-      ]
+      ],
+      "artifactName": "ddmm-${version}-linux-${arch}.${ext}",
+      "synopsis": "Mod Manager for Doki Doki Literature Club",
+      "description": "A comprehensive mod manager for Doki Doki Literature Club with support for mod installation, management, and organization."
     },
     "mac": {
       "category": "public.app-category.games",
+      "icon": "build/icon.icns",
       "target": [
-        "dmg"
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "artifactName": "ddmm-${version}-mac-${arch}.${ext}",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "dmg": {
+      "title": "Doki Doki Mod Manager ${version}",
+      "icon": "build/icon.icns",
+      "background": "build/background.png",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
       ]
     }
   }

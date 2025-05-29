@@ -104,6 +104,13 @@ const app = new Vue({
             "button_negative": "",
             "input": "",
             "callback": null
+        },
+        "ddlc_crash_dialog": {
+            "display": false,
+            "folderName": "",
+            "crashInfo": null,
+            "message": "",
+            "installPath": ""
         }
     },
     "computed": {
@@ -314,6 +321,61 @@ const app = new Vue({
         "closeInput": function (input) {
             this.input_cover.callback(input);
             this.input_cover.display = false;
+        },
+
+        // DDLC Crash Dialog methods
+        "showCrashDialog": function(crashData) {
+            console.log("Showing DDLC crash dialog:", crashData);
+            this.ddlc_crash_dialog = {
+                display: true,
+                folderName: crashData.folderName,
+                crashInfo: crashData.crashInfo,
+                message: crashData.message,
+                installPath: crashData.installPath
+            };
+        },
+
+        "closeCrashDialog": function() {
+            this.ddlc_crash_dialog.display = false;
+        },
+
+        "relaunchDDLC": function() {
+            console.log("Relaunching DDLC:", this.ddlc_crash_dialog.folderName);
+            if (typeof ddmm !== 'undefined' && ddmm.app && ddmm.app.sendCrashAction) {
+                ddmm.app.sendCrashAction({
+                    type: 'relaunch',
+                    folderName: this.ddlc_crash_dialog.folderName
+                });
+            }
+            this.closeCrashDialog();
+        },
+
+        "backToMenu": function() {
+            console.log("Going back to menu after crash");
+            if (typeof ddmm !== 'undefined' && ddmm.app && ddmm.app.sendCrashAction) {
+                ddmm.app.sendCrashAction({
+                    type: 'back-to-menu'
+                });
+            }
+            this.closeCrashDialog();
+        },
+
+        "getCrashTypeDescription": function() {
+            if (!this.ddlc_crash_dialog.crashInfo) return "Unknown error";
+
+            const crashInfo = this.ddlc_crash_dialog.crashInfo;
+            switch (crashInfo.type) {
+                case 'process_error':
+                    return `Process error: ${crashInfo.error}`;
+                case 'abnormal_exit':
+                    if (crashInfo.signal) {
+                        return `Terminated by signal: ${crashInfo.signal}`;
+                    } else {
+                        return `Abnormal exit with code: ${crashInfo.exitCode}`;
+                    }
+                default:
+                    return "Unknown crash type";
+            }
         },
         "showInstallMod": function (mod) {
             this.tab = "mods";
@@ -819,6 +881,16 @@ function setupDDMMEventListeners(retryCount = 0) {
     ddmm.on("onboarding downloaded", () => {
         console.log("DDMM Event: Received 'onboarding downloaded' event");
         window.OnboardingManager.hideOnboarding();
+    });
+
+    // DDLC crash dialog event listener
+    ddmm.on("ddlc-crash", (crashData) => {
+        console.log("DDMM Event: Received 'ddlc-crash' event", crashData);
+        if (window.app && window.app.showCrashDialog) {
+            window.app.showCrashDialog(crashData);
+        } else {
+            console.error("App or showCrashDialog method not available");
+        }
     });
 
     // Firebase event handlers removed - cloud saves disabled

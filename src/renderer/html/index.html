@@ -82,6 +82,36 @@
         </p>
     </div>
 
+    <!-- DDLC Crash Dialog -->
+    <div class="cover ddlc-crash" v-if="ddlc_crash_dialog.display" :style="{'background-image': backgroundImageCrashStyle}">
+        <div class="crash-dialog-content">
+            <h1><i class="fas fa-exclamation-triangle"></i> DDLC Crashed</h1>
+            <p>Doki Doki Literature Club has unexpectedly crashed.</p>
+
+            <div class="crash-details">
+                <p><strong>Error Details:</strong> {{getCrashTypeDescription()}}</p>
+                <p><strong>Install:</strong> {{ddlc_crash_dialog.folderName}}</p>
+                <p><strong>Time:</strong> {{ddlc_crash_dialog.crashInfo ? new Date(ddlc_crash_dialog.crashInfo.timestamp).toLocaleString() : 'Unknown'}}</p>
+            </div>
+
+            <div class="crash-actions">
+                <button class="primary" @click="relaunchDDLC">
+                    <i class="fas fa-redo fa-fw"></i> Relaunch Game
+                </button>
+                <button class="secondary" @click="backToMenu">
+                    <i class="fas fa-arrow-left fa-fw"></i> Back to Menu
+                </button>
+                <button class="tertiary" @click="showFile(ddlc_crash_dialog.installPath)">
+                    <i class="fas fa-folder fa-fw"></i> Open Install Folder
+                </button>
+            </div>
+
+            <div class="crash-help">
+                <p><small>If this keeps happening, try reinstalling the mod or checking for updates.</small></p>
+            </div>
+        </div>
+    </div>
+
     <div class="titlebar">
         <div class="app-title">
             <span>{{app_name}}</span>

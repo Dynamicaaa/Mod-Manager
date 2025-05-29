@@ -397,6 +397,17 @@ ipcRenderer.on("error message", (ev, data) => {
     api.emit("error", data);
 });
 
+// Handler for DDLC crashes
+ipcRenderer.on("ddlc-crash", (ev, data) => {
+    console.log("DDLC crash detected:", data);
+    api.emit("ddlc-crash", data);
+});
+
+// Send crash dialog actions to main process
+api.app.sendCrashAction = function(action) {
+    ipcRenderer.send("crash-dialog-action", action);
+};
+
 // Handler for debug info
 ipcRenderer.on("debug info", (ev, data) => {
     api.debug = data;

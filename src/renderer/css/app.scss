@@ -29,8 +29,8 @@ $ddlc-glow-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
 $ddlc-glass-border: rgba(255, 255, 255, 0.3);
 
 // UI Theme Variables
-$classic-panel-bg: rgba(0, 0, 0, 0.1);
-$classic-border: 2px solid $ui-dark-colour-bg;
+$classic-panel-bg: rgba(0, 0, 0, 0.5);
+$classic-border: 2px solid #1e1e1e;
 
 @use "sass:color";
 @use "fonts";
@@ -126,6 +126,56 @@ div, section, main, article {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+// Global fix for blur effects during scrolling
+[style*="backdrop-filter"],
+*[class*="blur"],
+.mod-viewer-mod-list,
+.mod-viewer-mod-display,
+.mod-view-mod-list-entry,
+.theme-option {
+  // Ensure proper GPU acceleration for blur effects
+  transform: translateZ(0);
+  // Optimize rendering during scroll
+  will-change: auto;
+  // Improve containment for better performance
+  contain: layout style;
+}
+
+// Specific fix for scrollable containers with blur
+.mod-viewer-mod-list,
+.mod-viewer-mod-display {
+  // Ensure smooth scrolling with blur effects
+  scroll-behavior: smooth;
+  // Optimize scroll performance
+  -webkit-overflow-scrolling: touch;
+  // Create a new stacking context to contain blur effects
+  position: relative;
+  z-index: 0;
+  // Ensure proper clipping of blur backgrounds
+  overflow: hidden;
+}
+
+// Additional fix for blur background sizing during scroll
+.mod-viewer-mod-list,
+.mod-viewer-mod-display,
+.ddlc-options-container .mod-viewer-mod-list,
+.ddlc-options-container .mod-viewer-mod-display {
+  // Override overflow to ensure proper blur containment
+  overflow-y: auto !important;
+  // Ensure blur backgrounds are properly contained
+  &::before {
+    // Force the background to stay within bounds
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    // Ensure it covers the full scrollable area
+    height: 100% !important;
+    width: 100% !important;
+  }
 }
 
 // endregion
@@ -403,19 +453,20 @@ a .fab {
   border: 1px solid $ddlc-glass-border;
   backdrop-filter: blur(25px);
   position: relative;
+  // Ensure proper scrolling behavior with blur effects
+  contain: layout style paint;
+  // Fix for blur background sizing during scroll
+  isolation: isolate;
+  // Use background instead of ::before for better scroll behavior
+  background-image: $ddlc-glass-gradient, $ddlc-panel-gradient;
+  background-attachment: local, local;
+  background-size: 100% 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
 }
 
+// Remove the ::before pseudo-element as we're using background-image instead
 .mod-viewer-mod-list::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: $ddlc-glass-gradient;
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .mod-viewer-mod-display {
@@ -428,19 +479,20 @@ a .fab {
   border: 1px solid $ddlc-glass-border;
   backdrop-filter: blur(25px);
   position: relative;
+  // Ensure proper scrolling behavior with blur effects
+  contain: layout style paint;
+  // Fix for blur background sizing during scroll
+  isolation: isolate;
+  // Use background instead of ::before for better scroll behavior
+  background-image: $ddlc-glass-gradient, $ddlc-panel-gradient;
+  background-attachment: local, local;
+  background-size: 100% 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
 }
 
+// Remove the ::before pseudo-element as we're using background-image instead
 .mod-viewer-mod-display::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: $ddlc-glass-gradient;
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .mod-view-mod-list-title {
@@ -484,6 +536,9 @@ a .fab {
   cursor: pointer;
   backdrop-filter: blur(10px);
   position: relative;
+  // Improve performance for blur effects during scrolling
+  contain: layout style;
+  transform: translateZ(0);
 }
 
 .mod-view-mod-list-entry::before {
@@ -499,6 +554,9 @@ a .fab {
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: -1;
+  // Ensure proper rendering during scroll
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 .mod-view-mod-list-entry:hover {
@@ -1528,6 +1586,8 @@ input[type="radio"]:focus {
 .ddlc-options-container {
   // Ensure no gray boxes appear during scrolling
   overflow: hidden;
+  // Improve scrolling performance and blur rendering
+  contain: layout style paint;
 
   // Remove any potential gray backgrounds from all child elements
   * {
@@ -1540,6 +1600,15 @@ input[type="radio"]:focus {
     border: 2px solid rgba(168, 85, 247, 0.4);
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
     backdrop-filter: blur(25px);
+    // Improve scrolling performance with blur effects
+    contain: layout style paint;
+    transform: translateZ(0);
+    will-change: scroll-position;
+    // Use background instead of ::before for better scroll behavior
+    background-image: $ddlc-glass-gradient;
+    background-attachment: local;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 
     // Ensure scrollbar styling doesn't create gray boxes
     ::-webkit-scrollbar {
@@ -1566,6 +1635,15 @@ input[type="radio"]:focus {
     border: 2px solid rgba(168, 85, 247, 0.4);
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
     backdrop-filter: blur(25px);
+    // Improve scrolling performance with blur effects
+    contain: layout style paint;
+    transform: translateZ(0);
+    will-change: scroll-position;
+    // Use background instead of ::before for better scroll behavior
+    background-image: $ddlc-glass-gradient;
+    background-attachment: local;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 
     // Ensure scrollbar styling doesn't create gray boxes
     ::-webkit-scrollbar {
@@ -1942,6 +2020,10 @@ h2 {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
   position: relative;
+  // Improve performance for blur effects during scrolling
+  contain: layout style;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .theme-option:hover {
@@ -1973,13 +2055,224 @@ h2 {
   font-size: 14px;
 }
 
+// Enhanced Theme Previews with Live UI Elements
 .theme-preview {
   width: 100%;
-  height: 120px;
-  border-radius: 8px;
-  margin-bottom: 1em;
+  height: 160px;
+  border-radius: 12px;
+  margin-bottom: 1.5em;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-preview:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+// Preview Structure
+.preview-titlebar {
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.preview-title {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview-controls {
+  display: flex;
+  gap: 4px;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    font-weight: bold;
+  }
+}
+
+.preview-navbar {
+  height: 20px;
+  display: flex;
+  font-size: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-nav-item {
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.preview-content {
+  display: flex;
+  height: 116px;
+}
+
+.preview-sidebar {
+  width: 35%;
+  padding: 4px;
+  font-size: 6px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+}
+
+.preview-main {
+  width: 65%;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.preview-section-title {
+  font-size: 5px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preview-mod-entry {
+  display: flex;
+  align-items: center;
+  padding: 2px 3px;
+  margin: 1px 0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 6px;
+
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.preview-mod-icon {
+  margin-right: 3px;
+  font-size: 5px;
+  width: 8px;
+  text-align: center;
+}
+
+.preview-mod-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview-mod-info {
+  width: 100%;
+
+  .preview-mod-header {
+    margin-bottom: 3px;
+
+    h4 {
+      font-size: 7px;
+      margin: 0 0 1px 0;
+      font-weight: bold;
+    }
+  }
+
+  .preview-mod-status {
+    font-size: 5px;
+    opacity: 0.8;
+    margin-bottom: 2px;
+  }
+
+  .preview-mod-description {
+    font-size: 5px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    opacity: 0.9;
+  }
+}
+
+.preview-button-group {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.preview-button {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  &.primary {
+    opacity: 1;
+    font-weight: bold;
+  }
+
+  &.secondary {
+    opacity: 0.9;
+  }
+
+  &.tertiary {
+    opacity: 0.8;
+  }
+}
+
+.preview-progress {
+  margin-top: 3px;
+
+  .preview-progress-label {
+    font-size: 4px;
+    margin-bottom: 1px;
+    opacity: 0.8;
+  }
+
+  .preview-progress-bar {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    overflow: hidden;
+
+    .preview-progress-fill {
+      height: 100%;
+      border-radius: 1px;
+      transition: width 0.3s ease;
+    }
+  }
 }
 
 .ddlc-preview {
@@ -2074,16 +2367,942 @@ h2 {
   color: $ddlc-natsuki;
 }
 
-// Classic Theme Overrides
+// Theme Selector Override - Ensure it's not affected by current theme
+.ddlc-theme-selector {
+  // Reset all text colors to default theme styling for theme option content only
+  .theme-option {
+    h3 {
+      color: #fff !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+      animation: none !important;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.8) !important;
+      text-shadow: none !important;
+    }
+
+    .theme-features .feature {
+      color: rgba(255, 255, 255, 0.8) !important;
+      text-shadow: none !important;
+    }
+
+    // Icons should maintain their theme-specific colors
+    .ddlc-heart { color: #ff69b4 !important; }
+    .monika-icon { color: #00d166 !important; }
+    .sayori-icon { color: #22bbff !important; }
+    .natsuki-icon { color: #ff69b4 !important; }
+    .yuri-icon { color: #a855f7 !important; }
+    .cyberpunk-icon { color: #00ffff !important; }
+    .retro-icon { color: #ff6b35 !important; }
+    .midnight-icon { color: #1e3a8a !important; }
+    .sunset-icon { color: #f97316 !important; }
+  }
+
+  // Ensure preview elements maintain their specific styling and are NOT affected by current theme
+  .theme-preview {
+    *, *::before, *::after {
+      color: inherit !important;
+      text-shadow: inherit !important;
+      animation: inherit !important;
+    }
+  }
+}
+
+// Enhanced Theme Preview Styling for Each Theme
+// DDLC Theme Preview - Enhanced with animations
+.ddlc-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #ff69b4, #a855f7);
+      color: white;
+      text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+      animation: ddlc-glow 3s ease-in-out infinite alternate;
+    }
+
+    .preview-controls span {
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+    }
+
+    .preview-navbar {
+      background: rgba(255, 105, 180, 0.2);
+      color: white;
+
+      .preview-nav-item.active {
+        background: rgba(255, 105, 180, 0.4);
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(255, 105, 180, 0.15);
+      color: white;
+    }
+
+    .preview-main {
+      background: rgba(168, 85, 247, 0.1);
+      color: white;
+    }
+
+    .preview-mod-entry {
+      color: rgba(255, 255, 255, 0.8);
+
+      &.active {
+        background: rgba(255, 105, 180, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.6);
+      }
+
+      &:hover {
+        background: rgba(255, 105, 180, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #ff69b4, rgba(255, 105, 180, 0.8));
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #a855f7, rgba(168, 85, 247, 0.8));
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      &.tertiary {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .preview-progress-fill {
+      background: linear-gradient(90deg, #ff69b4, #a855f7);
+    }
+
+    .preview-section-title {
+      color: #ff69b4;
+      text-shadow: 0 0 3px rgba(255, 105, 180, 0.5);
+    }
+  }
+
+  .ddlc-heart {
+    animation: heartbeat 2s ease-in-out infinite;
+    color: #ff69b4;
+  }
+}
+
+// Classic Theme Preview - Simple and clean
+.classic-theme-preview {
+  .theme-preview {
+    background: #111;
+
+    .preview-titlebar {
+      background: #333;
+      color: #ddd;
+    }
+
+    .preview-controls span {
+      background: #666;
+      color: #ddd;
+    }
+
+    .preview-navbar {
+      background: transparent;
+      color: #aaa;
+
+      .preview-nav-item.active {
+        color: #fff;
+        text-shadow: 0 0 10px #fff;
+      }
+    }
+
+    .preview-sidebar {
+      background: transparent;
+      color: #ddd;
+    }
+
+    .preview-main {
+      background: transparent;
+      color: #ddd;
+    }
+
+    .preview-mod-entry {
+      color: #aaa;
+
+      &.active {
+        background: linear-gradient(315deg, rgba(187, 85, 153, 0.5), rgba(73, 50, 64, 0.5));
+        color: #fff;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: #bb5599;
+        color: white;
+      }
+
+      &.secondary {
+        background: #2b2b2b;
+        color: #ddd;
+      }
+
+      &.tertiary {
+        background: #1e1e1e;
+        color: #aaa;
+      }
+    }
+
+    .preview-progress-fill {
+      background: linear-gradient(315deg, rgba(187, 85, 153, 0.8), rgba(73, 50, 64, 0.8));
+    }
+
+    .preview-section-title {
+      color: #aaa;
+    }
+  }
+}
+
+// Character Theme Previews with Life and Animations
+
+// Monika Theme Preview - Green with code effects
+.monika-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(10, 26, 10, 0.95), rgba(20, 40, 20, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #00d166, #00a855);
+      color: #e0ffe0;
+      text-shadow: 0 0 10px rgba(0, 209, 102, 0.8);
+      animation: monika-glitch 4s ease-in-out infinite;
+    }
+
+    .preview-controls span {
+      background: rgba(0, 209, 102, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(0, 209, 102, 0.2);
+      color: #e0ffe0;
+
+      .preview-nav-item.active {
+        background: rgba(0, 209, 102, 0.4);
+        text-shadow: 0 0 5px rgba(0, 209, 102, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(0, 209, 102, 0.15);
+      color: #e0ffe0;
+    }
+
+    .preview-main {
+      background: rgba(0, 168, 85, 0.1);
+      color: #e0ffe0;
+    }
+
+    .preview-mod-entry {
+      color: rgba(224, 255, 224, 0.8);
+
+      &.active {
+        background: rgba(0, 209, 102, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(0, 209, 102, 0.6);
+      }
+
+      &:hover {
+        background: rgba(0, 209, 102, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #00d166, rgba(0, 209, 102, 0.8));
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #00a855, rgba(0, 168, 85, 0.8));
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      &.tertiary {
+        background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+        color: #e0ffe0;
+        border: 1px solid rgba(0, 209, 102, 0.3);
+      }
+    }
+
+    .preview-progress-fill {
+      background: linear-gradient(90deg, #00d166, #00a855);
+    }
+
+    .preview-section-title {
+      color: #00d166;
+      text-shadow: 0 0 3px rgba(0, 209, 102, 0.5);
+    }
+  }
+
+  .monika-icon {
+    animation: code-pulse 2s ease-in-out infinite;
+    color: #00d166;
+  }
+}
+
+// Sayori Theme Preview - Blue with cheerful effects
+.sayori-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(10, 26, 42, 0.95), rgba(20, 40, 60, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #22bbff, #1a9bff);
+      color: #e0f0ff;
+      text-shadow: 0 0 10px rgba(34, 187, 255, 0.8);
+      animation: sayori-bounce 3s ease-in-out infinite;
+    }
+
+    .preview-controls span {
+      background: rgba(34, 187, 255, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(34, 187, 255, 0.2);
+      color: #e0f0ff;
+
+      .preview-nav-item.active {
+        background: rgba(34, 187, 255, 0.4);
+        text-shadow: 0 0 5px rgba(34, 187, 255, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(34, 187, 255, 0.15);
+      color: #e0f0ff;
+    }
+
+    .preview-main {
+      background: rgba(26, 155, 255, 0.1);
+      color: #e0f0ff;
+    }
+
+    .preview-mod-entry {
+      color: rgba(224, 240, 255, 0.8);
+
+      &.active {
+        background: rgba(34, 187, 255, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(34, 187, 255, 0.6);
+      }
+
+      &:hover {
+        background: rgba(34, 187, 255, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #22bbff, rgba(34, 187, 255, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #1a9bff, rgba(26, 155, 255, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .sayori-icon {
+    animation: sunshine-glow 2.5s ease-in-out infinite alternate;
+    color: #22bbff;
+  }
+}
+
+// Natsuki Theme Preview - Pink with cute effects
+.natsuki-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(42, 10, 26, 0.95), rgba(60, 20, 40, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #ff69b4, #ff4da6);
+      color: #ffe0f0;
+      text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+      animation: natsuki-wiggle 2s ease-in-out infinite;
+    }
+
+    .preview-controls span {
+      background: rgba(255, 105, 180, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(255, 105, 180, 0.2);
+      color: #ffe0f0;
+
+      .preview-nav-item.active {
+        background: rgba(255, 105, 180, 0.4);
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(255, 105, 180, 0.15);
+      color: #ffe0f0;
+    }
+
+    .preview-main {
+      background: rgba(255, 77, 166, 0.1);
+      color: #ffe0f0;
+    }
+
+    .preview-mod-entry {
+      color: rgba(255, 224, 240, 0.8);
+
+      &.active {
+        background: rgba(255, 105, 180, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.6);
+      }
+
+      &:hover {
+        background: rgba(255, 105, 180, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #ff69b4, rgba(255, 105, 180, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #ff4da6, rgba(255, 77, 166, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .natsuki-icon {
+    animation: kawaii-bounce 1.5s ease-in-out infinite;
+    color: #ff69b4;
+  }
+}
+
+// Yuri Theme Preview - Purple with elegant effects
+.yuri-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(26, 10, 42, 0.95), rgba(40, 20, 60, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #a855f7, #9333ea);
+      color: #f0e0ff;
+      text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+      animation: yuri-fade 4s ease-in-out infinite alternate;
+    }
+
+    .preview-controls span {
+      background: rgba(168, 85, 247, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(168, 85, 247, 0.2);
+      color: #f0e0ff;
+
+      .preview-nav-item.active {
+        background: rgba(168, 85, 247, 0.4);
+        text-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(168, 85, 247, 0.15);
+      color: #f0e0ff;
+    }
+
+    .preview-main {
+      background: rgba(147, 51, 234, 0.1);
+      color: #f0e0ff;
+    }
+
+    .preview-mod-entry {
+      color: rgba(240, 224, 255, 0.8);
+
+      &.active {
+        background: rgba(168, 85, 247, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
+      }
+
+      &:hover {
+        background: rgba(168, 85, 247, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #a855f7, rgba(168, 85, 247, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #9333ea, rgba(147, 51, 234, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .yuri-icon {
+    animation: elegant-float 3s ease-in-out infinite alternate;
+    color: #a855f7;
+  }
+}
+
+// Cyberpunk Theme Preview - Neon with glitch effects
+.cyberpunk-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(5, 5, 15, 0.95), rgba(10, 10, 25, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #00ffff, #ff00ff);
+      color: #e0ffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+      animation: cyberpunk-glitch 2s ease-in-out infinite;
+    }
+
+    .preview-controls span {
+      background: rgba(0, 255, 255, 0.8);
+      color: black;
+    }
+
+    .preview-navbar {
+      background: rgba(0, 255, 255, 0.2);
+      color: #e0ffff;
+
+      .preview-nav-item.active {
+        background: rgba(255, 0, 255, 0.4);
+        text-shadow: 0 0 5px rgba(255, 0, 255, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(0, 255, 255, 0.15);
+      color: #e0ffff;
+    }
+
+    .preview-main {
+      background: rgba(255, 0, 255, 0.1);
+      color: #e0ffff;
+    }
+
+    .preview-mod-entry {
+      color: rgba(224, 255, 255, 0.8);
+
+      &.active {
+        background: rgba(255, 0, 255, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(255, 0, 255, 0.6);
+      }
+
+      &:hover {
+        background: rgba(0, 255, 255, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #00ffff, rgba(0, 255, 255, 0.8));
+        color: black;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #ff00ff, rgba(255, 0, 255, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .cyberpunk-icon {
+    animation: neon-pulse 1s ease-in-out infinite alternate;
+    color: #00ffff;
+  }
+}
+
+// Retro Theme Preview - 80s with synthwave effects
+.retro-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(25, 10, 5, 0.95), rgba(40, 20, 10, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #ff6b35, #f7931e);
+      color: #fff0e0;
+      text-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
+      animation: retro-wave 3s ease-in-out infinite;
+    }
+
+    .preview-controls span {
+      background: rgba(255, 107, 53, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(255, 107, 53, 0.2);
+      color: #fff0e0;
+
+      .preview-nav-item.active {
+        background: rgba(247, 147, 30, 0.4);
+        text-shadow: 0 0 5px rgba(247, 147, 30, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(255, 107, 53, 0.15);
+      color: #fff0e0;
+    }
+
+    .preview-main {
+      background: rgba(247, 147, 30, 0.1);
+      color: #fff0e0;
+    }
+
+    .preview-mod-entry {
+      color: rgba(255, 240, 224, 0.8);
+
+      &.active {
+        background: rgba(255, 107, 53, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(255, 107, 53, 0.6);
+      }
+
+      &:hover {
+        background: rgba(247, 147, 30, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #ff6b35, rgba(255, 107, 53, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #f7931e, rgba(247, 147, 30, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .retro-icon {
+    animation: synthwave-glow 2s ease-in-out infinite alternate;
+    color: #ff6b35;
+  }
+}
+
+// Midnight Theme Preview - Dark blue with peaceful effects
+.midnight-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(5, 15, 30, 0.95), rgba(10, 25, 45, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+      color: #e0f0ff;
+      text-shadow: 0 0 10px rgba(30, 58, 138, 0.8);
+      animation: midnight-drift 4s ease-in-out infinite alternate;
+    }
+
+    .preview-controls span {
+      background: rgba(30, 58, 138, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(30, 58, 138, 0.2);
+      color: #e0f0ff;
+
+      .preview-nav-item.active {
+        background: rgba(59, 130, 246, 0.4);
+        text-shadow: 0 0 5px rgba(59, 130, 246, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(30, 58, 138, 0.15);
+      color: #e0f0ff;
+    }
+
+    .preview-main {
+      background: rgba(59, 130, 246, 0.1);
+      color: #e0f0ff;
+    }
+
+    .preview-mod-entry {
+      color: rgba(224, 240, 255, 0.8);
+
+      &.active {
+        background: rgba(30, 58, 138, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(30, 58, 138, 0.6);
+      }
+
+      &:hover {
+        background: rgba(59, 130, 246, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #1e3a8a, rgba(30, 58, 138, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #3b82f6, rgba(59, 130, 246, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .midnight-icon {
+    animation: moon-glow 3s ease-in-out infinite alternate;
+    color: #1e3a8a;
+  }
+}
+
+// Sunset Theme Preview - Warm with cozy effects
+.sunset-theme-preview {
+  .theme-preview {
+    background: linear-gradient(145deg, rgba(30, 15, 5, 0.95), rgba(45, 25, 10, 0.9));
+
+    .preview-titlebar {
+      background: linear-gradient(90deg, #f97316, #dc2626);
+      color: #fff5e0;
+      text-shadow: 0 0 10px rgba(249, 115, 22, 0.8);
+      animation: sunset-glow 3.5s ease-in-out infinite alternate;
+    }
+
+    .preview-controls span {
+      background: rgba(249, 115, 22, 0.8);
+      color: white;
+    }
+
+    .preview-navbar {
+      background: rgba(249, 115, 22, 0.2);
+      color: #fff5e0;
+
+      .preview-nav-item.active {
+        background: rgba(220, 38, 38, 0.4);
+        text-shadow: 0 0 5px rgba(220, 38, 38, 0.8);
+      }
+    }
+
+    .preview-sidebar {
+      background: rgba(249, 115, 22, 0.15);
+      color: #fff5e0;
+    }
+
+    .preview-main {
+      background: rgba(220, 38, 38, 0.1);
+      color: #fff5e0;
+    }
+
+    .preview-mod-entry {
+      color: rgba(255, 245, 224, 0.8);
+
+      &.active {
+        background: rgba(249, 115, 22, 0.3);
+        color: white;
+        text-shadow: 0 0 5px rgba(249, 115, 22, 0.6);
+      }
+
+      &:hover {
+        background: rgba(220, 38, 38, 0.2);
+        color: white;
+      }
+    }
+
+    .preview-button {
+      &.primary {
+        background: linear-gradient(135deg, #f97316, rgba(249, 115, 22, 0.8));
+        color: white;
+      }
+
+      &.secondary {
+        background: linear-gradient(135deg, #dc2626, rgba(220, 38, 38, 0.8));
+        color: white;
+      }
+    }
+  }
+
+  .sunset-icon {
+    animation: warm-pulse 2.5s ease-in-out infinite alternate;
+    color: #f97316;
+  }
+}
+
+// Theme Preview Animations - Adding Life to Each Theme
+@keyframes ddlc-glow {
+  0% { text-shadow: 0 0 10px rgba(255, 105, 180, 0.8); }
+  100% { text-shadow: 0 0 20px rgba(255, 105, 180, 1), 0 0 30px rgba(168, 85, 247, 0.5); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes monika-glitch {
+  0%, 90% { transform: translateX(0); }
+  92% { transform: translateX(-2px); }
+  94% { transform: translateX(2px); }
+  96% { transform: translateX(-1px); }
+  98% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes code-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes sayori-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes sunshine-glow {
+  0% { text-shadow: 0 0 5px rgba(34, 187, 255, 0.8); }
+  100% { text-shadow: 0 0 15px rgba(34, 187, 255, 1), 0 0 25px rgba(255, 255, 0, 0.3); }
+}
+
+@keyframes natsuki-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+@keyframes kawaii-bounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(2deg); }
+}
+
+@keyframes yuri-fade {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+@keyframes elegant-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+@keyframes cyberpunk-glitch {
+  0%, 85% { transform: translateX(0); filter: hue-rotate(0deg); }
+  87% { transform: translateX(-3px); filter: hue-rotate(90deg); }
+  89% { transform: translateX(3px); filter: hue-rotate(180deg); }
+  91% { transform: translateX(-2px); filter: hue-rotate(270deg); }
+  93% { transform: translateX(2px); filter: hue-rotate(360deg); }
+  100% { transform: translateX(0); filter: hue-rotate(0deg); }
+}
+
+@keyframes neon-pulse {
+  0% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.8); }
+  100% { text-shadow: 0 0 15px rgba(0, 255, 255, 1), 0 0 25px rgba(255, 0, 255, 0.5); }
+}
+
+@keyframes retro-wave {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  50% { transform: translateY(-1px) scaleX(1.02); }
+}
+
+@keyframes synthwave-glow {
+  0% { text-shadow: 0 0 5px rgba(255, 107, 53, 0.8); }
+  100% { text-shadow: 0 0 15px rgba(255, 107, 53, 1), 0 0 25px rgba(247, 147, 30, 0.5); }
+}
+
+@keyframes midnight-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(1px); }
+}
+
+@keyframes moon-glow {
+  0% { text-shadow: 0 0 5px rgba(30, 58, 138, 0.8); }
+  100% { text-shadow: 0 0 15px rgba(30, 58, 138, 1), 0 0 25px rgba(59, 130, 246, 0.3); }
+}
+
+@keyframes sunset-glow {
+  0% { text-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+  100% { text-shadow: 0 0 20px rgba(249, 115, 22, 1), 0 0 30px rgba(220, 38, 38, 0.5); }
+}
+
+@keyframes warm-pulse {
+  0% { text-shadow: 0 0 5px rgba(249, 115, 22, 0.8); }
+  100% { text-shadow: 0 0 15px rgba(249, 115, 22, 1), 0 0 25px rgba(255, 165, 0, 0.3); }
+}
+
+@keyframes cyberpunk-text-glitch {
+  0%, 90% {
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    transform: translateX(0);
+  }
+  92% {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 25px rgba(255, 0, 255, 0.3);
+    transform: translateX(-1px);
+  }
+  94% {
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.8), 0 0 25px rgba(0, 255, 255, 0.3);
+    transform: translateX(1px);
+  }
+  96% {
+    text-shadow: 0 0 15px rgba(255, 255, 0, 0.8), 0 0 25px rgba(255, 0, 255, 0.3);
+    transform: translateX(-0.5px);
+  }
+  98% {
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 25px rgba(255, 255, 0, 0.3);
+    transform: translateX(0.5px);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    transform: translateX(0);
+  }
+}
+
+// Classic Theme Overrides - Exact match to proudust/Mod-Manager original styling
 body.classic-theme {
+  // Override main background to match original
+  background-color: #111 !important;
+  color: #ddd;
+
+  // Remove all glass effects and modern styling
   .mod-viewer-mod-list,
   .mod-viewer-mod-display,
   .text-container {
-    background: $classic-panel-bg;
-    border: $classic-border;
-    border-radius: 3px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
     box-shadow: none;
     backdrop-filter: none;
+    padding: 0 1.5em;
   }
 
   .mod-viewer-mod-list::before,
@@ -2093,10 +3312,13 @@ body.classic-theme {
   }
 
   .mod-view-mod-list-entry {
-    background: rgba(0, 0, 0, 0.1);
+    background: transparent;
     border: none;
     border-radius: 3px;
     backdrop-filter: none;
+    transition: color 0.25s;
+    padding: 0.25em 0.5em;
+    color: #ddd;
   }
 
   .mod-view-mod-list-entry::before {
@@ -2104,34 +3326,51 @@ body.classic-theme {
   }
 
   .mod-view-mod-list-entry:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
     transform: none;
     box-shadow: none;
-    color: $ui-highlight-text-colour;
+    color: #fff;
   }
 
   .mod-view-mod-list-entry.active {
-    background-image: $ui-highlight-gradient;
+    background-image: linear-gradient(315deg, rgba(187, 85, 153, 0.5), rgba(73, 50, 64, 0.5));
     box-shadow: none;
     transform: none;
+    color: #fff;
   }
 
   .mod-view-mod-list-title {
-    color: $ui-muted-text-colour;
+    color: #aaa;
     text-shadow: none;
-    border-bottom: 1px solid $ui-dark-colour-bg;
+    padding: 0.25em 0.25em 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: none;
   }
 
   .mod-view-mod-list-title::after {
     display: none;
   }
 
+  // Buttons exactly like original proudust DDMM - no outlines, solid colors only
   button {
+    font-family: "Open Sans", sans-serif;
+    color: #fff;
+    user-select: none;
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.75em 2em;
+    font-size: 14px;
     border-radius: 3px;
-    background: $ui-primary-colour-bg;
+    text-align: center;
+    font-weight: normal;
+    outline: none;
+    transition: background-color 0.25s;
     border: none;
+    background-color: #bb5599;
     box-shadow: none;
     text-shadow: none;
+    transform: none;
   }
 
   button::before {
@@ -2139,34 +3378,100 @@ body.classic-theme {
   }
 
   button:hover {
+    background-color: #9e3f7e;
     transform: none;
     box-shadow: none;
-    background-color: color.adjust($ui-primary-colour-bg, $lightness: -10%);
+  }
+
+  button.huge {
+    font-size: 1.25em;
+  }
+
+  button.primary {
+    background-color: #bb5599;
+  }
+
+  button.primary:hover {
+    background-color: #9e3f7e;
   }
 
   button.secondary {
-    background-color: color.adjust($ui-background-colour, $lightness: 10%);
+    background-color: #2b2b2b;
+    color: #ddd;
   }
 
   button.secondary:hover {
-    background-color: color.adjust($ui-background-colour, $lightness: 5%);
+    background-color: #1e1e1e;
   }
 
+  button.dark {
+    background-color: #1e1e1e;
+  }
+
+  button.dark:hover {
+    background-color: #050505;
+  }
+
+  button.danger {
+    background-color: #eb4d4b;
+  }
+
+  button.danger:hover {
+    background-color: #e6201d;
+  }
+
+  button.warning {
+    background-color: #f0932b;
+  }
+
+  button.warning:hover {
+    background-color: #d97a0f;
+  }
+
+  button.success {
+    background-color: #6ab04c;
+  }
+
+  button.success:hover {
+    background-color: #558c3d;
+  }
+
+  button[disabled], button[disabled]:hover {
+    background-color: #aaa;
+    color: #ddd;
+  }
+
+  // Form inputs exactly like original
   input[type="text"], input[type="number"], input[type="url"], textarea, select {
-    background: rgba(0, 0, 0, 0.5);
-    border: 2px solid $ui-dark-colour-bg;
+    font-family: "Open Sans", sans-serif;
     border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #1e1e1e;
+    color: #ddd;
+    font-weight: normal;
+    min-width: 350px;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.25s;
+    box-shadow: none;
     backdrop-filter: none;
-    color: $ui-text-colour;
+  }
+
+  input.small {
+    font-size: 0.75em;
+    min-width: 0;
   }
 
   input[type="text"]:focus, input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
-    border-color: $ui-muted-text-colour;
+    border-color: #aaa;
     box-shadow: none;
     transform: none;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
+  // Reset checkboxes and radios to browser defaults
   input[type="checkbox"], input[type="radio"] {
     appearance: auto;
     width: auto;
@@ -2176,6 +3481,7 @@ body.classic-theme {
     border: initial;
     backdrop-filter: none;
     min-width: auto;
+    box-shadow: none;
   }
 
   input[type="checkbox"]:checked::before,
@@ -2183,10 +3489,11 @@ body.classic-theme {
     display: none;
   }
 
+  // Remove all modern card styling
   .ddlc-mod-card {
-    background: rgba(0, 0, 0, 0.1);
-    border: 2px solid $ui-dark-colour-bg;
-    border-radius: 3px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
     box-shadow: none;
   }
 
@@ -2200,62 +3507,132 @@ body.classic-theme {
   }
 
   .ddlc-mod-card h3 {
-    color: $ui-text-colour;
+    color: #ddd;
     text-shadow: none;
   }
 
   .ddlc-mod-card p {
-    color: $ui-text-colour;
+    color: #ddd;
   }
 
-  // Disable DDLC-specific containers in classic mode
+  // Remove all container styling
   .ddlc-options-container,
   .ddlc-about-container {
     .mod-viewer-mod-list,
     .mod-viewer-mod-display,
     .text-container {
-      background: $classic-panel-bg;
-      border: $classic-border;
+      background: transparent;
+      border: none;
     }
   }
 
-  // Fix headings in classic mode
+  // Simple headings like original
   h1, h2, h3, h4 {
-    color: $ui-text-colour;
+    margin: 0;
+    font-weight: 500;
+    color: #ddd;
     text-shadow: none;
   }
 
   h1 {
-    color: $ui-highlight-text-colour;
+    color: #fff;
   }
 
   h2 {
-    color: $ui-text-colour;
+    color: #ddd;
   }
 
-  // Theme selector in classic mode
+  // Theme selector styling - simple like original
   .theme-option {
-    background: rgba(0, 0, 0, 0.1);
-    border: 2px solid $ui-dark-colour-bg;
-    border-radius: 3px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
     backdrop-filter: none;
+    cursor: pointer;
   }
 
   .theme-option:hover {
     transform: none;
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
     box-shadow: none;
   }
 
   .theme-option.active {
-    background-image: $ui-highlight-gradient;
-    border-color: $ui-primary-colour-bg;
+    background: transparent;
+    border: none;
     box-shadow: none;
   }
 
   .feature {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid $ui-dark-colour-bg;
+    background: transparent;
+    border: none;
+  }
+
+  // Simple navbar like original
+  .navbar {
+    color: #fff;
+    display: flex;
+    flex-shrink: 0;
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .navbar::before {
+    display: none;
+  }
+
+  .nav-links div {
+    color: #aaa;
+    transition: color 0.25s, text-shadow 0.25s;
+  }
+
+  .nav-links div:hover {
+    color: #fff;
+  }
+
+  .nav-links div.active {
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+  }
+
+  // Simple progress bars like original
+  .progress .bar {
+    background-image: linear-gradient(315deg, rgba(187, 85, 153, 0.5), rgba(73, 50, 64, 0.5)) !important;
+  }
+
+  // Original scrollbars
+  ::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+
+  // Simple screenshots like original
+  .screenshots {
+    max-width: 100%;
+    overflow-x: scroll;
+    display: flex;
+  }
+
+  .screenshots img {
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: block;
+    width: 192px;
+    height: 108px;
+    padding: 0.5em;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .screenshots img:hover {
+    border: none;
   }
 }
 
@@ -2388,20 +3765,75 @@ body.monika-theme {
   background-color: var(--bg-color);
   color: var(--text-color);
 
+  // Apply text color to all text elements except theme previews
+  *:not(.ddlc-theme-selector *):not(.theme-option *):not(.theme-preview *),
+  *:not(.ddlc-theme-selector *)::before,
+  *:not(.ddlc-theme-selector *)::after {
+    color: var(--text-color);
+  }
+
+  h1:not(.ddlc-theme-selector *),
+  h2:not(.ddlc-theme-selector *),
+  h3:not(.ddlc-theme-selector *),
+  h4:not(.ddlc-theme-selector *),
+  h5:not(.ddlc-theme-selector *),
+  h6:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(0, 255, 127, 0.3);
+  }
+
+  p:not(.ddlc-theme-selector *),
+  span:not(.ddlc-theme-selector *),
+  div:not(.ddlc-theme-selector *),
+  label:not(.ddlc-theme-selector *),
+  input:not(.ddlc-theme-selector *),
+  textarea:not(.ddlc-theme-selector *),
+  select:not(.ddlc-theme-selector *) {
+    color: var(--text-color);
+  }
+
+  a:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 3px rgba(0, 255, 127, 0.2);
+  }
+
+  // Ensure navigation area is affected by theme
+  .navbar, .nav-links {
+    color: var(--text-color) !important;
+  }
+
+  // Fix for buttons without explicit styling - add outline with theme colors
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success) {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success):hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
+
   .text-container {
     background: linear-gradient(145deg, rgba(10, 26, 10, 0.95), rgba(20, 40, 20, 0.9));
     border: 2px solid var(--border-color);
     box-shadow: 0 0 20px rgba(0, 209, 102, 0.2);
+    color: var(--text-color);
   }
 
   .navbar {
     background: linear-gradient(90deg, rgba(0, 209, 102, 0.2), rgba(0, 168, 85, 0.1));
     border-top: 2px solid var(--border-color);
+    color: var(--text-color);
   }
 
-  .nav-links div.active {
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color);
+  .nav-links div {
+    color: rgba(224, 255, 224, 0.8);
+
+    &.active {
+      color: var(--accent-color);
+      text-shadow: 0 0 10px var(--accent-color);
+    }
   }
 
   button.primary {
@@ -2427,20 +3859,75 @@ body.sayori-theme {
   background-color: var(--bg-color);
   color: var(--text-color);
 
+  // Apply text color to all text elements except theme previews
+  *:not(.ddlc-theme-selector *):not(.theme-option *):not(.theme-preview *),
+  *:not(.ddlc-theme-selector *)::before,
+  *:not(.ddlc-theme-selector *)::after {
+    color: var(--text-color);
+  }
+
+  h1:not(.ddlc-theme-selector *),
+  h2:not(.ddlc-theme-selector *),
+  h3:not(.ddlc-theme-selector *),
+  h4:not(.ddlc-theme-selector *),
+  h5:not(.ddlc-theme-selector *),
+  h6:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(102, 217, 255, 0.3);
+  }
+
+  p:not(.ddlc-theme-selector *),
+  span:not(.ddlc-theme-selector *),
+  div:not(.ddlc-theme-selector *),
+  label:not(.ddlc-theme-selector *),
+  input:not(.ddlc-theme-selector *),
+  textarea:not(.ddlc-theme-selector *),
+  select:not(.ddlc-theme-selector *) {
+    color: var(--text-color);
+  }
+
+  a:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 3px rgba(102, 217, 255, 0.2);
+  }
+
+  // Ensure navigation area is affected by theme
+  .navbar, .nav-links {
+    color: var(--text-color) !important;
+  }
+
+  // Fix for buttons without explicit styling - add outline with theme colors
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success) {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success):hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
+
   .text-container {
     background: linear-gradient(145deg, rgba(10, 26, 42, 0.95), rgba(20, 40, 60, 0.9));
     border: 2px solid var(--border-color);
     box-shadow: 0 0 20px rgba(34, 187, 255, 0.2);
+    color: var(--text-color);
   }
 
   .navbar {
     background: linear-gradient(90deg, rgba(34, 187, 255, 0.2), rgba(26, 155, 255, 0.1));
     border-top: 2px solid var(--border-color);
+    color: var(--text-color);
   }
 
-  .nav-links div.active {
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color);
+  .nav-links div {
+    color: rgba(224, 240, 255, 0.8);
+
+    &.active {
+      color: var(--accent-color);
+      text-shadow: 0 0 10px var(--accent-color);
+    }
   }
 
   button.primary {
@@ -2465,6 +3952,55 @@ body.natsuki-theme {
 
   background-color: var(--bg-color);
   color: var(--text-color);
+
+  // Apply text color to all text elements except theme previews
+  *:not(.ddlc-theme-selector *):not(.theme-option *):not(.theme-preview *),
+  *:not(.ddlc-theme-selector *)::before,
+  *:not(.ddlc-theme-selector *)::after {
+    color: var(--text-color);
+  }
+
+  h1:not(.ddlc-theme-selector *),
+  h2:not(.ddlc-theme-selector *),
+  h3:not(.ddlc-theme-selector *),
+  h4:not(.ddlc-theme-selector *),
+  h5:not(.ddlc-theme-selector *),
+  h6:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(255, 153, 204, 0.3);
+  }
+
+  p:not(.ddlc-theme-selector *),
+  span:not(.ddlc-theme-selector *),
+  div:not(.ddlc-theme-selector *),
+  label:not(.ddlc-theme-selector *),
+  input:not(.ddlc-theme-selector *),
+  textarea:not(.ddlc-theme-selector *),
+  select:not(.ddlc-theme-selector *) {
+    color: var(--text-color);
+  }
+
+  a:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 3px rgba(255, 153, 204, 0.2);
+  }
+
+  // Ensure navigation area is affected by theme
+  .navbar, .nav-links {
+    color: var(--text-color) !important;
+  }
+
+  // Fix for buttons without explicit styling - add outline with theme colors
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success) {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success):hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
 
   .text-container {
     background: linear-gradient(145deg, rgba(42, 10, 26, 0.95), rgba(60, 20, 40, 0.9));
@@ -2546,6 +4082,60 @@ body.cyberpunk-theme {
   background-image:
     radial-gradient(circle at 20% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+
+  // Apply text color to all text elements except theme previews
+  *:not(.ddlc-theme-selector *):not(.theme-option *):not(.theme-preview *),
+  *:not(.ddlc-theme-selector *)::before,
+  *:not(.ddlc-theme-selector *)::after {
+    color: var(--text-color);
+  }
+
+  h1:not(.ddlc-theme-selector *),
+  h2:not(.ddlc-theme-selector *),
+  h3:not(.ddlc-theme-selector *),
+  h4:not(.ddlc-theme-selector *),
+  h5:not(.ddlc-theme-selector *),
+  h6:not(.ddlc-theme-selector *) {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    animation: cyberpunk-text-glitch 3s ease-in-out infinite;
+  }
+
+  p:not(.ddlc-theme-selector *),
+  span:not(.ddlc-theme-selector *),
+  div:not(.ddlc-theme-selector *),
+  label:not(.ddlc-theme-selector *),
+  input:not(.ddlc-theme-selector *),
+  textarea:not(.ddlc-theme-selector *),
+  select:not(.ddlc-theme-selector *) {
+    color: var(--text-color);
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+  }
+
+  a:not(.ddlc-theme-selector *) {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.4);
+  }
+
+  // Ensure navigation area is affected by theme
+  .navbar, .nav-links {
+    color: var(--text-color) !important;
+  }
+
+  // Fix for buttons without explicit styling - add outline with theme colors
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success) {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    text-shadow: 0 0 5px var(--accent-color);
+  }
+
+  button:not(.primary):not(.secondary):not(.dark):not(.danger):not(.warning):not(.success):hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    text-shadow: none;
+    box-shadow: 0 0 15px var(--accent-color);
+  }
 
   .text-container {
     background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.9));

@@ -180,20 +180,99 @@ export default class InstallLauncher {
                 });
 
                 procHandle.on("error", e => {
-                    console.log(e);
+                    console.log("DDLC process error:", e);
                     if (sdkServer) { sdkServer.shutdown(); }
-                    rj(lang.translate("main.running_cover.install_crashed"))
+
+                    // Enhanced crash detection - this is definitely a crash
+                    const crashInfo = {
+                        type: 'process_error',
+                        error: e.message || e.toString(),
+                        folderName: folderName,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    logToConsole(`Game crashed with error: ${crashInfo.error}`, LogClass.ERROR);
+                    rj({ crashed: true, crashInfo, message: lang.translate("main.running_cover.install_crashed") });
                 });
 
-                procHandle.on("close", () => {
+                procHandle.on("close", (code, signal) => {
                     if (sdkServer) { sdkServer.shutdown(); }
-                    logToConsole("Game has closed.");
-                    ff(undefined);
+
+                    // Enhanced exit code analysis
+                    const exitInfo = {
+                        code: code,
+                        signal: signal,
+                        folderName: folderName,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    logToConsole(`Game closed with exit code: ${code}, signal: ${signal}`);
+
+                    // Detect crashes based on exit codes and signals
+                    const isCrash = this.detectCrashFromExit(code, signal);
+
+                    if (isCrash) {
+                        const crashInfo = {
+                            type: 'abnormal_exit',
+                            exitCode: code,
+                            signal: signal,
+                            folderName: folderName,
+                            timestamp: new Date().toISOString()
+                        };
+
+                        logToConsole(`Game appears to have crashed (exit code: ${code}, signal: ${signal})`, LogClass.ERROR);
+                        rj({ crashed: true, crashInfo, message: lang.translate("main.running_cover.install_crashed") });
+                    } else {
+                        logToConsole("Game closed normally.");
+                        ff(undefined);
+                    }
                 });
             }).catch((error) => {
                 logToConsole("Error checking executable permissions: " + error, LogClass.ERROR);
                 rj(lang.translate("main.errors.executable_permission.body") + " " + error);
             });
         });
+    }
+
+    /**
+     * Detects if a process exit indicates a crash based on exit code and signal
+     * @param code The exit code
+     * @param signal The signal that terminated the process
+     * @returns true if the exit indicates a crash
+     */
+    private static detectCrashFromExit(code: number | null, signal: string | null): boolean {
+        // Normal exit codes (0 = success, some games use 1 for normal exit)
+        if (code === 0 || code === 1) {
+            return false;
+        }
+
+        // Signals that indicate crashes
+        const crashSignals = ['SIGSEGV', 'SIGABRT', 'SIGFPE', 'SIGILL', 'SIGBUS'];
+        if (signal && crashSignals.includes(signal)) {
+            return true;
+        }
+
+        // Exit codes that typically indicate crashes or errors
+        // Common crash exit codes:
+        // - 3: Quit/SIGQUIT
+        // - 6: SIGABRT (abort)
+        // - 8: SIGFPE (floating point exception)
+        // - 9: SIGKILL (killed)
+        // - 11: SIGSEGV (segmentation fault)
+        // - 139: 128 + 11 (SIGSEGV on some systems)
+        // - 134: 128 + 6 (SIGABRT on some systems)
+        const crashExitCodes = [3, 6, 8, 9, 11, 134, 139];
+        if (code !== null && crashExitCodes.includes(code)) {
+            return true;
+        }
+
+        // Exit codes above 128 often indicate termination by signal (128 + signal number)
+        if (code !== null && code > 128) {
+            return true;
+        }
+
+        // Any other non-zero exit code could be a crash, but we'll be conservative
+        // and only flag obvious crashes to avoid false positives
+        return false;
     }
 }

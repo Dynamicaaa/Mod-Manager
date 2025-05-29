@@ -1,4 +1,4 @@
-const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
+const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     "template": `
 <div class="page-content sayonika-store">
     <!-- Header Section -->
@@ -39,11 +39,19 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
         </div>
         <div class="filter-group">
             <label>Sort by:</label>
-            <select v-model="sortBy" @change="loadMods">
-                <option value="created_at">Newest</option>
-                <option value="download_count">Most Downloaded</option>
-                <option value="title">Alphabetical</option>
-                <option value="rating_average">Highest Rated</option>
+            <select v-model="sortBy" @change="onSortChange">
+                <option value="created_at">Date Created</option>
+                <option value="updated_at">Date Updated</option>
+                <option value="downloads">Downloads</option>
+                <option value="rating">Rating</option>
+                <option value="title">Title</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Order:</label>
+            <select v-model="sortOrder" @change="onSortChange">
+                <option value="desc">Descending</option>
+                <option value="asc">Ascending</option>
             </select>
         </div>
         <div class="filter-group">
@@ -79,14 +87,14 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             <p>Try adjusting your search or filters</p>
         </div>
 
-        <div v-for="mod in mods" :key="mod.id" class="mod-card" @click="showModDetails(mod)">
+        <div v-for="mod in mods" :key="mod.id" :class="['mod-card', { 'nsfw': mod.is_nsfw }]" @click="showModDetails(mod)">
             <div class="mod-thumbnail">
                 <img :src="getModThumbnail(mod)" :alt="mod.title" @error="handleImageError">
                 <div v-if="mod.is_featured" class="featured-badge">
                     <i class="fas fa-star"></i> Featured
                 </div>
                 <div v-if="mod.is_nsfw" class="nsfw-badge">
-                    NSFW
+                    <i class="fas fa-exclamation-triangle"></i> Mature
                 </div>
             </div>
             <div class="mod-info">
@@ -181,7 +189,12 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
     <div v-if="selectedMod" class="modal-overlay" @click="closeModDetails">
         <div class="modal-content mod-details-modal" @click.stop>
             <div class="modal-header">
-                <h2>{{selectedMod.title}}</h2>
+                <h2>
+                    {{selectedMod.title}}
+                    <span v-if="selectedMod.is_nsfw" class="nsfw-indicator">
+                        <i class="fas fa-exclamation-triangle"></i> Mature
+                    </span>
+                </h2>
                 <button class="modal-close" @click="closeModDetails">
                     <i class="fas fa-times"></i>
                 </button>
@@ -190,6 +203,25 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
                 <div class="mod-details-content">
                     <div class="mod-details-left">
                         <img :src="getModThumbnail(selectedMod)" :alt="selectedMod.title" class="mod-details-image">
+
+                        <!-- Screenshots Gallery -->
+                        <div v-if="selectedMod.screenshots && selectedMod.screenshots.length > 0" class="mod-screenshots-section">
+                            <h3>Screenshots ({{selectedMod.screenshots.length}})</h3>
+                            <div class="mod-screenshots-gallery">
+                                <div
+                                    v-for="(screenshot, index) in selectedMod.screenshots"
+                                    :key="index"
+                                    class="screenshot-thumbnail"
+                                    @click="openScreenshotModal(screenshot, index)"
+                                >
+                                    <img :src="getScreenshotUrl(screenshot)" :alt="'Screenshot ' + (index + 1)" loading="lazy">
+                                    <div class="screenshot-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mod-details-stats">
                             <div class="stat">
                                 <i class="fas fa-download"></i>
@@ -237,6 +269,52 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             </div>
         </div>
     </div>
+
+    <!-- Screenshot Modal -->
+    <div v-if="screenshotModal.show" class="modal-overlay screenshot-modal-overlay" @click="closeScreenshotModal">
+        <div class="modal-content screenshot-modal-content" @click.stop>
+            <div class="screenshot-modal-header">
+                <h3>Screenshot {{screenshotModal.currentIndex + 1}} of {{screenshotModal.screenshots.length}}</h3>
+                <button class="modal-close" @click="closeScreenshotModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="screenshot-modal-body">
+                <div class="screenshot-navigation">
+                    <button
+                        v-if="screenshotModal.screenshots.length > 1"
+                        class="screenshot-nav-btn prev"
+                        @click="previousScreenshot"
+                        :disabled="screenshotModal.currentIndex === 0"
+                    >
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <img
+                        :src="getScreenshotUrl(screenshotModal.screenshots[screenshotModal.currentIndex])"
+                        :alt="'Screenshot ' + (screenshotModal.currentIndex + 1)"
+                        class="screenshot-modal-image"
+                    >
+                    <button
+                        v-if="screenshotModal.screenshots.length > 1"
+                        class="screenshot-nav-btn next"
+                        @click="nextScreenshot"
+                        :disabled="screenshotModal.currentIndex === screenshotModal.screenshots.length - 1"
+                    >
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div v-if="screenshotModal.screenshots.length > 1" class="screenshot-indicators">
+                    <span
+                        v-for="(screenshot, index) in screenshotModal.screenshots"
+                        :key="index"
+                        class="screenshot-indicator"
+                        :class="{ active: index === screenshotModal.currentIndex }"
+                        @click="goToScreenshot(index)"
+                    ></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
         `,
     "data": function () {
@@ -264,6 +342,7 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             "searchQuery": "",
             "selectedCategory": "",
             "sortBy": "created_at",
+            "sortOrder": "desc",
             "showFeatured": false,
             "searchTimeout": null,
 
@@ -275,6 +354,13 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             // UI state
             "selectedMod": null,
             "downloadingMods": new Set(),
+
+            // Screenshot modal
+            "screenshotModal": {
+                "show": false,
+                "screenshots": [],
+                "currentIndex": 0
+            },
 
             // Image caching
             "imageCache": {}
@@ -549,8 +635,9 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             try {
                 const params = new URLSearchParams({
                     page: this.currentPage,
-                    limit: this.modsPerPage,
-                    sort_by: this.sortBy
+                    per_page: this.modsPerPage,
+                    sort: this.sortBy,
+                    order: this.sortOrder
                 });
 
                 if (this.searchQuery) {
@@ -573,7 +660,14 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
 
                 const data = await response.json();
                 this.mods = data.mods || [];
-                this.totalPages = Math.ceil((data.total || 0) / this.modsPerPage);
+
+                // Handle both old and new pagination response formats
+                if (data.pagination) {
+                    this.totalPages = data.pagination.total_pages || 1;
+                } else {
+                    // Fallback for old format
+                    this.totalPages = Math.ceil((data.total || 0) / this.modsPerPage);
+                }
             } catch (error) {
                 console.error('Failed to load mods:', error);
                 this.error = `Failed to connect to Sayonika store: ${error.message}`;
@@ -615,6 +709,12 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             this.loadMods();
         },
 
+        "onSortChange": function() {
+            // Reset to first page when sorting changes
+            this.currentPage = 1;
+            this.loadMods();
+        },
+
         // Mod interaction methods
         "showModDetails": function(mod) {
             this.selectedMod = mod;
@@ -624,11 +724,70 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             this.selectedMod = null;
         },
 
+        // Screenshot modal methods
+        "openScreenshotModal": function(screenshot, index) {
+            if (this.selectedMod && this.selectedMod.screenshots) {
+                this.screenshotModal.screenshots = this.selectedMod.screenshots;
+                this.screenshotModal.currentIndex = index;
+                this.screenshotModal.show = true;
+
+                // Prevent body scrolling when modal is open
+                document.body.style.overflow = 'hidden';
+            }
+        },
+
+        "closeScreenshotModal": function() {
+            this.screenshotModal.show = false;
+            this.screenshotModal.screenshots = [];
+            this.screenshotModal.currentIndex = 0;
+
+            // Restore body scrolling
+            document.body.style.overflow = '';
+        },
+
+        "nextScreenshot": function() {
+            if (this.screenshotModal.currentIndex < this.screenshotModal.screenshots.length - 1) {
+                this.screenshotModal.currentIndex++;
+            }
+        },
+
+        "previousScreenshot": function() {
+            if (this.screenshotModal.currentIndex > 0) {
+                this.screenshotModal.currentIndex--;
+            }
+        },
+
+        "goToScreenshot": function(index) {
+            this.screenshotModal.currentIndex = index;
+        },
+
+        "getScreenshotUrl": function(screenshot) {
+            if (!screenshot) return '';
+
+            // If it's already a full URL, return as-is
+            if (screenshot.startsWith('http')) {
+                return screenshot;
+            }
+
+            // If it's a relative path, prepend the store URL
+            return this.storeUrl + screenshot;
+        },
+
         "downloadMod": async function(mod) {
             if (this.isDownloading(mod.id)) {
                 return;
             }
 
+            // Check if mod is NSFW and show warning
+            if (mod.is_nsfw) {
+                this.showNSFWWarning(mod);
+                return;
+            }
+
+            this.startDownload(mod);
+        },
+
+        "startDownload": async function(mod) {
             this.downloadingMods.add(mod.id);
 
             try {
@@ -652,6 +811,69 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
                     this.downloadingMods.delete(mod.id);
                 }, 3000);
             }
+        },
+
+        "showNSFWWarning": function(mod) {
+            const modal = document.createElement('div');
+            modal.className = 'nsfw-warning-modal';
+            modal.innerHTML = `
+                <div class="nsfw-warning-overlay">
+                    <div class="nsfw-warning-dialog">
+                        <div class="nsfw-warning-header">
+                            <h3>
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Mature Content Warning
+                            </h3>
+                            <button class="nsfw-warning-close">&times;</button>
+                        </div>
+                        <div class="nsfw-warning-body">
+                            <p><strong>This mod contains mature/NSFW content.</strong></p>
+                            <p>The mod "${mod.title}" has been marked as containing adult themes, explicit content, or mature subject matter.</p>
+                            <p>By proceeding with the download, you confirm that:</p>
+                            <ul>
+                                <li>You are of legal age to view such content in your jurisdiction</li>
+                                <li>You understand the nature of the content you are downloading</li>
+                                <li>You accept responsibility for your decision to download this content</li>
+                            </ul>
+                            <p><strong>Do you wish to continue with the download?</strong></p>
+                        </div>
+                        <div class="nsfw-warning-footer">
+                            <button class="btn btn-secondary nsfw-cancel">Cancel</button>
+                            <button class="btn btn-danger nsfw-confirm">Continue Download</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Event listeners
+            const closeModal = () => {
+                document.body.removeChild(modal);
+            };
+
+            modal.querySelector('.nsfw-warning-close').addEventListener('click', closeModal);
+            modal.querySelector('.nsfw-cancel').addEventListener('click', closeModal);
+            modal.querySelector('.nsfw-confirm').addEventListener('click', () => {
+                closeModal();
+                this.startDownload(mod);
+            });
+
+            // Close on overlay click
+            modal.querySelector('.nsfw-warning-overlay').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closeModal();
+                }
+            });
+
+            // ESC key to close
+            const escHandler = (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    document.removeEventListener('keydown', escHandler);
+                }
+            };
+            document.addEventListener('keydown', escHandler);
         },
 
         "isDownloading": function(modId) {
@@ -885,6 +1107,25 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             // If all fail, use the default
             this.storeUrl = possibleUrls[0];
             console.log('Using default Sayonika store URL (no connection test):', this.storeUrl);
+        },
+
+        // Keyboard navigation handler
+        "handleKeydown": function(event) {
+            if (!this.screenshotModal.show) return;
+
+            switch(event.key) {
+                case 'Escape':
+                    this.closeScreenshotModal();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    this.previousScreenshot();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    this.nextScreenshot();
+                    break;
+            }
         }
     },
     "mounted": async function () {
@@ -919,5 +1160,13 @@ const SayonikaStoreTab = Vue.component("ddmm-store-placeholder-tab", {
             this.loadCategories(),
             this.loadMods()
         ]);
+
+        // Add keyboard navigation for screenshot modal
+        document.addEventListener('keydown', this.handleKeydown);
+    },
+
+    "beforeDestroy": function() {
+        // Clean up event listeners
+        document.removeEventListener('keydown', this.handleKeydown);
     }
 });

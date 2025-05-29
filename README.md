@@ -93,6 +93,6 @@ For support and bug reports, please create an issue on the [GitHub repository](h
 
 ## Licenses and Acknowledgements
 
-Doki Doki Mod Manager is licensed under the [MIT License](LICENSE.txt). Contributions are welcomed!
+Doki Doki Mod Manager is licensed under the [MIT License](LICENSE). Contributions are welcomed!
 
 [7-Zip (7za.exe)](https://www.7-zip.org/) licensed under [GNU LGPL](https://www.7-zip.org/license.txt).

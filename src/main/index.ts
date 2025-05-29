@@ -112,13 +112,28 @@ async function launchInstall(folderName: string): Promise<void> {
     }).catch(err => {
         appWindow.restore();
         appWindow.focus();
-        appWindow.webContents.send("running cover", {
-            display: true,
-            dismissable: true,
-            title: lang.translate("main.running_cover.title_crashed"),
-            description: err,
-            folder_path: joinPath(Config.readConfigValue("installFolder"), "installs", folderName)
-        });
+
+        // Check if this is a crash with enhanced information
+        if (err && typeof err === 'object' && err.crashed) {
+            console.log("DDLC crashed with enhanced crash info:", err.crashInfo);
+
+            // Send crash dialog to renderer
+            appWindow.webContents.send("ddlc-crash", {
+                folderName: folderName,
+                crashInfo: err.crashInfo,
+                message: err.message,
+                installPath: joinPath(Config.readConfigValue("installFolder"), "installs", folderName)
+            });
+        } else {
+            // Fallback to old behavior for non-crash errors
+            appWindow.webContents.send("running cover", {
+                display: true,
+                dismissable: true,
+                title: lang.translate("main.running_cover.title_crashed"),
+                description: err.message || err,
+                folder_path: joinPath(Config.readConfigValue("installFolder"), "installs", folderName)
+            });
+        }
     });
 }
 
@@ -186,6 +201,27 @@ ipcMain.on("get app config", (ev: IpcMainEvent) => {
 // Launch install
 ipcMain.on("launch install", (ev: IpcMainEvent, folderName: string) => {
     launchInstall(folderName);
+});
+
+// Handle crash dialog actions
+ipcMain.on("crash-dialog-action", (ev: IpcMainEvent, action: { type: string, folderName?: string }) => {
+    console.log("Crash dialog action received:", action);
+
+    switch (action.type) {
+        case 'relaunch':
+            if (action.folderName) {
+                console.log("Relaunching DDLC install:", action.folderName);
+                launchInstall(action.folderName);
+            }
+            break;
+        case 'back-to-menu':
+            console.log("User chose to go back to menu after crash");
+            // Just dismiss the crash dialog - the running cover will be hidden
+            appWindow.webContents.send("running cover", {display: false});
+            break;
+        default:
+            console.warn("Unknown crash dialog action:", action.type);
+    }
 });
 
 // Browse for a mod
@@ -677,7 +713,6 @@ app.on("ready", async () => {
         appWindow.webContents.send("debug info", {
             "Platform": process.platform,
             "Node Environment": process.env.NODE_ENV || "none",
-
             "Background": Config.readConfigValue("background"),
             "Node Version": process.version,
             "Electron Version": process.versions.electron,

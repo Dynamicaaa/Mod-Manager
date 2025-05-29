@@ -4,7 +4,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
     <div class="mod-viewer-pane">
         <div class="mod-viewer-mod-list">
             <div class="ddlc-search-container">
-                <input type="text" class="small ddlc-search" :placeholder="_('renderer.tab_mods.list.placeholder_search') + ' ♡'" autofocus @keydown="_searchEscapeHandler" @focus="search = ''" v-model="search">
+                <input type="text" class="small ddlc-search" :placeholder="_('renderer.tab_mods.list.placeholder_search') + ' ♡'" autofocus @keydown="_searchEscapeHandler" @input="onSearchInput" @focus="search = ''" v-model="search">
                 <i class="fas fa-search ddlc-search-icon"></i>
             </div>
             <br>
@@ -194,6 +194,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "mod": ""
             },
             "search": "",
+            "searchTimeout": null,
             "_fuseMods": null,
             "_fuseInstalls": null
         }
@@ -447,6 +448,40 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             if (e.key === "Escape") {
                 this.search = "";
             }
+        },
+        "onSearchInput": function(e) {
+            // Real-time search as user types
+            this.search = e.target.value;
+
+            // Debounce the search to avoid excessive filtering
+            if (this.searchTimeout) {
+                clearTimeout(this.searchTimeout);
+            }
+
+            this.searchTimeout = setTimeout(() => {
+                // Force Vue to update the computed properties
+                this.$forceUpdate();
+
+                // If we have search results and no item is selected, select the first result
+                if (this.search.length > 0) {
+                    if (this.searchResultsInstalls.length > 0 &&
+                        (!this.selected_item.type ||
+                         (this.selected_item.type === 'install' && !this.searchResultsInstalls.find(i => i.folderName === this.selected_item.id)))) {
+                        this.selectItem(this.searchResultsInstalls[0].folderName, "install");
+                    } else if (this.searchResultsMods.length > 0 && this.searchResultsInstalls.length === 0 &&
+                               (!this.selected_item.type ||
+                                (this.selected_item.type === 'mod' && !this.searchResultsMods.find(m => m.filename === this.selected_item.id)))) {
+                        this.selectItem(this.searchResultsMods[0].filename, "mod");
+                    }
+                } else {
+                    // If search is cleared, select first install or create page
+                    if (this.installs.length > 0) {
+                        this.selectItem(this.installs[0].folderName, "install");
+                    } else {
+                        this.selectItem("", "create");
+                    }
+                }
+            }, 150); // 150ms debounce for smooth real-time search
         },
         // getSaveFiles function removed - cloud saves disabled
     },
