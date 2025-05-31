@@ -193,7 +193,6 @@
     "dmg": {
       "title": "Doki Doki Mod Manager ${version}",
       "icon": "build/icon.icns",
-      "background": "build/background.png",
       "contents": [
         {
           "x": 130,
