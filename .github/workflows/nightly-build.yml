@@ -11,11 +11,8 @@ env:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: Build on ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
@@ -40,33 +37,22 @@ jobs:
       - name: Postinstall rebuild
         run: bun run postinstall
 
-      - name: Build app for Windows
-        if: matrix.os == 'windows-latest'
-        run: bun run dist:win
-        shell: bash
-
-      - name: Build app for macOS
-        if: matrix.os == 'macos-latest'
+      - name: Build all platforms (dist:all)
         run: |
-          curl -sSL https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          sudo mv git-cliff-2.8.0/git-cliff /usr/local/bin/
-          bun run dist:mac
-        shell: bash
-
-      - name: Build app for Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: bun run dist:linux
+          # This will build Windows, macOS, and Linux artifacts on Ubuntu
+          bun run dist:all
         shell: bash
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ddmm-${{ runner.os }}-artifacts
+          name: ddmm-ubuntu-artifacts
           path: dist/
 
   changelog:
     name: Generate Changelog
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -88,6 +74,7 @@ jobs:
   nightly-branch:
     name: Update nightly branch
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -106,6 +93,7 @@ jobs:
     name: Publish Nightly Release
     needs: [build, changelog, nightly-branch]
     runs-on: ubuntu-latest
+
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
