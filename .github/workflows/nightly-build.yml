@@ -34,14 +34,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      - name: Install dependencies
+      - name: Install dependencies with Bun
         run: bun install
+
+      - name: Install dmg-license on macOS
+        if: matrix.os == 'macos-latest'
+        run: bun add dmg-license
 
       - name: Postinstall rebuild
         run: bun run postinstall
 
-      - name: Build app
-        run: bun run dist:all
+      - name: Build app on Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          bun run dist:linux
+          npx electron-builder --linux --prepackaged --publish never
+        shell: bash
+
+      - name: Build app on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          bun run dist:win
+          npx electron-builder --win --prepackaged --publish never
+        shell: bash
+
+      - name: Build app on macOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          bun run dist:mac
+          npx electron-builder --mac --prepackaged --publish never
         shell: bash
 
       - name: Upload Build Artifacts
@@ -112,4 +133,3 @@ jobs:
             artifacts/**/*.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
