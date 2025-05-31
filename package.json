@@ -161,6 +161,7 @@
           ]
         }
       ],
+      "maintainer": "Dynamicaaa",
       "artifactName": "ddmm-${version}-linux-${arch}.${ext}",
       "synopsis": "Mod Manager for Doki Doki Literature Club",
       "description": "A comprehensive mod manager for Doki Doki Literature Club with support for mod installation, management, and organization."
