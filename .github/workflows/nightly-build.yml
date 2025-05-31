@@ -80,7 +80,7 @@ jobs:
 
       - name: Install git-cliff
         run: |
-          curl -sSL -o git-cliff.tar.gz https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-x86_64-unknown-linux-gnu.tar.gz
+          curl -sSL -o git-cliff.tar.gz https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz
           file git-cliff.tar.gz
           tar -tzf git-cliff.tar.gz
           tar -xzf git-cliff.tar.gz
