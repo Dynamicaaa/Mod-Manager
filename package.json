@@ -192,6 +192,7 @@
     },
     "dmg": {
       "title": "Doki Doki Mod Manager ${version}",
+      "volumeName": "DDMM-${version}",
       "icon": "build/icon.icns",
       "contents": [
         {
