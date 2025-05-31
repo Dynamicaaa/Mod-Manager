@@ -6,20 +6,27 @@ on:
   workflow_dispatch:
 
 env:
-  TODAY: ${{ github.event.head_commit.timestamp || github.event.pushed_at }}
-  NIGHTLY_TAG: nightly-${{ github.run_number }}
+  # set a date or timestamp, fallback to pushed_at
+  today: ${{ github.event.head_commit.timestamp || github.event.pushed_at }}
+  nightly_tag: nightly-${{ github.run_number }}
 
 jobs:
   build:
-    name: Build on ubuntu-latest
-    runs-on: ubuntu-latest
+    name: Build on all platforms
+    # define a matrix to run on ubuntu, macos, and windows
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        # pull the code so each runner can build
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
+        # install bun on each runner (works on all three OSes)
 
       - name: Cache Bun dependencies
         uses: actions/cache@v3
@@ -30,24 +37,39 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-bun-
+        # cache bun’s cache folder and node_modules for faster installs
 
       - name: Install dependencies
         run: bun install
+        # install js/ts dependencies from bun.lockb
 
       - name: Postinstall rebuild
         run: bun run postinstall
+        # run any postinstall steps (e.g., native rebuilds)
 
-      - name: Build all platforms (dist:all)
+      - name: Build for ${{ matrix.os }}
         run: |
-          # This will build Windows, macOS, and Linux artifacts on Ubuntu
-          bun run dist:all
+          # choose the right dist command per OS
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            # on windows, you might need to use a .cmd or adjust shell
+            bun run dist:windows
+          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+            bun run dist:mac
+          else
+            bun run dist:linux
+          fi
         shell: bash
+        # this block picks the correct dist command per OS
+        # dist:mac will run electron-builder --mac on a mac runner
+        # dist:windows should run electron-builder --win on a windows runner
+        # dist:linux should run electron-builder --linux on ubuntu runner
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ddmm-ubuntu-artifacts
+          name: ddmm-${{ matrix.os }}-artifacts
           path: dist/
+        # after building on each OS, upload those artifacts separately
 
   changelog:
     name: Generate Changelog
@@ -61,9 +83,11 @@ jobs:
         run: |
           curl -sSL https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz | tar xz
           sudo mv git-cliff-2.8.0/git-cliff /usr/local/bin/
+        # grab git-cliff binary for changelog generation
 
       - name: Generate changelog
         run: git-cliff -t nightly-${{ github.run_number }} > CHANGELOG.md
+        # produce a changelog tagged with the nightly tag
 
       - name: Upload changelog
         uses: actions/upload-artifact@v4
@@ -88,6 +112,7 @@ jobs:
           git fetch origin
           git branch -f nightly HEAD
           git push -f origin nightly
+        # force-update the nightly branch to point at main’s latest commit
 
   release:
     name: Publish Nightly Release
@@ -99,6 +124,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+        # get all OS artifacts and changelog
 
       - name: Copy changelog
         run: cp artifacts/changelog/CHANGELOG.md ./CHANGELOG.md
@@ -114,3 +140,4 @@ jobs:
             artifacts/**/*.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # publish a GitHub Release, attaching all built artifacts from each OS
