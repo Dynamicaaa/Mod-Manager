@@ -191,8 +191,7 @@
       "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "dmg": {
-      "title": "Doki Doki Mod Manager ${version}",
-      "volumeName": "DDMM-${version}",
+      "title": "DDMM-${version}",
       "icon": "build/icon.icns",
       "contents": [
         {
