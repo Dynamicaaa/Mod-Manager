@@ -34,35 +34,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      - name: Install dependencies with Bun
+      - name: Install dependencies
         run: bun install
-
-      - name: Install dmg-license on macOS
-        if: matrix.os == 'macos-latest'
-        run: bun add dmg-license
 
       - name: Postinstall rebuild
         run: bun run postinstall
 
-      - name: Build app on Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          bun run dist:linux
-          npx electron-builder --linux --prepackaged --publish never
-        shell: bash
-
-      - name: Build app on Windows
+      - name: Build app for Windows
         if: matrix.os == 'windows-latest'
-        run: |
-          bun run dist:win
-          npx electron-builder --win --prepackaged --publish never
+        run: bun run dist:win
         shell: bash
 
-      - name: Build app on macOS
+      - name: Build app for macOS
         if: matrix.os == 'macos-latest'
         run: |
+          curl -sSL https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv git-cliff-2.8.0/git-cliff /usr/local/bin/
           bun run dist:mac
-          npx electron-builder --mac --prepackaged --publish never
+        shell: bash
+
+      - name: Build app for Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: bun run dist:linux
         shell: bash
 
       - name: Upload Build Artifacts
@@ -80,12 +73,8 @@ jobs:
 
       - name: Install git-cliff
         run: |
-          curl -sSL -o git-cliff.tar.gz https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz
-          file git-cliff.tar.gz
-          tar -tzf git-cliff.tar.gz
-          tar -xzf git-cliff.tar.gz
-          sudo mv git-cliff /usr/local/bin/
-
+          curl -sSL https://github.com/orhun/git-cliff/releases/download/v2.8.0/git-cliff-2.8.0-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv git-cliff-2.8.0/git-cliff /usr/local/bin/
 
       - name: Generate changelog
         run: git-cliff -t nightly-${{ github.run_number }} > CHANGELOG.md
