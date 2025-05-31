@@ -80,8 +80,12 @@ jobs:
 
       - name: Install git-cliff
         run: |
-          curl -sSL https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          curl -sSL -o git-cliff.tar.gz https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-x86_64-unknown-linux-gnu.tar.gz
+          file git-cliff.tar.gz
+          tar -tzf git-cliff.tar.gz
+          tar -xzf git-cliff.tar.gz
           sudo mv git-cliff /usr/local/bin/
+
 
       - name: Generate changelog
         run: git-cliff -t nightly-${{ github.run_number }} > CHANGELOG.md
