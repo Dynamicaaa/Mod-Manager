@@ -20,12 +20,12 @@
     "clean": "rm -rf lib",
     "copy-assets": "shx cp -r lang lib/ && shx cp -r src/renderer lib/src/ && shx mkdir -p lib/vendor && shx cp node_modules/vue/dist/vue.js lib/vendor/ && shx cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && shx cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
     "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets",
-    "dist": "npm run build && electron-builder",
-    "dist:win": "npm run build && electron-builder --win",
-    "dist:mac": "npm run build && electron-builder --mac",
-    "dist:linux": "npm run build && electron-builder --linux",
-    "dist:all": "npm run build && electron-builder --win --mac --linux",
-    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder --publish=never",
+    "dist:win": "npm run build && electron-builder --win --publish=never",
+    "dist:mac": "npm run build && electron-builder --mac --publish=never",
+    "dist:linux": "npm run build && electron-builder --linux --publish=never",
+    "dist:all": "npm run build && electron-builder --win --mac --linux --publish=never",
+    "pack": "npm run build && electron-builder --dir --publish=never",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
