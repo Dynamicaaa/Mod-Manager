@@ -1,0 +1,115 @@
+name: Nightly Build and Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  TODAY: ${{ github.event.head_commit.timestamp || github.event.pushed_at }}
+  NIGHTLY_TAG: nightly-${{ github.run_number }}
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Postinstall rebuild
+        run: bun run postinstall
+
+      - name: Build app
+        run: bun run dist:all
+        shell: bash
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ddmm-${{ runner.os }}-artifacts
+          path: dist/
+
+  changelog:
+    name: Generate Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install git-cliff
+        run: |
+          curl -sSL https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv git-cliff /usr/local/bin/
+
+      - name: Generate changelog
+        run: git-cliff -t nightly-${{ github.run_number }} > CHANGELOG.md
+
+      - name: Upload changelog
+        uses: actions/upload-artifact@v4
+        with:
+          name: changelog
+          path: CHANGELOG.md
+
+  nightly-branch:
+    name: Update nightly branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create/update nightly branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git fetch origin
+          git branch -f nightly HEAD
+          git push -f origin nightly
+
+  release:
+    name: Publish Nightly Release
+    needs: [build, changelog, nightly-branch]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Copy changelog
+        run: cp artifacts/changelog/CHANGELOG.md ./CHANGELOG.md
+
+      - name: Create Nightly Pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly-${{ github.run_number }}
+          name: Nightly Build (${{ github.run_number }})
+          prerelease: true
+          body_path: CHANGELOG.md
+          files: |
+            artifacts/**/*.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
