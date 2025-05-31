@@ -37,10 +37,11 @@ jobs:
       - name: Postinstall rebuild
         run: bun run postinstall
 
+      - name: Install dmg-license for mac target
+        run: bun add dmg-license
+
       - name: Build all platforms (dist:all)
-        run: |
-          # This will build Windows, macOS, and Linux artifacts on Ubuntu
-          bun run dist:all
+        run: bun run dist:all
         shell: bash
 
       - name: Upload Build Artifacts
