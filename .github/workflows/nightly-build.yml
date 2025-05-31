@@ -52,7 +52,7 @@ jobs:
           # choose the right dist command per OS
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             # on windows, you might need to use a .cmd or adjust shell
-            bun run dist:windows
+            bun run dist:win
           elif [ "${{ matrix.os }}" = "macos-latest" ]; then
             bun run dist:mac
           else
