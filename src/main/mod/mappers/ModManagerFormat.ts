@@ -20,9 +20,26 @@ export default class ModManagerFormat extends ModMapper {
             return path;
         } else if (baseFolder === "characters") {
             return path;
+        } else if (this.isAssetFolder(baseFolder)) {
+            // Include asset folders (audio, images, fonts, videos, etc.)
+            return path;
         }
 
         return null; // ignore it
+    }
+
+    private isAssetFolder(folderName: string): boolean {
+        // Common asset folder names that should be preserved
+        const assetFolders = [
+            "audio", "music", "sound", "sounds",
+            "images", "img", "sprites", "backgrounds", "bg", "cg",
+            "fonts", "font",
+            "videos", "video", "movies", "movie",
+            "data", "assets", "resources",
+            "gui", "interface",
+            "tl", "translations", "lang", "locale"
+        ];
+        return assetFolders.includes(folderName.toLowerCase());
     }
 
     public getFriendlyName(): string {

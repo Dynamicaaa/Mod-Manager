@@ -11,6 +11,13 @@ export default class InstallAppropriateFiles extends ModMapper {
 
     public mapFile(path: string): string {
         const filename: string = path.split("/").pop();
+        const pathParts = path.split("/");
+        
+        // Check if this file is in an asset folder that should be preserved
+        if (pathParts.length > 1 && this.isAssetFolder(pathParts[0])) {
+            return path;
+        }
+        
         if (filename.match(/\.rp(y|yc)$/)) { // it is a ren'py script file
             // On macOS, place scripts in autorun for better compatibility
             if (process.platform === "darwin") {
@@ -24,6 +31,20 @@ export default class InstallAppropriateFiles extends ModMapper {
         }
 
         return null; // ignore it
+    }
+
+    private isAssetFolder(folderName: string): boolean {
+        // Common asset folder names that should be preserved
+        const assetFolders = [
+            "audio", "music", "sound", "sounds",
+            "images", "img", "sprites", "backgrounds", "bg", "cg",
+            "fonts", "font",
+            "videos", "video", "movies", "movie",
+            "data", "assets", "resources",
+            "gui", "interface",
+            "tl", "translations", "lang", "locale"
+        ];
+        return assetFolders.includes(folderName.toLowerCase());
     }
 
     public getFriendlyName(): string {

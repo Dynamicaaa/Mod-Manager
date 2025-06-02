@@ -38,6 +38,9 @@ export default class MacOSAutorunFormat extends ModMapper {
         } else if (pathParts[0] === "characters") {
             // Keep character files in characters folder
             return path;
+        } else if (this.isAssetFolder(pathParts[0])) {
+            // Include asset folders (audio, images, fonts, videos, etc.)
+            return path;
         } else if (filename.match(/\.rp(y|yc)$/)) {
             // Place loose Ren'Py scripts in autorun for macOS compatibility
             return joinPath("game", "autorun", filename);
@@ -51,6 +54,20 @@ export default class MacOSAutorunFormat extends ModMapper {
 
         // Ignore all other files
         return null;
+    }
+
+    private isAssetFolder(folderName: string): boolean {
+        // Common asset folder names that should be preserved
+        const assetFolders = [
+            "audio", "music", "sound", "sounds",
+            "images", "img", "sprites", "backgrounds", "bg", "cg",
+            "fonts", "font",
+            "videos", "video", "movies", "movie",
+            "data", "assets", "resources",
+            "gui", "interface",
+            "tl", "translations", "lang", "locale"
+        ];
+        return assetFolders.includes(folderName.toLowerCase());
     }
 
     public getFriendlyName(): string {
