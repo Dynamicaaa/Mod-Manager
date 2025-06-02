@@ -20,19 +20,20 @@ export default class InstallLauncher {
     private static debugConsole: SDKDebugConsole;
 
     /**
-     * Ensures DDLC.sh is executable on Linux systems before launching
+     * Ensures the game executable is executable on Unix systems before launching
      * @param gameExecutable The path to the game executable
      * @returns Promise that resolves with success status and error message if any
      */
     private static ensureExecutableBeforeLaunch(gameExecutable: string): Promise<{success: boolean, error?: string}> {
         return new Promise((resolve) => {
-            if (process.platform !== "linux" || !gameExecutable.endsWith("DDLC.sh")) {
+            if (process.platform === "win32") {
                 resolve({success: true});
                 return;
             }
 
             if (!existsSync(gameExecutable)) {
-                resolve({success: false, error: "DDLC.sh not found"});
+                const fileName = gameExecutable.split(/[\/\\]/).pop();
+                resolve({success: false, error: `${fileName} not found`});
                 return;
             }
 
@@ -44,10 +45,10 @@ export default class InstallLauncher {
                 // File is not executable, try to make it executable
                 chmodr(gameExecutable, 0o755, (err) => {
                     if (err) {
-                        console.error("Failed to make DDLC.sh executable:", err);
+                        console.error("Failed to make game executable:", err);
                         resolve({success: false, error: err.toString()});
                     } else {
-                        console.log("Successfully made DDLC.sh executable");
+                        console.log("Successfully made game executable");
                         resolve({success: true});
                     }
                 });
@@ -136,7 +137,24 @@ export default class InstallLauncher {
             } else if (process.platform === "linux") {
                 gameExecutable = joinPath(installFolder, "install", "DDLC.sh");
             } else if (process.platform === "darwin") {
-                gameExecutable = joinPath(installFolder, "install", "MacOS", "DDLC");
+                // Try multiple possible locations for macOS DDLC executable
+                const possiblePaths = [
+                    joinPath(installFolder, "install", "DDLC.app", "Contents", "MacOS", "DDLC"),
+                    joinPath(installFolder, "install", "MacOS", "DDLC"),
+                    joinPath(installFolder, "install", "DDLC")
+                ];
+                
+                gameExecutable = null;
+                for (const path of possiblePaths) {
+                    if (existsSync(path)) {
+                        gameExecutable = path;
+                        break;
+                    }
+                }
+                
+                if (!gameExecutable) {
+                    gameExecutable = possiblePaths[0]; // Default to app bundle path
+                }
             } else {
                 throw new Error("I have no idea what kind of computer you're using!");
             }

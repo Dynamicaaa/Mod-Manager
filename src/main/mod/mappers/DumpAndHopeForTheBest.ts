@@ -8,6 +8,13 @@ import {ModMapper} from "../ModMapper";
 export default class DumpAndHopeForTheBest extends ModMapper {
 
     public mapFile(path: string): string {
+        const filename = path.split("/").pop();
+        
+        // On macOS, place Ren'Py scripts in autorun for better compatibility
+        if (process.platform === "darwin" && filename && filename.match(/\.rp(y|yc)$/)) {
+            return joinPath("game", "autorun", filename);
+        }
+        
         return joinPath("game", path);
     }
 

@@ -11,7 +11,13 @@ export default class InstallAppropriateFiles extends ModMapper {
 
     public mapFile(path: string): string {
         const filename: string = path.split("/").pop();
-        if (filename.match(/\.rp(y|yc|a)$/)) { // it is a ren'py file
+        if (filename.match(/\.rp(y|yc)$/)) { // it is a ren'py script file
+            // On macOS, place scripts in autorun for better compatibility
+            if (process.platform === "darwin") {
+                return joinPath("game", "autorun", filename);
+            }
+            return joinPath("game", filename);
+        } else if (filename.match(/\.rpa$/)) { // it is a ren'py archive file
             return joinPath("game", filename);
         } else if (filename.match(/\.chr$/)) { // it is a character file
             return joinPath("characters", filename);

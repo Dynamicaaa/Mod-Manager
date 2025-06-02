@@ -338,35 +338,86 @@ ipcMain.on("delete save", (ev: IpcMainEvent, folderName: string) => {
 
 // desktop shortcut creation
 ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: string, installName: string }) => {
-    if (process.platform !== "win32") {
-        dialog.showErrorBox("Shortcut creation is only supported on Windows", "Nice try.");
-        return;
-    }
+    if (process.platform === "win32") {
+        const result = await dialog.showSaveDialog(appWindow, {
+            title: lang.translate("main.shortcut_dialog.title"),
+            defaultPath: options.installName,
+            filters: [
+                {name: lang.translate("main.shortcut_dialog.file_format_name"), extensions: ["lnk"]}
+            ]
+        });
 
-    const result = await dialog.showSaveDialog(appWindow, {
-        title: lang.translate("main.shortcut_dialog.title"),
-        defaultPath: options.installName,
-        filters: [
-            {name: lang.translate("main.shortcut_dialog.file_format_name"), extensions: ["lnk"]}
-        ]
-    });
-
-    if (result.filePath) {
-        console.log("[IPC create shortcut] Writing shortcut to " + result.filePath);
-        if (!shell.writeShortcutLink(result.filePath, "create", {
-            target: "ddmm://launch-install/" + options.folderName,
-            icon: process.execPath,
-            iconIndex: 0
-        })) {
-            showError(
-                lang.translate("main.errors.shortcut.title"),
-                lang.translate("main.errors.shortcut.body"),
-                null,
-                false
-            );
-        } else {
-            console.log("[IPC create shortcut] Written shortcut to " + result.filePath);
+        if (result.filePath) {
+            console.log("[IPC create shortcut] Writing shortcut to " + result.filePath);
+            if (!shell.writeShortcutLink(result.filePath, "create", {
+                target: "ddmm://launch-install/" + options.folderName,
+                icon: process.execPath,
+                iconIndex: 0
+            })) {
+                showError(
+                    lang.translate("main.errors.shortcut.title"),
+                    lang.translate("main.errors.shortcut.body"),
+                    null,
+                    false
+                );
+            } else {
+                console.log("[IPC create shortcut] Written shortcut to " + result.filePath);
+            }
         }
+    } else if (process.platform === "darwin") {
+        // macOS: Create app bundle shortcut
+        const result = await dialog.showSaveDialog(appWindow, {
+            title: lang.translate("main.shortcut_dialog.title"),
+            defaultPath: options.installName,
+            filters: [
+                {name: "Application", extensions: ["app"]}
+            ]
+        });
+
+        if (result.filePath) {
+            console.log("[IPC create shortcut] Creating macOS app bundle at " + result.filePath);
+            try {
+                const {createMacOSShortcut} = require("./utils/MacOSShortcut");
+                await createMacOSShortcut(result.filePath, options.folderName, options.installName);
+                console.log("[IPC create shortcut] Created macOS app bundle at " + result.filePath);
+            } catch (error) {
+                console.error("[IPC create shortcut] Failed to create macOS shortcut:", error);
+                showError(
+                    lang.translate("main.errors.shortcut.title"),
+                    lang.translate("main.errors.shortcut.body"),
+                    error.toString(),
+                    false
+                );
+            }
+        }
+    } else if (process.platform === "linux") {
+        // Linux: Create .desktop file
+        const result = await dialog.showSaveDialog(appWindow, {
+            title: lang.translate("main.shortcut_dialog.title"),
+            defaultPath: options.installName,
+            filters: [
+                {name: "Desktop Entry", extensions: ["desktop"]}
+            ]
+        });
+
+        if (result.filePath) {
+            console.log("[IPC create shortcut] Creating Linux desktop entry at " + result.filePath);
+            try {
+                const {createLinuxShortcut} = require("./utils/LinuxShortcut");
+                await createLinuxShortcut(result.filePath, options.folderName, options.installName);
+                console.log("[IPC create shortcut] Created Linux desktop entry at " + result.filePath);
+            } catch (error) {
+                console.error("[IPC create shortcut] Failed to create Linux shortcut:", error);
+                showError(
+                    lang.translate("main.errors.shortcut.title"),
+                    lang.translate("main.errors.shortcut.body"),
+                    error.toString(),
+                    false
+                );
+            }
+        }
+    } else {
+        dialog.showErrorBox("Shortcut creation not supported", "Shortcut creation is not supported on this platform.");
     }
 });
 

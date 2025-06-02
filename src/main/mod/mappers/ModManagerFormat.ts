@@ -10,8 +10,15 @@ export default class ModManagerFormat extends ModMapper {
 
     public mapFile(path: string): string {
         const baseFolder = path.split("/")[0];
+        const filename = path.split("/").pop();
 
-        if (baseFolder === "game" || baseFolder === "characters") {
+        if (baseFolder === "game") {
+            // On macOS, place Ren'Py scripts in autorun for better compatibility
+            if (process.platform === "darwin" && filename && filename.match(/\.rp(y|yc)$/)) {
+                return joinPath("game", "autorun", filename);
+            }
+            return path;
+        } else if (baseFolder === "characters") {
             return path;
         }
 

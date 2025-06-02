@@ -1,4 +1,4 @@
-import {sep as pathSep} from "path";
+import {sep as pathSep, join as joinPath} from "path";
 import {ModMapper} from "../ModMapper";
 
 /*
@@ -11,8 +11,15 @@ export default class ModTemplateFormat extends ModMapper {
     public mapFile(path: string): string {
         const pathParts = path.split("/");
         const baseFolder = pathParts.shift();
+        const filename = pathParts[pathParts.length - 1];
 
-        if (pathParts[0] === "game" || pathParts[0] === "characters") {
+        if (pathParts[0] === "game") {
+            // On macOS, place Ren'Py scripts in autorun for better compatibility
+            if (process.platform === "darwin" && filename && filename.match(/\.rp(y|yc)$/)) {
+                return joinPath("game", "autorun", filename);
+            }
+            return pathParts.join(pathSep);
+        } else if (pathParts[0] === "characters") {
             return pathParts.join(pathSep);
         }
 

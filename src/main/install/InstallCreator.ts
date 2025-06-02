@@ -65,6 +65,8 @@ export default class InstallCreator {
                     mkdirsSync(joinPath(canonicalPath, "appdata", "RenPy"));
                 } else if (process.platform === "darwin") {
                     mkdirsSync(joinPath(canonicalPath, "appdata", "Library", "RenPy"));
+                    // Create autorun directory for macOS mod support
+                    mkdirsSync(joinPath(canonicalPath, "install", "game", "autorun"));
                 } else {
                     mkdirsSync(joinPath(canonicalPath, "appdata", ".renpy"));
                 }
@@ -134,7 +136,15 @@ export default class InstallCreator {
                                         fileName === "python" ||
                                         fileName === "pythonw" ||
                                         (relativePath.includes("lib/linux-x86_64/") &&
-                                         (fileName === "zsync" || fileName === "zsyncmake"))
+                                         (fileName === "zsync" || fileName === "zsyncmake")) ||
+                                        // macOS specific executables
+                                        (process.platform === "darwin" && (
+                                            relativePath.includes("MacOS/") ||
+                                            relativePath.includes(".app/Contents/MacOS/") ||
+                                            fileName === "DDLC" ||
+                                            fileName.endsWith(".dylib") ||
+                                            fileName.endsWith(".so")
+                                        ))
                                     );
 
                                     if (shouldMakeExecutable) {
@@ -157,6 +167,12 @@ export default class InstallCreator {
 
                     zipfile.on("end", () => {
                         console.log("DDLC extraction completed successfully");
+
+                        // Ensure autorun directory exists for macOS mod support
+                        if (process.platform === "darwin") {
+                            mkdirsSync(joinPath(canonicalPath, "install", "game", "autorun"));
+                            console.log("Created autorun directory for macOS mod support");
+                        }
 
                         // write the install data file
                         writeFileSync(joinPath(canonicalPath, "install.json"), JSON.stringify({

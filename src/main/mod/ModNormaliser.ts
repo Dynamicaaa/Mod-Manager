@@ -5,6 +5,7 @@ import NestedGameFolder from "./mappers/NestedGameFolder";
 import ModTemplateFormat from "./mappers/ModTemplateFormat";
 import InstallAppropriateFiles from "./mappers/InstallAppropriateFiles";
 import DumpAndHopeForTheBest from "./mappers/DumpAndHopeForTheBest";
+import MacOSAutorunFormat from "./mappers/MacOSAutorunFormat";
 
 /*
     This script is intended to take any zip file and try and determine how DDMM should install it, if it is a mod.
@@ -89,7 +90,11 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
                 let mapper: ModMapper;
 
                 // Decision logic for mapper selection
-                if (hasModJson && (hasGameFolder || hasCharactersFolder)) {
+                // On macOS, prefer autorun format for better mod compatibility
+                if (process.platform === "darwin" && (gameFiles > 0 || characterFiles > 0)) {
+                    // MacOSAutorunFormat: Use autorun folder for automatic mod loading on macOS
+                    mapper = new MacOSAutorunFormat();
+                } else if (hasModJson && (hasGameFolder || hasCharactersFolder)) {
                     // ModManagerFormat: has mod.json and proper folder structure
                     mapper = new ModManagerFormat();
                 } else if (hasNestedStructure && topLevelDirs.size === 1) {
