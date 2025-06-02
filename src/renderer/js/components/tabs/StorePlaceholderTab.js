@@ -354,6 +354,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             // UI state
             "selectedMod": null,
             "downloadingMods": new Set(),
+            "filterHeight": 0, // Track filter bar height for dynamic spacing
 
             // Screenshot modal
             "screenshotModal": {
@@ -674,6 +675,10 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 this.mods = [];
             } finally {
                 this.loading = false;
+                // Ensure proper layout after content loads
+                this.$nextTick(() => {
+                    this.ensureModVisibility();
+                });
             }
         },
 
@@ -713,6 +718,10 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             // Reset to first page when sorting changes
             this.currentPage = 1;
             this.loadMods();
+            // Update layout after sort change
+            this.$nextTick(() => {
+                this.updateFilterHeight();
+            });
         },
 
         // Mod interaction methods
@@ -1126,6 +1135,58 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                     this.nextScreenshot();
                     break;
             }
+        },
+
+        // Layout management methods
+        "updateFilterHeight": function() {
+            // Calculate and store filter bar height for dynamic spacing
+            this.$nextTick(() => {
+                const filterElement = this.$el.querySelector('.store-filters');
+                if (filterElement) {
+                    this.filterHeight = filterElement.offsetHeight;
+                    this.updateContentSpacing();
+                }
+            });
+        },
+
+        "updateContentSpacing": function() {
+            // Ensure content area has proper spacing from filter bar
+            const contentElement = this.$el.querySelector('.store-content');
+            if (contentElement && this.filterHeight > 0) {
+                // Add extra margin based on filter height for responsive layouts
+                const extraMargin = Math.max(10, this.filterHeight * 0.1);
+                contentElement.style.marginTop = `${extraMargin}px`;
+            }
+        },
+
+        "handleResize": function() {
+            // Update layout when window is resized
+            this.updateFilterHeight();
+        },
+
+        "ensureModVisibility": function() {
+            // Ensure no mod cards are hidden behind filters
+            this.$nextTick(() => {
+                const modCards = this.$el.querySelectorAll('.mod-card');
+                const filterElement = this.$el.querySelector('.store-filters');
+                
+                if (modCards.length > 0 && filterElement) {
+                    const filterRect = filterElement.getBoundingClientRect();
+                    const filterBottom = filterRect.bottom;
+                    
+                    modCards.forEach(card => {
+                        const cardRect = card.getBoundingClientRect();
+                        if (cardRect.top < filterBottom + 10) {
+                            // Card is too close to or behind filter, scroll content down
+                            const contentElement = this.$el.querySelector('.store-content');
+                            if (contentElement) {
+                                const scrollOffset = (filterBottom + 20) - cardRect.top;
+                                contentElement.scrollTop = Math.max(0, contentElement.scrollTop - scrollOffset);
+                            }
+                        }
+                    });
+                }
+            });
         }
     },
     "mounted": async function () {
@@ -1161,12 +1222,34 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             this.loadMods()
         ]);
 
-        // Add keyboard navigation for screenshot modal
+        // Set up layout management
+        this.$nextTick(() => {
+            this.updateFilterHeight();
+            this.ensureModVisibility();
+        });
+
+        // Add event listeners
         document.addEventListener('keydown', this.handleKeydown);
+        window.addEventListener('resize', this.handleResize);
+
+        // Watch for filter changes that might affect layout
+        this.$watch('selectedCategory', () => {
+            this.$nextTick(() => {
+                this.updateFilterHeight();
+                this.ensureModVisibility();
+            });
+        });
+
+        this.$watch('mods', () => {
+            this.$nextTick(() => {
+                this.ensureModVisibility();
+            });
+        });
     },
 
     "beforeDestroy": function() {
         // Clean up event listeners
         document.removeEventListener('keydown', this.handleKeydown);
+        window.removeEventListener('resize', this.handleResize);
     }
 });

@@ -670,8 +670,8 @@ app.on("ready", async () => {
 
     appWindow = new BrowserWindow({
         title: `${appConfig.getName()} v${appConfig.getVersion()}`,
-        width: 1024,
-        height: 600,
+        width: 1280,
+        height: 800,
         minWidth: 1000,
         minHeight: 600,
         maximizable: true,
