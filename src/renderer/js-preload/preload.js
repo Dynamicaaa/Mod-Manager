@@ -74,7 +74,7 @@ try {
 
 const api = new EventEmitter();
 
-// Ready flag for Firebase auth state
+// Ready flag for authentication state
 let ready = false;
 
 api.mods = {};
@@ -508,7 +508,7 @@ api.joinPath = path.join;
 // Is absolute
 api.isAbsolute = path.isAbsolute;
 
-// Set ready flag when Firebase auth is ready
+// Set ready flag when authentication is ready
 api.setReady = function(isReady) {
     ready = isReady;
 };

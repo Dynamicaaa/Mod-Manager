@@ -16,7 +16,7 @@ const APP_CONFIG = {
         cloudSaves: false,
         achievements: true,
         analytics: false,
-        crashReporting: true,
+        crashReporting: false,
         betaFeatures: false
     },
     defaults: {

@@ -2,19 +2,11 @@ import {app, BrowserWindow, ipcMain, IpcMainEvent, shell, dialog, Notification} 
 import {move, existsSync, mkdirpSync, readdirSync, removeSync, copyFileSync} from "fs-extra";
 import {join as joinPath} from "path";
 import {autoUpdater} from "electron-updater";
-import * as Sentry from "@sentry/electron";
 import * as semver from "semver";
 import * as remoteMain from "@electron/remote/main";
 
 // Check if running from Windows Store
 const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
-
-Sentry.init({
-    dsn: "https://bf0edf3f287344d4969e3171c33af4ea@sentry.io/1297252",
-    onFatalError: () => {
-        // workaround for stacktrace being displayed (see getsentry/sentry-electron#146)
-    }
-});
 
 // One of my major regrets in life is putting an ! at the end of the application name
 // This should allow me to use a sane directory name but not break old installs.

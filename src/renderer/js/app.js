@@ -1,5 +1,3 @@
-// Firebase variable removed - cloud saves disabled
-
 console.log("Starting app.js initialization...");
 console.log("ddmm object available:", typeof ddmm !== 'undefined');
 console.log("ddmm.config available:", typeof ddmm !== 'undefined' && typeof ddmm.config !== 'undefined');
@@ -14,8 +12,6 @@ window.updateAppVersion = function(version) {
         console.log("Updated app version to:", version);
     }
 };
-
-// Firebase integration removed - cloud saves disabled
 
 console.log("Creating Vue app...");
 const app = new Vue({
@@ -713,10 +709,6 @@ function setupThemeLoading(retryCount = 0) {
 // Start theme loading retry
 setupThemeLoading();
 
-// Firebase announcement code removed - cloud saves disabled
-
-// Firebase announcement listener removed
-
 function allowKeyEvents() {
     return !(document.querySelectorAll(".cover").length > 0);
 }
@@ -799,19 +791,8 @@ document.addEventListener("keydown", ev => {
     }
 });
 
-// Cloud save variables and functions removed - cloud saves disabled
-
 let ready = false;
 
-// Cloud save functions removed
-
-// Firebase sync functions removed - cloud saves disabled
-
-// Firebase authentication functions removed
-
-// Firebase functions removed - cloud saves disabled
-
-// Firebase auth state change handler removed - cloud saves disabled
 ready = true;
 if (typeof ddmm !== 'undefined' && ddmm.setReady) {
     ddmm.setReady(true);
@@ -892,10 +873,6 @@ function setupDDMMEventListeners(retryCount = 0) {
             console.error("App or showCrashDialog method not available");
         }
     });
-
-    // Firebase event handlers removed - cloud saves disabled
-
-    // Cloud save event handlers removed
 
     ddmm.on("is appx", is => {
         app.appx = is;
