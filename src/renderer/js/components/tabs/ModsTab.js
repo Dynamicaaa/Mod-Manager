@@ -4,7 +4,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
     <div class="mod-viewer-pane">
         <div class="mod-viewer-mod-list">
             <div class="ddlc-search-container">
-                <input type="text" class="small ddlc-search" :placeholder="_('renderer.tab_mods.list.placeholder_search') + ' ♡'" autofocus @keydown="_searchEscapeHandler" @input="onSearchInput" @focus="search = ''" v-model="search">
+                <input type="text" class="small ddlc-search" :placeholder="_('renderer.tab_mods.list.placeholder_search') + ' ♡'" autofocus @keydown="_searchEscapeHandler" @input="onSearchInput" v-model="search">
                 <i class="fas fa-search ddlc-search-icon"></i>
             </div>
             <br>
@@ -373,6 +373,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         "_refreshInstallList": function (installs) {
             // Event handler for refreshed install list
             this.installs = installs;
+            console.log("ModsTab: Refreshed install list with", installs.length, "installs");
 
             // select something to avoid leaving a blank area
             if (!this.selected_item.type) {
@@ -385,21 +386,56 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 }
             }
 
-            this._fuseInstalls = new Fuse(installs, {
-                shouldSort: true,
-                threshold: 0.5,
-                keys: ["name", "folderName", "mod.name"]
-            });
+            try {
+                if (typeof Fuse !== 'undefined') {
+                    this._fuseInstalls = new Fuse(installs, {
+                        shouldSort: true,
+                        threshold: 0.5,
+                        location: 0,
+                        distance: 100,
+                        minMatchCharLength: 1,
+                        keys: [
+                            { name: "name", weight: 0.8 },
+                            { name: "folderName", weight: 0.6 },
+                            { name: "mod.name", weight: 0.7 }
+                        ]
+                    });
+                    console.log("ModsTab: Fuse.js initialized for installs");
+                } else {
+                    console.warn("ModsTab: Fuse.js not available, using fallback search");
+                    this._fuseInstalls = null;
+                }
+            } catch (error) {
+                console.warn("Failed to initialize Fuse.js for installs:", error);
+                this._fuseInstalls = null;
+            }
         },
         "_refreshModList": function (mods) {
             // Event handler for refreshed mod list
             this.mods = mods;
+            console.log("ModsTab: Refreshed mod list with", mods.length, "mods");
 
-            this._fuseMods = new Fuse(mods, {
-                shouldSort: true,
-                threshold: 0.5,
-                keys: ["filename"]
-            });
+            try {
+                if (typeof Fuse !== 'undefined') {
+                    this._fuseMods = new Fuse(mods, {
+                        shouldSort: true,
+                        threshold: 0.5,
+                        location: 0,
+                        distance: 100,
+                        minMatchCharLength: 1,
+                        keys: [
+                            { name: "filename", weight: 1.0 }
+                        ]
+                    });
+                    console.log("ModsTab: Fuse.js initialized for mods");
+                } else {
+                    console.warn("ModsTab: Fuse.js not available, using fallback search");
+                    this._fuseMods = null;
+                }
+            } catch (error) {
+                console.warn("Failed to initialize Fuse.js for mods:", error);
+                this._fuseMods = null;
+            }
         },
         "_keyPressHandler": function (e) {
             if (!allowKeyEvents()) {
@@ -451,7 +487,8 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         },
         "onSearchInput": function(e) {
             // Real-time search as user types
-            this.search = e.target.value;
+            const newSearchValue = e.target.value || "";
+            this.search = newSearchValue;
 
             // Debounce the search to avoid excessive filtering
             if (this.searchTimeout) {
@@ -464,14 +501,22 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
 
                 // If we have search results and no item is selected, select the first result
                 if (this.search.length > 0) {
-                    if (this.searchResultsInstalls.length > 0 &&
+                    const searchInstalls = this.searchResultsInstalls;
+                    const searchMods = this.searchResultsMods;
+                    
+                    if (searchInstalls.length > 0 &&
                         (!this.selected_item.type ||
-                         (this.selected_item.type === 'install' && !this.searchResultsInstalls.find(i => i.folderName === this.selected_item.id)))) {
-                        this.selectItem(this.searchResultsInstalls[0].folderName, "install");
-                    } else if (this.searchResultsMods.length > 0 && this.searchResultsInstalls.length === 0 &&
+                         (this.selected_item.type === 'install' && !searchInstalls.find(i => i.folderName === this.selected_item.id)))) {
+                        this.selectItem(searchInstalls[0].folderName, "install");
+                    } else if (searchMods.length > 0 && searchInstalls.length === 0 &&
                                (!this.selected_item.type ||
-                                (this.selected_item.type === 'mod' && !this.searchResultsMods.find(m => m.filename === this.selected_item.id)))) {
-                        this.selectItem(this.searchResultsMods[0].filename, "mod");
+                                (this.selected_item.type === 'mod' && !searchMods.find(m => m.filename === this.selected_item.id)))) {
+                        this.selectItem(searchMods[0].filename, "mod");
+                    } else if (searchInstalls.length === 0 && searchMods.length === 0) {
+                        // No search results found - keep current selection or show create page
+                        if (!this.selected_item.type) {
+                            this.selectItem("", "create");
+                        }
                     }
                 } else {
                     // If search is cleared, select first install or create page
@@ -495,10 +540,34 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 || ddmm.mods.installExists(this.install_creation.folder_name);
         },
         "searchResultsMods": function () {
-            return this.search.length > 0 ? this._fuseMods.search(this.search) : this.mods;
+            if (!this.search || this.search.length === 0) {
+                return this.mods;
+            }
+            if (!this._fuseMods) {
+                // Fallback to simple string matching if Fuse.js isn't available
+                return this.mods.filter(mod =>
+                    mod.filename.toLowerCase().includes(this.search.toLowerCase())
+                );
+            }
+            const searchResults = this._fuseMods.search(this.search);
+            // Fuse.js returns objects with 'item' property in v6+
+            return searchResults.map ? searchResults.map(result => result.item || result) : searchResults;
         },
         "searchResultsInstalls": function () {
-            return this.search.length > 0 ? this._fuseInstalls.search(this.search) : this.installs;
+            if (!this.search || this.search.length === 0) {
+                return this.installs;
+            }
+            if (!this._fuseInstalls) {
+                // Fallback to simple string matching if Fuse.js isn't available
+                return this.installs.filter(install =>
+                    install.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                    install.folderName.toLowerCase().includes(this.search.toLowerCase()) ||
+                    (install.mod && install.mod.name && install.mod.name.toLowerCase().includes(this.search.toLowerCase()))
+                );
+            }
+            const searchResults = this._fuseInstalls.search(this.search);
+            // Fuse.js returns objects with 'item' property in v6+
+            return searchResults.map ? searchResults.map(result => result.item || result) : searchResults;
         }
     },
     "mounted": function () {

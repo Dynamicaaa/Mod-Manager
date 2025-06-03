@@ -56,21 +56,15 @@ try {
 }
 const path = remote.require("path");
 
-// Try to require file-url, but provide fallback if it fails (ES module issue)
-let fileUrl;
-try {
-    fileUrl = remote.require("file-url");
-} catch (e) {
-    console.warn("Could not load file-url module:", e.message);
-    // Provide a simple fallback implementation
-    fileUrl = (filePath) => {
-        if (process.platform === 'win32') {
-            return 'file:///' + filePath.replace(/\\/g, '/');
-        } else {
-            return 'file://' + filePath;
-        }
-    };
-}
+// file-url v4+ is an ES module and cannot be required in CommonJS
+// Use a simple fallback implementation instead
+const fileUrl = (filePath) => {
+    if (process.platform === 'win32') {
+        return 'file:///' + filePath.replace(/\\/g, '/');
+    } else {
+        return 'file://' + filePath;
+    }
+};
 
 const api = new EventEmitter();
 

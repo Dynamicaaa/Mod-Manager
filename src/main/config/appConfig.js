@@ -30,7 +30,7 @@ const APP_CONFIG = {
     urls: {
         feedback: "mailto:CanaryZen@proton.me",
         ddlcDownload: "https://ddlc.moe",
-        modStore: "https://sayonika.reconvial.dev"
+        modStore: "https://sayonika.dynamicaaa.me"
     },
     limits: {
         maxInstalls: 50,
@@ -47,7 +47,7 @@ const APP_CONFIG = {
     },
     security: {
         allowedDomains: [
-            "sayonika.reconvial.dev",
+            "sayonika.dynamicaaa.me",
             "ddlc.moe",
             "github.com",
             "githubusercontent.com"

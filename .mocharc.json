@@ -1,0 +1,18 @@
+{
+  "spec": [
+    "test/**/*.test.js"
+  ],
+  "exclude": [
+    "test/**/*.demo.js",
+    "test/**/*simple*.js",
+    "test/**/*.bak"
+  ],
+  "timeout": 10000,
+  "recursive": true,
+  "reporter": "spec",
+  "require": [
+    "test/setup.js"
+  ],
+  "color": true,
+  "bail": false
+}

@@ -320,7 +320,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     "data": function () {
         return {
             // Store configuration
-            "storeUrl": "https://sayonika.reconvial.dev", // Default to community Sayonika instance
+            "storeUrl": "https://sayonika.dynamicaaa.me", // Default to community Sayonika instance
 
             // Authentication
             "user": null,
@@ -1091,7 +1091,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
 
             // Fallback to manual detection with new default
             const possibleUrls = [
-                'https://sayonika.reconvial.dev',
+                'https://sayonika.dynamicaaa.me',
                 'http://localhost:3000',
                 'http://127.0.0.1:3000'
             ];

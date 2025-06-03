@@ -683,7 +683,8 @@ app.on("ready", async () => {
             contextIsolation: false,
             sandbox: false,
             nodeIntegration: false,
-            webSecurity: false, // Allow loading images from localhost
+            webSecurity: true, // Enable web security for better security posture
+            allowRunningInsecureContent: false, // Prevent running insecure content
             preload: preloadPath // contains all the IPC scripts
         },
         titleBarStyle: "hiddenInset",

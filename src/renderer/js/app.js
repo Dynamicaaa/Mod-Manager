@@ -48,6 +48,7 @@ const app = new Vue({
         "system_platform": (typeof ddmm !== 'undefined') ? ddmm.platform : "unknown",
         "app_updating": "none",
         "discord_status": { connected: false, enabled: false },
+        "sayonika_maintenance_mode": false, // Reactive flag for Sayonika maintenance status
         "tab": "mods",
         "previousTab": "mods",
         "pageTransition": "fade",
@@ -107,6 +108,12 @@ const app = new Vue({
             "crashInfo": null,
             "message": "",
             "installPath": ""
+        },
+        "maintenance_cover": {
+            "display": false,
+            "title": "Sayonika Maintenance",
+            "message": "",
+            "estimatedTime": null
         }
     },
     "computed": {
@@ -371,8 +378,33 @@ const app = new Vue({
                     }
                 default:
                     return "Unknown crash type";
-            }
-        },
+           }
+       },
+
+       // Maintenance mode methods
+       "showMaintenanceMode": function(maintenanceData) {
+           console.log("Showing maintenance mode dialog:", maintenanceData);
+           this.maintenance_cover = {
+               display: true,
+               title: "Sayonika Maintenance",
+               message: "Sayonika is temporarily unavailable for maintenance. You can still browse and manage your installed mods while we work on getting the store back online.",
+               estimatedTime: maintenanceData.estimatedTime
+           };
+       },
+
+       "closeMaintenanceMode": function() {
+           this.maintenance_cover.display = false;
+       },
+
+       "getMaintenanceTimeText": function() {
+           if (!this.maintenance_cover.estimatedTime) return null;
+           try {
+               const estimatedTime = new Date(this.maintenance_cover.estimatedTime);
+               return `Expected completion: ${estimatedTime.toLocaleString()}`;
+           } catch (error) {
+               return `Expected completion: ${this.maintenance_cover.estimatedTime}`;
+           }
+       },
         "showInstallMod": function (mod) {
             this.tab = "mods";
             this.$nextTick(() => {
@@ -428,27 +460,38 @@ const app = new Vue({
             }
         },
         "getSayonikaUser": function () {
-            // Use the centralized authentication manager
-            if (typeof window.SayonikaAuth !== 'undefined') {
-                return window.SayonikaAuth.getUser();
-            }
-
-            // Fallback to old method if auth manager not available
-            const findStoreTab = (component) => {
-                if (component && component.user !== undefined && component.showLogin && typeof component.showLogin === 'function') {
-                    return component;
+            try {
+                // Use the centralized authentication manager
+                if (typeof window.SayonikaAuth !== 'undefined' && window.SayonikaAuth.getUser) {
+                    return window.SayonikaAuth.getUser();
                 }
-                if (component.$children) {
-                    for (let child of component.$children) {
-                        const found = findStoreTab(child);
-                        if (found) return found;
+
+                // Fallback to old method if auth manager not available
+                const findStoreTab = (component) => {
+                    if (component && component.user !== undefined && component.showLogin && typeof component.showLogin === 'function') {
+                        return component;
                     }
-                }
-                return null;
-            };
+                    if (component.$children) {
+                        for (let child of component.$children) {
+                            const found = findStoreTab(child);
+                            if (found) return found;
+                        }
+                    }
+                    return null;
+                };
 
-            const storeTab = findStoreTab(this);
-            return storeTab ? storeTab.user : null;
+                const storeTab = findStoreTab(this);
+                return storeTab ? storeTab.user : null;
+            } catch (error) {
+                console.warn('Error getting Sayonika user:', error);
+                return null;
+            }
+        },
+        "isSayonikaInMaintenance": function () {
+            // Use the reactive maintenance flag for Vue reactivity
+            // This is updated by the event listeners when maintenance status changes
+            console.log('isSayonikaInMaintenance check (reactive):', this.sayonika_maintenance_mode);
+            return Boolean(this.sayonika_maintenance_mode);
         },
         "logoutFromSayonika": function () {
             // Use the centralized authentication manager
@@ -909,6 +952,55 @@ function setupSayonikaAuthListeners() {
             }
         });
 
+        // Listen for maintenance mode events
+        window.SayonikaAuth.on('maintenance-mode-blocked', (maintenanceData) => {
+            console.log('Sayonika login blocked due to maintenance mode:', maintenanceData);
+            if (window.app) {
+                // Update the reactive maintenance flag
+                window.app.sayonika_maintenance_mode = Boolean(maintenanceData.isInMaintenance);
+                console.log('Updated reactive maintenance flag to:', window.app.sayonika_maintenance_mode);
+                
+                window.app.showMaintenanceMode(maintenanceData);
+            }
+        });
+
+        window.SayonikaAuth.on('maintenance-mode-changed', (maintenanceData) => {
+            console.log('Sayonika maintenance mode status changed:', maintenanceData);
+            if (window.app) {
+                // Update the reactive maintenance flag
+                window.app.sayonika_maintenance_mode = Boolean(maintenanceData.isInMaintenance);
+                console.log('Updated reactive maintenance flag to:', window.app.sayonika_maintenance_mode);
+                
+                if (maintenanceData.isInMaintenance) {
+                    window.app.showMaintenanceMode(maintenanceData);
+                } else {
+                    window.app.closeMaintenanceMode();
+                }
+                // Force update is no longer needed since we're using reactive data
+            }
+        });
+
+        window.SayonikaAuth.on('maintenance-mode-detected', (maintenanceData) => {
+            console.log('Sayonika maintenance mode detected on startup:', maintenanceData);
+            if (window.app) {
+                // Update the reactive maintenance flag
+                window.app.sayonika_maintenance_mode = Boolean(maintenanceData.isInMaintenance);
+                console.log('Updated reactive maintenance flag to:', window.app.sayonika_maintenance_mode);
+                
+                window.app.showMaintenanceMode(maintenanceData);
+            }
+        });
+
+        window.SayonikaAuth.on('maintenance-mode-initial-check-complete', (maintenanceData) => {
+            console.log('Sayonika initial maintenance check complete:', maintenanceData);
+            if (window.app) {
+                // Update the reactive maintenance flag based on initial check
+                window.app.sayonika_maintenance_mode = Boolean(maintenanceData.isInMaintenance);
+                console.log('Updated reactive maintenance flag to:', window.app.sayonika_maintenance_mode);
+                console.log('Vue app updated after initial maintenance check');
+            }
+        });
+
         console.log("Sayonika authentication event listeners set up successfully");
     } else {
         console.warn("SayonikaAuth not available, retrying in 100ms");
@@ -930,6 +1022,30 @@ window.addEventListener('ddmm-ready', (event) => {
     console.log("DDMM ready, reloading theme...");
     window.ThemeManager.loadUITheme();
 });
+
+// Window animation functionality has been removed
+
+// Simplified titlebar drag functionality
+function setupTitlebarDragListeners() {
+    const titlebar = document.querySelector('.titlebar');
+    if (titlebar) {
+        titlebar.addEventListener('mousedown', (e) => {
+            // Only trigger on left mouse button and if clicking on draggable area
+            if (e.button === 0 && window.getComputedStyle(e.target)['-webkit-app-region'] === 'drag') {
+                console.log("Titlebar drag started");
+            }
+        });
+        
+        console.log("Titlebar drag listeners set up successfully");
+    } else {
+        console.log("Titlebar not found, will retry after DOM load...");
+        // Try again after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', setupTitlebarDragListeners);
+    }
+}
+
+// Initialize simplified titlebar functionality
+setupTitlebarDragListeners();
 
 // Add global functions for testing onboarding
 window.testOnboarding = function() {

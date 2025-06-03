@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file: blob:; font-src 'self'; connect-src 'self' http://localhost:* http://127.0.0.1:* https://sayonika.dynamicaaa.me https://*.sayonika.dynamicaaa.me;">
 
     <title>Doki Doki Mod Manager</title>
 
@@ -112,6 +113,28 @@
         </div>
     </div>
 
+    <!-- Sayonika Maintenance Mode Dialog -->
+    <div class="cover maintenance" v-if="maintenance_cover.display" :style="{'background-image': backgroundImageStyle}">
+        <div class="maintenance-dialog-content">
+            <h1><i class="fas fa-tools"></i> {{maintenance_cover.title}}</h1>
+            <p>{{maintenance_cover.message}}</p>
+            
+            <div class="maintenance-details" v-if="getMaintenanceTimeText()">
+                <p><strong>{{getMaintenanceTimeText()}}</strong></p>
+            </div>
+
+            <div class="maintenance-actions">
+                <button class="secondary" @click="closeMaintenanceMode">
+                    <i class="fas fa-times fa-fw"></i> Close
+                </button>
+            </div>
+
+            <div class="maintenance-help">
+                <p><small>Please try again later. We apologize for any inconvenience.</small></p>
+            </div>
+        </div>
+    </div>
+
     <div class="titlebar">
         <div class="app-title">
             <span>{{app_name}}</span>
@@ -140,8 +163,11 @@
 
 
 
-            <div @click="showSayonikaLogin" v-if="!getSayonikaUser()">{{_('renderer.window_controls.sayonika_login')}}</div>
-            <div @click="showSayonikaUserMenu" v-else style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{getSayonikaUser().display_name || getSayonikaUser().username}}</div>
+            <div @click="showSayonikaLogin" v-if="!getSayonikaUser() && !isSayonikaInMaintenance()">{{_('renderer.window_controls.sayonika_login')}}</div>
+            <div v-if="!getSayonikaUser() && isSayonikaInMaintenance()" style="color: #f0932b; cursor: not-allowed;" :title="'Sayonika is currently in maintenance mode'">
+                <i class="fas fa-tools"></i> Maintenance
+            </div>
+            <div @click="showSayonikaUserMenu" v-if="getSayonikaUser()" style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{getSayonikaUser().display_name || getSayonikaUser().username}}</div>
 
             <div @click="toggleDevTools" :title="_('renderer.window_controls.devtools')"><i
                     class="fas fa-code fa-fw"></i></div>
@@ -173,6 +199,11 @@
 
 <script src="../../../vendor/fuse.js"></script>
 <script src="../../../vendor/vue.js"></script>
+<script>
+// Set Vue to production mode to suppress development warnings
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
+</script>
 <script src="../js/sayonika-config.js"></script>
 <script src="../js/sayonika-auth.js"></script>
 <script src="../js/components/OnboardingOverlay.js"></script>

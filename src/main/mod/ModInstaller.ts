@@ -195,6 +195,12 @@ export default class ModInstaller {
     }
 
     private static isArchive(filename: string): boolean {
-        return ["zip", "rar", "7z"].filter(ext => filename.endsWith("." + ext)).length > 0;
+        const lowerFilename = filename.toLowerCase();
+        const archiveExtensions = [
+            "zip", "rar", "7z",
+            "tar", "tar.gz", "tgz", "tar.bz2", "tar.xz", "tar.Z"
+        ];
+        
+        return archiveExtensions.some(ext => lowerFilename.endsWith("." + ext));
     }
 }

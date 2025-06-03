@@ -6,4 +6,5 @@ lib/
 yarn-error.log
 yarn.lock
 package-lock.json
+bun.lock
 *.css

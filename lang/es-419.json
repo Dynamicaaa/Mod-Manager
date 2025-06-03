@@ -11,12 +11,18 @@
       "link_changelog": "¿Qué hay de nuevo?"
     },
 
+    "user_menu": {
+      "option_rename": "Cambiar Nombre de Usuario",
+      "option_logout": "Cerrar Sesión"
+    },
     "window_controls": {
       "close": "Cerrar",
       "maximise": "Maximizar",
       "minimise": "Minimizar",
+      "devtools": "Alternar Herramientas de Desarrollador (F12)",
 
       "announcement": "Lee los últimos anuncios",
+      "login": "Iniciar Sesión",
       "sayonika_login": "Iniciar Sesión en Sayonika",
       "update": {
         "checking": "Buscando actualizaciones en segundo plano...",
@@ -35,6 +41,30 @@
     "announcement": {
       "button_open": "Abrir enlace",
       "button_close": "Cerrar"
+    },
+    "onboarding": {
+      "title": "¡Bienvenido!",
+      "description_download": "Encontremos una copia de DDLC.",
+      "button_download": "Visitar la página oficial de descarga de DDLC",
+      "button_choose": "Buscar una copia",
+      "heading_step": "Paso {0}",
+      "s1_desc": "Necesitas descargar una copia de Doki Doki Literature Club. Esto se puede encontrar en el sitio web oficial (ddlc.moe) - haz clic en el botón de abajo para ir allí ahora.",
+      "s1_platform": "Cuando te pregunten, elige descargar el archivo llamado \"DDLC ({0})\".",
+      "s2_desc": "Una vez que tu descarga haya terminado, selecciónala usando el botón de abajo.",
+      "description_location": "Tus juegos se almacenarán en {0}",
+      "link_change": "(Cambiar)"
+    },
+    "login_input": {
+      "message": "Ingresa tu dirección de correo electrónico",
+      "details": "Se enviará un correo electrónico a esta dirección. Haz clic en el enlace del correo para terminar de iniciar sesión.",
+      "button_affirmative": "Iniciar Sesión",
+      "button_negative": "Cancelar"
+    },
+    "change_username_input": {
+      "message": "Ingresa tu nuevo nombre de usuario",
+      "details": "Los nombres de usuario no tienen que ser únicos.",
+      "button_affirmative": "Cambiar",
+      "button_negative": "Cancelar"
     },
     "tab_mods": {
       "list": {
@@ -83,6 +113,10 @@
         "button_launch": "Abrir",
         "button_settings": "Opciones",
         "tag_global_save": "Guardado Global",
+        "tag_sdk": "SDK",
+        "title_achievements": "Logros ({0} / {1})",
+        "description_achievements": "Sigue jugando para desbloquear más logros.",
+        "description_achievements_complete": "¡Has desbloqueado todos los logros. ¡Felicitaciones!",
         "title_screenshots_none": "No hay capturas",
         "title_screenshots_one": "1 captura",
         "title_screenshots": "{0} capturas",
@@ -103,6 +137,7 @@
         "label_install_name": "Nombre de la Instalación",
         "label_folder_name": "Nombre de la Carpeta",
         "label_global_save": "Guardado Global",
+        "label_existing_saves": "Archivos de Guardado Existentes",
         "label_has_mod": "Instalar Mod",
         "label_mod": "Mod",
         "description_mod": "Haz click para buscar un mod.",
@@ -112,7 +147,7 @@
         "description_modded": "Se creará una nueva copia de DDLC, y se instalará el mod. Los datos de guardado no serán compartidos con otra copia del juego.",
         "description_modded_global_save": "Se creará una nueva copia de DDLC, y se instalará el mod. Los datos de guardado serán compartidos con otras copias del juego (ejemplo: Steam).",
         "button_install": "Instalar",
-        "status_installing": "Instalando juego...",
+        "button_installing": "Instalando...",
         "status_exists": "La carpeta ya existe. Escribe otro nombre para la carpeta."
       }
     },

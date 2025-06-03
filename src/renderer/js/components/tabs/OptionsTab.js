@@ -536,7 +536,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 <h1>Sayonika Server</h1>
                 <p>Configure which Sayonika server to connect to for downloading mods.</p>
                 <br>
-                <p><strong>Current server:</strong> {{sayonika_server_url || 'https://sayonika.reconvial.dev (default)'}}</p>
+                <p><strong>Current server:</strong> {{sayonika_server_url || 'https://sayonika.dynamicaaa.me (default)'}}</p>
                 <br>
                 <div class="form-group">
                     <label for="sayonika-server-input">Server URL:</label>
@@ -544,7 +544,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         id="sayonika-server-input"
                         type="url"
                         v-model="sayonika_server_url_interim"
-                        placeholder="https://sayonika.reconvial.dev"
+                        placeholder="https://sayonika.dynamicaaa.me"
                         style="width: 100%; max-width: 400px; margin: 8px 0;"
                     >
                 </div>
@@ -582,7 +582,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 <div class="info-box">
                     <h3>Popular Sayonika Servers:</h3>
                     <ul>
-                        <li><strong>https://sayonika.reconvial.dev</strong> - Official community server (default)</li>
+                        <li><strong>https://sayonika.dynamicaaa.me</strong> - Official community server (default)</li>
                         <li><strong>http://localhost:3000</strong> - Local development server</li>
                     </ul>
                     <p><small>Since Sayonika is open source, you can run your own server or connect to community-hosted instances.</small></p>
@@ -1030,7 +1030,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
         },
 
         "resetSayonikaServer": function() {
-            const defaultUrl = "https://sayonika.reconvial.dev";
+            const defaultUrl = "https://sayonika.dynamicaaa.me";
             this.sayonika_server_url_interim = defaultUrl;
 
             try {
@@ -1168,7 +1168,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
                     // Get Sayonika server URL
                     try {
-                        this.sayonika_server_url = ipcRenderer.sendSync("read config", "sayonikaServerUrl") || "https://sayonika.reconvial.dev";
+                        this.sayonika_server_url = ipcRenderer.sendSync("read config", "sayonikaServerUrl") || "https://sayonika.dynamicaaa.me";
                         this.sayonika_server_url_interim = this.sayonika_server_url;
                         console.log("Sayonika server URL refreshed:", this.sayonika_server_url);
                     } catch (e) {
@@ -1179,7 +1179,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         try {
                             this.sdk_debugging_enabled = ddmm.config.readConfigValue("sdkDebuggingEnabled") || false;
                             this.system_borders_enabled = ddmm.config.readConfigValue("systemBorders") || false;
-                            this.sayonika_server_url = ddmm.config.readConfigValue("sayonikaServerUrl") || "https://sayonika.reconvial.dev";
+                            this.sayonika_server_url = ddmm.config.readConfigValue("sayonikaServerUrl") || "https://sayonika.dynamicaaa.me";
                             this.sayonika_server_url_interim = this.sayonika_server_url;
                         } catch (e) {
                             console.warn("Could not get config values via ddmm:", e);

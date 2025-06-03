@@ -79,7 +79,6 @@ body {
   width: 100vw;
   overflow: hidden;
   background-color: $ui-background-colour; // Move background to app container
-  background-size: cover;
   border-radius: 12px;
   position: relative;
   // Use clip-path to create proper rounded corners that hide content
@@ -88,6 +87,11 @@ body {
   border: none;
   outline: none;
   box-shadow: none;
+}
+
+.page-content {
+  height: calc(100% - 63px - 67px);
+  opacity: 1;
 }
 
 // Remove any potential gray backgrounds from common container elements
@@ -180,6 +184,35 @@ div, section, main, article {
 
 // endregion
 
+// region Popup/Overlay Background Fix
+// Ensure all popup/overlay elements properly scale background images
+.onboarding-overlay,
+.cover,
+.modal-overlay,
+.drop-overlay,
+[class*="-overlay"],
+[class*="-modal"],
+[class*="-dialog"] {
+  // Override any inherited background sizing to ensure proper scaling
+  &[style*="background-image"] {
+    // Fix the background to properly fit the entire window
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    // Remove fixed attachment to ensure proper scaling with window size
+    background-attachment: scroll !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    // Ensure the background stays in place and scales properly
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+  }
+}
+// endregion
+
 // region Navbar / titlebar
 .titlebar {
   color: $ui-highlight-text-colour;
@@ -189,10 +222,13 @@ div, section, main, article {
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
-  // Add padding to prevent content from going into rounded corners
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 12px;
+}
+
+.titlebar:active {
+  cursor: grabbing;
 }
 
 .app-title {
@@ -234,7 +270,6 @@ div, section, main, article {
   padding: 0.5em;
   -webkit-app-region: no-drag;
   color: $ui-muted-text-colour;
-  transition: color 0.25s, text-shadow 0.25s;
 }
 
 .nav-links div:hover {
@@ -243,12 +278,6 @@ div, section, main, article {
 
 .nav-links div.active {
   color: $ui-highlight-text-colour;
-  text-shadow: 0 0 10px #fff;
-}
-
-// macOS hide buttons
-.os-darwin .window-buttons {
-  visibility: hidden;
 }
 
 .window-buttons {
@@ -265,25 +294,10 @@ div, section, main, article {
 
 .window-buttons div {
   padding: 0.5em;
-  transition: color 0.25s;
 }
 
 .window-buttons div:hover {
   color: $ui-highlight-text-colour;
-}
-
-@keyframes draw-attention {
-  from {
-    color: white;
-  }
-
-  to {
-    color: red;
-  }
-}
-
-.window-button-draw-attention {
-  animation: draw-attention 1s infinite alternate;
 }
 
 // endregion
@@ -297,60 +311,6 @@ div, section, main, article {
 .page-content {
   height: calc(100% - 63px - 67px);
   opacity: 1;
-  transform: translateX(0);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-// Page transition animations
-.page-transition-enter {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.page-transition-enter-active {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.page-transition-leave {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.page-transition-leave-active {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-// Slide animation variants
-.slide-left-enter {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-
-.slide-left-enter-active {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-left-leave-active {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-right-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.slide-right-enter-active {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-right-leave-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // Fade animation
@@ -528,7 +488,6 @@ a .fab {
   justify-content: space-between;
   display: flex;
   margin-bottom: 0.4em;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: $ui-text-colour;
@@ -811,6 +770,13 @@ input[type="text"], input[type="number"], input[type="url"], textarea, select {
   width: 100%;
   outline: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  min-width: 350px;
+  padding: 0.8em 1.2em;
+  font-size: 1em;
+  width: 100%;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
 }
@@ -940,7 +906,10 @@ input[type="radio"]:focus {
   width: 100vw;
   height: 100vh;
   z-index: 100;
-  background-size: cover;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important; // Use scroll instead of fixed to prevent zooming issues
   color: $ui-text-colour;
   padding: 3em;
 }
@@ -982,11 +951,19 @@ input[type="radio"]:focus {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9001;
   padding: 1em;
+  
+  // Ensure background images are properly scaled
+  &[style*="background-image"] {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
 }
 
 .drop-overlay .info {
@@ -1008,6 +985,7 @@ input[type="radio"]:focus {
 
 // region Enhanced Onboarding Styles
 .onboarding-overlay {
+  // Create a layered background for better visual effect
   background: linear-gradient(135deg, rgba(17, 17, 17, 0.95), rgba(30, 30, 30, 0.95));
   backdrop-filter: blur(10px);
   display: flex;
@@ -1021,6 +999,14 @@ input[type="radio"]:focus {
   top: 0;
   left: 0;
   z-index: 10000;
+  // Override background image properties for proper scaling on overlays
+  // Using scroll instead of fixed prevents zooming issues on window resize
+  &[style*="background-image"] {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
 }
 
 .onboarding-container {
@@ -2322,7 +2308,7 @@ h2 {
 
 .ddlc-preview .preview-main {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255,  0.1);
 }
 
 .classic-preview .preview-sidebar {
@@ -4289,4 +4275,70 @@ body.sunset-theme {
   }
 }
 
-// endregion
+// Maintenance Mode Dialog Styles
+.cover.maintenance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+}
+
+.maintenance-dialog-content {
+  background: rgba(30, 30, 30, 0.95);
+  border: 2px solid $ui-warning-colour-bg;
+  border-radius: 12px;
+  padding: 2em;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(240, 147, 43, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.maintenance-dialog-content h1 {
+  color: $ui-warning-colour-bg;
+  margin-bottom: 1em;
+  text-shadow: 0 2px 4px rgba(240, 147, 43, 0.3);
+}
+
+.maintenance-dialog-content h1 i {
+  margin-right: 0.5em;
+}
+
+.maintenance-dialog-content p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+.maintenance-details {
+  background: rgba(240, 147, 43, 0.1);
+  border: 1px solid rgba(240, 147, 43, 0.3);
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.maintenance-details p {
+  margin: 0;
+  color: $ui-warning-colour-bg;
+  font-weight: bold;
+}
+
+.maintenance-actions {
+  margin: 1.5em 0 1em 0;
+}
+
+.maintenance-actions button {
+  margin: 0 0.5em;
+}
+
+.maintenance-help {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.maintenance-help p {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9em;
+}

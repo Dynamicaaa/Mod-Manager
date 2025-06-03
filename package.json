@@ -18,7 +18,7 @@
     "build-css-once": "sass src/renderer/css:src/renderer/css --no-source-map",
     "rebuild-css": "npm run build-css-once",
     "clean": "rm -rf lib",
-    "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.js lib/vendor/ && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
+    "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.min.js lib/vendor/vue.js && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
     "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets",
     "dist": "npm run build && electron-builder",
     "dist:win": "npm run build && electron-builder --win",
@@ -31,7 +31,6 @@
   "dependencies": {
     "@electron/remote": "^2.1.2",
     "@fortawesome/fontawesome-free": "^6.5.0",
-    "7zip-bin": "^5.2.0",
     "archiver": "^6.0.0",
     "axios": "^1.6.0",
     "chmodr": "^1.2.0",
@@ -39,7 +38,9 @@
     "file-url": "^4.0.0",
     "fs-extra": "^11.2.0",
     "fuse.js": "^7.0.0",
+    "node-stream-zip": "^1.15.0",
     "semver": "^7.5.0",
+    "tar": "^7.4.3",
     "vue": "^2.7.0",
     "yauzl": "^3.0.0"
   },

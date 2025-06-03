@@ -44,6 +44,16 @@ $scrollbar-thumb-hover: rgba(255, 105, 180, 0.8);
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);
+  
+  // Ensure background images are properly scaled
+  &[style*="background-image"] {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
 }
 
 @mixin button-base {

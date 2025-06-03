@@ -1,7 +1,7 @@
 // Sayonika Store Configuration
 window.SayonikaConfig = {
     // Default store URL - can be overridden by user settings
-    defaultStoreUrl: 'https://sayonika.reconvial.dev',
+    defaultStoreUrl: 'https://sayonika.dynamicaaa.me',
 
     // Alternative store URLs to try if default fails
     fallbackUrls: [
@@ -43,7 +43,8 @@ window.SayonikaConfig = {
         images: {
             avatar: '/api/images/avatar/{userId}',
             thumbnail: '/api/images/thumbnail/{modId}'
-        }
+        },
+        maintenance: '/api/maintenance/status'
     },
 
     // OAuth providers
@@ -125,6 +126,86 @@ window.SayonikaConfig = {
 
         console.warn('Could not connect to any Sayonika store URLs');
         return userUrl || this.defaultStoreUrl; // Return user's choice or default as fallback
+    },
+
+    // Check if Sayonika is in maintenance mode
+    checkMaintenanceMode: async function(storeUrl = null) {
+        try {
+            const baseUrl = storeUrl || this.getUserServerUrl();
+            
+            // Check the /api/auth endpoint for 503 status as requested
+            try {
+                console.log('Checking Sayonika maintenance mode via /api/auth endpoint');
+                const authResponse = await fetch(baseUrl + '/api/auth', {
+                    method: 'GET',
+                    timeout: 5000,
+                    headers: {
+                        'User-Agent': `DokiDokiModManager/${(typeof window.APP_CONFIG !== 'undefined' && window.APP_CONFIG.version) ? window.APP_CONFIG.version : '0.0.0'} (Maintenance Check)`
+                    }
+                });
+                
+                console.log('Auth endpoint response status:', authResponse.status);
+                
+                // If we get a 503 Service Unavailable, service is in maintenance mode
+                if (authResponse.status === 503) {
+                    console.log('Service returned 503 from /api/auth, treating as maintenance mode');
+                    let maintenanceMessage = 'Sayonika is currently undergoing maintenance. Please try again later.';
+                    let estimatedTime = null;
+                    
+                    // Try to get maintenance details from response body
+                    try {
+                        const data = await authResponse.json();
+                        if (data.message) {
+                            maintenanceMessage = data.message;
+                        }
+                        if (data.estimatedTime) {
+                            estimatedTime = data.estimatedTime;
+                        }
+                    } catch (parseError) {
+                        console.log('Could not parse maintenance response body, using default message');
+                    }
+                    
+                    return {
+                        isInMaintenance: true,
+                        message: maintenanceMessage,
+                        estimatedTime: estimatedTime
+                    };
+                }
+                
+                // If auth endpoint is accessible with other status codes, service is not in maintenance
+                console.log('Auth endpoint accessible, service not in maintenance mode');
+                return { isInMaintenance: false };
+                
+            } catch (authError) {
+                console.log('Auth endpoint check failed, trying fallback methods:', authError.message);
+                
+                // Fallback: try the dedicated maintenance endpoint
+                try {
+                    const maintenanceResponse = await fetch(baseUrl + this.endpoints.maintenance, {
+                        method: 'GET',
+                        timeout: 5000
+                    });
+                    
+                    if (maintenanceResponse.ok) {
+                        const data = await maintenanceResponse.json();
+                        return {
+                            isInMaintenance: data.maintenance || false,
+                            message: data.message || 'Sayonika is currently in maintenance mode.',
+                            estimatedTime: data.estimatedTime || null
+                        };
+                    }
+                } catch (maintenanceError) {
+                    console.log('Maintenance endpoint also not available');
+                }
+                
+                // Network errors could be connectivity issues, don't assume maintenance
+                console.log('Could not determine maintenance status, assuming service is available');
+                return { isInMaintenance: false };
+            }
+        } catch (error) {
+            console.warn('Error checking maintenance status:', error);
+            return { isInMaintenance: false };
+        }
     }
 };
 
