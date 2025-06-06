@@ -70,13 +70,20 @@ export default class ArchiveConverter {
                     
                     extractArchive.on('entry', (entry: any) => {
                         if (entry.type === 'File') {
-                            const outputPath = joinPath(tempDir, entry.name);
-                            const outputDir = dirname(outputPath);
+                            const entryPath = joinPath(tempDir, entry.name);
+
+                            if (!entryPath.startsWith(tempDir)) {
+                                return reject(new Error("Potential zip slip vulnerability detected."));
+                            }
+
+                            if (entry.isDirectory) {
+                                mkdirsSync(entryPath);
+                                return;
+                            }
+
+                            mkdirsSync(dirname(entryPath));
                             
-                            // Ensure directory exists
-                            mkdirsSync(outputDir);
-                            
-                            const writeStream = createWriteStream(outputPath);
+                            const writeStream = createWriteStream(entryPath);
                             entry.pipe(writeStream);
                             
                             writeStream.on('close', () => {
@@ -120,57 +127,71 @@ export default class ArchiveConverter {
     }
 
     private static extract7z(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            try {
-                const zip = new StreamZip.async({file: pathToArchive});
-                zip.extract(null, tempDir).then(() => {
-                    zip.close();
-                    resolve();
-                }).catch((error) => {
-                    zip.close();
-                    reject(new Error(`7z extraction failed: ${error.message}`));
-                });
-            } catch (error) {
-                reject(new Error(`7z extraction failed: ${error.message}`));
+        return new Promise(async (resolve, reject) => {
+            const zip = new StreamZip.async({file: pathToArchive});
+            const entries = await zip.entries();
+
+            for (const entry of Object.values(entries)) {
+                const entryPath = joinPath(tempDir, entry.name);
+
+                if (!entryPath.startsWith(tempDir)) {
+                    return reject(new Error("Potential zip slip vulnerability detected."));
+                }
+
+                if (entry.isDirectory) {
+                    mkdirsSync(entryPath);
+                    continue;
+                }
+
+                mkdirsSync(dirname(entryPath));
+                await zip.extract(entry, entryPath);
             }
+
+            await zip.close();
+            resolve();
         });
     }
 
     private static extractTar(pathToArchive: string, tempDir: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            try {
-                tar.x({
-                    file: pathToArchive,
-                    cwd: tempDir,
-                    preservePaths: false,
-                    onentry: (entry) => {
-                        console.log('Extracting:', entry.path);
+            tar.x({
+                file: pathToArchive,
+                cwd: tempDir,
+                onentry: (entry) => {
+                    const entryPath = joinPath(tempDir, entry.path);
+                    if (!entryPath.startsWith(tempDir)) {
+                        // With the tar package, this should not be hittable.
+                        // However, it is better to be safe than sorry.
+                        return reject(new Error("Potential zip slip vulnerability detected."));
                     }
-                }).then(() => {
-                    resolve();
-                }).catch((error) => {
-                    reject(new Error(`TAR extraction failed: ${error.message}`));
-                });
-            } catch (error) {
-                reject(new Error(`TAR extraction failed: ${error.message}`));
-            }
+                }
+            }).then(resolve).catch(reject);
         });
     }
 
     private static extractZip(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            try {
-                const zip = new StreamZip.async({file: pathToArchive});
-                zip.extract(null, tempDir).then(() => {
-                    zip.close();
-                    resolve();
-                }).catch((error) => {
-                    zip.close();
-                    reject(new Error(`ZIP extraction failed: ${error.message}`));
-                });
-            } catch (error) {
-                reject(new Error(`ZIP extraction failed: ${error.message}`));
+        return new Promise(async (resolve, reject) => {
+            const zip = new StreamZip.async({file: pathToArchive});
+            const entries = await zip.entries();
+
+            for (const entry of Object.values(entries)) {
+                const entryPath = joinPath(tempDir, entry.name);
+
+                if (!entryPath.startsWith(tempDir)) {
+                    return reject(new Error("Potential zip slip vulnerability detected."));
+                }
+
+                if (entry.isDirectory) {
+                    mkdirsSync(entryPath);
+                    continue;
+                }
+
+                mkdirsSync(dirname(entryPath));
+                await zip.extract(entry, entryPath);
             }
+
+            await zip.close();
+            resolve();
         });
     }
 
