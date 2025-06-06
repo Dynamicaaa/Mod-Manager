@@ -9,8 +9,8 @@
   "repository": "https://github.com/Dynamicaaa/Mod-Manager",
   "bugs": "CanaryZen@proton.me",
   "scripts": {
-    "start": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron .",
-    "start-dev": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --inspect=5858 .",
+    "start": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --no-sandbox .",
+    "start-dev": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --inspect=5858 --no-sandbox .",
     "test": "npm run clean && tsc && mocha",
     "build-css": "sass src/renderer/css:src/renderer/css --no-source-map",
     "build-css-watch": "sass src/renderer/css:src/renderer/css --watch --no-source-map",
@@ -41,6 +41,7 @@
     "node-stream-zip": "^1.15.0",
     "semver": "^7.5.0",
     "tar": "^7.4.3",
+    "tslib": "^2.8.1",
     "vue": "^2.7.0",
     "yauzl": "^3.0.0"
   },
