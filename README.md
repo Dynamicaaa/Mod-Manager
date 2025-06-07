@@ -50,9 +50,9 @@
 
 </div>
 
-<table align="center">
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 🌟 **Core Features**
 
@@ -67,7 +67,7 @@
 </div>
 
 </td>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 🚀 **Advanced Features**
 
@@ -127,34 +127,34 @@ While [Doki Doki Mod Docker](https://github.com/DokiDokiModManager/Mod-Manager-D
 
 <div align="center">
 
-<table>
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<th width="50%">🏆 <strong>This Mod Manager</strong></th>
-<th width="50%">🐳 <strong>Docker Version</strong></th>
+<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🏆 <strong>This Mod Manager</strong></th>
+<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🐳 <strong>Docker Version</strong></th>
 </tr>
 <tr>
-<td align="center">✅ <strong>Native Performance</strong><br/><em>Runs directly on your system</em></td>
-<td align="center">❌ <strong>Containerization Overhead</strong><br/><em>Slower due to Docker layers</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Native Performance</strong><br/><em>Runs directly on your system</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Containerization Overhead</strong><br/><em>Slower due to Docker layers</em></td>
 </tr>
 <tr>
-<td align="center">✅ <strong>Simple Installation</strong><br/><em>Download and run executable</em></td>
-<td align="center">❌ <strong>Complex Setup</strong><br/><em>Requires Docker knowledge</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Simple Installation</strong><br/><em>Download and run executable</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Complex Setup</strong><br/><em>Requires Docker knowledge</em></td>
 </tr>
 <tr>
-<td align="center">✅ <strong>OS Integration</strong><br/><em>File associations & shortcuts</em></td>
-<td align="center">❌ <strong>Limited Integration</strong><br/><em>Isolated container environment</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>OS Integration</strong><br/><em>File associations & shortcuts</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Integration</strong><br/><em>Isolated container environment</em></td>
 </tr>
 <tr>
-<td align="center">✅ <strong>Low Resource Usage</strong><br/><em>Minimal system impact</em></td>
-<td align="center">❌ <strong>High Overhead</strong><br/><em>Docker daemon always running</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Low Resource Usage</strong><br/><em>Minimal system impact</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>High Overhead</strong><br/><em>Docker daemon always running</em></td>
 </tr>
 <tr>
-<td align="center">✅ <strong>Sayonika Store Built-in</strong><br/><em>Integrated mod browsing</em></td>
-<td align="center">❌ <strong>No Store Integration</strong><br/><em>Manual mod sourcing</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Sayonika Store Built-in</strong><br/><em>Integrated mod browsing</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>No Store Integration</strong><br/><em>Manual mod sourcing</em></td>
 </tr>
 <tr>
-<td align="center">✅ <strong>Active Development</strong><br/><em>Regular updates & features</em></td>
-<td align="center">❌ <strong>Limited Updates</strong><br/><em>Slower development cycle</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Active Development</strong><br/><em>Regular updates & features</em></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Updates</strong><br/><em>Slower development cycle</em></td>
 </tr>
 </table>
 
@@ -218,9 +218,9 @@ This version of DDMM includes **full integration** with the Sayonika mod store a
 
 </div>
 
-<table align="center">
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 🎯 **Discovery Features**
 
@@ -233,7 +233,7 @@ This version of DDMM includes **full integration** with the Sayonika mod store a
 </div>
 
 </td>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### ⚡ **User Features**
 
@@ -346,21 +346,21 @@ bun rebuild-css.js --watch        # Watch mode
 
 </div>
 
-<table align="center">
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<td align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 [`app.scss`](src/renderer/css/app.scss)
 *Main application styles*
 
 </td>
-<td align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 [`fonts.scss`](src/renderer/css/fonts.scss)
 *Font definitions*
 
 </td>
-<td align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 [`sayonika-store.scss`](src/renderer/css/sayonika-store.scss)
 *Sayonika integration styles*
@@ -383,26 +383,26 @@ Set these environment variables to enable debugging features:
 
 </div>
 
-<table align="center">
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<th>🔧 <strong>Variable</strong></th>
-<th>📋 <strong>Purpose</strong></th>
+<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🔧 <strong>Variable</strong></th>
+<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">📋 <strong>Purpose</strong></th>
 </tr>
 <tr>
-<td align="center"><code>DDMM_LANG_PROOF</code></td>
-<td align="center">🔤 Adds prefixes to all localized strings</td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG_PROOF</code></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔤 Adds prefixes to all localized strings</td>
 </tr>
 <tr>
-<td align="center"><code>DDMM_DEVTOOLS</code></td>
-<td align="center">🔧 Opens developer tools on launch</td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_DEVTOOLS</code></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔧 Opens developer tools on launch</td>
 </tr>
 <tr>
-<td align="center"><code>DDMM_INCOGNITO</code></td>
-<td align="center">🕶️ Removes app name from title bar</td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_INCOGNITO</code></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🕶️ Removes app name from title bar</td>
 </tr>
 <tr>
-<td align="center"><code>DDMM_LANG</code></td>
-<td align="center">🌍 Sets language (see <a href="lang/"><code>lang/</code></a> folder)</td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG</code></td>
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🌍 Sets language (see <a href="lang/"><code>lang/</code></a> folder)</td>
 </tr>
 </table>
 
@@ -420,9 +420,9 @@ We welcome contributions! Here's how you can help:
 
 </div>
 
-<table align="center">
+<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
 <tr>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 🐛 **Bug Reports**
 
@@ -434,7 +434,7 @@ We welcome contributions! Here's how you can help:
 </div>
 
 </td>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 💡 **Feature Requests**
 
@@ -448,7 +448,7 @@ We welcome contributions! Here's how you can help:
 </td>
 </tr>
 <tr>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 🔧 **Code Contributions**
 
@@ -460,7 +460,7 @@ We welcome contributions! Here's how you can help:
 </div>
 
 </td>
-<td width="50%" align="center">
+<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
 
 ### 📖 **Documentation**
 
