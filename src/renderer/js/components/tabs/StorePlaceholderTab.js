@@ -4,12 +4,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     <!-- Header Section -->
     <div class="store-header">
         <div class="store-title">
-            <h1><i class="fas fa-store"></i> Sayonika Store</h1>
-            <p>Discover and download DDLC mods</p>
+            <h1><i class="fas fa-store"></i> {{_('renderer.tab_store.title')}}</h1>
+            <p>{{_('renderer.tab_store.subtitle')}}</p>
         </div>
         <div class="store-actions">
             <div class="search-container">
-                <input type="text" v-model="searchQuery" @input="searchMods" placeholder="Search mods..." class="search-input">
+                <input type="text" v-model="searchQuery" @input="searchMods" :placeholder="_('renderer.tab_store.search_placeholder')" class="search-input">
                 <i class="fas fa-search search-icon"></i>
             </div>
             <div class="auth-section">
@@ -29,35 +29,47 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     <!-- Filters Section -->
     <div class="store-filters">
         <div class="filter-group">
-            <label>Category:</label>
+            <label>{{_('renderer.tab_store.filters.category')}}</label>
             <select v-model="selectedCategory" @change="loadMods">
-                <option value="">All Categories</option>
+                <option value="">{{_('renderer.tab_store.filters.all_categories')}}</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">
                     {{category.name}}
                 </option>
             </select>
         </div>
         <div class="filter-group">
-            <label>Sort by:</label>
+            <label>{{_('renderer.tab_store.filters.sort_by')}}</label>
             <select v-model="sortBy" @change="onSortChange">
-                <option value="created_at">Date Created</option>
-                <option value="updated_at">Date Updated</option>
-                <option value="downloads">Downloads</option>
-                <option value="rating">Rating</option>
-                <option value="title">Title</option>
+                <option value="created_at">{{_('renderer.tab_store.filters.date_created')}}</option>
+                <option value="updated_at">{{_('renderer.tab_store.filters.date_updated')}}</option>
+                <option value="downloads">{{_('renderer.tab_store.filters.downloads')}}</option>
+                <option value="rating">{{_('renderer.tab_store.filters.rating')}}</option>
+                <option value="title">{{_('renderer.tab_store.filters.title')}}</option>
             </select>
         </div>
         <div class="filter-group">
-            <label>Order:</label>
+            <label>{{_('renderer.tab_store.filters.order')}}</label>
             <select v-model="sortOrder" @change="onSortChange">
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
+                <option value="desc">{{_('renderer.tab_store.filters.descending')}}</option>
+                <option value="asc">{{_('renderer.tab_store.filters.ascending')}}</option>
             </select>
         </div>
         <div class="filter-group">
             <label>
-                <input type="checkbox" v-model="showFeatured" @change="loadMods"> Featured Only
+                <input type="checkbox" v-model="showFeatured" @change="loadMods"> {{_('renderer.tab_store.filters.featured_only')}}
             </label>
+        </div>
+        <div class="filter-group translation-group">
+            <label>
+                <input type="checkbox" v-model="enableTranslation" @change="onTranslationToggle" :disabled="translationInProgress"> {{_('renderer.tab_store.filters.translate_content')}}
+                <i v-if="translationInProgress" class="fas fa-spinner fa-spin" style="margin-left: 8px; color: #007acc;"></i>
+            </label>
+            <select v-if="enableTranslation" v-model="translationLanguage" @change="onTranslationLanguageChange" :disabled="translationInProgress" style="margin-left: 8px;">
+                <option value="auto">{{_('renderer.tab_store.filters.auto_detect')}}</option>
+                <option v-for="(langName, langCode) in availableTranslationLanguages" :key="langCode" :value="langCode">
+                    {{langName}}
+                </option>
+            </select>
         </div>
     </div>
 
@@ -66,16 +78,35 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         <!-- Loading State -->
         <div v-if="loading" class="loading-container">
             <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading mods...</p>
+            <p>{{_('renderer.tab_store.loading')}}</p>
         </div>
 
         <!-- Error State -->
         <div v-if="error && !loading" class="error-container">
             <i class="fas fa-exclamation-triangle"></i>
-            <h3>Connection Error</h3>
+            <h3>{{_('renderer.tab_store.error_title')}}</h3>
             <p>{{error}}</p>
             <button class="btn-retry" @click="loadMods">
-                <i class="fas fa-redo"></i> Retry
+                <i class="fas fa-redo"></i> {{_('renderer.tab_store.retry_button')}}
+            </button>
+        </div>
+
+        <!-- Offline State -->
+        <div v-if="connectionStatus === 'offline' && !loading" class="offline-container">
+            <i class="fas fa-wifi-slash"></i>
+            <h3>{{_('renderer.tab_store.offline_title')}}</h3>
+            <p>{{offlineMessage || _('renderer.tab_store.offline_message')}}</p>
+            <button class="btn-retry" @click="checkConnection">
+                <i class="fas fa-sync"></i> {{_('renderer.tab_store.check_connection')}}
+            </button>
+        </div>
+
+        <!-- Maintenance State Banner (non-blocking) -->
+        <div v-if="connectionStatus === 'maintenance' && !loading" class="maintenance-banner">
+            <i class="fas fa-tools"></i>
+            <span>{{_('renderer.tab_store.maintenance_banner')}}</span>
+            <button class="btn-banner-dismiss" @click="dismissMaintenanceBanner">
+                <i class="fas fa-times"></i>
             </button>
         </div>
 
@@ -83,23 +114,23 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         <div v-if="!loading && !error" class="mods-grid">
         <div v-if="mods.length === 0" class="no-mods">
             <i class="fas fa-search"></i>
-            <h3>No mods found</h3>
-            <p>Try adjusting your search or filters</p>
+            <h3>{{_('renderer.tab_store.no_mods_title')}}</h3>
+            <p>{{_('renderer.tab_store.no_mods_message')}}</p>
         </div>
 
         <div v-for="mod in mods" :key="mod.id" :class="['mod-card', { 'nsfw': mod.is_nsfw }]" @click="showModDetails(mod)">
             <div class="mod-thumbnail">
                 <img :src="getModThumbnail(mod)" :alt="mod.title" @error="handleImageError">
                 <div v-if="mod.is_featured" class="featured-badge">
-                    <i class="fas fa-star"></i> Featured
+                    <i class="fas fa-star"></i> {{_('renderer.tab_store.mod_card.featured')}}
                 </div>
                 <div v-if="mod.is_nsfw" class="nsfw-badge">
-                    <i class="fas fa-exclamation-triangle"></i> Mature
+                    <i class="fas fa-exclamation-triangle"></i> {{_('renderer.tab_store.mod_card.mature')}}
                 </div>
             </div>
             <div class="mod-info">
                 <h3 class="mod-title">{{mod.title}}</h3>
-                <p class="mod-author">by {{mod.author_username}}</p>
+                <p class="mod-author">{{_('renderer.tab_store.mod_card.by_author', mod.author_username)}}</p>
                 <p class="mod-description">{{mod.short_description || mod.description}}</p>
                 <div class="mod-stats">
                     <span class="downloads">
@@ -119,7 +150,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             <div class="mod-actions">
                 <button class="btn-download" :disabled="isDownloading(mod.id)" @click.stop="downloadMod(mod)">
                     <i :class="isDownloading(mod.id) ? 'fas fa-spinner fa-spin' : 'fas fa-download'"></i>
-                    {{isDownloading(mod.id) ? 'Downloading...' : 'Download'}}
+                    {{isDownloading(mod.id) ? _('renderer.tab_store.mod_card.downloading') : _('renderer.tab_store.mod_card.download')}}
                 </button>
             </div>
         </div>
@@ -128,11 +159,11 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         <!-- Pagination -->
         <div v-if="!loading && !error && totalPages > 1" class="pagination">
             <button :disabled="currentPage <= 1" @click="changePage(currentPage - 1)">
-                <i class="fas fa-chevron-left"></i> Previous
+                <i class="fas fa-chevron-left"></i> {{_('renderer.tab_store.pagination.previous')}}
             </button>
-            <span class="page-info">Page {{currentPage}} of {{totalPages}}</span>
+            <span class="page-info">{{_('renderer.tab_store.pagination.page_info', currentPage, totalPages)}}</span>
             <button :disabled="currentPage >= totalPages" @click="changePage(currentPage + 1)">
-                Next <i class="fas fa-chevron-right"></i>
+                {{_('renderer.tab_store.pagination.next')}} <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     </div>
@@ -141,7 +172,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     <div v-if="showLoginModal" class="modal-overlay" @click="closeLogin">
         <div class="modal-content" @click.stop>
             <div class="modal-header">
-                <h2>Login to Sayonika</h2>
+                <h2>{{_('renderer.tab_store.login.title')}}</h2>
                 <button class="modal-close" @click="closeLogin">
                     <i class="fas fa-times"></i>
                 </button>
@@ -149,37 +180,37 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             <div class="modal-body">
                 <div class="login-options">
                     <button class="btn-oauth discord" @click="loginWithDiscord">
-                        <i class="fab fa-discord"></i> Login with Discord
+                        <i class="fab fa-discord"></i> {{_('renderer.tab_store.login.discord')}}
                     </button>
                     <button class="btn-oauth github" @click="loginWithGitHub">
-                        <i class="fab fa-github"></i> Login with GitHub
+                        <i class="fab fa-github"></i> {{_('renderer.tab_store.login.github')}}
                     </button>
                 </div>
                 <div class="divider">
-                    <span>or</span>
+                    <span>{{_('renderer.tab_store.login.or')}}</span>
                 </div>
                 <form @submit.prevent="loginWithCredentials" class="credential-login">
                     <div class="form-group">
-                        <label>Username or Email:</label>
-                        <input type="text" v-model="loginForm.username" placeholder="Enter username or email address" required>
-                        <small class="input-help">You can use either your username or email address to log in</small>
+                        <label>{{_('renderer.tab_store.login.username_label')}}</label>
+                        <input type="text" v-model="loginForm.username" :placeholder="_('renderer.tab_store.login.username_placeholder')" required>
+                        <small class="input-help">{{_('renderer.tab_store.login.username_help')}}</small>
                     </div>
                     <div class="form-group">
-                        <label>Password:</label>
+                        <label>{{_('renderer.tab_store.login.password_label')}}</label>
                         <input type="password" v-model="loginForm.password" required>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" v-model="loginForm.rememberMe"> Remember me
+                            <input type="checkbox" v-model="loginForm.rememberMe"> {{_('renderer.tab_store.login.remember_me')}}
                         </label>
                     </div>
                     <button type="submit" class="btn-submit" :disabled="loggingIn">
                         <i :class="loggingIn ? 'fas fa-spinner fa-spin' : 'fas fa-sign-in-alt'"></i>
-                        {{loggingIn ? 'Logging in...' : 'Login'}}
+                        {{loggingIn ? _('renderer.tab_store.login.logging_in') : _('renderer.tab_store.login.login_button')}}
                     </button>
                 </form>
                 <div class="register-link">
-                    <p>Don't have an account? <a href="#" @click="openRegister">Register here</a></p>
+                    <p>{{_('renderer.tab_store.login.register_link')}}</p>
                 </div>
             </div>
         </div>
@@ -192,7 +223,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 <h2>
                     {{selectedMod.title}}
                     <span v-if="selectedMod.is_nsfw" class="nsfw-indicator">
-                        <i class="fas fa-exclamation-triangle"></i> Mature
+                        <i class="fas fa-exclamation-triangle"></i> {{_('renderer.tab_store.mod_card.mature')}}
                     </span>
                 </h2>
                 <button class="modal-close" @click="closeModDetails">
@@ -206,7 +237,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
 
                         <!-- Screenshots Gallery -->
                         <div v-if="selectedMod.screenshots && selectedMod.screenshots.length > 0" class="mod-screenshots-section">
-                            <h3>Screenshots ({{selectedMod.screenshots.length}})</h3>
+                            <h3>{{_('renderer.tab_store.mod_card.screenshots', selectedMod.screenshots.length)}}</h3>
                             <div class="mod-screenshots-gallery">
                                 <div
                                     v-for="(screenshot, index) in selectedMod.screenshots"
@@ -225,15 +256,15 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                         <div class="mod-details-stats">
                             <div class="stat">
                                 <i class="fas fa-download"></i>
-                                <span>{{formatNumber(selectedMod.download_count)}} downloads</span>
+                                <span>{{_('renderer.tab_store.mod_card.downloads_count', formatNumber(selectedMod.download_count))}}</span>
                             </div>
                             <div class="stat">
                                 <i class="fas fa-tag"></i>
-                                <span>Version {{selectedMod.version}}</span>
+                                <span>{{_('renderer.tab_store.mod_card.version', selectedMod.version)}}</span>
                             </div>
                             <div class="stat">
                                 <i class="fas fa-user"></i>
-                                <span>by {{selectedMod.author_username}}</span>
+                                <span>{{_('renderer.tab_store.mod_card.by_author', selectedMod.author_username)}}</span>
                             </div>
                             <div class="stat">
                                 <i class="fas fa-calendar"></i>
@@ -242,22 +273,22 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                         </div>
                         <button class="btn-download-large" :disabled="isDownloading(selectedMod.id)" @click="downloadMod(selectedMod)">
                             <i :class="isDownloading(selectedMod.id) ? 'fas fa-spinner fa-spin' : 'fas fa-download'"></i>
-                            {{isDownloading(selectedMod.id) ? 'Downloading...' : 'Download Mod'}}
+                            {{isDownloading(selectedMod.id) ? _('renderer.tab_store.mod_card.downloading') : _('renderer.tab_store.mod_card.download_mod')}}
                         </button>
                     </div>
                     <div class="mod-details-right">
                         <div class="mod-description">
-                            <h3>Description</h3>
+                            <h3>{{_('renderer.tab_store.mod_card.description')}}</h3>
                             <div v-html="formatDescription(selectedMod.description)"></div>
                         </div>
                         <div v-if="selectedMod.tags && selectedMod.tags.length > 0" class="mod-tags-section">
-                            <h3>Tags</h3>
+                            <h3>{{_('renderer.tab_store.mod_card.tags')}}</h3>
                             <div class="tags-list">
                                 <span v-for="tag in selectedMod.tags" :key="tag" class="tag">{{tag}}</span>
                             </div>
                         </div>
                         <div v-if="selectedMod.requirements && Object.keys(selectedMod.requirements).length > 0" class="mod-requirements">
-                            <h3>Requirements</h3>
+                            <h3>{{_('renderer.tab_store.mod_card.requirements')}}</h3>
                             <ul>
                                 <li v-for="(value, key) in selectedMod.requirements" :key="key">
                                     {{key}}: {{value}}
@@ -318,25 +349,39 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
 </div>
         `,
     "data": function () {
-        return {
-            // Store configuration
-            "storeUrl": "https://sayonika.dynamicaaa.me", // Default to community Sayonika instance
+        return {        // Store configuration
+        "storeUrl": "https://sayonika.dynamicaaa.me", // Default to community Sayonika instance
 
-            // Authentication
-            "user": null,
-            "showLoginModal": false,
-            "loggingIn": false,
-            "loginForm": {
-                "username": "", // Can be username or email
-                "password": "",
-                "rememberMe": false
-            },
+        // Connection state
+        "isOnline": navigator.onLine,
+        "connectionStatus": "checking", // "checking", "online", "offline", "maintenance"
+        "lastConnectionCheck": null,
+        "connectionCheckInterval": null,
+        "offlineMessage": "You are currently offline. The Sayonika Store requires an internet connection to browse and download mods.",
 
-            // Mods data
-            "mods": [],
-            "categories": [],
-            "loading": true,
-            "error": null,
+        // Authentication
+        "user": null,
+        "showLoginModal": false,
+        "loggingIn": false,
+        "loginForm": {
+            "username": "", // Can be username or email
+            "password": "",
+            "rememberMe": false
+        },
+
+        // Mods data
+        "mods": [],
+        "categories": [],
+        "loading": true,
+        "error": null,
+
+        // Translation system
+        "enableTranslation": false,
+        "translationLanguage": "auto", // Target language for translation
+        "originalContent": {}, // Store original content for translation
+        "availableTranslationLanguages": {}, // Dynamic list from available program languages
+        "translationRequestTimes": [], // Track request times for rate limiting
+        "translationInProgress": false, // Track if translation is currently running
 
             // Filters and search
             "searchQuery": "",
@@ -379,10 +424,85 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                     return ddmm.translate(key, ...args);
                 } catch (e) {
                     console.warn("Translation failed for", key, e);
-                    return key;
+                    return this.getFallbackTranslation(key, ...args);
                 }
             }
-            return key;
+            return this.getFallbackTranslation(key, ...args);
+        },
+
+        "getFallbackTranslation": function(key, ...args) {
+            const fallbacks = {
+                "renderer.tab_store.title": "Sayonika Store",
+                "renderer.tab_store.subtitle": "Discover and download DDLC mods",
+                "renderer.tab_store.search_placeholder": "Search mods...",
+                "renderer.tab_store.loading": "Loading mods...",
+                "renderer.tab_store.error_title": "Connection Error",
+                "renderer.tab_store.retry_button": "Retry",
+                "renderer.tab_store.offline_title": "Offline",
+                "renderer.tab_store.offline_message": "You are currently offline. Please check your internet connection and try again.",
+                "renderer.tab_store.check_connection": "Check Connection",
+                "renderer.tab_store.maintenance_banner": "Authentication services are temporarily unavailable due to maintenance. You can still browse mods but cannot login or register.",
+                "renderer.tab_store.no_mods_title": "No mods found",
+                "renderer.tab_store.no_mods_message": "Try adjusting your search or filters",
+                "renderer.tab_store.filters.category": "Category:",
+                "renderer.tab_store.filters.all_categories": "All Categories",
+                "renderer.tab_store.filters.sort_by": "Sort by:",
+                "renderer.tab_store.filters.date_created": "Date Created",
+                "renderer.tab_store.filters.date_updated": "Date Updated",
+                "renderer.tab_store.filters.downloads": "Downloads",
+                "renderer.tab_store.filters.rating": "Rating",
+                "renderer.tab_store.filters.title": "Title",
+                "renderer.tab_store.filters.order": "Order:",
+                "renderer.tab_store.filters.descending": "Descending",
+                "renderer.tab_store.filters.ascending": "Ascending",
+                "renderer.tab_store.filters.featured_only": "Featured Only",
+                "renderer.tab_store.filters.translate_content": "Translate Content",
+                "renderer.tab_store.filters.auto_detect": "Auto-detect",
+                "renderer.tab_store.mod_card.featured": "Featured",
+                "renderer.tab_store.mod_card.mature": "Mature",
+                "renderer.tab_store.mod_card.by_author": "by {0}",
+                "renderer.tab_store.mod_card.download": "Download",
+                "renderer.tab_store.mod_card.downloading": "Downloading...",
+                "renderer.tab_store.mod_card.download_mod": "Download Mod",
+                "renderer.tab_store.mod_card.downloads_count": "{0} downloads",
+                "renderer.tab_store.mod_card.version": "Version {0}",
+                "renderer.tab_store.mod_card.screenshots": "Screenshots ({0})",
+                "renderer.tab_store.mod_card.description": "Description",
+                "renderer.tab_store.mod_card.tags": "Tags",
+                "renderer.tab_store.mod_card.requirements": "Requirements",
+                "renderer.tab_store.pagination.previous": "Previous",
+                "renderer.tab_store.pagination.next": "Next",
+                "renderer.tab_store.pagination.page_info": "Page {0} of {1}",
+                "renderer.tab_store.login.title": "Login to Sayonika",
+                "renderer.tab_store.login.discord": "Login with Discord",
+                "renderer.tab_store.login.github": "Login with GitHub",
+                "renderer.tab_store.login.or": "or",
+                "renderer.tab_store.login.username_label": "Username or Email:",
+                "renderer.tab_store.login.username_placeholder": "Enter username or email address",
+                "renderer.tab_store.login.username_help": "You can use either your username or email address to log in",
+                "renderer.tab_store.login.password_label": "Password:",
+                "renderer.tab_store.login.remember_me": "Remember me",
+                "renderer.tab_store.login.login_button": "Login",
+                "renderer.tab_store.login.logging_in": "Logging in...",
+                "renderer.tab_store.login.register_link": "Don't have an account? Register here",
+                "renderer.tab_store.login.success": "Successfully logged in!",
+                "renderer.tab_store.login.failed": "Login failed: {0}",
+                "renderer.tab_store.translation.enabled": "Translation enabled. Content will be translated when available.",
+                "renderer.tab_store.translation.disabled": "Translation disabled.",
+                "renderer.tab_store.translation.language_changed": "Translation language changed to {0}"
+            };
+
+            let translation = fallbacks[key] || key;
+
+            // Handle string interpolation for fallback translations
+            if (args.length > 0) {
+                translation = translation.replace(/{(\d+)}/g, (match, index) => {
+                    const argIndex = parseInt(index);
+                    return args[argIndex] !== undefined ? args[argIndex] : match;
+                });
+            }
+
+            return translation;
         },
 
         // Authentication methods
@@ -453,6 +573,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         },
 
         "showLogin": function() {
+            // Check if we're in maintenance mode
+            if (this.connectionStatus === 'maintenance') {
+                this.showNotification('Authentication is currently unavailable due to maintenance mode. You can still browse and download mods.', 'warning');
+                return;
+            }
+            
             this.showLoginModal = true;
             this.loginForm = {
                 username: "",
@@ -500,12 +626,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                     if (result.success) {
                         this.user = result.user;
                         this.closeLogin();
-                        this.showNotification('Successfully logged in!', 'success');
+                        this.showNotification(this._('renderer.tab_store.login.success'), 'success');
                     } else {
                         // Handle validation errors
                         if (result.errors && Array.isArray(result.errors)) {
                             const errorMessages = result.errors.map(err => err.msg).join(', ');
-                            this.showNotification(`Login failed: ${errorMessages}`, 'error');
+                            this.showNotification(this._('renderer.tab_store.login.failed', errorMessages), 'error');
                         } else {
                             let errorMessage = result.error || 'Login failed';
 
@@ -514,7 +640,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                                 errorMessage = `Invalid ${inputType} or password. Please check your credentials and try again.`;
                             }
 
-                            this.showNotification(`Login failed: ${errorMessage}`, 'error');
+                            this.showNotification(this._('renderer.tab_store.login.failed', errorMessage), 'error');
                         }
                     }
                     return;
@@ -536,12 +662,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 if (response.ok) {
                     this.user = data.user;
                     this.closeLogin();
-                    this.showNotification('Successfully logged in!', 'success');
+                    this.showNotification(this._('renderer.tab_store.login.success'), 'success');
                 } else {
                     // Handle validation errors
                     if (data.errors && Array.isArray(data.errors)) {
                         const errorMessages = data.errors.map(err => err.msg).join(', ');
-                        this.showNotification(`Login failed: ${errorMessages}`, 'error');
+                        this.showNotification(this._('renderer.tab_store.login.failed', errorMessages), 'error');
                     } else {
                         let errorMessage = data.error || 'Login failed';
 
@@ -550,7 +676,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                             errorMessage = `Invalid ${inputType} or password. Please check your credentials and try again.`;
                         }
 
-                        this.showNotification(`Login failed: ${errorMessage}`, 'error');
+                        this.showNotification(this._('renderer.tab_store.login.failed', errorMessage), 'error');
                     }
                     console.error('Login failed with status:', response.status, 'Data:', data);
                 }
@@ -563,6 +689,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         },
 
         "loginWithDiscord": function() {
+            // Check if we're in maintenance mode
+            if (this.connectionStatus === 'maintenance') {
+                this.showNotification('Authentication is currently unavailable due to maintenance mode.', 'warning');
+                return;
+            }
+            
             window.open(`${this.storeUrl}/auth/discord`, '_blank', 'width=500,height=600');
             this.closeLogin();
             // Listen for auth completion
@@ -570,6 +702,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         },
 
         "loginWithGitHub": function() {
+            // Check if we're in maintenance mode
+            if (this.connectionStatus === 'maintenance') {
+                this.showNotification('Authentication is currently unavailable due to maintenance mode.', 'warning');
+                return;
+            }
+            
             window.open(`${this.storeUrl}/auth/github`, '_blank', 'width=500,height=600');
             this.closeLogin();
             // Listen for auth completion
@@ -628,8 +766,673 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
 
 
 
+        // Connection and status checking methods
+        "checkConnection": async function() {
+            console.log('Checking connection status...');
+            this.connectionStatus = "checking";
+            
+            // Check basic internet connectivity first
+            if (!navigator.onLine) {
+                console.log('Navigator reports offline');
+                this.connectionStatus = "offline";
+                this.isOnline = false;
+                return false;
+            }
+
+            try {
+                // Use SayonikaConfig if available for sophisticated checking
+                if (typeof window.SayonikaConfig !== 'undefined') {
+                    // Test connection to store
+                    const isConnected = await window.SayonikaConfig.testStoreConnection(this.storeUrl);
+                    if (!isConnected) {
+                        console.log('Store connection test failed');
+                        this.connectionStatus = "offline";
+                        this.isOnline = false;
+                        return false;
+                    }
+
+                    // Check for maintenance mode
+                    const maintenanceStatus = await window.SayonikaConfig.checkMaintenanceMode(this.storeUrl);
+                    if (maintenanceStatus.isInMaintenance) {
+                        console.log('Store is in maintenance mode');
+                        this.connectionStatus = "maintenance";
+                        this.isOnline = false;
+                        return false;
+                    }
+                } else {
+                    // Fallback: simple connectivity test
+                    const response = await fetch(`${this.storeUrl}/api/categories`, {
+                        method: 'HEAD',
+                        timeout: 5000
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 503) {
+                            this.connectionStatus = "maintenance";
+                        } else {
+                            this.connectionStatus = "offline";
+                        }
+                        this.isOnline = false;
+                        return false;
+                    }
+                }
+
+                console.log('Connection check successful');
+                this.connectionStatus = "online";
+                this.isOnline = true;
+                this.lastConnectionCheck = Date.now();
+                return true;
+
+            } catch (error) {
+                console.error('Connection check failed:', error);
+                this.connectionStatus = "offline";
+                this.isOnline = false;
+                return false;
+            }
+        },
+
+        "startConnectionMonitoring": function() {
+            // Set up periodic connection checking (every 30 seconds)
+            this.connectionCheckInterval = setInterval(async () => {
+                if (this.connectionStatus !== "online") {
+                    await this.checkConnection();
+                }
+            }, 30000);
+
+            // Listen for online/offline events
+            window.addEventListener('online', async () => {
+                console.log('Browser detected online status');
+                await this.checkConnection();
+                if (this.isOnline) {
+                    this.loadMods();
+                }
+            });
+
+            window.addEventListener('offline', () => {
+                console.log('Browser detected offline status');
+                this.connectionStatus = "offline";
+                this.isOnline = false;
+            });
+        },
+
+        "stopConnectionMonitoring": function() {
+            if (this.connectionCheckInterval) {
+                clearInterval(this.connectionCheckInterval);
+                this.connectionCheckInterval = null;
+            }
+        },
+
+        // Translation methods
+        "onTranslationToggle": function() {
+            if (this.enableTranslation) {
+                this.showNotification('Translation enabled. Content will be translated when available.', 'info');
+                this.translateExistingContent();
+            } else {
+                this.showNotification('Translation disabled.', 'info');
+                this.restoreOriginalContent();
+            }
+        },
+
+        "onTranslationLanguageChange": function() {
+            if (this.enableTranslation) {
+                this.showNotification(`Translation language changed to ${this.getLanguageName(this.translationLanguage)}`, 'info');
+                this.translateExistingContent();
+            }
+        },
+
+        "getLanguageName": function(code) {
+            const languages = {
+                'auto': 'Auto-detect',
+                'es': 'Spanish',
+                'es-419': 'Spanish (Latin America)',
+                'fr': 'French', 
+                'fr-FR': 'French (France)',
+                'de': 'German',
+                'de-DE': 'German (Germany)',
+                'it': 'Italian',
+                'it-IT': 'Italian (Italy)',
+                'pt': 'Portuguese',
+                'pt-BR': 'Portuguese (Brazil)',
+                'ru': 'Russian',
+                'ja': 'Japanese',
+                'ko': 'Korean',
+                'zh': 'Chinese',
+                'zh-CN': 'Chinese (Simplified)',
+                'zh-TW': 'Chinese (Traditional)',
+                'ar': 'Arabic',
+                'hi': 'Hindi',
+                'cs': 'Czech',
+                'da': 'Danish',
+                'fi': 'Finnish',
+                'hu': 'Hungarian',
+                'nb': 'Norwegian (Bokmål)',
+                'nl': 'Dutch',
+                'pl': 'Polish',
+                'sv': 'Swedish',
+                'tr': 'Turkish',
+                'en-GB': 'English (UK)'
+            };
+            return languages[code] || code;
+        },
+
+        "loadAvailableTranslationLanguages": function() {
+            try {
+                // Get available languages from the program
+                if (typeof ddmm !== 'undefined' && ddmm.getAvailableLanguages) {
+                    const programLanguages = ddmm.getAvailableLanguages();
+                    
+                    if (programLanguages && typeof programLanguages === 'object') {
+                        // Convert program languages to translation format
+                        const translationLanguages = {};
+                        
+                        for (const [langCode, langInfo] of Object.entries(programLanguages)) {
+                            // Convert language codes to LibreTranslate API compatible codes
+                            let apiCode = langCode;
+                            
+                            // Map specific codes to LibreTranslate language codes
+                            const codeMapping = {
+                                'en-GB': 'en',
+                                'en-US': 'en',
+                                'es-419': 'es',
+                                'fr-FR': 'fr',
+                                'de-DE': 'de',
+                                'it-IT': 'it',
+                                'pt-BR': 'pt',
+                                'zh-CN': 'zh',
+                                'zh-TW': 'zh',
+                                'nb': 'no', // Norwegian Bokmål -> Norwegian
+                                'ja': 'ja',
+                                'ko': 'ko',
+                                'ru': 'ru',
+                                'ar': 'ar',
+                                'hi': 'hi',
+                                'cs': 'cs',
+                                'da': 'da',
+                                'fi': 'fi',
+                                'hu': 'hu',
+                                'nl': 'nl',
+                                'pl': 'pl',
+                                'sv': 'sv',
+                                'tr': 'tr'
+                            };
+                            
+                            if (codeMapping[langCode]) {
+                                apiCode = codeMapping[langCode];
+                            } else {
+                                // Extract base language code (e.g., 'en' from 'en-US')
+                                apiCode = langCode.split('-')[0];
+                            }
+                            
+                            // Skip English since content is already in English
+                            if (apiCode !== 'en') {
+                                // Use proper language names
+                                const languageNames = {
+                                    'es': 'Spanish',
+                                    'fr': 'French',
+                                    'de': 'German',
+                                    'it': 'Italian',
+                                    'pt': 'Portuguese',
+                                    'ru': 'Russian',
+                                    'ja': 'Japanese',
+                                    'ko': 'Korean',
+                                    'zh': 'Chinese (Simplified)',
+                                    'zh-TW': 'Chinese (Traditional)',
+                                    'ar': 'Arabic',
+                                    'hi': 'Hindi',
+                                    'cs': 'Czech',
+                                    'da': 'Danish',
+                                    'fi': 'Finnish',
+                                    'hu': 'Hungarian',
+                                    'no': 'Norwegian',
+                                    'nl': 'Dutch',
+                                    'pl': 'Polish',
+                                    'sv': 'Swedish',
+                                    'tr': 'Turkish'
+                                };
+                                
+                                const displayName = languageNames[apiCode] || 
+                                                   (langInfo && langInfo.nativeName) || 
+                                                   (langInfo && langInfo.name) || 
+                                                   apiCode;
+                                
+                                translationLanguages[apiCode] = displayName;
+                            }
+                        }
+                        
+                        this.availableTranslationLanguages = translationLanguages;
+                        console.log('Loaded translation languages from program:', translationLanguages);
+                        
+                        // Set auto-detect to current program language if not already set
+                        if (this.translationLanguage === 'auto') {
+                            this.setAutoDetectLanguage();
+                        }
+                        
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to load program languages for translation:', error);
+            }
+            
+            // Fallback to LibreTranslate supported languages
+            this.availableTranslationLanguages = {
+                'es': 'Spanish',
+                'fr': 'French',
+                'de': 'German',
+                'it': 'Italian',
+                'pt': 'Portuguese',
+                'ru': 'Russian',
+                'ja': 'Japanese',
+                'ko': 'Korean',
+                'zh': 'Chinese',
+                'ar': 'Arabic',
+                'hi': 'Hindi',
+                'cs': 'Czech',
+                'da': 'Danish',
+                'fi': 'Finnish',
+                'hu': 'Hungarian',
+                'no': 'Norwegian',
+                'nl': 'Dutch',
+                'pl': 'Polish',
+                'sv': 'Swedish',
+                'tr': 'Turkish'
+            };
+        },
+
+        "setAutoDetectLanguage": function() {
+            try {
+                // Get current program language
+                let currentLang = 'en';
+                
+                if (typeof ddmm !== 'undefined' && ddmm.config) {
+                    currentLang = ddmm.config.readConfigValue("language") || "en-GB";
+                }
+                
+                // Convert to LibreTranslate API format
+                const codeMapping = {
+                    'en-GB': 'en',
+                    'en-US': 'en',
+                    'es-419': 'es',
+                    'fr-FR': 'fr',
+                    'de-DE': 'de',
+                    'it-IT': 'it',
+                    'pt-BR': 'pt',
+                    'zh-CN': 'zh',
+                    'zh-TW': 'zh',
+                    'nb': 'no',
+                    'ja': 'ja',
+                    'ko': 'ko',
+                    'ru': 'ru',
+                    'ar': 'ar',
+                    'hi': 'hi',
+                    'cs': 'cs',
+                    'da': 'da',
+                    'fi': 'fi',
+                    'hu': 'hu',
+                    'nl': 'nl',
+                    'pl': 'pl',
+                    'sv': 'sv',
+                    'tr': 'tr'
+                };
+                
+                const apiCode = codeMapping[currentLang] || currentLang.split('-')[0];
+                
+                // Only set if it's not English (since content is already in English)
+                if (apiCode !== 'en' && this.availableTranslationLanguages[apiCode]) {
+                    this.translationLanguage = apiCode;
+                    console.log('Auto-detect set translation language to:', apiCode, 'based on program language:', currentLang);
+                }
+            } catch (error) {
+                console.warn('Failed to set auto-detect language:', error);
+            }
+        },
+
+        "checkAndEnableTranslationByDefault": function() {
+            try {
+                // Get current program language
+                let currentLang = 'en';
+                
+                if (typeof ddmm !== 'undefined' && ddmm.config) {
+                    currentLang = ddmm.config.readConfigValue("language") || "en-GB";
+                }
+                
+                // Convert to API format to check if it's non-English
+                const codeMapping = {
+                    'en-GB': 'en',
+                    'en-US': 'en',
+                    'es-419': 'es',
+                    'fr-FR': 'fr',
+                    'de-DE': 'de',
+                    'it-IT': 'it',
+                    'pt-BR': 'pt',
+                    'zh-CN': 'zh',
+                    'zh-TW': 'zh',
+                    'nb': 'no',
+                    'ja': 'ja',
+                    'ko': 'ko',
+                    'ru': 'ru',
+                    'ar': 'ar',
+                    'hi': 'hi',
+                    'cs': 'cs',
+                    'da': 'da',
+                    'fi': 'fi',
+                    'hu': 'hu',
+                    'nl': 'nl',
+                    'pl': 'pl',
+                    'sv': 'sv',
+                    'tr': 'tr'
+                };
+                
+                const apiCode = codeMapping[currentLang] || currentLang.split('-')[0];
+                
+                // If language is not English and translation is available, enable it by default
+                if (apiCode !== 'en' && this.availableTranslationLanguages[apiCode]) {
+                    this.enableTranslation = true;
+                    this.translationLanguage = apiCode;
+                    console.log('Auto-enabled translation for non-English language:', apiCode, 'based on program language:', currentLang);
+                    
+                    // Show a notification to inform the user
+                    this.showNotification(`Translation enabled automatically for ${this.getLanguageName(apiCode)}. You can disable it in the store filters.`, 'info');
+                }
+            } catch (error) {
+                console.warn('Failed to check and enable translation by default:', error);
+            }
+        },
+
+        "onTranslationToggle": async function() {
+            if (this.enableTranslation) {
+                // Load available languages and set auto-detect
+                this.loadAvailableTranslationLanguages();
+                this.setAutoDetectLanguage();    
+                
+                // Check if we have content to translate
+                if (this.mods.length === 0) {
+                    this.showNotification('No content available to translate. Load some mods first.', 'warning');
+                    return;
+                }
+                
+                try {
+                    // Translate existing content
+                    await this.translateExistingContent();
+                    this.showNotification(this._('renderer.tab_store.translation.enabled'), 'success');
+                } catch (error) {
+                    console.error('Translation failed:', error);
+                    this.showNotification('Translation failed due to rate limits or API issues. Please try again later.', 'error');
+                    this.enableTranslation = false; // Disable on failure
+                }
+            } else {
+                // Restore original content
+                this.restoreOriginalContent();
+                this.showNotification(this._('renderer.tab_store.translation.disabled'), 'info');
+            }
+        },
+
+        "onTranslationLanguageChange": async function() {
+            if (this.enableTranslation) {
+                if (this.translationLanguage === 'auto') {
+                    this.setAutoDetectLanguage();
+                }
+                
+                try {
+                    await this.translateExistingContent();
+                    const langName = this.availableTranslationLanguages[this.translationLanguage] || this.translationLanguage;
+                    this.showNotification(this._('renderer.tab_store.translation.language_changed', langName), 'success');
+                } catch (error) {
+                    console.error('Translation language change failed:', error);
+                    this.showNotification('Translation failed due to rate limits or API issues. Please try again later.', 'error');
+                }
+            }
+        },
+
+        "translateText": async function(text, targetLang = null) {
+            if (!text || text.trim().length === 0) {
+                return text;
+            }
+
+            const target = targetLang || this.translationLanguage;
+            if (target === 'auto') {
+                return text; // Don't translate with auto-detect as target
+            }
+
+            try {
+                // Rate limiting: wait if we've made too many requests recently
+                await this.rateLimitCheck();
+
+                // Use Google Translate API via translate.googleapis.com (free tier)
+                const apiUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${target}&dt=t&q=${encodeURIComponent(text)}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (compatible; DDMM-Store/1.0)',
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Translation API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Google Translate returns an array structure
+                if (data && data[0] && data[0][0] && data[0][0][0]) {
+                    // Combine all translation segments
+                    let translatedText = '';
+                    for (const segment of data[0]) {
+                        if (segment && segment[0]) {
+                            translatedText += segment[0];
+                        }
+                    }
+                    return translatedText || text;
+                } else {
+                    throw new Error('Translation failed: Invalid response format');
+                }
+            } catch (error) {
+                console.warn('Translation failed:', error);
+                return text; // Return original text on failure
+            }
+        },
+
+        "translateLongText": async function(text, target) {
+            // LibreTranslate can handle longer texts better than MyMemory
+            // Split text into sentences or logical chunks (up to 5000 chars)
+            const sentences = text.split(/(?<=[.!?])\s+/);
+            const chunks = [];
+            let currentChunk = '';
+
+            for (const sentence of sentences) {
+                if ((currentChunk + sentence).length > 4000) {
+                    if (currentChunk) {
+                        chunks.push(currentChunk.trim());
+                        currentChunk = sentence;
+                    } else {
+                        // Single sentence is too long, split by words
+                        const words = sentence.split(' ');
+                        let wordChunk = '';
+                        for (const word of words) {
+                            if ((wordChunk + ' ' + word).length > 4000) {
+                                if (wordChunk) {
+                                    chunks.push(wordChunk.trim());
+                                    wordChunk = word;
+                                } else {
+                                    // Single word is too long, just use first 4000 chars
+                                    chunks.push(word.substring(0, 4000));
+                                    wordChunk = word.substring(4000);
+                                }
+                            } else {
+                                wordChunk += (wordChunk ? ' ' : '') + word;
+                            }
+                        }
+                        if (wordChunk) {
+                            currentChunk = wordChunk;
+                        }
+                    }
+                } else {
+                    currentChunk += (currentChunk ? ' ' : '') + sentence;
+                }
+            }
+
+            if (currentChunk) {
+                chunks.push(currentChunk.trim());
+            }
+
+            // Translate each chunk with delays
+            const translatedChunks = [];
+            for (let i = 0; i < chunks.length; i++) {
+                if (i > 0) {
+                    // Add delay between chunks to avoid rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                }
+                const translatedChunk = await this.translateText(chunks[i], target);
+                translatedChunks.push(translatedChunk);
+            }
+
+            return translatedChunks.join(' ');
+        },
+
+        "rateLimitCheck": async function() {
+            // LibreTranslate rate limiting: track requests and add delays
+            if (!this.translationRequestTimes) {
+                this.translationRequestTimes = [];
+            }
+
+            const now = Date.now();
+            // Remove requests older than 1 minute
+            this.translationRequestTimes = this.translationRequestTimes.filter(time => now - time < 60000);
+
+            // If we've made more than 5 requests in the last minute, wait (LibreTranslate is more restrictive)
+            if (this.translationRequestTimes.length >= 5) {
+                const oldestRequest = Math.min(...this.translationRequestTimes);
+                const waitTime = 60000 - (now - oldestRequest) + 100; // Add 100ms buffer
+                if (waitTime > 0) {
+                    console.log(`Rate limiting: waiting ${waitTime}ms for LibreTranslate`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                }
+            }
+
+            // Record this request
+            this.translationRequestTimes.push(now);
+        },
+
+        "translateExistingContent": async function() {
+            if (!this.enableTranslation || this.mods.length === 0) {
+                return;
+            }
+
+            if (this.translationInProgress) {
+                this.showNotification('Translation is already in progress. Please wait...', 'warning');
+                return;
+            }
+
+            console.log('Translating existing content...');
+            this.translationInProgress = true;
+            
+            try {
+                // Show progress notification
+                const totalMods = this.mods.length;
+                let translatedCount = 0;
+                
+                this.showNotification(`Starting translation of ${totalMods} mods...`, 'info');
+                
+                // Translate mod content sequentially to avoid rate limits
+                for (let i = 0; i < this.mods.length; i++) {
+                    const mod = this.mods[i];
+                    
+                    if (!this.originalContent[mod.id]) {
+                        // Store original content first
+                        this.originalContent[mod.id] = {
+                            title: mod.title,
+                            description: mod.description,
+                            short_description: mod.short_description
+                        };
+                    }
+
+                    try {
+                        // Translate title (usually short, safe to translate)
+                        if (mod.title) {
+                            mod.title = await this.translateText(this.originalContent[mod.id].title);
+                        }
+
+                        // Translate short description first (usually shorter)
+                        if (mod.short_description) {
+                            mod.short_description = await this.translateText(this.originalContent[mod.id].short_description);
+                        }
+
+                        // Translate full description (might be long)
+                        if (mod.description) {
+                            mod.description = await this.translateText(this.originalContent[mod.id].description);
+                        }
+
+                        translatedCount++;
+                        
+                        // Update progress every 5 mods or on last mod
+                        if (translatedCount % 5 === 0 || translatedCount === totalMods) {
+                            this.showNotification(`Translation progress: ${translatedCount}/${totalMods} mods completed`, 'info');
+                            // Force Vue to update the display
+                            this.$forceUpdate();
+                        }
+
+                        // Delay between mods to avoid overwhelming the API (LibreTranslate needs more time)
+                        if (i < this.mods.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 1500));
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to translate content for mod ${mod.id}:`, error);
+                        // Continue with next mod even if this one failed
+                    }
+
+                    // Check if translation was disabled during the process
+                    if (!this.enableTranslation) {
+                        console.log('Translation was disabled during processing, stopping...');
+                        break;
+                    }
+                }
+
+                // Final update
+                this.$forceUpdate();
+                
+                if (this.enableTranslation) {
+                    this.showNotification(`Translation completed! ${translatedCount}/${totalMods} mods translated successfully.`, 'success');
+                }
+            } catch (error) {
+                console.error('Translation process failed:', error);
+                this.showNotification('Translation failed due to API errors. Please try again later.', 'error');
+                throw error; // Re-throw to be handled by caller
+            } finally {
+                this.translationInProgress = false;
+            }
+        },
+
+        "restoreOriginalContent": function() {
+            if (this.mods.length === 0) {
+                return;
+            }
+
+            console.log('Restoring original content...');
+            
+            for (let mod of this.mods) {
+                if (this.originalContent[mod.id]) {
+                    mod.title = this.originalContent[mod.id].title;
+                    mod.description = this.originalContent[mod.id].description;
+                    mod.short_description = this.originalContent[mod.id].short_description;
+                }
+            }
+
+            // Force Vue to update the display
+            this.$forceUpdate();
+        },
+
         // Data loading methods
         "loadMods": async function() {
+            // Check connection first
+            if (!this.isOnline) {
+                const connectionAvailable = await this.checkConnection();
+                if (!connectionAvailable) {
+                    this.loading = false;
+                    return;
+                }
+            }
+
             this.loading = true;
             this.error = null;
 
@@ -669,10 +1472,22 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                     // Fallback for old format
                     this.totalPages = Math.ceil((data.total || 0) / this.modsPerPage);
                 }
+
+                // Store original content and translate if enabled
+                if (this.enableTranslation) {
+                    await this.translateExistingContent();
+                }
+
             } catch (error) {
                 console.error('Failed to load mods:', error);
                 this.error = `Failed to connect to Sayonika store: ${error.message}`;
                 this.mods = [];
+                
+                // Update connection status based on error
+                if (error.message.includes('NetworkError') || error.message.includes('fetch')) {
+                    this.connectionStatus = "offline";
+                    this.isOnline = false;
+                }
             } finally {
                 this.loading = false;
                 // Ensure proper layout after content loads
@@ -731,6 +1546,15 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
 
         "closeModDetails": function() {
             this.selectedMod = null;
+        },
+
+        "dismissMaintenanceBanner": function() {
+            // Temporarily hide the maintenance banner by setting connection status to online
+            // This allows users to dismiss the banner while still being in maintenance mode
+            if (this.connectionStatus === 'maintenance') {
+                this.connectionStatus = 'online';
+                this.showNotification('Maintenance banner dismissed. Note: Authentication features remain unavailable during maintenance.', 'info');
+            }
         },
 
         // Screenshot modal methods
@@ -1192,6 +2016,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     "mounted": async function () {
         console.log("Sayonika Store Tab mounted");
 
+        // Initialize translation languages
+        this.loadAvailableTranslationLanguages();
+
+        // Check if we should enable translation by default for non-English languages
+        this.checkAndEnableTranslationByDefault();
+
         // Set up authentication state synchronization
         if (typeof window.SayonikaAuth !== 'undefined') {
             // Sync initial state
@@ -1216,11 +2046,22 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
             await this.validateSessionOnStartup();
         }
 
-        // Load initial data
-        await Promise.all([
-            this.loadCategories(),
-            this.loadMods()
-        ]);
+        // Start connection monitoring
+        this.startConnectionMonitoring();
+
+        // Load available translation languages
+        this.loadAvailableTranslationLanguages();
+
+        // Initial connection check
+        await this.checkConnection();
+
+        // Load initial data only if online
+        if (this.isOnline) {
+            await Promise.all([
+                this.loadCategories(),
+                this.loadMods()
+            ]);
+        }
 
         // Set up layout management
         this.$nextTick(() => {
@@ -1248,7 +2089,8 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
     },
 
     "beforeDestroy": function() {
-        // Clean up event listeners
+        // Clean up event listeners and intervals
+        this.stopConnectionMonitoring();
         document.removeEventListener('keydown', this.handleKeydown);
         window.removeEventListener('resize', this.handleResize);
     }

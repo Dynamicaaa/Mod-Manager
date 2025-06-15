@@ -163,10 +163,86 @@
       "error": "Failed to load the list of mods. Are you offline?",
       "button_download": "Download"
     },
+    "tab_store": {
+      "title": "Sayonika Store",
+      "subtitle": "Discover and download DDLC mods",
+      "search_placeholder": "Search mods...",
+      "loading": "Loading mods...",
+      "error_title": "Connection Error",
+      "retry_button": "Retry",
+      "offline_title": "Offline",
+      "offline_message": "You are currently offline. Please check your internet connection and try again.",
+      "check_connection": "Check Connection",
+      "maintenance_banner": "Authentication services are temporarily unavailable due to maintenance. You can still browse mods but cannot login or register.",
+      "no_mods_title": "No mods found",
+      "no_mods_message": "Try adjusting your search or filters",
+      
+      "filters": {
+        "category": "Category:",
+        "all_categories": "All Categories",
+        "sort_by": "Sort by:",
+        "date_created": "Date Created",
+        "date_updated": "Date Updated", 
+        "downloads": "Downloads",
+        "rating": "Rating",
+        "title": "Title",
+        "order": "Order:",
+        "descending": "Descending",
+        "ascending": "Ascending",
+        "featured_only": "Featured Only",
+        "translate_content": "Translate Content",
+        "auto_detect": "Auto-detect"
+      },
+      
+      "mod_card": {
+        "featured": "Featured",
+        "mature": "Mature",
+        "by_author": "by {0}",
+        "download": "Download",
+        "downloading": "Downloading...",
+        "download_mod": "Download Mod",
+        "downloads_count": "{0} downloads",
+        "version": "Version {0}",
+        "screenshots": "Screenshots ({0})",
+        "description": "Description",
+        "tags": "Tags",
+        "requirements": "Requirements"
+      },
+      
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "page_info": "Page {0} of {1}"
+      },
+      
+      "login": {
+        "title": "Login to Sayonika",
+        "discord": "Login with Discord",
+        "github": "Login with GitHub",
+        "or": "or",
+        "username_label": "Username or Email:",
+        "username_placeholder": "Enter username or email address",
+        "username_help": "You can use either your username or email address to log in",
+        "password_label": "Password:",
+        "remember_me": "Remember me",
+        "login_button": "Login",
+        "logging_in": "Logging in...",
+        "register_link": "Don't have an account? Register here",
+        "success": "Successfully logged in!",
+        "failed": "Login failed: {0}"
+      },
+      
+      "translation": {
+        "enabled": "Translation enabled. Content will be translated when available.",
+        "disabled": "Translation disabled.",
+        "language_changed": "Translation language changed to {0}"
+      }
+    },
     "tab_options": {
       "list": {
         "header_appearance": "Appearance",
         "link_background": "Background",
+        "link_language": "Language",
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
         "link_sdk": "Achievements & SDK",
@@ -224,6 +300,16 @@
       "section_debug": {
         "title": "App Info",
         "subtitle": "Information for diagnosing problems."
+      },
+      "section_language": {
+        "title": "Language",
+        "subtitle": "Change the language of Doki Doki Mod Manager.",
+        "description_current": "Current language: {0}",
+        "button_apply": "Apply Language",
+        "button_contribute": "Help Translate",
+        "description_restart": "Language changes will take effect after restarting the application.",
+        "notification_changed": "Language changed to {0}. Please restart the application to see the changes.",
+        "notification_same": "Language is already set to {0}."
       }
     },
     "tab_about": {

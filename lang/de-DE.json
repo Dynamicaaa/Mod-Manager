@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Startseite",
+      "tab_mods": "Mods",
+      "tab_store": "Shop",
+      "tab_options": "Optionen",
+      "tab_about": "Über"
+    },
+    "version": {
+      "link_changelog": "Was ist neu?"
+    },
+
+    "user_menu": {
+      "option_rename": "Benutzername ändern",
+      "option_logout": "Abmelden"
+    },
+    "window_controls": {
+      "close": "Schließen",
+      "maximise": "Maximieren",
+      "minimise": "Minimieren",
+      "devtools": "Entwicklertools umschalten (F12)",
+
+      "announcement": "Neueste Ankündigung lesen",
+      "login": "Anmelden",
+      "sayonika_login": "Sayonika Anmeldung",
+      "update": {
+        "checking": "Suche nach Updates im Hintergrund...",
+        "available": "Ein Update ist verfügbar. Klicken Sie hier zum Herunterladen.",
+        "downloading": "Update wird heruntergeladen...",
+        "downloaded": "Ein Update ist bereit zur Installation beim Beenden."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Beenden",
+      "button_continue": "Fortsetzen"
+    },
+    "drop_cover": {
+      "text": "Ziehen Sie einen Mod hierher, um ihn zu installieren"
+    },
+    "announcement": {
+      "button_open": "Link öffnen",
+      "button_close": "Schließen"
+    },
+    "onboarding": {
+      "title": "Willkommen!",
+      "description_download": "Lass uns eine Kopie von DDLC finden.",
+      "button_download": "DDLC's offizielle Download-Seite besuchen",
+      "button_choose": "Nach einer Kopie suchen",
+      "heading_step": "Schritt {0}",
+      "s1_desc": "Sie müssen eine Kopie von Doki Doki Literature Club herunterladen. Diese finden Sie auf der offiziellen Website (ddlc.moe) - klicken Sie auf die Schaltfläche unten, um dorthin zu gelangen.",
+      "s1_platform": "Wenn Sie gefragt werden, wählen Sie die Datei \"DDLC ({0})\" zum Herunterladen.",
+      "s2_desc": "Sobald Ihr Download abgeschlossen ist, wählen Sie ihn mit der Schaltfläche unten aus.",
+      "description_location": "Ihre Spiele werden unter {0} gespeichert",
+      "link_change": "(Ändern)"
+    },
+    "login_input": {
+      "message": "Geben Sie Ihre E-Mail-Adresse ein",
+      "details": "An diese Adresse wird eine E-Mail gesendet. Klicken Sie auf den Link in der E-Mail, um die Anmeldung abzuschließen.",
+      "button_affirmative": "Anmelden",
+      "button_negative": "Abbrechen"
+    },
+    "change_username_input": {
+      "message": "Geben Sie Ihren neuen Benutzernamen ein",
+      "details": "Benutzernamen müssen nicht eindeutig sein.",
+      "button_affirmative": "Ändern",
+      "button_negative": "Abbrechen"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Mods suchen...",
+        "header_new": "Loslegen",
+        "link_install": "DDLC installieren",
+        "header_installed": "Installiert",
+        "header_downloaded": "Downloads"
+      },
+      "install_contextmenu": {
+        "launch": "Starten",
+        "rename": "Umbenennen",
+        "shortcut": "Verknüpfung erstellen",
+        "delete_save": "Speicherdaten löschen",
+        "uninstall": "Deinstallieren"
+      },
+      "mod_contextmenu": {
+        "install": "Installieren",
+        "delete": "Löschen"
+      },
+      "uninstall_confirmation": {
+        "message": "Sind Sie sicher, dass Sie deinstallieren möchten?",
+        "details": "Ihre Speicherdaten für {0} werden gelöscht und Sie benötigen eine Kopie des Mods, um ihn erneut zu installieren.",
+        "button_affirmative": "Deinstallieren",
+        "button_negative": "Abbrechen"
+      },
+      "rename_input": {
+        "message": "Installation umbenennen",
+        "details": "Geben Sie den neuen Namen für {0} ein.",
+        "button_affirmative": "Umbenennen",
+        "button_negative": "Abbrechen"
+      },
+      "mod_delete_confirmation": {
+        "message": "Sind Sie sicher, dass Sie den Mod löschen möchten?",
+        "details": "Sie müssen eine weitere Kopie des Mods herunterladen, um ihn erneut zu installieren.",
+        "button_affirmative": "Löschen",
+        "button_negative": "Abbrechen"
+      },
+      "save_delete_confirmation": {
+        "message": "Sind Sie sicher, dass Sie Ihre Speicherdaten löschen möchten?",
+        "details": "Sie müssen {0} von vorne beginnen.",
+        "button_affirmative": "Löschen",
+        "button_negative": "Abbrechen"
+      },
+      "install": {
+        "button_launch": "Starten",
+        "button_settings": "Einstellungen",
+        "tag_global_save": "Globaler Speicher",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Errungenschaften ({0} / {1})",
+        "description_achievements": "Spielen Sie weiter, um weitere Errungenschaften freizuschalten.",
+        "description_achievements_complete": "Sie haben alle Errungenschaften freigeschaltet. Herzlichen Glückwunsch!",
+        "title_screenshots_none": "Keine Screenshots",
+        "title_screenshots_one": "1 Screenshot",
+        "title_screenshots": "{0} Screenshots",
+        "description_screenshots": "Drücken Sie S beim Spielen, um einen Screenshot zu machen.",
+        "description_sdk": "Dieser Mod unterstützt spezielle Funktionen mit dem Doki Doki Mod Manager SDK!",
+        "description_author": "Erstellt von {0}",
+
+        "link_website": "Website ({0})",
+        "description_external": "Im Ordner anzeigen"
+      },
+      "mod": {
+        "button_install": "Installieren",
+        "button_settings": "Einstellungen",
+        "description_external": "Im Ordner anzeigen"
+      },
+      "install_creation": {
+        "title": "DDLC installieren",
+        "label_install_name": "Installationsname",
+        "label_folder_name": "Ordnername",
+        "label_global_save": "Globaler Speicher",
+        "label_has_mod": "Mod installieren",
+        "label_mod": "Mod",
+
+        "label_existing_saves": "Vorhandene Speicherdateien",
+        "description_mod": "Klicken, um nach einem Mod zu suchen.",
+        "header_summary": "Zusammenfassung",
+        "description_vanilla": "Eine saubere Kopie von DDLC wird erstellt. Die Speicherdaten werden getrennt von anderen Kopien des Spiels gespeichert.",
+        "description_vanilla_global_save": "Eine saubere Kopie von DDLC wird erstellt. Die Speicherdaten werden mit anderen Kopien des Spiels geteilt (z.B. Steam)",
+
+        "description_modded": "Eine Kopie von DDLC wird erstellt und der Mod wird installiert. Die Speicherdaten werden getrennt von anderen Kopien des Spiels gespeichert.",
+        "description_modded_global_save": "Eine Kopie von DDLC wird erstellt und der Mod wird installiert. Die Speicherdaten werden mit anderen Kopien des Spiels geteilt (z.B. Steam)",
+
+        "button_install": "Installieren",
+        "button_installing": "Installiere...",
+        "status_exists": "Dieser Ordner existiert bereits. Wählen Sie einen anderen Ordnernamen."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Der Shop kommt bald!",
+      "description_1": "Die Sayonika Mod-Datenbank wird einen zentralen Ort bieten, um DDLC-Mods zu teilen, herunterzuladen und zu bewerten. Wenn Sayonika öffentlich verfügbar ist, können Sie Mods direkt hier im Doki Doki Mod Manager durchsuchen.",
+      "description_2": "Während Sie warten, können Sie gerne einige dieser empfohlenen Mods herunterladen.",
+      "error": "Die Mod-Liste konnte nicht geladen werden. Sind Sie offline?",
+      "button_download": "Herunterladen"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Erscheinungsbild",
+        "link_background": "Hintergrund",
+        "link_language": "Sprache",
+        "link_advanced_appearance": "Erweitert",
+        "header_enhancements": "Verbesserungen",
+        "link_sdk": "Errungenschaften & SDK",
+
+        "header_application": "Anwendung",
+        "link_updates": "Updates",
+        "link_storage": "Speicherort",
+        "header_developers": "Entwickler",
+        "link_testing": "SDK Debug",
+        "link_debug": "App-Info"
+      },
+      "section_backgrounds": {
+        "title": "Hintergrund",
+        "subtitle": "Passen Sie Ihre Kopie des Doki Doki Mod Managers mit einem dieser Hintergründe an.",
+        "button_none": "Kein Hintergrund",
+        "description_credit": "Originale DDLC-Hintergründe mit freundlicher Genehmigung von Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Erweitert",
+        "subtitle": "Finden Sie hier weitere Schnittstellenoptionen.",
+        "button_enable_sysborders": "Systemränder verwenden (Neustart erforderlich)",
+        "button_disable_sysborders": "Systemränder deaktivieren (Neustart erforderlich)"
+      },
+      "section_storage": {
+        "title": "Speicherort",
+        "subtitle": "Ändern Sie, wo Ihre Spieldaten gespeichert werden.",
+        "description_moving": "Warnung! Wenn Sie Ihren Installationsort ändern, werden alle Ihre Mods, Installationen und Speicherdaten verschoben. Dies kann mehrere Minuten dauern und kann nicht unterbrochen werden.",
+        "description_current": "Aktueller Standort: {0}",
+        "button_change": "Installationsort ändern"
+      },
+      "section_updates": {
+        "title": "Updates",
+        "subtitle": "Holen Sie sich die neueste Version des Doki Doki Mod Managers.",
+        "description_current_version": "Aktuelle Version: {0}",
+        "label_channel": "Release-Kanal",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Nach Updates suchen"
+      },
+      "section_sdk": {
+        "title": "Errungenschaften & SDK",
+        "subtitle": "Ändern Sie, wie Errungenschaften behandelt werden.",
+        "description_mode": "Errungenschaften aktivieren:",
+        "checkbox_always": "Immer (empfohlen)",
+        "checkbox_specified": "Wenn der Mod angibt, dass er sie unterstützt",
+        "checkbox_never": "Niemals"
+      },
+
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Aktivieren Sie Debug-Protokollierung, um Ihre Mods mit dem Doki Doki Mod Manager SDK zu testen.",
+        "button_enable": "Debugging aktivieren",
+        "button_disable": "Debugging deaktivieren"
+      },
+      "section_debug": {
+        "title": "App-Info",
+        "subtitle": "Informationen zur Problemdiagnose."
+      },
+      "section_language": {
+        "title": "Sprache",
+        "subtitle": "Ändern Sie die Sprache des Doki Doki Mod Managers.",
+        "description_current": "Aktuelle Sprache: {0}",
+        "button_apply": "Sprache anwenden",
+        "button_contribute": "Beim Übersetzen helfen",
+        "description_restart": "Sprachänderungen werden nach einem Neustart der Anwendung wirksam.",
+        "notification_changed": "Sprache geändert zu {0}. Bitte starten Sie die Anwendung neu, um die Änderungen zu sehen.",
+        "notification_same": "Sprache ist bereits auf {0} eingestellt."
+      }
+    },
+    "tab_about": {
+      "title": "Über",
+      "description": "Doki Doki Mod Manager ist ein von der Community entwickeltes Projekt, das Ihnen hilft, Mods für Doki Doki Literature Club zu finden, zu installieren und zu spielen, ein kostenloses Visual Novel-Spiel von Team Salvato.",
+      "title_disclaimer": "Haftungsausschluss",
+      "disclaimer_1": "Doki Doki Mod Manager ist ein Fan-Werk von Doki Doki Literature Club und ist nicht mit Team Salvato verbunden. Es ist ein Fan-Werk, wie in Team Salvatos IP-Richtlinien definiert.",
+      "disclaimer_2": "Doki Doki Mod Manager übernimmt keine Verantwortung für Schäden an Ihren Dateien oder Ihrem Computer infolge des Spielens eines Mods oder anderweitig. Es liegt an Ihnen, sicherzustellen, dass Mods sicher zu spielen sind.",
+      "title_socials": "Kontakt aufnehmen",
+
+      "social_twitter": "Folgen Sie @DokiMod auf Twitter",
+      "social_reddit": "Schreiben Sie mir auf Reddit",
+      "social_email": "Senden Sie mir eine E-Mail",
+      "title_support": "Entwicklung unterstützen",
+      "description_support": "Doki Doki Mod Manager wird immer kostenlos zum Herunterladen und Verwenden sein. Wenn es Ihnen gefällt und Sie mir helfen möchten, es auf dem neuesten Stand zu halten, unterstützen Sie mich bitte auf eine der folgenden Weisen.",
+      "support_donate": "Eine einmalige Spende machen",
+      "support_steelseries": "10% Rabatt auf SteelSeries Gaming-Peripheriegeräte erhalten (Affiliate-Link)",
+      "support_code": "Zum Projekt beitragen (Code oder Übersetzungen)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager öffnen und {0} starten."
+    },
+    "running_cover": {
+      "title_running": "DDLC läuft",
+      "title_crashed": "Etwas ist schief gelaufen",
+      "button_browse": "Spielordner öffnen",
+      "button_close": "OK",
+      "description_running": "Schließen Sie das Spiel, um Änderungen an Ihren Mods vorzunehmen.",
+      "install_missing": "Die Installation konnte nicht gefunden werden.",
+      "install_corrupt": "Die Installation ist unvollständig oder beschädigt.",
+      "install_crashed": "Das Spiel konnte nicht gestartet werden oder ist abgestürzt."
+    },
+    "move_install": {
+      "title": "Neuen Installationsordner auswählen"
+    },
+    "mod_browse_dialog": {
+      "title": "Einen Mod zum Installieren finden",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Eine Kopie der DDLC-Zip-Datei finden",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Wählen Sie, wo Sie Ihre Verknüpfung platzieren möchten",
+      "file_format_name": "Verknüpfung"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager ist abgestürzt",
+        "body": "Das Problem wurde gemeldet. Bitte starten Sie neu und versuchen Sie es erneut."
+      },
+      "move_install": {
+        "title": "Installationsordner konnte nicht verschoben werden",
+        "body": "Überprüfen Sie, ob Sie die Berechtigung und genügend Speicherplatz haben, um in diesen Ordner zu verschieben."
+      },
+      "shortcut": {
+        "title": "Verknüpfung konnte nicht erstellt werden",
+        "body": "Überprüfen Sie, ob Sie die Berechtigung haben, Dateien in diesem Ordner zu erstellen."
+      },
+      "install": {
+        "title": "Spiel konnte nicht installiert werden",
+        "body": "Überprüfen Sie, ob Sie die Berechtigung und genügend Speicherplatz zum Installieren haben."
+      },
+      "rename": {
+        "title": "Umbenennung fehlgeschlagen",
+        "body": "Überprüfen Sie, ob Sie alle Programme geschlossen haben, die stören könnten, und versuchen Sie es erneut."
+      },
+      "uninstall": {
+        "title": "Deinstallation fehlgeschlagen",
+        "body": "Überprüfen Sie, ob Sie alle Programme geschlossen haben, die stören könnten, und versuchen Sie es erneut."
+      },
+      "save_delete": {
+        "title": "Speicherdaten konnten nicht gelöscht werden",
+        "body": "Überprüfen Sie, ob Sie alle Programme geschlossen haben, die stören könnten, und versuchen Sie es erneut."
+      },
+      "mod_delete": {
+        "title": "Mod konnte nicht gelöscht werden",
+        "body": "Überprüfen Sie, ob Sie alle Programme geschlossen haben, die stören könnten, und versuchen Sie es erneut."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager reagiert nicht mehr",
+        "body": "Wenn dieses Problem längere Zeit anhält, schließen Sie die App und starten Sie erneut."
+      },
+      "executable_permission": {
+        "title": "Spiel konnte nicht ausführbar gemacht werden",
+        "body": "DDLC.sh konnte unter Linux nicht ausführbar gemacht werden. Das Spiel startet möglicherweise nicht ordnungsgemäß."
+      }
+    }
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "홈",
+      "tab_mods": "모드",
+      "tab_store": "스토어",
+      "tab_options": "옵션",
+      "tab_about": "정보"
+    },
+    "version": {
+      "link_changelog": "새로운 기능"
+    },
+
+    "user_menu": {
+      "option_rename": "사용자명 변경",
+      "option_logout": "로그아웃"
+    },
+    "window_controls": {
+      "close": "닫기",
+      "maximise": "최대화",
+      "minimise": "최소화",
+      "devtools": "개발자 도구 전환 (F12)",
+
+      "announcement": "최신 공지사항 읽기",
+      "login": "로그인",
+      "sayonika_login": "Sayonika 로그인",
+      "update": {
+        "checking": "백그라운드에서 업데이트 확인 중...",
+        "available": "업데이트가 사용 가능합니다. 여기를 클릭하여 다운로드하세요.",
+        "downloading": "업데이트 다운로드 중...",
+        "downloaded": "업데이트가 종료 시 설치할 준비가 되었습니다."
+      }
+    },
+    "crash_cover": {
+      "button_close": "종료",
+      "button_continue": "계속"
+    },
+    "drop_cover": {
+      "text": "모드를 여기에 끌어다 놓아 설치하세요"
+    },
+    "announcement": {
+      "button_open": "링크 열기",
+      "button_close": "닫기"
+    },
+    "onboarding": {
+      "title": "환영합니다!",
+      "description_download": "DDLC 사본을 찾아보겠습니다.",
+      "button_download": "DDLC 공식 다운로드 페이지 방문",
+      "button_choose": "사본 찾아보기",
+      "heading_step": "단계 {0}",
+      "s1_desc": "Doki Doki Literature Club 사본을 다운로드해야 합니다. 이는 공식 웹사이트 (ddlc.moe)에서 찾을 수 있습니다 - 아래 버튼을 클릭하여 지금 이동하세요.",
+      "s1_platform": "질문받으면 \"DDLC ({0})\"라는 이름의 파일을 다운로드하도록 선택하세요.",
+      "s2_desc": "다운로드가 완료되면 아래 버튼을 사용하여 선택하세요.",
+      "description_location": "게임이 {0}에 저장됩니다",
+      "link_change": "(변경)"
+    },
+    "login_input": {
+      "message": "이메일 주소를 입력하세요",
+      "details": "이 주소로 이메일이 전송됩니다. 이메일의 링크를 클릭하여 로그인을 완료하세요.",
+      "button_affirmative": "로그인",
+      "button_negative": "취소"
+    },
+    "change_username_input": {
+      "message": "새 사용자명을 입력하세요",
+      "details": "사용자명은 고유할 필요가 없습니다.",
+      "button_affirmative": "변경",
+      "button_negative": "취소"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "모드 검색...",
+        "header_new": "시작하기",
+        "link_install": "DDLC 설치",
+        "header_installed": "설치됨",
+        "header_downloaded": "다운로드"
+      },
+      "install_contextmenu": {
+        "launch": "실행",
+        "rename": "이름 바꾸기",
+        "shortcut": "바로가기 만들기",
+        "delete_save": "저장 데이터 삭제",
+        "uninstall": "제거"
+      },
+      "mod_contextmenu": {
+        "install": "설치",
+        "delete": "삭제"
+      },
+      "uninstall_confirmation": {
+        "message": "정말 제거하시겠습니까?",
+        "details": "{0}의 저장 데이터가 삭제되며, 다시 설치하려면 모드 사본이 필요합니다.",
+        "button_affirmative": "제거",
+        "button_negative": "취소"
+      },
+      "rename_input": {
+        "message": "설치 이름 바꾸기",
+        "details": "{0}의 새 이름을 입력하세요.",
+        "button_affirmative": "이름 바꾸기",
+        "button_negative": "취소"
+      },
+      "mod_delete_confirmation": {
+        "message": "정말 모드를 삭제하시겠습니까?",
+        "details": "다시 설치하려면 모드의 다른 사본을 다운로드해야 합니다.",
+        "button_affirmative": "삭제",
+        "button_negative": "취소"
+      },
+      "save_delete_confirmation": {
+        "message": "정말 저장 데이터를 삭제하시겠습니까?",
+        "details": "{0}을 처음부터 다시 시작해야 합니다.",
+        "button_affirmative": "삭제",
+        "button_negative": "취소"
+      },
+      "install": {
+        "button_launch": "실행",
+        "button_settings": "설정",
+        "tag_global_save": "전역 저장",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "업적 ({0} / {1})",
+        "description_achievements": "더 많은 업적을 잠금 해제하려면 계속 플레이하세요.",
+        "description_achievements_complete": "모든 업적을 잠금 해제했습니다. 축하합니다!",
+        "title_screenshots_none": "스크린샷 없음",
+        "title_screenshots_one": "1개의 스크린샷",
+        "title_screenshots": "{0}개의 스크린샷",
+        "description_screenshots": "플레이 중에 S 키를 눌러 스크린샷을 찍으세요.",
+        "description_sdk": "이 모드는 Doki Doki Mod Manager SDK의 특별한 기능을 지원합니다!",
+        "description_author": "{0}에 의해 제작됨",
+
+        "link_website": "웹사이트 ({0})",
+        "description_external": "폴더에서 보기"
+      },
+      "mod": {
+        "button_install": "설치",
+        "button_settings": "설정",
+        "description_external": "폴더에서 보기"
+      },
+      "install_creation": {
+        "title": "DDLC 설치",
+        "label_install_name": "설치 이름",
+        "label_folder_name": "폴더 이름",
+        "label_global_save": "전역 저장",
+        "label_has_mod": "모드 설치",
+        "label_mod": "모드",
+
+        "label_existing_saves": "기존 저장 파일",
+        "description_mod": "클릭하여 모드를 찾아보세요.",
+        "header_summary": "요약",
+        "description_vanilla": "DDLC의 깨끗한 사본이 생성됩니다. 저장 데이터는 게임의 다른 사본과 분리됩니다.",
+        "description_vanilla_global_save": "DDLC의 깨끗한 사본이 생성됩니다. 저장 데이터는 게임의 다른 사본과 공유됩니다 (예: Steam)",
+
+        "description_modded": "DDLC의 사본이 생성되고 모드가 설치됩니다. 저장 데이터는 게임의 다른 사본과 분리됩니다.",
+        "description_modded_global_save": "DDLC의 사본이 생성되고 모드가 설치됩니다. 저장 데이터는 게임의 다른 사본과 공유됩니다 (예: Steam)",
+
+        "button_install": "설치",
+        "button_installing": "설치 중...",
+        "status_exists": "해당 폴더가 이미 있습니다. 다른 폴더 이름을 선택하세요."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "스토어가 곧 출시됩니다!",
+      "description_1": "Sayonika 모드 데이터베이스는 DDLC 모드를 공유, 다운로드 및 리뷰할 수 있는 중앙 위치를 제공합니다. Sayonika가 공개적으로 사용 가능해지면 Doki Doki Mod Manager에서 바로 모드를 탐색할 수 있습니다.",
+      "description_2": "기다리는 동안 이 추천 모드들을 자유롭게 다운로드하세요.",
+      "error": "모드 목록을 불러오는데 실패했습니다. 오프라인 상태인가요?",
+      "button_download": "다운로드"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "모양",
+        "link_background": "배경",
+        "link_language": "언어",
+        "link_advanced_appearance": "고급",
+        "header_enhancements": "향상",
+        "link_sdk": "업적 & SDK",
+
+        "header_application": "애플리케이션",
+        "link_updates": "업데이트",
+        "link_storage": "저장 위치",
+        "header_developers": "개발자",
+        "link_testing": "SDK 디버그",
+        "link_debug": "앱 정보"
+      },
+      "section_backgrounds": {
+        "title": "배경",
+        "subtitle": "이 배경 중 하나로 Doki Doki Mod Manager 사본을 사용자 지정하세요.",
+        "button_none": "배경 없음",
+        "description_credit": "원본 DDLC 배경은 Team Salvato의 제공입니다."
+      },
+      "section_advanced_appearance": {
+        "title": "고급",
+        "subtitle": "다른 인터페이스 옵션을 여기서 찾으세요.",
+        "button_enable_sysborders": "시스템 테두리 사용 (재시작 필요)",
+        "button_disable_sysborders": "시스템 테두리 비활성화 (재시작 필요)"
+      },
+      "section_storage": {
+        "title": "저장 위치",
+        "subtitle": "게임 데이터가 저장되는 위치를 변경하세요.",
+        "description_moving": "경고! 설치 위치 변경을 선택하면 모든 모드, 설치 및 저장 데이터가 이동됩니다. 이는 몇 분이 걸릴 수 있으며 중단할 수 없습니다.",
+        "description_current": "현재 위치: {0}",
+        "button_change": "설치 위치 변경"
+      },
+      "section_updates": {
+        "title": "업데이트",
+        "subtitle": "Doki Doki Mod Manager의 최신 버전을 받으세요.",
+        "description_current_version": "현재 버전: {0}",
+        "label_channel": "릴리스 채널",
+        "option_stable": "안정",
+        "option_beta": "베타",
+        "button_check": "업데이트 확인"
+      },
+      "section_sdk": {
+        "title": "업적 & SDK",
+        "subtitle": "업적 처리 방식을 변경하세요.",
+        "description_mode": "업적 활성화:",
+        "checkbox_always": "항상 (권장)",
+        "checkbox_specified": "모드가 지원을 명시할 때",
+        "checkbox_never": "안 함"
+      },
+
+      "section_testing": {
+        "title": "SDK 디버그",
+        "subtitle": "Doki Doki Mod Manager SDK로 모드를 테스트하기 위해 디버그 로깅을 활성화하세요.",
+        "button_enable": "디버깅 활성화",
+        "button_disable": "디버깅 비활성화"
+      },
+      "section_debug": {
+        "title": "앱 정보",
+        "subtitle": "문제 진단을 위한 정보."
+      },
+      "section_language": {
+        "title": "언어",
+        "subtitle": "Doki Doki Mod Manager의 언어를 변경하세요.",
+        "description_current": "현재 언어: {0}",
+        "button_apply": "언어 적용",
+        "button_contribute": "번역 도움",
+        "description_restart": "언어 변경은 애플리케이션을 재시작한 후에 적용됩니다.",
+        "notification_changed": "언어가 {0}로 변경되었습니다. 변경사항을 보려면 애플리케이션을 재시작하세요.",
+        "notification_same": "언어가 이미 {0}로 설정되어 있습니다."
+      }
+    },
+    "tab_about": {
+      "title": "정보",
+      "description": "Doki Doki Mod Manager는 Team Salvato의 무료 비주얼 노벨 게임인 Doki Doki Literature Club의 모드를 찾고, 설치하고, 플레이하는 데 도움을 주는 커뮤니티 개발 프로젝트입니다.",
+      "title_disclaimer": "면책 조항",
+      "disclaimer_1": "Doki Doki Mod Manager는 Doki Doki Literature Club의 팬 작품이며 Team Salvato와 관련이 없습니다. 이는 Team Salvato IP 가이드라인에서 정의한 팬 작품입니다.",
+      "disclaimer_2": "Doki Doki Mod Manager는 모드 플레이 또는 기타 이유로 인해 파일이나 컴퓨터에 발생한 손상에 대해 책임지지 않습니다. 모드가 안전하게 플레이할 수 있는지 확인하는 것은 사용자의 책임입니다.",
+      "title_socials": "연락하기",
+
+      "social_twitter": "Twitter에서 @DokiMod 팔로우",
+      "social_reddit": "Reddit에서 메시지 보내기",
+      "social_email": "이메일 보내기",
+      "title_support": "개발 지원",
+      "description_support": "Doki Doki Mod Manager는 항상 무료로 다운로드하고 사용할 수 있습니다. 마음에 들고 업데이트를 유지하는 데 도움을 주고 싶다면 다음 방법 중 하나로 지원을 고려해 주세요.",
+      "support_donate": "일회성 기부하기",
+      "support_steelseries": "SteelSeries 게이밍 주변기기 10% 할인 받기 (제휴 링크)",
+      "support_code": "프로젝트에 기여하기 (코드 또는 번역)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager를 열고 {0}을 실행합니다."
+    },
+    "running_cover": {
+      "title_running": "DDLC가 실행 중입니다",
+      "title_crashed": "문제가 발생했습니다",
+      "button_browse": "게임 폴더 열기",
+      "button_close": "확인",
+      "description_running": "모드를 변경하려면 게임을 닫으세요.",
+      "install_missing": "설치를 찾을 수 없습니다.",
+      "install_corrupt": "설치가 불완전하거나 손상되었습니다.",
+      "install_crashed": "게임 실행에 실패했거나 충돌했습니다."
+    },
+    "move_install": {
+      "title": "새 설치 폴더 선택"
+    },
+    "mod_browse_dialog": {
+      "title": "설치할 모드 찾기",
+      "file_format_name": "모드"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC zip 파일의 사본 찾기",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "바로가기를 배치할 위치 선택",
+      "file_format_name": "바로가기"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager가 충돌했습니다",
+        "body": "문제가 보고되었습니다. 재시작하고 다시 시도하세요."
+      },
+      "move_install": {
+        "title": "설치 폴더 이동 실패",
+        "body": "이 폴더로 이동할 권한과 충분한 공간이 있는지 확인하세요."
+      },
+      "shortcut": {
+        "title": "바로가기 생성 실패",
+        "body": "이 폴더에 파일을 생성할 권한이 있는지 확인하세요."
+      },
+      "install": {
+        "title": "게임 설치 실패",
+        "body": "설치할 권한과 충분한 공간이 있는지 확인하세요."
+      },
+      "rename": {
+        "title": "이름 바꾸기 실패",
+        "body": "방해할 수 있는 모든 프로그램을 닫고 다시 시도하세요."
+      },
+      "uninstall": {
+        "title": "제거 실패",
+        "body": "방해할 수 있는 모든 프로그램을 닫고 다시 시도하세요."
+      },
+      "save_delete": {
+        "title": "저장 데이터 삭제 실패",
+        "body": "방해할 수 있는 모든 프로그램을 닫고 다시 시도하세요."
+      },
+      "mod_delete": {
+        "title": "모드 삭제 실패",
+        "body": "방해할 수 있는 모든 프로그램을 닫고 다시 시도하세요."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager가 응답을 중지했습니다",
+        "body": "이 문제가 오래 지속되면 앱을 닫고 다시 시작하세요."
+      },
+      "executable_permission": {
+        "title": "게임을 실행 가능하게 만들기 실패",
+        "body": "Linux에서 DDLC.sh를 실행 가능하게 만들 수 없습니다. 게임이 제대로 실행되지 않을 수 있습니다."
+      }
+    }
+  }
+}

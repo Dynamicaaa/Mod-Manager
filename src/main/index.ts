@@ -56,7 +56,11 @@ let downloadManager: DownloadManager;
 // Flag for allowing the app window to be closed
 let windowClosable: boolean = true;
 
-const lang: I18n = new I18n(process.env.DDMM_LANG || app.getLocale());
+// Initialize language from saved config or fall back to system locale
+const savedLanguage = Config.readConfigValue("language");
+const defaultLanguage = process.env.DDMM_LANG || savedLanguage || app.getLocale();
+const lang: I18n = new I18n(defaultLanguage);
+console.log(`Initialized I18n with language: ${defaultLanguage} (saved: ${savedLanguage}, system: ${app.getLocale()})`);
 
 // endregion
 
@@ -150,6 +154,85 @@ ipcMain.on("translate", (ev: IpcMainEvent, query: { key: string, args: string[] 
     let passArgs: string[] = query.args;
     passArgs.unshift(query.key);
     ev.returnValue = lang.translate.apply(lang, passArgs);
+});
+
+// Get available languages
+ipcMain.on("get available languages", (ev: IpcMainEvent) => {
+    const langPath = joinPath(__dirname, "../../../lang/");
+    try {
+        const files = readdirSync(langPath);
+        const languages = {};
+        
+        files.forEach(file => {
+            if (file.endsWith('.json')) {
+                const langCode = file.replace('.json', '');
+                const langFile = joinPath(langPath, file);
+                try {
+                    const langData = JSON.parse(require('fs').readFileSync(langFile, 'utf8'));
+                    // Try to get language name from the file itself, or use a lookup
+                    const languageNames = {
+                        'en-GB': { name: 'English', nativeName: 'English (UK)' },
+                        'es-419': { name: 'Spanish', nativeName: 'Español (América Latina)' },
+                        'fr-FR': { name: 'French', nativeName: 'Français' },
+                        'de-DE': { name: 'German', nativeName: 'Deutsch' },
+                        'fi': { name: 'Finnish', nativeName: 'Suomi' },
+                        'ja': { name: 'Japanese', nativeName: '日本語' },
+                        'ko': { name: 'Korean', nativeName: '한국어' },
+                        'zh-CN': { name: 'Chinese (Simplified)', nativeName: '简体中文' },
+                        'zh-TW': { name: 'Chinese (Traditional)', nativeName: '繁體中文' },
+                        'ru': { name: 'Russian', nativeName: 'Русский' },
+                        'pt-BR': { name: 'Portuguese (Brazil)', nativeName: 'Português (Brasil)' },
+                        'it-IT': { name: 'Italian', nativeName: 'Italiano' },
+                        'nl': { name: 'Dutch', nativeName: 'Nederlands' },
+                        'nb': { name: 'Norwegian', nativeName: 'Norsk (Bokmål)' },
+                        'pl': { name: 'Polish', nativeName: 'Polski' },
+                        'cs': { name: 'Czech', nativeName: 'Čeština' },
+                        'da': { name: 'Danish', nativeName: 'Dansk' },
+                        'hu': { name: 'Hungarian', nativeName: 'Magyar' },
+                        'sv': { name: 'Swedish', nativeName: 'Svenska' },
+                        'tr': { name: 'Turkish', nativeName: 'Türkçe' }
+                    };
+                    
+                    languages[langCode] = languageNames[langCode] || { 
+                        name: langCode, 
+                        nativeName: langCode 
+                    };
+                } catch (err) {
+                    console.warn(`Failed to parse language file ${file}:`, err);
+                }
+            }
+        });
+        
+        ev.returnValue = languages;
+    } catch (err) {
+        console.error("Failed to read language directory:", err);
+        ev.returnValue = {
+            'en-GB': { name: 'English', nativeName: 'English (UK)' }
+        };
+    }
+});
+
+// Reload language
+ipcMain.on("reload language", (ev: IpcMainEvent, newLanguage: string) => {
+    try {
+        // Create new I18n instance with the new language
+        const newLang = new I18n(newLanguage);
+        
+        // Replace the global lang instance
+        Object.setPrototypeOf(lang, Object.getPrototypeOf(newLang));
+        Object.assign(lang, newLang);
+        
+        console.log(`Language reloaded to: ${newLanguage}`);
+        ev.returnValue = { success: true };
+        
+        // Notify renderer that language has been reloaded
+        if (appWindow && appWindow.webContents) {
+            appWindow.webContents.send('language-reloaded', newLanguage);
+        }
+    } catch (err) {
+        console.error("Failed to reload language:", err);
+        ev.returnValue = { success: false, error: err.message };
+    }
 });
 
 // Open external URLs

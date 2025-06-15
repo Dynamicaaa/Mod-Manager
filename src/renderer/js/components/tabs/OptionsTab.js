@@ -501,6 +501,44 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     </div>
                 </div>
             </div>
+            <div v-else-if="selected_option === 'language'">
+                <h1><i class="fas fa-language"></i> {{_("renderer.tab_options.section_language.title")}}</h1>
+                <p>{{_("renderer.tab_options.section_language.subtitle")}}</p>
+                <br>
+                
+                <p><strong>{{_("renderer.tab_options.section_language.description_current", getCurrentLanguageName())}}</strong></p>
+                <br>
+                
+                <div class="language-selector">
+                    <div class="form-group">
+                        <label for="language-select">{{_("renderer.tab_options.section_language.title")}}:</label>
+                        <select id="language-select" v-model="language_interim" style="width: 100%; max-width: 300px; margin: 8px 0;">
+                            <option v-for="(lang, code) in available_languages" :key="code" :value="code">
+                                {{lang.name}} ({{lang.nativeName}})
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-group" style="margin: 16px 0;">
+                    <button 
+                        class="primary" 
+                        @click="updateLanguage" 
+                        :disabled="language_interim === current_language"
+                    >
+                        <i class="fas fa-check fa-fw"></i>
+                        {{_("renderer.tab_options.section_language.button_apply")}}
+                    </button>
+                    <button class="secondary" @click="openLanguageContribution">
+                        <i class="fas fa-globe fa-fw"></i>
+                        {{_("renderer.tab_options.section_language.button_contribute")}}
+                    </button>
+                </div>
+                
+                <div class="info-box">
+                    <p><small><i class="fas fa-info-circle"></i> Language changes are applied immediately.</small></p>
+                </div>
+            </div>
             <div v-else-if="selected_option === 'advanced_appearance'">
                 <h1>{{_("renderer.tab_options.section_advanced_appearance.title")}}</h1>
                 <p>{{_("renderer.tab_options.section_advanced_appearance.subtitle")}}</p>
@@ -651,12 +689,28 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             "sayonika_server_testing": false,
             "sayonika_server_test_result": null,
             "ui_theme": "ddlc", // ddlc or classic
+            
+            // Language settings
+            "available_languages": {
+                "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
+                "de-DE": { "name": "German", "nativeName": "Deutsch" },
+                "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
+                "ja-JP": { "name": "Japanese", "nativeName": "日本語" },
+                "ko-KR": { "name": "Korean", "nativeName": "한국어" },
+                "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
+                "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
+            },
+            "language_interim": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-GB") : "en-GB",
+            "current_language": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-GB") : "en-GB",
+            
             "menu": [
                 {
                     "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
                     "contents": [
                         {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
                         {"title": "UI Theme", "id": "ui_theme"},
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
                         {
                             "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
                             "id": "advanced_appearance"
@@ -736,7 +790,15 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 "renderer.tab_options.section_testing.button_disable": "Disable SDK Debugging",
                 "renderer.tab_options.section_testing.button_enable": "Enable SDK Debugging",
                 "renderer.tab_options.section_debug.title": "Debug Information",
-                "renderer.tab_options.section_debug.subtitle": "Technical information about the application."
+                "renderer.tab_options.section_debug.subtitle": "Technical information about the application.",
+                "renderer.tab_options.section_language.title": "Language",
+                "renderer.tab_options.section_language.subtitle": "Change the language of Doki Doki Mod Manager.",
+                "renderer.tab_options.section_language.description_current": "Current language: {0}",
+                "renderer.tab_options.section_language.button_apply": "Apply Language",
+                "renderer.tab_options.section_language.button_contribute": "Help Translate",
+                "renderer.tab_options.section_language.description_restart": "Language changes will take effect after restarting the application.",
+                "renderer.tab_options.section_language.notification_changed": "Language changed to {0}. Please restart the application to see the changes.",
+                "renderer.tab_options.section_language.notification_same": "Language is already set to {0}."
             };
 
             let translation = fallbacks[key] || key;
@@ -1174,6 +1236,15 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     } catch (e) {
                         console.warn("Could not get Sayonika server URL:", e);
                     }
+
+                    // Get language setting
+                    try {
+                        this.current_language = ipcRenderer.sendSync("read config", "language") || "en-GB";
+                        this.language_interim = this.current_language;
+                        console.log("Language setting refreshed:", this.current_language);
+                    } catch (e) {
+                        console.warn("Could not get language setting:", e);
+                    }
                 } else if (typeof ddmm !== 'undefined') {
                     if (ddmm.config) {
                         try {
@@ -1181,6 +1252,8 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                             this.system_borders_enabled = ddmm.config.readConfigValue("systemBorders") || false;
                             this.sayonika_server_url = ddmm.config.readConfigValue("sayonikaServerUrl") || "https://sayonika.dynamicaaa.me";
                             this.sayonika_server_url_interim = this.sayonika_server_url;
+                            this.current_language = ddmm.config.readConfigValue("language") || "en-GB";
+                            this.language_interim = this.current_language;
                         } catch (e) {
                             console.warn("Could not get config values via ddmm:", e);
                         }
@@ -1206,6 +1279,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             const iconMap = {
                 "background": "fas fa-image",
                 "ui_theme": "fas fa-palette",
+                "language": "fas fa-language",
                 "advanced_appearance": "fas fa-sliders-h",
                 "updates": "fas fa-download",
                 "storage": "fas fa-folder",
@@ -1340,6 +1414,191 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     this.applyUITheme("ddlc");
                 }
             }
+        },
+
+        // Language methods
+        "updateLanguage": function() {
+            const newLanguage = this.language_interim;
+            
+            if (newLanguage === this.current_language) {
+                this.showNotification(this._("renderer.tab_options.section_language.notification_same", this.getCurrentLanguageName()), "info");
+                return;
+            }
+            
+            try {
+                // Save the language preference
+                if (typeof ddmm !== 'undefined' && ddmm.config) {
+                    ddmm.config.saveConfigValue("language", newLanguage);
+                } else if (typeof require !== 'undefined') {
+                    const {ipcRenderer} = require("electron");
+                    ipcRenderer.send("save config", {"key": "language", "value": newLanguage});
+                }
+                
+                // Reload the language immediately
+                if (typeof ddmm !== 'undefined' && ddmm.reloadLanguage) {
+                    const result = ddmm.reloadLanguage(newLanguage);
+                    if (result.success) {
+                        this.current_language = newLanguage;
+                        
+                        // Force update all Vue components
+                        this.$forceUpdate();
+                        
+                        // Emit global event to refresh all components
+                        if (typeof ddmm.emit === 'function') {
+                            ddmm.emit('language-changed', newLanguage);
+                        }
+                        
+                        // Also emit window event as fallback
+                        window.dispatchEvent(new CustomEvent('language-changed', { 
+                            detail: newLanguage 
+                        }));
+                        
+                        const languageName = this.getCurrentLanguageName();
+                        this.showNotification(`Language changed to ${languageName}`, "success");
+                        
+                        // Refresh the menu items with new translations
+                        this.refreshMenuTranslations();
+                    } else {
+                        console.error("Failed to reload language:", result.error);
+                        this.showNotification("Failed to apply language change: " + result.error, "error");
+                    }
+                } else {
+                    console.warn("ddmm.reloadLanguage not available, language saved but restart required");
+                    const languageName = this.getCurrentLanguageName();
+                    this.current_language = newLanguage;
+                    this.showNotification(this._("renderer.tab_options.section_language.notification_changed", languageName), "success");
+                }
+            } catch (error) {
+                console.error("Error saving language:", error);
+                this.showNotification("Error saving language configuration: " + error.message, "error");
+            }
+        },
+
+        "getCurrentLanguageName": function() {
+            const languageInfo = this.available_languages[this.current_language];
+            return languageInfo ? languageInfo.nativeName : this.current_language;
+        },
+
+        "openLanguageContribution": function() {
+            const url = "https://github.com/Dynamicaaa/Mod-Manager/tree/master/lang";
+            if (typeof ddmm !== 'undefined' && ddmm.app && ddmm.app.openURL) {
+                ddmm.app.openURL(url);
+            } else if (typeof require !== 'undefined') {
+                const {shell} = require("electron");
+                shell.openExternal(url);
+            } else {
+                window.open(url, '_blank');
+            }
+        },
+
+        "refreshMenuTranslations": function() {
+            // Refresh menu translations
+            this.menu = [
+                {
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
+                    "contents": [
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
+                        {"title": "UI Theme", "id": "ui_theme"},
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
+                        {
+                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
+                            "id": "advanced_appearance"
+                        }
+                    ]
+                },
+                {
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
+                    "contents": [
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
+                        {"title": "Sayonika Server", "id": "sayonika_server"}
+                    ]
+                },
+                {
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
+                    "contents": [
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
+                    ]
+                },
+                {
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
+                    "contents": [
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
+                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
+                    ]
+                }
+            ];
+        },
+
+        "loadAvailableLanguages": async function() {
+            try {
+                if (typeof ddmm !== 'undefined' && ddmm.getAvailableLanguages) {
+                    const languageData = ddmm.getAvailableLanguages();
+                    
+                    // Check if we got valid language data
+                    if (languageData && typeof languageData === 'object' && Object.keys(languageData).length > 0) {
+                        this.available_languages = languageData;
+                        
+                        // Get current language from config
+                        if (ddmm.config) {
+                            this.current_language = ddmm.config.readConfigValue("language") || "en-GB";
+                        } else {
+                            // Fallback to detecting system language or default
+                            this.current_language = "en-GB";
+                        }
+                        
+                        // Set interim language to current language
+                        this.language_interim = this.current_language;
+                        
+                        console.log("OptionsTab: Available languages loaded:", this.available_languages);
+                        console.log("OptionsTab: Current language:", this.current_language);
+                    } else {
+                        console.error("Failed to load available languages - invalid data:", languageData);
+                        // Set fallback languages
+                        this.available_languages = {
+                            "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                            "es-419": { "name": "Spanish", "nativeName": "Español (Latinoamérica)" },
+                            "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
+                            "ja-JP": { "name": "Japanese", "nativeName": "日本語" },
+                            "ko-KR": { "name": "Korean", "nativeName": "한국어" },
+                            "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
+                            "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
+                        };
+                        this.current_language = "en-GB";
+                        this.language_interim = "en-GB";
+                    }
+                } else {
+                    console.warn("ddmm.getAvailableLanguages not available, using fallback languages");
+                    // Set fallback languages
+                    this.available_languages = {
+                        "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                        "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
+                        "de-DE": { "name": "German", "nativeName": "Deutsch" },
+                        "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
+                        "ja-JP": { "name": "Japanese", "nativeName": "日本語" },
+                        "ko-KR": { "name": "Korean", "nativeName": "한국어" },
+                        "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
+                        "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
+                    };
+                    this.current_language = "en-GB";
+                    this.language_interim = "en-GB";
+                }
+            } catch (error) {
+                console.error("Error loading available languages:", error);
+                // Set fallback languages
+                this.available_languages = {
+                    "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                    "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
+                    "de-DE": { "name": "German", "nativeName": "Deutsch" },
+                    "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
+                    "ja-JP": { "name": "Japanese", "nativeName": "日本語" },
+                    "ko-KR": { "name": "Korean", "nativeName": "한국어" },
+                    "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
+                    "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
+                };
+                this.current_language = "en-GB";
+                this.language_interim = "en-GB";
+            }
         }
     },
 
@@ -1371,6 +1630,10 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 }
                 // Refresh all settings
                 this.refreshSettings();
+                
+                // Load available languages
+                this.loadAvailableLanguages();
+                
                 this.$forceUpdate();
             }
         });
@@ -1403,6 +1666,9 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 this.sdk_mode_interim = ddmm.config.readConfigValue("sdkMode") || "always";
                 this.release_channel_interim = ddmm.config.readConfigValue("updateChannel") || "stable";
             }
+            
+            // Load available languages
+            this.loadAvailableLanguages();
         } else {
             console.warn("OptionsTab: ddmm not available on mount");
             // Still try to get version from APP_CONFIG even if ddmm is not available
@@ -1415,6 +1681,9 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
         // Load and apply saved UI theme
         this.loadUITheme();
+
+        // Load available languages
+        this.loadAvailableLanguages();
 
         // Set up event listener for update status changes
         if (typeof ddmm !== 'undefined' && ddmm.on) {

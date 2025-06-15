@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Start",
+      "tab_mods": "Mods",
+      "tab_store": "Winkel",
+      "tab_options": "Opties",
+      "tab_about": "Over"
+    },
+    "version": {
+      "link_changelog": "wat is er nieuw?"
+    },
+
+    "user_menu": {
+      "option_rename": "Gebruikersnaam Wijzigen",
+      "option_logout": "Uitloggen"
+    },
+    "window_controls": {
+      "close": "Sluiten",
+      "maximise": "Maximaliseren",
+      "minimise": "Minimaliseren",
+      "devtools": "Ontwikkelaarstools In-/Uitschakelen (F12)",
+
+      "announcement": "Lees de laatste aankondiging",
+      "login": "Inloggen",
+      "sayonika_login": "Sayonika Inloggen",
+      "update": {
+        "checking": "Controleren op updates op de achtergrond...",
+        "available": "Er is een update beschikbaar. Klik hier om te downloaden.",
+        "downloading": "Update downloaden...",
+        "downloaded": "Een update is klaar om te installeren bij het afsluiten."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Afsluiten",
+      "button_continue": "Doorgaan"
+    },
+    "drop_cover": {
+      "text": "Sleep hier een mod om te installeren"
+    },
+    "announcement": {
+      "button_open": "Link Openen",
+      "button_close": "Sluiten"
+    },
+    "onboarding": {
+      "title": "Welkom!",
+      "description_download": "Laten we een kopie van DDLC zoeken.",
+      "button_download": "Bezoek DDLC's officiële downloadpagina",
+      "button_choose": "Bladeren naar een kopie",
+      "heading_step": "Stap {0}",
+      "s1_desc": "Je moet een kopie van Doki Doki Literature Club downloaden. Deze is te vinden op de officiële website (ddlc.moe) - klik op de knop hieronder om er nu naartoe te gaan.",
+      "s1_platform": "Wanneer gevraagd, kies ervoor om het bestand genaamd \"DDLC ({0})\" te downloaden.",
+      "s2_desc": "Zodra je download is voltooid, selecteer je deze met de knop hieronder.",
+      "description_location": "Je spellen worden opgeslagen in {0}",
+      "link_change": "(Wijzigen)"
+    },
+    "login_input": {
+      "message": "Voer je e-mailadres in",
+      "details": "Er wordt een e-mail naar dit adres gestuurd. Klik op de link in de e-mail om het inloggen te voltooien.",
+      "button_affirmative": "Inloggen",
+      "button_negative": "Annuleren"
+    },
+    "change_username_input": {
+      "message": "Voer je nieuwe gebruikersnaam in",
+      "details": "Gebruikersnamen hoeven niet uniek te zijn.",
+      "button_affirmative": "Wijzigen",
+      "button_negative": "Annuleren"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Zoek mods...",
+        "header_new": "Aan de Slag",
+        "link_install": "DDLC Installeren",
+        "header_installed": "Geïnstalleerd",
+        "header_downloaded": "Downloads"
+      },
+      "install_contextmenu": {
+        "launch": "Starten",
+        "rename": "Hernoemen",
+        "shortcut": "Snelkoppeling Maken",
+        "delete_save": "Opslaggegevens Verwijderen",
+        "uninstall": "Deïnstalleren"
+      },
+      "mod_contextmenu": {
+        "install": "Installeren",
+        "delete": "Verwijderen"
+      },
+      "uninstall_confirmation": {
+        "message": "Weet je zeker dat je wilt deïnstalleren?",
+        "details": "Je opslaggegevens voor {0} worden verwijderd en je hebt een kopie van de mod nodig om opnieuw te installeren.",
+        "button_affirmative": "Deïnstalleren",
+        "button_negative": "Annuleren"
+      },
+      "rename_input": {
+        "message": "Installatie Hernoemen",
+        "details": "Voer de nieuwe naam in voor {0}.",
+        "button_affirmative": "Hernoemen",
+        "button_negative": "Annuleren"
+      },
+      "mod_delete_confirmation": {
+        "message": "Weet je zeker dat je de mod wilt verwijderen?",
+        "details": "Je moet een andere kopie van de mod downloaden om opnieuw te installeren.",
+        "button_affirmative": "Verwijderen",
+        "button_negative": "Annuleren"
+      },
+      "save_delete_confirmation": {
+        "message": "Weet je zeker dat je je opslaggegevens wilt verwijderen?",
+        "details": "Je moet {0} opnieuw vanaf het begin starten.",
+        "button_affirmative": "Verwijderen",
+        "button_negative": "Annuleren"
+      },
+      "install": {
+        "button_launch": "Starten",
+        "button_settings": "Instellingen",
+        "tag_global_save": "Globale Opslag",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Prestaties ({0} / {1})",
+        "description_achievements": "Blijf spelen om meer prestaties te ontgrendelen.",
+        "description_achievements_complete": "Je hebt alle prestaties ontgrendeld. Gefeliciteerd!",
+        "title_screenshots_none": "Geen screenshots",
+        "title_screenshots_one": "1 screenshot",
+        "title_screenshots": "{0} screenshots",
+        "description_screenshots": "Druk op S tijdens het spelen om een screenshot te maken.",
+        "description_sdk": "Deze mod ondersteunt speciale functies met de Doki Doki Mod Manager SDK!",
+        "description_author": "Gemaakt door {0}",
+
+        "link_website": "Website ({0})",
+        "description_external": "Tonen in map"
+      },
+      "mod": {
+        "button_install": "Installeren",
+        "button_settings": "Instellingen",
+        "description_external": "Tonen in map"
+      },
+      "install_creation": {
+        "title": "DDLC Installeren",
+        "label_install_name": "Installatienaam",
+        "label_folder_name": "Mapnaam",
+        "label_global_save": "Globale Opslag",
+        "label_has_mod": "Mod Installeren",
+        "label_mod": "Mod",
+
+        "label_existing_saves": "Bestaande Opslagbestanden",
+        "description_mod": "Klik om naar een mod te bladeren.",
+        "header_summary": "Samenvatting",
+        "description_vanilla": "Er wordt een schone kopie van DDLC gemaakt. De opslaggegevens zijn gescheiden van elke andere kopie van het spel.",
+        "description_vanilla_global_save": "Er wordt een schone kopie van DDLC gemaakt. De opslaggegevens worden gedeeld met andere kopieën van het spel (bijv. Steam)",
+
+        "description_modded": "Er wordt een kopie van DDLC gemaakt en de mod wordt geïnstalleerd. De opslaggegevens zijn gescheiden van elke andere kopie van het spel.",
+        "description_modded_global_save": "Er wordt een kopie van DDLC gemaakt en de mod wordt geïnstalleerd. De opslaggegevens worden gedeeld met andere kopieën van het spel (bijv. Steam)",
+
+        "button_install": "Installeren",
+        "button_installing": "Installeren...",
+        "status_exists": "Die map bestaat al. Kies een andere mapnaam."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "De winkel komt binnenkort!",
+      "description_1": "De Sayonika mod database zal een centrale locatie bieden om DDLC mods te delen, downloaden en beoordelen. Wanneer Sayonika publiek beschikbaar is, kun je mods rechtstreeks hier in Doki Doki Mod Manager bekijken.",
+      "description_2": "Terwijl je wacht, kun je gerust enkele van deze aanbevolen mods downloaden.",
+      "error": "Laden van de modlijst mislukt. Ben je offline?",
+      "button_download": "Downloaden"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Uiterlijk",
+        "link_background": "Achtergrond",
+        "link_language": "Taal",
+        "link_advanced_appearance": "Geavanceerd",
+        "header_enhancements": "Verbeteringen",
+        "link_sdk": "Prestaties & SDK",
+
+        "header_application": "Applicatie",
+        "link_updates": "Updates",
+        "link_storage": "Opslaglocatie",
+        "header_developers": "Ontwikkelaars",
+        "link_testing": "SDK Debug",
+        "link_debug": "App Info"
+      },
+      "section_backgrounds": {
+        "title": "Achtergrond",
+        "subtitle": "Pas je kopie van Doki Doki Mod Manager aan met een van deze achtergronden.",
+        "button_none": "Geen Achtergrond",
+        "description_credit": "Originele DDLC achtergronden met dank aan Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Geavanceerd",
+        "subtitle": "Vind hier andere interface-opties.",
+        "button_enable_sysborders": "Systeemranden Gebruiken (herstart vereist)",
+        "button_disable_sysborders": "Systeemranden Uitschakelen (herstart vereist)"
+      },
+      "section_storage": {
+        "title": "Opslaglocatie",
+        "subtitle": "Wijzig waar je spelgegevens worden opgeslagen.",
+        "description_moving": "Waarschuwing! Als je ervoor kiest om je installatielocatie te wijzigen, worden al je mods, installaties en opslaggegevens verplaatst. Dit kan enkele minuten duren en kan niet worden onderbroken.",
+        "description_current": "Huidige locatie: {0}",
+        "button_change": "Installatielocatie Wijzigen"
+      },
+      "section_updates": {
+        "title": "Updates",
+        "subtitle": "Verkrijg de nieuwste versie van Doki Doki Mod Manager.",
+        "description_current_version": "Huidige versie: {0}",
+        "label_channel": "Release Kanaal",
+        "option_stable": "Stabiel",
+        "option_beta": "Beta",
+        "button_check": "Controleren op updates"
+      },
+      "section_sdk": {
+        "title": "Prestaties & SDK",
+        "subtitle": "Wijzig de manier waarop prestaties worden behandeld.",
+        "description_mode": "Prestaties inschakelen:",
+        "checkbox_always": "Altijd (aanbevolen)",
+        "checkbox_specified": "Wanneer de mod specificeert dat het ze ondersteunt",
+        "checkbox_never": "Nooit"
+      },
+
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Schakel debug logging in om je mods te testen met de Doki Doki Mod Manager SDK.",
+        "button_enable": "Debugging Inschakelen",
+        "button_disable": "Debugging Uitschakelen"
+      },
+      "section_debug": {
+        "title": "App Info",
+        "subtitle": "Informatie voor het diagnosticeren van problemen."
+      },
+      "section_language": {
+        "title": "Taal",
+        "subtitle": "Wijzig de taal van Doki Doki Mod Manager.",
+        "description_current": "Huidige taal: {0}",
+        "button_apply": "Taal Toepassen",
+        "button_contribute": "Help met Vertalen",
+        "description_restart": "Taalwijzigingen worden van kracht na het herstarten van de applicatie.",
+        "notification_changed": "Taal gewijzigd naar {0}. Herstart de applicatie om de wijzigingen te zien.",
+        "notification_same": "Taal is al ingesteld op {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Over",
+      "description": "Doki Doki Mod Manager is een door de community ontwikkeld project dat je helpt bij het vinden, installeren en spelen van mods voor Doki Doki Literature Club, een gratis Visual Novel spel van Team Salvato.",
+      "title_disclaimer": "Disclaimer",
+      "disclaimer_1": "Doki Doki Mod Manager is een fanwerk van Doki Doki Literature Club en is niet geaffilieerd met Team Salvato. Het is een fanwerk, zoals gedefinieerd door Team Salvato's IP Richtlijnen.",
+      "disclaimer_2": "Doki Doki Mod Manager neemt geen verantwoordelijkheid voor schade aan je bestanden of computer als gevolg van het spelen van een mod of anderszins. Het is aan jou om ervoor te zorgen dat mods veilig zijn om te spelen.",
+      "title_socials": "Contact opnemen",
+
+      "social_twitter": "Volg @DokiMod op Twitter",
+      "social_reddit": "Stuur me een bericht op Reddit",
+      "social_email": "Stuur me een e-mail",
+      "title_support": "Ontwikkeling Ondersteunen",
+      "description_support": "Doki Doki Mod Manager zal altijd gratis zijn om te downloaden en gebruiken. Als je het leuk vindt en me wilt helpen het up-to-date te houden, overweeg dan me te ondersteunen op een van de volgende manieren.",
+      "support_donate": "Doe een eenmalige donatie",
+      "support_steelseries": "Krijg 10% korting op SteelSeries gaming randapparatuur (affiliate link)",
+      "support_code": "Draag bij aan het project (code of vertalingen)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Open Doki Doki Mod Manager en start {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC is actief",
+      "title_crashed": "Er is iets misgegaan",
+      "button_browse": "Spelmap Openen",
+      "button_close": "OK",
+      "description_running": "Sluit het spel om wijzigingen aan je mods te maken.",
+      "install_missing": "De installatie kon niet worden gevonden.",
+      "install_corrupt": "De installatie is onvolledig of beschadigd.",
+      "install_crashed": "Het spel kon niet worden gestart of is gecrasht."
+    },
+    "move_install": {
+      "title": "Selecteer nieuwe installatiemap"
+    },
+    "mod_browse_dialog": {
+      "title": "Vind een mod om te installeren",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Zoek een kopie van DDLC's zip-bestand",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Kies waar je snelkoppeling moet worden geplaatst",
+      "file_format_name": "Snelkoppeling"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager is gecrasht",
+        "body": "Het probleem is gerapporteerd. Herstart en probeer opnieuw."
+      },
+      "move_install": {
+        "title": "Verplaatsen van installatiemap mislukt",
+        "body": "Controleer of je toestemming hebt en genoeg ruimte om naar deze map te verplaatsen."
+      },
+      "shortcut": {
+        "title": "Maken van snelkoppeling mislukt",
+        "body": "Controleer of je toestemming hebt om bestanden in deze map te maken."
+      },
+      "install": {
+        "title": "Installeren van spel mislukt",
+        "body": "Controleer of je toestemming hebt en genoeg ruimte om te installeren."
+      },
+      "rename": {
+        "title": "Hernoemen mislukt",
+        "body": "Controleer of je alle programma's hebt gesloten die mogelijk interfereren en probeer opnieuw."
+      },
+      "uninstall": {
+        "title": "Deïnstalleren mislukt",
+        "body": "Controleer of je alle programma's hebt gesloten die mogelijk interfereren en probeer opnieuw."
+      },
+      "save_delete": {
+        "title": "Verwijderen van opslaggegevens mislukt",
+        "body": "Controleer of je alle programma's hebt gesloten die mogelijk interfereren en probeer opnieuw."
+      },
+      "mod_delete": {
+        "title": "Verwijderen van de mod mislukt",
+        "body": "Controleer of je alle programma's hebt gesloten die mogelijk interfereren en probeer opnieuw."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager reageerde niet meer",
+        "body": "Als dit probleem lang aanhoudt, sluit de app af en start opnieuw."
+      },
+      "executable_permission": {
+        "title": "Uitvoerbaar maken van spel mislukt",
+        "body": "Kon DDLC.sh niet uitvoerbaar maken op Linux. Het spel start mogelijk niet goed op."
+      }
+    }
+  }
+}

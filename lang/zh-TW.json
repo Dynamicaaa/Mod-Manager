@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "主頁",
+      "tab_mods": "模組",
+      "tab_store": "商店",
+      "tab_options": "選項",
+      "tab_about": "關於"
+    },
+    "version": {
+      "link_changelog": "新功能"
+    },
+
+    "user_menu": {
+      "option_rename": "更改用戶名",
+      "option_logout": "登出"
+    },
+    "window_controls": {
+      "close": "關閉",
+      "maximise": "最大化",
+      "minimise": "最小化",
+      "devtools": "切換開發者工具 (F12)",
+
+      "announcement": "閱讀最新公告",
+      "login": "登錄",
+      "sayonika_login": "Sayonika 登錄",
+      "update": {
+        "checking": "正在後台檢查更新...",
+        "available": "有可用更新。點擊此處下載。",
+        "downloading": "正在下載更新...",
+        "downloaded": "更新已準備好，退出時安裝。"
+      }
+    },
+    "crash_cover": {
+      "button_close": "退出",
+      "button_continue": "繼續"
+    },
+    "drop_cover": {
+      "text": "將模組拖放到此處以安裝"
+    },
+    "announcement": {
+      "button_open": "打開鏈接",
+      "button_close": "關閉"
+    },
+    "onboarding": {
+      "title": "歡迎！",
+      "description_download": "讓我們找到 DDLC 的副本。",
+      "button_download": "訪問 DDLC 官方下載頁面",
+      "button_choose": "瀏覽副本",
+      "heading_step": "步驟 {0}",
+      "s1_desc": "您需要下載一份 Doki Doki Literature Club 的副本。這可以在官方網站 (ddlc.moe) 找到 - 點擊下面的按鈕立即前往。",
+      "s1_platform": "當詢問時，選擇下載名為 \"DDLC ({0})\" 的文件。",
+      "s2_desc": "下載完成後，使用下面的按鈕選擇它。",
+      "description_location": "您的遊戲將存儲在 {0}",
+      "link_change": "(更改)"
+    },
+    "login_input": {
+      "message": "輸入您的電子郵件地址",
+      "details": "郵件將發送到此地址。點擊郵件中的鏈接完成登錄。",
+      "button_affirmative": "登錄",
+      "button_negative": "取消"
+    },
+    "change_username_input": {
+      "message": "輸入您的新用戶名",
+      "details": "用戶名不需要是唯一的。",
+      "button_affirmative": "更改",
+      "button_negative": "取消"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "搜索模組...",
+        "header_new": "開始使用",
+        "link_install": "安裝 DDLC",
+        "header_installed": "已安裝",
+        "header_downloaded": "下載"
+      },
+      "install_contextmenu": {
+        "launch": "啟動",
+        "rename": "重新命名",
+        "shortcut": "創建快捷方式",
+        "delete_save": "刪除存檔數據",
+        "uninstall": "卸載"
+      },
+      "mod_contextmenu": {
+        "install": "安裝",
+        "delete": "刪除"
+      },
+      "uninstall_confirmation": {
+        "message": "您確定要卸載嗎？",
+        "details": "{0} 的存檔數據將被刪除，您需要模組副本才能再次安裝。",
+        "button_affirmative": "卸載",
+        "button_negative": "取消"
+      },
+      "rename_input": {
+        "message": "重新命名安裝",
+        "details": "輸入 {0} 的新名稱。",
+        "button_affirmative": "重新命名",
+        "button_negative": "取消"
+      },
+      "mod_delete_confirmation": {
+        "message": "您確定要刪除模組嗎？",
+        "details": "您需要下載模組的另一個副本才能再次安裝。",
+        "button_affirmative": "刪除",
+        "button_negative": "取消"
+      },
+      "save_delete_confirmation": {
+        "message": "您確定要刪除存檔數據嗎？",
+        "details": "您必須從頭開始重新開始 {0}。",
+        "button_affirmative": "刪除",
+        "button_negative": "取消"
+      },
+      "install": {
+        "button_launch": "啟動",
+        "button_settings": "設置",
+        "tag_global_save": "全局存檔",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "成就 ({0} / {1})",
+        "description_achievements": "繼續遊戲以解鎖更多成就。",
+        "description_achievements_complete": "您已解鎖所有成就。恭喜！",
+        "title_screenshots_none": "無截圖",
+        "title_screenshots_one": "1張截圖",
+        "title_screenshots": "{0}張截圖",
+        "description_screenshots": "遊戲時按 S 鍵截圖。",
+        "description_sdk": "此模組支援 Doki Doki Mod Manager SDK 的特殊功能！",
+        "description_author": "由 {0} 創作",
+
+        "link_website": "網站 ({0})",
+        "description_external": "在文件夾中顯示"
+      },
+      "mod": {
+        "button_install": "安裝",
+        "button_settings": "設置",
+        "description_external": "在文件夾中顯示"
+      },
+      "install_creation": {
+        "title": "安裝 DDLC",
+        "label_install_name": "安裝名稱",
+        "label_folder_name": "文件夾名稱",
+        "label_global_save": "全局存檔",
+        "label_has_mod": "安裝模組",
+        "label_mod": "模組",
+
+        "label_existing_saves": "現有存檔文件",
+        "description_mod": "點擊瀏覽模組。",
+        "header_summary": "摘要",
+        "description_vanilla": "將創建 DDLC 的純淨副本。存檔數據將與遊戲的任何其他副本分開。",
+        "description_vanilla_global_save": "將創建 DDLC 的純淨副本。存檔數據將與遊戲的其他副本共享（例如 Steam）",
+
+        "description_modded": "將創建 DDLC 的副本，並安裝模組。存檔數據將與遊戲的任何其他副本分開。",
+        "description_modded_global_save": "將創建 DDLC 的副本，並安裝模組。存檔數據將與遊戲的其他副本共享（例如 Steam）",
+
+        "button_install": "安裝",
+        "button_installing": "正在安裝...",
+        "status_exists": "該文件夾已存在。請選擇另一個文件夾名稱。"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "商店即將推出！",
+      "description_1": "Sayonika 模組數據庫將提供一個分享、下載和評論 DDLC 模組的中心位置。當 Sayonika 公開可用時，您將能夠直接在 Doki Doki Mod Manager 中瀏覽模組。",
+      "description_2": "在等待期間，請隨意下載一些推薦的模組。",
+      "error": "加載模組列表失敗。您是離線狀態嗎？",
+      "button_download": "下載"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "外觀",
+        "link_background": "背景",
+        "link_language": "語言",
+        "link_advanced_appearance": "進階",
+        "header_enhancements": "增強功能",
+        "link_sdk": "成就 & SDK",
+
+        "header_application": "應用程式",
+        "link_updates": "更新",
+        "link_storage": "存儲位置",
+        "header_developers": "開發者",
+        "link_testing": "SDK 調試",
+        "link_debug": "應用資訊"
+      },
+      "section_backgrounds": {
+        "title": "背景",
+        "subtitle": "使用這些背景之一自定義您的 Doki Doki Mod Manager 副本。",
+        "button_none": "無背景",
+        "description_credit": "原始 DDLC 背景由 Team Salvato 提供。"
+      },
+      "section_advanced_appearance": {
+        "title": "進階",
+        "subtitle": "在此處查找其他界面選項。",
+        "button_enable_sysborders": "使用系統邊框（需要重啟）",
+        "button_disable_sysborders": "禁用系統邊框（需要重啟）"
+      },
+      "section_storage": {
+        "title": "存儲位置",
+        "subtitle": "更改遊戲數據的存儲位置。",
+        "description_moving": "警告！如果您選擇更改安裝位置，您的所有模組、安裝和存檔數據都將被移動。這可能需要幾分鐘時間，並且無法中斷。",
+        "description_current": "當前位置：{0}",
+        "button_change": "更改安裝位置"
+      },
+      "section_updates": {
+        "title": "更新",
+        "subtitle": "獲取 Doki Doki Mod Manager 的最新版本。",
+        "description_current_version": "當前版本：{0}",
+        "label_channel": "發佈頻道",
+        "option_stable": "穩定版",
+        "option_beta": "測試版",
+        "button_check": "檢查更新"
+      },
+      "section_sdk": {
+        "title": "成就 & SDK",
+        "subtitle": "更改成就處理方式。",
+        "description_mode": "啟用成就：",
+        "checkbox_always": "總是（推薦）",
+        "checkbox_specified": "當模組指定支援時",
+        "checkbox_never": "從不"
+      },
+
+      "section_testing": {
+        "title": "SDK 調試",
+        "subtitle": "啟用調試日誌以使用 Doki Doki Mod Manager SDK 測試您的模組。",
+        "button_enable": "啟用調試",
+        "button_disable": "禁用調試"
+      },
+      "section_debug": {
+        "title": "應用資訊",
+        "subtitle": "用於診斷問題的資訊。"
+      },
+      "section_language": {
+        "title": "語言",
+        "subtitle": "更改 Doki Doki Mod Manager 的語言。",
+        "description_current": "當前語言：{0}",
+        "button_apply": "應用語言",
+        "button_contribute": "幫助翻譯",
+        "description_restart": "語言更改將在重啟應用程式後生效。",
+        "notification_changed": "語言已更改為 {0}。請重啟應用程式以查看更改。",
+        "notification_same": "語言已設置為 {0}。"
+      }
+    },
+    "tab_about": {
+      "title": "關於",
+      "description": "Doki Doki Mod Manager 是一個社區開發的項目，幫助您查找、安裝和遊玩 Doki Doki Literature Club（Team Salvato 開發的免費視覺小說遊戲）的模組。",
+      "title_disclaimer": "免責聲明",
+      "disclaimer_1": "Doki Doki Mod Manager 是 Doki Doki Literature Club 的同人作品，與 Team Salvato 無關。這是 Team Salvato IP 指南定義的同人作品。",
+      "disclaimer_2": "Doki Doki Mod Manager 不對因遊玩模組或其他原因而對您的文件或電腦造成的任何損害負責。確保模組安全遊玩是您的責任。",
+      "title_socials": "聯繫我們",
+
+      "social_twitter": "在 Twitter 上關注 @DokiMod",
+      "social_reddit": "在 Reddit 上給我留言",
+      "social_email": "給我發郵件",
+      "title_support": "支援開發",
+      "description_support": "Doki Doki Mod Manager 將始終免費下載和使用。如果您喜歡它並希望幫助我保持更新，請考慮通過以下方式之一支援我。",
+      "support_donate": "進行一次性捐贈",
+      "support_steelseries": "獲得 SteelSeries 遊戲外設 10% 折扣（聯盟鏈接）",
+      "support_code": "為項目做貢獻（代碼或翻譯）"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "打開 Doki Doki Mod Manager 並啟動 {0}。"
+    },
+    "running_cover": {
+      "title_running": "DDLC 正在運行",
+      "title_crashed": "出現了問題",
+      "button_browse": "打開遊戲文件夾",
+      "button_close": "確定",
+      "description_running": "關閉遊戲以對模組進行更改。",
+      "install_missing": "找不到安裝。",
+      "install_corrupt": "安裝不完整或已損壞。",
+      "install_crashed": "遊戲啟動失敗或崩潰。"
+    },
+    "move_install": {
+      "title": "選擇新的安裝文件夾"
+    },
+    "mod_browse_dialog": {
+      "title": "查找要安裝的模組",
+      "file_format_name": "模組"
+    },
+    "game_browse_dialog": {
+      "title": "定位 DDLC zip 文件的副本",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "選擇快捷方式的放置位置",
+      "file_format_name": "快捷方式"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager 崩潰了",
+        "body": "問題已報告。請重啟並重試。"
+      },
+      "move_install": {
+        "title": "移動安裝文件夾失敗",
+        "body": "檢查您是否有權限和足夠的空間移動到此文件夾。"
+      },
+      "shortcut": {
+        "title": "創建快捷方式失敗",
+        "body": "檢查您是否有權限在此文件夾中創建文件。"
+      },
+      "install": {
+        "title": "遊戲安裝失敗",
+        "body": "檢查您是否有權限和足夠的空間進行安裝。"
+      },
+      "rename": {
+        "title": "重新命名失敗",
+        "body": "檢查您是否已關閉所有可能干擾的程式並重試。"
+      },
+      "uninstall": {
+        "title": "卸載失敗",
+        "body": "檢查您是否已關閉所有可能干擾的程式並重試。"
+      },
+      "save_delete": {
+        "title": "刪除存檔數據失敗",
+        "body": "檢查您是否已關閉所有可能干擾的程式並重試。"
+      },
+      "mod_delete": {
+        "title": "刪除模組失敗",
+        "body": "檢查您是否已關閉所有可能干擾的程式並重試。"
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager 停止響應",
+        "body": "如果此問題持續很長時間，請關閉應用並重新啟動。"
+      },
+      "executable_permission": {
+        "title": "使遊戲可執行失敗",
+        "body": "在 Linux 上無法使 DDLC.sh 可執行。遊戲可能無法正常啟動。"
+      }
+    }
+  }
+}

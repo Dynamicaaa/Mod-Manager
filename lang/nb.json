@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Hjem",
+      "tab_mods": "Mods",
+      "tab_store": "Butikk",
+      "tab_options": "Alternativer",
+      "tab_about": "Om"
+    },
+    "version": {
+      "link_changelog": "hva er nytt?"
+    },
+
+    "user_menu": {
+      "option_rename": "Endre Brukernavn",
+      "option_logout": "Logg ut"
+    },
+    "window_controls": {
+      "close": "Lukk",
+      "maximise": "Maksimer",
+      "minimise": "Minimer",
+      "devtools": "Aktiver/Deaktiver Utviklerverktøy (F12)",
+
+      "announcement": "Les den siste kunngjøringen",
+      "login": "Logg Inn",
+      "sayonika_login": "Sayonika Innlogging",
+      "update": {
+        "checking": "Sjekker for oppdateringer i bakgrunnen...",
+        "available": "En oppdatering er tilgjengelig. Klikk her for å laste den ned.",
+        "downloading": "Laster ned oppdatering...",
+        "downloaded": "En oppdatering er klar til å installeres når du avslutter."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Avslutt",
+      "button_continue": "Fortsett"
+    },
+    "drop_cover": {
+      "text": "Dra en mod hit for å installere den"
+    },
+    "announcement": {
+      "button_open": "Åpne Lenke",
+      "button_close": "Lukk"
+    },
+    "onboarding": {
+      "title": "Velkommen!",
+      "description_download": "La oss finne en kopi av DDLC.",
+      "button_download": "Besøk DDLC sin offisielle nedlastingsside",
+      "button_choose": "Bla gjennom for en kopi",
+      "heading_step": "Steg {0}",
+      "s1_desc": "Du må laste ned en kopi av Doki Doki Literature Club. Denne kan finnes på den offisielle nettsiden (ddlc.moe) - klikk på knappen nedenfor for å gå dit nå.",
+      "s1_platform": "Når du blir spurt, velg å laste ned filen som heter \"DDLC ({0})\".",
+      "s2_desc": "Når nedlastingen er ferdig, velg den ved å bruke knappen nedenfor.",
+      "description_location": "Spillene dine vil bli lagret på {0}",
+      "link_change": "(Endre)"
+    },
+    "login_input": {
+      "message": "Skriv inn e-postadressen din",
+      "details": "En e-post vil bli sendt til denne adressen. Klikk på lenken i e-posten for å fullføre innloggingen.",
+      "button_affirmative": "Logg Inn",
+      "button_negative": "Avbryt"
+    },
+    "change_username_input": {
+      "message": "Skriv inn ditt nye brukernavn",
+      "details": "Brukernavn trenger ikke å være unike.",
+      "button_affirmative": "Endre",
+      "button_negative": "Avbryt"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Søk mods...",
+        "header_new": "Kom i Gang",
+        "link_install": "Installer DDLC",
+        "header_installed": "Installerte",
+        "header_downloaded": "Nedlastinger"
+      },
+      "install_contextmenu": {
+        "launch": "Start",
+        "rename": "Gi nytt navn",
+        "shortcut": "Lag Snarvei",
+        "delete_save": "Slett Lagrede Data",
+        "uninstall": "Avinstaller"
+      },
+      "mod_contextmenu": {
+        "install": "Installer",
+        "delete": "Slett"
+      },
+      "uninstall_confirmation": {
+        "message": "Er du sikker på at du vil avinstallere?",
+        "details": "Dine lagrede data for {0} vil bli slettet, og du vil trenge en kopi av modden for å installere den igjen.",
+        "button_affirmative": "Avinstaller",
+        "button_negative": "Avbryt"
+      },
+      "rename_input": {
+        "message": "Gi nytt navn til Installasjon",
+        "details": "Skriv inn det nye navnet for {0}.",
+        "button_affirmative": "Gi nytt navn",
+        "button_negative": "Avbryt"
+      },
+      "mod_delete_confirmation": {
+        "message": "Er du sikker på at du vil slette modden?",
+        "details": "Du vil måtte laste ned en annen kopi av modden for å installere den igjen.",
+        "button_affirmative": "Slett",
+        "button_negative": "Avbryt"
+      },
+      "save_delete_confirmation": {
+        "message": "Er du sikker på at du vil slette dine lagrede data?",
+        "details": "Du vil måtte starte {0} på nytt fra begynnelsen.",
+        "button_affirmative": "Slett",
+        "button_negative": "Avbryt"
+      },
+      "install": {
+        "button_launch": "Start",
+        "button_settings": "Innstillinger",
+        "tag_global_save": "Global Lagring",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Prestater ({0} / {1})",
+        "description_achievements": "Fortsett å spille for å låse opp flere prestater.",
+        "description_achievements_complete": "Du har låst opp alle prestater. Gratulerer!",
+        "title_screenshots_none": "Ingen skjermbilder",
+        "title_screenshots_one": "1 skjermbilde",
+        "title_screenshots": "{0} skjermbilder",
+        "description_screenshots": "Trykk S mens du spiller for å ta et skjermbilde.",
+        "description_sdk": "Denne modden støtter spesielle funksjoner med Doki Doki Mod Manager SDK!",
+        "description_author": "Laget av {0}",
+
+        "link_website": "Nettsted ({0})",
+        "description_external": "Vis i mappe"
+      },
+      "mod": {
+        "button_install": "Installer",
+        "button_settings": "Innstillinger",
+        "description_external": "Vis i mappe"
+      },
+      "install_creation": {
+        "title": "Installer DDLC",
+        "label_install_name": "Installasjonsnavn",
+        "label_folder_name": "Mappenavn",
+        "label_global_save": "Global Lagring",
+        "label_has_mod": "Installer Mod",
+        "label_mod": "Mod",
+
+        "label_existing_saves": "Eksisterende Lagrede Filer",
+        "description_mod": "Klikk for å bla gjennom for en mod.",
+        "header_summary": "Sammendrag",
+        "description_vanilla": "En ren kopi av DDLC vil bli opprettet. De lagrede dataene vil være separate fra alle andre kopier av spillet.",
+        "description_vanilla_global_save": "En ren kopi av DDLC vil bli opprettet. De lagrede dataene vil bli delt med andre kopier av spillet (f.eks. Steam)",
+
+        "description_modded": "En kopi av DDLC vil bli opprettet, og modden vil bli installert. De lagrede dataene vil være separate fra alle andre kopier av spillet.",
+        "description_modded_global_save": "En kopi av DDLC vil bli opprettet, og modden vil bli installert. De lagrede dataene vil bli delt med andre kopier av spillet (f.eks. Steam)",
+
+        "button_install": "Installer",
+        "button_installing": "Installerer...",
+        "status_exists": "Den mappen eksisterer allerede. Velg et annet mappenavn."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Butikken kommer snart!",
+      "description_1": "Sayonika mod-databasen vil tilby et sentralt sted for å dele, laste ned og anmelde DDLC-mods. Når Sayonika er offentlig tilgjengelig, vil du kunne bla gjennom mods direkte her i Doki Doki Mod Manager.",
+      "description_2": "Mens du venter, kan du gjerne laste ned noen av disse anbefalte moddene.",
+      "error": "Kunne ikke laste listen over mods. Er du frakoblet?",
+      "button_download": "Last ned"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Utseende",
+        "link_background": "Bakgrunn",
+        "link_language": "Språk",
+        "link_advanced_appearance": "Avansert",
+        "header_enhancements": "Forbedringer",
+        "link_sdk": "Prestater & SDK",
+
+        "header_application": "Applikasjon",
+        "link_updates": "Oppdateringer",
+        "link_storage": "Lagringssted",
+        "header_developers": "Utviklere",
+        "link_testing": "SDK Debug",
+        "link_debug": "App Info"
+      },
+      "section_backgrounds": {
+        "title": "Bakgrunn",
+        "subtitle": "Tilpass din kopi av Doki Doki Mod Manager med en av disse bakgrunnene.",
+        "button_none": "Ingen Bakgrunn",
+        "description_credit": "Originale DDLC bakgrunner med tillatelse fra Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Avansert",
+        "subtitle": "Finn andre grensesnittvalg her.",
+        "button_enable_sysborders": "Bruk Systemkanter (krever omstart)",
+        "button_disable_sysborders": "Deaktiver Systemkanter (krever omstart)"
+      },
+      "section_storage": {
+        "title": "Lagringssted",
+        "subtitle": "Endre hvor spilldataene dine lagres.",
+        "description_moving": "Advarsel! Hvis du velger å endre installasjonsstedet ditt, vil alle dine mods, installasjoner og lagrede data bli flyttet. Dette kan ta flere minutter og kan ikke avbrytes.",
+        "description_current": "Nåværende sted: {0}",
+        "button_change": "Endre Installasjonssted"
+      },
+      "section_updates": {
+        "title": "Oppdateringer",
+        "subtitle": "Få den nyeste versjonen av Doki Doki Mod Manager.",
+        "description_current_version": "Nåværende versjon: {0}",
+        "label_channel": "Utgivelseskanal",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Sjekk for oppdateringer"
+      },
+      "section_sdk": {
+        "title": "Prestater & SDK",
+        "subtitle": "Endre måten prestater håndteres på.",
+        "description_mode": "Aktiver prestater:",
+        "checkbox_always": "Alltid (anbefalt)",
+        "checkbox_specified": "Når modden spesifiserer at den støtter dem",
+        "checkbox_never": "Aldri"
+      },
+
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Aktiver debug-logging for å teste moddene dine med Doki Doki Mod Manager SDK.",
+        "button_enable": "Aktiver Debugging",
+        "button_disable": "Deaktiver Debugging"
+      },
+      "section_debug": {
+        "title": "App Info",
+        "subtitle": "Informasjon for å diagnostisere problemer."
+      },
+      "section_language": {
+        "title": "Språk",
+        "subtitle": "Endre språket til Doki Doki Mod Manager.",
+        "description_current": "Nåværende språk: {0}",
+        "button_apply": "Bruk Språk",
+        "button_contribute": "Hjelp til med Oversettelse",
+        "description_restart": "Språkendringer vil tre i kraft etter omstart av applikasjonen.",
+        "notification_changed": "Språk endret til {0}. Start applikasjonen på nytt for å se endringene.",
+        "notification_same": "Språket er allerede satt til {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Om",
+      "description": "Doki Doki Mod Manager er et samfunnsutviklet prosjekt som hjelper deg med å finne, installere og spille mods for Doki Doki Literature Club, et gratis Visual Novel-spill av Team Salvato.",
+      "title_disclaimer": "Ansvarsfraskrivelse",
+      "disclaimer_1": "Doki Doki Mod Manager er et fanverk av Doki Doki Literature Club og er ikke tilknyttet Team Salvato. Det er et fanverk, som definert av Team Salvatos IP-retningslinjer.",
+      "disclaimer_2": "Doki Doki Mod Manager tar ikke ansvar for skader på filene eller datamaskinen din som følge av å spille en mod eller på annen måte. Det er opp til deg å sørge for at mods er trygge å spille.",
+      "title_socials": "Ta kontakt",
+
+      "social_twitter": "Følg @DokiMod på Twitter",
+      "social_reddit": "Send meg en melding på Reddit",
+      "social_email": "Send meg en e-post",
+      "title_support": "Støtt Utvikling",
+      "description_support": "Doki Doki Mod Manager vil alltid være gratis å laste ned og bruke. Hvis du liker det og vil hjelpe meg med å holde det oppdatert, vurder å støtte meg på en av følgende måter.",
+      "support_donate": "Gi en engangsdonasjon",
+      "support_steelseries": "Få 10% rabatt på SteelSeries gaming-tilbehør (affiliate-lenke)",
+      "support_code": "Bidra til prosjektet (kode eller oversettelser)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Åpne Doki Doki Mod Manager og start {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC kjører",
+      "title_crashed": "Noe gikk galt",
+      "button_browse": "Åpne Spillmappe",
+      "button_close": "OK",
+      "description_running": "Lukk spillet for å gjøre endringer i moddene dine.",
+      "install_missing": "Installasjonen kunne ikke finnes.",
+      "install_corrupt": "Installasjonen er ufullstendig eller ødelagt.",
+      "install_crashed": "Spillet klarte ikke å starte eller krasjet."
+    },
+    "move_install": {
+      "title": "Velg ny installasjonsmappe"
+    },
+    "mod_browse_dialog": {
+      "title": "Finn en mod å installere",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Finn en kopi av DDLC sin zip-fil",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Velg hvor du vil plassere snarveien din",
+      "file_format_name": "Snarvei"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager krasjet",
+        "body": "Problemet har blitt rapportert. Start på nytt og prøv igjen."
+      },
+      "move_install": {
+        "title": "Kunne ikke flytte installasjonsmappe",
+        "body": "Sjekk at du har tillatelse og nok plass til å flytte til denne mappen."
+      },
+      "shortcut": {
+        "title": "Kunne ikke lage snarvei",
+        "body": "Sjekk at du har tillatelse til å lage filer i denne mappen."
+      },
+      "install": {
+        "title": "Kunne ikke installere spill",
+        "body": "Sjekk at du har tillatelse og nok plass til å installere."
+      },
+      "rename": {
+        "title": "Kunne ikke gi nytt navn",
+        "body": "Sjekk at du har lukket alle programmer som kan forstyrre og prøv igjen."
+      },
+      "uninstall": {
+        "title": "Kunne ikke avinstallere",
+        "body": "Sjekk at du har lukket alle programmer som kan forstyrre og prøv igjen."
+      },
+      "save_delete": {
+        "title": "Kunne ikke slette lagrede data",
+        "body": "Sjekk at du har lukket alle programmer som kan forstyrre og prøv igjen."
+      },
+      "mod_delete": {
+        "title": "Kunne ikke slette modden",
+        "body": "Sjekk at du har lukket alle programmer som kan forstyrre og prøv igjen."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager sluttet å svare",
+        "body": "Hvis dette problemet varer lenge, lukk appen og start på nytt."
+      },
+      "executable_permission": {
+        "title": "Kunne ikke gjøre spillet kjørbart",
+        "body": "Kunne ikke gjøre DDLC.sh kjørbar på Linux. Spillet kan kanskje ikke starte riktig."
+      }
+    }
+  }
+}

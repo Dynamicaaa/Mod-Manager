@@ -151,17 +151,86 @@
         "status_exists": "La carpeta ya existe. Escribe otro nombre para la carpeta."
       }
     },
-    "tab_store_placeholder": {
-      "title": "¡Pronto estará disponible la Tienda!",
-      "description_1": "La base de datos de mods de Sayonika permitirá compartir, descargar y valorar mods de DDLC. Cuando Sayonika esté disponible públicamente, podrás ver la lista de mods directamente en Doki Doki Mod Manager.",
-      "description_2": "Mientras esperas, siéntete libre de descargar alguno de los siguientes mods recomendados.",
-      "error": "No se pudo cargar la lista de mods. ¿Estás conectado a internet?",
-      "button_download": "Descargar"
+    "tab_store": {
+      "title": "Tienda Sayonika",
+      "subtitle": "Descubre y descarga mods de DDLC",
+      "search_placeholder": "Buscar mods...",
+      "loading": "Cargando mods...",
+      "error_title": "Error de Conexión",
+      "retry_button": "Reintentar",
+      "offline_title": "Sin Conexión",
+      "offline_message": "Actualmente estás sin conexión. Por favor verifica tu conexión a internet e intenta de nuevo.",
+      "check_connection": "Verificar Conexión",
+      "maintenance_banner": "Los servicios de autenticación no están disponibles temporalmente debido a mantenimiento. Puedes navegar los mods pero no puedes iniciar sesión o registrarte.",
+      "no_mods_title": "No se encontraron mods",
+      "no_mods_message": "Intenta ajustar tu búsqueda o filtros",
+      
+      "filters": {
+        "category": "Categoría:",
+        "all_categories": "Todas las Categorías",
+        "sort_by": "Ordenar por:",
+        "date_created": "Fecha de Creación",
+        "date_updated": "Fecha de Actualización",
+        "downloads": "Descargas",
+        "rating": "Calificación",
+        "title": "Título",
+        "order": "Orden:",
+        "descending": "Descendente",
+        "ascending": "Ascendente",
+        "featured_only": "Solo Destacados",
+        "translate_content": "Traducir Contenido",
+        "auto_detect": "Auto-detectar"
+      },
+      
+      "mod_card": {
+        "featured": "Destacado",
+        "mature": "Maduro",
+        "by_author": "por {0}",
+        "download": "Descargar",
+        "downloading": "Descargando...",
+        "download_mod": "Descargar Mod",
+        "downloads_count": "{0} descargas",
+        "version": "Versión {0}",
+        "screenshots": "Capturas ({0})",
+        "description": "Descripción",
+        "tags": "Etiquetas",
+        "requirements": "Requisitos"
+      },
+      
+      "pagination": {
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "page_info": "Página {0} de {1}"
+      },
+      
+      "login": {
+        "title": "Iniciar Sesión en Sayonika",
+        "discord": "Iniciar Sesión con Discord",
+        "github": "Iniciar Sesión con GitHub",
+        "or": "o",
+        "username_label": "Usuario o Email:",
+        "username_placeholder": "Ingresa usuario o email",
+        "username_help": "Puedes usar tu usuario o email para iniciar sesión",
+        "password_label": "Contraseña:",
+        "remember_me": "Recordarme",
+        "login_button": "Iniciar Sesión",
+        "logging_in": "Iniciando sesión...",
+        "register_link": "¿No tienes cuenta? Regístrate aquí",
+        "success": "¡Sesión iniciada exitosamente!",
+        "failed": "Error al iniciar sesión: {0}"
+      },
+      
+      "translation": {
+        "enabled": "Traducción activada. El contenido será traducido cuando esté disponible.",
+        "disabled": "Traducción desactivada.",
+        "language_changed": "Idioma de traducción cambiado a {0}"
+      }
     },
     "tab_options": {
       "list": {
         "header_appearance": "Apariencia",
         "link_background": "Fondo",
+        "link_language": "Idioma",
         "link_advanced_appearance": "Avanzado",
         "header_enhancements": "Mejoras",
         "link_sdk": "Logros y SDK",
@@ -219,6 +288,16 @@
       "section_debug": {
         "title": "Información",
         "subtitle": "Información para diagnosticar problemas."
+      },
+      "section_language": {
+        "title": "Idioma",
+        "subtitle": "Cambia el idioma de Doki Doki Mod Manager.",
+        "description_current": "Idioma actual: {0}",
+        "button_apply": "Aplicar Idioma",
+        "button_contribute": "Ayudar a Traducir",
+        "description_restart": "Los cambios de idioma tomarán efecto después de reiniciar la aplicación.",
+        "notification_changed": "Idioma cambiado a {0}. Por favor reinicia la aplicación para ver los cambios.",
+        "notification_same": "El idioma ya está configurado como {0}."
       }
     },
     "tab_about": {

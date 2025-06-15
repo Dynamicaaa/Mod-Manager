@@ -273,6 +273,33 @@ $scrollbar-thumb-hover: rgba(255, 105, 180, 0.8);
       transform: scale(1.1); // Slightly larger for better accessibility
     }
   }
+
+  // Translation specific styling
+  .translation-group {
+    background: rgba(255, 105, 180, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+
+    label {
+      color: $primary-color !important;
+      font-weight: bold;
+    }
+
+    select {
+      background: rgba(255, 105, 180, 0.1);
+      border-color: rgba(255, 105, 180, 0.4);
+      
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.3);
+      }
+    }
+
+    input[type="checkbox"] {
+      accent-color: $primary-color;
+    }
+  }
 }
 
 // Loading and Error States
@@ -294,6 +321,39 @@ $scrollbar-thumb-hover: rgba(255, 105, 180, 0.8);
 
 .error-container i {
   color: $error-color;
+}
+
+// Offline and Maintenance States
+.offline-container,
+.maintenance-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: $text-secondary;
+
+  i {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: $text-primary;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+
+  p {
+    max-width: 500px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+}
+
+.offline-container i {
+  color: $warning-color;
+}
+
+.maintenance-container i {
+  color: #ff6b35; // Orange color for maintenance
 }
 
 .btn-retry {

@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Hjem",
+      "tab_mods": "Mods",
+      "tab_store": "Butik",
+      "tab_options": "Indstillinger",
+      "tab_about": "Om"
+    },
+    "version": {
+      "link_changelog": "hvad er nyt?"
+    },
+
+    "user_menu": {
+      "option_rename": "Skift Brugernavn",
+      "option_logout": "Log ud"
+    },
+    "window_controls": {
+      "close": "Luk",
+      "maximise": "Maksimer",
+      "minimise": "Minimer",
+      "devtools": "Slå Udviklerværktøjer Til/Fra (F12)",
+
+      "announcement": "Læs den seneste meddelelse",
+      "login": "Log Ind",
+      "sayonika_login": "Sayonika Login",
+      "update": {
+        "checking": "Checker for opdateringer i baggrunden...",
+        "available": "En opdatering er tilgængelig. Klik her for at downloade den.",
+        "downloading": "Downloader opdatering...",
+        "downloaded": "En opdatering er klar til at installere, når du lukker."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Luk",
+      "button_continue": "Fortsæt"
+    },
+    "drop_cover": {
+      "text": "Træk en mod hertil for at installere den"
+    },
+    "announcement": {
+      "button_open": "Åbn Link",
+      "button_close": "Luk"
+    },
+    "onboarding": {
+      "title": "Velkommen!",
+      "description_download": "Lad os finde en kopi af DDLC.",
+      "button_download": "Besøg DDLC's officielle downloadside",
+      "button_choose": "Gennemse efter en kopi",
+      "heading_step": "Trin {0}",
+      "s1_desc": "Du skal downloade en kopi af Doki Doki Literature Club. Denne kan findes på den officielle hjemmeside (ddlc.moe) - klik på knappen nedenfor for at gå derhen nu.",
+      "s1_platform": "Når du bliver spurgt, vælg at downloade filen ved navn \"DDLC ({0})\".",
+      "s2_desc": "Når dit download er færdigt, vælg det ved hjælp af knappen nedenfor.",
+      "description_location": "Dine spil vil blive gemt på {0}",
+      "link_change": "(Skift)"
+    },
+    "login_input": {
+      "message": "Indtast din email-adresse",
+      "details": "En email vil blive sendt til denne adresse. Klik på linket i emailen for at færdiggøre login.",
+      "button_affirmative": "Log Ind",
+      "button_negative": "Annuller"
+    },
+    "change_username_input": {
+      "message": "Indtast dit nye brugernavn",
+      "details": "Brugernavne behøver ikke at være unikke.",
+      "button_affirmative": "Skift",
+      "button_negative": "Annuller"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Søg mods...",
+        "header_new": "Kom I Gang",
+        "link_install": "Installer DDLC",
+        "header_installed": "Installeret",
+        "header_downloaded": "Downloads"
+      },
+      "install_contextmenu": {
+        "launch": "Start",
+        "rename": "Omdøb",
+        "shortcut": "Opret Genvej",
+        "delete_save": "Slet Gemme Data",
+        "uninstall": "Afinstaller"
+      },
+      "mod_contextmenu": {
+        "install": "Installer",
+        "delete": "Slet"
+      },
+      "uninstall_confirmation": {
+        "message": "Er du sikker på, at du vil afinstallere?",
+        "details": "Dine gemme data for {0} vil blive slettet, og du vil have brug for en kopi af moddet for at installere det igen.",
+        "button_affirmative": "Afinstaller",
+        "button_negative": "Annuller"
+      },
+      "rename_input": {
+        "message": "Omdøb Installation",
+        "details": "Indtast det nye navn for {0}.",
+        "button_affirmative": "Omdøb",
+        "button_negative": "Annuller"
+      },
+      "mod_delete_confirmation": {
+        "message": "Er du sikker på, at du vil slette moddet?",
+        "details": "Du vil være nødt til at downloade en anden kopi af moddet for at installere det igen.",
+        "button_affirmative": "Slet",
+        "button_negative": "Annuller"
+      },
+      "save_delete_confirmation": {
+        "message": "Er du sikker på, at du vil slette dine gemme data?",
+        "details": "Du vil være nødt til at starte {0} forfra.",
+        "button_affirmative": "Slet",
+        "button_negative": "Annuller"
+      },
+      "install": {
+        "button_launch": "Start",
+        "button_settings": "Indstillinger",
+        "tag_global_save": "Global Gemme",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Præstationer ({0} / {1})",
+        "description_achievements": "Fortsæt med at spille for at låse flere præstationer op.",
+        "description_achievements_complete": "Du har låst alle præstationer op. Tillykke!",
+        "title_screenshots_none": "Ingen skærmbilleder",
+        "title_screenshots_one": "1 skærmbillede",
+        "title_screenshots": "{0} skærmbilleder",
+        "description_screenshots": "Tryk S mens du spiller for at tage et skærmbillede.",
+        "description_sdk": "Dette mod understøtter særlige funktioner med Doki Doki Mod Manager SDK!",
+        "description_author": "Skabt af {0}",
+
+        "link_website": "Hjemmeside ({0})",
+        "description_external": "Vis i mappe"
+      },
+      "mod": {
+        "button_install": "Installer",
+        "button_settings": "Indstillinger",
+        "description_external": "Vis i mappe"
+      },
+      "install_creation": {
+        "title": "Installer DDLC",
+        "label_install_name": "Installations Navn",
+        "label_folder_name": "Mappe Navn",
+        "label_global_save": "Global Gemme",
+        "label_has_mod": "Installer Mod",
+        "label_mod": "Mod",
+
+        "label_existing_saves": "Eksisterende Gemme Filer",
+        "description_mod": "Klik for at gennemse efter et mod.",
+        "header_summary": "Oversigt",
+        "description_vanilla": "En ren kopi af DDLC vil blive oprettet. Gemme data vil være separat fra alle andre kopier af spillet.",
+        "description_vanilla_global_save": "En ren kopi af DDLC vil blive oprettet. Gemme data vil blive delt med andre kopier af spillet (f.eks. Steam)",
+
+        "description_modded": "En kopi af DDLC vil blive oprettet, og moddet vil blive installeret. Gemme data vil være separat fra alle andre kopier af spillet.",
+        "description_modded_global_save": "En kopi af DDLC vil blive oprettet, og moddet vil blive installeret. Gemme data vil blive delt med andre kopier af spillet (f.eks. Steam)",
+
+        "button_install": "Installer",
+        "button_installing": "Installerer...",
+        "status_exists": "Den mappe eksisterer allerede. Vælg et andet mappe navn."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Butikken kommer snart!",
+      "description_1": "Sayonika mod databasen vil give et centralt sted til at dele, downloade og anmelde DDLC mods. Når Sayonika er offentligt tilgængelig, vil du kunne gennemse mods direkte her i Doki Doki Mod Manager.",
+      "description_2": "Mens du venter, kan du downloade nogle af disse anbefalede mods.",
+      "error": "Kunne ikke indlæse listen over mods. Er du offline?",
+      "button_download": "Download"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Udseende",
+        "link_background": "Baggrund",
+        "link_language": "Sprog",
+        "link_advanced_appearance": "Avanceret",
+        "header_enhancements": "Forbedringer",
+        "link_sdk": "Præstationer & SDK",
+
+        "header_application": "Applikation",
+        "link_updates": "Opdateringer",
+        "link_storage": "Lager Placering",
+        "header_developers": "Udviklere",
+        "link_testing": "SDK Debug",
+        "link_debug": "App Info"
+      },
+      "section_backgrounds": {
+        "title": "Baggrund",
+        "subtitle": "Tilpas din kopi af Doki Doki Mod Manager med en af disse baggrunde.",
+        "button_none": "Ingen Baggrund",
+        "description_credit": "Originale DDLC baggrunde takket være Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Avanceret",
+        "subtitle": "Find andre interface muligheder her.",
+        "button_enable_sysborders": "Brug System Kanter (kræver genstart)",
+        "button_disable_sysborders": "Deaktiver System Kanter (kræver genstart)"
+      },
+      "section_storage": {
+        "title": "Lager Placering",
+        "subtitle": "Skift hvor dine spil data bliver gemt.",
+        "description_moving": "Advarsel! Hvis du vælger at ændre din installations placering, vil alle dine mods, installationer og gemme data blive flyttet. Dette kan tage flere minutter og kan ikke afbrydes.",
+        "description_current": "Nuværende placering: {0}",
+        "button_change": "Skift Installations Placering"
+      },
+      "section_updates": {
+        "title": "Opdateringer",
+        "subtitle": "Få den nyeste version af Doki Doki Mod Manager.",
+        "description_current_version": "Nuværende version: {0}",
+        "label_channel": "Udgivelses Kanal",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Tjek for opdateringer"
+      },
+      "section_sdk": {
+        "title": "Præstationer & SDK",
+        "subtitle": "Skift måden præstationer håndteres på.",
+        "description_mode": "Aktiver præstationer:",
+        "checkbox_always": "Altid (anbefalet)",
+        "checkbox_specified": "Når moddet specificerer at det understøtter dem",
+        "checkbox_never": "Aldrig"
+      },
+
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Aktiver debug logging for at teste dine mods med Doki Doki Mod Manager SDK.",
+        "button_enable": "Aktiver Debugging",
+        "button_disable": "Deaktiver Debugging"
+      },
+      "section_debug": {
+        "title": "App Info",
+        "subtitle": "Information til at diagnosticere problemer."
+      },
+      "section_language": {
+        "title": "Sprog",
+        "subtitle": "Skift sproget for Doki Doki Mod Manager.",
+        "description_current": "Nuværende sprog: {0}",
+        "button_apply": "Anvend Sprog",
+        "button_contribute": "Hjælp Med Oversættelse",
+        "description_restart": "Sprog ændringer vil træde i kraft efter genstart af applikationen.",
+        "notification_changed": "Sprog ændret til {0}. Genstart applikationen for at se ændringerne.",
+        "notification_same": "Sproget er allerede indstillet til {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Om",
+      "description": "Doki Doki Mod Manager er et samfunds-udviklet projekt, der hjælper dig med at finde, installere og spille mods for Doki Doki Literature Club, et gratis Visual Novel spil af Team Salvato.",
+      "title_disclaimer": "Ansvarsfraskrivelse",
+      "disclaimer_1": "Doki Doki Mod Manager er et fan værk af Doki Doki Literature Club og er ikke tilknyttet Team Salvato. Det er et fan værk, som defineret af Team Salvatos IP Retningslinjer.",
+      "disclaimer_2": "Doki Doki Mod Manager tager ikke ansvar for skader på dine filer eller computer som resultat af at spille et mod eller på anden måde. Det er op til dig at sikre at mods er sikre at spille.",
+      "title_socials": "Kom i kontakt",
+
+      "social_twitter": "Følg @DokiMod på Twitter",
+      "social_reddit": "Send mig en besked på Reddit",
+      "social_email": "Send mig en email",
+      "title_support": "Support Udvikling",
+      "description_support": "Doki Doki Mod Manager vil altid være gratis at downloade og bruge. Hvis du kan lide det og vil hjælpe mig med at holde det opdateret, overvej at støtte mig på en af følgende måder.",
+      "support_donate": "Lav en engangs donation",
+      "support_steelseries": "Få 10% rabat på SteelSeries gaming tilbehør (affiliate link)",
+      "support_code": "Bidrag til projektet (kode eller oversættelser)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Åbn Doki Doki Mod Manager og start {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC kører",
+      "title_crashed": "Noget gik galt",
+      "button_browse": "Åbn Spil Mappe",
+      "button_close": "OK",
+      "description_running": "Luk spillet for at lave ændringer til dine mods.",
+      "install_missing": "Installationen kunne ikke findes.",
+      "install_corrupt": "Installationen er ufuldstændig eller korrupt.",
+      "install_crashed": "Spillet kunne ikke starte eller crashede."
+    },
+    "move_install": {
+      "title": "Vælg ny installations mappe"
+    },
+    "mod_browse_dialog": {
+      "title": "Find et mod at installere",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Find en kopi af DDLC's zip fil",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Vælg hvor du vil placere din genvej",
+      "file_format_name": "Genvej"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager crashede",
+        "body": "Problemet er blevet rapporteret. Genstart og prøv igen."
+      },
+      "move_install": {
+        "title": "Kunne ikke flytte installations mappe",
+        "body": "Tjek at du har tilladelse og nok plads til at flytte til denne mappe."
+      },
+      "shortcut": {
+        "title": "Kunne ikke oprette genvej",
+        "body": "Tjek at du har tilladelse til at oprette filer i denne mappe."
+      },
+      "install": {
+        "title": "Kunne ikke installere spil",
+        "body": "Tjek at du har tilladelse og nok plads til at installere."
+      },
+      "rename": {
+        "title": "Kunne ikke omdøbe",
+        "body": "Tjek at du har lukket alle programmer der kan forstyrre og prøv igen."
+      },
+      "uninstall": {
+        "title": "Kunne ikke afinstallere",
+        "body": "Tjek at du har lukket alle programmer der kan forstyrre og prøv igen."
+      },
+      "save_delete": {
+        "title": "Kunne ikke slette gemme data",
+        "body": "Tjek at du har lukket alle programmer der kan forstyrre og prøv igen."
+      },
+      "mod_delete": {
+        "title": "Kunne ikke slette moddet",
+        "body": "Tjek at du har lukket alle programmer der kan forstyrre og prøv igen."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager stoppede med at svare",
+        "body": "Hvis dette problem varer længe, luk appen og start igen."
+      },
+      "executable_permission": {
+        "title": "Kunne ikke gøre spillet kørbart",
+        "body": "Kunne ikke gøre DDLC.sh kørbar på Linux. Spillet starter muligvis ikke korrekt."
+      }
+    }
+  }
+}

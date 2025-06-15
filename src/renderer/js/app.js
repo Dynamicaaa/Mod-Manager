@@ -61,14 +61,10 @@ const app = new Vue({
             "url": ""
         },
         "tabs": [
-            {"id": "mods", "name": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tabs.tab_mods") : "Mods", "component": "ddmm-mods-tab"},
-            {
-                "id": "store",
-                "name": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tabs.tab_store") : "Sayonika Store",
-                "component": "ddmm-store-placeholder-tab"
-            },
-            {"id": "options", "name": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tabs.tab_options") : "Options", "component": "ddmm-options-tab"},
-            {"id": "about", "name": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tabs.tab_about") : "About", "component": "ddmm-about-tab"},
+            {"id": "mods", "name": "Mods", "component": "ddmm-mods-tab"},
+            {"id": "store", "name": "Sayonika Store", "component": "ddmm-store-placeholder-tab"},
+            {"id": "options", "name": "Options", "component": "ddmm-options-tab"},
+            {"id": "about", "name": "About", "component": "ddmm-about-tab"},
             {"id": "edit-instance", "name": "Edit Instance", "component": "ddmm-edit-instance-tab", "hidden": true}
         ],
         "running_cover": {
@@ -281,6 +277,32 @@ const app = new Vue({
             this.previousTab = this.tab;
             this.pageTransition = transition;
             this.tab = tabId;
+        },
+
+        // Refresh tab names when language changes
+        "refreshTabNames": function() {
+            console.log("Refreshing tab names with current translations");
+            this.tabs.forEach(tab => {
+                switch(tab.id) {
+                    case "mods":
+                        tab.name = this._("renderer.tabs.tab_mods");
+                        break;
+                    case "store":
+                        tab.name = this._("renderer.tabs.tab_store");
+                        break;
+                    case "options":
+                        tab.name = this._("renderer.tabs.tab_options");
+                        break;
+                    case "about":
+                        tab.name = this._("renderer.tabs.tab_about");
+                        break;
+                    case "edit-instance":
+                        // This tab name doesn't need translation as it's a technical term
+                        tab.name = "Edit Instance";
+                        break;
+                }
+            });
+            console.log("Tab names refreshed:", this.tabs.map(tab => `${tab.id}: ${tab.name}`));
         },
 
         "showEditInstance": function(instanceData) {
@@ -664,6 +686,25 @@ const app = new Vue({
                 }
             }
         }, 2000); // Wait 2 seconds after mount
+
+        // Initialize tab names with current translations
+        this.refreshTabNames();
+
+        // Listen for language changes to update tab names
+        if (typeof ddmm !== 'undefined' && ddmm.on) {
+            ddmm.on('language-changed', (newLanguage) => {
+                console.log("Language changed, refreshing tab names for language:", newLanguage);
+                this.refreshTabNames();
+                this.$forceUpdate(); // Force Vue to re-render with updated tab names
+            });
+        }
+
+        // Also listen for the language-changed event on window (fallback)
+        window.addEventListener('language-changed', (event) => {
+            console.log("Window language-changed event received:", event.detail);
+            this.refreshTabNames();
+            this.$forceUpdate();
+        });
     }
 });
 
@@ -919,6 +960,15 @@ function setupDDMMEventListeners(retryCount = 0) {
 
     ddmm.on("is appx", is => {
         app.appx = is;
+    });
+
+    // Language change event listener
+    ddmm.on('language-changed', (newLanguage) => {
+        console.log("DDMM Event: Language changed to:", newLanguage);
+        if (window.app && window.app.refreshTabNames) {
+            window.app.refreshTabNames();
+            window.app.$forceUpdate();
+        }
     });
 
     console.log("All DDMM event listeners set up successfully");

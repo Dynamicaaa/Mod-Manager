@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Koti",
+      "tab_mods": "Modit",
+      "tab_store": "Kauppa",
+      "tab_options": "Asetukset",
+      "tab_about": "Tietoja"
+    },
+    "version": {
+      "link_changelog": "mitä uutta?"
+    },
+
+    "user_menu": {
+      "option_rename": "Vaihda käyttäjänimi",
+      "option_logout": "Kirjaudu ulos"
+    },
+    "window_controls": {
+      "close": "Sulje",
+      "maximise": "Suurenna",
+      "minimise": "Pienennä",
+      "devtools": "Vaihda kehittäjätyökalut (F12)",
+
+      "announcement": "Lue viimeisin ilmoitus",
+      "login": "Kirjaudu sisään",
+      "sayonika_login": "Sayonika-kirjautuminen",
+      "update": {
+        "checking": "Tarkistetaan päivityksiä taustalla...",
+        "available": "Päivitys on saatavilla. Napsauta tästä ladataksesi sen.",
+        "downloading": "Ladataan päivitystä...",
+        "downloaded": "Päivitys on valmis asennettavaksi kun poistut."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Lopeta",
+      "button_continue": "Jatka"
+    },
+    "drop_cover": {
+      "text": "Pudota modi tähän asentaaksesi sen"
+    },
+    "announcement": {
+      "button_open": "Avaa linkki",
+      "button_close": "Sulje"
+    },
+    "onboarding": {
+      "title": "Tervetuloa!",
+      "description_download": "Etsitään DDLC:n kopio.",
+      "button_download": "Vieraile DDLC:n virallisella lataussivulla",
+      "button_choose": "Selaa kopiota",
+      "heading_step": "Vaihe {0}",
+      "s1_desc": "Sinun täytyy ladata kopio Doki Doki Literature Clubista. Tämä löytyy viralliselta verkkosivulta (ddlc.moe) - napsauta alla olevaa painiketta mennäksesi sinne nyt.",
+      "s1_platform": "Kun sinulta kysytään, valitse ladata tiedosto nimeltä \"DDLC ({0})\".",
+      "s2_desc": "Kun latauksesi on valmis, valitse se alla olevalla painikkeella.",
+      "description_location": "Pelisi tallennetaan sijaintiin {0}",
+      "link_change": "(Vaihda)"
+    },
+    "login_input": {
+      "message": "Syötä sähköpostiosoitteesi",
+      "details": "Sähköposti lähetetään tähän osoitteeseen. Napsauta sähköpostissa olevaa linkkiä viimeistelläksesi kirjautumisen.",
+      "button_affirmative": "Kirjaudu sisään",
+      "button_negative": "Peruuta"
+    },
+    "change_username_input": {
+      "message": "Syötä uusi käyttäjänimesi",
+      "details": "Käyttäjänimien ei tarvitse olla ainutlaatuisia.",
+      "button_affirmative": "Vaihda",
+      "button_negative": "Peruuta"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Etsi modeja...",
+        "header_new": "Aloita",
+        "link_install": "Asenna DDLC",
+        "header_installed": "Asennettu",
+        "header_downloaded": "Lataukset"
+      },
+      "install_contextmenu": {
+        "launch": "Käynnistä",
+        "rename": "Nimeä uudelleen",
+        "shortcut": "Luo pikakuvake",
+        "delete_save": "Poista tallennustiedot",
+        "uninstall": "Poista asennus"
+      },
+      "mod_contextmenu": {
+        "install": "Asenna",
+        "delete": "Poista"
+      },
+      "uninstall_confirmation": {
+        "message": "Oletko varma että haluat poistaa asennuksen?",
+        "details": "Tallennustietosi kohteelle {0} poistetaan, ja tarvitset kopion modista asentaaksesi sen uudelleen.",
+        "button_affirmative": "Poista asennus",
+        "button_negative": "Peruuta"
+      },
+      "rename_input": {
+        "message": "Nimeä asennus uudelleen",
+        "details": "Syötä uusi nimi kohteelle {0}.",
+        "button_affirmative": "Nimeä uudelleen",
+        "button_negative": "Peruuta"
+      },
+      "mod_delete_confirmation": {
+        "message": "Oletko varma että haluat poistaa modin?",
+        "details": "Joudut lataamaan toisen kopion modista asentaaksesi sen uudelleen.",
+        "button_affirmative": "Poista",
+        "button_negative": "Peruuta"
+      },
+      "save_delete_confirmation": {
+        "message": "Oletko varma että haluat poistaa tallennustietosi?",
+        "details": "Joudut aloittamaan {0} alusta uudelleen.",
+        "button_affirmative": "Poista",
+        "button_negative": "Peruuta"
+      },
+      "install": {
+        "button_launch": "Käynnistä",
+        "button_settings": "Asetukset",
+        "tag_global_save": "Globaali tallennus",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Saavutukset ({0} / {1})",
+        "description_achievements": "Jatka pelaamista avataksesi lisää saavutuksia.",
+        "description_achievements_complete": "Olet avannut kaikki saavutukset. Onnittelut!",
+        "title_screenshots_none": "Ei kuvakaappauksia",
+        "title_screenshots_one": "1 kuvakaappaus",
+        "title_screenshots": "{0} kuvakaappausta",
+        "description_screenshots": "Paina S pelatessasi ottaaksesi kuvakaappauksen.",
+        "description_sdk": "Tämä modi tukee erityisominaisuuksia Doki Doki Mod Manager SDK:n kanssa!",
+        "description_author": "Luonut {0}",
+
+        "link_website": "Verkkosivusto ({0})",
+        "description_external": "Näytä kansiossa"
+      },
+      "mod": {
+        "button_install": "Asenna",
+        "button_settings": "Asetukset",
+        "description_external": "Näytä kansiossa"
+      },
+      "install_creation": {
+        "title": "Asenna DDLC",
+        "label_install_name": "Asennuksen nimi",
+        "label_folder_name": "Kansion nimi",
+        "label_global_save": "Globaali tallennus",
+        "label_has_mod": "Asenna modi",
+        "label_mod": "Modi",
+
+        "label_existing_saves": "Olemassa olevat tallennustiedostot",
+        "description_mod": "Napsauta selataksesi modia.",
+        "header_summary": "Yhteenveto",
+        "description_vanilla": "Puhdas kopio DDLC:stä luodaan. Tallennustiedot ovat erillään muista pelin kopioista.",
+        "description_vanilla_global_save": "Puhdas kopio DDLC:stä luodaan. Tallennustiedot jaetaan muiden pelien kopioiden kanssa (esim. Steam)",
+
+        "description_modded": "Kopio DDLC:stä luodaan ja modi asennetaan. Tallennustiedot ovat erillään muista pelin kopioista.",
+        "description_modded_global_save": "Kopio DDLC:stä luodaan ja modi asennetaan. Tallennustiedot jaetaan muiden pelien kopioiden kanssa (esim. Steam)",
+
+        "button_install": "Asenna",
+        "button_installing": "Asennetaan...",
+        "status_exists": "Tuo kansio on jo olemassa. Valitse toinen kansion nimi."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Kauppa tulee pian!",
+      "description_1": "Sayonika-moditietokanta tarjoaa keskitetyn paikan jakaa, ladata ja arvostella DDLC-modeja. Kun Sayonika on julkisesti saatavilla, voit selata modeja suoraan täällä Doki Doki Mod Managerissa.",
+      "description_2": "Odottaessasi voit vapaasti ladata joitakin näistä suositelluista modeista.",
+      "error": "Modilistan lataaminen epäonnistui. Oletko offline-tilassa?",
+      "button_download": "Lataa"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Ulkoasu",
+        "link_background": "Tausta",
+        "link_language": "Kieli",
+        "link_advanced_appearance": "Lisäasetukset",
+        "header_enhancements": "Parannukset",
+        "link_sdk": "Saavutukset & SDK",
+
+        "header_application": "Sovellus",
+        "link_updates": "Päivitykset",
+        "link_storage": "Tallennussijainti",
+        "header_developers": "Kehittäjät",
+        "link_testing": "SDK-debuggaus",
+        "link_debug": "Sovellustiedot"
+      },
+      "section_backgrounds": {
+        "title": "Tausta",
+        "subtitle": "Mukauta Doki Doki Mod Managerin kopiotasi yhdellä näistä taustoista.",
+        "button_none": "Ei taustaa",
+        "description_credit": "Alkuperäiset DDLC-taustat Team Salvaton ansiosta."
+      },
+      "section_advanced_appearance": {
+        "title": "Lisäasetukset",
+        "subtitle": "Löydä muita käyttöliittymävaihtoehtoja täältä.",
+        "button_enable_sysborders": "Käytä järjestelmärajoja (vaatii uudelleenkäynnistyksen)",
+        "button_disable_sysborders": "Poista järjestelmärajat käytöstä (vaatii uudelleenkäynnistyksen)"
+      },
+      "section_storage": {
+        "title": "Tallennussijainti",
+        "subtitle": "Vaihda missä pelitietosi tallennetaan.",
+        "description_moving": "Varoitus! Jos päätät vaihtaa asennussijaintisi, kaikki modisi, asennuksesi ja tallennustietosi siirretään. Tämä voi kestää useita minuutteja, eikä sitä voi keskeyttää.",
+        "description_current": "Nykyinen sijainti: {0}",
+        "button_change": "Vaihda asennussijainti"
+      },
+      "section_updates": {
+        "title": "Päivitykset",
+        "subtitle": "Hanki Doki Doki Mod Managerin uusin versio.",
+        "description_current_version": "Nykyinen versio: {0}",
+        "label_channel": "Julkaisukanava",
+        "option_stable": "Vakaa",
+        "option_beta": "Beta",
+        "button_check": "Tarkista päivitykset"
+      },
+      "section_sdk": {
+        "title": "Saavutukset & SDK",
+        "subtitle": "Vaihda tapaa jolla saavutuksia käsitellään.",
+        "description_mode": "Ota saavutukset käyttöön:",
+        "checkbox_always": "Aina (suositeltu)",
+        "checkbox_specified": "Kun modi määrittelee tukevansa niitä",
+        "checkbox_never": "Ei koskaan"
+      },
+
+      "section_testing": {
+        "title": "SDK-debuggaus",
+        "subtitle": "Ota debug-lokitus käyttöön testataksesi modejasi Doki Doki Mod Manager SDK:n kanssa.",
+        "button_enable": "Ota debuggaus käyttöön",
+        "button_disable": "Poista debuggaus käytöstä"
+      },
+      "section_debug": {
+        "title": "Sovellustiedot",
+        "subtitle": "Tietoja ongelmien diagnosointiin."
+      },
+      "section_language": {
+        "title": "Kieli",
+        "subtitle": "Vaihda Doki Doki Mod Managerin kieli.",
+        "description_current": "Nykyinen kieli: {0}",
+        "button_apply": "Käytä kieltä",
+        "button_contribute": "Auta kääntämään",
+        "description_restart": "Kielimuutokset tulevat voimaan sovelluksen uudelleenkäynnistyksen jälkeen.",
+        "notification_changed": "Kieli vaihdettu kielelle {0}. Käynnistä sovellus uudelleen nähdäksesi muutokset.",
+        "notification_same": "Kieli on jo asetettu kielelle {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Tietoja",
+      "description": "Doki Doki Mod Manager on yhteisön kehittämä projekti, joka auttaa sinua löytämään, asentamaan ja pelaamaan modeja Doki Doki Literature Clubille, ilmaiselle Visual Novel -pelille Team Salvaton toimesta.",
+      "title_disclaimer": "Vastuuvapauslauseke",
+      "disclaimer_1": "Doki Doki Mod Manager on fanityö Doki Doki Literature Clubista eikä ole yhteydessä Team Salvatoon. Se on fanityö, Team Salvaton IP-ohjeiden määrittämänä.",
+      "disclaimer_2": "Doki Doki Mod Manager ei ota vastuuta mistään vahingoista tiedostoillesi tai tietokoneellesi, jotka johtuvat modin pelaamisesta tai muutoin. Sinun vastuullasi on varmistaa että modit ovat turvallisia pelata.",
+      "title_socials": "Ota yhteyttä",
+
+      "social_twitter": "Seuraa @DokiMod Twitterissä",
+      "social_reddit": "Lähetä minulle viesti Redditissä",
+      "social_email": "Lähetä minulle sähköposti",
+      "title_support": "Tue kehitystä",
+      "description_support": "Doki Doki Mod Manager on aina ilmainen ladata ja käyttää. Jos pidät siitä ja haluat auttaa minua pitämään sen päivitettynä, harkitse tukemistani yhdellä seuraavista tavoista.",
+      "support_donate": "Tee kertainen lahjoitus",
+      "support_steelseries": "Saa 10% alennus SteelSeries-pelivarusteista (affiliate-linkki)",
+      "support_code": "Osallistu projektiin (koodi tai käännökset)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Avaa Doki Doki Mod Manager ja käynnistä {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC on käynnissä",
+      "title_crashed": "Jotain meni pieleen",
+      "button_browse": "Avaa pelikansio",
+      "button_close": "OK",
+      "description_running": "Sulje peli tehdäksesi muutoksia modeihin.",
+      "install_missing": "Asennusta ei löytynyt.",
+      "install_corrupt": "Asennus on epätäydellinen tai korruptoitunut.",
+      "install_crashed": "Pelin käynnistäminen epäonnistui tai kaatui."
+    },
+    "move_install": {
+      "title": "Valitse uusi asennuskansio"
+    },
+    "mod_browse_dialog": {
+      "title": "Etsi asennettava modi",
+      "file_format_name": "Modit"
+    },
+    "game_browse_dialog": {
+      "title": "Paikanna DDLC:n zip-tiedoston kopio",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Valitse minne pikakuvake sijoitetaan",
+      "file_format_name": "Pikakuvake"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager kaatui",
+        "body": "Ongelma on raportoitu. Käynnistä uudelleen ja yritä uudestaan."
+      },
+      "move_install": {
+        "title": "Asennuskansion siirtäminen epäonnistui",
+        "body": "Tarkista että sinulla on lupa ja tarpeeksi tilaa siirtää tähän kansioon."
+      },
+      "shortcut": {
+        "title": "Pikakuvakkeen luominen epäonnistui",
+        "body": "Tarkista että sinulla on lupa luoda tiedostoja tähän kansioon."
+      },
+      "install": {
+        "title": "Pelin asentaminen epäonnistui",
+        "body": "Tarkista että sinulla on lupa ja tarpeeksi tilaa asentamiseen."
+      },
+      "rename": {
+        "title": "Uudelleennimeäminen epäonnistui",
+        "body": "Tarkista että olet sulkenut kaikki ohjelmat jotka voivat häiritä ja yritä uudestaan."
+      },
+      "uninstall": {
+        "title": "Asennuksen poistaminen epäonnistui",
+        "body": "Tarkista että olet sulkenut kaikki ohjelmat jotka voivat häiritä ja yritä uudestaan."
+      },
+      "save_delete": {
+        "title": "Tallennustietojen poistaminen epäonnistui",
+        "body": "Tarkista että olet sulkenut kaikki ohjelmat jotka voivat häiritä ja yritä uudestaan."
+      },
+      "mod_delete": {
+        "title": "Modin poistaminen epäonnistui",
+        "body": "Tarkista että olet sulkenut kaikki ohjelmat jotka voivat häiritä ja yritä uudestaan."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager lakkasi vastaamasta",
+        "body": "Jos tämä ongelma kestää pitkään, sulje sovellus ja käynnistä uudestaan."
+      },
+      "executable_permission": {
+        "title": "Pelin tekeminen suoritettavaksi epäonnistui",
+        "body": "DDLC.sh:ta ei voitu tehdä suoritettavaksi Linuxissa. Peli ei ehkä käynnisty kunnolla."
+      }
+    }
+  }
+}

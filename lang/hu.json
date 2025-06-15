@@ -1,0 +1,329 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Főoldal",
+      "tab_mods": "Modok",
+      "tab_store": "Áruház",
+      "tab_options": "Beállítások",
+      "tab_about": "Névjegy"
+    },
+    "version": {
+      "link_changelog": "mi az újdonság?"
+    },
+
+    "user_menu": {
+      "option_rename": "Felhasználónév Módosítása",
+      "option_logout": "Kijelentkezés"
+    },
+    "window_controls": {
+      "close": "Bezárás",
+      "maximise": "Maximalizálás",
+      "minimise": "Minimalizálás",
+      "devtools": "Fejlesztői Eszközök Kapcsolása (F12)",
+
+      "announcement": "Legújabb bejelentés olvasása",
+      "login": "Bejelentkezés",
+      "sayonika_login": "Sayonika Bejelentkezés",
+      "update": {
+        "checking": "Frissítések keresése a háttérben...",
+        "available": "Elérhető egy frissítés. Kattintson ide a letöltéshez.",
+        "downloading": "Frissítés letöltése...",
+        "downloaded": "Egy frissítés telepítésre kész a kilépéskor."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Kilépés",
+      "button_continue": "Folytatás"
+    },
+    "drop_cover": {
+      "text": "Húzzon ide egy modot a telepítéshez"
+    },
+    "announcement": {
+      "button_open": "Link Megnyitása",
+      "button_close": "Bezárás"
+    },
+    "onboarding": {
+      "title": "Üdvözöljük!",
+      "description_download": "Keressünk egy DDLC másolatot.",
+      "button_download": "DDLC hivatalos letöltési oldalának látogatása",
+      "button_choose": "Másolat tallózása",
+      "heading_step": "Lépés {0}",
+      "s1_desc": "Le kell töltenie egy Doki Doki Literature Club másolatot. Ez megtalálható a hivatalos weboldalon (ddlc.moe) - kattintson az alábbi gombra, hogy most odamenjen.",
+      "s1_platform": "Amikor megkérdezik, válassza a \"DDLC ({0})\" nevű fájl letöltését.",
+      "s2_desc": "Amikor a letöltés befejeződik, válassza ki az alábbi gombbal.",
+      "description_location": "A játékai itt lesznek tárolva: {0}",
+      "link_change": "(Módosítás)"
+    },
+    "login_input": {
+      "message": "Adja meg az e-mail címét",
+      "details": "Egy e-mail lesz elküldve erre a címre. Kattintson a linkre az e-mailben a bejelentkezés befejezéséhez.",
+      "button_affirmative": "Bejelentkezés",
+      "button_negative": "Mégse"
+    },
+    "change_username_input": {
+      "message": "Adja meg az új felhasználónevét",
+      "details": "A felhasználóneveknek nem kell egyedinek lenniük.",
+      "button_affirmative": "Módosítás",
+      "button_negative": "Mégse"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Modok keresése...",
+        "header_new": "Kezdés",
+        "link_install": "DDLC Telepítése",
+        "header_installed": "Telepítve",
+        "header_downloaded": "Letöltések"
+      },
+      "install_contextmenu": {
+        "launch": "Indítás",
+        "rename": "Átnevezés",
+        "shortcut": "Parancsikon Létrehozása",
+        "delete_save": "Mentési Adatok Törlése",
+        "uninstall": "Eltávolítás"
+      },
+      "mod_contextmenu": {
+        "install": "Telepítés",
+        "delete": "Törlés"
+      },
+      "uninstall_confirmation": {
+        "message": "Biztosan el szeretné távolítani?",
+        "details": "A(z) {0} mentési adatai törlésre kerülnek, és szüksége lesz a mod egy másolatára az újratelepítéshez.",
+        "button_affirmative": "Eltávolítás",
+        "button_negative": "Mégse"
+      },
+      "rename_input": {
+        "message": "Telepítés Átnevezése",
+        "details": "Adja meg a(z) {0} új nevét.",
+        "button_affirmative": "Átnevezés",
+        "button_negative": "Mégse"
+      },
+      "mod_delete_confirmation": {
+        "message": "Biztosan törölni szeretné a modot?",
+        "details": "Le kell töltenie a mod egy másik másolatát az újratelepítéshez.",
+        "button_affirmative": "Törlés",
+        "button_negative": "Mégse"
+      },
+      "save_delete_confirmation": {
+        "message": "Biztosan törölni szeretné a mentési adatait?",
+        "details": "Újra kell kezdenie a(z) {0}-t az elejétől.",
+        "button_affirmative": "Törlés",
+        "button_negative": "Mégse"
+      },
+      "install": {
+        "button_launch": "Indítás",
+        "button_settings": "Beállítások",
+        "tag_global_save": "Globális Mentés",
+        "tag_sdk": "SDK",
+
+        "title_achievements": "Eredmények ({0} / {1})",
+        "description_achievements": "Folytassa a játékot további eredmények feloldásához.",
+        "description_achievements_complete": "Az összes eredményt feloldotta. Gratulálunk!",
+        "title_screenshots_none": "Nincsenek képernyőképek",
+        "title_screenshots_one": "1 képernyőkép",
+        "title_screenshots": "{0} képernyőkép",
+        "description_screenshots": "Nyomja meg az S-t játék közben képernyőkép készítéséhez.",
+        "description_sdk": "Ez a mod speciális funkciókat támogat a Doki Doki Mod Manager SDK-val!",
+        "description_author": "Készítette: {0}",
+
+        "link_website": "Weboldal ({0})",
+        "description_external": "Megjelenítés mappában"
+      },
+      "mod": {
+        "button_install": "Telepítés",
+        "button_settings": "Beállítások",
+        "description_external": "Megjelenítés mappában"
+      },
+      "install_creation": {
+        "title": "DDLC Telepítése",
+        "label_install_name": "Telepítés Neve",
+        "label_folder_name": "Mappa Neve",
+        "label_global_save": "Globális Mentés",
+        "label_has_mod": "Mod Telepítése",
+        "label_mod": "Mod",
+
+        "label_existing_saves": "Meglévő Mentési Fájlok",
+        "description_mod": "Kattintson mod tallózásához.",
+        "header_summary": "Összefoglaló",
+        "description_vanilla": "Egy tiszta DDLC másolat lesz létrehozva. A mentési adatok elkülönülnek a játék bármely más másolatától.",
+        "description_vanilla_global_save": "Egy tiszta DDLC másolat lesz létrehozva. A mentési adatok megosztásra kerülnek a játék más másolataival (pl. Steam)",
+
+        "description_modded": "Egy DDLC másolat lesz létrehozva, és a mod telepítésre kerül. A mentési adatok elkülönülnek a játék bármely más másolatától.",
+        "description_modded_global_save": "Egy DDLC másolat lesz létrehozva, és a mod telepítésre kerül. A mentési adatok megosztásra kerülnek a játék más másolataival (pl. Steam)",
+
+        "button_install": "Telepítés",
+        "button_installing": "Telepítés...",
+        "status_exists": "Ez a mappa már létezik. Válasszon másik mappanevet."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Az áruház hamarosan érkezik!",
+      "description_1": "A Sayonika mod adatbázis központi helyet biztosít DDLC modok megosztásához, letöltéséhez és értékeléséhez. Amikor a Sayonika nyilvánosan elérhető lesz, közvetlenül itt böngészhet modokat a Doki Doki Mod Manager-ben.",
+      "description_2": "Amíg vár, letölthet néhányat ezekből az ajánlott modokból.",
+      "error": "Nem sikerült betölteni a modok listáját. Offline van?",
+      "button_download": "Letöltés"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Megjelenés",
+        "link_background": "Háttér",
+        "link_language": "Nyelv",
+        "link_advanced_appearance": "Speciális",
+        "header_enhancements": "Fejlesztések",
+        "link_sdk": "Eredmények és SDK",
+
+        "header_application": "Alkalmazás",
+        "link_updates": "Frissítések",
+        "link_storage": "Tárolóhely",
+        "header_developers": "Fejlesztők",
+        "link_testing": "SDK Hibakeresés",
+        "link_debug": "Alkalmazás Info"
+      },
+      "section_backgrounds": {
+        "title": "Háttér",
+        "subtitle": "Testreszabja Doki Doki Mod Manager másolatát az egyik háttérrel.",
+        "button_none": "Nincs Háttér",
+        "description_credit": "Eredeti DDLC hátterek a Team Salvato jóvoltából."
+      },
+      "section_advanced_appearance": {
+        "title": "Speciális",
+        "subtitle": "További felületi opciók itt találhatók.",
+        "button_enable_sysborders": "Rendszerkeretek Használata (újraindítás szükséges)",
+        "button_disable_sysborders": "Rendszerkeretek Letiltása (újraindítás szükséges)"
+      },
+      "section_storage": {
+        "title": "Tárolóhely",
+        "subtitle": "Változtassa meg, hogy hol tárolódnak a játékadatai.",
+        "description_moving": "Figyelem! Ha a telepítési helyet változtatja, az összes modjuk, telepítésük és mentési adatuk át lesz helyezve. Ez több percig tarthat és nem szakítható meg.",
+        "description_current": "Jelenlegi hely: {0}",
+        "button_change": "Telepítési Hely Módosítása"
+      },
+      "section_updates": {
+        "title": "Frissítések",
+        "subtitle": "Szerezze be a Doki Doki Mod Manager legújabb verzióját.",
+        "description_current_version": "Jelenlegi verzió: {0}",
+        "label_channel": "Kiadási Csatorna",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Frissítések keresése"
+      },
+      "section_sdk": {
+        "title": "Eredmények és SDK",
+        "subtitle": "Változtassa meg az eredmények kezelését.",
+        "description_mode": "Eredmények engedélyezése:",
+        "checkbox_always": "Mindig (ajánlott)",
+        "checkbox_specified": "Amikor a mod meghatározza, hogy támogatja őket",
+        "checkbox_never": "Soha"
+      },
+
+      "section_testing": {
+        "title": "SDK Hibakeresés",
+        "subtitle": "Engedélyezze a hibakeresési naplózást a modok teszteléséhez a Doki Doki Mod Manager SDK-val.",
+        "button_enable": "Hibakeresés Engedélyezése",
+        "button_disable": "Hibakeresés Letiltása"
+      },
+      "section_debug": {
+        "title": "Alkalmazás Info",
+        "subtitle": "Információk a problémák diagnosztizálásához."
+      },
+      "section_language": {
+        "title": "Nyelv",
+        "subtitle": "Változtassa meg a Doki Doki Mod Manager nyelvét.",
+        "description_current": "Jelenlegi nyelv: {0}",
+        "button_apply": "Nyelv Alkalmazása",
+        "button_contribute": "Segítsen a Fordításban",
+        "description_restart": "A nyelvváltozások az alkalmazás újraindítása után lépnek életbe.",
+        "notification_changed": "Nyelv módosítva: {0}. Indítsa újra az alkalmazást a változások megtekintéséhez.",
+        "notification_same": "A nyelv már be van állítva erre: {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Névjegy",
+      "description": "A Doki Doki Mod Manager egy közösség által fejlesztett projekt, amely segít megtalálni, telepíteni és játszani a Doki Doki Literature Club modokat, amely a Team Salvato ingyenes Visual Novel játéka.",
+      "title_disclaimer": "Nyilatkozat",
+      "disclaimer_1": "A Doki Doki Mod Manager a Doki Doki Literature Club rajongói műve, és nem kapcsolódik a Team Salvato-hoz. Ez egy rajongói mű, ahogy a Team Salvato IP irányelvei meghatározzák.",
+      "disclaimer_2": "A Doki Doki Mod Manager nem vállal felelősséget a fájlokhoz vagy számítógéphez okozott károkért mod játszása vagy egyéb módon. Az Ön felelőssége biztosítani, hogy a modok biztonságosak legyenek a játékhoz.",
+      "title_socials": "Lépjen kapcsolatba",
+
+      "social_twitter": "Kövesse @DokiMod-ot Twitteren",
+      "social_reddit": "Küldjön üzenetet Reddit-en",
+      "social_email": "Küldjön e-mailt",
+      "title_support": "Fejlesztés Támogatása",
+      "description_support": "A Doki Doki Mod Manager mindig ingyenes lesz a letöltéshez és használathoz. Ha tetszik és segíteni szeretne frissíteni, fontolja meg a támogatásomat az alábbi módok egyikével.",
+      "support_donate": "Egyszeri adományt ad",
+      "support_steelseries": "10% kedvezmény a SteelSeries gaming perifériákra (affiliate link)",
+      "support_code": "Hozzájárulás a projekthez (kód vagy fordítások)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager megnyitása és {0} indítása."
+    },
+    "running_cover": {
+      "title_running": "DDLC fut",
+      "title_crashed": "Valami elromlott",
+      "button_browse": "Játékmappa Megnyitása",
+      "button_close": "OK",
+      "description_running": "Zárja be a játékot a modok módosításához.",
+      "install_missing": "A telepítés nem található.",
+      "install_corrupt": "A telepítés hiányos vagy sérült.",
+      "install_crashed": "A játék nem tudott elindulni vagy összeomlott."
+    },
+    "move_install": {
+      "title": "Válasszon új telepítési mappát"
+    },
+    "mod_browse_dialog": {
+      "title": "Keessen egy modot a telepítéshez",
+      "file_format_name": "Modok"
+    },
+    "game_browse_dialog": {
+      "title": "Keresse meg a DDLC zip fájl másolatát",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Válassza ki, hova helyezze a parancsikonját",
+      "file_format_name": "Parancsikon"
+    },
+    "errors": {
+      "exception": {
+        "title": "A Doki Doki Mod Manager összeomlott",
+        "body": "A probléma jelentve lett. Indítsa újra és próbálja újra."
+      },
+      "move_install": {
+        "title": "Nem sikerült áthelyezni a telepítési mappát",
+        "body": "Ellenőrizze, hogy van-e engedélye és elegendő helye az ebbe a mappába való áthelyezéshez."
+      },
+      "shortcut": {
+        "title": "Nem sikerült létrehozni a parancsiont",
+        "body": "Ellenőrizze, hogy van-e engedélye fájlok létrehozására ebben a mappában."
+      },
+      "install": {
+        "title": "Nem sikerült telepíteni a játékot",
+        "body": "Ellenőrizze, hogy van-e engedélye és elegendő helye a telepítéshez."
+      },
+      "rename": {
+        "title": "Nem sikerült átnevezni",
+        "body": "Ellenőrizze, hogy bezárta-e az összes zavaró programot és próbálja újra."
+      },
+      "uninstall": {
+        "title": "Nem sikerült eltávolítani",
+        "body": "Ellenőrizze, hogy bezárta-e az összes zavaró programot és próbálja újra."
+      },
+      "save_delete": {
+        "title": "Nem sikerült törölni a mentési adatokat",
+        "body": "Ellenőrizze, hogy bezárta-e az összes zavaró programot és próbálja újra."
+      },
+      "mod_delete": {
+        "title": "Nem sikerült törölni a modot",
+        "body": "Ellenőrizze, hogy bezárta-e az összes zavaró programot és próbálja újra."
+      },
+      "renderer_freeze": {
+        "title": "A Doki Doki Mod Manager nem válaszol",
+        "body": "Ha ez a probléma sokáig tart, zárja be az alkalmazást és indítsa újra."
+      },
+      "executable_permission": {
+        "title": "Nem sikerült futtathatóvá tenni a játékot",
+        "body": "Nem sikerült futtathatóvá tenni a DDLC.sh-t Linuxon. A játék lehet, hogy nem indul el megfelelően."
+      }
+    }
+  }
+}

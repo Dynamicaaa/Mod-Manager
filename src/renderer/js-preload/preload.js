@@ -165,6 +165,32 @@ api.translate = function (key, ...args) {
     }
 };
 
+// Get available languages
+api.getAvailableLanguages = function () {
+    try {
+        const result = ipcRenderer.sendSync("get available languages");
+        console.log("Available languages:", result);
+        return result;
+    } catch (e) {
+        console.warn("Failed to get available languages:", e);
+        return {
+            'en-GB': { name: 'English', nativeName: 'English (UK)' }
+        };
+    }
+};
+
+// Reload language
+api.reloadLanguage = function (newLanguage) {
+    try {
+        const result = ipcRenderer.sendSync("reload language", newLanguage);
+        console.log(`Language reload result for "${newLanguage}":`, result);
+        return result;
+    } catch (e) {
+        console.warn(`Failed to reload language "${newLanguage}":`, e);
+        return { success: false, error: e.message };
+    }
+};
+
 // Path to URL conversion
 api.pathToFile = fileUrl;
 

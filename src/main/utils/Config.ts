@@ -56,7 +56,8 @@ export default class Config {
         background: "default.png",
         sdkMode: "always",
         updateChannel: "latest",
-        sayonikaServerUrl: "https://sayonika.dynamicaaa.me"
+        sayonikaServerUrl: "https://sayonika.dynamicaaa.me",
+        language: "en-GB"
     };
 
     private static configPath = joinPath(app.getPath("userData"), "config.json");
