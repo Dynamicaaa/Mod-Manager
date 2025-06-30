@@ -25,7 +25,7 @@ const APP_CONFIG = {
         systemBorders: false,
         sdkDebuggingEnabled: false,
         background: "none",
-        language: "en-GB"
+        language: "en-US"
     },
     urls: {
         feedback: "mailto:CanaryZen@proton.me",

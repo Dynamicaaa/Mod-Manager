@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Bello!",
+      "tab_mods": "Mods, banana!",
+      "tab_store": "Store, papaya!",
+      "tab_options": "Settings, tulaliloo",
+      "tab_about": "About, bapple"
+    },
+    "version": {
+      "link_changelog": "Whap? Bello?"
+    },
+    "user_menu": {
+      "option_rename": "Change Name, banana!",
+      "option_logout": "Poopaye!"
+    },
+    "window_controls": {
+      "close": "Bello! Bye-bye!",
+      "maximise": "Big! Big!",
+      "minimise": "Small! Small!",
+      "devtools": "Toolz! (F12)",
+      "announcement": "Read banana news",
+      "login": "Bello! Log in!",
+      "sayonika_login": "Sayonika Log in, tulaliloo",
+      "update": {
+        "checking": "Checking for banana updates...",
+        "available": "Banana update! Click! Bello!",
+        "downloading": "Downloading... banana...",
+        "downloaded": "Banana ready! Install when you go bye-bye!"
+      }
+    },
+    "crash_cover": {
+      "button_close": "Bye-bye!",
+      "button_continue": "Continue, banana!"
+    },
+    "drop_cover": {
+      "text": "Drop mod here! Bello!"
+    },
+    "announcement": {
+      "button_open": "Open banana link",
+      "button_close": "Bye-bye!"
+    },
+    "onboarding": {
+      "title": "Bello! Welcome!",
+      "description_download": "Find DDLC, banana!",
+      "button_download": "Go to banana download page!",
+      "button_choose": "Pick file, tulaliloo",
+      "heading_step": "Step {0}, banana!",
+      "s1_desc": "Download Doki Doki Literature Club from banana website (ddlc.moe) – click below, bello!",
+      "s1_platform": "Pick file \"DDLC ({0})\", banana!",
+      "s2_desc": "After download, pick file below, banana!",
+      "description_location": "Games go to {0}, banana!",
+      "link_change": "(Change, banana!)"
+    },
+    "login_input": {
+      "message": "Type email, banana!",
+      "details": "Banana link sent! Click to log in, bello!",
+      "button_affirmative": "Log in, banana!",
+      "button_negative": "No! Cancel!"
+    },
+    "change_username_input": {
+      "message": "Type new name, banana!",
+      "details": "Name not unique, banana!",
+      "button_affirmative": "Change, banana!",
+      "button_negative": "No! Cancel!"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Search mods, banana...",
+        "header_new": "Get Started, banana!",
+        "link_install": "Install DDLC, banana!",
+        "header_installed": "Installed, banana!",
+        "header_downloaded": "Downloads, banana!"
+      },
+      "install_contextmenu": {
+        "launch": "Launch, banana!",
+        "rename": "Rename, banana!",
+        "shortcut": "Make Shortcut, banana!",
+        "delete_save": "Delete Save Data, banana!",
+        "uninstall": "Uninstall, banana!"
+      },
+      "mod_contextmenu": {
+        "install": "Install, banana!",
+        "delete": "Delete, banana!"
+      },
+      "uninstall_confirmation": {
+        "message": "You sure want to uninstall, banana?",
+        "details": "Your save data for {0} will be deleted, and you need a copy of the mod to install again, banana!",
+        "button_affirmative": "Uninstall, banana!",
+        "button_negative": "No! Cancel!"
+      },
+      "rename_input": {
+        "message": "Rename Install, banana!",
+        "details": "Type the new name for {0}, banana!",
+        "button_affirmative": "Rename, banana!",
+        "button_negative": "No! Cancel!"
+      },
+      "mod_delete_confirmation": {
+        "message": "You sure want to delete the mod, banana?",
+        "details": "You need to download another copy of the mod to install again, banana!",
+        "button_affirmative": "Delete, banana!",
+        "button_negative": "No! Cancel!"
+      },
+      "save_delete_confirmation": {
+        "message": "You sure want to delete your save data, banana?",
+        "details": "You have to start {0} again from scratch, banana!",
+        "button_affirmative": "Delete, banana!",
+        "button_negative": "No! Cancel!"
+      },
+      "install": {
+        "button_launch": "Launch, banana!",
+        "button_settings": "Settings, banana!",
+        "tag_global_save": "Global Save, banana!",
+        "tag_sdk": "SDK, banana!",
+        "title_achievements": "Achievements ({0} / {1}), banana!",
+        "description_achievements": "Keep playing to unlock more achievements, banana!",
+        "description_achievements_complete": "You unlocked all achievements! Bello!",
+        "title_screenshots_none": "No screenshots, banana!",
+        "title_screenshots_one": "1 screenshot, banana!",
+        "title_screenshots": "{0} screenshots, banana!",
+        "description_screenshots": "Press S while playing to take a screenshot, banana!",
+        "description_sdk": "This mod supports special features with the Doki Doki Mod Manager SDK, banana!",
+        "description_author": "Created by {0}, banana!",
+        "link_website": "Website ({0}), banana!",
+        "description_external": "Show in folder, banana!"
+      },
+      "mod": {
+        "button_install": "Install, banana!",
+        "button_settings": "Settings, banana!",
+        "description_external": "Show in folder, banana!"
+      },
+      "install_creation": {
+        "title": "Install DDLC, banana!",
+        "label_install_name": "Install Name, banana!",
+        "label_folder_name": "Folder Name, banana!",
+        "label_global_save": "Global Save, banana!",
+        "label_has_mod": "Install Mod, banana!",
+        "label_mod": "Mod, banana!",
+        "label_existing_saves": "Existing Save Files, banana!",
+        "description_mod": "Click to browse for a mod, banana!",
+        "header_summary": "Summary, banana!",
+        "description_vanilla": "A clean copy of DDLC will be created. The save data will be separate from any other copy of the game, banana!",
+        "description_vanilla_global_save": "A clean copy of DDLC will be created. The save data will be shared with other copies of the game (like Steam), banana!",
+        "description_modded": "A copy of DDLC will be created, and the mod will be installed. The save data will be separate from any other copy of the game, banana!",
+        "description_modded_global_save": "A copy of DDLC will be created, and the mod will be installed. The save data will be shared with other copies of the game (like Steam), banana!",
+        "button_install": "Install, banana!",
+        "button_installing": "Installing... banana...",
+        "status_exists": "That folder already exists. Pick another folder name, banana!"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Store coming soon, banana!",
+      "description_1": "The Sayonika mod database will be a central place to share, download and review DDLC mods, banana! When Sayonika is public, you can browse mods here in Doki Doki Mod Manager, banana!",
+      "description_2": "While you wait, download some recommended mods, banana!",
+      "error": "Failed to load the list of mods. Are you offline, banana?",
+      "button_download": "Download, banana!"
+    },
+    "tab_store": {
+      "title": "Sayonika Store, banana!",
+      "subtitle": "Discover and download DDLC mods, banana!",
+      "search_placeholder": "Search mods, banana...",
+      "loading": "Loading mods, banana...",
+      "error_title": "Connection Error, banana!",
+      "retry_button": "Retry, banana!",
+      "offline_title": "Offline, banana!",
+      "offline_message": "You are offline. Check your internet and try again, banana!",
+      "check_connection": "Check Connection, banana!",
+      "maintenance_banner": "Authentication services are down for maintenance, banana! You can browse mods but can't log in or register, banana!",
+      "no_mods_title": "No mods found, banana!",
+      "no_mods_message": "Try changing your search or filters, banana!",
+      "filters": {
+        "category": "Category, banana:",
+        "all_categories": "All Categories, banana!",
+        "sort_by": "Sort by, banana:",
+        "date_created": "Date Created, banana!",
+        "date_updated": "Date Updated, banana!", 
+        "downloads": "Downloads, banana!",
+        "rating": "Rating, banana!",
+        "title": "Title, banana!",
+        "order": "Order, banana:",
+        "descending": "Descending, banana!",
+        "ascending": "Ascending, banana!",
+        "featured_only": "Featured Only, banana!",
+        "translate_content": "Translate Content, banana!",
+        "auto_detect": "Auto-detect, banana!"
+      },
+      "mod_card": {
+        "featured": "Featured, banana!",
+        "mature": "Mature, banana!",
+        "by_author": "by {0}, banana!",
+        "download": "Download, banana!",
+        "downloading": "Downloading... banana...",
+        "download_mod": "Download Mod, banana!",
+        "downloads_count": "{0} downloads, banana!",
+        "version": "Version {0}, banana!",
+        "screenshots": "Screenshots ({0}), banana!",
+        "description": "Description, banana!",
+        "tags": "Tags, banana!",
+        "requirements": "Requirements, banana!"
+      },
+      "pagination": {
+        "previous": "Previous, banana!",
+        "next": "Next, banana!",
+        "page_info": "Page {0} of {1}, banana!"
+      },
+      "login": {
+        "title": "Login to Sayonika, banana!",
+        "discord": "Login with Discord, banana!",
+        "github": "Login with GitHub, banana!",
+        "or": "or, banana!",
+        "username_label": "Username or Email, banana:",
+        "username_placeholder": "Enter username or email, banana!",
+        "username_help": "You can use your username or email to log in, banana!",
+        "password_label": "Password, banana:",
+        "remember_me": "Remember me, banana!",
+        "login_button": "Login, banana!",
+        "logging_in": "Logging in... banana...",
+        "register_link": "No account? Register here, banana!",
+        "success": "Logged in, banana!",
+        "failed": "Login failed: {0}, banana!"
+      },
+      "translation": {
+        "enabled": "Translation enabled, banana! Content will be translated when available, banana!",
+        "disabled": "Translation disabled, banana!",
+        "language_changed": "Translation language changed to {0}, banana!"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Appearance, banana!",
+        "link_background": "Background, banana!",
+        "link_language": "Language, banana!",
+        "link_advanced_appearance": "Advanced, banana!",
+        "header_enhancements": "Enhancements, banana!",
+        "link_sdk": "Achievements & SDK, banana!",
+        "header_application": "Application, banana!",
+        "link_updates": "Updates, banana!",
+        "link_storage": "Storage Location, banana!",
+        "header_developers": "Developers, banana!",
+        "link_testing": "SDK Debug, banana!",
+        "link_debug": "App Info, banana!"
+      },
+      "section_backgrounds": {
+        "title": "Background, banana!",
+        "subtitle": "Customize your Doki Doki Mod Manager with backgrounds, banana!",
+        "button_none": "No Background, banana!",
+        "description_credit": "Original DDLC backgrounds by Team Salvato, banana!"
+      },
+      "section_advanced_appearance": {
+        "title": "Advanced, banana!",
+        "subtitle": "Find more options here, banana!",
+        "button_enable_sysborders": "Use System Borders (restart needed), banana!",
+        "button_disable_sysborders": "Disable System Borders (restart needed), banana!"
+      },
+      "section_storage": {
+        "title": "Storage Location, banana!",
+        "subtitle": "Change where your game data is stored, banana!",
+        "description_moving": "Warning! If you change your install location, all your mods, installs and save data will be moved, banana! This may take a while, and can't be stopped, banana!",
+        "description_current": "Current location: {0}, banana!",
+        "button_change": "Change Install Location, banana!"
+      },
+      "section_updates": {
+        "title": "Updates, banana!",
+        "subtitle": "Get the latest version of Doki Doki Mod Manager, banana!",
+        "description_current_version": "Current version: {0}, banana!",
+        "label_channel": "Release Channel, banana!",
+        "option_stable": "Stable, banana!",
+        "option_beta": "Beta, banana!",
+        "button_check": "Check for updates, banana!"
+      },
+      "section_sdk": {
+        "title": "Achievements & SDK, banana!",
+        "subtitle": "Change how achievements work, banana!",
+        "description_mode": "Enable achievements, banana:",
+        "checkbox_always": "Always (recommended), banana!",
+        "checkbox_specified": "When the mod supports them, banana!",
+        "checkbox_never": "Never, banana!"
+      },
+      "section_testing": {
+        "title": "SDK Debug, banana!",
+        "subtitle": "Enable debug logging to test your mods, banana!",
+        "button_enable": "Enable Debugging, banana!",
+        "button_disable": "Disable Debugging, banana!"
+      },
+      "section_debug": {
+        "title": "App Info, banana!",
+        "subtitle": "Info for fixing problems, banana!"
+      },
+      "section_language": {
+        "title": "Language, banana!",
+        "subtitle": "Change the language of Doki Doki Mod Manager, banana!",
+        "description_current": "Current language: {0}, banana!",
+        "button_apply": "Apply Language, banana!",
+        "button_contribute": "Help Translate, banana!",
+        "description_restart": "Language changes after restart, banana!",
+        "notification_changed": "Language changed to {0}, banana! Restart to see changes, banana!",
+        "notification_same": "Language is already set to {0}, banana!"
+      }
+    },
+    "tab_about": {
+      "title": "About, banana!",
+      "description": "Doki Doki Mod Manager is a community project to help you find, install and play mods for Doki Doki Literature Club, a free Visual Novel game by Team Salvato, banana!",
+      "title_disclaimer": "Disclaimer, banana!",
+      "disclaimer_1": "Doki Doki Mod Manager is a fan work and not by Team Salvato, banana! It's a fan work, like Team Salvato's IP rules, banana!",
+      "disclaimer_2": "Doki Doki Mod Manager not responsible for any damage to your files or computer, banana! Make sure mods are safe, banana!",
+      "title_socials": "Get in touch, banana!",
+      "social_twitter": "Follow @Dynamicxaa on Twitter, banana!",
+      "social_reddit": "Message me on Reddit, banana!",
+      "social_email": "Send me an email, banana!",
+      "title_support": "Support Development, banana!",
+      "description_support": "Doki Doki Mod Manager is always free, banana! If you like it, support me, banana!",
+      "support_donate": "Make a donation, banana!",
+      "support_steelseries": "Get 10% off SteelSeries (affiliate link), banana!",
+      "support_code": "Contribute code or translations, banana!"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Open Doki Doki Mod Manager and launch {0}, banana!"
+    },
+    "running_cover": {
+      "title_running": "DDLC is running, banana!",
+      "title_crashed": "Something went wrong, banana!",
+      "button_browse": "Open Game Folder, banana!",
+      "button_close": "OK, banana!",
+      "description_running": "Close the game to change your mods, banana!",
+      "install_missing": "The install could not be found, banana!",
+      "install_corrupt": "The install is incomplete or broken, banana!",
+      "install_crashed": "The game failed to launch or crashed, banana!"
+    },
+    "move_install": {
+      "title": "Select new install folder, banana!"
+    },
+    "mod_browse_dialog": {
+      "title": "Find a mod to install, banana!",
+      "file_format_name": "Mods, banana!"
+    },
+    "game_browse_dialog": {
+      "title": "Locate a copy of DDLC's zip file, banana!",
+      "file_format_name": "DDLC, banana!"
+    },
+    "shortcut_dialog": {
+      "title": "Choose where to put your shortcut, banana!",
+      "file_format_name": "Shortcut, banana!"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager crashed, banana!",
+        "body": "Problem reported. Restart and try again, banana!"
+      },
+      "move_install": {
+        "title": "Failed to move install folder, banana!",
+        "body": "Check permission and space, banana!"
+      },
+      "shortcut": {
+        "title": "Failed to create shortcut, banana!",
+        "body": "Check permission for this folder, banana!"
+      },
+      "install": {
+        "title": "Failed to install game, banana!",
+        "body": "Check permission and space, banana!"
+      },
+      "rename": {
+        "title": "Failed to rename, banana!",
+        "body": "Close other programs and try again, banana!"
+      },
+      "uninstall": {
+        "title": "Failed to uninstall, banana!",
+        "body": "Close other programs and try again, banana!"
+      },
+      "save_delete": {
+        "title": "Failed to delete save data, banana!",
+        "body": "Close other programs and try again, banana!"
+      },
+      "mod_delete": {
+        "title": "Failed to delete the mod, banana!",
+        "body": "Close other programs and try again, banana!"
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager stopped responding, banana!",
+        "body": "If this lasts a long time, close the app and start again, banana!"
+      },
+      "executable_permission": {
+        "title": "Failed to make game executable, banana!",
+        "body": "Could not make DDLC.sh executable on Linux. The game may not launch, banana!"
+      }
+    }
+  }
+}

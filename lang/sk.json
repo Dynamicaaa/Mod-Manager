@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Domov",
+      "tab_mods": "Módy",
+      "tab_store": "Obchod",
+      "tab_options": "Nastavenia",
+      "tab_about": "O aplikácii"
+    },
+    "version": {
+      "link_changelog": "čo je nové?"
+    },
+    "user_menu": {
+      "option_rename": "Zmeniť meno",
+      "option_logout": "Odhlásiť sa"
+    },
+    "window_controls": {
+      "close": "Zatvoriť",
+      "maximise": "Maximalizovať",
+      "minimise": "Minimalizovať",
+      "devtools": "Vývojárske nástroje (F12)",
+      "announcement": "Prečítajte si najnovšie oznámenie",
+      "login": "Prihlásiť sa",
+      "sayonika_login": "Sayonika Prihlásenie",
+      "update": {
+        "checking": "Kontrola aktualizácií na pozadí...",
+        "available": "K dispozícii je aktualizácia. Kliknutím si ju stiahnete.",
+        "downloading": "Sťahovanie aktualizácie...",
+        "downloaded": "Aktualizácia je pripravená na inštaláciu po ukončení aplikácie."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Ukončiť",
+      "button_continue": "Pokračovať"
+    },
+    "drop_cover": {
+      "text": "Presuňte mod sem pre inštaláciu"
+    },
+    "announcement": {
+      "button_open": "Otvoriť odkaz",
+      "button_close": "Zatvoriť"
+    },
+    "onboarding": {
+      "title": "Vitajte!",
+      "description_download": "Nájdeme kópiu hry DDLC.",
+      "button_download": "Navštívte oficiálnu stránku DDLC",
+      "button_choose": "Vybrať súbor",
+      "heading_step": "Krok {0}",
+      "s1_desc": "Je potrebné stiahnuť kópiu hry Doki Doki Literature Club. Nájdete ju na oficiálnej stránke (ddlc.moe) - kliknutím na tlačidlo nižšie sa tam okamžite presuniete.",
+      "s1_platform": "Keď budete požiadaní, vyberte súbor s názvom \"DDLC ({0})\".",
+      "s2_desc": "Po dokončení sťahovania ho vyberte pomocou tlačidla nižšie.",
+      "description_location": "Vaše hry budú uložené v {0}",
+      "link_change": "(Zmeniť)"
+    },
+    "login_input": {
+      "message": "Zadajte e-mailovú adresu",
+      "details": "Na túto adresu bude odoslaný e-mail. Kliknutím na odkaz v e-maili dokončíte prihlásenie.",
+      "button_affirmative": "Prihlásiť sa",
+      "button_negative": "Zrušiť"
+    },
+    "change_username_input": {
+      "message": "Zadajte nové používateľské meno",
+      "details": "Mená nemusia byť jedinečné.",
+      "button_affirmative": "Zmeniť",
+      "button_negative": "Zrušiť"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Hľadať módy...",
+        "header_new": "Začíname",
+        "link_install": "Inštalovať DDLC",
+        "header_installed": "Nainštalované",
+        "header_downloaded": "Stiahnuté"
+      },
+      "install_contextmenu": {
+        "launch": "Spustiť",
+        "rename": "Premenovať",
+        "shortcut": "Vytvoriť odkaz",
+        "delete_save": "Odstrániť uložené údaje",
+        "uninstall": "Odinštalovať"
+      },
+      "mod_contextmenu": {
+        "install": "Inštalovať",
+        "delete": "Odstrániť"
+      },
+      "uninstall_confirmation": {
+        "message": "Naozaj chcete odinštalovať?",
+        "details": "Vaše uložené údaje pre {0} budú odstránené a na opätovnú inštaláciu budete potrebovať kópiu módu.",
+        "button_affirmative": "Odinštalovať",
+        "button_negative": "Zrušiť"
+      },
+      "rename_input": {
+        "message": "Premenovať inštaláciu",
+        "details": "Zadajte nový názov pre {0}.",
+        "button_affirmative": "Premenovať",
+        "button_negative": "Zrušiť"
+      },
+      "mod_delete_confirmation": {
+        "message": "Naozaj chcete odstrániť mod?",
+        "details": "Na opätovnú inštaláciu budete potrebovať novú kópiu módu.",
+        "button_affirmative": "Odstrániť",
+        "button_negative": "Zrušiť"
+      },
+      "save_delete_confirmation": {
+        "message": "Naozaj chcete odstrániť uložené údaje?",
+        "details": "Budete musieť začať {0} odznova.",
+        "button_affirmative": "Odstrániť",
+        "button_negative": "Zrušiť"
+      },
+      "install": {
+        "button_launch": "Spustiť",
+        "button_settings": "Nastavenia",
+        "tag_global_save": "Globálne ukladanie",
+        "tag_sdk": "SDK",
+        "title_achievements": "Úspechy ({0} / {1})",
+        "description_achievements": "Pokračujte v hre pre odomknutie ďalších úspechov.",
+        "description_achievements_complete": "Odoknuli ste všetky úspechy. Gratulujeme!",
+        "title_screenshots_none": "Žiadne screenshoty",
+        "title_screenshots_one": "1 screenshot",
+        "title_screenshots": "{0} screenshotov",
+        "description_screenshots": "Stlačením S počas hry vytvoríte screenshot.",
+        "description_sdk": "Tento mod podporuje špeciálne funkcie s Doki Doki Mod Manager SDK!",
+        "description_author": "Vytvoril {0}",
+        "link_website": "Web ({0})",
+        "description_external": "Zobraziť v priečinku"
+      },
+      "mod": {
+        "button_install": "Inštalovať",
+        "button_settings": "Nastavenia",
+        "description_external": "Zobraziť v priečinku"
+      },
+      "install_creation": {
+        "title": "Inštalovať DDLC",
+        "label_install_name": "Názov inštalácie",
+        "label_folder_name": "Názov priečinka",
+        "label_global_save": "Globálne ukladanie",
+        "label_has_mod": "Inštalovať mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Existujúce uložené súbory",
+        "description_mod": "Kliknutím vyhľadáte mod.",
+        "header_summary": "Zhrnutie",
+        "description_vanilla": "Bude vytvorená čistá kópia DDLC. Uložené údaje budú oddelené od ostatných kópií hry.",
+        "description_vanilla_global_save": "Bude vytvorená čistá kópia DDLC. Uložené údaje budú zdieľané s ostatnými kópiami hry (napr. Steam)",
+        "description_modded": "Bude vytvorená kópia DDLC s nainštalovaným modom. Uložené údaje budú oddelené od ostatných kópií hry.",
+        "description_modded_global_save": "Bude vytvorená kópia DDLC s nainštalovaným modom. Uložené údaje budú zdieľané s ostatnými kópiami hry (napr. Steam)",
+        "button_install": "Inštalovať",
+        "button_installing": "Inštalácia...",
+        "status_exists": "Tento priečinok už existuje. Zvoľte iný názov."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Obchod čoskoro príde!",
+      "description_1": "Sayonika mod databáza poskytne centrálne miesto pre zdieľanie, sťahovanie a hodnotenie modov pre DDLC. Keď bude Sayonika verejne dostupná, budete môcť prehľadávať módy priamo tu v Doki Doki Mod Manager.",
+      "description_2": "Kým čakáte, môžete si stiahnuť niektoré z odporúčaných modov.",
+      "error": "Nepodarilo sa načítať zoznam modov. Ste offline?",
+      "button_download": "Stiahnuť"
+    },
+    "tab_store": {
+      "title": "Sayonika Obchod",
+      "subtitle": "Objavujte a sťahujte módy pre DDLC",
+      "search_placeholder": "Hľadať módy...",
+      "loading": "Načítavam módy...",
+      "error_title": "Chyba pripojenia",
+      "retry_button": "Skúsiť znova",
+      "offline_title": "Offline",
+      "offline_message": "Ste momentálne offline. Skontrolujte pripojenie a skúste znova.",
+      "check_connection": "Skontrolovať pripojenie",
+      "maintenance_banner": "Autentizačné služby sú dočasne nedostupné z dôvodu údržby. Módy môžete prehliadať, ale nie sa prihlásiť alebo registrovať.",
+      "no_mods_title": "Nenašli sa žiadne módy",
+      "no_mods_message": "Skúste upraviť vyhľadávanie alebo filtre",
+      "filters": {
+        "category": "Kategória:",
+        "all_categories": "Všetky kategórie",
+        "sort_by": "Zoradiť podľa:",
+        "date_created": "Dátum vytvorenia",
+        "date_updated": "Dátum aktualizácie",
+        "downloads": "Stiahnutia",
+        "rating": "Hodnotenie",
+        "title": "Názov",
+        "order": "Poradie:",
+        "descending": "Zostupne",
+        "ascending": "Vzostupne",
+        "featured_only": "Len doporučené",
+        "translate_content": "Preložiť obsah",
+        "auto_detect": "Automatická detekcia"
+      },
+      "mod_card": {
+        "featured": "Doporučené",
+        "mature": "Pre dospelých",
+        "by_author": "autor: {0}",
+        "download": "Stiahnuť",
+        "downloading": "Sťahovanie...",
+        "download_mod": "Stiahnuť mod",
+        "downloads_count": "{0} stiahnutí",
+        "version": "Verzia {0}",
+        "screenshots": "Screenshoty ({0})",
+        "description": "Popis",
+        "tags": "Tagy",
+        "requirements": "Požiadavky"
+      },
+      "pagination": {
+        "previous": "Predchádzajúca",
+        "next": "Ďalšia",
+        "page_info": "Strana {0} z {1}"
+      },
+      "login": {
+        "title": "Prihlásiť sa do Sayonika",
+        "discord": "Prihlásiť sa cez Discord",
+        "github": "Prihlásiť sa cez GitHub",
+        "or": "alebo",
+        "username_label": "Meno alebo e-mail:",
+        "username_placeholder": "Zadajte meno alebo e-mail",
+        "username_help": "Na prihlásenie môžete použiť meno alebo e-mail",
+        "password_label": "Heslo:",
+        "remember_me": "Zapamätať si ma",
+        "login_button": "Prihlásiť sa",
+        "logging_in": "Prihlasovanie...",
+        "register_link": "Nemáte účet? Zaregistrovať sa",
+        "success": "Úspešne prihlásené!",
+        "failed": "Prihlásenie zlyhalo: {0}"
+      },
+      "translation": {
+        "enabled": "Preklad povolený. Obsah bude preložený, ak je k dispozícii.",
+        "disabled": "Preklad zakázaný.",
+        "language_changed": "Jazyk prekladu zmenený na {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Vzhľad",
+        "link_background": "Pozadie",
+        "link_language": "Jazyk",
+        "link_advanced_appearance": "Pokročilé",
+        "header_enhancements": "Vylepšenia",
+        "link_sdk": "Úspechy & SDK",
+        "header_application": "Aplikácia",
+        "link_updates": "Aktualizácie",
+        "link_storage": "Umiestnenie úložiska",
+        "header_developers": "Pre vývojárov",
+        "link_testing": "Ladenie SDK",
+        "link_debug": "Informácie o aplikácii"
+      },
+      "section_backgrounds": {
+        "title": "Pozadie",
+        "subtitle": "Prispôsobte si Doki Doki Mod Manager jedným z týchto pozadí.",
+        "button_none": "Bez pozadia",
+        "description_credit": "Pôvodné pozadia DDLC poskytol Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Pokročilé",
+        "subtitle": "Ďalšie možnosti rozhrania.",
+        "button_enable_sysborders": "Použiť systémové okraje (vyžaduje reštart)",
+        "button_disable_sysborders": "Zakázať systémové okraje (vyžaduje reštart)"
+      },
+      "section_storage": {
+        "title": "Umiestnenie úložiska",
+        "subtitle": "Zmeniť umiestnenie herných dát.",
+        "description_moving": "Upozornenie! Zmenou umiestnenia sa presunú všetky módy, inštalácie a uložené údaje. Tento proces môže trvať niekoľko minút a nesmie byť prerušený.",
+        "description_current": "Aktuálne umiestnenie: {0}",
+        "button_change": "Zmeniť umiestnenie"
+      },
+      "section_updates": {
+        "title": "Aktualizácie",
+        "subtitle": "Získajte najnovšiu verziu Doki Doki Mod Manager.",
+        "description_current_version": "Aktuálna verzia: {0}",
+        "label_channel": "Kanál aktualizácií",
+        "option_stable": "Stabilná",
+        "option_beta": "Beta",
+        "button_check": "Skontrolovať aktualizácie"
+      },
+      "section_sdk": {
+        "title": "Úspechy & SDK",
+        "subtitle": "Nastavenie správy úspechov.",
+        "description_mode": "Povoliť úspechy:",
+        "checkbox_always": "Vždy (odporúčané)",
+        "checkbox_specified": "Keď mod podporuje",
+        "checkbox_never": "Nikdy"
+      },
+      "section_testing": {
+        "title": "Ladenie SDK",
+        "subtitle": "Povoliť ladiace protokoly pre testovanie modov s Doki Doki Mod Manager SDK.",
+        "button_enable": "Povoliť ladenie",
+        "button_disable": "Zakázať ladenie"
+      },
+      "section_debug": {
+        "title": "Informácie o aplikácii",
+        "subtitle": "Informácie pre diagnostiku problémov."
+      },
+      "section_language": {
+        "title": "Jazyk",
+        "subtitle": "Zmeniť jazyk aplikácie.",
+        "description_current": "Aktuálny jazyk: {0}",
+        "button_apply": "Použiť jazyk",
+        "button_contribute": "Pomôcť s prekladom",
+        "description_restart": "Zmena jazyka sa prejaví po reštarte aplikácie.",
+        "notification_changed": "Jazyk zmenený na {0}. Reštartujte aplikáciu pre zobrazenie zmien.",
+        "notification_same": "Jazyk je už nastavený na {0}."
+      }
+    },
+    "tab_about": {
+      "title": "O aplikácii",
+      "description": "Doki Doki Mod Manager je komunitný projekt pomáhajúci nájsť, inštalovať a hrať módy pre Doki Doki Literature Club, bezplatnú vizuálnu novelu od Team Salvato.",
+      "title_disclaimer": "Vylúčenie zodpovednosti",
+      "disclaimer_1": "Doki Doki Mod Manager je fanúšikovská práca a nie je spojená s Team Salvato. Je definovaný ako fanúšikovská práca podľa smerníc Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager nepreberá zodpovednosť za škody spôsobené súborom alebo počítačom v dôsledku hrania modu. Zodpovednosťou používateľa je overiť bezpečnosť modov.",
+      "title_socials": "Kontakt",
+      "social_twitter": "Sledujte @Dynamicxaa na Twitteri",
+      "social_reddit": "Napíšte mi na Reddite",
+      "social_email": "Poslať e-mail",
+      "title_support": "Podpora vývoja",
+      "description_support": "Doki Doki Mod Manager je vždy zadarmo. Ak sa vám páči a chcete podporiť jeho vývoj, zvážte jednu z nasledujúcich možností.",
+      "support_donate": "Prispieť jednorazovo",
+      "support_steelseries": "Zľava 10% na SteelSeries produkty (affiliate link)",
+      "support_code": "Prispieť kódom alebo prekladmi"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Otvoriť Doki Doki Mod Manager a spustiť {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC beží",
+      "title_crashed": "Vyskytol sa problém",
+      "button_browse": "Otvoriť priečinok hry",
+      "button_close": "OK",
+      "description_running": "Pre vykonanie zmien zatvorte hru.",
+      "install_missing": "Inštaláciu sa nepodarilo nájsť.",
+      "install_corrupt": "Inštalácia je neúplná alebo poškodená.",
+      "install_crashed": "Hra sa nepodarilo spustiť alebo zlyhala."
+    },
+    "move_install": {
+      "title": "Vyberte nový inštalačný priečinok"
+    },
+    "mod_browse_dialog": {
+      "title": "Vyhľadať mod na inštaláciu",
+      "file_format_name": "Módy"
+    },
+    "game_browse_dialog": {
+      "title": "Nájsť súbor DDLC.zip",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Vyberte umiestnenie pre odkaz",
+      "file_format_name": "Odkaz"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager zlyhal",
+        "body": "Problém bol nahlásený. Reštartujte aplikáciu a skúste znova."
+      },
+      "move_install": {
+        "title": "Presun priečinka zlyhal",
+        "body": "Skontrolujte oprávnenia a dostatok miesta v cielovom priečinku."
+      },
+      "shortcut": {
+        "title": "Vytvorenie odkazu zlyhalo",
+        "body": "Skontrolujte oprávnenia na vytvorenie súboru."
+      },
+      "install": {
+        "title": "Inštalácia hry zlyhala",
+        "body": "Skontrolujte oprávnenia a dostatok miesta."
+      },
+      "rename": {
+        "title": "Premenovanie zlyhalo",
+        "body": "Zatvorte všetky zasahujúce programy a skúste znova."
+      },
+      "uninstall": {
+        "title": "Odinštalovanie zlyhalo",
+        "body": "Zatvorte všetky zasahujúce programy a skúste znova."
+      },
+      "save_delete": {
+        "title": "Odstránenie údajov zlyhalo",
+        "body": "Zatvorte všetky zasahujúce programy a skúste znova."
+      },
+      "mod_delete": {
+        "title": "Odstránenie módu zlyhalo",
+        "body": "Zatvorte všetky zasahujúce programy a skúste znova."
+      },
+      "renderer_freeze": {
+        "title": "Aplikácia neodpovedá",
+        "body": "Ak problém pretrváva, zatvorte aplikáciu a spustite znova."
+      },
+      "executable_permission": {
+        "title": "Chyba oprávnení",
+        "body": "Nepodarilo sa nastaviť spustiteľnosť DDLC.sh v Linuxe. Hra sa nemusí spustiť správne."
+      }
+    }
+  }
+}

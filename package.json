@@ -53,7 +53,7 @@
     "typescript": "^5.3.0"
   },
   "build": {
-    "appId": "dynamicaaa.dokidokimodmanager",
+    "appId": "dynamicaaa.DokiDokiModmanager",
     "productName": "Doki Doki Mod Manager",
     "artifactName": "ddmm-${version}-${os}-${arch}.${ext}",
     "directories": {

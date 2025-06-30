@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "H-Home~",
+      "tab_mods": "M-Mods >w<",
+      "tab_store": "Stowe~",
+      "tab_options": "Optiowns",
+      "tab_about": "Abwout"
+    },
+    "version": {
+      "link_changelog": "wh-what's nyew? owo"
+    },
+    "user_menu": {
+      "option_rename": "Ch-change Usewname~",
+      "option_logout": "Log o-out >_<"
+    },
+    "window_controls": {
+      "close": "Cwose",
+      "maximise": "Maximiwize",
+      "minimise": "Minimiwize",
+      "devtools": "Toggwe Dev Toows (F12)",
+      "announcement": "Wead the watest annowncement",
+      "login": "Log In~",
+      "sayonika_login": "Sayonika Wogin",
+      "update": {
+        "checking": "Checking fow updaties in the backgwound~",
+        "available": "An updaty is avaiwabwe! Cwick hewe to downwoad it uwu",
+        "downloading": "Downwoading updaty...",
+        "downloaded": "Updaty weady to instaww when you qwit~"
+      }
+    },
+    "crash_cover": {
+      "button_close": "Q-Quit",
+      "button_continue": "Continyue~"
+    },
+    "drop_cover": {
+      "text": "Dwop a mod hewe to instaww it owo"
+    },
+    "announcement": {
+      "button_open": "Open Wink",
+      "button_close": "Cwose"
+    },
+    "onboarding": {
+      "title": "We-welcome! >w<",
+      "description_download": "Wet's find a copy of DDLC, nya~",
+      "button_download": "Visit DDLC's offishawl downwoad page",
+      "button_choose": "Bwows for a copy",
+      "heading_step": "Step {0} uwu",
+      "s1_desc": "You need to downwoad a copy of Doki Doki Litewatuwe Cwub. Cwick the button bewow to go thewe now~",
+      "s1_platform": "When asked, choose \"DDLC ({0})\".",
+      "s2_desc": "Once downwoaded, sewect it using the button bewow.",
+      "description_location": "Youw games wiww be stowed at {0}",
+      "link_change": "(Change~)"
+    },
+    "login_input": {
+      "message": "Entew youw emaiw addwess~",
+      "details": "An emaiw wiww be sent. Cwick the wink to finish wogging in.",
+      "button_affirmative": "Log In~",
+      "button_negative": "Cancew"
+    },
+    "change_username_input": {
+      "message": "Entew youw nyew usewname~",
+      "details": "Usewnames don't have to be uniqwue.",
+      "button_affirmative": "Change~",
+      "button_negative": "Cancew"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "S-seawch mods...",
+        "header_new": "Get Stawted",
+        "link_install": "Instaww DDLC",
+        "header_installed": "Instawwed",
+        "header_downloaded": "Downwoads"
+      },
+      "install_contextmenu": {
+        "launch": "Waunch",
+        "rename": "Wename",
+        "shortcut": "Cweate Showtcuts",
+        "delete_save": "Deweete Save Data",
+        "uninstall": "Uninstaww"
+      },
+      "mod_contextmenu": {
+        "install": "Instaww",
+        "delete": "Deweete"
+      },
+      "uninstall_confirmation": {
+        "message": "Awe you suwe you want to uninstaww? >_<",
+        "details": "Youw save data fow {0} wiww be deweeted, and you'ww nyeed a copy of the mod to instaww again.",
+        "button_affirmative": "Uninstaww",
+        "button_negative": "Cancew"
+      },
+      "rename_input": {
+        "message": "Wename Instaww",
+        "details": "Entew the nyew nyame fow {0}.",
+        "button_affirmative": "Wename",
+        "button_negative": "Cancew"
+      },
+      "mod_delete_confirmation": {
+        "message": "Awe you suwe you want to deweete the mod?",
+        "details": "You'ww nyeed to downwoad anothew copy to instaww again.",
+        "button_affirmative": "Deweete",
+        "button_negative": "Cancew"
+      },
+      "save_delete_confirmation": {
+        "message": "Awe you suwe you want to deweete youw save data?",
+        "details": "You'ww have to stawt {0} again fwom scwatch.",
+        "button_affirmative": "Deweete",
+        "button_negative": "Cancew"
+      },
+      "install": {
+        "button_launch": "Waunch",
+        "button_settings": "Settigns",
+        "tag_global_save": "Gwobaw Save",
+        "tag_sdk": "SDK",
+        "title_achievements": "Achievements ({0} / {1})",
+        "description_achievements": "Keep pwaying to unwock mowe achievements.",
+        "description_achievements_complete": "You'we unwocked aww achievements. Congwatuwations!",
+        "title_screenshots_none": "No scweenshots",
+        "title_screenshots_one": "1 scweenshot",
+        "title_screenshots": "{0} scweenshots",
+        "description_screenshots": "Pwess S whiwe pwaying to take a scweenshot.",
+        "description_sdk": "This mod suppowts speshaw featuwes with the Doki Doki Mod Manager SDK!",
+        "description_author": "Cweated by {0}",
+        "link_website": "Website ({0})",
+        "description_external": "Show in fowdew"
+      },
+      "mod": {
+        "button_install": "Instaww",
+        "button_settings": "Settigns",
+        "description_external": "Show in fowdew"
+      },
+      "install_creation": {
+        "title": "Instaww DDLC",
+        "label_install_name": "Instaww Nyame",
+        "label_folder_name": "Fowdew Nyame",
+        "label_global_save": "Gwobaw Save",
+        "label_has_mod": "Instaww Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Existing Save Fiwes",
+        "description_mod": "Cwick to bwows fow a mod.",
+        "header_summary": "Summawy",
+        "description_vanilla": "A cwean copy of DDLC wiww be cweated. The save data wiww be sepawate fwom any othew copy of the game.",
+        "description_vanilla_global_save": "A cwean copy of DDLC wiww be cweated. The save data wiww be shawed with othew copies of the game (e.g. Steam)",
+        "description_modded": "A copy of DDLC wiww be cweated, and the mod wiww be instawwed.  The save data wiww be sepawate fwom any othew copy of the game.",
+        "description_modded_global_save": "A copy of DDLC wiww be cweated, and the mod wiww be instawwed.  The save data wiww be shawed with othew copies of the game (e.g. Steam)",
+        "button_install": "Instaww",
+        "button_installing": "Instawwing...",
+        "status_exists": "That fowdew awweady exists. Pick anothew fowdew nyame."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "The stowe is coming soon! OwO",
+      "description_1": "The Sayonika mod database wiww pwovide a centwal wocation to shawe, downwoad and weview DDLC mods. When Sayonika is pubwicwy avaiwabwe, you'ww be abwe to bwows mods wight hewe in Doki Doki Mod Manager.",
+      "description_2": "Whiwe you wait, feew fwee to downwoad some of these wecommended mods.",
+      "error": "Faiwed to woad the wist of mods. Awe you offwine?",
+      "button_download": "Downwoad"
+    },
+    "tab_store": {
+      "title": "Sayonika Stowe",
+      "subtitle": "Discovew and downwoad DDLC mods",
+      "search_placeholder": "Seawch mods...",
+      "loading": "Woading mods...",
+      "error_title": "Connection Ewwow",
+      "retry_button": "Wetwy",
+      "offline_title": "Offwine",
+      "offline_message": "You awe cuwwentwy offwine. Pwease check youw intewnet connection and twy again.",
+      "check_connection": "Check Connection",
+      "maintenance_banner": "Authentication sewvices awe tempowawiwy unavaiwabwe due to maintenance. You can stiww bwows mods but cannot wogin ow wegistew.",
+      "no_mods_title": "No mods found",
+      "no_mods_message": "Twy adjusting youw seawch ow fiwtews",
+      "filters": {
+        "category": "Categowy:",
+        "all_categories": "Aww Categowies",
+        "sort_by": "Sowt by:",
+        "date_created": "Date Cweated",
+        "date_updated": "Date Updated", 
+        "downloads": "Downwoads",
+        "rating": "Wating",
+        "title": "Titwe",
+        "order": "Owdew:",
+        "descending": "Descending",
+        "ascending": "Ascending",
+        "featured_only": "Featuwed Onwy",
+        "translate_content": "Twanswate Content",
+        "auto_detect": "Auto-detect"
+      },
+      "mod_card": {
+        "featured": "Featuwed",
+        "mature": "Matuwe",
+        "by_author": "by {0}",
+        "download": "Downwoad",
+        "downloading": "Downwoading...",
+        "download_mod": "Downwoad Mod",
+        "downloads_count": "{0} downwoads",
+        "version": "Vewsion {0}",
+        "screenshots": "Scweenshots ({0})",
+        "description": "Descwiption",
+        "tags": "Tags",
+        "requirements": "Wequiwements"
+      },
+      "pagination": {
+        "previous": "Pwevious",
+        "next": "Next",
+        "page_info": "Page {0} of {1}"
+      },
+      "login": {
+        "title": "Wogin to Sayonika",
+        "discord": "Wogin with Discord",
+        "github": "Wogin with GitHub",
+        "or": "ow",
+        "username_label": "Usewname ow Emaiw:",
+        "username_placeholder": "Entew usewname ow emaiw addwess",
+        "username_help": "You can use eithew youw usewname ow emaiw addwess to wog in",
+        "password_label": "Passwowd:",
+        "remember_me": "Wemembew me",
+        "login_button": "Wogin",
+        "logging_in": "Wogging in...",
+        "register_link": "Don't have an account? Wegistew hewe",
+        "success": "Successfuwwy wogged in!",
+        "failed": "Wogin faiwed: {0}"
+      },
+      "translation": {
+        "enabled": "Twanswation enabwed. Content wiww be twanswated when avaiwabwe.",
+        "disabled": "Twanswation disabwed.",
+        "language_changed": "Twanswation wanguage changed to {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Appeawance",
+        "link_background": "Backgwound",
+        "link_language": "Wanguage",
+        "link_advanced_appearance": "Advanced",
+        "header_enhancements": "Enhancements",
+        "link_sdk": "Achievements & SDK",
+        "header_application": "Appwication",
+        "link_updates": "Updates",
+        "link_storage": "Stowage Location",
+        "header_developers": "Devewopews",
+        "link_testing": "SDK Debug",
+        "link_debug": "App Info"
+      },
+      "section_backgrounds": {
+        "title": "Backgwound",
+        "subtitle": "Customise youw copy of Doki Doki Mod Manager with one of these backgwounds.",
+        "button_none": "No Backgwound",
+        "description_credit": "Owiginaw DDLC backgwounds couwtesy of Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Advanced",
+        "subtitle": "Find othew intewface options hewe.",
+        "button_enable_sysborders": "Use System Bowdews (wequiwes westawt)",
+        "button_disable_sysborders": "Disabwe System Bowdews (wequiwes westawt)"
+      },
+      "section_storage": {
+        "title": "Stowage Location",
+        "subtitle": "Change whewe youw game data is stowed.",
+        "description_moving": "Wawning! If you choose to change youw instaww wocation, aww youw mods, instawwations and save data wiww be moved. This may take sevewaw minutes, and cannot be intewwupted.",
+        "description_current": "Cuwwent wocation: {0}",
+        "button_change": "Change Instaww Location"
+      },
+      "section_updates": {
+        "title": "Updates",
+        "subtitle": "Get the watest vewsion of Doki Doki Mod Manager.",
+        "description_current_version": "Cuwwent vewsion: {0}",
+        "label_channel": "Wewease Chawnew",
+        "option_stable": "Stabwe",
+        "option_beta": "Beta",
+        "button_check": "Check fow updates"
+      },
+      "section_sdk": {
+        "title": "Achievements & SDK",
+        "subtitle": "Change the way achievements awe handwed.",
+        "description_mode": "Enabwe achievements:",
+        "checkbox_always": "Awways (wecommended)",
+        "checkbox_specified": "When the mod specifies it suppowts them",
+        "checkbox_never": "Nevew"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Enabwe debug wogging to test youw mods with the Doki Doki Mod Manager SDK.",
+        "button_enable": "Enabwe Debugging",
+        "button_disable": "Disabwe Debugging"
+      },
+      "section_debug": {
+        "title": "App Info",
+        "subtitle": "Infowmation fow diagnosing pwobwems."
+      },
+      "section_language": {
+        "title": "Wanguage",
+        "subtitle": "Change the wanguage of Doki Doki Mod Manager.",
+        "description_current": "Cuwwent wanguage: {0}",
+        "button_apply": "Appwy Wanguage",
+        "button_contribute": "Hewp Twanswate",
+        "description_restart": "Wanguage changes wiww take effect aftew westawting the appwication.",
+        "notification_changed": "Wanguage changed to {0}. Pwease westawt the appwication to see the changes.",
+        "notification_same": "Wanguage is awweady set to {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Abwout",
+      "description": "Doki Doki Mod Manager is a community-devewoped pwoject that hewps you find, instaww and pway mods fow Doki Doki Litewatuwe Cwub, a fwee Visuaw Novew game by Team Salvato.",
+      "title_disclaimer": "Discwaimew",
+      "disclaimer_1": "Doki Doki Mod Manager is a fan wowk of Doki Doki Litewatuwe Cwub and is nyot affiwated with Team Salvato. It is a fan wowk, as defined by Team Salvato's IP Guidewines.",
+      "disclaimer_2": "Doki Doki Mod Manager does nyot take wesponsibiwity fow any damage caused to youw fiwes ow computew, as a wesuwt of pwaying a mod ow othewwise. It is up to you to ensuwe mods awe safe to pway.",
+      "title_socials": "Get in touch",
+      "social_twitter": "Fowwow @Dynamicxaa on Twittew",
+      "social_reddit": "Message me on Weddit",
+      "social_email": "Send me an emaiw",
+      "title_support": "Suppowt Devewopment",
+      "description_support": "Doki Doki Mod Manager wiww awways be fwee to downwoad and use. If you wike it and want to hewp me keep it updated, considew suppowting me in one of the fowwowing ways.",
+      "support_donate": "Make a one-off donation",
+      "support_steelseries": "Get 10% off SteelSeries gaming pewiphewaws (affiliate wink)",
+      "support_code": "Contwibute to the pwoject (code ow twanswations)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Open Doki Doki Mod Manager and waunch {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC is wunning",
+      "title_crashed": "Something went wwong",
+      "button_browse": "Open Game Fowdew",
+      "button_close": "OK",
+      "description_running": "Cwose the game to make changes to youw mods.",
+      "install_missing": "The instaww couwd nyot be found.",
+      "install_corrupt": "The instaww is incompwete ow cowwupt.",
+      "install_crashed": "The game faiwed to waunch ow cwrashed."
+    },
+    "move_install": {
+      "title": "Sewect nyew instaww fowdew"
+    },
+    "mod_browse_dialog": {
+      "title": "Find a mod to instaww",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Wocate a copy of DDLC's zip fiwe",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Choose whewe to pwace youw showtcuts",
+      "file_format_name": "Showtcuts"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager cwrashed",
+        "body": "The pwobwem has been wepowted. Pwease westawt and twy again."
+      },
+      "move_install": {
+        "title": "Faiwed to move instaww fowdew",
+        "body": "Check that you have pewmission and enough space to move to this fowdew."
+      },
+      "shortcut": {
+        "title": "Faiwed to cweate showtcuts",
+        "body": "Check that you have pewmission to cweate fiwes in this fowdew."
+      },
+      "install": {
+        "title": "Faiwed to instaww game",
+        "body": "Check that you have pewmission and enough space to instaww."
+      },
+      "rename": {
+        "title": "Faiwed to wename",
+        "body": "Check that you have cwosed aww pwogwams that may be intewfeweing and twy again."
+      },
+      "uninstall": {
+        "title": "Faiwed to uninstaww",
+        "body": "Check that you have cwosed aww pwogwams that may be intewfeweing and twy again."
+      },
+      "save_delete": {
+        "title": "Faiwed to deweete save data",
+        "body": "Check that you have cwosed aww pwogwams that may be intewfeweing and twy again."
+      },
+      "mod_delete": {
+        "title": "Faiwed to deweete the mod",
+        "body": "Check that you have cwosed aww pwogwams that may be intewfeweing and twy again."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager stopped wesponding",
+        "body": "If this issue wasts fow a wong time, cwose the app and stawt again."
+      },
+      "executable_permission": {
+        "title": "Faiwed to make game executabwe",
+        "body": "Couwd nyot make DDLC.sh executabwe on Linux. The game may nyot waunch pwopewwy."
+      }
+    }
+  }
+}

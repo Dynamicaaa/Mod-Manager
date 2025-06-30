@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Αρχική",
+      "tab_mods": "Mods",
+      "tab_store": "Κατάστημα",
+      "tab_options": "Ρυθμίσεις",
+      "tab_about": "Πληροφορίες"
+    },
+    "version": {
+      "link_changelog": "τι νέο υπάρχει;"
+    },
+    "user_menu": {
+      "option_rename": "Αλλαγή ονόματος",
+      "option_logout": "Αποσύνδεση"
+    },
+    "window_controls": {
+      "close": "Κλείσιμο",
+      "maximise": "Μεγιστοποίηση",
+      "minimise": "Ελαχιστοποίηση",
+      "devtools": "Εργαλεία προγραμματιστή (F12)",
+      "announcement": "Δείτε την τελευταία ανακοίνωση",
+      "login": "Σύνδεση",
+      "sayonika_login": "Σύνδεση Sayonika",
+      "update": {
+        "checking": "Έλεγχος για ενημερώσεις...",
+        "available": "Διαθέσιμη ενημέρωση. Κάντε κλικ για λήψη.",
+        "downloading": "Γίνεται λήψη ενημέρωσης...",
+        "downloaded": "Η ενημέρωση είναι έτοιμη για εγκατάσταση όταν κλείσετε."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Έξοδος",
+      "button_continue": "Συνέχεια"
+    },
+    "drop_cover": {
+      "text": "Αφήστε mod εδώ για εγκατάσταση"
+    },
+    "announcement": {
+      "button_open": "Άνοιγμα συνδέσμου",
+      "button_close": "Κλείσιμο"
+    },
+    "onboarding": {
+      "title": "Καλώς ήρθατε!",
+      "description_download": "Ας βρούμε ένα αντίγραφο του DDLC.",
+      "button_download": "Επίσκεψη επίσημης σελίδας λήψης",
+      "button_choose": "Επιλέξτε αρχείο",
+      "heading_step": "Βήμα {0}",
+      "s1_desc": "Πρέπει να κατεβάσετε το Doki Doki Literature Club από την επίσημη ιστοσελίδα (ddlc.moe) - πατήστε το παρακάτω κουμπί.",
+      "s1_platform": "Επιλέξτε το αρχείο \"DDLC ({0})\" όταν σας ζητηθεί.",
+      "s2_desc": "Μετά την λήψη, επιλέξτε το αρχείο με το παρακάτω κουμπί.",
+      "description_location": "Τα παιχνίδια θα αποθηκευτούν στο {0}",
+      "link_change": "(Αλλαγή)"
+    },
+    "login_input": {
+      "message": "Εισαγωγή email",
+      "details": "Θα σταλεί email με σύνδεσμο σύνδεσης.",
+      "button_affirmative": "Σύνδεση",
+      "button_negative": "Ακύρωση"
+    },
+    "change_username_input": {
+      "message": "Εισαγωγή νέου ονόματος",
+      "details": "Τα ονόματα δεν χρειάζεται να είναι μοναδικά.",
+      "button_affirmative": "Αλλαγή",
+      "button_negative": "Ακύρωση"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Αναζήτηση mods...",
+        "header_new": "Ξεκινήστε",
+        "link_install": "Εγκατάσταση DDLC",
+        "header_installed": "Εγκατεστημένα",
+        "header_downloaded": "Ληφθέντα"
+      },
+      "install_contextmenu": {
+        "launch": "Εκκίνηση",
+        "rename": "Μετονομασία",
+        "shortcut": "Δημιουργία συντόμευσης",
+        "delete_save": "Διαγραφή αποθηκεύσεων",
+        "uninstall": "Απεγκατάσταση"
+      },
+      "mod_contextmenu": {
+        "install": "Εγκατάσταση",
+        "delete": "Διαγραφή"
+      },
+      "uninstall_confirmation": {
+        "message": "Είστε βέβαιοι ότι θέλετε να απεγκαταστήσετε;",
+        "details": "Οι αποθηκεύσεις για {0} θα διαγραφούν.",
+        "button_affirmative": "Απεγκατάσταση",
+        "button_negative": "Ακύρωση"
+      },
+      "rename_input": {
+        "message": "Μετονομασία εγκατάστασης",
+        "details": "Εισαγωγή νέου ονόματος για {0}.",
+        "button_affirmative": "Αλλαγή",
+        "button_negative": "Ακύρωση"
+      },
+      "mod_delete_confirmation": {
+        "message": "Είστε βέβαιοι ότι θέλετε να διαγράψετε το mod;",
+        "details": "Θα χρειαστεί να κατεβάσετε ξανά το mod.",
+        "button_affirmative": "Διαγραφή",
+        "button_negative": "Ακύρωση"
+      },
+      "save_delete_confirmation": {
+        "message": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αποθηκεύσεις;",
+        "details": "Θα ξεκινήσετε το {0} από την αρχή.",
+        "button_affirmative": "Διαγραφή",
+        "button_negative": "Ακύρωση"
+      },
+      "install": {
+        "button_launch": "Εκκίνηση",
+        "button_settings": "Ρυθμίσεις",
+        "tag_global_save": "Καθολική αποθήκευση",
+        "tag_sdk": "SDK",
+        "title_achievements": "Επιτεύγματα ({0}/{1})",
+        "description_achievements": "Συνεχίστε να παίζετε για περισσότερα επιτεύγματα.",
+        "description_achievements_complete": "Ξεκλειδώσατε όλα τα επιτεύγματα! Συγχαρητήρια!",
+        "title_screenshots_none": "Καμία στιγμιότυπο",
+        "title_screenshots_one": "1 στιγμιότυπο",
+        "title_screenshots": "{0} στιγμιότυπα",
+        "description_screenshots": "Πατήστε S κατά τη διάρκεια παιχνιδιού για λήψη.",
+        "description_sdk": "Αυτό το mod υποστηρίζει ειδικές λειτουργίες με SDK!",
+        "description_author": "Δημιουργήθηκε από {0}",
+        "link_website": "Ιστοσελίδα ({0})",
+        "description_external": "Εμφάνιση σε φάκελο"
+      },
+      "mod": {
+        "button_install": "Εγκατάσταση",
+        "button_settings": "Ρυθμίσεις",
+        "description_external": "Εμφάνιση σε φάκελο"
+      },
+      "install_creation": {
+        "title": "Εγκατάσταση DDLC",
+        "label_install_name": "Όνομα εγκατάστασης",
+        "label_folder_name": "Όνομα φακέλου",
+        "label_global_save": "Καθολική αποθήκευση",
+        "label_has_mod": "Εγκατάσταση mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Υπάρχουσες αποθηκεύσεις",
+        "description_mod": "Κάντε κλικ για επιλογή mod.",
+        "header_summary": "Περίληψη",
+        "description_vanilla": "Δημιουργία καθαρού DDLC. Οι αποθηκεύσεις θα είναι ξεχωριστές.",
+        "description_vanilla_global_save": "Δημιουργία καθαρού DDLC με κοινές αποθηκεύσεις (π.χ. Steam)",
+        "description_modded": "Δημιουργία DDLC με mod. Οι αποθηκεύσεις θα είναι ξεχωριστές.",
+        "description_modded_global_save": "Δημιουργία DDLC με mod και κοινές αποθηκεύσεις.",
+        "button_install": "Εγκατάσταση",
+        "button_installing": "Γίνεται εγκατάσταση...",
+        "status_exists": "Ο φάκελος υπάρχει ήδη. Επιλέξτε άλλο όνομα."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Το κατάστημα έρχεται σύντομα!",
+      "description_1": "Το Sayonika θα προσφέρει κεντρική πλατφόρμα για mods DDLC.",
+      "description_2": "Δοκιμάστε τα προτεινόμενα mods.",
+      "error": "Αποτυχία φόρτωσης. Ελέγξτε τη σύνδεση.",
+      "button_download": "Λήψη"
+    },
+    "tab_store": {
+      "title": "Κατάστημα Sayonika",
+      "subtitle": "Ανακαλύψτε και κατεβάστε mods",
+      "search_placeholder": "Αναζήτηση mods...",
+      "loading": "Φόρτωση mods...",
+      "error_title": "Σφάλμα σύνδεσης",
+      "retry_button": "Δοκιμή ξανά",
+      "offline_title": "Εκτός σύνδεσης",
+      "offline_message": "Ελέγξτε τη σύνδεσή σας.",
+      "check_connection": "Έλεγχος σύνδεσης",
+      "maintenance_banner": "Οι υπηρεσίες ταυτοποίησης είναι προσωρινά μη διαθέσιμες.",
+      "no_mods_title": "Δεν βρέθηκαν mods",
+      "no_mods_message": "Δοκιμάστε άλλα κριτήρια αναζήτησης",
+      "filters": {
+        "category": "Κατηγορία:",
+        "all_categories": "Όλες οι κατηγορίες",
+        "sort_by": "Ταξινόμηση κατά:",
+        "date_created": "Ημερομηνία δημιουργίας",
+        "date_updated": "Τελευταία ενημέρωση",
+        "downloads": "Λήψεις",
+        "rating": "Βαθμολογία",
+        "title": "Τίτλος",
+        "order": "Σειρά:",
+        "descending": "Φθίνουσα",
+        "ascending": "Αύξουσα",
+        "featured_only": "Μόνο επιλεγμένα",
+        "translate_content": "Μετάφραση περιεχομένου",
+        "auto_detect": "Αυτόματη ανίχνευση"
+      },
+      "mod_card": {
+        "featured": "Προτεινόμενο",
+        "mature": "Για ενήλικες",
+        "by_author": "από {0}",
+        "download": "Λήψη",
+        "downloading": "Γίνεται λήψη...",
+        "download_mod": "Λήψη mod",
+        "downloads_count": "{0} λήψεις",
+        "version": "Έκδοση {0}",
+        "screenshots": "Στιγμιότυπα ({0})",
+        "description": "Περιγραφή",
+        "tags": "Ετικέτες",
+        "requirements": "Απαιτήσεις"
+      },
+      "pagination": {
+        "previous": "Προηγούμενο",
+        "next": "Επόμενο",
+        "page_info": "Σελίδα {0} από {1}"
+      },
+      "login": {
+        "title": "Σύνδεση Sayonika",
+        "discord": "Σύνδεση με Discord",
+        "github": "Σύνδεση με GitHub",
+        "or": "ή",
+        "username_label": "Όνομα χρήστη/Email:",
+        "username_placeholder": "Εισαγωγή ονόματος ή email",
+        "username_help": "Χρησιμοποιήστε όνομα χρήστη ή email",
+        "password_label": "Κωδικός:",
+        "remember_me": "Να με θυμάσαι",
+        "login_button": "Σύνδεση",
+        "logging_in": "Σύνδεση σε εξέλιξη...",
+        "register_link": "Δεν έχετε λογαριασμό; Εγγραφή εδώ",
+        "success": "Επιτυχής σύνδεση!",
+        "failed": "Σφάλμα: {0}"
+      },
+      "translation": {
+        "enabled": "Ενεργοποιημένη μετάφραση.",
+        "disabled": "Απενεργοποιημένη μετάφραση.",
+        "language_changed": "Επιλεγμένη γλώσσα: {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Εμφάνιση",
+        "link_background": "Φόντο",
+        "link_language": "Γλώσσα",
+        "link_advanced_appearance": "Προχωρημένα",
+        "header_enhancements": "Βελτιώσεις",
+        "link_sdk": "Επιτεύγματα & SDK",
+        "header_application": "Εφαρμογή",
+        "link_updates": "Ενημερώσεις",
+        "link_storage": "Τοποθεσία αποθήκευσης",
+        "header_developers": "Προγραμματιστές",
+        "link_testing": "Εντοπισμός σφαλμάτων SDK",
+        "link_debug": "Πληροφορίες εφαρμογής"
+      },
+      "section_backgrounds": {
+        "title": "Φόντο",
+        "subtitle": "Προσαρμόστε το φόντο σας",
+        "button_none": "Χωρίς φόντο",
+        "description_credit": "Πρωτότυπα φόντο από την Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Προχωρημένα",
+        "subtitle": "Πρόσθετες επιλογές",
+        "button_enable_sysborders": "Χρήση συστημικών ορίων (απαιτεί επανεκκίνηση)",
+        "button_disable_sysborders": "Απενεργοποίηση συστημικών ορίων"
+      },
+      "section_storage": {
+        "title": "Τοποθεσία αποθήκευσης",
+        "subtitle": "Αλλαγή τοποθεσίας δεδομένων",
+        "description_moving": "Προσοχή! Η αλλαγή θα μετακινήσει όλα τα δεδομένα.",
+        "description_current": "Τρέχουσα τοποθεσία: {0}",
+        "button_change": "Αλλαγή τοποθεσίας"
+      },
+      "section_updates": {
+        "title": "Ενημερώσεις",
+        "subtitle": "Λήψη τελευταίας έκδοσης",
+        "description_current_version": "Τρέχουσα έκδοση: {0}",
+        "label_channel": "Κανάλι ενημερώσεων",
+        "option_stable": "Σταθερό",
+        "option_beta": "Beta",
+        "button_check": "Έλεγχος ενημερώσεων"
+      },
+      "section_sdk": {
+        "title": "Επιτεύγματα & SDK",
+        "subtitle": "Διαχείριση επιτευγμάτων",
+        "description_mode": "Ενεργοποίηση επιτευγμάτων:",
+        "checkbox_always": "Πάντα (προτείνεται)",
+        "checkbox_specified": "Όταν το mod υποστηρίζει",
+        "checkbox_never": "Ποτέ"
+      },
+      "section_testing": {
+        "title": "Εντοπισμός σφαλμάτων SDK",
+        "subtitle": "Ενεργοποίηση καταγραφών",
+        "button_enable": "Ενεργοποίηση",
+        "button_disable": "Απενεργοποίηση"
+      },
+      "section_debug": {
+        "title": "Πληροφορίες εφαρμογής",
+        "subtitle": "Τεχνικές λεπτομέρειες"
+      },
+      "section_language": {
+        "title": "Γλώσσα",
+        "subtitle": "Αλλαγή γλώσσας εφαρμογής",
+        "description_current": "Τρέχουσα γλώσσα: {0}",
+        "button_apply": "Εφαρμογή γλώσσας",
+        "button_contribute": "Συμβάλετε στη μετάφραση",
+        "description_restart": "Η αλλαγή θα εφαρμοστεί μετά την επανεκκίνηση.",
+        "notification_changed": "Η γλώσσα άλλαξε σε {0}. Επανεκκινήστε την εφαρμογή.",
+        "notification_same": "Η γλώσσα είναι ήδη {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Πληροφορίες",
+      "description": "Το Doki Doki Mod Manager είναι ένα έργο της κοινότητας για τη διαχείριση mods του DDLC.",
+      "title_disclaimer": "Αποποίηση ευθυνών",
+      "disclaimer_1": "Δεν συνδέεται με την Team Salvato. Συμμορφώνεται με τις οδηγίες IP.",
+      "disclaimer_2": "Η χρήση mods γίνεται με δική σας ευθύνη.",
+      "title_socials": "Επικοινωνία",
+      "social_twitter": "Ακολουθήστε @Dynamicxaa στο Twitter",
+      "social_reddit": "Μήνυμα στο Reddit",
+      "social_email": "Αποστολή email",
+      "title_support": "Υποστήριξη ανάπτυξης",
+      "description_support": "Δωρεάν εφαρμογή. Μπορείτε να υποστηρίξετε:",
+      "support_donate": "Δωρεά",
+      "support_steelseries": "Έκπτωση 10% σε SteelSeries (σύνδεσμος)",
+      "support_code": "Συμβολή σε κώδικα ή μεταφράσεις"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Άνοιγμα Doki Doki Mod Manager και εκκίνηση {0}."
+    },
+    "running_cover": {
+      "title_running": "Το DDLC εκτελείται",
+      "title_crashed": "Παρουσιάστηκε σφάλμα",
+      "button_browse": "Άνοιγμα φακέλου",
+      "button_close": "ΟΚ",
+      "description_running": "Κλείστε το παιχνίδι για αλλαγές.",
+      "install_missing": "Η εγκατάσταση δεν βρέθηκε.",
+      "install_corrupt": "Η εγκατάσταση είναι κατεστραμμένη.",
+      "install_crashed": "Αποτυχία εκκίνησης παιχνιδιού."
+    },
+    "move_install": {
+      "title": "Επιλογή νέου φακέλου"
+    },
+    "mod_browse_dialog": {
+      "title": "Επιλογή mod",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Εντοπισμός αρχείου DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Επιλογή τοποθεσίας συντόμευσης",
+      "file_format_name": "Συντόμευση"
+    },
+    "errors": {
+      "exception": {
+        "title": "Σφάλμα εφαρμογής",
+        "body": "Το σφάλμα αναφέρθηκε. Επανεκκινήστε."
+      },
+      "move_install": {
+        "title": "Αποτυχία μετακίνησης",
+        "body": "Ελέγξτε δικαιώματα και χώρο."
+      },
+      "shortcut": {
+        "title": "Αποτυχία δημιουργίας",
+        "body": "Ελέγξτε δικαιώματα."
+      },
+      "install": {
+        "title": "Αποτυχία εγκατάστασης",
+        "body": "Ελέγξτε δικαιώματα και χώρο."
+      },
+      "rename": {
+        "title": "Αποτυχία μετονομασίας",
+        "body": "Κλείστε παρεμβατικές εφαρμογές."
+      },
+      "uninstall": {
+        "title": "Αποτυχία απεγκατάστασης",
+        "body": "Κλείστε παρεμβατικές εφαρμογές."
+      },
+      "save_delete": {
+        "title": "Αποτυχία διαγραφής",
+        "body": "Κλείστε παρεμβατικές εφαρμογές."
+      },
+      "mod_delete": {
+        "title": "Αποτυχία διαγραφής mod",
+        "body": "Κλείστε παρεμβατικές εφαρμογές."
+      },
+      "renderer_freeze": {
+        "title": "Η εφαρμογή δεν ανταποκρίνεται",
+        "body": "Επανεκκινήστε την εφαρμογή."
+      },
+      "executable_permission": {
+        "title": "Σφάλμα δικαιωμάτων Linux",
+        "body": "Αδυναμία εκτέλεσης DDLC.sh."
+      }
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Tuis",
+      "tab_mods": "Mods",
+      "tab_store": "Winkel",
+      "tab_options": "Instellings",
+      "tab_about": "Oor"
+    },
+    "version": {
+      "link_changelog": "wat is nuut?"
+    },
+    "user_menu": {
+      "option_rename": "Verander Gebruikersnaam",
+      "option_logout": "Teken uit"
+    },
+    "window_controls": {
+      "close": "Maak toe",
+      "maximise": "Maksimeer",
+      "minimise": "Minimeer",
+      "devtools": "Ontwikkelaarshulpmiddels (F12)",
+      "announcement": "Lees die nuutste aankondiging",
+      "login": "Teken in",
+      "sayonika_login": "Sayonika Inskrywing",
+      "update": {
+        "checking": "Kyk vir opdaterings...",
+        "available": "Opdatering beskikbaar. Klik om af te laai.",
+        "downloading": "Laai opdatering af...",
+        "downloaded": "Opdatering gereed om te installeer wanneer jy afsluit."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Sluit",
+      "button_continue": "Gaan voort"
+    },
+    "drop_cover": {
+      "text": "Los 'n mod hier om te installeer"
+    },
+    "announcement": {
+      "button_open": "Maak Skakel Oop",
+      "button_close": "Maak toe"
+    },
+    "onboarding": {
+      "title": "Welkom!",
+      "description_download": "Kom ons vind 'n kopie van DDLC.",
+      "button_download": "Besoek die amptelike aflaaibladsy",
+      "button_choose": "Kies 'n lêer",
+      "heading_step": "Stap {0}",
+      "s1_desc": "Laai Doki Doki Literature Club af van die amptelike webwerf (ddlc.moe) - klik die knoppie hieronder.",
+      "s1_platform": "Kies die lêer \"DDLC ({0})\" wanneer gevra.",
+      "s2_desc": "Kies die lêer met die knoppie hieronder nadat jy afgelaai het.",
+      "description_location": "Speletjies sal gestoor word by {0}",
+      "link_change": "(Verander)"
+    },
+    "login_input": {
+      "message": "Voer jou e-posadres in",
+      "details": "‘n Skakel sal na hierdie adres gestuur word.",
+      "button_affirmative": "Teken in",
+      "button_negative": "Kanselleer"
+    },
+    "change_username_input": {
+      "message": "Voer nuwe gebruikersnaam in",
+      "details": "Gebruikersname hoef nie uniek te wees nie.",
+      "button_affirmative": "Verander",
+      "button_negative": "Kanselleer"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Soek mods...",
+        "header_new": "Begin",
+        "link_install": "Installeer DDLC",
+        "header_installed": "Geïnstalleer",
+        "header_downloaded": "Afgelaai"
+      },
+      "install_contextmenu": {
+        "launch": "Begin",
+        "rename": "Hernoem",
+        "shortcut": "Skep Kortpad",
+        "delete_save": "Verwyder Stoordata",
+        "uninstall": "Deïnstalleer"
+      },
+      "mod_contextmenu": {
+        "install": "Installeer",
+        "delete": "Verwyder"
+      },
+      "uninstall_confirmation": {
+        "message": "Is jy seker jy wil deïnstalleer?",
+        "details": "Stoordata vir {0} sal verwyder word.",
+        "button_affirmative": "Deïnstalleer",
+        "button_negative": "Kanselleer"
+      },
+      "rename_input": {
+        "message": "Hernoem Installasie",
+        "details": "Voer nuwe naam vir {0} in.",
+        "button_affirmative": "Hernoem",
+        "button_negative": "Kanselleer"
+      },
+      "mod_delete_confirmation": {
+        "message": "Is jy seker jy wil die mod verwyder?",
+        "details": "Jy sal dit weer moet aflaai om te herinstalleer.",
+        "button_affirmative": "Verwyder",
+        "button_negative": "Kanselleer"
+      },
+      "save_delete_confirmation": {
+        "message": "Is jy seker jy wil stoordata verwyder?",
+        "details": "Jy sal {0} van voor af moet begin.",
+        "button_affirmative": "Verwyder",
+        "button_negative": "Kanselleer"
+      },
+      "install": {
+        "button_launch": "Begin",
+        "button_settings": "Instellings",
+        "tag_global_save": "Globale Stoor",
+        "tag_sdk": "SDK",
+        "title_achievements": "Prestasies ({0}/{1})",
+        "description_achievements": "Speel verder om meer prestasies oop te sluit.",
+        "description_achievements_complete": "Jy het al die prestasies oopgesluit! Geluk!",
+        "title_screenshots_none": "Geen kiekies nie",
+        "title_screenshots_one": "1 kiekie",
+        "title_screenshots": "{0} kiekies",
+        "description_screenshots": "Druk S tydens speel om 'n kiekie te neem.",
+        "description_sdk": "Hierdie mod ondersteun spesiale funksies met die SDK!",
+        "description_author": "Geskep deur {0}",
+        "link_website": "Webwerf ({0})",
+        "description_external": "Wys in gids"
+      },
+      "mod": {
+        "button_install": "Installeer",
+        "button_settings": "Instellings",
+        "description_external": "Wys in gids"
+      },
+      "install_creation": {
+        "title": "Installeer DDLC",
+        "label_install_name": "Installering Naam",
+        "label_folder_name": "Gids Naam",
+        "label_global_save": "Globale Stoor",
+        "label_has_mod": "Installeer Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Bestaande Stoordata",
+        "description_mod": "Klik om 'n mod te kies.",
+        "header_summary": "Opsomming",
+        "description_vanilla": "‘n Skoon kopie van DDLC sal geskep word. Stoordata sal apart wees.",
+        "description_vanilla_global_save": "‘n Skoon kopie met globale stoor (bv. Steam)",
+        "description_modded": "‘n Kopie van DDLC met mod. Stoordata sal apart wees.",
+        "description_modded_global_save": "‘n Kopie met mod en globale stoor.",
+        "button_install": "Installeer",
+        "button_installing": "Besig om te installeer...",
+        "status_exists": "Daardie gids bestaan reeds. Kies 'n ander naam."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Winkel kom binnekort!",
+      "description_1": "Sayonika sal ‘n sentrale databasis vir DDLC-mods wees.",
+      "description_2": "Probeer hierdie aanbevole mods terwyl jy wag.",
+      "error": "Kon nie die lys van mods laai nie. Is jy vanlyn?",
+      "button_download": "Aflaai"
+    },
+    "tab_store": {
+      "title": "Sayonika Winkel",
+      "subtitle": "Ontdek en laai DDLC-mods af",
+      "search_placeholder": "Soek mods...",
+      "loading": "Laai mods...",
+      "error_title": "Verbindingsfout",
+      "retry_button": "Probeer Weer",
+      "offline_title": "Vanlyn",
+      "offline_message": "Gaan jou internetverbinding na.",
+      "check_connection": "Gaan Verbinding na",
+      "maintenance_banner": "Verifikasiedienste is tydelik nie beskikbaar nie.",
+      "no_mods_title": "Geen mods gevind nie",
+      "no_mods_message": "Probeer ander soekkriteria",
+      "filters": {
+        "category": "Kategorie:",
+        "all_categories": "Alle",
+        "sort_by": "Sorteer volgens:",
+        "date_created": "Skeppingsdatum",
+        "date_updated": "Laaste Opdateer",
+        "downloads": "Aflaaie",
+        "rating": "Gradering",
+        "title": "Titel",
+        "order": "Volgorde:",
+        "descending": "Aflopend",
+        "ascending": "Oplopend",
+        "featured_only": "Slegs Uitgelig",
+        "translate_content": "Vertaal Inhoud",
+        "auto_detect": "Outomaties Opspoor"
+      },
+      "mod_card": {
+        "featured": "Uitgelig",
+        "mature": "Volwasse",
+        "by_author": "deur {0}",
+        "download": "Aflaai",
+        "downloading": "Besig om af te laai...",
+        "download_mod": "Laai Mod Af",
+        "downloads_count": "{0} aflaaie",
+        "version": "Weergawe {0}",
+        "screenshots": "Kiekies ({0})",
+        "description": "Beskrywing",
+        "tags": "Etikette",
+        "requirements": "Vereistes"
+      },
+      "pagination": {
+        "previous": "Vorige",
+        "next": "Volgende",
+        "page_info": "Bladsy {0} van {1}"
+      },
+      "login": {
+        "title": "Sayonika Inskrywing",
+        "discord": "Teken in met Discord",
+        "github": "Teken in met GitHub",
+        "or": "of",
+        "username_label": "Gebruiker/E-pos:",
+        "username_placeholder": "Voer gebruiker of e-pos in",
+        "username_help": "Gebruik gebruiker of e-pos",
+        "password_label": "Wagwoord:",
+        "remember_me": "Onthou My",
+        "login_button": "Teken in",
+        "logging_in": "Besig om in te teken...",
+        "register_link": "Geen rekening nie? Registreer hier",
+        "success": "Suksesvol ingeteken!",
+        "failed": "Misluk: {0}"
+      },
+      "translation": {
+        "enabled": "Vertaling geaktiveer.",
+        "disabled": "Vertaling gedeaktiveer.",
+        "language_changed": "Vertaaltaal verander na {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Voorkoms",
+        "link_background": "Agtergrond",
+        "link_language": "Taal",
+        "link_advanced_appearance": "Gevorderd",
+        "header_enhancements": "Verbeterings",
+        "link_sdk": "Prestasies & SDK",
+        "header_application": "Toepassing",
+        "link_updates": "Opdaterings",
+        "link_storage": "Stoorplek",
+        "header_developers": "Ontwikkelaars",
+        "link_testing": "SDK Ontfouting",
+        "link_debug": "Toepassingsinligting"
+      },
+      "section_backgrounds": {
+        "title": "Agtergrond",
+        "subtitle": "Pas jou agtergrond aan",
+        "button_none": "Geen Agtergrond",
+        "description_credit": "Oorspronklike agtergronde deur Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Gevorderd",
+        "subtitle": "Bykomende opsies",
+        "button_enable_sysborders": "Gebruik Stelselrande (herbegin nodig)",
+        "button_disable_sysborders": "Deaktiveer Stelselrande"
+      },
+      "section_storage": {
+        "title": "Stoorplek",
+        "subtitle": "Verander waar jou speletjiedata gestoor word",
+        "description_moving": "Waarskuwing! Al jou mods en stoordata sal verskuif word.",
+        "description_current": "Huidige plek: {0}",
+        "button_change": "Verander Plek"
+      },
+      "section_updates": {
+        "title": "Opdaterings",
+        "subtitle": "Kry die nuutste weergawe",
+        "description_current_version": "Huidige weergawe: {0}",
+        "label_channel": "Opdateringskanaal",
+        "option_stable": "Stabiel",
+        "option_beta": "Beta",
+        "button_check": "Kyk vir Opdaterings"
+      },
+      "section_sdk": {
+        "title": "Prestasies & SDK",
+        "subtitle": "Bestuur prestasies",
+        "description_mode": "Aktiveer prestasies:",
+        "checkbox_always": "Altyd (aanbeveel)",
+        "checkbox_specified": "Wanneer mod dit ondersteun",
+        "checkbox_never": "Nooit"
+      },
+      "section_testing": {
+        "title": "SDK Ontfouting",
+        "subtitle": "Aktiveer ontfoutlog",
+        "button_enable": "Aktiveer Ontfouting",
+        "button_disable": "Deaktiveer Ontfouting"
+      },
+      "section_debug": {
+        "title": "Toepassingsinligting",
+        "subtitle": "Tegniese besonderhede"
+      },
+      "section_language": {
+        "title": "Taal",
+        "subtitle": "Verander die toepassingstaal",
+        "description_current": "Huidige taal: {0}",
+        "button_apply": "Pas Taal Toe",
+        "button_contribute": "Help Vertaal",
+        "description_restart": "Veranderinge tree in werking na herbegin.",
+        "notification_changed": "Taal verander na {0}. Herbegin die toepassing.",
+        "notification_same": "Taal is reeds {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Oor",
+      "description": "Doki Doki Mod Manager is 'n gemeenskapsprojek om DDLC-mods te bestuur.",
+      "title_disclaimer": "Vrywaring",
+      "disclaimer_1": "Nie geaffilieer met Team Salvato nie. In ooreenstemming met hul IP-riglyne.",
+      "disclaimer_2": "Gebruik van mods is jou eie verantwoordelikheid.",
+      "title_socials": "Kontak",
+      "social_twitter": "Volg @Dynamicxaa op Twitter",
+      "social_reddit": "Stuur boodskap op Reddit",
+      "social_email": "Stuur e-pos",
+      "title_support": "Ondersteun Ontwikkeling",
+      "description_support": "Die toepassing is gratis. Jy kan ondersteun deur:",
+      "support_donate": "Skenk",
+      "support_steelseries": "10% afslag by SteelSeries (affiliate skakel)",
+      "support_code": "Dra by tot kode of vertalings"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Maak Doki Doki Mod Manager oop en begin {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC is besig om te hardloop",
+      "title_crashed": "Iets het verkeerd gegaan",
+      "button_browse": "Maak Speletjiegids Oop",
+      "button_close": "OK",
+      "description_running": "Maak die speletjie toe om jou mods te verander.",
+      "install_missing": "Die installasie kon nie gevind word nie.",
+      "install_corrupt": "Die installasie is korrup.",
+      "install_crashed": "Die speletjie kon nie begin nie."
+    },
+    "move_install": {
+      "title": "Kies nuwe installasiegids"
+    },
+    "mod_browse_dialog": {
+      "title": "Kies 'n mod om te installeer",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Vind DDLC zip-lêer",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Kies waar om jou kortpad te plaas",
+      "file_format_name": "Kortpad"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager het gecrash",
+        "body": "Die probleem is gerapporteer. Herbegin en probeer weer."
+      },
+      "move_install": {
+        "title": "Kon nie installasiegids skuif nie",
+        "body": "Gaan jou regte en spasie na."
+      },
+      "shortcut": {
+        "title": "Kon nie kortpad skep nie",
+        "body": "Gaan jou regte in daardie gids na."
+      },
+      "install": {
+        "title": "Kon nie speletjie installeer nie",
+        "body": "Gaan jou regte en spasie na."
+      },
+      "rename": {
+        "title": "Kon nie hernoem nie",
+        "body": "Maak alle programme toe wat dalk inmeng en probeer weer."
+      },
+      "uninstall": {
+        "title": "Kon nie deïnstalleer nie",
+        "body": "Maak alle programme toe wat dalk inmeng en probeer weer."
+      },
+      "save_delete": {
+        "title": "Kon nie stoordata verwyder nie",
+        "body": "Maak alle programme toe wat dalk inmeng en probeer weer."
+      },
+      "mod_delete": {
+        "title": "Kon nie die mod verwyder nie",
+        "body": "Maak alle programme toe wat dalk inmeng en probeer weer."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager reageer nie",
+        "body": "As hierdie probleem voortduur, maak die toepassing toe en begin weer."
+      },
+      "executable_permission": {
+        "title": "Kon nie speletjie uitvoerbaar maak nie",
+        "body": "Kon nie DDLC.sh uitvoerbaar maak op Linux nie. Die speletjie mag dalk nie reg begin nie."
+      }
+    }
+  }
+}

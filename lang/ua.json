@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Головна",
+      "tab_mods": "Моди",
+      "tab_store": "Магазин",
+      "tab_options": "Налаштування",
+      "tab_about": "Про програму"
+    },
+    "version": {
+      "link_changelog": "що нового?"
+    },
+    "user_menu": {
+      "option_rename": "Змінити ім'я користувача",
+      "option_logout": "Вийти"
+    },
+    "window_controls": {
+      "close": "Закрити",
+      "maximise": "Розгорнути",
+      "minimise": "Згорнути",
+      "devtools": "Інструменти розробника (F12)",
+      "announcement": "Читати останнє оголошення",
+      "login": "Увійти",
+      "sayonika_login": "Вхід в Sayonika",
+      "update": {
+        "checking": "Перевірка оновлень...",
+        "available": "Доступне оновлення. Натисніть, щоб завантажити.",
+        "downloading": "Завантаження оновлення...",
+        "downloaded": "Оновлення готове до встановлення після закриття програми."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Вийти",
+      "button_continue": "Продовжити"
+    },
+    "drop_cover": {
+      "text": "Перетягніть мод сюди для встановлення"
+    },
+    "announcement": {
+      "button_open": "Відкрити посилання",
+      "button_close": "Закрити"
+    },
+    "onboarding": {
+      "title": "Ласкаво просимо!",
+      "description_download": "Знайдемо копію DDLC.",
+      "button_download": "Офіційна сторінка завантаження DDLC",
+      "button_choose": "Обрати файл",
+      "heading_step": "Крок {0}",
+      "s1_desc": "Завантажте оригінальну гру Doki Doki Literature Club з офіційного сайту (ddlc.moe) - натисніть кнопку нижче, щоб перейти туди.",
+      "s1_platform": "Оберіть файл з назвою \"DDLC ({0})\".",
+      "s2_desc": "Після завантаження оберіть файл за допомогою кнопки нижче.",
+      "description_location": "Ігри зберігатимуться в {0}",
+      "link_change": "(Змінити)"
+    },
+    "login_input": {
+      "message": "Введіть email",
+      "details": "На цю адресу буде надіслано лист з посиланням для входу.",
+      "button_affirmative": "Увійти",
+      "button_negative": "Скасувати"
+    },
+    "change_username_input": {
+      "message": "Нове ім'я користувача",
+      "details": "Ім'я не повинно бути унікальним.",
+      "button_affirmative": "Змінити",
+      "button_negative": "Скасувати"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Пошук модів...",
+        "header_new": "Початок роботи",
+        "link_install": "Встановити DDLC",
+        "header_installed": "Встановлені",
+        "header_downloaded": "Завантажені"
+      },
+      "install_contextmenu": {
+        "launch": "Запустити",
+        "rename": "Перейменувати",
+        "shortcut": "Створити ярлик",
+        "delete_save": "Видалити збереження",
+        "uninstall": "Видалити"
+      },
+      "mod_contextmenu": {
+        "install": "Встановити",
+        "delete": "Видалити"
+      },
+      "uninstall_confirmation": {
+        "message": "Видалити встановлення?",
+        "details": "Збереження для {0} будуть видалені назавжди.",
+        "button_affirmative": "Видалити",
+        "button_negative": "Скасувати"
+      },
+      "rename_input": {
+        "message": "Нова назва",
+        "details": "Введіть нову назву для {0}.",
+        "button_affirmative": "Зберегти",
+        "button_negative": "Скасувати"
+      },
+      "mod_delete_confirmation": {
+        "message": "Видалити мод?",
+        "details": "Для повторного встановлення потрібно буде завантажити його знову.",
+        "button_affirmative": "Видалити",
+        "button_negative": "Скасувати"
+      },
+      "save_delete_confirmation": {
+        "message": "Видалити збереження?",
+        "details": "Прогрес у {0} буде втрачено.",
+        "button_affirmative": "Видалити",
+        "button_negative": "Скасувати"
+      },
+      "install": {
+        "button_launch": "Запустити",
+        "button_settings": "Налаштування",
+        "tag_global_save": "Спільні збереження",
+        "tag_sdk": "SDK",
+        "title_achievements": "Досягнення ({0} / {1})",
+        "description_achievements": "Грайте далі, щоб відкрити більше досягнень.",
+        "description_achievements_complete": "Всі досягнення отримано! Вітаємо!",
+        "title_screenshots_none": "Немає скріншотів",
+        "title_screenshots_one": "1 скріншот",
+        "title_screenshots": "{0} скріншотів",
+        "description_screenshots": "Натисніть S під час гри, щоб робити скріншоти.",
+        "description_sdk": "Цей мод підтримує SDK Doki Doki Mod Manager!",
+        "description_author": "Автор: {0}",
+        "link_website": "Сайт ({0})",
+        "description_external": "Відкрити папку"
+      },
+      "mod": {
+        "button_install": "Встановити",
+        "button_settings": "Налаштування",
+        "description_external": "Відкрити папку"
+      },
+      "install_creation": {
+        "title": "Встановити DDLC",
+        "label_install_name": "Назва встановлення",
+        "label_folder_name": "Назва папки",
+        "label_global_save": "Спільні збереження",
+        "label_has_mod": "Встановити мод",
+        "label_mod": "Мод",
+        "label_existing_saves": "Наявні збереження",
+        "description_mod": "Оберіть мод для встановлення.",
+        "header_summary": "Підсумок",
+        "description_vanilla": "Чиста копія DDLC з окремими збереженнями.",
+        "description_vanilla_global_save": "Чиста копія DDLC зі спільними збереженнями (наприклад, з Steam)",
+        "description_modded": "Модифікована версія з окремими збереженнями.",
+        "description_modded_global_save": "Модифікована версія зі спільними збереженнями.",
+        "button_install": "Встановити",
+        "button_installing": "Встановлення...",
+        "status_exists": "Папка вже існує. Виберіть іншу назву."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Магазин незабаром з'явиться!",
+      "description_1": "База модів Sayonika дозволить легко знаходити та встановлювати моди. Коли магазин запрацює, ви зможете переглядати моди прямо тут.",
+      "description_2": "А поки що можете спробувати ці рекомендовані моди.",
+      "error": "Помилка завантаження. Перевірте інтернет-з'єднання.",
+      "button_download": "Завантажити"
+    },
+    "tab_store": {
+      "title": "Магазин Sayonika",
+      "subtitle": "Знаходьте та завантажуйте моди",
+      "search_placeholder": "Пошук модів...",
+      "loading": "Завантаження...",
+      "error_title": "Помилка з'єднання",
+      "retry_button": "Повторити",
+      "offline_title": "Офлайн",
+      "offline_message": "Перевірте інтернет-з'єднання.",
+      "check_connection": "Перевірити",
+      "maintenance_banner": "Технічні роботи. Вхід тимчасово недоступний.",
+      "no_mods_title": "Модів не знайдено",
+      "no_mods_message": "Спробуйте змінити параметри пошуку",
+      "filters": {
+        "category": "Категорія:",
+        "all_categories": "Всі категорії",
+        "sort_by": "Сортування:",
+        "date_created": "Дата створення",
+        "date_updated": "Дата оновлення",
+        "downloads": "Завантаження",
+        "rating": "Рейтинг",
+        "title": "Назва",
+        "order": "Порядок:",
+        "descending": "За спаданням",
+        "ascending": "За зростанням",
+        "featured_only": "Тіп рекомендовані",
+        "translate_content": "Перекладати контент",
+        "auto_detect": "Автовизначення"
+      },
+      "mod_card": {
+        "featured": "Рекомендовано",
+        "mature": "18+",
+        "by_author": "автор: {0}",
+        "download": "Завантажити",
+        "downloading": "Завантаження...",
+        "download_mod": "Завантажити мод",
+        "downloads_count": "Завантажень: {0}",
+        "version": "Версія {0}",
+        "screenshots": "Скріншоти ({0})",
+        "description": "Опис",
+        "tags": "Теги",
+        "requirements": "Вимоги"
+      },
+      "pagination": {
+        "previous": "Назад",
+        "next": "Вперед",
+        "page_info": "Сторінка {0} з {1}"
+      },
+      "login": {
+        "title": "Вхід в Sayonika",
+        "discord": "Через Discord",
+        "github": "Через GitHub",
+        "or": "або",
+        "username_label": "Логін або email:",
+        "username_placeholder": "Введіть логін або email",
+        "username_help": "Можна використовувати логін або email",
+        "password_label": "Пароль:",
+        "remember_me": "Запам'ятати мене",
+        "login_button": "Увійти",
+        "logging_in": "Вхід...",
+        "register_link": "Реєстрація",
+        "success": "Успішний вхід!",
+        "failed": "Помилка: {0}"
+      },
+      "translation": {
+        "enabled": "Переклад увімкнено",
+        "disabled": "Переклад вимкнено",
+        "language_changed": "Мова перекладу: {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Зовнішній вигляд",
+        "link_background": "Фон",
+        "link_language": "Мова",
+        "link_advanced_appearance": "Додатково",
+        "header_enhancements": "Додатково",
+        "link_sdk": "Досягнення та SDK",
+        "header_application": "Програма",
+        "link_updates": "Оновлення",
+        "link_storage": "Розташування даних",
+        "header_developers": "Розробникам",
+        "link_testing": "Налагодження SDK",
+        "link_debug": "Інформація"
+      },
+      "section_backgrounds": {
+        "title": "Фон",
+        "subtitle": "Оберіть фон для програми",
+        "button_none": "Без фону",
+        "description_credit": "Оригінальні фони від Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Додатково",
+        "subtitle": "Додаткові налаштування інтерфейсу",
+        "button_enable_sysborders": "Системні рамки (потрібен перезапуск)",
+        "button_disable_sysborders": "Вимкнути системні рамки"
+      },
+      "section_storage": {
+        "title": "Розташування даних",
+        "subtitle": "Змінити місце зберігання даних",
+        "description_moving": "Увага! Зміна розташування може зайняти час.",
+        "description_current": "Поточне розташування: {0}",
+        "button_change": "Змінити"
+      },
+      "section_updates": {
+        "title": "Оновлення",
+        "subtitle": "Перевірка оновлень",
+        "description_current_version": "Поточна версія: {0}",
+        "label_channel": "Канал оновлень",
+        "option_stable": "Стабільний",
+        "option_beta": "Бета",
+        "button_check": "Перевірити"
+      },
+      "section_sdk": {
+        "title": "Досягнення та SDK",
+        "subtitle": "Налаштування досягнень",
+        "description_mode": "Режим досягнень:",
+        "checkbox_always": "Завжди (рекомендовано)",
+        "checkbox_specified": "Якщо підтримується",
+        "checkbox_never": "Ніколи"
+      },
+      "section_testing": {
+        "title": "Налагодження SDK",
+        "subtitle": "Діагностика модів",
+        "button_enable": "Увімкнути",
+        "button_disable": "Вимкнути"
+      },
+      "section_debug": {
+        "title": "Інформація",
+        "subtitle": "Діагностична інформація"
+      },
+      "section_language": {
+        "title": "Мова",
+        "subtitle": "Оберіть мову інтерфейсу",
+        "description_current": "Поточна мова: {0}",
+        "button_apply": "Застосувати",
+        "button_contribute": "Допомогти з перекладом",
+        "description_restart": "Зміни набудуть чинності після перезапуску.",
+        "notification_changed": "Мова змінена на {0}. Перезапустіть програму.",
+        "notification_same": "Поточна мова вже {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Про програму",
+      "description": "Doki Doki Mod Manager - спільнотний проект для встановлення модів до гри Doki Doki Literature Club.",
+      "title_disclaimer": "Відмова від відповідальності",
+      "disclaimer_1": "Не пов'язано з Team Salvato. Відповідно до їхніх правил.",
+      "disclaimer_2": "Використання модів на ваш розсуд.",
+      "title_socials": "Контакти",
+      "social_twitter": "Twitter @Dynamicxaa",
+      "social_reddit": "Reddit",
+      "social_email": "Email",
+      "title_support": "Підтримка розробки",
+      "description_support": "Програма безкоштовна. Підтримайте розробку:",
+      "support_donate": "Пожертвування",
+      "support_steelseries": "Знижка на SteelSeries",
+      "support_code": "Внесок у код або переклад"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Запустити {0} через Doki Doki Mod Manager."
+    },
+    "running_cover": {
+      "title_running": "Гра запущена",
+      "title_crashed": "Помилка",
+      "button_browse": "Відкрити папку",
+      "button_close": "OK",
+      "description_running": "Закрийте гру для внесення змін.",
+      "install_missing": "Встановлення не знайдено.",
+      "install_corrupt": "Пошкоджені файли.",
+      "install_crashed": "Гра не запустилася або вилетіла."
+    },
+    "move_install": {
+      "title": "Обрати нову папку"
+    },
+    "mod_browse_dialog": {
+      "title": "Оберіть мод",
+      "file_format_name": "Моди"
+    },
+    "game_browse_dialog": {
+      "title": "Знайдіть архів DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Створення ярлика",
+      "file_format_name": "Ярлик"
+    },
+    "errors": {
+      "exception": {
+        "title": "Збій програми",
+        "body": "Помилка відправлена. Перезапустіть програму."
+      },
+      "move_install": {
+        "title": "Помилка перенесення",
+        "body": "Перевірте права доступу та місце на диску."
+      },
+      "shortcut": {
+        "title": "Помилка ярлика",
+        "body": "Перевірте права доступу."
+      },
+      "install": {
+        "title": "Помилка встановлення",
+        "body": "Перевірте права та доступний простір."
+      },
+      "rename": {
+        "title": "Помилка перейменування",
+        "body": "Закрийте зайві програми та спробуйте знову."
+      },
+      "uninstall": {
+        "title": "Помилка видалення",
+        "body": "Закрийте зайві програми та спробуйте знову."
+      },
+      "save_delete": {
+        "title": "Помилка видалення",
+        "body": "Закрийте зайві програми та спробуйте знову."
+      },
+      "mod_delete": {
+        "title": "Помилка видалення",
+        "body": "Закрийте зайві програми та спробуйте знову."
+      },
+      "renderer_freeze": {
+        "title": "Програма не відповідає",
+        "body": "Спробуйте перезапустити."
+      },
+      "executable_permission": {
+        "title": "Помилка прав доступу",
+        "body": "Не вдалося встановити права на Linux."
+      }
+    }
+  }
+}

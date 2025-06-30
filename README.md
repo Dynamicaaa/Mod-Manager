@@ -123,7 +123,7 @@ The original [**Doki Doki Mod Manager by proudust**](https://github.com/proudust
 
 </div>
 
-While [Doki Doki Mod Docker](https://github.com/DokiDokiModManager/Mod-Manager-Docker) exists as an alternative, this Doki Doki Mod Manager offers significant advantages:
+While [Doki Doki Mod Docker](https://github.com/Bronya-Rand/DDModDocker) exists as an alternative, this Doki Doki Mod Manager offers significant advantages:
 
 <div align="center">
 

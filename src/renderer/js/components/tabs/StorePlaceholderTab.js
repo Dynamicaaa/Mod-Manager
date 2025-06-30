@@ -910,7 +910,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 'pl': 'Polish',
                 'sv': 'Swedish',
                 'tr': 'Turkish',
-                'en-GB': 'English (UK)'
+                'en-US': 'English (US)'
             };
             return languages[code] || code;
         },
@@ -931,7 +931,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                             
                             // Map specific codes to LibreTranslate language codes
                             const codeMapping = {
-                                'en-GB': 'en',
+                                'en-US': 'en',
                                 'en-US': 'en',
                                 'es-419': 'es',
                                 'fr-FR': 'fr',
@@ -1045,12 +1045,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 let currentLang = 'en';
                 
                 if (typeof ddmm !== 'undefined' && ddmm.config) {
-                    currentLang = ddmm.config.readConfigValue("language") || "en-GB";
+                    currentLang = ddmm.config.readConfigValue("language") || "en-US";
                 }
                 
                 // Convert to LibreTranslate API format
                 const codeMapping = {
-                    'en-GB': 'en',
+                    'en-US': 'en',
                     'en-US': 'en',
                     'es-419': 'es',
                     'fr-FR': 'fr',
@@ -1093,12 +1093,12 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
                 let currentLang = 'en';
                 
                 if (typeof ddmm !== 'undefined' && ddmm.config) {
-                    currentLang = ddmm.config.readConfigValue("language") || "en-GB";
+                    currentLang = ddmm.config.readConfigValue("language") || "en-US";
                 }
                 
                 // Convert to API format to check if it's non-English
                 const codeMapping = {
-                    'en-GB': 'en',
+                    'en-US': 'en',
                     'en-US': 'en',
                     'es-419': 'es',
                     'fr-FR': 'fr',
@@ -2020,7 +2020,7 @@ const StorePlaceholderTab = Vue.component("ddmm-store-placeholder-tab", {
         this.loadAvailableTranslationLanguages();
 
         // Check if we should enable translation by default for non-English languages
-        this.checkAndEnableTranslationByDefault();
+        // this.checkAndEnableTranslationByDefault();
 
         // Set up authentication state synchronization
         if (typeof window.SayonikaAuth !== 'undefined') {

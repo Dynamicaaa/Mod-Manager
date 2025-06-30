@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Начало",
+      "tab_mods": "Модове",
+      "tab_store": "Магазин",
+      "tab_options": "Настройки",
+      "tab_about": "За програмата"
+    },
+    "version": {
+      "link_changelog": "какво ново?"
+    },
+    "user_menu": {
+      "option_rename": "Смяна на име",
+      "option_logout": "Изход"
+    },
+    "window_controls": {
+      "close": "Затвори",
+      "maximise": "Максимизирай",
+      "minimise": "Минимизирай",
+      "devtools": "Инструменти за разработчици (F12)",
+      "announcement": "Виж последното съобщение",
+      "login": "Вход",
+      "sayonika_login": "Вход в Sayonika",
+      "update": {
+        "checking": "Проверка за актуализации...",
+        "available": "Има актуализация. Кликни за изтегляне.",
+        "downloading": "Изтегляне на актуализация...",
+        "downloaded": "Актуализацията е готова за инсталиране."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Изход",
+      "button_continue": "Продължи"
+    },
+    "drop_cover": {
+      "text": "Пусни мод тук за инсталиране"
+    },
+    "announcement": {
+      "button_open": "Отвори връзка",
+      "button_close": "Затвори"
+    },
+    "onboarding": {
+      "title": "Добре дошли!",
+      "description_download": "Да намерим копие на DDLC.",
+      "button_download": "Официален сайт за изтегляне",
+      "button_choose": "Избери файл",
+      "heading_step": "Стъпка {0}",
+      "s1_desc": "Изтеглете Doki Doki Literature Club от официалния сайт (ddlc.moe) - кликнете бутона по-долу.",
+      "s1_platform": "Изберете файла \"DDLC ({0})\" когато бъдете попитани.",
+      "s2_desc": "След изтегляне, изберете файла с бутона по-долу.",
+      "description_location": "Игрите ще се съхраняват в {0}",
+      "link_change": "(Промени)"
+    },
+    "login_input": {
+      "message": "Въведете имейл",
+      "details": "Ще изпратим връзка за вход на този имейл.",
+      "button_affirmative": "Вход",
+      "button_negative": "Отказ"
+    },
+    "change_username_input": {
+      "message": "Въведете ново име",
+      "details": "Имената не трябва да са уникални.",
+      "button_affirmative": "Промени",
+      "button_negative": "Отказ"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Търсене на модове...",
+        "header_new": "Започнете",
+        "link_install": "Инсталирай DDLC",
+        "header_installed": "Инсталирани",
+        "header_downloaded": "Изтеглени"
+      },
+      "install_contextmenu": {
+        "launch": "Стартирай",
+        "rename": "Преименувай",
+        "shortcut": "Създай пряк път",
+        "delete_save": "Изтрий записа",
+        "uninstall": "Деинсталирай"
+      },
+      "mod_contextmenu": {
+        "install": "Инсталирай",
+        "delete": "Изтрий"
+      },
+      "uninstall_confirmation": {
+        "message": "Сигурни ли сте, че искате да деинсталирате?",
+        "details": "Записите за {0} ще бъдат изтрити.",
+        "button_affirmative": "Деинсталирай",
+        "button_negative": "Отказ"
+      },
+      "rename_input": {
+        "message": "Преименуване на инсталация",
+        "details": "Въведете ново име за {0}.",
+        "button_affirmative": "Промени",
+        "button_negative": "Отказ"
+      },
+      "mod_delete_confirmation": {
+        "message": "Сигурни ли сте, че искате да изтриете мода?",
+        "details": "Ще трябва да го изтеглите отново.",
+        "button_affirmative": "Изтрий",
+        "button_negative": "Отказ"
+      },
+      "save_delete_confirmation": {
+        "message": "Сигурни ли сте, че искате да изтриете записа?",
+        "details": "Ще започнете {0} отначало.",
+        "button_affirmative": "Изтрий",
+        "button_negative": "Отказ"
+      },
+      "install": {
+        "button_launch": "Стартирай",
+        "button_settings": "Настройки",
+        "tag_global_save": "Глобален запис",
+        "tag_sdk": "SDK",
+        "title_achievements": "Постижения ({0}/{1})",
+        "description_achievements": "Продължете да играете за повече.",
+        "description_achievements_complete": "Отключихте всички постижения! Поздравления!",
+        "title_screenshots_none": "Няма екранни снимки",
+        "title_screenshots_one": "1 екранна снимка",
+        "title_screenshots": "{0} екранни снимки",
+        "description_screenshots": "Натисни S по време на игра за снимка.",
+        "description_sdk": "Този мод поддържа специални функции със SDK!",
+        "description_author": "Създаден от {0}",
+        "link_website": "Уебсайт ({0})",
+        "description_external": "Покажи в папка"
+      },
+      "mod": {
+        "button_install": "Инсталирай",
+        "button_settings": "Настройки",
+        "description_external": "Покажи в папка"
+      },
+      "install_creation": {
+        "title": "Инсталиране на DDLC",
+        "label_install_name": "Име на инсталация",
+        "label_folder_name": "Име на папка",
+        "label_global_save": "Глобален запис",
+        "label_has_mod": "Инсталирай мод",
+        "label_mod": "Мод",
+        "label_existing_saves": "Съществуващи записи",
+        "description_mod": "Кликни за избор на мод.",
+        "header_summary": "Резюме",
+        "description_vanilla": "Чисто копие на DDLC. Записите ще са отделни.",
+        "description_vanilla_global_save": "Чисто копие със споделени записи (напр. Steam)",
+        "description_modded": "DDLC с мод. Записите ще са отделни.",
+        "description_modded_global_save": "DDLC с мод и споделени записи.",
+        "button_install": "Инсталирай",
+        "button_installing": "Инсталира се...",
+        "status_exists": "Папката вече съществува. Изберете друго име."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Магазинът идва скоро!",
+      "description_1": "Sayonika ще предлага централна платформа за модове.",
+      "description_2": "Опитайте препоръчаните модове.",
+      "error": "Грешка при зареждане. Проверете връзката.",
+      "button_download": "Изтегли"
+    },
+    "tab_store": {
+      "title": "Магазин Sayonika",
+      "subtitle": "Открийте и изтеглете модове",
+      "search_placeholder": "Търсене на модове...",
+      "loading": "Зареждане на модове...",
+      "error_title": "Грешка във връзката",
+      "retry_button": "Опитай отново",
+      "offline_title": "Извън мрежа",
+      "offline_message": "Проверете интернет връзката.",
+      "check_connection": "Проверка на връзката",
+      "maintenance_banner": "Услугите за удостоверяване са временно спрени.",
+      "no_mods_title": "Няма намерени модове",
+      "no_mods_message": "Променете критериите за търсене",
+      "filters": {
+        "category": "Категория:",
+        "all_categories": "Всички",
+        "sort_by": "Сортирай по:",
+        "date_created": "Дата на създаване",
+        "date_updated": "Последна актуализация",
+        "downloads": "Изтегляния",
+        "rating": "Рейтинг",
+        "title": "Заглавие",
+        "order": "Ред:",
+        "descending": "Низходящ",
+        "ascending": "Възходящ",
+        "featured_only": "Само препоръчани",
+        "translate_content": "Преведи съдържание",
+        "auto_detect": "Автоматично откриване"
+      },
+      "mod_card": {
+        "featured": "Препоръчано",
+        "mature": "За възрастни",
+        "by_author": "от {0}",
+        "download": "Изтегли",
+        "downloading": "Изтегля се...",
+        "download_mod": "Изтегли мод",
+        "downloads_count": "{0} изтегляния",
+        "version": "Версия {0}",
+        "screenshots": "Екранни снимки ({0})",
+        "description": "Описание",
+        "tags": "Етикети",
+        "requirements": "Изисквания"
+      },
+      "pagination": {
+        "previous": "Предишно",
+        "next": "Следващо",
+        "page_info": "Страница {0} от {1}"
+      },
+      "login": {
+        "title": "Вход в Sayonika",
+        "discord": "Вход с Discord",
+        "github": "Вход с GitHub",
+        "or": "или",
+        "username_label": "Потребител/Имейл:",
+        "username_placeholder": "Въведете потребител или имейл",
+        "username_help": "Използвайте потребителско име или имейл",
+        "password_label": "Парола:",
+        "remember_me": "Запомни ме",
+        "login_button": "Вход",
+        "logging_in": "В процес на вход...",
+        "register_link": "Нямате акаунт? Регистрирайте се",
+        "success": "Успешен вход!",
+        "failed": "Грешка: {0}"
+      },
+      "translation": {
+        "enabled": "Преводът е активиран.",
+        "disabled": "Преводът е деактивиран.",
+        "language_changed": "Избраният език: {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Външен вид",
+        "link_background": "Фон",
+        "link_language": "Език",
+        "link_advanced_appearance": "Разширени",
+        "header_enhancements": "Подобрения",
+        "link_sdk": "Постижения & SDK",
+        "header_application": "Приложение",
+        "link_updates": "Актуализации",
+        "link_storage": "Местоположение",
+        "header_developers": "Разработчици",
+        "link_testing": "Дебъгване на SDK",
+        "link_debug": "Информация"
+      },
+      "section_backgrounds": {
+        "title": "Фон",
+        "subtitle": "Персонализирайте фона",
+        "button_none": "Без фон",
+        "description_credit": "Оригинални фонове от Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Разширени",
+        "subtitle": "Допълнителни настройки",
+        "button_enable_sysborders": "Системни рамки (изисква рестарт)",
+        "button_disable_sysborders": "Без системни рамки"
+      },
+      "section_storage": {
+        "title": "Местоположение",
+        "subtitle": "Промяна на мястото за съхранение",
+        "description_moving": "Внимание! Това ще премести всички данни.",
+        "description_current": "Текущо местоположение: {0}",
+        "button_change": "Промени местоположението"
+      },
+      "section_updates": {
+        "title": "Актуализации",
+        "subtitle": "Вземете най-новата версия",
+        "description_current_version": "Текуща версия: {0}",
+        "label_channel": "Канал за актуализации",
+        "option_stable": "Стабилен",
+        "option_beta": "Бета",
+        "button_check": "Проверка за актуализации"
+      },
+      "section_sdk": {
+        "title": "Постижения & SDK",
+        "subtitle": "Управление на постижения",
+        "description_mode": "Активирай постижения:",
+        "checkbox_always": "Винаги (препоръчително)",
+        "checkbox_specified": "Когато модът поддържа",
+        "checkbox_never": "Никога"
+      },
+      "section_testing": {
+        "title": "Дебъгване на SDK",
+        "subtitle": "Активиране на логове",
+        "button_enable": "Активирай",
+        "button_disable": "Деактивирай"
+      },
+      "section_debug": {
+        "title": "Информация",
+        "subtitle": "Технически детайли"
+      },
+      "section_language": {
+        "title": "Език",
+        "subtitle": "Промяна на езика",
+        "description_current": "Текущ език: {0}",
+        "button_apply": "Приложи език",
+        "button_contribute": "Помогнете с превода",
+        "description_restart": "Промяната ще се приложи след рестарт.",
+        "notification_changed": "Езикът е променен на {0}. Рестартирайте приложението.",
+        "notification_same": "Езикът вече е {0}."
+      }
+    },
+    "tab_about": {
+      "title": "За програмата",
+      "description": "Doki Doki Mod Manager е проект на общността за управление на модове за DDLC.",
+      "title_disclaimer": "Отказ от отговорност",
+      "disclaimer_1": "Не е свързан с Team Salvato. Съобразено с техните насоки.",
+      "disclaimer_2": "Използването на модове е на ваша отговорност.",
+      "title_socials": "Контакти",
+      "social_twitter": "Последвайте @Dynamicxaa в Twitter",
+      "social_reddit": "Съобщение в Reddit",
+      "social_email": "Изпратете имейл",
+      "title_support": "Подкрепа",
+      "description_support": "Безплатна програма. Можете да подкрепите:",
+      "support_donate": "Дарение",
+      "support_steelseries": "10% отстъпка за SteelSeries (партньорска връзка)",
+      "support_code": "Принос в код или преводи"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Отворете Doki Doki Mod Manager и стартирайте {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC работи",
+      "title_crashed": "Възникна грешка",
+      "button_browse": "Отвори папка",
+      "button_close": "OK",
+      "description_running": "Затворете играта за промени.",
+      "install_missing": "Инсталацията липсва.",
+      "install_corrupt": "Инсталацията е повредена.",
+      "install_crashed": "Грешка при стартиране."
+    },
+    "move_install": {
+      "title": "Избор на нова папка"
+    },
+    "mod_browse_dialog": {
+      "title": "Изберете мод",
+      "file_format_name": "Модове"
+    },
+    "game_browse_dialog": {
+      "title": "Намерете DDLC файл",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Изберете място за пряк път",
+      "file_format_name": "Пряк път"
+    },
+    "errors": {
+      "exception": {
+        "title": "Грешка в приложението",
+        "body": "Грешката е докладвана. Рестартирайте."
+      },
+      "move_install": {
+        "title": "Грешка при преместване",
+        "body": "Проверете правата и пространството."
+      },
+      "shortcut": {
+        "title": "Грешка при създаване",
+        "body": "Проверете правата."
+      },
+      "install": {
+        "title": "Грешка при инсталиране",
+        "body": "Проверете правата и пространството."
+      },
+      "rename": {
+        "title": "Грешка при преименуване",
+        "body": "Затворете други приложения."
+      },
+      "uninstall": {
+        "title": "Грешка при деинсталиране",
+        "body": "Затворете други приложения."
+      },
+      "save_delete": {
+        "title": "Грешка при изтриване",
+        "body": "Затворете други приложения."
+      },
+      "mod_delete": {
+        "title": "Грешка при изтриване на мод",
+        "body": "Затворете други приложения."
+      },
+      "renderer_freeze": {
+        "title": "Приложението не отговаря",
+        "body": "Рестартирайте приложението."
+      },
+      "executable_permission": {
+        "title": "Грешка в правата за Linux",
+        "body": "DDLC.sh не може да се изпълни."
+      }
+    }
+  }
+}

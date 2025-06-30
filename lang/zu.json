@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Ikhaya",
+      "tab_mods": "Ama-Mod",
+      "tab_store": "Isitolo",
+      "tab_options": "Izilungiselelo",
+      "tab_about": "Mayelana"
+    },
+    "version": {
+      "link_changelog": "kwenzekeni okusha?"
+    },
+    "user_menu": {
+      "option_rename": "Shintsha Igama Lomsebenzisi",
+      "option_logout": "Phuma"
+    },
+    "window_controls": {
+      "close": "Vala",
+      "maximise": "Khulisa",
+      "minimise": "Nciphisa",
+      "devtools": "Amathuluzi Wokuthuthukisa (F12)",
+      "announcement": "Funda isaziso sakamuva",
+      "login": "Ngena",
+      "sayonika_login": "Ngena ku-Sayonika",
+      "update": {
+        "checking": "Kuhlolwa izibuyekezo...",
+        "available": "Kukhona isibuyekezo. Chofoza ukuze ulande.",
+        "downloading": "Kulandwa isibuyekezo...",
+        "downloaded": "Isibuyekezo silungele ukufakwa uma uvala."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Phuma",
+      "button_continue": "Qhubeka"
+    },
+    "drop_cover": {
+      "text": "Hudula i-mod lapha ukuze uyifake"
+    },
+    "announcement": {
+      "button_open": "Vula Isixhumanisi",
+      "button_close": "Vala"
+    },
+    "onboarding": {
+      "title": "Siyakwamukela!",
+      "description_download": "Ake sithole ikhophi ye-DDLC.",
+      "button_download": "Vakashela ikhasi lokulanda elisemthethweni",
+      "button_choose": "Khetha ifayela",
+      "heading_step": "Isinyathelo {0}",
+      "s1_desc": "Udinga ukulanda i-Doki Doki Literature Club kusuka kuwebhusayithi esemthethweni (ddlc.moe) - chofoza inkinobho engezansi.",
+      "s1_platform": "Khetha ifayela elithi \"DDLC ({0})\" uma ucelwa.",
+      "s2_desc": "Uma usulande, khetha ifayela ngenkinobho engezansi.",
+      "description_location": "Imidlalo izogcinwa ku-{0}",
+      "link_change": "(Shintsha)"
+    },
+    "login_input": {
+      "message": "Faka ikheli le-imeyili",
+      "details": "Isixhumanisi sokungena sizothunyelwa kule imeyili.",
+      "button_affirmative": "Ngena",
+      "button_negative": "Khansela"
+    },
+    "change_username_input": {
+      "message": "Faka igama lomsebenzisi elisha",
+      "details": "Amagama awadingi ukuba ahluke.",
+      "button_affirmative": "Shintsha",
+      "button_negative": "Khansela"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Sesha ama-mod...",
+        "header_new": "Qala",
+        "link_install": "Faka i-DDLC",
+        "header_installed": "Kufakiwe",
+        "header_downloaded": "Kulandiwe"
+      },
+      "install_contextmenu": {
+        "launch": "Qalisa",
+        "rename": "Qamba kabusha",
+        "shortcut": "Dala Umfushane",
+        "delete_save": "Susa Idatha Yokulondoloza",
+        "uninstall": "Susa"
+      },
+      "mod_contextmenu": {
+        "install": "Faka",
+        "delete": "Susa"
+      },
+      "uninstall_confirmation": {
+        "message": "Uqinisekile ukuthi ufuna ukususa?",
+        "details": "Idatha yokulondoloza ye-{0} izosuswa.",
+        "button_affirmative": "Susa",
+        "button_negative": "Khansela"
+      },
+      "rename_input": {
+        "message": "Qamba kabusha ukufakwa",
+        "details": "Faka igama elisha le-{0}.",
+        "button_affirmative": "Qamba kabusha",
+        "button_negative": "Khansela"
+      },
+      "mod_delete_confirmation": {
+        "message": "Uqinisekile ukuthi ufuna ukususa i-mod?",
+        "details": "Kuzodingeka ulande i-mod futhi ukuze uyifake kabusha.",
+        "button_affirmative": "Susa",
+        "button_negative": "Khansela"
+      },
+      "save_delete_confirmation": {
+        "message": "Uqinisekile ukuthi ufuna ukususa idatha yokulondoloza?",
+        "details": "Kuzodingeka uqale kabusha u-{0}.",
+        "button_affirmative": "Susa",
+        "button_negative": "Khansela"
+      },
+      "install": {
+        "button_launch": "Qalisa",
+        "button_settings": "Izilungiselelo",
+        "tag_global_save": "Ukulondoloza Komhlaba Wonke",
+        "tag_sdk": "SDK",
+        "title_achievements": "Izimpumelelo ({0}/{1})",
+        "description_achievements": "Qhubeka udlala ukuze uvule izimpumelelo ezengeziwe.",
+        "description_achievements_complete": "Uvule zonke izimpumelelo! Siyakuhalalisela!",
+        "title_screenshots_none": "Azikho izithombe-skrini",
+        "title_screenshots_one": "1 isithombe-skrini",
+        "title_screenshots": "{0} izithombe-skrini",
+        "description_screenshots": "Cindezela u-S ngesikhathi udlala ukuthatha isithombe-skrini.",
+        "description_sdk": "Le mod isekela izici ezikhethekile nge-SDK!",
+        "description_author": "Kwenziwe ngu-{0}",
+        "link_website": "Iwebhusayithi ({0})",
+        "description_external": "Bonisa kufolda"
+      },
+      "mod": {
+        "button_install": "Faka",
+        "button_settings": "Izilungiselelo",
+        "description_external": "Bonisa kufolda"
+      },
+      "install_creation": {
+        "title": "Faka i-DDLC",
+        "label_install_name": "Igama Lokufakwa",
+        "label_folder_name": "Igama Lefolda",
+        "label_global_save": "Ukulondoloza Komhlaba Wonke",
+        "label_has_mod": "Faka i-Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Amafayela Okulondoloza Akhona",
+        "description_mod": "Chofoza ukukhetha i-mod.",
+        "header_summary": "Isifinyezo",
+        "description_vanilla": "Kuzokwakhiwa ikhophi ehlanzekile ye-DDLC. Idatha yokulondoloza izohlukaniswa.",
+        "description_vanilla_global_save": "Kopisha ehlanzekile enokulondoloza komhlaba wonke (isb: Steam)",
+        "description_modded": "Kopisha ye-DDLC enama-mod. Idatha yokulondoloza izohlukaniswa.",
+        "description_modded_global_save": "Kopisha enama-mod nokulondoloza komhlaba wonke.",
+        "button_install": "Faka",
+        "button_installing": "Kufakwa...",
+        "status_exists": "Ifolda isivele ikhona. Khetha elinye igama."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Isitolo siza maduze!",
+      "description_1": "I-Sayonika izoba yindawo emaphakathi yama-mod e-DDLC.",
+      "description_2": "Zama lawa ma-mod anconyiwe ngenkathi ulinda.",
+      "error": "Yehlulekile ukulayisha uhlu lwama-mod. Ingabe ungaxhunyiwe ku-inthanethi?",
+      "button_download": "Landa"
+    },
+    "tab_store": {
+      "title": "Isitolo se-Sayonika",
+      "subtitle": "Thola futhi ulande ama-mod e-DDLC",
+      "search_placeholder": "Sesha ama-mod...",
+      "loading": "Kulayishwa ama-mod...",
+      "error_title": "Iphutha Lokuxhuma",
+      "retry_button": "Zama Futhi",
+      "offline_title": "Ngaphandle Kwenethiwekhi",
+      "offline_message": "Sicela uhlole uxhumano lwakho lwe-inthanethi.",
+      "check_connection": "Hlola Uxhumano",
+      "maintenance_banner": "Izinsizakalo zokuqinisekisa azitholakali okwamanje.",
+      "no_mods_title": "Azikho ama-mod atholakele",
+      "no_mods_message": "Zama ukushintsha izinketho zokusesha",
+      "filters": {
+        "category": "Isigaba:",
+        "all_categories": "Zonke",
+        "sort_by": "Hlela ngokwe:",
+        "date_created": "Usuku Lokudala",
+        "date_updated": "Usuku Lokubuyekezwa",
+        "downloads": "Ukulandwa",
+        "rating": "Isilinganiso",
+        "title": "Isihloko",
+        "order": "Uhlelo:",
+        "descending": "Ehla",
+        "ascending": "Enyuka",
+        "featured_only": "Okufakiwe Kuphela",
+        "translate_content": "HUMUSHA Okuqukethwe",
+        "auto_detect": "Thola Okuzenzakalelayo"
+      },
+      "mod_card": {
+        "featured": "Okufakiwe",
+        "mature": "Okokukhulile",
+        "by_author": "ngu-{0}",
+        "download": "Landa",
+        "downloading": "Kulandwa...",
+        "download_mod": "Landa i-Mod",
+        "downloads_count": "{0} ukulandwa",
+        "version": "Inguqulo {0}",
+        "screenshots": "Izithombe-skrini ({0})",
+        "description": "Incazelo",
+        "tags": "Omaka",
+        "requirements": "Izidingo"
+      },
+      "pagination": {
+        "previous": "Okwedlule",
+        "next": "Olandelayo",
+        "page_info": "Ikhasi {0} ku-{1}"
+      },
+      "login": {
+        "title": "Ngena ku-Sayonika",
+        "discord": "Ngena nge-Discord",
+        "github": "Ngena nge-GitHub",
+        "or": "noma",
+        "username_label": "Igama Lomsebenzisi/I-imeyili:",
+        "username_placeholder": "Faka igama lomsebenzisi noma i-imeyili",
+        "username_help": "Sebenzisa igama lomsebenzisi noma i-imeyili",
+        "password_label": "Iphasiwedi:",
+        "remember_me": "Ngikhumbule",
+        "login_button": "Ngena",
+        "logging_in": "Kuyangenwa...",
+        "register_link": "Awunayo i-akhawunti? Bhalisa lapha",
+        "success": "Ungene ngempumelelo!",
+        "failed": "Yehlulekile: {0}"
+      },
+      "translation": {
+        "enabled": "Ukuhumusha kuvuliwe.",
+        "disabled": "Ukuhumusha kuvaliwe.",
+        "language_changed": "Ulimi lokuhumusha luguqulwe laba ngu-{0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Ukubukeka",
+        "link_background": "Isizinda",
+        "link_language": "Ulimi",
+        "link_advanced_appearance": "Okuthuthukile",
+        "header_enhancements": "Izithuthukisi",
+        "link_sdk": "Izimpumelelo & SDK",
+        "header_application": "Uhlelo Lokusebenza",
+        "link_updates": "Izibuyekezo",
+        "link_storage": "Indawo Yokugcina",
+        "header_developers": "Abathuthukisi",
+        "link_testing": "SDK Debug",
+        "link_debug": "Imininingwane Yohlelo"
+      },
+      "section_backgrounds": {
+        "title": "Isizinda",
+        "subtitle": "Yenza ngokwezifiso isizinda sakho",
+        "button_none": "Akukho Sizinda",
+        "description_credit": "Izizinda zangempela ezivela ku-Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Okuthuthukile",
+        "subtitle": "Izinketho ezengeziwe",
+        "button_enable_sysborders": "Sebenzisa Imingcele Yohlelo (idinga ukuqala kabusha)",
+        "button_disable_sysborders": "Khansela Imingcele Yohlelo"
+      },
+      "section_storage": {
+        "title": "Indawo Yokugcina",
+        "subtitle": "Shintsha lapho idatha yomdlalo igcinwa khona",
+        "description_moving": "Isixwayiso! Yonke idatha izothuthelwa.",
+        "description_current": "Indawo yamanje: {0}",
+        "button_change": "Shintsha Indawo"
+      },
+      "section_updates": {
+        "title": "Izibuyekezo",
+        "subtitle": "Thola inguqulo yakamuva",
+        "description_current_version": "Inguqulo yamanje: {0}",
+        "label_channel": "Isiteshi Sezibuyekezo",
+        "option_stable": "Ozinzile",
+        "option_beta": "Beta",
+        "button_check": "Hlola Izibuyekezo"
+      },
+      "section_sdk": {
+        "title": "Izimpumelelo & SDK",
+        "subtitle": "Phatha izimpumelelo",
+        "description_mode": "Vula izimpumelelo:",
+        "checkbox_always": "Njalo (kunconyiwe)",
+        "checkbox_specified": "Uma i-mod isekela",
+        "checkbox_never": "Ungaze"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Vula i-debug logging",
+        "button_enable": "Vula Debug",
+        "button_disable": "Khansela Debug"
+      },
+      "section_debug": {
+        "title": "Imininingwane Yohlelo",
+        "subtitle": "Imininingwane yezobuchwepheshe"
+      },
+      "section_language": {
+        "title": "Ulimi",
+        "subtitle": "Shintsha ulimi lohlelo",
+        "description_current": "Ulimi lwamanje: {0}",
+        "button_apply": "Sebenzisa Ulimi",
+        "button_contribute": "Siza Ukuhumusha",
+        "description_restart": "Izinguquko zizosebenza ngemva kokuqalisa kabusha.",
+        "notification_changed": "Ulimi luguqulwe laba ngu-{0}. Qalisa kabusha uhlelo.",
+        "notification_same": "Ulimi selivele lingu-{0}."
+      }
+    },
+    "tab_about": {
+      "title": "Mayelana",
+      "description": "I-Doki Doki Mod Manager iyiprojekthi yomphakathi yokuphatha ama-mod e-DDLC.",
+      "title_disclaimer": "Isaziso",
+      "disclaimer_1": "Ayihlobene ne-Team Salvato. Iyahambisana nemihlahlandlela yabo ye-IP.",
+      "disclaimer_2": "Ukusebenzisa ama-mod kungenxa yakho.",
+      "title_socials": "Xhumana",
+      "social_twitter": "Landela @Dynamicxaa ku-Twitter",
+      "social_reddit": "Thumela umlayezo ku-Reddit",
+      "social_email": "Thumela i-imeyili",
+      "title_support": "Sekela Ukuthuthukiswa",
+      "description_support": "Uhlelo luyatholakala mahhala. Ungasekela ngokusebenzisa:",
+      "support_donate": "Nika Umnikelo",
+      "support_steelseries": "10% isaphulelo ku-SteelSeries (isixhumanisi sokubambisana)",
+      "support_code": "Nika isandla kukhodi noma ukuhumusha"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Vula i-Doki Doki Mod Manager bese uqala u-{0}."
+    },
+    "running_cover": {
+      "title_running": "I-DDLC iyasebenza",
+      "title_crashed": "Kunenkinga",
+      "button_browse": "Vula Ifolda Yomdlalo",
+      "button_close": "OK",
+      "description_running": "Vala umdlalo ukuze ushintshe ama-mod.",
+      "install_missing": "Ukufakwa akutholakali.",
+      "install_corrupt": "Ukufakwa konakele.",
+      "install_crashed": "Umdlalo wehlulekile ukuqala."
+    },
+    "move_install": {
+      "title": "Khetha ifolda entsha yokufaka"
+    },
+    "mod_browse_dialog": {
+      "title": "Khetha i-mod ongayifaka",
+      "file_format_name": "Ama-Mod"
+    },
+    "game_browse_dialog": {
+      "title": "Thola ifayela le-DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Khetha lapho ofuna ukufaka khona umfushane",
+      "file_format_name": "Umfushane"
+    },
+    "errors": {
+      "exception": {
+        "title": "I-Doki Doki Mod Manager iphahlazekile",
+        "body": "Inkinga ibikiwe. Qalisa kabusha bese uzama futhi."
+      },
+      "move_install": {
+        "title": "Yehlulekile ukususa ifolda yokufaka",
+        "body": "Hlola amalungelo akho nesikhala."
+      },
+      "shortcut": {
+        "title": "Yehlulekile ukudala umfushane",
+        "body": "Hlola amalungelo akho kule folda."
+      },
+      "install": {
+        "title": "Yehlulekile ukufaka umdlalo",
+        "body": "Hlola amalungelo akho nesikhala."
+      },
+      "rename": {
+        "title": "Yehlulekile ukuqamba kabusha",
+        "body": "Vala zonke izinhlelo ezingase ziphazamise bese uzama futhi."
+      },
+      "uninstall": {
+        "title": "Yehlulekile ukususa ukufakwa",
+        "body": "Vala zonke izinhlelo ezingase ziphazamise bese uzama futhi."
+      },
+      "save_delete": {
+        "title": "Yehlulekile ukususa idatha yokulondoloza",
+        "body": "Vala zonke izinhlelo ezingase ziphazamise bese uzama futhi."
+      },
+      "mod_delete": {
+        "title": "Yehlulekile ukususa i-mod",
+        "body": "Vala zonke izinhlelo ezingase ziphazamise bese uzama futhi."
+      },
+      "renderer_freeze": {
+        "title": "I-Doki Doki Mod Manager ayiphenduli",
+        "body": "Uma le nkinga iqhubeka, vala uhlelo bese uqala kabusha."
+      },
+      "executable_permission": {
+        "title": "Yehlulekile ukwenza umdlalo usebenze",
+        "body": "Ayikwazanga ukwenza i-DDLC.sh isebenze ku-Linux. Umdlalo kungenzeka ungavuli kahle."
+      }
+    }
+  }
+}

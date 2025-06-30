@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Trang chủ",
+      "tab_mods": "Mod",
+      "tab_store": "Cửa hàng",
+      "tab_options": "Tùy chọn",
+      "tab_about": "Giới thiệu"
+    },
+    "version": {
+      "link_changelog": "xem có gì mới?"
+    },
+    "user_menu": {
+      "option_rename": "Đổi tên người dùng",
+      "option_logout": "Đăng xuất"
+    },
+    "window_controls": {
+      "close": "Đóng",
+      "maximise": "Phóng to",
+      "minimise": "Thu nhỏ",
+      "devtools": "Bật công cụ phát triển (F12)",
+      "announcement": "Đọc thông báo mới nhất",
+      "login": "Đăng nhập",
+      "sayonika_login": "Đăng nhập Sayonika",
+      "update": {
+        "checking": "Đang kiểm tra bản cập nhật...",
+        "available": "Có bản cập nhật. Nhấn để tải về.",
+        "downloading": "Đang tải bản cập nhật...",
+        "downloaded": "Bản cập nhật đã sẵn sàng cài đặt khi bạn thoát."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Thoát",
+      "button_continue": "Tiếp tục"
+    },
+    "drop_cover": {
+      "text": "Thả mod vào đây để cài đặt"
+    },
+    "announcement": {
+      "button_open": "Mở liên kết",
+      "button_close": "Đóng"
+    },
+    "onboarding": {
+      "title": "Chào mừng!",
+      "description_download": "Hãy tìm bản copy của DDLC.",
+      "button_download": "Truy cập trang tải DDLC chính thức",
+      "button_choose": "Chọn file từ máy",
+      "heading_step": "Bước {0}",
+      "s1_desc": "Bạn cần tải bản copy của Doki Doki Literature Club từ trang web chính thức (ddlc.moe) - nhấn nút bên dưới để truy cập.",
+      "s1_platform": "Khi được hỏi, hãy chọn tải file \"DDLC ({0})\".",
+      "s2_desc": "Sau khi tải xong, chọn file bằng nút bên dưới.",
+      "description_location": "Game sẽ được lưu tại {0}",
+      "link_change": "(Thay đổi)"
+    },
+    "login_input": {
+      "message": "Nhập địa chỉ email",
+      "details": "Một email xác nhận sẽ được gửi đến địa chỉ này.",
+      "button_affirmative": "Đăng nhập",
+      "button_negative": "Hủy"
+    },
+    "change_username_input": {
+      "message": "Nhập tên người dùng mới",
+      "details": "Tên người dùng không cần phải duy nhất.",
+      "button_affirmative": "Đổi tên",
+      "button_negative": "Hủy"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Tìm mod...",
+        "header_new": "Bắt đầu",
+        "link_install": "Cài đặt DDLC",
+        "header_installed": "Đã cài đặt",
+        "header_downloaded": "Đã tải về"
+      },
+      "install_contextmenu": {
+        "launch": "Khởi chạy",
+        "rename": "Đổi tên",
+        "shortcut": "Tạo lối tắt",
+        "delete_save": "Xóa dữ liệu lưu",
+        "uninstall": "Gỡ cài đặt"
+      },
+      "mod_contextmenu": {
+        "install": "Cài đặt",
+        "delete": "Xóa"
+      },
+      "uninstall_confirmation": {
+        "message": "Bạn chắc chắn muốn gỡ cài đặt?",
+        "details": "Dữ liệu lưu của {0} sẽ bị xóa và bạn cần có bản copy mod để cài lại.",
+        "button_affirmative": "Gỡ cài đặt",
+        "button_negative": "Hủy"
+      },
+      "rename_input": {
+        "message": "Đổi tên bản cài",
+        "details": "Nhập tên mới cho {0}.",
+        "button_affirmative": "Đổi tên",
+        "button_negative": "Hủy"
+      },
+      "mod_delete_confirmation": {
+        "message": "Bạn chắc chắn muốn xóa mod?",
+        "details": "Bạn cần tải lại mod để cài đặt lại.",
+        "button_affirmative": "Xóa",
+        "button_negative": "Hủy"
+      },
+      "save_delete_confirmation": {
+        "message": "Bạn chắc chắn muốn xóa dữ liệu lưu?",
+        "details": "Bạn sẽ phải chơi lại {0} từ đầu.",
+        "button_affirmative": "Xóa",
+        "button_negative": "Hủy"
+      },
+      "install": {
+        "button_launch": "Khởi chạy",
+        "button_settings": "Cài đặt",
+        "tag_global_save": "Lưu toàn cục",
+        "tag_sdk": "SDK",
+        "title_achievements": "Thành tích ({0} / {1})",
+        "description_achievements": "Tiếp tục chơi để mở khóa thêm thành tích.",
+        "description_achievements_complete": "Bạn đã mở khóa tất cả thành tích. Chúc mừng!",
+        "title_screenshots_none": "Không có ảnh chụp",
+        "title_screenshots_one": "1 ảnh chụp",
+        "title_screenshots": "{0} ảnh chụp",
+        "description_screenshots": "Nhấn S khi chơi để chụp ảnh màn hình.",
+        "description_sdk": "Mod này hỗ trợ tính năng đặc biệt với Doki Doki Mod Manager SDK!",
+        "description_author": "Tạo bởi {0}",
+        "link_website": "Trang web ({0})",
+        "description_external": "Hiện trong thư mục"
+      },
+      "mod": {
+        "button_install": "Cài đặt",
+        "button_settings": "Cài đặt",
+        "description_external": "Hiện trong thư mục"
+      },
+      "install_creation": {
+        "title": "Cài đặt DDLC",
+        "label_install_name": "Tên bản cài",
+        "label_folder_name": "Tên thư mục",
+        "label_global_save": "Lưu toàn cục",
+        "label_has_mod": "Cài mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "File lưu hiện có",
+        "description_mod": "Nhấn để chọn mod.",
+        "header_summary": "Tóm tắt",
+        "description_vanilla": "Bản DDLC gốc sẽ được tạo. Dữ liệu lưu sẽ tách biệt với các bản khác.",
+        "description_vanilla_global_save": "Bản DDLC gốc sẽ được tạo. Dữ liệu lưu sẽ dùng chung (ví dụ với Steam)",
+        "description_modded": "Bản DDLC có mod sẽ được tạo. Dữ liệu lưu sẽ tách biệt.",
+        "description_modded_global_save": "Bản DDLC có mod sẽ được tạo. Dữ liệu lưu sẽ dùng chung.",
+        "button_install": "Cài đặt",
+        "button_installing": "Đang cài...",
+        "status_exists": "Thư mục đã tồn tại. Chọn tên khác."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Cửa hàng sắp ra mắt!",
+      "description_1": "Sayonika sẽ là nơi chia sẻ và tải mod DDLC. Khi ra mắt, bạn có thể tìm mod ngay tại đây.",
+      "description_2": "Trong khi chờ, hãy thử các mod đề xuất sau.",
+      "error": "Lỗi tải danh sách mod. Bạn đang offline?",
+      "button_download": "Tải về"
+    },
+    "tab_store": {
+      "title": "Cửa hàng Sayonika",
+      "subtitle": "Khám phá và tải mod DDLC",
+      "search_placeholder": "Tìm mod...",
+      "loading": "Đang tải mod...",
+      "error_title": "Lỗi kết nối",
+      "retry_button": "Thử lại",
+      "offline_title": "Offline",
+      "offline_message": "Mất kết nối internet. Vui lòng kiểm tra lại.",
+      "check_connection": "Kiểm tra kết nối",
+      "maintenance_banner": "Dịch vụ xác thực đang bảo trì. Bạn vẫn có thể xem mod.",
+      "no_mods_title": "Không tìm thấy mod",
+      "no_mods_message": "Thử thay đổi từ khóa tìm kiếm",
+      "filters": {
+        "category": "Danh mục:",
+        "all_categories": "Tất cả",
+        "sort_by": "Sắp xếp theo:",
+        "date_created": "Ngày tạo",
+        "date_updated": "Ngày cập nhật",
+        "downloads": "Lượt tải",
+        "rating": "Đánh giá",
+        "title": "Tiêu đề",
+        "order": "Thứ tự:",
+        "descending": "Giảm dần",
+        "ascending": "Tăng dần",
+        "featured_only": "Chỉ featured",
+        "translate_content": "Dịch nội dung",
+        "auto_detect": "Tự động"
+      },
+      "mod_card": {
+        "featured": "Nổi bật",
+        "mature": "Người lớn",
+        "by_author": "bởi {0}",
+        "download": "Tải về",
+        "downloading": "Đang tải...",
+        "download_mod": "Tải mod",
+        "downloads_count": "{0} lượt tải",
+        "version": "Phiên bản {0}",
+        "screenshots": "Ảnh chụp ({0})",
+        "description": "Mô tả",
+        "tags": "Thẻ",
+        "requirements": "Yêu cầu"
+      },
+      "pagination": {
+        "previous": "Trước",
+        "next": "Sau",
+        "page_info": "Trang {0} / {1}"
+      },
+      "login": {
+        "title": "Đăng nhập Sayonika",
+        "discord": "Đăng nhập bằng Discord",
+        "github": "Đăng nhập bằng GitHub",
+        "or": "hoặc",
+        "username_label": "Tên đăng nhập/Email:",
+        "username_placeholder": "Nhập tên đăng nhập hoặc email",
+        "username_help": "Có thể dùng tên đăng nhập hoặc email",
+        "password_label": "Mật khẩu:",
+        "remember_me": "Ghi nhớ",
+        "login_button": "Đăng nhập",
+        "logging_in": "Đang đăng nhập...",
+        "register_link": "Chưa có tài khoản? Đăng ký tại đây",
+        "success": "Đăng nhập thành công!",
+        "failed": "Lỗi đăng nhập: {0}"
+      },
+      "translation": {
+        "enabled": "Đã bật dịch. Nội dung sẽ được dịch khi có sẵn.",
+        "disabled": "Đã tắt dịch.",
+        "language_changed": "Đã đổi ngôn ngữ dịch sang {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Giao diện",
+        "link_background": "Hình nền",
+        "link_language": "Ngôn ngữ",
+        "link_advanced_appearance": "Nâng cao",
+        "header_enhancements": "Nâng cấp",
+        "link_sdk": "Thành tích & SDK",
+        "header_application": "Ứng dụng",
+        "link_updates": "Cập nhật",
+        "link_storage": "Vị trí lưu",
+        "header_developers": "Nhà phát triển",
+        "link_testing": "Gỡ lỗi SDK",
+        "link_debug": "Thông tin ứng dụng"
+      },
+      "section_backgrounds": {
+        "title": "Hình nền",
+        "subtitle": "Tùy chỉnh hình nền cho ứng dụng.",
+        "button_none": "Không dùng hình nền",
+        "description_credit": "Hình nền gốc từ Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Nâng cao",
+        "subtitle": "Tùy chọn giao diện khác.",
+        "button_enable_sysborders": "Dùng viền hệ thống (cần khởi động lại)",
+        "button_disable_sysborders": "Tắt viền hệ thống (cần khởi động lại)"
+      },
+      "section_storage": {
+        "title": "Vị trí lưu",
+        "subtitle": "Thay đổi nơi lưu dữ liệu game.",
+        "description_moving": "Cảnh báo! Thay đổi vị trí sẽ di chuyển tất cả mod và dữ liệu.",
+        "description_current": "Vị trí hiện tại: {0}",
+        "button_change": "Đổi vị trí lưu"
+      },
+      "section_updates": {
+        "title": "Cập nhật",
+        "subtitle": "Nhận bản cập nhật mới nhất.",
+        "description_current_version": "Phiên bản hiện tại: {0}",
+        "label_channel": "Kênh phát hành",
+        "option_stable": "Ổn định",
+        "option_beta": "Beta",
+        "button_check": "Kiểm tra cập nhật"
+      },
+      "section_sdk": {
+        "title": "Thành tích & SDK",
+        "subtitle": "Cài đặt thành tích.",
+        "description_mode": "Bật thành tích:",
+        "checkbox_always": "Luôn bật (khuyên dùng)",
+        "checkbox_specified": "Khi mod hỗ trợ",
+        "checkbox_never": "Không bao giờ"
+      },
+      "section_testing": {
+        "title": "Gỡ lỗi SDK",
+        "subtitle": "Bật log gỡ lỗi cho mod.",
+        "button_enable": "Bật gỡ lỗi",
+        "button_disable": "Tắt gỡ lỗi"
+      },
+      "section_debug": {
+        "title": "Thông tin ứng dụng",
+        "subtitle": "Thông tin chẩn đoán sự cố."
+      },
+      "section_language": {
+        "title": "Ngôn ngữ",
+        "subtitle": "Đổi ngôn ngữ ứng dụng.",
+        "description_current": "Ngôn ngữ hiện tại: {0}",
+        "button_apply": "Áp dụng ngôn ngữ",
+        "button_contribute": "Đóng góp dịch thuật",
+        "description_restart": "Thay đổi có hiệu lực sau khi khởi động lại.",
+        "notification_changed": "Đã đổi ngôn ngữ sang {0}. Khởi động lại để áp dụng.",
+        "notification_same": "Ngôn ngữ đã là {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Giới thiệu",
+      "description": "Doki Doki Mod Manager là dự án cộng đồng giúp tìm và cài mod cho Doki Doki Literature Club.",
+      "title_disclaimer": "Tuyên bố miễn trừ",
+      "disclaimer_1": "Doki Doki Mod Manager là fan work không liên kết với Team Salvato.",
+      "disclaimer_2": "Ứng dụng không chịu trách nhiệm cho hư hại do mod gây ra.",
+      "title_socials": "Liên hệ",
+      "social_twitter": "Theo dõi @Dynamicxaa trên Twitter",
+      "social_reddit": "Nhắn tin qua Reddit",
+      "social_email": "Gửi email",
+      "title_support": "Hỗ trợ phát triển",
+      "description_support": "Ứng dụng miễn phí. Nếu thích, hãy ủng hộ tác giả:",
+      "support_donate": "Quyên góp một lần",
+      "support_steelseries": "Giảm 10% phụ kiện SteelSeries (liên kết affiliate)",
+      "support_code": "Đóng góp code hoặc bản dịch"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Mở Doki Doki Mod Manager và chạy {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC đang chạy",
+      "title_crashed": "Lỗi xảy ra",
+      "button_browse": "Mở thư mục game",
+      "button_close": "OK",
+      "description_running": "Đóng game để thay đổi mod.",
+      "install_missing": "Không tìm thấy bản cài.",
+      "install_corrupt": "Bản cài bị lỗi.",
+      "install_crashed": "Game khởi chạy thất bại."
+    },
+    "move_install": {
+      "title": "Chọn thư mục cài mới"
+    },
+    "mod_browse_dialog": {
+      "title": "Tìm mod để cài đặt",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Tìm file zip DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Chọn vị trí tạo lối tắt",
+      "file_format_name": "Lối tắt"
+    },
+    "errors": {
+      "exception": {
+        "title": "Ứng dụng gặp lỗi",
+        "body": "Lỗi đã được báo cáo. Vui lòng khởi động lại."
+      },
+      "move_install": {
+        "title": "Di chuyển thư mục thất bại",
+        "body": "Kiểm tra quyền và dung lượng lưu trữ."
+      },
+      "shortcut": {
+        "title": "Tạo lối tắt thất bại",
+        "body": "Kiểm tra quyền tạo file."
+      },
+      "install": {
+        "title": "Cài game thất bại",
+        "body": "Kiểm tra quyền và dung lượng."
+      },
+      "rename": {
+        "title": "Đổi tên thất bại",
+        "body": "Đóng các chương trình can thiệp và thử lại."
+      },
+      "uninstall": {
+        "title": "Gỡ cài đặt thất bại",
+        "body": "Đóng các chương trình can thiệp và thử lại."
+      },
+      "save_delete": {
+        "title": "Xóa dữ liệu lưu thất bại",
+        "body": "Đóng các chương trình can thiệp và thử lại."
+      },
+      "mod_delete": {
+        "title": "Xóa mod thất bại",
+        "body": "Đóng các chương trình can thiệp và thử lại."
+      },
+      "renderer_freeze": {
+        "title": "Ứng dụng không phản hồi",
+        "body": "Nếu kéo dài, hãy đóng và mở lại ứng dụng."
+      },
+      "executable_permission": {
+        "title": "Lỗi quyền thực thi",
+        "body": "Không thể chạy DDLC.sh trên Linux. Game có thể không khởi động được."
+      }
+    }
+  }
+}

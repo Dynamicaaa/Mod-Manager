@@ -174,7 +174,7 @@ api.getAvailableLanguages = function () {
     } catch (e) {
         console.warn("Failed to get available languages:", e);
         return {
-            'en-GB': { name: 'English', nativeName: 'English (UK)' }
+            'en-US': { name: 'English', nativeName: 'English (US)' }
         };
     }
 };

@@ -1,0 +1,319 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "الرئيسية",
+      "tab_mods": "الإضافات",
+      "tab_store": "المتجر",
+      "tab_options": "الإعدادات",
+      "tab_about": "عن التطبيق"
+    },
+    "version": {
+      "link_changelog": "ما الجديد؟"
+    },
+    "user_menu": {
+      "option_rename": "تغيير اسم المستخدم",
+      "option_logout": "تسجيل الخروج"
+    },
+    "window_controls": {
+      "close": "إغلاق",
+      "maximise": "تكبير",
+      "minimise": "تصغير",
+      "devtools": "تبديل أدوات المطور (F12)",
+      "announcement": "قراءة أحدث الإعلانات",
+      "login": "تسجيل الدخول",
+      "sayonika_login": "تسجيل دخول Sayonika",
+      "update": {
+        "checking": "جارٍ التحقق من التحديثات في الخلفية...",
+        "available": "يتوفر تحديث. انقر هنا للتنزيل.",
+        "downloading": "جارٍ تنزيل التحديث...",
+        "downloaded": "التحديث جاهز للتثبيت عند الإغلاق."
+      }
+    },
+    "crash_cover": {
+      "button_close": "إنهاء",
+      "button_continue": "متابعة"
+    },
+    "drop_cover": {
+      "text": "اسحب الإضافة هنا لتثبيتها"
+    },
+    "announcement": {
+      "button_open": "فتح الرابط",
+      "button_close": "إغلاق"
+    },
+    "onboarding": {
+      "title": "مرحبًا!",
+      "description_download": "لنجد نسخة من DDLC.",
+      "button_download": "زيارة الموقع الرسمي لتنزيل DDLC",
+      "button_choose": "تصفح النسخة",
+      "heading_step": "الخطوة {0}",
+      "s1_desc": "يجب تنزيل نسخة من Doki Doki Literature Club. يمكنك العثور عليها على الموقع الرسمي (ddlc.moe) - انقر على الزر أدناه للذهاب هناك الآن.",
+      "s1_platform": "عند الطلب، اختر تنزيل الملف المسمى \"DDLC ({0})\".",
+      "s2_desc": "بمجرد اكتمال التنزيل، حدده باستخدام الزر أدناه.",
+      "description_location": "سيتم حفظ ألعابك في {0}",
+      "link_change": "(تغيير)"
+    },
+    "login_input": {
+      "message": "أدخل عنوان بريدك الإلكتروني",
+      "details": "سيتم إرسال رابط تسجيل دخول إلى هذا العنوان. انقر على الرابط في البريد الإلكتروني لإكمال عملية التسجيل.",
+      "button_affirmative": "تسجيل الدخول",
+      "button_negative": "إلغاء"
+    },
+    "change_username_input": {
+      "message": "أدخل اسم مستخدم جديد",
+      "details": "أسماء المستخدمين لا يجب أن تكون فريدة.",
+      "button_affirmative": "تغيير",
+      "button_negative": "إلغاء"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "بحث في الإضافات...",
+        "header_new": "ابدأ",
+        "link_install": "تثبيت DDLC",
+        "header_installed": "المثبتة",
+        "header_downloaded": "المنزلة"
+      },
+      "install_contextmenu": {
+        "launch": "تشغيل",
+        "rename": "إعادة تسمية",
+        "shortcut": "إنشاء اختصار",
+        "delete_save": "حذف بيانات الحفظ",
+        "uninstall": "إلغاء التثبيت"
+      },
+      "mod_contextmenu": {
+        "install": "تثبيت",
+        "delete": "حذف"
+      },
+      "uninstall_confirmation": {
+        "message": "هل تريد حقًا إلغاء التثبيت؟",
+        "details": "سيتم حذف بيانات الحفظ الخاصة بـ {0} وسوف تحتاج إلى نسخة من الإضافة لإعادة تثبيتها.",
+        "button_affirmative": "إلغاء التثبيت",
+        "button_negative": "إلغاء"
+      },
+      "rename_input": {
+        "message": "إعادة تسمية التثبيت",
+        "details": "أدخل اسمًا جديدًا لـ {0}.",
+        "button_affirmative": "إعادة تسمية",
+        "button_negative": "إلغاء"
+      },
+      "mod_delete_confirmation": {
+        "message": "هل تريد حقًا حذف الإضافة؟",
+        "details": "سوف تحتاج إلى تنزيل نسخة أخرى من الإضافة لإعادة تثبيتها.",
+        "button_affirmative": "حذف",
+        "button_negative": "إلغاء"
+      },
+      "save_delete_confirmation": {
+        "message": "هل تريد حقًا حذف بيانات الحفظ؟",
+        "details": "سوف تضطر إلى بدء {0} من جديد.",
+        "button_affirmative": "حذف",
+        "button_negative": "إلغاء"
+      },
+      "install": {
+        "button_launch": "تشغيل",
+        "button_settings": "الإعدادات",
+        "tag_global_save": "حفظ عام",
+        "tag_sdk": "SDK",
+        "title_achievements": "الإنجازات ({0} / {1})",
+        "description_achievements": "استمر في اللعب لفتح المزيد من الإنجازات.",
+        "description_achievements_complete": "لقد فتحت جميع الإنجازات. تهانينا!",
+        "title_screenshots_none": "لا توجد لقطات",
+        "title_screenshots_one": "لقطة واحدة",
+        "title_screenshots": "{0} لقطات",
+        "description_screenshots": "اضغط S أثناء اللعب لالتقاط لقطة.",
+        "description_sdk": "هذه الإضافة تدعم ميزات خاصة مع Doki Doki Mod Manager SDK!",
+        "description_author": "من صنع {0}",
+        "link_website": "الموقع ({0})",
+        "description_external": "عرض في المجلد"
+      },
+      "mod": {
+        "button_install": "تثبيت",
+        "button_settings": "الإعدادات",
+        "description_external": "عرض في المجلد"
+      },
+      "install_creation": {
+        "title": "تثبيت DDLC",
+        "label_install_name": "اسم التثبيت",
+        "label_folder_name": "اسم المجلد",
+        "label_global_save": "حفظ عام",
+        "label_has_mod": "تثبيت الإضافة",
+        "label_mod": "الإضافة",
+        "label_existing_saves": "بيانات الحفظ الموجودة",
+        "description_mod": "انقر للتصفح للإضافات.",
+        "header_summary": "ملخص",
+        "description_vanilla": "سيتم إنشاء نسخة نظيفة من DDLC. سيتم عزل بيانات الحفظ عن جميع نسخ اللعبة الأخرى.",
+        "description_vanilla_global_save": "سيتم إنشاء نسخة نظيفة من DDLC. سيتم مشاركة بيانات الحفظ مع نسخ اللعبة الأخرى (مثل Steam)",
+        "description_modded": "سيتم إنشاء نسخة من DDLC وتثبيت الإضافة. سيتم عزل بيانات الحفظ عن جميع نسخ اللعبة الأخرى.",
+        "description_modded_global_save": "سيتم إنشاء نسخة من DDLC وتثبيت الإضافة. سيتم مشاركة بيانات الحفظ مع نسخ اللعبة الأخرى (مثل Steam)",
+        "button_install": "تثبيت",
+        "button_installing": "جارٍ التثبيت...",
+        "status_exists": "هذا المجلد موجود مسبقًا. اختر اسم مجلد آخر."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "المتجر قريبًا!",
+      "description_1": "ستوفر قاعدة بيانات إضافات Sayonika مكانًا مركزيًا لمشاركة وتنزيل ومراجعة إضافات DDLC. عندما تصبح Sayonika متاحة للجمهور، يمكنك تصفح الإضافات مباشرة هنا في Doki Doki Mod Manager.",
+      "description_2": "في انتظار ذلك، يمكنك تنزيل بعض الإضافات الموصى بها.",
+      "error": "فشل تحميل قائمة الإضافات. هل أنت غير متصل بالإنترنت؟",
+      "button_download": "تنزيل"
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "المظهر",
+        "link_background": "الخلفية",
+        "link_language": "اللغة",
+        "link_advanced_appearance": "متقدم",
+        "header_enhancements": "التحسينات",
+        "link_sdk": "الإنجازات وSDK",
+        "header_application": "التطبيق",
+        "link_updates": "التحديثات",
+        "link_storage": "موقع التخزين",
+        "header_developers": "المطورون",
+        "link_testing": "اختبار SDK",
+        "link_debug": "معلومات التطبيق"
+      },
+      "section_backgrounds": {
+        "title": "الخلفيات",
+        "subtitle": "خصّص نسختك من Doki Doki Mod Manager بواحدة من هذه الخلفيات.",
+        "button_none": "بدون خلفية",
+        "description_credit": "خلفيات DDLC الأصلية بواسطة Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "متقدم",
+        "subtitle": "خيارات واجهة إضافية.",
+        "button_enable_sysborders": "تمكين الحدود النظامية (يتطلب إعادة التشغيل)",
+        "button_disable_sysborders": "تعطيل الحدود النظامية (يتطلب إعادة التشغيل)"
+      },
+      "section_storage": {
+        "title": "موقع التخزين",
+        "subtitle": "غيّر مكان تخزين بيانات اللعبة.",
+        "description_moving": "تحذير! عند تغيير موقع التثبيت، سيتم نقل جميع الإضافات والتثبيتات وبيانات الحفظ. قد يستغرق هذا بضع دقائق ولا يمكن إلغاؤه.",
+        "description_current": "الموقع الحالي: {0}",
+        "button_change": "تغيير موقع التثبيت"
+      },
+      "section_updates": {
+        "title": "التحديثات",
+        "subtitle": "احصل على أحدث نسخة من Doki Doki Mod Manager.",
+        "description_current_version": "الإصدار الحالي: {0}",
+        "label_channel": "قناة الإصدار",
+        "option_stable": "مستقر",
+        "option_beta": "بيتا",
+        "button_check": "التحقق من التحديثات"
+      },
+      "section_sdk": {
+        "title": "الإنجازات وSDK",
+        "subtitle": "غيّر طريقة معالجة الإنجازات.",
+        "description_mode": "تمكين الإنجازات:",
+        "checkbox_always": "دائمًا (موصى به)",
+        "checkbox_specified": "عندما تحدد الإضافة دعمها",
+        "checkbox_never": "مطلقًا"
+      },
+      "section_testing": {
+        "title": "اختبار SDK",
+        "subtitle": "تمكين تسجيل تصحيح الأخطاء لاختبار إضافاتك مع Doki Doki Mod Manager SDK.",
+        "button_enable": "تمكين التصحيح",
+        "button_disable": "تعطيل التصحيح"
+      },
+      "section_debug": {
+        "title": "معلومات التطبيق",
+        "subtitle": "معلومات تشخيصية للمشاكل."
+      },
+      "section_language": {
+        "title": "اللغة",
+        "subtitle": "غيّر لغة Doki Doki Mod Manager.",
+        "description_current": "اللغة الحالية: {0}",
+        "button_apply": "تطبيق اللغة",
+        "button_contribute": "المساعدة في الترجمة",
+        "description_restart": "سوف تصبح تغييرات اللغة سارية بعد إعادة تشغيل التطبيق.",
+        "notification_changed": "تم تغيير اللغة إلى {0}. أعد تشغيل التطبيق لرؤية التغييرات.",
+        "notification_same": "اللمة مضبوطة بالفعل على {0}."
+      }
+    },
+    "tab_about": {
+      "title": "عن التطبيق",
+      "description": "Doki Doki Mod Manager هو مشروع مجتمعي يساعدك في العثور على وتثبيت ولعب إضافات Doki Doki Literature Club، لعبة فيجوال نوفيل مجانية من Team Salvato.",
+      "title_disclaimer": "إخلاء المسؤولية",
+      "disclaimer_1": "Doki Doki Mod Manager هو عمل معجبين لـ Doki Doki Literature Club وغير مرتبط ب Team Salvato. إنه عمل معجبين كما هو محدد في إرشادات IP الخاصة ب Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager لا يتحمل أي مسؤولية عن أي ضرر يلحق بملفاتك أو جهازك نتيجة لعب الإضافات أو غير ذلك. عليك التأكد من أن الإضافات آمنة للعب.",
+      "title_socials": "تواصل معنا",
+      "social_twitter": "تابع @Dynamicxaa على تويتر",
+      "social_reddit": "أرسل رسالة على Reddit",
+      "social_email": "أرسل بريدًا إلكترونيًا",
+      "title_support": "ادعم التطوير",
+      "description_support": "Doki Doki Mod Manager سيظل دائمًا مجانيًا للتنزيل والاستخدام. إذا أعجبك وترغب في مساعدتي في الحفاظ على تحديثه، يرجى دعمي بأحد الطرق التالية.",
+      "support_donate": "تبرع لمرة واحدة",
+      "support_steelseries": "احصل على خصم 10% على ملحقات الألعاب من SteelSeries (رابط إحالة)",
+      "support_code": "ساهم في المشروع (كود أو ترجمات)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "فتح Doki Doki Mod Manager وتشغيل {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC قيد التشغيل",
+      "title_crashed": "حدث خطأ ما",
+      "button_browse": "فتح مجلد اللعبة",
+      "button_close": "موافق",
+      "description_running": "أغلق اللعبة لإجراء تغييرات على إضافاتك.",
+      "install_missing": "لم يتم العثور على التثبيت.",
+      "install_corrupt": "التثبيت غير مكتمل أو تالف.",
+      "install_crashed": "فشل تشغيل اللعبة أو تعطلت."
+    },
+    "move_install": {
+      "title": "اختر مجلد تثبيت جديد"
+    },
+    "mod_browse_dialog": {
+      "title": "ابحث عن إضافة للتثبيت",
+      "file_format_name": "الإضافات"
+    },
+    "game_browse_dialog": {
+      "title": "ابحث عن ملف zip لنسخة DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "اختر مكان وضع الاختصار",
+      "file_format_name": "الاختصار"
+    },
+    "errors": {
+      "exception": {
+        "title": "تعطل Doki Doki Mod Manager",
+        "body": "تم الإبلاغ عن المشكلة. أعد التشغيل وحاول مرة أخرى."
+      },
+      "move_install": {
+        "title": "فشل نقل مجلد التثبيت",
+        "body": "تحقق من الأذونات والمساحة الكافية في المجلد الجديد."
+      },
+      "shortcut": {
+        "title": "فشل إنشاء اختصار",
+        "body": "تحقق من أذونات الكتابة في المجلد المحدد."
+      },
+      "install": {
+        "title": "فشل تثبيت اللعبة",
+        "body": "تحقق من الأذونات والمساحة الكافية للتثبيت."
+      },
+      "rename": {
+        "title": "فشل إعادة التسمية",
+        "body": "أغلق أي برامج متداخلة وحاول مرة أخرى."
+      },
+      "uninstall": {
+        "title": "فشل إلغاء التثبيت",
+        "body": "أغلق أي برامج متداخلة وحاول مرة أخرى."
+      },
+      "save_delete": {
+        "title": "فشل حذف بيانات الحفظ",
+        "body": "أغلق أي برامج متداخلة وحاول مرة أخرى."
+      },
+      "mod_delete": {
+        "title": "فشل حذف الإضافة",
+        "body": "أغلق أي برامج متداخلة وحاول مرة أخرى."
+      },
+      "renderer_freeze": {
+        "title": "توقف Doki Doki Mod Manager عن الاستجابة",
+        "body": "إذا استمرت المشكلة، أغلق التطبيق وأعِد التشغيل."
+      },
+      "executable_permission": {
+        "title": "فشل جعل اللعبة قابلة للتنفيذ",
+        "body": "فشل جعل DDLC.sh قابلًا للتنفيذ على لينكس. قد لا تعمل اللعبة بشكل صحيح."
+      }
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Laman Utama",
+      "tab_mods": "Mod",
+      "tab_store": "Kedai",
+      "tab_options": "Tetapan",
+      "tab_about": "Perihal"
+    },
+    "version": {
+      "link_changelog": "apa yang baru?"
+    },
+    "user_menu": {
+      "option_rename": "Tukar Nama",
+      "option_logout": "Log Keluar"
+    },
+    "window_controls": {
+      "close": "Tutup",
+      "maximise": "Maksimumkan",
+      "minimise": "Minimumkan",
+      "devtools": "Alat Pembangun (F12)",
+      "announcement": "Baca pengumuman terkini",
+      "login": "Log Masuk",
+      "sayonika_login": "Log Masuk Sayonika",
+      "update": {
+        "checking": "Memeriksa kemas kini...",
+        "available": "Kemas kini tersedia. Klik untuk muat turun.",
+        "downloading": "Memuat turun kemas kini...",
+        "downloaded": "Kemas kini sedia dipasang apabila anda keluar."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Keluar",
+      "button_continue": "Teruskan"
+    },
+    "drop_cover": {
+      "text": "Letak mod di sini untuk pasang"
+    },
+    "announcement": {
+      "button_open": "Buka Pautan",
+      "button_close": "Tutup"
+    },
+    "onboarding": {
+      "title": "Selamat Datang!",
+      "description_download": "Mari cari salinan DDLC.",
+      "button_download": "Lawati laman muat turun rasmi",
+      "button_choose": "Pilih fail",
+      "heading_step": "Langkah {0}",
+      "s1_desc": "Anda perlu muat turun Doki Doki Literature Club dari laman rasmi (ddlc.moe) - klik butang di bawah.",
+      "s1_platform": "Pilih fail \"DDLC ({0})\" apabila diminta.",
+      "s2_desc": "Selepas muat turun, pilih fail menggunakan butang di bawah.",
+      "description_location": "Permainan akan disimpan di {0}",
+      "link_change": "(Tukar)"
+    },
+    "login_input": {
+      "message": "Masukkan alamat emel",
+      "details": "Pautan log masuk akan dihantar ke emel ini.",
+      "button_affirmative": "Log Masuk",
+      "button_negative": "Batal"
+    },
+    "change_username_input": {
+      "message": "Masukkan nama baharu",
+      "details": "Nama tidak perlu unik.",
+      "button_affirmative": "Tukar",
+      "button_negative": "Batal"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Cari mod...",
+        "header_new": "Mula",
+        "link_install": "Pasang DDLC",
+        "header_installed": "Telah Dipasang",
+        "header_downloaded": "Telah Dimuat Turun"
+      },
+      "install_contextmenu": {
+        "launch": "Lancarkan",
+        "rename": "Tukar Nama",
+        "shortcut": "Buat Pintasan",
+        "delete_save": "Padam Data Simpanan",
+        "uninstall": "Nyahpasang"
+      },
+      "mod_contextmenu": {
+        "install": "Pasang",
+        "delete": "Padam"
+      },
+      "uninstall_confirmation": {
+        "message": "Anda pasti mahu nyahpasang?",
+        "details": "Data simpanan untuk {0} akan dipadam.",
+        "button_affirmative": "Nyahpasang",
+        "button_negative": "Batal"
+      },
+      "rename_input": {
+        "message": "Tukar Nama Pemasangan",
+        "details": "Masukkan nama baharu untuk {0}.",
+        "button_affirmative": "Tukar",
+        "button_negative": "Batal"
+      },
+      "mod_delete_confirmation": {
+        "message": "Anda pasti mahu padam mod?",
+        "details": "Anda perlu muat turun semula untuk pasang semula.",
+        "button_affirmative": "Padam",
+        "button_negative": "Batal"
+      },
+      "save_delete_confirmation": {
+        "message": "Anda pasti mahu padam data simpanan?",
+        "details": "Anda perlu mula semula {0}.",
+        "button_affirmative": "Padam",
+        "button_negative": "Batal"
+      },
+      "install": {
+        "button_launch": "Lancarkan",
+        "button_settings": "Tetapan",
+        "tag_global_save": "Simpanan Global",
+        "tag_sdk": "SDK",
+        "title_achievements": "Pencapaian ({0}/{1})",
+        "description_achievements": "Teruskan bermain untuk membuka lebih banyak pencapaian.",
+        "description_achievements_complete": "Anda telah membuka semua pencapaian! Tahniah!",
+        "title_screenshots_none": "Tiada tangkapan skrin",
+        "title_screenshots_one": "1 tangkapan skrin",
+        "title_screenshots": "{0} tangkapan skrin",
+        "description_screenshots": "Tekan S semasa bermain untuk tangkapan skrin.",
+        "description_sdk": "Mod ini menyokong ciri khas dengan SDK!",
+        "description_author": "Dicipta oleh {0}",
+        "link_website": "Laman Web ({0})",
+        "description_external": "Tunjuk dalam folder"
+      },
+      "mod": {
+        "button_install": "Pasang",
+        "button_settings": "Tetapan",
+        "description_external": "Tunjuk dalam folder"
+      },
+      "install_creation": {
+        "title": "Pasang DDLC",
+        "label_install_name": "Nama Pemasangan",
+        "label_folder_name": "Nama Folder",
+        "label_global_save": "Simpanan Global",
+        "label_has_mod": "Pasang Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Data Simpanan Sedia Ada",
+        "description_mod": "Klik untuk pilih mod.",
+        "header_summary": "Ringkasan",
+        "description_vanilla": "Salinan DDLC bersih akan dibuat. Data simpanan berasingan.",
+        "description_vanilla_global_save": "Salinan bersih dengan simpanan global (cth: Steam)",
+        "description_modded": "Salinan DDLC dengan mod. Data simpanan berasingan.",
+        "description_modded_global_save": "Salinan dengan mod dan simpanan global.",
+        "button_install": "Pasang",
+        "button_installing": "Memasang...",
+        "status_exists": "Folder sudah wujud. Pilih nama lain."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Kedai akan datang!",
+      "description_1": "Sayonika akan menjadi pusat mod DDLC.",
+      "description_2": "Cuba mod yang disyorkan ini sementara menunggu.",
+      "error": "Gagal memuatkan mod. Sila semak sambungan.",
+      "button_download": "Muat Turun"
+    },
+    "tab_store": {
+      "title": "Kedai Sayonika",
+      "subtitle": "Cari dan muat turun mod DDLC",
+      "search_placeholder": "Cari mod...",
+      "loading": "Memuatkan mod...",
+      "error_title": "Ralat Sambungan",
+      "retry_button": "Cuba Lagi",
+      "offline_title": "Luar Talian",
+      "offline_message": "Sila semak sambungan internet anda.",
+      "check_connection": "Semak Sambungan",
+      "maintenance_banner": "Perkhidmatan pengesahan tidak tersedia buat sementara.",
+      "no_mods_title": "Tiada mod dijumpai",
+      "no_mods_message": "Cuba ubah kriteria carian",
+      "filters": {
+        "category": "Kategori:",
+        "all_categories": "Semua",
+        "sort_by": "Susun mengikut:",
+        "date_created": "Tarikh Dicipta",
+        "date_updated": "Tarikh Dikemas Kini",
+        "downloads": "Muat Turun",
+        "rating": "Penilaian",
+        "title": "Tajuk",
+        "order": "Susunan:",
+        "descending": "Menurun",
+        "ascending": "Menaik",
+        "featured_only": "Hanya Disyorkan",
+        "translate_content": "Terjemah Kandungan",
+        "auto_detect": "Kesan Automatik"
+      },
+      "mod_card": {
+        "featured": "Disyorkan",
+        "mature": "Dewasa",
+        "by_author": "oleh {0}",
+        "download": "Muat Turun",
+        "downloading": "Sedang memuat turun...",
+        "download_mod": "Muat Turun Mod",
+        "downloads_count": "{0} muat turun",
+        "version": "Versi {0}",
+        "screenshots": "Tangkapan Skrin ({0})",
+        "description": "Deskripsi",
+        "tags": "Tag",
+        "requirements": "Keperluan"
+      },
+      "pagination": {
+        "previous": "Sebelum",
+        "next": "Seterusnya",
+        "page_info": "Halaman {0} dari {1}"
+      },
+      "login": {
+        "title": "Log Masuk Sayonika",
+        "discord": "Log Masuk dengan Discord",
+        "github": "Log Masuk dengan GitHub",
+        "or": "atau",
+        "username_label": "Nama Pengguna/Emel:",
+        "username_placeholder": "Masukkan nama pengguna atau emel",
+        "username_help": "Boleh guna nama pengguna atau emel",
+        "password_label": "Kata Laluan:",
+        "remember_me": "Ingat Saya",
+        "login_button": "Log Masuk",
+        "logging_in": "Sedang log masuk...",
+        "register_link": "Tiada akaun? Daftar di sini",
+        "success": "Berjaya log masuk!",
+        "failed": "Gagal: {0}"
+      },
+      "translation": {
+        "enabled": "Terjemahan diaktifkan.",
+        "disabled": "Terjemahan dinyahaktifkan.",
+        "language_changed": "Bahasa terjemahan ditukar ke {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Penampilan",
+        "link_background": "Latar Belakang",
+        "link_language": "Bahasa",
+        "link_advanced_appearance": "Lanjutan",
+        "header_enhancements": "Penambahbaikan",
+        "link_sdk": "Pencapaian & SDK",
+        "header_application": "Aplikasi",
+        "link_updates": "Kemas Kini",
+        "link_storage": "Lokasi Simpanan",
+        "header_developers": "Pembangun",
+        "link_testing": "Debug SDK",
+        "link_debug": "Maklumat Aplikasi"
+      },
+      "section_backgrounds": {
+        "title": "Latar Belakang",
+        "subtitle": "Sesuaikan latar belakang anda",
+        "button_none": "Tiada Latar Belakang",
+        "description_credit": "Latar belakang asal oleh Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Lanjutan",
+        "subtitle": "Pilihan tambahan",
+        "button_enable_sysborders": "Guna Sempadan Sistem (perlu mula semula)",
+        "button_disable_sysborders": "Nyahaktifkan Sempadan Sistem"
+      },
+      "section_storage": {
+        "title": "Lokasi Simpanan",
+        "subtitle": "Tukar lokasi data permainan",
+        "description_moving": "Amaran! Semua data akan dipindahkan.",
+        "description_current": "Lokasi semasa: {0}",
+        "button_change": "Tukar Lokasi"
+      },
+      "section_updates": {
+        "title": "Kemas Kini",
+        "subtitle": "Dapatkan versi terkini",
+        "description_current_version": "Versi semasa: {0}",
+        "label_channel": "Saluran Kemas Kini",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Semak Kemas Kini"
+      },
+      "section_sdk": {
+        "title": "Pencapaian & SDK",
+        "subtitle": "Urus pencapaian",
+        "description_mode": "Aktifkan pencapaian:",
+        "checkbox_always": "Sentiasa (disyorkan)",
+        "checkbox_specified": "Apabila mod menyokong",
+        "checkbox_never": "Jangan Pernah"
+      },
+      "section_testing": {
+        "title": "Debug SDK",
+        "subtitle": "Aktifkan log debug",
+        "button_enable": "Aktifkan Debug",
+        "button_disable": "Nyahaktifkan Debug"
+      },
+      "section_debug": {
+        "title": "Maklumat Aplikasi",
+        "subtitle": "Butiran teknikal"
+      },
+      "section_language": {
+        "title": "Bahasa",
+        "subtitle": "Tukar bahasa aplikasi",
+        "description_current": "Bahasa semasa: {0}",
+        "button_apply": "Terapkan Bahasa",
+        "button_contribute": "Bantu Terjemah",
+        "description_restart": "Perubahan akan berkuat kuasa selepas mula semula.",
+        "notification_changed": "Bahasa ditukar ke {0}. Sila mula semula aplikasi.",
+        "notification_same": "Bahasa sudah {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Perihal",
+      "description": "Doki Doki Mod Manager ialah projek komuniti untuk mengurus mod DDLC.",
+      "title_disclaimer": "Penafian",
+      "disclaimer_1": "Tidak berkaitan dengan Team Salvato. Mengikut garis panduan IP mereka.",
+      "disclaimer_2": "Penggunaan mod adalah tanggungjawab anda.",
+      "title_socials": "Hubungi",
+      "social_twitter": "Ikuti @Dynamicxaa di Twitter",
+      "social_reddit": "Hantar mesej di Reddit",
+      "social_email": "Hantar Emel",
+      "title_support": "Sokong Pembangunan",
+      "description_support": "Aplikasi percuma. Anda boleh sokong melalui:",
+      "support_donate": "Derma",
+      "support_steelseries": "Diskaun 10% SteelSeries (pautan affiliate)",
+      "support_code": "Sumbang kod/terjemahan"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Buka Doki Doki Mod Manager dan lancarkan {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC sedang berjalan",
+      "title_crashed": "Terdapat Ralat",
+      "button_browse": "Buka Folder",
+      "button_close": "OK",
+      "description_running": "Tutup permainan untuk menukar mod.",
+      "install_missing": "Pemasangan tidak dijumpai.",
+      "install_corrupt": "Pemasangan rosak.",
+      "install_crashed": "Gagal melancarkan permainan."
+    },
+    "move_install": {
+      "title": "Pilih folder baharu"
+    },
+    "mod_browse_dialog": {
+      "title": "Pilih Mod",
+      "file_format_name": "Mod"
+    },
+    "game_browse_dialog": {
+      "title": "Cari Fail DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Pilih Lokasi Pintasan",
+      "file_format_name": "Pintasan"
+    },
+    "errors": {
+      "exception": {
+        "title": "Ralat Aplikasi",
+        "body": "Ralat telah dilaporkan. Sila mula semula."
+      },
+      "move_install": {
+        "title": "Gagal Memindahkan",
+        "body": "Semak kebenaran dan ruang simpanan."
+      },
+      "shortcut": {
+        "title": "Gagal Membuat Pintasan",
+        "body": "Semak kebenaran fail."
+      },
+      "install": {
+        "title": "Gagal Memasang",
+        "body": "Semak kebenaran dan ruang simpanan."
+      },
+      "rename": {
+        "title": "Gagal Menukar Nama",
+        "body": "Tutup aplikasi lain dan cuba lagi."
+      },
+      "uninstall": {
+        "title": "Gagal Nyahpasang",
+        "body": "Tutup aplikasi lain dan cuba lagi."
+      },
+      "save_delete": {
+        "title": "Gagal Padam Simpanan",
+        "body": "Tutup aplikasi lain dan cuba lagi."
+      },
+      "mod_delete": {
+        "title": "Gagal Padam Mod",
+        "body": "Tutup aplikasi lain dan cuba lagi."
+      },
+      "renderer_freeze": {
+        "title": "Aplikasi Tidak Bertindak Balas",
+        "body": "Sila mula semula aplikasi."
+      },
+      "executable_permission": {
+        "title": "Ralat Kebenaran Linux",
+        "body": "Gagal menjalankan DDLC.sh."
+      }
+    }
+  }
+}

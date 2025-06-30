@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Home",
+      "tab_mods": "Mga Mod",
+      "tab_store": "Tindahan",
+      "tab_options": "Mga Setting",
+      "tab_about": "Tungkol"
+    },
+    "version": {
+      "link_changelog": "ano ang bago?"
+    },
+    "user_menu": {
+      "option_rename": "Palitan ang Pangalan",
+      "option_logout": "Log Out"
+    },
+    "window_controls": {
+      "close": "Isara",
+      "maximise": "I-maximize",
+      "minimise": "I-minimize",
+      "devtools": "Developer Tools (F12)",
+      "announcement": "Basahin ang pinakabagong anunsyo",
+      "login": "Mag-log In",
+      "sayonika_login": "Sayonika Login",
+      "update": {
+        "checking": "Sinusuri ang mga update...",
+        "available": "May available na update. I-click para i-download.",
+        "downloading": "Nagda-download ng update...",
+        "downloaded": "Handa nang i-install ang update pagkatapos isara."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Isara",
+      "button_continue": "Magpatuloy"
+    },
+    "drop_cover": {
+      "text": "I-drop ang mod dito para i-install"
+    },
+    "announcement": {
+      "button_open": "Buksan ang Link",
+      "button_close": "Isara"
+    },
+    "onboarding": {
+      "title": "Maligayang pagdating!",
+      "description_download": "Hanapin natin ang kopya ng DDLC.",
+      "button_download": "Bisitahin ang official download page",
+      "button_choose": "Pumili ng file",
+      "heading_step": "Hakbang {0}",
+      "s1_desc": "Kailangan mong i-download ang Doki Doki Literature Club sa official website (ddlc.moe) - i-click ang button sa ibaba.",
+      "s1_platform": "Piliin ang \"DDLC ({0})\" file kapag hiniling.",
+      "s2_desc": "Pagkatapos ma-download, piliin ang file gamit ang button sa ibaba.",
+      "description_location": "Ang mga laro ay maiimbak sa {0}",
+      "link_change": "(Palitan)"
+    },
+    "login_input": {
+      "message": "Ilagay ang email address",
+      "details": "Padadalhan ka ng link sa pag-login sa email na ito.",
+      "button_affirmative": "Mag-log In",
+      "button_negative": "Kanselahin"
+    },
+    "change_username_input": {
+      "message": "Ilagay ang bagong username",
+      "details": "Hindi kailangang unique ang username.",
+      "button_affirmative": "Palitan",
+      "button_negative": "Kanselahin"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Maghanap ng mods...",
+        "header_new": "Magsimula",
+        "link_install": "I-install ang DDLC",
+        "header_installed": "Naka-install",
+        "header_downloaded": "Na-download"
+      },
+      "install_contextmenu": {
+        "launch": "I-launch",
+        "rename": "Palitan ng Pangalan",
+        "shortcut": "Gumawa ng Shortcut",
+        "delete_save": "Burahin ang Save Data",
+        "uninstall": "I-uninstall"
+      },
+      "mod_contextmenu": {
+        "install": "I-install",
+        "delete": "Burahin"
+      },
+      "uninstall_confirmation": {
+        "message": "Sigurado ka bang gusto mong i-uninstall?",
+        "details": "Mabubura ang save data para sa {0}.",
+        "button_affirmative": "I-uninstall",
+        "button_negative": "Kanselahin"
+      },
+      "rename_input": {
+        "message": "Palitan ang Pangalan ng Install",
+        "details": "Ilagay ang bagong pangalan para sa {0}.",
+        "button_affirmative": "Palitan",
+        "button_negative": "Kanselahin"
+      },
+      "mod_delete_confirmation": {
+        "message": "Sigurado ka bang gusto mong burahin ang mod?",
+        "details": "Kailangan mong i-download muli ang mod para ma-install ulit.",
+        "button_affirmative": "Burahin",
+        "button_negative": "Kanselahin"
+      },
+      "save_delete_confirmation": {
+        "message": "Sigurado ka bang gusto mong burahin ang save data?",
+        "details": "Kailangan mong simulan ulit ang {0} mula sa simula.",
+        "button_affirmative": "Burahin",
+        "button_negative": "Kanselahin"
+      },
+      "install": {
+        "button_launch": "I-launch",
+        "button_settings": "Mga Setting",
+        "tag_global_save": "Global Save",
+        "tag_sdk": "SDK",
+        "title_achievements": "Mga Achievement ({0}/{1})",
+        "description_achievements": "Magpatuloy sa paglalaro para sa mas maraming achievement.",
+        "description_achievements_complete": "Na-unlock mo na lahat ng achievement! Congratulations!",
+        "title_screenshots_none": "Walang screenshot",
+        "title_screenshots_one": "1 screenshot",
+        "title_screenshots": "{0} na screenshot",
+        "description_screenshots": "Pindutin ang S habang naglalaro para kumuha ng screenshot.",
+        "description_sdk": "Sinusuportahan ng mod na ito ang mga espesyal na feature gamit ang SDK!",
+        "description_author": "Ginawa ni {0}",
+        "link_website": "Website ({0})",
+        "description_external": "Ipakita sa folder"
+      },
+      "mod": {
+        "button_install": "I-install",
+        "button_settings": "Mga Setting",
+        "description_external": "Ipakita sa folder"
+      },
+      "install_creation": {
+        "title": "I-install ang DDLC",
+        "label_install_name": "Pangalan ng Install",
+        "label_folder_name": "Pangalan ng Folder",
+        "label_global_save": "Global Save",
+        "label_has_mod": "Mag-install ng Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Mga Existing na Save File",
+        "description_mod": "I-click para pumili ng mod.",
+        "header_summary": "Buod",
+        "description_vanilla": "Malilinis na kopya ng DDLC. Hiwalay ang save data.",
+        "description_vanilla_global_save": "Malinis na kopya na may shared save (hal. Steam)",
+        "description_modded": "DDLC na may mod. Hiwalay ang save data.",
+        "description_modded_global_save": "DDLC na may mod at shared save.",
+        "button_install": "I-install",
+        "button_installing": "Nag-i-install...",
+        "status_exists": "Umiiral na ang folder na iyan. Pumili ng ibang pangalan."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Malapit nang dumating ang Tindahan!",
+      "description_1": "Ang Sayonika ay magiging central database para sa mga mod ng DDLC.",
+      "description_2": "Subukan ang mga recommended mod na ito habang naghihintay.",
+      "error": "Nabigong i-load ang mga mod. Naka-offline ka ba?",
+      "button_download": "I-download"
+    },
+    "tab_store": {
+      "title": "Sayonika Store",
+      "subtitle": "Tuklasin at i-download ang mga mod ng DDLC",
+      "search_placeholder": "Maghanap ng mods...",
+      "loading": "Naglo-load ng mga mod...",
+      "error_title": "Connection Error",
+      "retry_button": "Subukan Muli",
+      "offline_title": "Offline",
+      "offline_message": "Suriin ang iyong koneksyon sa internet.",
+      "check_connection": "Suriin ang Koneksyon",
+      "maintenance_banner": "Pansamantalang hindi available ang authentication services.",
+      "no_mods_title": "Walang nahanap na mods",
+      "no_mods_message": "Baguhin ang iyong search criteria",
+      "filters": {
+        "category": "Kategorya:",
+        "all_categories": "Lahat",
+        "sort_by": "Sort by:",
+        "date_created": "Petsa ng Paggawa",
+        "date_updated": "Huling Update",
+        "downloads": "Mga Download",
+        "rating": "Rating",
+        "title": "Pamagat",
+        "order": "Order:",
+        "descending": "Pababa",
+        "ascending": "Paakyat",
+        "featured_only": "Featured Lang",
+        "translate_content": "Isalin ang Content",
+        "auto_detect": "Awtomatikong Detect"
+      },
+      "mod_card": {
+        "featured": "Featured",
+        "mature": "Para sa Matanda",
+        "by_author": "ni {0}",
+        "download": "I-download",
+        "downloading": "Nagda-download...",
+        "download_mod": "I-download ang Mod",
+        "downloads_count": "{0} downloads",
+        "version": "Bersyon {0}",
+        "screenshots": "Mga Screenshot ({0})",
+        "description": "Deskripsyon",
+        "tags": "Mga Tag",
+        "requirements": "Mga Kailangan"
+      },
+      "pagination": {
+        "previous": "Nakaraan",
+        "next": "Susunod",
+        "page_info": "Pahina {0} ng {1}"
+      },
+      "login": {
+        "title": "Mag-log In sa Sayonika",
+        "discord": "Mag-log In gamit ang Discord",
+        "github": "Mag-log In gamit ang GitHub",
+        "or": "o",
+        "username_label": "Username/Email:",
+        "username_placeholder": "Ilagay ang username o email",
+        "username_help": "Pwedeng gamitin ang username o email",
+        "password_label": "Password:",
+        "remember_me": "Tandaan Ako",
+        "login_button": "Mag-log In",
+        "logging_in": "Naglo-log In...",
+        "register_link": "Walang account? Magrehistro dito",
+        "success": "Matagumpay na naka-log In!",
+        "failed": "Nabigong mag-log In: {0}"
+      },
+      "translation": {
+        "enabled": "Na-enable ang translation.",
+        "disabled": "Na-disable ang translation.",
+        "language_changed": "Ang wika ng translation ay napalitan sa {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Itsura",
+        "link_background": "Background",
+        "link_language": "Wika",
+        "link_advanced_appearance": "Advanced",
+        "header_enhancements": "Mga Pagpapaganda",
+        "link_sdk": "Mga Achievement & SDK",
+        "header_application": "Aplikasyon",
+        "link_updates": "Mga Update",
+        "link_storage": "Lokasyon ng Storage",
+        "header_developers": "Mga Developer",
+        "link_testing": "SDK Debug",
+        "link_debug": "Impormasyon ng App"
+      },
+      "section_backgrounds": {
+        "title": "Background",
+        "subtitle": "I-customize ang iyong background",
+        "button_none": "Walang Background",
+        "description_credit": "Original na background mula sa Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Advanced",
+        "subtitle": "Karagdagang mga opsyon",
+        "button_enable_sysborders": "Gamitin ang System Borders (kailangan i-restart)",
+        "button_disable_sysborders": "I-disable ang System Borders"
+      },
+      "section_storage": {
+        "title": "Lokasyon ng Storage",
+        "subtitle": "Palitan ang storage location",
+        "description_moving": "Babala! Lahat ng data ay ililipat.",
+        "description_current": "Kasalukuyang lokasyon: {0}",
+        "button_change": "Palitan ang Lokasyon"
+      },
+      "section_updates": {
+        "title": "Mga Update",
+        "subtitle": "Kunin ang pinakabagong bersyon",
+        "description_current_version": "Kasalukuyang bersyon: {0}",
+        "label_channel": "Channel ng Update",
+        "option_stable": "Stable",
+        "option_beta": "Beta",
+        "button_check": "Suriin para sa mga Update"
+      },
+      "section_sdk": {
+        "title": "Mga Achievement & SDK",
+        "subtitle": "Pamahalaan ang mga achievement",
+        "description_mode": "I-enable ang mga achievement:",
+        "checkbox_always": "Laging (recommended)",
+        "checkbox_specified": "Kapag sinusuportahan ng mod",
+        "checkbox_never": "Huwag Kailanman"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "I-enable ang debug logging",
+        "button_enable": "I-enable ang Debug",
+        "button_disable": "I-disable ang Debug"
+      },
+      "section_debug": {
+        "title": "Impormasyon ng App",
+        "subtitle": "Mga teknikal na detalye"
+      },
+      "section_language": {
+        "title": "Wika",
+        "subtitle": "Palitan ang wika ng app",
+        "description_current": "Kasalukuyang wika: {0}",
+        "button_apply": "Ilapat ang Wika",
+        "button_contribute": "Tumulong sa Pagsasalin",
+        "description_restart": "Magkakabisa pagkatapos i-restart.",
+        "notification_changed": "Ang wika ay napalitan sa {0}. I-restart ang app.",
+        "notification_same": "Ang wika ay {0} na."
+      }
+    },
+    "tab_about": {
+      "title": "Tungkol",
+      "description": "Ang Doki Doki Mod Manager ay community project para pamahalaan ang mga mod ng DDLC.",
+      "title_disclaimer": "Disclaimer",
+      "disclaimer_1": "Hindi affiliated sa Team Salvato. Sumusunod sa kanilang mga alituntunin.",
+      "disclaimer_2": "Ikaw ang may pananagutan sa paggamit ng mga mod.",
+      "title_socials": "Makipag-ugnayan",
+      "social_twitter": "Sundan si @Dynamicxaa sa Twitter",
+      "social_reddit": "Mensahe sa Reddit",
+      "social_email": "Magpadala ng Email",
+      "title_support": "Suportahan ang Pag-unlad",
+      "description_support": "Libre ang app. Maaari kang suportahan sa pamamagitan ng:",
+      "support_donate": "Mag-donate",
+      "support_steelseries": "10% discount sa SteelSeries (affiliate link)",
+      "support_code": "Tumulong sa code o pagsasalin"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Buksan ang Doki Doki Mod Manager at i-launch ang {0}."
+    },
+    "running_cover": {
+      "title_running": "Tumatakbo ang DDLC",
+      "title_crashed": "May naging problema",
+      "button_browse": "Buksan ang Folder",
+      "button_close": "OK",
+      "description_running": "Isara ang laro para magbago ng mod.",
+      "install_missing": "Hindi mahanap ang install.",
+      "install_corrupt": "Sirain o corrupt ang install.",
+      "install_crashed": "Nabigo ang paglulunsad ng laro."
+    },
+    "move_install": {
+      "title": "Pumili ng Bagong Folder"
+    },
+    "mod_browse_dialog": {
+      "title": "Pumili ng Mod",
+      "file_format_name": "Mga Mod"
+    },
+    "game_browse_dialog": {
+      "title": "Hanapin ang DDLC File",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Pumili ng Lokasyon ng Shortcut",
+      "file_format_name": "Shortcut"
+    },
+    "errors": {
+      "exception": {
+        "title": "Nag-crash ang App",
+        "body": "Na-report na ang problema. Mangyaring i-restart."
+      },
+      "move_install": {
+        "title": "Nabigong ilipat ang folder",
+        "body": "Suriin ang mga permiso at espasyo."
+      },
+      "shortcut": {
+        "title": "Nabigong gumawa ng shortcut",
+        "body": "Suriin ang mga permiso sa file."
+      },
+      "install": {
+        "title": "Nabigong mag-install",
+        "body": "Suriin ang mga permiso at espasyo."
+      },
+      "rename": {
+        "title": "Nabigong magpalit ng pangalan",
+        "body": "Isara ang ibang apps at subukan muli."
+      },
+      "uninstall": {
+        "title": "Nabigong mag-uninstall",
+        "body": "Isara ang ibang apps at subukan muli."
+      },
+      "save_delete": {
+        "title": "Nabigong magbura ng save",
+        "body": "Isara ang ibang apps at subukan muli."
+      },
+      "mod_delete": {
+        "title": "Nabigong magbura ng mod",
+        "body": "Isara ang ibang apps at subukan muli."
+      },
+      "renderer_freeze": {
+        "title": "Hindi tumutugon ang app",
+        "body": "I-restart ang app."
+      },
+      "executable_permission": {
+        "title": "Linux Permission Error",
+        "body": "Hindi ma-execute ang DDLC.sh."
+      }
+    }
+  }
+}

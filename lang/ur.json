@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "ہوم",
+      "tab_mods": "موڈز",
+      "tab_store": "اسٹور",
+      "tab_options": "ترتیبات",
+      "tab_about": "متعلق"
+    },
+    "version": {
+      "link_changelog": "نیا کیا ہے؟"
+    },
+    "user_menu": {
+      "option_rename": "یوزر نیم تبدیل کریں",
+      "option_logout": "لاگ آؤٹ"
+    },
+    "window_controls": {
+      "close": "بند کریں",
+      "maximise": "بڑھائیں",
+      "minimise": "کم کریں",
+      "devtools": "ڈیولپر ٹولز (F12)",
+      "announcement": "تازہ ترین اعلان پڑھیں",
+      "login": "لاگ ان",
+      "sayonika_login": "سایونیکا لاگ ان",
+      "update": {
+        "checking": "اپ ڈیٹس چیک کی جا رہی ہیں...",
+        "available": "نیا اپ ڈیٹ دستیاب ہے۔ ڈاؤن لوڈ کے لیے کلک کریں۔",
+        "downloading": "اپ ڈیٹ ڈاؤن لوڈ ہو رہا ہے...",
+        "downloaded": "ایپ بند کرنے پر اپ ڈیٹ انسٹال ہو جائے گا۔"
+      }
+    },
+    "crash_cover": {
+      "button_close": "بند کریں",
+      "button_continue": "جاری رکھیں"
+    },
+    "drop_cover": {
+      "text": "موڈ انسٹال کرنے کے لیے یہاں چھوڑیں"
+    },
+    "announcement": {
+      "button_open": "لنک کھولیں",
+      "button_close": "بند کریں"
+    },
+    "onboarding": {
+      "title": "خوش آمدید!",
+      "description_download": "آئیے DDLC کی ایک کاپی تلاش کریں۔",
+      "button_download": "آفیشل ڈاؤن لوڈ پیج پر جائیں",
+      "button_choose": "فائل منتخب کریں",
+      "heading_step": "مرحلہ {0}",
+      "s1_desc": "Doki Doki Literature Club کو آفیشل ویب سائٹ (ddlc.moe) سے ڈاؤن لوڈ کریں - نیچے دیے گئے بٹن پر کلک کریں۔",
+      "s1_platform": "\"DDLC ({0})\" فائل منتخب کریں۔",
+      "s2_desc": "ڈاؤن لوڈ مکمل ہونے پر، نیچے بٹن سے فائل منتخب کریں۔",
+      "description_location": "گیمز {0} پر محفوظ ہوں گی",
+      "link_change": "(تبدیل کریں)"
+    },
+    "login_input": {
+      "message": "ای میل ایڈریس درج کریں",
+      "details": "اس ای میل پر لاگ ان لنک بھیجا جائے گا۔",
+      "button_affirmative": "لاگ ان",
+      "button_negative": "منسوخ کریں"
+    },
+    "change_username_input": {
+      "message": "نیا یوزر نیم درج کریں",
+      "details": "یوزر نیم منفرد ہونا ضروری نہیں۔",
+      "button_affirmative": "تبدیل کریں",
+      "button_negative": "منسوخ کریں"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "موڈز تلاش کریں...",
+        "header_new": "شروع کریں",
+        "link_install": "DDLC انسٹال کریں",
+        "header_installed": "انسٹال شدہ",
+        "header_downloaded": "ڈاؤن لوڈ شدہ"
+      },
+      "install_contextmenu": {
+        "launch": "چلائیں",
+        "rename": "نام تبدیل کریں",
+        "shortcut": "شارٹ کٹ بنائیں",
+        "delete_save": "سیو ڈیٹا حذف کریں",
+        "uninstall": "ان انسٹال"
+      },
+      "mod_contextmenu": {
+        "install": "انسٹال کریں",
+        "delete": "حذف کریں"
+      },
+      "uninstall_confirmation": {
+        "message": "کیا آپ واقعی ان انسٹال کرنا چاہتے ہیں؟",
+        "details": "{0} کا سیو ڈیٹا حذف ہو جائے گا۔",
+        "button_affirmative": "ان انسٹال",
+        "button_negative": "منسوخ کریں"
+      },
+      "rename_input": {
+        "message": "انسٹال کا نام تبدیل کریں",
+        "details": "{0} کے لیے نیا نام درج کریں۔",
+        "button_affirmative": "تبدیل کریں",
+        "button_negative": "منسوخ کریں"
+      },
+      "mod_delete_confirmation": {
+        "message": "کیا آپ واقعی موڈ حذف کرنا چاہتے ہیں؟",
+        "details": "دوبارہ انسٹال کے لیے موڈ ڈاؤن لوڈ کرنا ہوگا۔",
+        "button_affirmative": "حذف کریں",
+        "button_negative": "منسوخ کریں"
+      },
+      "save_delete_confirmation": {
+        "message": "کیا آپ واقعی سیو ڈیٹا حذف کرنا چاہتے ہیں؟",
+        "details": "{0} کو دوبارہ شروع کرنا ہوگا۔",
+        "button_affirmative": "حذف کریں",
+        "button_negative": "منسوخ کریں"
+      },
+      "install": {
+        "button_launch": "چلائیں",
+        "button_settings": "ترتیبات",
+        "tag_global_save": "گلوبل سیو",
+        "tag_sdk": "SDK",
+        "title_achievements": "کامیابیاں ({0}/{1})",
+        "description_achievements": "مزید کامیابیاں ان لاک کرنے کے لیے کھیلتے رہیں۔",
+        "description_achievements_complete": "تمام کامیابیاں ان لاک ہو گئیں! مبارک ہو!",
+        "title_screenshots_none": "کوئی اسکرین شاٹ نہیں",
+        "title_screenshots_one": "1 اسکرین شاٹ",
+        "title_screenshots": "{0} اسکرین شاٹس",
+        "description_screenshots": "کھیل کے دوران S دبائیں اسکرین شاٹ کے لیے۔",
+        "description_sdk": "یہ موڈ SDK فیچرز کو سپورٹ کرتا ہے!",
+        "description_author": "{0} کی طرف سے بنایا گیا",
+        "link_website": "ویب سائٹ ({0})",
+        "description_external": "فولڈر میں دیکھیں"
+      },
+      "mod": {
+        "button_install": "انسٹال کریں",
+        "button_settings": "ترتیبات",
+        "description_external": "فولڈر میں دیکھیں"
+      },
+      "install_creation": {
+        "title": "DDLC انسٹال کریں",
+        "label_install_name": "انسٹال نام",
+        "label_folder_name": "فولڈر نام",
+        "label_global_save": "گلوبل سیو",
+        "label_has_mod": "موڈ انسٹال کریں",
+        "label_mod": "موڈ",
+        "label_existing_saves": "موجودہ سیو فائلیں",
+        "description_mod": "موڈ منتخب کرنے کے لیے کلک کریں۔",
+        "header_summary": "خلاصہ",
+        "description_vanilla": "DDLC کی صاف کاپی بنے گی۔ سیو ڈیٹا الگ رہے گا۔",
+        "description_vanilla_global_save": "DDLC کی صاف کاپی (Steam وغیرہ کے ساتھ شیئرڈ سیو)",
+        "description_modded": "موڈ کے ساتھ DDLC کاپی۔ سیو ڈیٹا الگ رہے گا۔",
+        "description_modded_global_save": "موڈ کے ساتھ DDLC کاپی اور شیئرڈ سیو۔",
+        "button_install": "انسٹال کریں",
+        "button_installing": "انسٹال ہو رہا ہے...",
+        "status_exists": "یہ فولڈر پہلے سے موجود ہے۔ دوسرا نام منتخب کریں۔"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "اسٹور جلد آ رہا ہے!",
+      "description_1": "Sayonika موڈ ڈیٹا بیس DDLC موڈز کے لیے مرکز ہوگا۔",
+      "description_2": "ان تجویز کردہ موڈز کو آزمائیں۔",
+      "error": "موڈز لوڈ نہیں ہو سکے۔ انٹرنیٹ چیک کریں۔",
+      "button_download": "ڈاؤن لوڈ"
+    },
+    "tab_store": {
+      "title": "Sayonika اسٹور",
+      "subtitle": "DDLC موڈز تلاش کریں اور ڈاؤن لوڈ کریں",
+      "search_placeholder": "موڈز تلاش کریں...",
+      "loading": "موڈز لوڈ ہو رہے ہیں...",
+      "error_title": "کنکشن ایرر",
+      "retry_button": "دوبارہ کوشش کریں",
+      "offline_title": "آف لائن",
+      "offline_message": "انٹرنیٹ کنکشن چیک کریں۔",
+      "check_connection": "کنکشن چیک کریں",
+      "maintenance_banner": "لاگ ان سروسز عارضی طور پر بند ہیں۔",
+      "no_mods_title": "کوئی موڈ نہیں ملا",
+      "no_mods_message": "سرچ کریٹیریا تبدیل کریں",
+      "filters": {
+        "category": "زمرہ:",
+        "all_categories": "سب",
+        "sort_by": "ترتیب دیں:",
+        "date_created": "تاریخ تخلیق",
+        "date_updated": "تاریخ اپ ڈیٹ",
+        "downloads": "ڈاؤن لوڈز",
+        "rating": "ریٹنگ",
+        "title": "عنوان",
+        "order": "ترتیب:",
+        "descending": "کم ہوتے",
+        "ascending": "زیادہ ہوتے",
+        "featured_only": "صرف فیچرڈ",
+        "translate_content": "مواد ترجمہ کریں",
+        "auto_detect": "آٹو ڈیٹیکٹ"
+      },
+      "mod_card": {
+        "featured": "فیچرڈ",
+        "mature": "بالغ",
+        "by_author": "{0} کی طرف سے",
+        "download": "ڈاؤن لوڈ",
+        "downloading": "ڈاؤن لوڈ ہو رہا ہے...",
+        "download_mod": "موڈ ڈاؤن لوڈ",
+        "downloads_count": "{0} ڈاؤن لوڈز",
+        "version": "ورژن {0}",
+        "screenshots": "اسکرین شاٹس ({0})",
+        "description": "تفصیل",
+        "tags": "ٹیگز",
+        "requirements": "ضروریات"
+      },
+      "pagination": {
+        "previous": "پچھلا",
+        "next": "اگلا",
+        "page_info": "صفحہ {0} میں سے {1}"
+      },
+      "login": {
+        "title": "Sayonika لاگ ان",
+        "discord": "Discord سے لاگ ان",
+        "github": "GitHub سے لاگ ان",
+        "or": "یا",
+        "username_label": "یوزر/ای میل:",
+        "username_placeholder": "یوزر یا ای میل درج کریں",
+        "username_help": "یوزر یا ای میل سے لاگ ان کریں",
+        "password_label": "پاس ورڈ:",
+        "remember_me": "مجھے یاد رکھیں",
+        "login_button": "لاگ ان",
+        "logging_in": "لاگ ان ہو رہا ہے...",
+        "register_link": "اکاؤنٹ نہیں؟ یہاں رجسٹر کریں",
+        "success": "لاگ ان کامیاب!",
+        "failed": "ایرر: {0}"
+      },
+      "translation": {
+        "enabled": "ترجمہ فعال ہے۔",
+        "disabled": "ترجمہ غیر فعال ہے۔",
+        "language_changed": "ترجمہ زبان تبدیل: {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "ظاہر",
+        "link_background": "پس منظر",
+        "link_language": "زبان",
+        "link_advanced_appearance": "ایڈوانسڈ",
+        "header_enhancements": "بہتریاں",
+        "link_sdk": "کامیابیاں & SDK",
+        "header_application": "ایپ",
+        "link_updates": "اپ ڈیٹس",
+        "link_storage": "اسٹوریج لوکیشن",
+        "header_developers": "ڈیولپرز",
+        "link_testing": "SDK ڈیبگنگ",
+        "link_debug": "ایپ معلومات"
+      },
+      "section_backgrounds": {
+        "title": "پس منظر",
+        "subtitle": "پس منظر کو حسب ضرورت بنائیں",
+        "button_none": "کوئی پس منظر نہیں",
+        "description_credit": "Team Salvato کے اصل پس منظر۔"
+      },
+      "section_advanced_appearance": {
+        "title": "ایڈوانسڈ",
+        "subtitle": "دیگر اختیارات",
+        "button_enable_sysborders": "سسٹم بارڈر (ری اسٹارٹ ضروری)",
+        "button_disable_sysborders": "سسٹم بارڈر بند کریں"
+      },
+      "section_storage": {
+        "title": "اسٹوریج لوکیشن",
+        "subtitle": "گیم ڈیٹا کی جگہ تبدیل کریں",
+        "description_moving": "انتباہ! تمام موڈز اور سیو ڈیٹا منتقل ہو جائیں گے۔",
+        "description_current": "موجودہ جگہ: {0}",
+        "button_change": "جگہ تبدیل کریں"
+      },
+      "section_updates": {
+        "title": "اپ ڈیٹس",
+        "subtitle": "تازہ ترین ورژن حاصل کریں",
+        "description_current_version": "موجودہ ورژن: {0}",
+        "label_channel": "اپ ڈیٹ چینل",
+        "option_stable": "مستحکم",
+        "option_beta": "بیٹا",
+        "button_check": "اپ ڈیٹس چیک کریں"
+      },
+      "section_sdk": {
+        "title": "کامیابیاں & SDK",
+        "subtitle": "کامیابیوں کی سیٹنگز",
+        "description_mode": "کامیابیاں فعال کریں:",
+        "checkbox_always": "ہمیشہ (تجویز کردہ)",
+        "checkbox_specified": "جب موڈ سپورٹ کرے",
+        "checkbox_never": "کبھی نہیں"
+      },
+      "section_testing": {
+        "title": "SDK ڈیبگنگ",
+        "subtitle": "ڈیبگ لاگز فعال کریں",
+        "button_enable": "ڈیبگنگ فعال کریں",
+        "button_disable": "ڈیبگنگ غیر فعال کریں"
+      },
+      "section_debug": {
+        "title": "ایپ معلومات",
+        "subtitle": "تکنیکی تفصیلات"
+      },
+      "section_language": {
+        "title": "زبان",
+        "subtitle": "ایپ کی زبان تبدیل کریں",
+        "description_current": "موجودہ زبان: {0}",
+        "button_apply": "زبان لاگو کریں",
+        "button_contribute": "ترجمہ میں مدد کریں",
+        "description_restart": "ری اسٹارٹ کرنے پر لاگو ہو گا۔",
+        "notification_changed": "زبان تبدیل: {0}. ایپ ری اسٹارٹ کریں۔",
+        "notification_same": "زبان پہلے سے {0} ہے۔"
+      }
+    },
+    "tab_about": {
+      "title": "متعلق",
+      "description": "Doki Doki Mod Manager DDLC موڈز کو منظم کرنے کا ٹول ہے۔",
+      "title_disclaimer": "ڈسکلیمر",
+      "disclaimer_1": "Team Salvato سے متعلق نہیں۔ ان کے اصولوں کے مطابق۔",
+      "disclaimer_2": "موڈز کے استعمال کی ذمہ داری آپ کی ہے۔",
+      "title_socials": "رابطہ",
+      "social_twitter": "Twitter پر @Dynamicxaa کو فالو کریں",
+      "social_reddit": "Reddit پر پیغام بھیجیں",
+      "social_email": "ای میل بھیجیں",
+      "title_support": "ڈیولپمنٹ سپورٹ",
+      "description_support": "مفت ایپ۔ آپ ان طریقوں سے سپورٹ کر سکتے ہیں:",
+      "support_donate": "ڈونیٹ کریں",
+      "support_steelseries": "SteelSeries پر 10% رعایت (افیلیئیٹ لنک)",
+      "support_code": "کوڈ یا ترجمہ میں حصہ ڈالیں"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager کھولیں اور {0} چلائیں۔"
+    },
+    "running_cover": {
+      "title_running": "DDLC چل رہا ہے",
+      "title_crashed": "ایرر آیا",
+      "button_browse": "فولڈر کھولیں",
+      "button_close": "OK",
+      "description_running": "موڈ تبدیل کرنے کے لیے گیم بند کریں۔",
+      "install_missing": "انسٹالیشن نہیں ملی۔",
+      "install_corrupt": "انسٹالیشن خراب ہے۔",
+      "install_crashed": "گیم چل نہیں سکا۔"
+    },
+    "move_install": {
+      "title": "نیا فولڈر منتخب کریں"
+    },
+    "mod_browse_dialog": {
+      "title": "موڈ منتخب کریں",
+      "file_format_name": "موڈ"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC فائل تلاش کریں",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "شارٹ کٹ منتخب کریں",
+      "file_format_name": "شارٹ کٹ"
+    },
+    "errors": {
+      "exception": {
+        "title": "ایپ کریش ہو گیا",
+        "body": "ایرر رپورٹ کیا گیا۔ براہ کرم ری اسٹارٹ کریں۔"
+      },
+      "move_install": {
+        "title": "فولڈر منتقل نہیں ہو سکا",
+        "body": "اجازت اور اسٹوریج چیک کریں۔"
+      },
+      "shortcut": {
+        "title": "شارٹ کٹ بنانے میں ایرر",
+        "body": "فائل اجازت چیک کریں۔"
+      },
+      "install": {
+        "title": "انسٹالیشن ناکام",
+        "body": "اجازت اور اسٹوریج چیک کریں۔"
+      },
+      "rename": {
+        "title": "نام تبدیل کرنے میں ایرر",
+        "body": "دوسرے ایپس بند کر کے کوشش کریں۔"
+      },
+      "uninstall": {
+        "title": "ان انسٹال ناکام",
+        "body": "دوسرے ایپس بند کر کے کوشش کریں۔"
+      },
+      "save_delete": {
+        "title": "سیو ڈیلیٹ ناکام",
+        "body": "دوسرے ایپس بند کر کے کوشش کریں۔"
+      },
+      "mod_delete": {
+        "title": "موڈ ڈیلیٹ ناکام",
+        "body": "دوسرے ایپس بند کر کے کوشش کریں۔"
+      },
+      "renderer_freeze": {
+        "title": "ایپ نہیں چل رہا",
+        "body": "ایپ کو ری اسٹارٹ کریں۔"
+      },
+      "executable_permission": {
+        "title": "Linux اجازت ایرر",
+        "body": "DDLC.sh چلایا نہیں جا سکا۔"
+      }
+    }
+  }
+}

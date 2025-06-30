@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "होम",
+      "tab_mods": "मोड",
+      "tab_store": "स्टोर", 
+      "tab_options": "सेटिंग्स",
+      "tab_about": "जानकारी"
+    },
+    "version": {
+      "link_changelog": "नया क्या है?"
+    },
+    "user_menu": {
+      "option_rename": "नाम बदलें",
+      "option_logout": "लॉग आउट"
+    },
+    "window_controls": {
+      "close": "बंद करें",
+      "maximise": "बड़ा करें",
+      "minimise": "छोटा करें",
+      "devtools": "डेवलपर टूल्स (F12)",
+      "announcement": "नवीनतम घोषणा पढ़ें",
+      "login": "लॉग इन",
+      "sayonika_login": "सयोनिका लॉगिन",
+      "update": {
+        "checking": "अपडेट्स की जाँच हो रही है...",
+        "available": "नया अपडेट उपलब्ध। डाउनलोड करने के लिए क्लिक करें।",
+        "downloading": "अपडेट डाउनलोड हो रहा है...",
+        "downloaded": "एप्लिकेशन बंद करने पर अपडेट इंस्टॉल हो जाएगा।"
+      }
+    },
+    "crash_cover": {
+      "button_close": "बंद करें",
+      "button_continue": "जारी रखें"
+    },
+    "drop_cover": {
+      "text": "मोड इंस्टॉल करने के लिए यहाँ छोड़ें"
+    },
+    "announcement": {
+      "button_open": "लिंक खोलें",
+      "button_close": "बंद करें"
+    },
+    "onboarding": {
+      "title": "स्वागत है!",
+      "description_download": "DDLC की एक कॉपी ढूंढते हैं।",
+      "button_download": "आधिकारिक डाउनलोड पेज पर जाएं",
+      "button_choose": "फ़ाइल चुनें",
+      "heading_step": "चरण {0}",
+      "s1_desc": "Doki Doki Literature Club को आधिकारिक वेबसाइट (ddlc.moe) से डाउनलोड करें - नीचे बटन पर क्लिक करें।",
+      "s1_platform": "\"DDLC ({0})\" फ़ाइल चुनें।",
+      "s2_desc": "डाउनलोड पूरा होने पर, नीचे बटन से फ़ाइल चुनें।",
+      "description_location": "गेम्स इस लोकेशन पर सेव होंगे: {0}",
+      "link_change": "(बदलें)"
+    },
+    "login_input": {
+      "message": "ईमेल एड्रेस डालें",
+      "details": "इस ईमेल पर लॉगिन लिंक भेजा जाएगा।",
+      "button_affirmative": "लॉग इन",
+      "button_negative": "कैंसिल"
+    },
+    "change_username_input": {
+      "message": "नया यूजरनेम डालें",
+      "details": "यूजरनेम यूनीक होना ज़रूरी नहीं।",
+      "button_affirmative": "बदलें",
+      "button_negative": "कैंसिल"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "मोड्स ढूंढें...",
+        "header_new": "शुरुआत करें",
+        "link_install": "DDLC इंस्टॉल करें",
+        "header_installed": "इंस्टॉल्ड",
+        "header_downloaded": "डाउनलोडेड"
+      },
+      "install_contextmenu": {
+        "launch": "लॉन्च करें",
+        "rename": "नाम बदलें",
+        "shortcut": "शॉर्टकट बनाएं",
+        "delete_save": "सेव डेटा डिलीट करें",
+        "uninstall": "अनइंस्टॉल"
+      },
+      "mod_contextmenu": {
+        "install": "इंस्टॉल करें",
+        "delete": "डिलीट करें"
+      },
+      "uninstall_confirmation": {
+        "message": "क्या आप वाकई अनइंस्टॉल करना चाहते हैं?",
+        "details": "{0} का सेव डेटा डिलीट हो जाएगा।",
+        "button_affirmative": "अनइंस्टॉल",
+        "button_negative": "कैंसिल"
+      },
+      "rename_input": {
+        "message": "इंस्टॉल का नाम बदलें",
+        "details": "{0} के लिए नया नाम डालें।",
+        "button_affirmative": "बदलें",
+        "button_negative": "कैंसिल"
+      },
+      "mod_delete_confirmation": {
+        "message": "क्या आप वाकई मोड डिलीट करना चाहते हैं?",
+        "details": "दोबारा इंस्टॉल के लिए मोड डाउनलोड करना होगा।",
+        "button_affirmative": "डिलीट",
+        "button_negative": "कैंसिल"
+      },
+      "save_delete_confirmation": {
+        "message": "क्या आप वाकई सेव डेटा डिलीट करना चाहते हैं?",
+        "details": "{0} को फिर से शुरू करना होगा।",
+        "button_affirmative": "डिलीट",
+        "button_negative": "कैंसिल"
+      },
+      "install": {
+        "button_launch": "लॉन्च करें",
+        "button_settings": "सेटिंग्स",
+        "tag_global_save": "ग्लोबल सेव",
+        "tag_sdk": "SDK",
+        "title_achievements": "उपलब्धियाँ ({0}/{1})",
+        "description_achievements": "और उपलब्धियाँ अनलॉक करने के लिए खेलते रहें।",
+        "description_achievements_complete": "सभी उपलब्धियाँ अनलॉक हो गईं! बधाई!",
+        "title_screenshots_none": "कोई स्क्रीनशॉट नहीं",
+        "title_screenshots_one": "1 स्क्रीनशॉट",
+        "title_screenshots": "{0} स्क्रीनशॉट",
+        "description_screenshots": "स्क्रीनशॉट लेने के लिए खेल के दौरान S दबाएं।",
+        "description_sdk": "यह मोड SDK सुविधाओं को सपोर्ट करता है!",
+        "description_author": "बनाया गया: {0}",
+        "link_website": "वेबसाइट ({0})",
+        "description_external": "फ़ोल्डर में दिखाएं"
+      },
+      "mod": {
+        "button_install": "इंस्टॉल करें",
+        "button_settings": "सेटिंग्स",
+        "description_external": "फ़ोल्डर में दिखाएं"
+      },
+      "install_creation": {
+        "title": "DDLC इंस्टॉल करें",
+        "label_install_name": "इंस्टॉल नाम",
+        "label_folder_name": "फ़ोल्डर नाम",
+        "label_global_save": "ग्लोबल सेव",
+        "label_has_mod": "मोड इंस्टॉल करें",
+        "label_mod": "मोड",
+        "label_existing_saves": "मौजूदा सेव फ़ाइलें",
+        "description_mod": "मोड चुनने के लिए क्लिक करें।",
+        "header_summary": "सारांश",
+        "description_vanilla": "DDLC की क्लीन कॉपी बनेगी। सेव डेटा अलग रहेगा।",
+        "description_vanilla_global_save": "DDLC की क्लीन कॉपी (Steam जैसे अन्य के साथ सेव शेयर होगा)",
+        "description_modded": "मोड के साथ DDLC कॉपी। सेव डेटा अलग रहेगा।",
+        "description_modded_global_save": "मोड के साथ DDLC कॉपी और शेयर्ड सेव।",
+        "button_install": "इंस्टॉल करें",
+        "button_installing": "इंस्टॉल हो रहा है...",
+        "status_exists": "यह फ़ोल्डर पहले से मौजूद है। दूसरा नाम चुनें।"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "स्टोर जल्द ही आ रहा है!",
+      "description_1": "सयोनिका मोड डेटाबेस DDLC मोड्स का केंद्र होगा।",
+      "description_2": "इन रिकमेंडेड मोड्स को ट्राई करें।",
+      "error": "मोड्स लोड नहीं हो पाए। इंटरनेट चेक करें।",
+      "button_download": "डाउनलोड"
+    },
+    "tab_store": {
+      "title": "सयोनिका स्टोर",
+      "subtitle": "DDLC मोड्स खोजें और डाउनलोड करें",
+      "search_placeholder": "मोड्स ढूंढें...",
+      "loading": "मोड्स लोड हो रहे हैं...",
+      "error_title": "कनेक्शन एरर",
+      "retry_button": "फिर कोशिश करें",
+      "offline_title": "ऑफ़लाइन",
+      "offline_message": "इंटरनेट कनेक्शन चेक करें।",
+      "check_connection": "कनेक्शन चेक करें",
+      "maintenance_banner": "लॉगिन सर्विसेज टेम्पररी डाउन हैं।",
+      "no_mods_title": "कोई मोड नहीं मिला",
+      "no_mods_message": "सर्च क्राइटेरिया बदलकर देखें",
+      "filters": {
+        "category": "श्रेणी:",
+        "all_categories": "सभी",
+        "sort_by": "सॉर्ट करें:",
+        "date_created": "बनाने की तारीख",
+        "date_updated": "अपडेट की तारीख",
+        "downloads": "डाउनलोड्स",
+        "rating": "रेटिंग",
+        "title": "टाइटल",
+        "order": "ऑर्डर:",
+        "descending": "घटते",
+        "ascending": "बढ़ते",
+        "featured_only": "सिर्फ़ फ़ीचर्ड",
+        "translate_content": "कंटेंट ट्रांसलेट करें",
+        "auto_detect": "ऑटो डिटेक्ट"
+      },
+      "mod_card": {
+        "featured": "फ़ीचर्ड",
+        "mature": "वयस्क",
+        "by_author": "द्वारा {0}",
+        "download": "डाउनलोड",
+        "downloading": "डाउनलोड हो रहा...",
+        "download_mod": "मोड डाउनलोड",
+        "downloads_count": "{0} डाउनलोड",
+        "version": "वर्ज़न {0}",
+        "screenshots": "स्क्रीनशॉट ({0})",
+        "description": "डिस्क्रिप्शन",
+        "tags": "टैग्स",
+        "requirements": "जरूरतें"
+      },
+      "pagination": {
+        "previous": "पिछला",
+        "next": "अगला",
+        "page_info": "पेज {0} में से {1}"
+      },
+      "login": {
+        "title": "सयोनिका लॉगिन",
+        "discord": "Discord से लॉगिन",
+        "github": "GitHub से लॉगिन",
+        "or": "या",
+        "username_label": "यूजरनेम/ईमेल:",
+        "username_placeholder": "यूजरनेम या ईमेल डालें",
+        "username_help": "यूजरनेम या ईमेल से लॉगिन करें",
+        "password_label": "पासवर्ड:",
+        "remember_me": "मुझे याद रखें",
+        "login_button": "लॉग इन",
+        "logging_in": "लॉगिन प्रोसेस...",
+        "register_link": "अकाउंट नहीं है? रजिस्टर करें",
+        "success": "लॉगिन सफल!",
+        "failed": "एरर: {0}"
+      },
+      "translation": {
+        "enabled": "ट्रांसलेशन चालू है।",
+        "disabled": "ट्रांसलेशन बंद है।",
+        "language_changed": "ट्रांसलेशन भाषा बदली गई: {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "दिखावट",
+        "link_background": "बैकग्राउंड",
+        "link_language": "भाषा",
+        "link_advanced_appearance": "एडवांस्ड",
+        "header_enhancements": "एन्हांसमेंट्स",
+        "link_sdk": "अचीवमेंट्स & SDK",
+        "header_application": "ऐप्लिकेशन",
+        "link_updates": "अपडेट्स",
+        "link_storage": "स्टोरेज लोकेशन",
+        "header_developers": "डेवलपर्स",
+        "link_testing": "SDK डिबगिंग",
+        "link_debug": "ऐप जानकारी"
+      },
+      "section_backgrounds": {
+        "title": "बैकग्राउंड",
+        "subtitle": "बैकग्राउंड कस्टमाइज़ करें",
+        "button_none": "बैकग्राउंड नहीं",
+        "description_credit": "Team Salvato के ओरिजिनल बैकग्राउंड्स।"
+      },
+      "section_advanced_appearance": {
+        "title": "एडवांस्ड",
+        "subtitle": "अन्य विकल्प",
+        "button_enable_sysborders": "सिस्टम बॉर्डर्स (रिस्टार्ट जरूरी)",
+        "button_disable_sysborders": "सिस्टम बॉर्डर्स बंद करें"
+      },
+      "section_storage": {
+        "title": "स्टोरेज लोकेशन",
+        "subtitle": "गेम डेटा का स्थान बदलें",
+        "description_moving": "चेतावनी! सभी मोड्स और सेव डेटा मूव हो जाएंगे।",
+        "description_current": "मौजूदा लोकेशन: {0}",
+        "button_change": "लोकेशन बदलें"
+      },
+      "section_updates": {
+        "title": "अपडेट्स",
+        "subtitle": "नवीनतम वर्ज़न पाएं",
+        "description_current_version": "मौजूदा वर्ज़न: {0}",
+        "label_channel": "अपडेट चैनल",
+        "option_stable": "स्टेबल",
+        "option_beta": "बीटा",
+        "button_check": "अपडेट्स चेक करें"
+      },
+      "section_sdk": {
+        "title": "अचीवमेंट्स & SDK",
+        "subtitle": "अचीवमेंट्स सेटिंग्स",
+        "description_mode": "अचीवमेंट्स चालू करें:",
+        "checkbox_always": "हमेशा (सुझाव)",
+        "checkbox_specified": "जब मोड सपोर्ट करे",
+        "checkbox_never": "कभी नहीं"
+      },
+      "section_testing": {
+        "title": "SDK डिबगिंग",
+        "subtitle": "डिबग लॉग्स चालू करें",
+        "button_enable": "डिबगिंग चालू",
+        "button_disable": "डिबगिंग बंद"
+      },
+      "section_debug": {
+        "title": "ऐप जानकारी",
+        "subtitle": "तकनीकी डिटेल्स"
+      },
+      "section_language": {
+        "title": "भाषा",
+        "subtitle": "ऐप की भाषा बदलें",
+        "description_current": "मौजूदा भाषा: {0}",
+        "button_apply": "भाषा लागू करें",
+        "button_contribute": "ट्रांसलेशन में मदद करें",
+        "description_restart": "रिस्टार्ट करने पर लागू होगा।",
+        "notification_changed": "भाषा बदल गई: {0}. ऐप रिस्टार्ट करें।",
+        "notification_same": "भाषा पहले से {0} है।"
+      }
+    },
+    "tab_about": {
+      "title": "जानकारी",
+      "description": "Doki Doki Mod Manager DDLC मोड्स को मैनेज करने का टूल है।",
+      "title_disclaimer": "डिस्क्लेमर",
+      "disclaimer_1": "Team Salvato से संबंधित नहीं। उनके गाइडलाइन्स के अनुसार।",
+      "disclaimer_2": "मोड्स इस्तेमाल की जिम्मेदारी आपकी है।",
+      "title_socials": "संपर्क",
+      "social_twitter": "Twitter पर @Dynamicxaa को फॉलो करें",
+      "social_reddit": "Reddit पर मैसेज करें",
+      "social_email": "ईमेल भेजें",
+      "title_support": "डेवलपमेंट सपोर्ट",
+      "description_support": "फ्री ऐप। आप इन तरीकों से सपोर्ट कर सकते हैं:",
+      "support_donate": "डोनेट करें",
+      "support_steelseries": "SteelSeries पर 10% छूट (एफिलिएट लिंक)",
+      "support_code": "कोड या ट्रांसलेशन में योगदान दें"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager खोलें और {0} लॉन्च करें।"
+    },
+    "running_cover": {
+      "title_running": "DDLC चल रहा है",
+      "title_crashed": "एरर आया",
+      "button_browse": "फ़ोल्डर खोलें",
+      "button_close": "OK",
+      "description_running": "मोड बदलने के लिए गेम बंद करें।",
+      "install_missing": "इंस्टॉलेशन नहीं मिला।",
+      "install_corrupt": "इंस्टॉलेशन खराब है।",
+      "install_crashed": "गेम लॉन्च नहीं हो पाया।"
+    },
+    "move_install": {
+      "title": "नया फ़ोल्डर चुनें"
+    },
+    "mod_browse_dialog": {
+      "title": "मोड चुनें",
+      "file_format_name": "मोड्स"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC फ़ाइल ढूंढें",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "शॉर्टकट चुनें",
+      "file_format_name": "शॉर्टकट"
+    },
+    "errors": {
+      "exception": {
+        "title": "ऐप्लिकेशन क्रैश हुआ",
+        "body": "एरर रिपोर्ट किया गया। कृपया रिस्टार्ट करें।"
+      },
+      "move_install": {
+        "title": "फ़ोल्डर मूव नहीं हो पाया",
+        "body": "परमिशन और स्टोरेज चेक करें।"
+      },
+      "shortcut": {
+        "title": "शॉर्टकट बनाने में एरर",
+        "body": "फ़ाइल परमिशन चेक करें।"
+      },
+      "install": {
+        "title": "इंस्टॉलेशन फेल",
+        "body": "परमिशन और स्टोरेज चेक करें।"
+      },
+      "rename": {
+        "title": "नाम बदलने में एरर",
+        "body": "दूसरे ऐप्स बंद करके कोशिश करें।"
+      },
+      "uninstall": {
+        "title": "अनइंस्टॉल फेल",
+        "body": "दूसरे ऐप्स बंद करके कोशिश करें।"
+      },
+      "save_delete": {
+        "title": "सेव डिलीट फेल",
+        "body": "दूसरे ऐप्स बंद करके कोशिश करें।"
+      },
+      "mod_delete": {
+        "title": "मोड डिलीट फेल",
+        "body": "दूसरे ऐप्स बंद करके कोशिश करें।"
+      },
+      "renderer_freeze": {
+        "title": "ऐप नहीं चल रहा",
+        "body": "ऐप को रिस्टार्ट करें।"
+      },
+      "executable_permission": {
+        "title": "Linux परमिशन एरर",
+        "body": "DDLC.sh एक्ज़ीक्यूट नहीं हो पाया।"
+      }
+    }
+  }
+}

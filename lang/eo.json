@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Hejmo",
+      "tab_mods": "Modoj",
+      "tab_store": "Vendejo",
+      "tab_options": "Agordoj",
+      "tab_about": "Pri"
+    },
+    "version": {
+      "link_changelog": "kio estas nova?"
+    },
+    "user_menu": {
+      "option_rename": "Ŝanĝi Uzantnomon",
+      "option_logout": "Elsaluti"
+    },
+    "window_controls": {
+      "close": "Fermi",
+      "maximise": "Maksimumigi",
+      "minimise": "Minimumigi",
+      "devtools": "Programilaj Iloj (F12)",
+      "announcement": "Legu la plej lastan anoncon",
+      "login": "Ensaluti",
+      "sayonika_login": "Sayonika Ensaluto",
+      "update": {
+        "checking": "Kontrolante ĝisdatigojn...",
+        "available": "Nova ĝisdatigo disponeblas. Alklaku por elŝuti.",
+        "downloading": "Elŝutante ĝisdatigon...",
+        "downloaded": "Ĝisdatigo pretas por instalo post eliro."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Eliri",
+      "button_continue": "Daŭrigi"
+    },
+    "drop_cover": {
+      "text": "Demetu modon ĉi tie por instali"
+    },
+    "announcement": {
+      "button_open": "Malfermi Ligon",
+      "button_close": "Fermi"
+    },
+    "onboarding": {
+      "title": "Bonvenon!",
+      "description_download": "Ni serĉu kopion de DDLC.",
+      "button_download": "Vizitu la oficialan elŝutpaĝon",
+      "button_choose": "Elekti dosieron",
+      "heading_step": "Paŝo {0}",
+      "s1_desc": "Vi devas elŝuti Doki Doki Literature Club de la oficiala retejo (ddlc.moe) - alklaku la suban butonon.",
+      "s1_platform": "Elektu la dosieron \"DDLC ({0})\" kiam oni petas.",
+      "s2_desc": "Post elŝuto, elektu la dosieron per la suba butono.",
+      "description_location": "Ludoj estos konservitaj ĉe {0}",
+      "link_change": "(Ŝanĝi)"
+    },
+    "login_input": {
+      "message": "Enigu vian retpoŝton",
+      "details": "Retpoŝto kun ensaluta ligilo estos sendita.",
+      "button_affirmative": "Ensaluti",
+      "button_negative": "Nuligi"
+    },
+    "change_username_input": {
+      "message": "Enigu novan uzantnomon",
+      "details": "Uzantnomoj ne devas esti unikaj.",
+      "button_affirmative": "Ŝanĝi",
+      "button_negative": "Nuligi"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Serĉi modojn...",
+        "header_new": "Komenci",
+        "link_install": "Instali DDLC",
+        "header_installed": "Instalitaj",
+        "header_downloaded": "Elŝutitaj"
+      },
+      "install_contextmenu": {
+        "launch": "Lanĉi",
+        "rename": "Renomi",
+        "shortcut": "Krei Ŝparvojon",
+        "delete_save": "Forigi Konservaĵon",
+        "uninstall": "Malinstali"
+      },
+      "mod_contextmenu": {
+        "install": "Instali",
+        "delete": "Forigi"
+      },
+      "uninstall_confirmation": {
+        "message": "Ĉu vi certas, ke vi volas malinstali?",
+        "details": "Via konservaĵo por {0} estos forigita.",
+        "button_affirmative": "Malinstali",
+        "button_negative": "Nuligi"
+      },
+      "rename_input": {
+        "message": "Renomi Instalon",
+        "details": "Enigu novan nomon por {0}.",
+        "button_affirmative": "Renomi",
+        "button_negative": "Nuligi"
+      },
+      "mod_delete_confirmation": {
+        "message": "Ĉu vi certas, ke vi volas forigi la modon?",
+        "details": "Vi devos elŝuti alian kopion por reinstali.",
+        "button_affirmative": "Forigi",
+        "button_negative": "Nuligi"
+      },
+      "save_delete_confirmation": {
+        "message": "Ĉu vi certas, ke vi volas forigi vian konservaĵon?",
+        "details": "Vi devos komenci {0} denove.",
+        "button_affirmative": "Forigi",
+        "button_negative": "Nuligi"
+      },
+      "install": {
+        "button_launch": "Lanĉi",
+        "button_settings": "Agordoj",
+        "tag_global_save": "Tutmonda Konservo",
+        "tag_sdk": "SDK",
+        "title_achievements": "Atingoj ({0}/{1})",
+        "description_achievements": "Ludu plu por malŝlosi pli da atingoj.",
+        "description_achievements_complete": "Vi malŝlosis ĉiujn atingojn! Gratulon!",
+        "title_screenshots_none": "Neniu ekrankopio",
+        "title_screenshots_one": "1 ekrankopio",
+        "title_screenshots": "{0} ekrankopioj",
+        "description_screenshots": "Premu S dum ludado por fari ekrankopion.",
+        "description_sdk": "Ĉi tiu mod subtenas specialajn funkciojn kun la SDK!",
+        "description_author": "Kreita de {0}",
+        "link_website": "Retejo ({0})",
+        "description_external": "Montri en dosierujo"
+      },
+      "mod": {
+        "button_install": "Instali",
+        "button_settings": "Agordoj",
+        "description_external": "Montri en dosierujo"
+      },
+      "install_creation": {
+        "title": "Instali DDLC",
+        "label_install_name": "Nomo de Instalo",
+        "label_folder_name": "Nomo de Dosierujo",
+        "label_global_save": "Tutmonda Konservo",
+        "label_has_mod": "Instali Modon",
+        "label_mod": "Modo",
+        "label_existing_saves": "Ekzistantaj Konservaĵoj",
+        "description_mod": "Alklaku por elekti modon.",
+        "header_summary": "Resumo",
+        "description_vanilla": "Kreos puran kopion de DDLC. Konservaĵoj estos apartaj.",
+        "description_vanilla_global_save": "Kreos puran kopion kun tutmonda konservo (ekz. Steam)",
+        "description_modded": "Kreos kopion de DDLC kun modo. Konservaĵoj estos apartaj.",
+        "description_modded_global_save": "Kreos kopion kun modo kaj tutmonda konservo.",
+        "button_install": "Instali",
+        "button_installing": "Instalante...",
+        "status_exists": "Tiu dosierujo jam ekzistas. Elektu alian nomon."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "La vendejo baldaŭ venos!",
+      "description_1": "Sayonika estos centra datumbazo por DDLC modoj.",
+      "description_2": "Provu ĉi tiujn rekomenditajn modojn dum vi atendas.",
+      "error": "Malsukcesis ŝargi la liston de modoj. Ĉu vi estas eksterrete?",
+      "button_download": "Elŝuti"
+    },
+    "tab_store": {
+      "title": "Sayonika Vendejo",
+      "subtitle": "Malkovru kaj elŝutu DDLC modojn",
+      "search_placeholder": "Serĉi modojn...",
+      "loading": "Ŝargante modojn...",
+      "error_title": "Konekta Eraro",
+      "retry_button": "Reprovi",
+      "offline_title": "Eksterrete",
+      "offline_message": "Bonvolu kontroli vian interretan konekton.",
+      "check_connection": "Kontroli Konekton",
+      "maintenance_banner": "Aŭtentikaj servoj estas provizore neatingeblaj.",
+      "no_mods_title": "Neniu mod trovita",
+      "no_mods_message": "Provu ŝanĝi viajn serĉkriteriojn",
+      "filters": {
+        "category": "Kategorio:",
+        "all_categories": "Ĉiuj",
+        "sort_by": "Ordigi laŭ:",
+        "date_created": "Kreita Dato",
+        "date_updated": "Ĝisdatigita Dato",
+        "downloads": "Elŝutoj",
+        "rating": "Taksado",
+        "title": "Titolo",
+        "order": "Ordo:",
+        "descending": "Malkreska",
+        "ascending": "Kreska",
+        "featured_only": "Nur elstaraj",
+        "translate_content": "Traduki Enhavon",
+        "auto_detect": "Aŭtomate Detekti"
+      },
+      "mod_card": {
+        "featured": "Elstara",
+        "mature": "Por Plenkreskuloj",
+        "by_author": "de {0}",
+        "download": "Elŝuti",
+        "downloading": "Elŝutante...",
+        "download_mod": "Elŝuti Modon",
+        "downloads_count": "{0} elŝutoj",
+        "version": "Versio {0}",
+        "screenshots": "Ekrankopioj ({0})",
+        "description": "Priskribo",
+        "tags": "Etikedoj",
+        "requirements": "Postuloj"
+      },
+      "pagination": {
+        "previous": "Antaŭa",
+        "next": "Sekva",
+        "page_info": "Paĝo {0} el {1}"
+      },
+      "login": {
+        "title": "Ensaluti al Sayonika",
+        "discord": "Ensaluti per Discord",
+        "github": "Ensaluti per GitHub",
+        "or": "aŭ",
+        "username_label": "Uzantnomo/Retpoŝto:",
+        "username_placeholder": "Enigu uzantnomon aŭ retpoŝton",
+        "username_help": "Vi povas uzi uzantnomon aŭ retpoŝton",
+        "password_label": "Pasvorto:",
+        "remember_me": "Memoru min",
+        "login_button": "Ensaluti",
+        "logging_in": "Ensalutante...",
+        "register_link": "Ĉu vi ne havas konton? Registriĝi ĉi tie",
+        "success": "Sukcese ensalutis!",
+        "failed": "Malsukcesis: {0}"
+      },
+      "translation": {
+        "enabled": "Tradukado ebligita.",
+        "disabled": "Tradukado malebligita.",
+        "language_changed": "Traduka lingvo ŝanĝita al {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Aspekto",
+        "link_background": "Fono",
+        "link_language": "Lingvo",
+        "link_advanced_appearance": "Altnivela",
+        "header_enhancements": "Plibonigoj",
+        "link_sdk": "Atingoj & SDK",
+        "header_application": "Aplikaĵo",
+        "link_updates": "Ĝisdatigoj",
+        "link_storage": "Konservejo",
+        "header_developers": "Programistoj",
+        "link_testing": "SDK Sencimigo",
+        "link_debug": "Aplikaĵa Informo"
+      },
+      "section_backgrounds": {
+        "title": "Fono",
+        "subtitle": "Agordu vian fonon",
+        "button_none": "Neniu Fono",
+        "description_credit": "Originalaj fonoj de Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Altnivela",
+        "subtitle": "Pliaj opcioj",
+        "button_enable_sysborders": "Uzi Sistemajn Bordojn (postulas restarton)",
+        "button_disable_sysborders": "Malebligi Sistemajn Bordojn"
+      },
+      "section_storage": {
+        "title": "Konservejo",
+        "subtitle": "Ŝanĝi kie via luddato estas konservita",
+        "description_moving": "Averto! Ĉiuj viaj modoj kaj konservaĵoj estos movitaj.",
+        "description_current": "Nuna loko: {0}",
+        "button_change": "Ŝanĝi Lokon"
+      },
+      "section_updates": {
+        "title": "Ĝisdatigoj",
+        "subtitle": "Ricevu la plej novan version",
+        "description_current_version": "Nuna versio: {0}",
+        "label_channel": "Ĝisdatiga Kanalo",
+        "option_stable": "Stabila",
+        "option_beta": "Beta",
+        "button_check": "Kontroli Ĝisdatigojn"
+      },
+      "section_sdk": {
+        "title": "Atingoj & SDK",
+        "subtitle": "Agordu atingojn",
+        "description_mode": "Ebligi atingojn:",
+        "checkbox_always": "Ĉiam (rekomendita)",
+        "checkbox_specified": "Kiam la modo subtenas",
+        "checkbox_never": "Neniam"
+      },
+      "section_testing": {
+        "title": "SDK Sencimigo",
+        "subtitle": "Ebligi sencimigan protokoladon",
+        "button_enable": "Ebligi Sencimigon",
+        "button_disable": "Malebligi Sencimigon"
+      },
+      "section_debug": {
+        "title": "Aplikaĵa Informo",
+        "subtitle": "Teknikaj detaloj"
+      },
+      "section_language": {
+        "title": "Lingvo",
+        "subtitle": "Ŝanĝi la lingvon de la aplikaĵo",
+        "description_current": "Nuna lingvo: {0}",
+        "button_apply": "Apliki Lingvon",
+        "button_contribute": "Helpu Traduki",
+        "description_restart": "Ŝanĝoj efektiviĝos post restarto.",
+        "notification_changed": "Lingvo ŝanĝita al {0}. Bonvolu restarti la aplikaĵon.",
+        "notification_same": "Lingvo jam estas {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Pri",
+      "description": "Doki Doki Mod Manager estas komunuma projekto por administri DDLC modojn.",
+      "title_disclaimer": "Malklaraĵo",
+      "disclaimer_1": "Ne rilatas al Team Salvato. Kongrua kun iliaj IP-gvidlinioj.",
+      "disclaimer_2": "Vi respondecas pri la uzo de modoj.",
+      "title_socials": "Kontakto",
+      "social_twitter": "Sekvu @Dynamicxaa ĉe Twitter",
+      "social_reddit": "Mesaĝu ĉe Reddit",
+      "social_email": "Sendu retpoŝton",
+      "title_support": "Subtenu Evoluon",
+      "description_support": "La aplikaĵo estas senpaga. Vi povas subteni per:",
+      "support_donate": "Donaci",
+      "support_steelseries": "10% rabato ĉe SteelSeries (afiliita ligilo)",
+      "support_code": "Kontribuu kodon aŭ tradukojn"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Malfermu Doki Doki Mod Manager kaj lanĉu {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC funkcias",
+      "title_crashed": "Io misfunkciis",
+      "button_browse": "Malfermi Luddosierujon",
+      "button_close": "OK",
+      "description_running": "Fermu la ludon por ŝanĝi viajn modojn.",
+      "install_missing": "La instalo ne troviĝis.",
+      "install_corrupt": "La instalo estas difektita.",
+      "install_crashed": "La ludo ne povis lanĉiĝi."
+    },
+    "move_install": {
+      "title": "Elektu novan instal-dosierujon"
+    },
+    "mod_browse_dialog": {
+      "title": "Elektu modon por instali",
+      "file_format_name": "Modoj"
+    },
+    "game_browse_dialog": {
+      "title": "Trovu DDLC zip-dosieron",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Elektu kie meti vian ŝparvojon",
+      "file_format_name": "Ŝparvojo"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager paneis",
+        "body": "La problemo estis raportita. Bonvolu restarti kaj reprovi."
+      },
+      "move_install": {
+        "title": "Malsukcesis movi instal-dosierujon",
+        "body": "Kontrolu viajn permesojn kaj spacon."
+      },
+      "shortcut": {
+        "title": "Malsukcesis krei ŝparvojon",
+        "body": "Kontrolu viajn permesojn en tiu dosierujo."
+      },
+      "install": {
+        "title": "Malsukcesis instali ludon",
+        "body": "Kontrolu viajn permesojn kaj spacon."
+      },
+      "rename": {
+        "title": "Malsukcesis renomi",
+        "body": "Fermu ĉiujn programojn kiuj eble influas kaj reprovu."
+      },
+      "uninstall": {
+        "title": "Malsukcesis malinstali",
+        "body": "Fermu ĉiujn programojn kiuj eble influas kaj reprovu."
+      },
+      "save_delete": {
+        "title": "Malsukcesis forigi konservaĵon",
+        "body": "Fermu ĉiujn programojn kiuj eble influas kaj reprovu."
+      },
+      "mod_delete": {
+        "title": "Malsukcesis forigi la modon",
+        "body": "Fermu ĉiujn programojn kiuj eble influas kaj reprovu."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager ne respondas",
+        "body": "Se ĉi tiu problemo daŭras, fermu la aplikaĵon kaj rekomencu."
+      },
+      "executable_permission": {
+        "title": "Malsukcesis fari ludon rulebla",
+        "body": "Ne eblis fari DDLC.sh rulebla en Linukso. La ludo eble ne lanĉiĝos ĝuste."
+      }
+    }
+  }
+}

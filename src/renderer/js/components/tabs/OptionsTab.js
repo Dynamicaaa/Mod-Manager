@@ -692,7 +692,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             
             // Language settings
             "available_languages": {
-                "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                "en-US": { "name": "English", "nativeName": "English (US)" },
                 "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
                 "de-DE": { "name": "German", "nativeName": "Deutsch" },
                 "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
@@ -701,8 +701,8 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                 "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
                 "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
             },
-            "language_interim": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-GB") : "en-GB",
-            "current_language": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-GB") : "en-GB",
+            "language_interim": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
+            "current_language": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
             
             "menu": [
                 {
@@ -1239,7 +1239,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
                     // Get language setting
                     try {
-                        this.current_language = ipcRenderer.sendSync("read config", "language") || "en-GB";
+                        this.current_language = ipcRenderer.sendSync("read config", "language") || "en-US";
                         this.language_interim = this.current_language;
                         console.log("Language setting refreshed:", this.current_language);
                     } catch (e) {
@@ -1252,7 +1252,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                             this.system_borders_enabled = ddmm.config.readConfigValue("systemBorders") || false;
                             this.sayonika_server_url = ddmm.config.readConfigValue("sayonikaServerUrl") || "https://sayonika.dynamicaaa.me";
                             this.sayonika_server_url_interim = this.sayonika_server_url;
-                            this.current_language = ddmm.config.readConfigValue("language") || "en-GB";
+                            this.current_language = ddmm.config.readConfigValue("language") || "en-US";
                             this.language_interim = this.current_language;
                         } catch (e) {
                             console.warn("Could not get config values via ddmm:", e);
@@ -1541,10 +1541,10 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         
                         // Get current language from config
                         if (ddmm.config) {
-                            this.current_language = ddmm.config.readConfigValue("language") || "en-GB";
+                            this.current_language = ddmm.config.readConfigValue("language") || "en-US";
                         } else {
                             // Fallback to detecting system language or default
-                            this.current_language = "en-GB";
+                            this.current_language = "en-US";
                         }
                         
                         // Set interim language to current language
@@ -1556,7 +1556,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         console.error("Failed to load available languages - invalid data:", languageData);
                         // Set fallback languages
                         this.available_languages = {
-                            "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                            "en-US": { "name": "English", "nativeName": "English (US)" },
                             "es-419": { "name": "Spanish", "nativeName": "Español (Latinoamérica)" },
                             "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
                             "ja-JP": { "name": "Japanese", "nativeName": "日本語" },
@@ -1564,14 +1564,14 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                             "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
                             "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
                         };
-                        this.current_language = "en-GB";
-                        this.language_interim = "en-GB";
+                        this.current_language = "en-US";
+                        this.language_interim = "en-US";
                     }
                 } else {
                     console.warn("ddmm.getAvailableLanguages not available, using fallback languages");
                     // Set fallback languages
                     this.available_languages = {
-                        "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                        "en-US": { "name": "English", "nativeName": "English (US)" },
                         "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
                         "de-DE": { "name": "German", "nativeName": "Deutsch" },
                         "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
@@ -1580,14 +1580,14 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
                         "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
                     };
-                    this.current_language = "en-GB";
-                    this.language_interim = "en-GB";
+                    this.current_language = "en-US";
+                    this.language_interim = "en-US";
                 }
             } catch (error) {
                 console.error("Error loading available languages:", error);
                 // Set fallback languages
                 this.available_languages = {
-                    "en-GB": { "name": "English", "nativeName": "English (UK)" },
+                    "en-US": { "name": "English", "nativeName": "English (US)" },
                     "es-419": { "name": "Spanish", "nativeName": "Español (América Latina)" },
                     "de-DE": { "name": "German", "nativeName": "Deutsch" },
                     "fi-FI": { "name": "Finnish", "nativeName": "Suomi" },
@@ -1596,8 +1596,8 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     "zh-CN": { "name": "Chinese (Simplified)", "nativeName": "简体中文" },
                     "zh-HK": { "name": "Chinese (Cantonese)", "nativeName": "繁體中文 (香港)" }
                 };
-                this.current_language = "en-GB";
-                this.language_interim = "en-GB";
+                this.current_language = "en-US";
+                this.language_interim = "en-US";
             }
         }
     },

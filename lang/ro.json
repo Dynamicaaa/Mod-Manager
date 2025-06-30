@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Acasă",
+      "tab_mods": "Moduri",
+      "tab_store": "Magazin",
+      "tab_options": "Setări",
+      "tab_about": "Despre"
+    },
+    "version": {
+      "link_changelog": "ce este nou?"
+    },
+    "user_menu": {
+      "option_rename": "Schimbă numele",
+      "option_logout": "Deconectare"
+    },
+    "window_controls": {
+      "close": "Închide",
+      "maximise": "Maximizează",
+      "minimise": "Minimizează",
+      "devtools": "Deschide instrumente dezvoltator (F12)",
+      "announcement": "Citește ultimul anunț",
+      "login": "Conectare",
+      "sayonika_login": "Conectare Sayonika",
+      "update": {
+        "checking": "Verificăm actualizări...",
+        "available": "Actualizare disponibilă. Click pentru descărcare.",
+        "downloading": "Se descarcă actualizarea...",
+        "downloaded": "Actualizarea este gata de instalare la închidere."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Închide",
+      "button_continue": "Continuă"
+    },
+    "drop_cover": {
+      "text": "Trage un mod aici pentru instalare"
+    },
+    "announcement": {
+      "button_open": "Deschide link",
+      "button_close": "Închide"
+    },
+    "onboarding": {
+      "title": "Bine ai venit!",
+      "description_download": "Să găsim o copie DDLC.",
+      "button_download": "Accesează pagina oficială de descărcare",
+      "button_choose": "Alege o copie",
+      "heading_step": "Pasul {0}",
+      "s1_desc": "Descarcă o copie a Doki Doki Literature Club de pe site-ul oficial (ddlc.moe) - folosește butonul de mai jos.",
+      "s1_platform": "Alege fișierul \"DDLC ({0})\" când ești întrebat.",
+      "s2_desc": "După descărcare, selectează fișierul folosind butonul de mai jos.",
+      "description_location": "Jocurile vor fi stocate în {0}",
+      "link_change": "(Schimbă)"
+    },
+    "login_input": {
+      "message": "Introdu adresa de email",
+      "details": "Un email cu link de conectare va fi trimis la această adresă.",
+      "button_affirmative": "Conectare",
+      "button_negative": "Anulează"
+    },
+    "change_username_input": {
+      "message": "Introdu nume nou",
+      "details": "Numele nu trebuie să fie unic.",
+      "button_affirmative": "Schimbă",
+      "button_negative": "Anulează"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Caută moduri...",
+        "header_new": "Începe",
+        "link_install": "Instalează DDLC",
+        "header_installed": "Instalate",
+        "header_downloaded": "Descărcate"
+      },
+      "install_contextmenu": {
+        "launch": "Lanșează",
+        "rename": "Redenumește",
+        "shortcut": "Creează scurtătură",
+        "delete_save": "Șterge salvări",
+        "uninstall": "Dezinstalează"
+      },
+      "mod_contextmenu": {
+        "install": "Instalează",
+        "delete": "Șterge"
+      },
+      "uninstall_confirmation": {
+        "message": "Sigur vrei să dezinstalezi?",
+        "details": "Salvările pentru {0} vor fi șterse.",
+        "button_affirmative": "Dezinstalează",
+        "button_negative": "Anulează"
+      },
+      "rename_input": {
+        "message": "Redenumește instalarea",
+        "details": "Introdu numele nou pentru {0}.",
+        "button_affirmative": "Schimbă",
+        "button_negative": "Anulează"
+      },
+      "mod_delete_confirmation": {
+        "message": "Sigur vrei să ștergi modul?",
+        "details": "Va trebui să descarci altă copie pentru reinstalare.",
+        "button_affirmative": "Șterge",
+        "button_negative": "Anulează"
+      },
+      "save_delete_confirmation": {
+        "message": "Sigur vrei să ștergi salvările?",
+        "details": "Va trebui să începi {0} de la început.",
+        "button_affirmative": "Șterge",
+        "button_negative": "Anulează"
+      },
+      "install": {
+        "button_launch": "Lanșează",
+        "button_settings": "Setări",
+        "tag_global_save": "Salvare globală",
+        "tag_sdk": "SDK",
+        "title_achievements": "Realizări ({0}/{1})",
+        "description_achievements": "Continuă să joci pentru mai multe realizări.",
+        "description_achievements_complete": "Ai deblocat toate realizările! Felicitări!",
+        "title_screenshots_none": "Fără capturi",
+        "title_screenshots_one": "1 captură",
+        "title_screenshots": "{0} capturi",
+        "description_screenshots": "Apasă S în timpul jocului pentru capturi.",
+        "description_sdk": "Acest mod suportă funcții speciale cu SDK!",
+        "description_author": "Creat de {0}",
+        "link_website": "Site ({0})",
+        "description_external": "Arată în folder"
+      },
+      "mod": {
+        "button_install": "Instalează",
+        "button_settings": "Setări",
+        "description_external": "Arată în folder"
+      },
+      "install_creation": {
+        "title": "Instalează DDLC",
+        "label_install_name": "Nume instalare",
+        "label_folder_name": "Nume folder",
+        "label_global_save": "Salvare globală",
+        "label_has_mod": "Instalează mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Salvări existente",
+        "description_mod": "Click pentru a alege un mod.",
+        "header_summary": "Sumar",
+        "description_vanilla": "O copie originală DDLC. Salvările vor fi separate.",
+        "description_vanilla_global_save": "Copie originală cu salvare partajată (ex. Steam)",
+        "description_modded": "Copie DDLC cu mod. Salvări separate.",
+        "description_modded_global_save": "Copie cu mod și salvare partajată.",
+        "button_install": "Instalează",
+        "button_installing": "Se instalează...",
+        "status_exists": "Folderul există deja. Alege alt nume."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Magazinul va apărea curând!",
+      "description_1": "Sayonika va adăuga suport pentru descărcare directă de moduri.",
+      "description_2": "Între timp, poți încerca aceste recomandări.",
+      "error": "Eroare la încărcare. Verifică conexiunea.",
+      "button_download": "Descarcă"
+    },
+    "tab_store": {
+      "title": "Magazin Sayonika",
+      "subtitle": "Descoperă și descarcă moduri",
+      "search_placeholder": "Caută moduri...",
+      "loading": "Se încarcă...",
+      "error_title": "Eroare conexiune",
+      "retry_button": "Reîncearcă",
+      "offline_title": "Offline",
+      "offline_message": "Fără conexiune la internet.",
+      "check_connection": "Verifică conexiunea",
+      "maintenance_banner": "Servicii de autentificare indisponibile temporar.",
+      "no_mods_title": "Niciun mod găsit",
+      "no_mods_message": "Încearcă alte criterii",
+      "filters": {
+        "category": "Categorie:",
+        "all_categories": "Toate",
+        "sort_by": "Sortează după:",
+        "date_created": "Data creării",
+        "date_updated": "Ultima actualizare",
+        "downloads": "Descărcări",
+        "rating": "Evaluare",
+        "title": "Titlu",
+        "order": "Ordine:",
+        "descending": "Descrescător",
+        "ascending": "Crescător",
+        "featured_only": "Doar recomandate",
+        "translate_content": "Tradu conținut",
+        "auto_detect": "Detectare automată"
+      },
+      "mod_card": {
+        "featured": "Recomandat",
+        "mature": "Conținut matur",
+        "by_author": "de {0}",
+        "download": "Descarcă",
+        "downloading": "Se descarcă...",
+        "download_mod": "Descarcă mod",
+        "downloads_count": "{0} descărcări",
+        "version": "Versiunea {0}",
+        "screenshots": "Capturi ({0})",
+        "description": "Descriere",
+        "tags": "Etichete",
+        "requirements": "Cerințe"
+      },
+      "pagination": {
+        "previous": "Înapoi",
+        "next": "Înainte",
+        "page_info": "Pagina {0} din {1}"
+      },
+      "login": {
+        "title": "Conectare Sayonika",
+        "discord": "Conectare cu Discord",
+        "github": "Conectare cu GitHub",
+        "or": "sau",
+        "username_label": "Utilizator/Email:",
+        "username_placeholder": "Introdu utilizator sau email",
+        "username_help": "Poți folosi utilizatorul sau emailul",
+        "password_label": "Parolă:",
+        "remember_me": "Ține-mă minte",
+        "login_button": "Conectare",
+        "logging_in": "Se conectează...",
+        "register_link": "Nu ai cont? Înregistrează-te",
+        "success": "Conectat cu succes!",
+        "failed": "Eroare: {0}"
+      },
+      "translation": {
+        "enabled": "Traducere activată.",
+        "disabled": "Traducere dezactivată.",
+        "language_changed": "Limba traducerii schimbată în {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Aspect",
+        "link_background": "Fundal",
+        "link_language": "Limbă",
+        "link_advanced_appearance": "Avansat",
+        "header_enhancements": "Îmbunătățiri",
+        "link_sdk": "Realizări & SDK",
+        "header_application": "Aplicație",
+        "link_updates": "Actualizări",
+        "link_storage": "Locație stocare",
+        "header_developers": "Dezvoltatori",
+        "link_testing": "Depanare SDK",
+        "link_debug": "Info aplicație"
+      },
+      "section_backgrounds": {
+        "title": "Fundal",
+        "subtitle": "Personalizează interfața",
+        "button_none": "Fără fundal",
+        "description_credit": "Fundaluri originale de la Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Avansat",
+        "subtitle": "Opțiuni suplimentare",
+        "button_enable_sysborders": "Folosește borduri sistem (necesită repornire)",
+        "button_disable_sysborders": "Dezactivează borduri sistem"
+      },
+      "section_storage": {
+        "title": "Locație stocare",
+        "subtitle": "Schimbă locația datelor",
+        "description_moving": "Atenție! Schimbarea va muta toate datele.",
+        "description_current": "Locație curentă: {0}",
+        "button_change": "Schimbă locația"
+      },
+      "section_updates": {
+        "title": "Actualizări",
+        "subtitle": "Obține ultima versiune",
+        "description_current_version": "Versiune curentă: {0}",
+        "label_channel": "Canal actualizări",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Verifică actualizări"
+      },
+      "section_sdk": {
+        "title": "Realizări & SDK",
+        "subtitle": "Gestionează realizări",
+        "description_mode": "Activează realizări:",
+        "checkbox_always": "Întotdeauna (recomandat)",
+        "checkbox_specified": "Când modul suportă",
+        "checkbox_never": "Niciodată"
+      },
+      "section_testing": {
+        "title": "Depanare SDK",
+        "subtitle": "Activează loguri de depanare",
+        "button_enable": "Activează depanare",
+        "button_disable": "Dezactivează depanare"
+      },
+      "section_debug": {
+        "title": "Informații aplicație",
+        "subtitle": "Detalii tehnice"
+      },
+      "section_language": {
+        "title": "Limbă",
+        "subtitle": "Schimbă limba aplicației",
+        "description_current": "Limba curentă: {0}",
+        "button_apply": "Aplică limba",
+        "button_contribute": "Ajută la traducere",
+        "description_restart": "Schimbarea va fi aplicată după repornire.",
+        "notification_changed": "Limba schimbată în {0}. Repornește aplicația.",
+        "notification_same": "Limba este deja {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Despre",
+      "description": "Doki Doki Mod Manager este un proiect comunitar pentru gestionarea modurilor DDLC.",
+      "title_disclaimer": "Disclaimer",
+      "disclaimer_1": "Nu afiliat cu Team Salvato. Conform ghidurilor IP.",
+      "disclaimer_2": "Utilizarea modurilor este pe propria răspundere.",
+      "title_socials": "Contact",
+      "social_twitter": "Urmărește @Dynamicxaa pe Twitter",
+      "social_reddit": "Mesaj pe Reddit",
+      "social_email": "Trimite email",
+      "title_support": "Suportă dezvoltarea",
+      "description_support": "Aplicație gratuită. Poți susține proiectul:",
+      "support_donate": "Donează",
+      "support_steelseries": "Reducere 10% SteelSeries (link afiliat)",
+      "support_code": "Contribuie cod sau traduceri"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Deschide Doki Doki Mod Manager și lansează {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC rulează",
+      "title_crashed": "Eroare",
+      "button_browse": "Deschide folder",
+      "button_close": "OK",
+      "description_running": "Închide jocul pentru modificări.",
+      "install_missing": "Instalare negăsită.",
+      "install_corrupt": "Instalare coruptă.",
+      "install_crashed": "Jocul nu a putut porni."
+    },
+    "move_install": {
+      "title": "Selectează folder nou"
+    },
+    "mod_browse_dialog": {
+      "title": "Selectează mod",
+      "file_format_name": "Moduri"
+    },
+    "game_browse_dialog": {
+      "title": "Găsește fișier DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Alege locație scurtătură",
+      "file_format_name": "Scurtătură"
+    },
+    "errors": {
+      "exception": {
+        "title": "Aplicație a eșuat",
+        "body": "Eroare raportată. Repornește."
+      },
+      "move_install": {
+        "title": "Mutare eșuată",
+        "body": "Verifică permisiuni și spațiu."
+      },
+      "shortcut": {
+        "title": "Scurtătură eșuată",
+        "body": "Verifică permisiuni."
+      },
+      "install": {
+        "title": "Instalare eșuată",
+        "body": "Verifică permisiuni și spațiu."
+      },
+      "rename": {
+        "title": "Redenumire eșuată",
+        "body": "Închide programe care interferează."
+      },
+      "uninstall": {
+        "title": "Dezinstalare eșuată",
+        "body": "Închide programe care interferează."
+      },
+      "save_delete": {
+        "title": "Ștergere salvări eșuată",
+        "body": "Închide programe care interferează."
+      },
+      "mod_delete": {
+        "title": "Ștergere mod eșuată",
+        "body": "Închide programe care interferează."
+      },
+      "renderer_freeze": {
+        "title": "Aplicație blocată",
+        "body": "Repornește aplicația."
+      },
+      "executable_permission": {
+        "title": "Eroare permisiuni Linux",
+        "body": "DDLC.sh nu poate fi executat."
+      }
+    }
+  }
+}

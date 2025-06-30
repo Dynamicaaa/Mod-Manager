@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "Piko",
+      "tab_mods": "Nā Mod",
+      "tab_store": "Hale kūʻai",
+      "tab_options": "Nā Pono",
+      "tab_about": "E pili ana"
+    },
+    "version": {
+      "link_changelog": "he aha ka hou?"
+    },
+    "user_menu": {
+      "option_rename": "Hoʻololi Inoa",
+      "option_logout": "Puka"
+    },
+    "window_controls": {
+      "close": "Pani",
+      "maximise": "Hoʻonui",
+      "minimise": "Hoʻemi",
+      "devtools": "Nā Mea Hana Hoʻomohala (F12)",
+      "announcement": "Heluhelu i ka hoʻolaha hou loa",
+      "login": "Komo",
+      "sayonika_login": "Komo Sayonika",
+      "update": {
+        "checking": "Ke nānā nei i nā hoʻomaikaʻi...",
+        "available": "Aia he hoʻomaikaʻi. Kaomi e hoʻoiho.",
+        "downloading": "Ke hoʻoiho nei i ka hoʻomaikaʻi...",
+        "downloaded": "Mākaukau ka hoʻomaikaʻi e hoʻokomo ke pani ʻoe."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Puka",
+      "button_continue": "Hoʻomau"
+    },
+    "drop_cover": {
+      "text": "Kūkulu i kahi mod i ʻaneʻi e hoʻokomo"
+    },
+    "announcement": {
+      "button_open": "Wehe i ka Loulou",
+      "button_close": "Pani"
+    },
+    "onboarding": {
+      "title": "Welina!",
+      "description_download": "E ʻimi i kahi kope o DDLC.",
+      "button_download": "E kipa i ka ʻaoʻao hoʻoiho kūhelu",
+      "button_choose": "E koho i kahi waihona",
+      "heading_step": "Kaʻina {0}",
+      "s1_desc": "Pono ʻoe e hoʻoiho i ka Doki Doki Literature Club mai ka pūnaewele kūhelu (ddlc.moe) - kaomi i ka pihi ma lalo.",
+      "s1_platform": "E koho i ka waihona \"DDLC ({0})\" ke noi ʻia.",
+      "s2_desc": "Ke pau ka hoʻoiho ʻana, koho i ka waihona me ka pihi ma lalo.",
+      "description_location": "E mālama ʻia nā pāʻani ma {0}",
+      "link_change": "(Hoʻololi)"
+    },
+    "login_input": {
+      "message": "E hoʻokomo i ka leka uila",
+      "details": "E hoʻouna ʻia ana he loulou komo i kēia leka uila.",
+      "button_affirmative": "Komo",
+      "button_negative": "Hoʻopau"
+    },
+    "change_username_input": {
+      "message": "E hoʻokomo i ka inoa hou",
+      "details": "ʻAʻole pono ke kū hoʻokahi ka inoa.",
+      "button_affirmative": "Hoʻololi",
+      "button_negative": "Hoʻopau"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Huli i nā mod...",
+        "header_new": "Hoʻomaka",
+        "link_install": "Hoʻokomo i ka DDLC",
+        "header_installed": "Ua hoʻokomo ʻia",
+        "header_downloaded": "Ua hoʻoiho ʻia"
+      },
+      "install_contextmenu": {
+        "launch": "Hoʻomaka",
+        "rename": "Hoʻololi Inoa",
+        "shortcut": "Hana i ka Pokole",
+        "delete_save": "Holoi i ka Waihona",
+        "uninstall": "Wehe i ka hoʻokomo"
+      },
+      "mod_contextmenu": {
+        "install": "Hoʻokomo",
+        "delete": "Holoi"
+      },
+      "uninstall_confirmation": {
+        "message": "He ʻoiaʻiʻo anei ʻoe e makemake e wehe?",
+        "details": "E holoi ʻia ka waihona no {0}.",
+        "button_affirmative": "Wehe",
+        "button_negative": "Hoʻopau"
+      },
+      "rename_input": {
+        "message": "Hoʻololi Inoa i ka Hoʻokomo",
+        "details": "E hoʻokomo i ka inoa hou no {0}.",
+        "button_affirmative": "Hoʻololi",
+        "button_negative": "Hoʻopau"
+      },
+      "mod_delete_confirmation": {
+        "message": "He ʻoiaʻiʻo anei ʻoe e makemake e holoi i ka mod?",
+        "details": "Pono ʻoe e hoʻoiho hou i ka mod e hoʻokomo hou.",
+        "button_affirmative": "Holoi",
+        "button_negative": "Hoʻopau"
+      },
+      "save_delete_confirmation": {
+        "message": "He ʻoiaʻiʻo anei ʻoe e makemake e holoi i ka waihona?",
+        "details": "Pono ʻoe e hoʻomaka hou i {0}.",
+        "button_affirmative": "Holoi",
+        "button_negative": "Hoʻopau"
+      },
+      "install": {
+        "button_launch": "Hoʻomaka",
+        "button_settings": "Nā Pono",
+        "tag_global_save": "Waihona Honua",
+        "tag_sdk": "SDK",
+        "title_achievements": "Nā Hoʻokō ({0}/{1})",
+        "description_achievements": "E pāʻani mau e wehe i nā hoʻokō hou.",
+        "description_achievements_complete": "Ua wehe ʻoe i nā hoʻokō a pau! Hoʻomaikaʻi!",
+        "title_screenshots_none": "ʻAʻohe kiʻi paʻi",
+        "title_screenshots_one": "1 kiʻi paʻi",
+        "title_screenshots": "{0} kiʻi paʻi",
+        "description_screenshots": "Kaomi S i ka pāʻani e paʻi kiʻi.",
+        "description_sdk": "Kākoʻo kēia mod i nā hiʻohiʻona kūikawā me ka SDK!",
+        "description_author": "Hana ʻia e {0}",
+        "link_website": "Pūnaewele ({0})",
+        "description_external": "Hōʻike i ka waihona"
+      },
+      "mod": {
+        "button_install": "Hoʻokomo",
+        "button_settings": "Nā Pono",
+        "description_external": "Hōʻike i ka waihona"
+      },
+      "install_creation": {
+        "title": "Hoʻokomo i ka DDLC",
+        "label_install_name": "Inoa Hoʻokomo",
+        "label_folder_name": "Inoa Waihona",
+        "label_global_save": "Waihona Honua",
+        "label_has_mod": "Hoʻokomo Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Nā Waihona i Kōkua",
+        "description_mod": "Kaomi e koho i ka mod.",
+        "header_summary": "Hōʻuluʻulu",
+        "description_vanilla": "E hana ʻia he kope maʻemaʻe o DDLC. E kūʻokoʻa ka waihona.",
+        "description_vanilla_global_save": "E hana ʻia he kope maʻemaʻe me ka waihona honua (laʻana: Steam)",
+        "description_modded": "E hana ʻia he kope o DDLC me ka mod. E kūʻokoʻa ka waihona.",
+        "description_modded_global_save": "E hana ʻia he kope me ka mod a me ka waihona honua.",
+        "button_install": "Hoʻokomo",
+        "button_installing": "Ke hoʻokomo nei...",
+        "status_exists": "Aia ka waihona. E koho i inoa ʻē aʻe."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "E hiki mai ana ka Hale kūʻai!",
+      "description_1": "E lilo ʻo Sayonika i kikowaena no nā mod DDLC.",
+      "description_2": "E ho'āʻo i kēia mau mod paipai.",
+      "error": "Hāʻule i ka hoʻouka ʻana i nā mod. Aia ʻoe ma waho o ka pūnaewele?",
+      "button_download": "Hoʻoiho"
+    },
+    "tab_store": {
+      "title": "Hale kūʻai Sayonika",
+      "subtitle": "E ʻimi a hoʻoiho i nā mod DDLC",
+      "search_placeholder": "Huli i nā mod...",
+      "loading": "Ke hoʻouka nei i nā mod...",
+      "error_title": "Hewa Pili",
+      "retry_button": "Ho'āʻo Hou",
+      "offline_title": "Ma waho o ka pūnaewele",
+      "offline_message": "E nānā i kou pilina pūnaewele.",
+      "check_connection": "Nānā i ka Pilina",
+      "maintenance_banner": "ʻAʻole loaʻa nā lawelawe hōʻoia no kēia manawa.",
+      "no_mods_title": "ʻAʻohe mod i loaʻa",
+      "no_mods_message": "E hoʻololi i nā kūlana huli",
+      "filters": {
+        "category": "Māhele:",
+        "all_categories": "Nā Mea A Pau",
+        "sort_by": "Hoʻonohonoho ma:",
+        "date_created": "Lā Hana ʻia",
+        "date_updated": "Lā Hoʻololi Hope",
+        "downloads": "Nā Hoʻoiho",
+        "rating": "Loiloi",
+        "title": "Poʻo Inoa",
+        "order": "Papa:",
+        "descending": "Iho",
+        "ascending": "Piʻi",
+        "featured_only": "Nā mea i koho ʻia wale nō",
+        "translate_content": "Unuhi i ka ʻike",
+        "auto_detect": "ʻIke ʻAkomi"
+      },
+      "mod_card": {
+        "featured": "Koho ʻia",
+        "mature": "No nā mākua",
+        "by_author": "na {0}",
+        "download": "Hoʻoiho",
+        "downloading": "Ke hoʻoiho nei...",
+        "download_mod": "Hoʻoiho Mod",
+        "downloads_count": "{0} hoʻoiho",
+        "version": "Mana {0}",
+        "screenshots": "Nā Kiʻi Paʻi ({0})",
+        "description": "Wehewehe",
+        "tags": "Nā Lepili",
+        "requirements": "Nā Koina"
+      },
+      "pagination": {
+        "previous": "Ma mua",
+        "next": "Aʻe",
+        "page_info": "ʻAoʻao {0} o {1}"
+      },
+      "login": {
+        "title": "Komo Sayonika",
+        "discord": "Komo me Discord",
+        "github": "Komo me GitHub",
+        "or": "a i ʻole",
+        "username_label": "Inoa/Email:",
+        "username_placeholder": "E hoʻokomo i ka inoa a i ʻole email",
+        "username_help": "Hiki ke hoʻohana i ka inoa a i ʻole email",
+        "password_label": "ʻŌlelo Huna:",
+        "remember_me": "Hoʻomanaʻo iaʻu",
+        "login_button": "Komo",
+        "logging_in": "Ke komo nei...",
+        "register_link": "ʻAʻohe moʻokāki? Kākau inoa i ʻaneʻi",
+        "success": "Ua komo maikaʻi!",
+        "failed": "Hāʻule: {0}"
+      },
+      "translation": {
+        "enabled": "Ua hoʻoulu ʻia ka unuhi.",
+        "disabled": "Ua hoʻopau ʻia ka unuhi.",
+        "language_changed": "Ua hoʻololi ʻia ka ʻōlelo unuhi i {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Helehelena",
+        "link_background": "Kiʻi Hope",
+        "link_language": "ʻŌlelo",
+        "link_advanced_appearance": "Kiʻekiʻe",
+        "header_enhancements": "Hoʻonui",
+        "link_sdk": "Nā Hoʻokō & SDK",
+        "header_application": "Polokalamu",
+        "link_updates": "Nā Hoʻomaikaʻi",
+        "link_storage": "Wahi Waihona",
+        "header_developers": "Nā Mea Hana",
+        "link_testing": "SDK Debug",
+        "link_debug": "ʻIke Polokalamu"
+      },
+      "section_backgrounds": {
+        "title": "Kiʻi Hope",
+        "subtitle": "Hoʻopilikino i kāu kiʻi hope",
+        "button_none": "ʻAʻohe Kiʻi Hope",
+        "description_credit": "Nā kiʻi hope kumu na Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Kiʻekiʻe",
+        "subtitle": "Nā koho hou aʻe",
+        "button_enable_sysborders": "E hoʻohana i nā palena ʻōnaehana (pono e hoʻomaka hou)",
+        "button_disable_sysborders": "Hoʻopau i nā palena ʻōnaehana"
+      },
+      "section_storage": {
+        "title": "Wahi Waihona",
+        "subtitle": "Hoʻololi i kahi waihona",
+        "description_moving": "ʻAla! E neʻe ʻia nā ʻike a pau.",
+        "description_current": "Wahi o kēia manawa: {0}",
+        "button_change": "Hoʻololi i ka Wahi"
+      },
+      "section_updates": {
+        "title": "Nā Hoʻomaikaʻi",
+        "subtitle": "E kiʻi i ka mana hou loa",
+        "description_current_version": "Mana o kēia manawa: {0}",
+        "label_channel": "Kālepa Hoʻomaikaʻi",
+        "option_stable": "Paʻa",
+        "option_beta": "Beta",
+        "button_check": "Nānā i nā Hoʻomaikaʻi"
+      },
+      "section_sdk": {
+        "title": "Nā Hoʻokō & SDK",
+        "subtitle": "Hoʻokele i nā hoʻokō",
+        "description_mode": "E hoʻoulu i nā hoʻokō:",
+        "checkbox_always": "Mau loa (paipai ʻia)",
+        "checkbox_specified": "Ke kākoʻo ka mod",
+        "checkbox_never": "ʻAʻole loa"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "E hoʻoulu i ka log debug",
+        "button_enable": "Hoʻoulu Debug",
+        "button_disable": "Hoʻopau Debug"
+      },
+      "section_debug": {
+        "title": "ʻIke Polokalamu",
+        "subtitle": "Nā kikoʻī ʻenehana"
+      },
+      "section_language": {
+        "title": "ʻŌlelo",
+        "subtitle": "Hoʻololi i ka ʻōlelo polokalamu",
+        "description_current": "ʻŌlelo o kēia manawa: {0}",
+        "button_apply": "Hoʻokomo i ka ʻŌlelo",
+        "button_contribute": "Kōkua i ka unuhi",
+        "description_restart": "E hoʻokō ʻia ma hope o ka hoʻomaka hou.",
+        "notification_changed": "Ua hoʻololi ʻia ka ʻōlelo i {0}. E hoʻomaka hou i ka polokalamu.",
+        "notification_same": "Ua hoʻonohonoho ʻia ka ʻōlelo i {0}."
+      }
+    },
+    "tab_about": {
+      "title": "E pili ana",
+      "description": "He papahana kaiāulu ʻo Doki Doki Mod Manager no ka hoʻokele i nā mod DDLC.",
+      "title_disclaimer": "Hoʻokaʻawale kuleana",
+      "disclaimer_1": "ʻAʻole pili me Team Salvato. Kūlike me kā lākou mau alakaʻi IP.",
+      "disclaimer_2": "Kuleana ʻoe i ka hoʻohana ʻana i nā mod.",
+      "title_socials": "Kāhea",
+      "social_twitter": "E hahai iā @Dynamicxaa ma Twitter",
+      "social_reddit": "Kākau leka ma Reddit",
+      "social_email": "Hoʻouna leka uila",
+      "title_support": "Kākoʻo i ka hoʻomohala",
+      "description_support": "He manuahi ka polokalamu. Hiki iā ʻoe ke kākoʻo ma:",
+      "support_donate": "Hana i makana",
+      "support_steelseries": "10% hoʻemi ma SteelSeries (kaulike affiliate)",
+      "support_code": "Kōkua i ke kākau code a i ʻole unuhi"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Wehe i ka Doki Doki Mod Manager a hoʻomaka i {0}."
+    },
+    "running_cover": {
+      "title_running": "Ke holo nei ka DDLC",
+      "title_crashed": "Ua loaʻa he hewa",
+      "button_browse": "Wehe i ka waihona",
+      "button_close": "OK",
+      "description_running": "Pani i ka pāʻani e hoʻololi i nā mod.",
+      "install_missing": "ʻAʻole i loaʻa ka hoʻokomo.",
+      "install_corrupt": "Ua hewa ka hoʻokomo.",
+      "install_crashed": "Hāʻule ka hoʻomaka ʻana i ka pāʻani."
+    },
+    "move_install": {
+      "title": "E koho i kahi waihona hou"
+    },
+    "mod_browse_dialog": {
+      "title": "E koho i ka Mod",
+      "file_format_name": "Nā Mod"
+    },
+    "game_browse_dialog": {
+      "title": "E ʻimi i ka waihona DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "E koho i kahi Pokole",
+      "file_format_name": "Pokole"
+    },
+    "errors": {
+      "exception": {
+        "title": "Ua hāʻule ka polokalamu",
+        "body": "Ua hōʻike ʻia ka pilikia. E hoʻomaka hou."
+      },
+      "move_install": {
+        "title": "Hāʻule i ka neʻe ʻana",
+        "body": "E nānā i nā kuleana a me ka wahi."
+      },
+      "shortcut": {
+        "title": "Hāʻule i ka hana pokole",
+        "body": "E nānā i nā kuleana waihona."
+      },
+      "install": {
+        "title": "Hāʻule i ka hoʻokomo",
+        "body": "E nānā i nā kuleana a me ka wahi."
+      },
+      "rename": {
+        "title": "Hāʻule i ka hoʻololi inoa",
+        "body": "Pani i nā polokalamu ʻē aʻe a ho'āʻo hou."
+      },
+      "uninstall": {
+        "title": "Hāʻule i ka wehe ʻana",
+        "body": "Pani i nā polokalamu ʻē aʻe a ho'āʻo hou."
+      },
+      "save_delete": {
+        "title": "Hāʻule i ka holoi waihona",
+        "body": "Pani i nā polokalamu ʻē aʻe a ho'āʻo hou."
+      },
+      "mod_delete": {
+        "title": "Hāʻule i ka holoi mod",
+        "body": "Pani i nā polokalamu ʻē aʻe a ho'āʻo hou."
+      },
+      "renderer_freeze": {
+        "title": "ʻAʻole pane ka polokalamu",
+        "body": "E hoʻomaka hou i ka polokalamu."
+      },
+      "executable_permission": {
+        "title": "Hewa Kuleana Linux",
+        "body": "ʻAʻole hiki ke holo i ka DDLC.sh."
+      }
+    }
+  }
+}

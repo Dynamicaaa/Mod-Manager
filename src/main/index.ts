@@ -171,7 +171,7 @@ ipcMain.on("get available languages", (ev: IpcMainEvent) => {
                     const langData = JSON.parse(require('fs').readFileSync(langFile, 'utf8'));
                     // Try to get language name from the file itself, or use a lookup
                     const languageNames = {
-                        'en-GB': { name: 'English', nativeName: 'English (UK)' },
+                        'en-US': { name: 'English', nativeName: 'English (US)' },
                         'es-419': { name: 'Spanish', nativeName: 'Español (América Latina)' },
                         'fr-FR': { name: 'French', nativeName: 'Français' },
                         'de-DE': { name: 'German', nativeName: 'Deutsch' },
@@ -190,7 +190,32 @@ ipcMain.on("get available languages", (ev: IpcMainEvent) => {
                         'da': { name: 'Danish', nativeName: 'Dansk' },
                         'hu': { name: 'Hungarian', nativeName: 'Magyar' },
                         'sv': { name: 'Swedish', nativeName: 'Svenska' },
-                        'tr': { name: 'Turkish', nativeName: 'Türkçe' }
+                        'tr': { name: 'Turkish', nativeName: 'Türkçe' },
+                        'ar': { name: 'Arabic', nativeName: 'العربية' },
+                        'ua': { name: 'Ukrainian', nativeName: 'Українська' },
+                        'sk': { name: 'Slovak', nativeName: 'Slovenčina' },
+                        'vn': { name: 'Vietnamese', nativeName: 'Tiếng Việt' },
+                        'ro': { name: 'Romanian', nativeName: 'Română' },
+                        'el': { name: 'Greek', nativeName: 'Ελληνικά' },
+                        'bg': { name: 'Bulgarian', nativeName: 'Български' },
+                        'hi': { name: 'Hindi', nativeName: 'हिन्दी' },
+                        'id': { name: 'Indonesian', nativeName: 'Bahasa Indonesia' },
+                        'tl': { name: 'Tagalog', nativeName: 'Tagalog' },
+                        'haw': { name: 'Hawaiian', nativeName: 'ʻŌlelo Hawaiʻi' },
+                        'eo': { name: 'Esperanto', nativeName: 'Esperanto' },
+                        'ms': { name: 'Malay', nativeName: 'Bahasa Melayu' },
+                        'ur': { name: 'Urdu', nativeName: 'اردو' },
+                        'pa': { name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ' },
+                        'zu': { name: 'Zulu', nativeName: 'isiZulu' },
+                        'af': { name: 'Afrikaans', nativeName: 'Afrikaans' },
+                        'uwu': { name: 'UwU', nativeName: 'UwU' },
+                        'emoji': { name: 'Emoji', nativeName: 'Emoji' },
+                        'yoda': { name: 'Yoda', nativeName: 'Yoda' },
+                        'pirate': { name: 'Pirate', nativeName: 'Pirate' },
+                        'hacker': { name: 'Hacker', nativeName: 'Hacker' },
+                        'shakespeare': { name: 'Shakespeare', nativeName: 'Shakespeare' },
+                        'valley': { name: 'Valley', nativeName: 'Valley' },
+                        'minion': { name: 'Minion', nativeName: 'Minion' }
                     };
                     
                     languages[langCode] = languageNames[langCode] || { 
@@ -207,7 +232,7 @@ ipcMain.on("get available languages", (ev: IpcMainEvent) => {
     } catch (err) {
         console.error("Failed to read language directory:", err);
         ev.returnValue = {
-            'en-GB': { name: 'English', nativeName: 'English (UK)' }
+            'en-US': { name: 'English', nativeName: 'English (US)' }
         };
     }
 });

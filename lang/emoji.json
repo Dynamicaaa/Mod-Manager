@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "🏠",
+      "tab_mods": "🧩",
+      "tab_store": "🛒",
+      "tab_options": "⚙️",
+      "tab_about": "ℹ️"
+    },
+    "version": {
+      "link_changelog": "✨🆕❓"
+    },
+    "user_menu": {
+      "option_rename": "✏️👤",
+      "option_logout": "🚪⬅️"
+    },
+    "window_controls": {
+      "close": "❌",
+      "maximise": "🔝",
+      "minimise": "🔽",
+      "devtools": "🛠️ (F12)",
+      "announcement": "📢🆕",
+      "login": "🔑",
+      "sayonika_login": "🔑 Sayonika",
+      "update": {
+        "checking": "🔄🆕❓",
+        "available": "⬇️🆕! 👆",
+        "downloading": "⬇️🆕...",
+        "downloaded": "🆕✅💾"
+      }
+    },
+    "crash_cover": {
+      "button_close": "❌",
+      "button_continue": "➡️"
+    },
+    "drop_cover": {
+      "text": "⬇️🧩➡️📦"
+    },
+    "announcement": {
+      "button_open": "🔗👆",
+      "button_close": "❌"
+    },
+    "onboarding": {
+      "title": "👋🎉",
+      "description_download": "🔍📦 DDLC",
+      "button_download": "🌐⬇️ DDLC",
+      "button_choose": "📂👆",
+      "heading_step": "🔢 {0}",
+      "s1_desc": "⬇️ DDLC 🌐 (ddlc.moe) 👇",
+      "s1_platform": "🗂️ \"DDLC ({0})\" 👆",
+      "s2_desc": "⬇️✅, 📂👆",
+      "description_location": "🎮💾: {0}",
+      "link_change": "🔄"
+    },
+    "login_input": {
+      "message": "✉️👆",
+      "details": "✉️➡️🔗👆",
+      "button_affirmative": "🔑",
+      "button_negative": "❌"
+    },
+    "change_username_input": {
+      "message": "✏️👤👆",
+      "details": "👤🆔❌🔑",
+      "button_affirmative": "✏️",
+      "button_negative": "❌"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "🔍🧩...",
+        "header_new": "🆕",
+        "link_install": "⬇️🧩",
+        "header_installed": "📦🧩",
+        "header_downloaded": "⬇️📦"
+      },
+      "install_contextmenu": {
+        "launch": "🚀",
+        "rename": "✏️",
+        "shortcut": "🔗",
+        "delete_save": "🗑️💾",
+        "uninstall": "🗑️"
+      },
+      "mod_contextmenu": {
+        "install": "⬇️",
+        "delete": "🗑️"
+      },
+      "uninstall_confirmation": {
+        "message": "❓🗑️?",
+        "details": "🗑️💾 {0}",
+        "button_affirmative": "🗑️",
+        "button_negative": "❌"
+      },
+      "rename_input": {
+        "message": "✏️📦",
+        "details": "✏️ {0}",
+        "button_affirmative": "✏️",
+        "button_negative": "❌"
+      },
+      "mod_delete_confirmation": {
+        "message": "❓🗑️🧩?",
+        "details": "⬇️🧩⬇️",
+        "button_affirmative": "🗑️",
+        "button_negative": "❌"
+      },
+      "save_delete_confirmation": {
+        "message": "❓🗑️💾?",
+        "details": "🔄 {0}",
+        "button_affirmative": "🗑️",
+        "button_negative": "❌"
+      },
+      "install": {
+        "button_launch": "🚀",
+        "button_settings": "⚙️",
+        "tag_global_save": "🌍💾",
+        "tag_sdk": "🛠️",
+        "title_achievements": "🏆 ({0}/{1})",
+        "description_achievements": "🎮➡️🏆",
+        "description_achievements_complete": "🏆✅🎉",
+        "title_screenshots_none": "❌📸",
+        "title_screenshots_one": "1️⃣📸",
+        "title_screenshots": "{0}📸",
+        "description_screenshots": "S🔘 = 📸",
+        "description_sdk": "🛠️🧩🎮!",
+        "description_author": "👤 {0}",
+        "link_website": "🌐 ({0})",
+        "description_external": "📂"
+      },
+      "mod": {
+        "button_install": "⬇️",
+        "button_settings": "⚙️",
+        "description_external": "📂"
+      },
+      "install_creation": {
+        "title": "⬇️🧩",
+        "label_install_name": "🏷️⬇️",
+        "label_folder_name": "📁⬇️",
+        "label_global_save": "🌍💾",
+        "label_has_mod": "⬇️🧩",
+        "label_mod": "🧩",
+        "label_existing_saves": "💾📂",
+        "description_mod": "🔍🧩",
+        "header_summary": "📝",
+        "description_vanilla": "🆕🧩. 💾🔄.",
+        "description_vanilla_global_save": "🆕🧩. 💾🌍 (e.g. Steam)",
+        "description_modded": "🧩+🧩. 💾🔄.",
+        "description_modded_global_save": "🧩+🧩. 💾🌍 (e.g. Steam)",
+        "button_install": "⬇️",
+        "button_installing": "⬇️...",
+        "status_exists": "📁✅. 🆕📁."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "🛒⏳",
+      "description_1": "🛒🧩📦🌍. 🛒🧩🔜.",
+      "description_2": "⬇️🧩⏳.",
+      "error": "❌🧩. 🌐❓",
+      "button_download": "⬇️"
+    },
+    "tab_store": {
+      "title": "🛒",
+      "subtitle": "🔍⬇️🧩",
+      "search_placeholder": "🔍🧩...",
+      "loading": "🔄🧩...",
+      "error_title": "❌🌐",
+      "retry_button": "🔄",
+      "offline_title": "❌🌐",
+      "offline_message": "🌐❌. 🔄🌐.",
+      "check_connection": "🔄🌐",
+      "maintenance_banner": "🛠️🌐❌. 🛒🧩✅, 🔑❌.",
+      "no_mods_title": "❌🧩",
+      "no_mods_message": "🔄🔍",
+      "filters": {
+        "category": "🏷️:",
+        "all_categories": "🏷️🌍",
+        "sort_by": "🔀:",
+        "date_created": "📅🆕",
+        "date_updated": "📅🔄",
+        "downloads": "⬇️",
+        "rating": "⭐",
+        "title": "🏷️",
+        "order": "🔃:",
+        "descending": "⬇️",
+        "ascending": "⬆️",
+        "featured_only": "⭐✅",
+        "translate_content": "🌐🔤",
+        "auto_detect": "🤖"
+      },
+      "mod_card": {
+        "featured": "⭐",
+        "mature": "🔞",
+        "by_author": "👤 {0}",
+        "download": "⬇️",
+        "downloading": "⬇️...",
+        "download_mod": "⬇️🧩",
+        "downloads_count": "{0}⬇️",
+        "version": "🔢 {0}",
+        "screenshots": "📸 ({0})",
+        "description": "📝",
+        "tags": "🏷️",
+        "requirements": "📋"
+      },
+      "pagination": {
+        "previous": "⬅️",
+        "next": "➡️",
+        "page_info": "📄 {0}/{1}"
+      },
+      "login": {
+        "title": "🔑🛒",
+        "discord": "🔑 Discord",
+        "github": "🔑 GitHub",
+        "or": "➖",
+        "username_label": "👤/✉️:",
+        "username_placeholder": "👤/✉️...",
+        "username_help": "👤/✉️🔑",
+        "password_label": "🔒:",
+        "remember_me": "💾",
+        "login_button": "🔑",
+        "logging_in": "🔑...",
+        "register_link": "❓🔑? ➕",
+        "success": "✅🔑!",
+        "failed": "❌🔑: {0}"
+      },
+      "translation": {
+        "enabled": "🌐✅",
+        "disabled": "🌐❌",
+        "language_changed": "🌐🔄 {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "🎨",
+        "link_background": "🖼️",
+        "link_language": "🌐",
+        "link_advanced_appearance": "⚙️",
+        "header_enhancements": "✨",
+        "link_sdk": "🏆🛠️",
+        "header_application": "💻",
+        "link_updates": "🔄",
+        "link_storage": "💾📦",
+        "header_developers": "👨‍💻",
+        "link_testing": "🛠️🐞",
+        "link_debug": "ℹ️"
+      },
+      "section_backgrounds": {
+        "title": "🖼️",
+        "subtitle": "🎨🖼️🧩",
+        "button_none": "❌🖼️",
+        "description_credit": "🖼️: Team Salvato"
+      },
+      "section_advanced_appearance": {
+        "title": "⚙️",
+        "subtitle": "⚙️🧩",
+        "button_enable_sysborders": "🖥️🟦 (🔄)",
+        "button_disable_sysborders": "🖥️❌🟦 (🔄)"
+      },
+      "section_storage": {
+        "title": "💾📦",
+        "subtitle": "🔄💾📦",
+        "description_moving": "⚠️🔄📦🧩💾.",
+        "description_current": "📦: {0}",
+        "button_change": "🔄📦"
+      },
+      "section_updates": {
+        "title": "🔄",
+        "subtitle": "🆕🧩",
+        "description_current_version": "🔢: {0}",
+        "label_channel": "🔀",
+        "option_stable": "✅",
+        "option_beta": "🧪",
+        "button_check": "🔄"
+      },
+      "section_sdk": {
+        "title": "🏆🛠️",
+        "subtitle": "🏆🛠️🔧",
+        "description_mode": "🏆:",
+        "checkbox_always": "✅",
+        "checkbox_specified": "🧩✅",
+        "checkbox_never": "❌"
+      },
+      "section_testing": {
+        "title": "🛠️🐞",
+        "subtitle": "🛠️🐞🧩",
+        "button_enable": "✅🐞",
+        "button_disable": "❌🐞"
+      },
+      "section_debug": {
+        "title": "ℹ️",
+        "subtitle": "🐞ℹ️"
+      },
+      "section_language": {
+        "title": "🌐",
+        "subtitle": "🔄🌐🧩",
+        "description_current": "🌐: {0}",
+        "button_apply": "🔄🌐",
+        "button_contribute": "🤝🌐",
+        "description_restart": "🔄🌐🔜",
+        "notification_changed": "🌐🔄 {0}. 🔄🧩.",
+        "notification_same": "🌐: {0}."
+      }
+    },
+    "tab_about": {
+      "title": "ℹ️",
+      "description": "🧩🎮 Team Salvato.",
+      "title_disclaimer": "⚠️",
+      "disclaimer_1": "🧩🎮❌ Team Salvato. 🧩🎮 IP.",
+      "disclaimer_2": "🧩🎮🗑️💻. 🧩✅.",
+      "title_socials": "📱",
+      "social_twitter": "🐦 @Dynamicxaa",
+      "social_reddit": "👽 Reddit",
+      "social_email": "✉️",
+      "title_support": "💸",
+      "description_support": "🧩🎮🆓⬇️. 👍💸:",
+      "support_donate": "💸",
+      "support_steelseries": "10% 🖱️🎧 (💸)",
+      "support_code": "🤝💻"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "🧩🚀 {0}"
+    },
+    "running_cover": {
+      "title_running": "🎮🏃",
+      "title_crashed": "❌🎮",
+      "button_browse": "📂",
+      "button_close": "❌",
+      "description_running": "❌🎮🧩.",
+      "install_missing": "❌📦.",
+      "install_corrupt": "❌📦.",
+      "install_crashed": "❌🚀🎮."
+    },
+    "move_install": {
+      "title": "📂⬇️"
+    },
+    "mod_browse_dialog": {
+      "title": "🔍🧩⬇️",
+      "file_format_name": "🧩"
+    },
+    "game_browse_dialog": {
+      "title": "🔍📦⬇️",
+      "file_format_name": "🎮"
+    },
+    "shortcut_dialog": {
+      "title": "📂🔗",
+      "file_format_name": "🔗"
+    },
+    "errors": {
+      "exception": {
+        "title": "❌🧩🎮",
+        "body": "❌🧩🎮. 🔄."
+      },
+      "move_install": {
+        "title": "❌📦⬇️",
+        "body": "🔒📦⬇️."
+      },
+      "shortcut": {
+        "title": "❌🔗",
+        "body": "🔒🔗📂."
+      },
+      "install": {
+        "title": "❌⬇️🎮",
+        "body": "🔒⬇️."
+      },
+      "rename": {
+        "title": "❌✏️",
+        "body": "❌📦. 🔄."
+      },
+      "uninstall": {
+        "title": "❌🗑️",
+        "body": "❌📦. 🔄."
+      },
+      "save_delete": {
+        "title": "❌🗑️💾",
+        "body": "❌📦. 🔄."
+      },
+      "mod_delete": {
+        "title": "❌🗑️🧩",
+        "body": "❌📦. 🔄."
+      },
+      "renderer_freeze": {
+        "title": "❌🧩🎮⏸️",
+        "body": "❌🧩🎮. 🔄."
+      },
+      "executable_permission": {
+        "title": "❌🔒🎮",
+        "body": "❌DDLC.sh Linux. 🎮❌🚀."
+      }
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "renderer": {
+    "tabs": {
+      "tab_home": "h0m3",
+      "tab_mods": "m0dz",
+      "tab_store": "5t0r3",
+      "tab_options": "0pt10nz",
+      "tab_about": "4b0u7"
+    },
+    "version": {
+      "link_changelog": "wh47'5 n3w?"
+    },
+    "user_menu": {
+      "option_rename": "ch4ng3 u53rn4m3",
+      "option_logout": "l06 0u7"
+    },
+    "window_controls": {
+      "close": "cl0z3",
+      "maximise": "m4x1m1z3",
+      "minimise": "m1n1m1z3",
+      "devtools": "d3v t00lz (F12)",
+      "announcement": "r34d l47357 4nn0unc3m3n7",
+      "login": "l06 1n",
+      "sayonika_login": "54y0n1k4 l06 1n",
+      "update": {
+        "checking": "ch3ck1n6 f0r upd473z...",
+        "available": "upd473 4v41l4bl3. cl1ck 70 d0wnl04d.",
+        "downloading": "d0wnl04d1n6 upd473...",
+        "downloaded": "upd473 r34dy 70 1n574ll wh3n y0u qu17."
+      }
+    },
+    "crash_cover": {
+      "button_close": "qu17",
+      "button_continue": "c0n71nu3"
+    },
+    "drop_cover": {
+      "text": "dr0p 4 m0d h3r3 70 1n574ll 17"
+    },
+    "announcement": {
+      "button_open": "0p3n l1nk",
+      "button_close": "cl0z3"
+    },
+    "onboarding": {
+      "title": "w3lc0m3!",
+      "description_download": "l37'5 f1nd 4 c0py 0f DDLC.",
+      "button_download": "v1517 0ff1c14l d0wnl04d p463",
+      "button_choose": "br0w53 f0r 4 c0py",
+      "heading_step": "573p {0}",
+      "s1_desc": "y0u n33d 70 d0wnl04d Doki Doki Literature Club fr0m 0ff1c14l w3b51t3 (ddlc.moe) - cl1ck b37w.",
+      "s1_platform": "wh3n 45k3d, ch0053 \"DDLC ({0})\".",
+      "s2_desc": "0nc3 d0wnl04d3d, s3l3c7 17 u51n6 b37w.",
+      "description_location": "y0ur 64m3z w1ll b3 574r3d 47 {0}",
+      "link_change": "(ch4n63)"
+    },
+    "login_input": {
+      "message": "3n73r 3m41l 4ddr355",
+      "details": "4 l1nk w1ll b3 53n7. cl1ck 70 f1n15h l06 1n.",
+      "button_affirmative": "l06 1n",
+      "button_negative": "c4nc3l"
+    },
+    "change_username_input": {
+      "message": "3n73r n3w u53rn4m3",
+      "details": "u53rn4m3z d0n'7 h4v3 70 b3 un1qu3.",
+      "button_affirmative": "ch4n63",
+      "button_negative": "c4nc3l"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "53arch m0dz...",
+        "header_new": "637 574r73d",
+        "link_install": "1n574ll DDLC",
+        "header_installed": "1n574ll3d",
+        "header_downloaded": "d0wnl04dz"
+      },
+      "install_contextmenu": {
+        "launch": "l4unch",
+        "rename": "r3n4m3",
+        "shortcut": "cr3473 5h0r7cu7",
+        "delete_save": "d3l373 54v3 d474",
+        "uninstall": "un1n574ll"
+      },
+      "mod_contextmenu": {
+        "install": "1n574ll",
+        "delete": "d3l373"
+      },
+      "uninstall_confirmation": {
+        "message": "4r3 y0u 5ur3 y0u w4n7 70 un1n574ll?",
+        "details": "y0ur 54v3 d474 f0r {0} w1ll b3 d3l373d, 4nd y0u w1ll n33d 4 c0py 0f 7h3 m0d 70 1n574ll 17 4641n.",
+        "button_affirmative": "un1n574ll",
+        "button_negative": "c4nc3l"
+      },
+      "rename_input": {
+        "message": "r3n4m3 1n574ll",
+        "details": "3n73r 7h3 n3w n4m3 f0r {0}.",
+        "button_affirmative": "r3n4m3",
+        "button_negative": "c4nc3l"
+      },
+      "mod_delete_confirmation": {
+        "message": "4r3 y0u 5ur3 y0u w4n7 70 d3l373 7h3 m0d?",
+        "details": "y0u w1ll n33d 70 d0wnl04d 4n07h3r c0py 0f 7h3 m0d 70 1n574ll 17 4641n.",
+        "button_affirmative": "d3l373",
+        "button_negative": "c4nc3l"
+      },
+      "save_delete_confirmation": {
+        "message": "4r3 y0u 5ur3 y0u w4n7 70 d3l373 y0ur 54v3 d474?",
+        "details": "y0u w1ll h4v3 70 574r7 {0} 4641n fr0m 5cr47ch.",
+        "button_affirmative": "d3l373",
+        "button_negative": "c4nc3l"
+      },
+      "install": {
+        "button_launch": "l4unch",
+        "button_settings": "53771n65",
+        "tag_global_save": "g10b4l 54v3",
+        "tag_sdk": "SDK",
+        "title_achievements": "4chi3v3m3n75 ({0} / {1})",
+        "description_achievements": "k33p p14y1n6 70 un10ck m0r3 4chi3v3m3n75.",
+        "description_achievements_complete": "y0u'v3 un10ck3d 4ll 4chi3v3m3n75. c0n6r475!",
+        "title_screenshots_none": "n0 5cr33n5h075",
+        "title_screenshots_one": "1 5cr33n5h07",
+        "title_screenshots": "{0} 5cr33n5h075",
+        "description_screenshots": "pr355 S wh1l3 p14y1n6 70 74k3 4 5cr33n5h07.",
+        "description_sdk": "7h15 m0d 5upp0r75 5p3c14l f347ur35 w17h 7h3 Doki Doki Mod Manager SDK!",
+        "description_author": "cr3473d by {0}",
+        "link_website": "w3b5173 ({0})",
+        "description_external": "5h0w 1n f0ld3r"
+      },
+      "mod": {
+        "button_install": "1n574ll",
+        "button_settings": "53771n65",
+        "description_external": "5h0w 1n f0ld3r"
+      },
+      "install_creation": {
+        "title": "1n574ll DDLC",
+        "label_install_name": "1n574ll n4m3",
+        "label_folder_name": "f0ld3r n4m3",
+        "label_global_save": "g10b4l 54v3",
+        "label_has_mod": "1n574ll m0d",
+        "label_mod": "m0d",
+        "label_existing_saves": "3x1571n6 54v3 f1l35",
+        "description_mod": "cl1ck 70 br0w53 f0r 4 m0d.",
+        "header_summary": "5umm4ry",
+        "description_vanilla": "4 cl34n c0py 0f DDLC w1ll b3 cr3473d. 7h3 54v3 d474 w1ll b3 53p4r473 fr0m 4ny 07h3r c0py 0f 7h3 64m3.",
+        "description_vanilla_global_save": "4 cl34n c0py 0f DDLC w1ll b3 cr3473d. 7h3 54v3 d474 w1ll b3 5h4r3d w17h 07h3r c0p135 0f 7h3 64m3 (e.g. 5734m)",
+        "description_modded": "4 c0py 0f DDLC w1ll b3 cr3473d, 4nd 7h3 m0d w1ll b3 1n574ll3d.  7h3 54v3 d474 w1ll b3 53p4r473 fr0m 4ny 07h3r c0py 0f 7h3 64m3.",
+        "description_modded_global_save": "4 c0py 0f DDLC w1ll b3 cr3473d, 4nd 7h3 m0d w1ll b3 1n574ll3d.  7h3 54v3 d474 w1ll b3 5h4r3d w17h 07h3r c0p135 0f 7h3 64m3 (e.g. 5734m)",
+        "button_install": "1n574ll",
+        "button_installing": "1n574ll1n6...",
+        "status_exists": "7h47 f0ld3r 41r34dy 3x1575. p1ck 4n07h3r f0ld3r n4m3."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "7h3 570r3 15 c0m1n6 500n!",
+      "description_1": "7h3 54y0n1k4 m0d d474b453 w1ll pr0v1d3 4 c3n7r4l l0c4710n 70 5h4r3, d0wnl04d 4nd r3v13w DDLC m0dz. wh3n 54y0n1k4 15 publ1cly 4v41l4bl3, y0u'11 b3 4bl3 70 br0w53 m0dz r16h7 h3r3 1n Doki Doki Mod Manager.",
+      "description_2": "wh1l3 y0u w417, f33l fr33 70 d0wnl04d 50m3 0f 7h353 r3c0mm3nd3d m0dz.",
+      "error": "f41l3d 70 l04d 7h3 l157 0f m0dz. 4r3 y0u 0ffl1n3?",
+      "button_download": "d0wnl04d"
+    },
+    "tab_store": {
+      "title": "54y0n1k4 570r3",
+      "subtitle": "d15c0v3r 4nd d0wnl04d DDLC m0dz",
+      "search_placeholder": "53arch m0dz...",
+      "loading": "l04d1n6 m0dz...",
+      "error_title": "c0nn3c710n 3rr0r",
+      "retry_button": "r37ry",
+      "offline_title": "0ffl1n3",
+      "offline_message": "y0u 4r3 curr3n7ly 0ffl1n3. pl3453 ch3ck y0ur 1n73rn37 c0nn3c710n 4nd 7ry 4641n.",
+      "check_connection": "ch3ck c0nn3c710n",
+      "maintenance_banner": "4u7h3n71c4710n 53rv1c35 4r3 73mp0r4r1ly un4v41l4bl3 du3 70 m41n73n4nc3. y0u c4n 57111 br0w53 m0dz bu7 c4nn07 l06 1n 0r r3g1573r.",
+      "no_mods_title": "n0 m0dz f0und",
+      "no_mods_message": "7ry 4dju57in6 y0ur 53arch 0r f1l73r5",
+      "filters": {
+        "category": "c47360ry:",
+        "all_categories": "411 c47360r135",
+        "sort_by": "50r7 by:",
+        "date_created": "d473 cr3473d",
+        "date_updated": "d473 upd473d", 
+        "downloads": "d0wnl04dz",
+        "rating": "r471n6",
+        "title": "717l3",
+        "order": "0rd3r:",
+        "descending": "d35c3nd1n6",
+        "ascending": "4sc3nd1n6",
+        "featured_only": "f347ur3d 0nly",
+        "translate_content": "7r4n5l473 c0n73n7",
+        "auto_detect": "4u70-d373c7"
+      },
+      "mod_card": {
+        "featured": "f347ur3d",
+        "mature": "m47ur3",
+        "by_author": "by {0}",
+        "download": "d0wnl04d",
+        "downloading": "d0wnl04d1n6...",
+        "download_mod": "d0wnl04d m0d",
+        "downloads_count": "{0} d0wnl04dz",
+        "version": "v3r510n {0}",
+        "screenshots": "5cr33n5h075 ({0})",
+        "description": "d35cr1p710n",
+        "tags": "74g5",
+        "requirements": "r3qu1r3m3n75"
+      },
+      "pagination": {
+        "previous": "pr3v10u5",
+        "next": "n3x7",
+        "page_info": "p463 {0} 0f {1}"
+      },
+      "login": {
+        "title": "l06 1n 70 54y0n1k4",
+        "discord": "l06 1n w17h D15c0rd",
+        "github": "l06 1n w17h G17Hub",
+        "or": "0r",
+        "username_label": "u53rn4m3 0r 3m41l:",
+        "username_placeholder": "3n73r u53rn4m3 0r 3m41l 4ddr355",
+        "username_help": "y0u c4n u53 317h3r y0ur u53rn4m3 0r 3m41l 4ddr355 70 l06 1n",
+        "password_label": "p455w0rd:",
+        "remember_me": "r3m3mb3r m3",
+        "login_button": "l06 1n",
+        "logging_in": "l06 1n...",
+        "register_link": "d0n'7 h4v3 4n 4cc0un7? r3g1573r h3r3",
+        "success": "5ucc355fully l06g3d 1n!",
+        "failed": "l06 1n f41l3d: {0}"
+      },
+      "translation": {
+        "enabled": "7r4n5l4710n 3n4bl3d. c0n73n7 w1ll b3 7r4n5l473d wh3n 4v41l4bl3.",
+        "disabled": "7r4n5l4710n d154bl3d.",
+        "language_changed": "7r4n5l4710n l4n6u463 ch4n63d 70 {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "4pp34r4nc3",
+        "link_background": "b4ck6r0und",
+        "link_language": "l4n6u463",
+        "link_advanced_appearance": "4dv4nc3d",
+        "header_enhancements": "3nh4nc3m3n75",
+        "link_sdk": "4chi3v3m3n75 & SDK",
+        "header_application": "4pp1c4710n",
+        "link_updates": "upd473z",
+        "link_storage": "574r463 l0c4710n",
+        "header_developers": "d3v3l0p3r5",
+        "link_testing": "SDK d36u6",
+        "link_debug": "4pp 1nf0"
+      },
+      "section_backgrounds": {
+        "title": "b4ck6r0und",
+        "subtitle": "cu570m153 y0ur c0py 0f Doki Doki Mod Manager w17h 0n3 0f 7h353 b4ck6r0und5.",
+        "button_none": "n0 b4ck6r0und",
+        "description_credit": "0r16in4l DDLC b4ck6r0und5 c0ur735y 0f 734m 54lv470."
+      },
+      "section_advanced_appearance": {
+        "title": "4dv4nc3d",
+        "subtitle": "f1nd 07h3r 1n73rf4c3 0p710n5 h3r3.",
+        "button_enable_sysborders": "u53 5y573m b0rd3r5 (r3qu1r35 r3574r7)",
+        "button_disable_sysborders": "d154bl3 5y573m b0rd3r5 (r3qu1r35 r3574r7)"
+      },
+      "section_storage": {
+        "title": "574r463 l0c4710n",
+        "subtitle": "ch4n63 wh3r3 y0ur 64m3 d474 15 574r3d.",
+        "description_moving": "w4rn1n6! 1f y0u ch0053 70 ch4n63 y0ur 1n574ll l0c4710n, 411 y0ur m0dz, 1n574ll4710n5 4nd 54v3 d474 w1ll b3 m0v3d. 7h15 m4y 74k3 53v3r4l m1nu735, 4nd c4nn07 b3 1n73rrup73d.",
+        "description_current": "curr3n7 l0c4710n: {0}",
+        "button_change": "ch4n63 1n574ll l0c4710n"
+      },
+      "section_updates": {
+        "title": "upd473z",
+        "subtitle": "637 7h3 l47357 v3r510n 0f Doki Doki Mod Manager.",
+        "description_current_version": "curr3n7 v3r510n: {0}",
+        "label_channel": "r3l3453 ch4nn3l",
+        "option_stable": "574bl3",
+        "option_beta": "b374",
+        "button_check": "ch3ck f0r upd473z"
+      },
+      "section_sdk": {
+        "title": "4chi3v3m3n75 & SDK",
+        "subtitle": "ch4n63 7h3 w4y 4chi3v3m3n75 4r3 h4ndl3d.",
+        "description_mode": "3n4bl3 4chi3v3m3n75:",
+        "checkbox_always": "41w4y5 (r3c0mm3nd3d)",
+        "checkbox_specified": "wh3n 7h3 m0d 5p3c1f135 17 5upp0r75 7h3m",
+        "checkbox_never": "n3v3r"
+      },
+      "section_testing": {
+        "title": "SDK d36u6",
+        "subtitle": "3n4bl3 d36u6 l0661n6 70 7357 y0ur m0dz w17h 7h3 Doki Doki Mod Manager SDK.",
+        "button_enable": "3n4bl3 d36u6",
+        "button_disable": "d154bl3 d36u6"
+      },
+      "section_debug": {
+        "title": "4pp 1nf0",
+        "subtitle": "1nf0rm4710n f0r d146n051n6 pr0bl3m5."
+      },
+      "section_language": {
+        "title": "l4n6u463",
+        "subtitle": "ch4n63 7h3 l4n6u463 0f Doki Doki Mod Manager.",
+        "description_current": "curr3n7 l4n6u463: {0}",
+        "button_apply": "4pply l4n6u463",
+        "button_contribute": "h3lp 7r4n5l473",
+        "description_restart": "l4n6u463 ch4n635 w1ll 74k3 3ff3c7 4f73r r3574r71n6 7h3 4pp1c4710n.",
+        "notification_changed": "l4n6u463 ch4n63d 70 {0}. pl3453 r3574r7 7h3 4pp1c4710n 70 533 7h3 ch4n635.",
+        "notification_same": "l4n6u463 15 41r34dy 537 70 {0}."
+      }
+    },
+    "tab_about": {
+      "title": "4b0u7",
+      "description": "Doki Doki Mod Manager 15 4 c0mmun17y-d3v3l0p3d pr0j3c7 7h47 h3lp5 y0u f1nd, 1n574ll 4nd p14y m0dz f0r Doki Doki Literature Club, 4 fr33 V15u41 N0v3l 64m3 by 734m 54lv470.",
+      "title_disclaimer": "d154cl41m3r",
+      "disclaimer_1": "Doki Doki Mod Manager 15 4 f4n w0rk 0f Doki Doki Literature Club 4nd 15 n07 4ff1l1473d w17h 734m 54lv470. 17 15 4 f4n w0rk, 45 d3f1n3d by 734m 54lv470'5 IP Guid3l1n35.",
+      "disclaimer_2": "Doki Doki Mod Manager d035 n07 74k3 r35p0n51b1l17y f0r 4ny d4m463 c4u53d 70 y0ur f1l35 0r c0mpu73r, 45 4 r35u17 0f p14y1n6 4 m0d 0r 07h3rw153. 17 15 up 70 y0u 70 3n5ur3 m0dz 4r3 54f3 70 p14y.",
+      "title_socials": "637 1n 70uch",
+      "social_twitter": "f0110w @Dynamicxaa 0n 7w1773r",
+      "social_reddit": "m355463 m3 0n R3dd17",
+      "social_email": "53nd m3 4n 3m41l",
+      "title_support": "5upp0r7 d3v3l0pm3n7",
+      "description_support": "Doki Doki Mod Manager w1ll 41w4y5 b3 fr33 70 d0wnl04d 4nd u53. 1f y0u l1k3 17 4nd w4n7 70 h3lp m3 k33p 17 upd473d, c0n51d3r 5upp0r71n6 m3 1n 0n3 0f 7h3 f0110w1n6 w4y5.",
+      "support_donate": "m4k3 4 0n3-0ff d0n4710n",
+      "support_steelseries": "637 10% 0ff 57331S3r135 64m1n6 p3r1ph3r41s (4ff1l1473 l1nk)",
+      "support_code": "c0n7r1bu73 70 7h3 pr0j3c7 (c0d3 0r 7r4n5l4710n5)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "0p3n Doki Doki Mod Manager 4nd l4unch {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC 15 runn1n6",
+      "title_crashed": "50m37h1n6 w3n7 wr0n6",
+      "button_browse": "0p3n 64m3 f0ld3r",
+      "button_close": "0k",
+      "description_running": "cl053 7h3 64m3 70 m4k3 ch4n635 70 y0ur m0dz.",
+      "install_missing": "7h3 1n574ll c0u1d n07 b3 f0und.",
+      "install_corrupt": "7h3 1n574ll 15 1nc0mp1373 0r c0rrup7.",
+      "install_crashed": "7h3 64m3 f41l3d 70 l4unch 0r cr45h3d."
+    },
+    "move_install": {
+      "title": "53l3c7 n3w 1n574ll f0ld3r"
+    },
+    "mod_browse_dialog": {
+      "title": "f1nd 4 m0d 70 1n574ll",
+      "file_format_name": "m0dz"
+    },
+    "game_browse_dialog": {
+      "title": "l0c473 4 c0py 0f DDLC'5 z1p f1l3",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "ch0053 wh3r3 70 pl4c3 y0ur 5h0r7cu7",
+      "file_format_name": "5h0r7cu7"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager cr45h3d",
+        "body": "7h3 pr0bl3m h45 b33n r3p0r73d. pl3453 r3574r7 4nd 7ry 4641n."
+      },
+      "move_install": {
+        "title": "f41l3d 70 m0v3 1n574ll f0ld3r",
+        "body": "ch3ck 7h47 y0u h4v3 p3rm15510n 4nd 3n0u6h 5p4c3 70 m0v3 70 7h15 f0ld3r."
+      },
+      "shortcut": {
+        "title": "f41l3d 70 cr3473 5h0r7cu7",
+        "body": "ch3ck 7h47 y0u h4v3 p3rm15510n 70 cr3473 f1l35 1n 7h15 f0ld3r."
+      },
+      "install": {
+        "title": "f41l3d 70 1n574ll 64m3",
+        "body": "ch3ck 7h47 y0u h4v3 p3rm15510n 4nd 3n0u6h 5p4c3 70 1n574ll."
+      },
+      "rename": {
+        "title": "f41l3d 70 r3n4m3",
+        "body": "ch3ck 7h47 y0u h4v3 cl053d 411 pr06r4m5 7h47 m4y b3 1n73rf3r1n6 4nd 7ry 4641n."
+      },
+      "uninstall": {
+        "title": "f41l3d 70 un1n574ll",
+        "body": "ch3ck 7h47 y0u h4v3 cl053d 411 pr06r4m5 7h47 m4y b3 1n73rf3r1n6 4nd 7ry 4641n."
+      },
+      "save_delete": {
+        "title": "f41l3d 70 d3l373 54v3 d474",
+        "body": "ch3ck 7h47 y0u h4v3 cl053d 411 pr06r4m5 7h47 m4y b3 1n73rf3r1n6 4nd 7ry 4641n."
+      },
+      "mod_delete": {
+        "title": "f41l3d 70 d3l373 7h3 m0d",
+        "body": "ch3ck 7h47 y0u h4v3 cl053d 411 pr06r4m5 7h47 m4y b3 1n73rf3r1n6 4nd 7ry 4641n."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager 570pp3d r35p0nd1n6",
+        "body": "1f 7h15 155u3 l4575 f0r 4 l0n6 71m3, cl053 7h3 4pp 4nd 574r7 4641n."
+      },
+      "executable_permission": {
+        "title": "f41l3d 70 m4k3 64m3 3x3cu74bl3",
+        "body": "c0u1d n07 m4k3 DDLC.sh 3x3cu74bl3 0n Linux. 7h3 64m3 m4y n07 l4unch pr0p3rly."
+      }
+    }
+  }
+}
