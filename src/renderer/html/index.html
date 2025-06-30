@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="app" :class="['os-'+system_platform, appx ? 'is-appx': 'is-standard']"
-     :style="{'background-image': backgroundImageStyle}">
+     :style="backgroundImageStyle">
     <ddmm-onboarding v-if="onboarding" :style="{'background-image': backgroundImageStyle}"
                      @close="onboarding = false"></ddmm-onboarding>
     <ddmm-drop-overlay v-if="dropping_mod" @end="dropping_mod = false" @file="showInstallMod"></ddmm-drop-overlay>

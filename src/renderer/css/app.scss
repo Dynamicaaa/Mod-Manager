@@ -196,7 +196,7 @@ div, section, main, article {
   // Override any inherited background sizing to ensure proper scaling
   &[style*="background-image"] {
     // Fix the background to properly fit the entire window
-    background-size: cover !important;
+    background-size: contain !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
     // Remove fixed attachment to ensure proper scaling with window size
@@ -420,7 +420,7 @@ a .fab {
   // Use background instead of ::before for better scroll behavior
   background-image: $ddlc-glass-gradient, $ddlc-panel-gradient;
   background-attachment: local, local;
-  background-size: 100% 100%, 100% 100%;
+  background-size: contain, contain;
   background-repeat: no-repeat, no-repeat;
 }
 
@@ -446,7 +446,7 @@ a .fab {
   // Use background instead of ::before for better scroll behavior
   background-image: $ddlc-glass-gradient, $ddlc-panel-gradient;
   background-attachment: local, local;
-  background-size: 100% 100%, 100% 100%;
+  background-size: contain, contain;
   background-repeat: no-repeat, no-repeat;
 }
 
@@ -906,7 +906,7 @@ input[type="radio"]:focus {
   width: 100vw;
   height: 100vh;
   z-index: 100;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
   background-attachment: scroll !important; // Use scroll instead of fixed to prevent zooming issues
@@ -959,7 +959,7 @@ input[type="radio"]:focus {
   
   // Ensure background images are properly scaled
   &[style*="background-image"] {
-    background-size: cover !important;
+    background-size: contain !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
@@ -1002,7 +1002,7 @@ input[type="radio"]:focus {
   // Override background image properties for proper scaling on overlays
   // Using scroll instead of fixed prevents zooming issues on window resize
   &[style*="background-image"] {
-    background-size: cover !important;
+    background-size: contain !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
@@ -1593,7 +1593,7 @@ input[type="radio"]:focus {
     // Use background instead of ::before for better scroll behavior
     background-image: $ddlc-glass-gradient;
     background-attachment: local;
-    background-size: 100% 100%;
+    background-size: contain;
     background-repeat: no-repeat;
 
     // Ensure scrollbar styling doesn't create gray boxes
@@ -1628,7 +1628,7 @@ input[type="radio"]:focus {
     // Use background instead of ::before for better scroll behavior
     background-image: $ddlc-glass-gradient;
     background-attachment: local;
-    background-size: 100% 100%;
+    background-size: contain;
     background-repeat: no-repeat;
 
     // Ensure scrollbar styling doesn't create gray boxes

@@ -118,16 +118,36 @@ const app = new Vue({
         },
         "backgroundImageStyle": function () {
             if (this.background_image && this.background_image !== "none") {
-                return "radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.99) 90%), url(../images/backgrounds/" + this.background_image + ")";
+                return {
+                    backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.99) 90%), url(../images/backgrounds/" + this.background_image + ")",
+                    backgroundSize: "120%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                };
             } else {
-                return "linear-gradient(#111, #111)";
+                return {
+                    backgroundImage: "linear-gradient(#111, #111)",
+                    backgroundSize: "120%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                };
             }
         },
         "backgroundImageCrashStyle": function () {
             if (this.background_image && this.background_image !== "none") {
-                return "radial-gradient(rgba(64, 0, 0, 0.5), rgba(64, 0, 0, 0.99) 90%), url(../images/backgrounds/" + this.background_image + ")";
+                return {
+                    backgroundImage: "radial-gradient(rgba(64, 0, 0, 0.5), rgba(64, 0, 0, 0.99) 90%), url(../images/backgrounds/" + this.background_image + ")",
+                    backgroundSize: "120%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                };
             } else {
-                return "linear-gradient(rgb(64, 0, 0), rgb(64, 0, 0))";
+                return {
+                    backgroundImage: "linear-gradient(rgb(64, 0, 0), rgb(64, 0, 0))",
+                    backgroundSize: "120%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                };
             }
         },
         "flashAnnouncement": function () {
