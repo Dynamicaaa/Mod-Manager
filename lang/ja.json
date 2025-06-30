@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "新機能"
     },
-
     "user_menu": {
       "option_rename": "ユーザー名変更",
       "option_logout": "ログアウト"
@@ -24,7 +23,6 @@
       "maximise": "最大化",
       "minimise": "最小化",
       "devtools": "開発者ツールの切り替え (F12)",
-
       "announcement": "最新のお知らせを読む",
       "login": "ログイン",
       "sayonika_login": "Sayonikaログイン",
@@ -118,7 +116,6 @@
         "button_settings": "設定",
         "tag_global_save": "グローバルセーブ",
         "tag_sdk": "SDK",
-
         "title_achievements": "実績 ({0} / {1})",
         "description_achievements": "さらなる実績を解除するためにプレイを続けてください。",
         "description_achievements_complete": "すべての実績を解除しました。おめでとうございます！",
@@ -128,7 +125,6 @@
         "description_screenshots": "プレイ中にSキーを押してスクリーンショットを撮影します。",
         "description_sdk": "このMODはDoki Doki Mod Manager SDKの特別な機能をサポートしています！",
         "description_author": "{0} による作成",
-
         "link_website": "ウェブサイト ({0})",
         "description_external": "フォルダで表示"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "グローバルセーブ",
         "label_has_mod": "MODをインストール",
         "label_mod": "MOD",
-
         "label_existing_saves": "既存のセーブファイル",
         "description_mod": "クリックしてMODを参照します。",
         "header_summary": "概要",
         "description_vanilla": "DDLCのクリーンコピーが作成されます。セーブデータは他のゲームのコピーとは別に保存されます。",
         "description_vanilla_global_save": "DDLCのクリーンコピーが作成されます。セーブデータは他のゲームのコピー（例：Steam）と共有されます。",
-
         "description_modded": "DDLCのコピーが作成され、MODがインストールされます。セーブデータは他のゲームのコピーとは別に保存されます。",
         "description_modded_global_save": "DDLCのコピーが作成され、MODがインストールされます。セーブデータは他のゲームのコピー（例：Steam）と共有されます。",
-
         "button_install": "インストール",
         "button_installing": "インストール中...",
         "status_exists": "そのフォルダは既に存在します。別のフォルダ名を選択してください。"
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "詳細設定",
         "header_enhancements": "拡張機能",
         "link_sdk": "実績 & SDK",
-
         "header_application": "アプリケーション",
         "link_updates": "アップデート",
         "link_storage": "保存場所",
@@ -218,7 +210,6 @@
         "checkbox_specified": "MODがサポートを指定している場合",
         "checkbox_never": "しない"
       },
-
       "section_testing": {
         "title": "SDKデバッグ",
         "subtitle": "Doki Doki Mod Manager SDKでMODをテストするためにデバッグログを有効にします。",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod ManagerはDoki Doki Literature Clubのファン作品であり、Team Salvatoとは関係ありません。これはTeam SalvatoのIPガイドラインで定義されているファン作品です。",
       "disclaimer_2": "Doki Doki Mod Managerは、MODをプレイした結果またはその他の理由により、あなたのファイルやコンピュータに生じた損害について責任を負いません。MODが安全にプレイできることを確認するのはあなたの責任です。",
       "title_socials": "お問い合わせ",
-
       "social_twitter": "TwitterでDynamicxaaをフォロー",
       "social_reddit": "Redditでメッセージを送る",
-      "social_email": "メールを送る",
-      "title_support": "開発をサポート",
-      "description_support": "Doki Doki Mod Managerは常にダウンロードと使用が無料です。気に入って、更新を続けるのを手伝いたい場合は、以下の方法のいずれかでサポートを検討してください。",
-      "support_donate": "一度限りの寄付をする",
-      "support_steelseries": "SteelSeriesゲーミング周辺機器を10%オフで入手 (アフィリエイトリンク)",
-      "support_code": "プロジェクトに貢献する (コードまたは翻訳)"
+      "social_email": "メールを送る"
     }
   },
   "main": {

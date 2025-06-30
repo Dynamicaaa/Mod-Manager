@@ -310,12 +310,7 @@
       "title_socials": "Επικοινωνία",
       "social_twitter": "Ακολουθήστε @Dynamicxaa στο Twitter",
       "social_reddit": "Μήνυμα στο Reddit",
-      "social_email": "Αποστολή email",
-      "title_support": "Υποστήριξη ανάπτυξης",
-      "description_support": "Δωρεάν εφαρμογή. Μπορείτε να υποστηρίξετε:",
-      "support_donate": "Δωρεά",
-      "support_steelseries": "Έκπτωση 10% σε SteelSeries (σύνδεσμος)",
-      "support_code": "Συμβολή σε κώδικα ή μεταφράσεις"
+      "social_email": "Αποστολή email"
     }
   },
   "main": {

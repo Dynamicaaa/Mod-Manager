@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "vad är nytt?"
     },
-
     "user_menu": {
       "option_rename": "Ändra Användarnamn",
       "option_logout": "Logga ut"
@@ -24,7 +23,6 @@
       "maximise": "Maximera",
       "minimise": "Minimera",
       "devtools": "Växla Utvecklarverktyg (F12)",
-
       "announcement": "Läs det senaste meddelandet",
       "login": "Logga In",
       "sayonika_login": "Sayonika Inloggning",
@@ -118,7 +116,6 @@
         "button_settings": "Inställningar",
         "tag_global_save": "Global Sparning",
         "tag_sdk": "SDK",
-
         "title_achievements": "Prestationer ({0} / {1})",
         "description_achievements": "Fortsätt spela för att låsa upp fler prestationer.",
         "description_achievements_complete": "Du har låst upp alla prestationer. Grattis!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Tryck S medan du spelar för att ta en skärmdump.",
         "description_sdk": "Denna mod stöder specialfunktioner med Doki Doki Mod Manager SDK!",
         "description_author": "Skapad av {0}",
-
         "link_website": "Webbplats ({0})",
         "description_external": "Visa i mapp"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Global Sparning",
         "label_has_mod": "Installera Mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "Befintliga Sparfiler",
         "description_mod": "Klicka för att bläddra efter en mod.",
         "header_summary": "Sammanfattning",
         "description_vanilla": "En ren kopia av DDLC kommer att skapas. Spardata kommer att vara separat från alla andra kopior av spelet.",
         "description_vanilla_global_save": "En ren kopia av DDLC kommer att skapas. Spardata kommer att delas med andra kopior av spelet (t.ex. Steam)",
-
         "description_modded": "En kopia av DDLC kommer att skapas och moden kommer att installeras. Spardata kommer att vara separat från alla andra kopior av spelet.",
         "description_modded_global_save": "En kopia av DDLC kommer att skapas och moden kommer att installeras. Spardata kommer att delas med andra kopior av spelet (t.ex. Steam)",
-
         "button_install": "Installera",
         "button_installing": "Installerar...",
         "status_exists": "Den mappen finns redan. Välj ett annat mappnamn."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Avancerat",
         "header_enhancements": "Förbättringar",
         "link_sdk": "Prestationer & SDK",
-
         "header_application": "Applikation",
         "link_updates": "Uppdateringar",
         "link_storage": "Lagringsplats",
@@ -218,7 +210,6 @@
         "checkbox_specified": "När moden specificerar att den stöder dem",
         "checkbox_never": "Aldrig"
       },
-
       "section_testing": {
         "title": "SDK Debug",
         "subtitle": "Aktivera debug-loggning för att testa dina mods med Doki Doki Mod Manager SDK.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager är ett fanverk av Doki Doki Literature Club och är inte affilierat med Team Salvato. Det är ett fanverk, som definierat av Team Salvatos IP-riktlinjer.",
       "disclaimer_2": "Doki Doki Mod Manager tar inget ansvar för skador på dina filer eller dator som resultat av att spela en mod eller på annat sätt. Det är upp till dig att säkerställa att mods är säkra att spela.",
       "title_socials": "Kontakta oss",
-
       "social_twitter": "Följ @Dynamicxaa på Twitter",
       "social_reddit": "Skicka mig ett meddelande på Reddit",
-      "social_email": "Skicka mig ett e-postmeddelande",
-      "title_support": "Stöd Utveckling",
-      "description_support": "Doki Doki Mod Manager kommer alltid att vara gratis att ladda ner och använda. Om du gillar det och vill hjälpa mig att hålla det uppdaterat, överväg att stödja mig på något av följande sätt.",
-      "support_donate": "Gör en engångsdonation",
-      "support_steelseries": "Få 10% rabatt på SteelSeries gaming-tillbehör (affiliate-länk)",
-      "support_code": "Bidra till projektet (kod eller översättningar)"
+      "social_email": "Skicka mig ett e-postmeddelande"
     }
   },
   "main": {

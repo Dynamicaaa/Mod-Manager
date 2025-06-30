@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "co je nového?"
     },
-
     "user_menu": {
       "option_rename": "Změnit uživatelské jméno",
       "option_logout": "Odhlásit se"
@@ -24,7 +23,6 @@
       "maximise": "Maximalizovat",
       "minimise": "Minimalizovat",
       "devtools": "Přepnout vývojářské nástroje (F12)",
-
       "announcement": "Přečíst nejnovější oznámení",
       "login": "Přihlásit se",
       "sayonika_login": "Přihlášení Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Nastavení",
         "tag_global_save": "Globální uložení",
         "tag_sdk": "SDK",
-
         "title_achievements": "Úspěchy ({0} / {1})",
         "description_achievements": "Pokračuj ve hře pro odemknutí dalších úspěchů.",
         "description_achievements_complete": "Odemkli jste všechny úspěchy. Gratulujeme!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Stiskněte S během hry pro vytvoření screenshotu.",
         "description_sdk": "Tento mód podporuje speciální funkce s Doki Doki Mod Manager SDK!",
         "description_author": "Vytvořil {0}",
-
         "link_website": "Webová stránka ({0})",
         "description_external": "Zobrazit ve složce"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Globální uložení",
         "label_has_mod": "Nainstalovat mód",
         "label_mod": "Mód",
-
         "label_existing_saves": "Existující soubory uložení",
         "description_mod": "Klikněte pro procházení módu.",
         "header_summary": "Shrnutí",
         "description_vanilla": "Bude vytvořena čistá kopie DDLC. Data uložení budou oddělena od všech ostatních kopií hry.",
         "description_vanilla_global_save": "Bude vytvořena čistá kopie DDLC. Data uložení budou sdílena s ostatními kopiemi hry (např. Steam)",
-
         "description_modded": "Bude vytvořena kopie DDLC a nainstalován mód. Data uložení budou oddělena od všech ostatních kopií hry.",
         "description_modded_global_save": "Bude vytvořena kopie DDLC a nainstalován mód. Data uložení budou sdílena s ostatními kopiemi hry (např. Steam)",
-
         "button_install": "Nainstalovat",
         "button_installing": "Instalování...",
         "status_exists": "Tato složka již existuje. Vyberte jiný název složky."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Pokročilé",
         "header_enhancements": "Vylepšení",
         "link_sdk": "Úspěchy a SDK",
-
         "header_application": "Aplikace",
         "link_updates": "Aktualizace",
         "link_storage": "Umístění úložiště",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Když mód specifikuje, že je podporuje",
         "checkbox_never": "Nikdy"
       },
-
       "section_testing": {
         "title": "Ladění SDK",
         "subtitle": "Povolte ladící protokolování pro testování vašich módů s Doki Doki Mod Manager SDK.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager je fanouškovské dílo Doki Doki Literature Club a není spojeno s Team Salvato. Je to fanouškovské dílo, jak je definováno v IP pokynech Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager nepřebírá odpovědnost za jakékoli škody způsobené vašim souborům nebo počítači v důsledku hraní módu nebo jinak. Je na vás, abyste se ujistili, že módy jsou bezpečné ke hraní.",
       "title_socials": "Kontaktujte nás",
-
       "social_twitter": "Sledujte @Dynamicxaa na Twitteru",
       "social_reddit": "Pošlete mi zprávu na Reddit",
-      "social_email": "Pošlete mi e-mail",
-      "title_support": "Podpořte vývoj",
-      "description_support": "Doki Doki Mod Manager bude vždy zdarma ke stažení a použití. Pokud se vám líbí a chcete mi pomoci udržet jej aktualizovaný, zvažte mou podporu jedním z následujících způsobů.",
-      "support_donate": "Proveďte jednorázový dar",
-      "support_steelseries": "Získejte 10% slevu na herní příslušenství SteelSeries (affiliate odkaz)",
-      "support_code": "Přispějte do projektu (kód nebo překlady)"
+      "social_email": "Pošlete mi e-mail"
     }
   },
   "main": {

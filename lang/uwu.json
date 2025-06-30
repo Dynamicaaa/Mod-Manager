@@ -177,7 +177,7 @@
         "all_categories": "Aww Categowies",
         "sort_by": "Sowt by:",
         "date_created": "Date Cweated",
-        "date_updated": "Date Updated", 
+        "date_updated": "Date Updated",
         "downloads": "Downwoads",
         "rating": "Wating",
         "title": "Titwe",
@@ -310,12 +310,7 @@
       "title_socials": "Get in touch",
       "social_twitter": "Fowwow @Dynamicxaa on Twittew",
       "social_reddit": "Message me on Weddit",
-      "social_email": "Send me an emaiw",
-      "title_support": "Suppowt Devewopment",
-      "description_support": "Doki Doki Mod Manager wiww awways be fwee to downwoad and use. If you wike it and want to hewp me keep it updated, considew suppowting me in one of the fowwowing ways.",
-      "support_donate": "Make a one-off donation",
-      "support_steelseries": "Get 10% off SteelSeries gaming pewiphewaws (affiliate wink)",
-      "support_code": "Contwibute to the pwoject (code ow twanswations)"
+      "social_email": "Send me an emaiw"
     }
   },
   "main": {

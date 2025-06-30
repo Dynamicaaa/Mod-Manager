@@ -310,12 +310,7 @@
       "title_socials": "Kontakt",
       "social_twitter": "Sledujte @Dynamicxaa na Twitteri",
       "social_reddit": "Napíšte mi na Reddite",
-      "social_email": "Poslať e-mail",
-      "title_support": "Podpora vývoja",
-      "description_support": "Doki Doki Mod Manager je vždy zadarmo. Ak sa vám páči a chcete podporiť jeho vývoj, zvážte jednu z nasledujúcich možností.",
-      "support_donate": "Prispieť jednorazovo",
-      "support_steelseries": "Zľava 10% na SteelSeries produkty (affiliate link)",
-      "support_code": "Prispieť kódom alebo prekladmi"
+      "social_email": "Poslať e-mail"
     }
   },
   "main": {

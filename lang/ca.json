@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Catalan",
+    "name_local": "Català"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Inici",
+      "tab_mods": "Mods",
+      "tab_store": "Botiga",
+      "tab_options": "Opcions",
+      "tab_about": "Quant a"
+    },
+    "version": {
+      "link_changelog": "què hi ha de nou?"
+    },
+    "user_menu": {
+      "option_rename": "Canvia el nom d'usuari",
+      "option_logout": "Tanca la sessió"
+    },
+    "window_controls": {
+      "close": "Tanca",
+      "maximise": "Maximitza",
+      "minimise": "Minimitza",
+      "devtools": "Activa/desactiva les eines de desenvolupador (F12)",
+      "announcement": "Llegeix l'últim anunci",
+      "login": "Inicia la sessió",
+      "sayonika_login": "Inici de sessió de Sayonika",
+      "update": {
+        "checking": "S'estan comprovant les actualitzacions en segon pla...",
+        "available": "Hi ha una actualització disponible. Fes clic aquí per descarregar-la.",
+        "downloading": "S'està descarregant l'actualització...",
+        "downloaded": "Hi ha una actualització a punt per instal·lar-se quan surtis."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Surt",
+      "button_continue": "Continua"
+    },
+    "drop_cover": {
+      "text": "Deixa anar un mod aquí per instal·lar-lo"
+    },
+    "announcement": {
+      "button_open": "Obre l'enllaç",
+      "button_close": "Tanca"
+    },
+    "onboarding": {
+      "title": "Benvingut/da!",
+      "description_download": "Anem a buscar una còpia de DDLC.",
+      "button_download": "Visita la pàgina de descàrrega oficial de DDLC",
+      "button_choose": "Busca una còpia",
+      "heading_step": "Pas {0}",
+      "s1_desc": "Necessites descarregar una còpia de Doki Doki Literature Club. La pots trobar al lloc web oficial (ddlc.moe). Fes clic al botó de sota per anar-hi ara.",
+      "s1_platform": "Quan se't demani, tria descarregar el fitxer anomenat \"DDLC ({0})\".",
+      "s2_desc": "Un cop finalitzada la descàrrega, selecciona-la mitjançant el botó de sota.",
+      "description_location": "Els teus jocs es desaran a {0}",
+      "link_change": "(Canvia)"
+    },
+    "login_input": {
+      "message": "Introdueix la teva adreça de correu electrònic",
+      "details": "S'enviarà un correu electrònic a aquesta adreça. Fes clic a l'enllaç del correu per finalitzar l'inici de sessió.",
+      "button_affirmative": "Inicia la sessió",
+      "button_negative": "Cancel·la"
+    },
+    "change_username_input": {
+      "message": "Introdueix el teu nou nom d'usuari",
+      "details": "Els noms d'usuari no han de ser únics.",
+      "button_affirmative": "Canvia",
+      "button_negative": "Cancel·la"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Cerca mods...",
+        "header_new": "Comença",
+        "link_install": "Instal·la DDLC",
+        "header_installed": "Instal·lats",
+        "header_downloaded": "Descàrregues"
+      },
+      "install_contextmenu": {
+        "launch": "Inicia",
+        "rename": "Canvia el nom",
+        "shortcut": "Crea una drecera",
+        "delete_save": "Suprimeix les dades desades",
+        "uninstall": "Desinstal·la"
+      },
+      "mod_contextmenu": {
+        "install": "Instal·la",
+        "delete": "Suprimeix"
+      },
+      "uninstall_confirmation": {
+        "message": "Estàs segur que vols desinstal·lar?",
+        "details": "Les teves dades desades per a {0} se suprimiran i necessitaràs una còpia del mod per tornar-lo a instal·lar.",
+        "button_affirmative": "Desinstal·la",
+        "button_negative": "Cancel·la"
+      },
+      "rename_input": {
+        "message": "Canvia el nom de la instal·lació",
+        "details": "Introdueix el nou nom per a {0}.",
+        "button_affirmative": "Canvia el nom",
+        "button_negative": "Cancel·la"
+      },
+      "mod_delete_confirmation": {
+        "message": "Estàs segur que vols suprimir el mod?",
+        "details": "Necessitaràs descarregar una altra còpia del mod per tornar-lo a instal·lar.",
+        "button_affirmative": "Suprimeix",
+        "button_negative": "Cancel·la"
+      },
+      "save_delete_confirmation": {
+        "message": "Estàs segur que vols suprimir les teves dades desades?",
+        "details": "Hauràs de començar {0} de nou des del principi.",
+        "button_affirmative": "Suprimeix",
+        "button_negative": "Cancel·la"
+      },
+      "install": {
+        "button_launch": "Inicia",
+        "button_settings": "Configuració",
+        "tag_global_save": "Desat global",
+        "tag_sdk": "SDK",
+        "title_achievements": "Assoliments ({0} / {1})",
+        "description_achievements": "Continua jugant per desbloquejar més assoliments.",
+        "description_achievements_complete": "Has desbloquejat tots els assoliments. Enhorabona!",
+        "title_screenshots_none": "Cap captura de pantalla",
+        "title_screenshots_one": "1 captura de pantalla",
+        "title_screenshots": "{0} captures de pantalla",
+        "description_screenshots": "Prem S mentre jugues per fer una captura de pantalla.",
+        "description_sdk": "Aquest mod és compatible amb funcions especials amb el SDK de Doki Doki Mod Manager!",
+        "description_author": "Creat per {0}",
+        "link_website": "Lloc web ({0})",
+        "description_external": "Mostra a la carpeta"
+      },
+      "mod": {
+        "button_install": "Instal·la",
+        "button_settings": "Configuració",
+        "description_external": "Mostra a la carpeta"
+      },
+      "install_creation": {
+        "title": "Instal·la DDLC",
+        "label_install_name": "Nom de la instal·lació",
+        "label_folder_name": "Nom de la carpeta",
+        "label_global_save": "Desat global",
+        "label_has_mod": "Instal·la el mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Fitxers de desat existents",
+        "description_mod": "Fes clic per buscar un mod.",
+        "header_summary": "Resum",
+        "description_vanilla": "Es crearà una còpia neta de DDLC. Les dades desades seran independents de qualsevol altra còpia del joc.",
+        "description_vanilla_global_save": "Es crearà una còpia neta de DDLC. Les dades desades es compartiran amb altres còpies del joc (p. ex., Steam).",
+        "description_modded": "Es crearà una còpia de DDLC i s'instal·larà el mod. Les dades desades seran independents de qualsevol altra còpia del joc.",
+        "description_modded_global_save": "Es crearà una còpia de DDLC i s'instal·larà el mod. Les dades desades es compartiran amb altres còpies del joc (p. ex., Steam).",
+        "button_install": "Instal·la",
+        "button_installing": "S'està instal·lant...",
+        "status_exists": "Aquesta carpeta ja existeix. Tria un altre nom de carpeta."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "La botiga estarà disponible aviat!",
+      "description_1": "La base de dades de mods de Sayonika proporcionarà un lloc central per compartir, descarregar i ressenyar mods de DDLC. Quan Sayonika estigui disponible públicament, podràs navegar pels mods directament des d'aquí, a Doki Doki Mod Manager.",
+      "description_2": "Mentre esperes, no dubtis a descarregar alguns d'aquests mods recomanats.",
+      "error": "No s'ha pogut carregar la llista de mods. No tens connexió?",
+      "button_download": "Descarrega"
+    },
+    "tab_store": {
+      "title": "Botiga de Sayonika",
+      "subtitle": "Descobreix i descarrega mods de DDLC",
+      "search_placeholder": "Cerca mods...",
+      "loading": "S'estan carregant els mods...",
+      "error_title": "Error de connexió",
+      "retry_button": "Torna-ho a provar",
+      "offline_title": "Sense connexió",
+      "offline_message": "Actualment no tens connexió. Comprova la teva connexió a Internet i torna-ho a provar.",
+      "check_connection": "Comprova la connexió",
+      "maintenance_banner": "Els serveis d'autenticació no estan disponibles temporalment per manteniment. Encara pots navegar pels mods, però no pots iniciar sessió ni registrar-te.",
+      "no_mods_title": "No s'ha trobat cap mod",
+      "no_mods_message": "Prova d'ajustar la cerca o els filtres",
+      "filters": {
+        "category": "Categoria:",
+        "all_categories": "Totes les categories",
+        "sort_by": "Ordena per:",
+        "date_created": "Data de creació",
+        "date_updated": "Data d'actualització",
+        "downloads": "Descàrregues",
+        "rating": "Puntuació",
+        "title": "Títol",
+        "order": "Ordre:",
+        "descending": "Descendent",
+        "ascending": "Ascendent",
+        "featured_only": "Només destacats",
+        "translate_content": "Tradueix el contingut",
+        "auto_detect": "Detecció automàtica"
+      },
+      "mod_card": {
+        "featured": "Destacat",
+        "mature": "Contingut per a adults",
+        "by_author": "de {0}",
+        "download": "Descarrega",
+        "downloading": "S'està descarregant...",
+        "download_mod": "Descarrega el mod",
+        "downloads_count": "{0} descàrregues",
+        "version": "Versió {0}",
+        "screenshots": "Captures de pantalla ({0})",
+        "description": "Descripció",
+        "tags": "Etiquetes",
+        "requirements": "Requisits"
+      },
+      "pagination": {
+        "previous": "Anterior",
+        "next": "Següent",
+        "page_info": "Pàgina {0} de {1}"
+      },
+      "login": {
+        "title": "Inicia la sessió a Sayonika",
+        "discord": "Inicia la sessió amb Discord",
+        "github": "Inicia la sessió amb GitHub",
+        "or": "o",
+        "username_label": "Nom d'usuari o correu electrònic:",
+        "username_placeholder": "Introdueix el nom d'usuari o l'adreça de correu electrònic",
+        "username_help": "Pots utilitzar tant el teu nom d'usuari com la teva adreça de correu electrònic per iniciar la sessió",
+        "password_label": "Contrasenya:",
+        "remember_me": "Recorda'm",
+        "login_button": "Inicia la sessió",
+        "logging_in": "S'està iniciant la sessió...",
+        "register_link": "No tens cap compte? Registra't aquí",
+        "success": "Sessió iniciada correctament!",
+        "failed": "Error en l'inici de sessió: {0}"
+      },
+      "translation": {
+        "enabled": "Traducció activada. El contingut es traduirà quan estigui disponible.",
+        "disabled": "Traducció desactivada.",
+        "language_changed": "L'idioma de traducció s'ha canviat a {0}."
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Aparença",
+        "link_background": "Fons",
+        "link_language": "Idioma",
+        "link_advanced_appearance": "Avançat",
+        "header_enhancements": "Millores",
+        "link_sdk": "Assoliments i SDK",
+        "header_application": "Aplicació",
+        "link_updates": "Actualitzacions",
+        "link_storage": "Ubicació d'emmagatzematge",
+        "header_developers": "Desenvolupadors",
+        "link_testing": "Depuració del SDK",
+        "link_debug": "Informació de l'aplicació"
+      },
+      "section_backgrounds": {
+        "title": "Fons",
+        "subtitle": "Personalitza la teva còpia de Doki Doki Mod Manager amb un d'aquests fons.",
+        "button_none": "Cap fons",
+        "description_credit": "Fons originals de DDLC cortesia de Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Avançat",
+        "subtitle": "Troba altres opcions d'interfície aquí.",
+        "button_enable_sysborders": "Utilitza les vores del sistema (requereix reiniciar)",
+        "button_disable_sysborders": "Desactiva les vores del sistema (requereix reiniciar)"
+      },
+      "section_storage": {
+        "title": "Ubicació d'emmagatzematge",
+        "subtitle": "Canvia on es desen les dades del joc.",
+        "description_moving": "Avís! Si canvies la ubicació d'instal·lació, tots els teus mods, instal·lacions i dades desades es mouran. Això pot trigar uns quants minuts i no es pot interrompre.",
+        "description_current": "Ubicació actual: {0}",
+        "button_change": "Canvia la ubicació d'instal·lació"
+      },
+      "section_updates": {
+        "title": "Actualitzacions",
+        "subtitle": "Aconsegueix la darrera versió de Doki Doki Mod Manager.",
+        "description_current_version": "Versió actual: {0}",
+        "label_channel": "Canal de llançament",
+        "option_stable": "Estable",
+        "option_beta": "Beta",
+        "button_check": "Comprova si hi ha actualitzacions"
+      },
+      "section_sdk": {
+        "title": "Assoliments i SDK",
+        "subtitle": "Canvia la manera com es gestionen els assoliments.",
+        "description_mode": "Activa els assoliments:",
+        "checkbox_always": "Sempre (recomanat)",
+        "checkbox_specified": "Quan el mod especifica que els admet",
+        "checkbox_never": "Mai"
+      },
+      "section_testing": {
+        "title": "Depuració del SDK",
+        "subtitle": "Activa el registre de depuració per provar els teus mods amb el SDK de Doki Doki Mod Manager.",
+        "button_enable": "Activa la depuració",
+        "button_disable": "Desactiva la depuració"
+      },
+      "section_debug": {
+        "title": "Informació de l'aplicació",
+        "subtitle": "Informació per diagnosticar problemes."
+      },
+      "section_language": {
+        "title": "Idioma",
+        "subtitle": "Canvia l'idioma de Doki Doki Mod Manager.",
+        "description_current": "Idioma actual: {0}",
+        "button_apply": "Aplica l'idioma",
+        "button_contribute": "Ajuda a traduir",
+        "description_restart": "Els canvis d'idioma tindran efecte després de reiniciar l'aplicació.",
+        "notification_changed": "L'idioma s'ha canviat a {0}. Reinicia l'aplicació per veure els canvis.",
+        "notification_same": "L'idioma ja està establert en {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Quant a",
+      "description": "Doki Doki Mod Manager és un projecte desenvolupat per la comunitat que t'ajuda a trobar, instal·lar i jugar a mods per a Doki Doki Literature Club, un joc de novel·la visual gratuït de Team Salvato.",
+      "title_disclaimer": "Exempció de responsabilitat",
+      "disclaimer_1": "Doki Doki Mod Manager és una obra de fans de Doki Doki Literature Club i no està afiliat a Team Salvato. És una obra de fans, tal com es defineix a les directrius de propietat intel·lectual de Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager no es fa responsable de cap dany causat als teus fitxers o ordinador, com a resultat de jugar a un mod o d'una altra manera. És la teva responsabilitat assegurar-te que els mods són segurs per jugar.",
+      "title_socials": "Posa't en contacte",
+      "social_twitter": "Segueix @Dynamicxaa a Twitter",
+      "social_reddit": "Envia'm un missatge a Reddit",
+      "social_email": "Envia'm un correu electrònic"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Obre Doki Doki Mod Manager i inicia {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC s'està executant",
+      "title_crashed": "Alguna cosa ha anat malament",
+      "button_browse": "Obre la carpeta del joc",
+      "button_close": "D'acord",
+      "description_running": "Tanca el joc per fer canvis als teus mods.",
+      "install_missing": "No s'ha pogut trobar la instal·lació.",
+      "install_corrupt": "La instal·lació està incompleta o corrupta.",
+      "install_crashed": "El joc no s'ha pogut iniciar o s'ha penjat."
+    },
+    "move_install": {
+      "title": "Selecciona la nova carpeta d'instal·lació"
+    },
+    "mod_browse_dialog": {
+      "title": "Troba un mod per instal·lar",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Localitza una còpia del fitxer zip de DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Tria on col·locar la teva drecera",
+      "file_format_name": "Drecera"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager s'ha penjat",
+        "body": "S'ha informat del problema. Reinicia i torna-ho a provar."
+      },
+      "move_install": {
+        "title": "No s'ha pogut moure la carpeta d'instal·lació",
+        "body": "Comprova que tens permís i prou espai per moure-la a aquesta carpeta."
+      },
+      "shortcut": {
+        "title": "No s'ha pogut crear la drecera",
+        "body": "Comprova que tens permís per crear fitxers en aquesta carpeta."
+      },
+      "install": {
+        "title": "No s'ha pogut instal·lar el joc",
+        "body": "Comprova que tens permís i prou espai per instal·lar."
+      },
+      "rename": {
+        "title": "No s'ha pogut canviar el nom",
+        "body": "Comprova que has tancat tots els programes que puguin estar interferint i torna-ho a provar."
+      },
+      "uninstall": {
+        "title": "No s'ha pogut desinstal·lar",
+        "body": "Comprova que has tancat tots els programes que puguin estar interferint i torna-ho a provar."
+      },
+      "save_delete": {
+        "title": "No s'han pogut suprimir les dades desades",
+        "body": "Comprova que has tancat tots els programes que puguin estar interferint i torna-ho a provar."
+      },
+      "mod_delete": {
+        "title": "No s'ha pogut suprimir el mod",
+        "body": "Comprova que has tancat tots els programes que puguin estar interferint i torna-ho a provar."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager ha deixat de respondre",
+        "body": "Si aquest problema persisteix durant molt de temps, tanca l'aplicació i torna a començar."
+      },
+      "executable_permission": {
+        "title": "No s'ha pogut fer executable el joc",
+        "body": "No s'ha pogut fer executable DDLC.sh a Linux. És possible que el joc no s'iniciï correctament."
+      }
+    }
+  }
+}

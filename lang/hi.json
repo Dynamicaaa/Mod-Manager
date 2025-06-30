@@ -7,7 +7,7 @@
     "tabs": {
       "tab_home": "होम",
       "tab_mods": "मोड",
-      "tab_store": "स्टोर", 
+      "tab_store": "स्टोर",
       "tab_options": "सेटिंग्स",
       "tab_about": "जानकारी"
     },
@@ -310,12 +310,7 @@
       "title_socials": "संपर्क",
       "social_twitter": "Twitter पर @Dynamicxaa को फॉलो करें",
       "social_reddit": "Reddit पर मैसेज करें",
-      "social_email": "ईमेल भेजें",
-      "title_support": "डेवलपमेंट सपोर्ट",
-      "description_support": "फ्री ऐप। आप इन तरीकों से सपोर्ट कर सकते हैं:",
-      "support_donate": "डोनेट करें",
-      "support_steelseries": "SteelSeries पर 10% छूट (एफिलिएट लिंक)",
-      "support_code": "कोड या ट्रांसलेशन में योगदान दें"
+      "social_email": "ईमेल भेजें"
     }
   },
   "main": {

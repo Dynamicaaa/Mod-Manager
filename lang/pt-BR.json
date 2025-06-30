@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "o que há de novo?"
     },
-
     "user_menu": {
       "option_rename": "Alterar nome de usuário",
       "option_logout": "Desconectar"
@@ -24,7 +23,6 @@
       "maximise": "Maximizar",
       "minimise": "Minimizar",
       "devtools": "Alternar ferramentas de desenvolvedor (F12)",
-
       "announcement": "Ler o último anúncio",
       "login": "Entrar",
       "sayonika_login": "Login Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Configurações",
         "tag_global_save": "Save Global",
         "tag_sdk": "SDK",
-
         "title_achievements": "Conquistas ({0} / {1})",
         "description_achievements": "Continue jogando para desbloquear mais conquistas.",
         "description_achievements_complete": "Você desbloqueou todas as conquistas. Parabéns!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Pressione S enquanto joga para tirar uma captura de tela.",
         "description_sdk": "Este mod suporta recursos especiais do SDK do Doki Doki Mod Manager!",
         "description_author": "Criado por {0}",
-
         "link_website": "Site ({0})",
         "description_external": "Mostrar na pasta"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Save global",
         "label_has_mod": "Instalar mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "Arquivos de save existentes",
         "description_mod": "Clique para procurar um mod.",
         "header_summary": "Resumo",
         "description_vanilla": "Uma cópia limpa do DDLC será criada. Os dados de save serão separados de qualquer outra cópia do jogo.",
         "description_vanilla_global_save": "Uma cópia limpa do DDLC será criada. Os dados de save serão compartilhados com outras cópias do jogo (ex: Steam)",
-
         "description_modded": "Uma cópia do DDLC será criada e o mod será instalado. Os dados de save serão separados de qualquer outra cópia do jogo.",
         "description_modded_global_save": "Uma cópia do DDLC será criada e o mod será instalado. Os dados de save serão compartilhados com outras cópias do jogo (ex: Steam)",
-
         "button_install": "Instalar",
         "button_installing": "Instalando...",
         "status_exists": "Essa pasta já existe. Escolha um nome de pasta diferente."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Avançado",
         "header_enhancements": "Melhorias",
         "link_sdk": "Conquistas e SDK",
-
         "header_application": "Aplicação",
         "link_updates": "Atualizações",
         "link_storage": "Local de armazenamento",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Quando mods especificam suporte",
         "checkbox_never": "Nunca"
       },
-
       "section_testing": {
         "title": "Debug do SDK",
         "subtitle": "Habilite log de debug para testar mods com o SDK do Doki Doki Mod Manager.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager é um trabalho de fã do Doki Doki Literature Club e não é afiliado à Team Salvato. É um trabalho de fã como definido nas diretrizes de PI da Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager não é responsável por danos aos seus arquivos ou computador como resultado de jogar mods ou por qualquer outro motivo. É sua responsabilidade garantir que os mods sejam seguros para jogar.",
       "title_socials": "Entre em contato",
-
       "social_twitter": "Siga @Dynamicxaa no Twitter",
       "social_reddit": "Envie uma mensagem no Reddit",
-      "social_email": "Enviar e-mail",
-      "title_support": "Apoiar o desenvolvimento",
-      "description_support": "Doki Doki Mod Manager sempre será gratuito para baixar e usar. Se você gosta dele e quer ajudar a manter as atualizações, considere nos apoiar de uma das seguintes formas.",
-      "support_donate": "Fazer doação única",
-      "support_steelseries": "Obtenha 10% de desconto em periféricos para jogos SteelSeries (link de afiliado)",
-      "support_code": "Contribuir para o projeto (código ou traduções)"
+      "social_email": "Enviar e-mail"
     }
   },
   "main": {

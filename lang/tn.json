@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Tswana",
+    "name_local": "Setswana"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Lelapa",
+      "tab_mods": "Diphetolo",
+      "tab_store": "Lebenkele",
+      "tab_options": "Dikgetho",
+      "tab_about": "Mabapi"
+    },
+    "version": {
+      "link_changelog": "ke eng se sešwa?"
+    },
+    "user_menu": {
+      "option_rename": "Fetola Leina la Mosadi",
+      "option_logout": "Tswa"
+    },
+    "window_controls": {
+      "close": "Tswala",
+      "maximise": "Godisa",
+      "minimise": "Fokotsa",
+      "devtools": "Fetola Ditiriso tsa Moqapi (F12)",
+      "announcement": "Bala Kitsiso ya Bosheng",
+      "login": "Tsena",
+      "sayonika_login": "Sayonika Tsena",
+      "update": {
+        "checking": "E lekola diphetolo kwa morago...",
+        "available": "Phetolo e teng. Tobetsa fano go e jarolla.",
+        "downloading": "E jarolla phetolo...",
+        "downloaded": "Phetolo e siametse go tsenngwa fa o tswa."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Tswa",
+      "button_continue": "Tswelela"
+    },
+    "drop_cover": {
+      "text": "Tsenya phetolo fano go e tsenya"
+    },
+    "announcement": {
+      "button_open": "Bula Khonokanyo",
+      "button_close": "Tswala"
+    },
+    "onboarding": {
+      "title": "Amogela!",
+      "description_download": "A re fumleng kopi ya DDLC.",
+      "button_download": "Etela leqephe la go jarolla la semmuso la DDLC",
+      "button_choose": "Batla kopi",
+      "heading_step": "Kgato {0}",
+      "s1_desc": "O tlhoka go jarolla kopi ya Doki Doki Literature Club. E ka fumanwa kwa webosaeteng ya semmuso (ddlc.moe) - tobetsa konopo e e kwa tlase go ya teng jaanong.",
+      "s1_platform": "Fa o kōpiwa, kgetha go jarolla faele e e bidiwang \"DDLC ({0})\".",
+      "s2_desc": "Fa go jarolla go fedile, e kgethe o dirisa konopo e e kwa tlase.",
+      "description_location": "Dipapadi tsa gago di tla bolokwa kwa {0}",
+      "link_change": "(Fetola)"
+    },
+    "login_input": {
+      "message": "Tlanya aterese ya gago ya imeile",
+      "details": "Imeile e tla romelwa kwa aterese e. Tobetsa khonokanyo mo imeileng go fetsa go tsena.",
+      "button_affirmative": "Tsena",
+      "button_negative": "Kganela"
+    },
+    "change_username_input": {
+      "message": "Tlanya leina la gago le lesha",
+      "details": "Maina a basebelisi ga a tlhoke go nna a a kgethegileng.",
+      "button_affirmative": "Fetola",
+      "button_negative": "Kganela"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Batla diphetolo...",
+        "header_new": "Simolola",
+        "link_install": "Tsenya DDLC",
+        "header_installed": "E Tsenngwe",
+        "header_downloaded": "Di-jarollo"
+      },
+      "install_contextmenu": {
+        "launch": "Simolola",
+        "rename": "Fetola Leina",
+        "shortcut": "Dira Khutsufatso",
+        "delete_save": "Tlosa Data ya Boloko",
+        "uninstall": "Tsenolola"
+      },
+      "mod_contextmenu": {
+        "install": "Tsenya",
+        "delete": "Tlosa"
+      },
+      "uninstall_confirmation": {
+        "message": "A o na le bonnete jwa gore o batla go tsenolola?",
+        "details": "Data ya gago ya boloko ya {0} e tla tloswa, mme o tla tlhoka kopi ya phetolo go e tsenya gape.",
+        "button_affirmative": "Tsenolola",
+        "button_negative": "Kganela"
+      },
+      "rename_input": {
+        "message": "Fetola Leina la Tsenyo",
+        "details": "Tlanya leina le lesha la {0}.",
+        "button_affirmative": "Fetola Leina",
+        "button_negative": "Kganela"
+      },
+      "mod_delete_confirmation": {
+        "message": "A o na le bonnete jwa gore o batla go tlosa phetolo?",
+        "details": "O tla tlhoka go jarolla kopi e nngwe ya phetolo go e tsenya gape.",
+        "button_affirmative": "Tlosa",
+        "button_negative": "Kganela"
+      },
+      "save_delete_confirmation": {
+        "message": "A o na le bonnete jwa gore o batla go tlosa data ya gago ya boloko?",
+        "details": "O tla tshwanela go simolola {0} gape go tloga kwa tshimologong.",
+        "button_affirmative": "Tlosa",
+        "button_negative": "Kganela"
+      },
+      "install": {
+        "button_launch": "Simolola",
+        "button_settings": "Ditlhophiso",
+        "tag_global_save": "Boloko jwa Lefatšhe",
+        "tag_sdk": "SDK",
+        "title_achievements": "Diphitlhelelo ({0} / {1})",
+        "description_achievements": "Tswelela o tshameka go bula diphitlhelelo tse dingwe.",
+        "description_achievements_complete": "O butse diphitlhelelo tsotlhe. Dikelelelo!",
+        "title_screenshots_none": "Ga go na ditshwantsho",
+        "title_screenshots_one": "1 setshwantsho",
+        "title_screenshots": "{0} ditshwantsho",
+        "description_screenshots": "Tobetsa S fa o tshameka go tsaya setshwantsho.",
+        "description_sdk": "Phetolo e e tshegetsa ditiriso tse di kgethegileng ka Doki Doki Mod Manager SDK!",
+        "description_author": "E dirilwe ke {0}",
+        "link_website": "Webosaete ({0})",
+        "description_external": "Bontsha mo foldareng"
+      },
+      "mod": {
+        "button_install": "Tsenya",
+        "button_settings": "Ditlhophiso",
+        "description_external": "Bontsha mo foldareng"
+      },
+      "install_creation": {
+        "title": "Tsenya DDLC",
+        "label_install_name": "Leina la Tsenyo",
+        "label_folder_name": "Leina la Foldara",
+        "label_global_save": "Boloko jwa Lefatšhe",
+        "label_has_mod": "Tsenya Phetolo",
+        "label_mod": "Phetolo",
+        "label_existing_saves": "Difaelete tsa Boloko tse di Teng",
+        "description_mod": "Tobetsa go batla phetolo.",
+        "header_summary": "Kakaretso",
+        "description_vanilla": "Kopi e ntle ya DDLC e tla dirwa. Data ya boloko e tla nna e farologane le kopi e nngwe le e nngwe ya papadi.",
+        "description_vanilla_global_save": "Kopi e ntle ya DDLC e tla dirwa. Data ya boloko e tla abelanwa le dikopi tse dingwe tsa papadi (e.g. Steam)",
+        "description_modded": "Kopi ya DDLC e tla dirwa, mme phetolo e tla tsenngwa. Data ya boloko e tla nna e farologane le kopi e nngwe le e nngwe ya papadi.",
+        "description_modded_global_save": "Kopi ya DDLC e tla dirwa, mme phetolo e tla tsenngwa. Data ya boloko e tla abelanwa le dikopi tse dingwe tsa papadi (e.g. Steam)",
+        "button_install": "Tsenya",
+        "button_installing": "E tsenya...",
+        "status_exists": "Foldara e e setse e le teng. Kgetha leina le lengwe la foldara."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Lebenkele le tla tloga le nna teng!",
+      "description_1": "Database ya phetolo ya Sayonika e tla tlamela ka lefelo le legolo la go abelana, go jarolla le go sekaseka diphetolo tsa DDLC. Fa Sayonika e setse e le teng mo setšhabeng, o tla kgona go batla diphetolo fano mo Doki Doki Mod Manager.",
+      "description_2": "Fa o ntse o emetse, ikutlwe o lokologile go jarolla dingwe tsa diphetolo tse di kgothaleditsweng.",
+      "error": "Go paletswe go jarolla lenane la diphetolo. A ga o online?",
+      "button_download": "Jarolla"
+    },
+    "tab_store": {
+      "title": "Sayonika Lebenkele",
+      "subtitle": "Batla o bo o jarolla diphetolo tsa DDLC",
+      "search_placeholder": "Batla diphetolo...",
+      "loading": "E jarolla diphetolo...",
+      "error_title": "Phoso ya Khonexene",
+      "retry_button": "Leka Gape",
+      "offline_title": "Ga o Online",
+      "offline_message": "Ga o online. Tsweetswee tlola khonexene ya gago ya inthanete o bo o leka gape.",
+      "check_connection": "Lekola Khonexene",
+      "maintenance_banner": "Ditiriso tsa tlhomamiso ga di kgonege ka nakwana ka ntlha ya tlhokomelo. O ka kgona go batla diphetolo fela mme ga o kgone go tsena kgotsa go ikwadisa.",
+      "no_mods_title": "Ga go na diphetolo tse di fumanweng",
+      "no_mods_message": "Leka go fetola patlisiso ya gago kgotsa disefe",
+      "filters": {
+        "category": "Setlhopha:",
+        "all_categories": "Ditlhopha Tsotlhe",
+        "sort_by": "Sefa ka:",
+        "date_created": "Letsatsi le le Dirilweng ka Lona",
+        "date_updated": "Letsatsi le le Ntshafaditsweng ka Lona",
+        "downloads": "Di-jarollo",
+        "rating": "Tekanyetso",
+        "title": "Setlhogo",
+        "order": "Odara:",
+        "descending": "Go Theogela",
+        "ascending": "Go tlhatloga",
+        "featured_only": "Tse di Bontshitsweng Fela",
+        "translate_content": "Ranola Dikgang",
+        "auto_detect": "Bonagatsa ka Boona"
+      },
+      "mod_card": {
+        "featured": "E Bontshitswe",
+        "mature": "E Godile",
+        "by_author": "ke {0}",
+        "download": "Jarolla",
+        "downloading": "E jarolla...",
+        "download_mod": "Jarolla Phetolo",
+        "downloads_count": "{0} di-jarollo",
+        "version": "Kgatiso {0}",
+        "screenshots": "Ditshwantsho ({0})",
+        "description": "Tlhaloso",
+        "tags": "Ditlha",
+        "requirements": "Ditlhoko"
+      },
+      "pagination": {
+        "previous": "E e Fetileng",
+        "next": "E e Latelang",
+        "page_info": "Letlha {0} la {1}"
+      },
+      "login": {
+        "title": "Tsena mo Sayonika",
+        "discord": "Tsena ka Discord",
+        "github": "Tsena ka GitHub",
+        "or": "kgotsa",
+        "username_label": "Leina la Mosadi kgotsa Imeile:",
+        "username_placeholder": "Tlanya leina la mosadi kgotsa aterese ya imeile",
+        "username_help": "O ka dirisa leina la gago la mosadi kgotsa aterese ya imeile go tsena",
+        "password_label": "Lefokoporelo:",
+        "remember_me": "Nkgopole",
+        "login_button": "Tsena",
+        "logging_in": "E tsena...",
+        "register_link": "Ga o na akhaonto? Ikwadise fano",
+        "success": "O tsenye sentle!",
+        "failed": "Go paletswe go tsena: {0}"
+      },
+      "translation": {
+        "enabled": "Phetlhelelo e dirilwe. Dikgang di tla ranolwa fa di le teng.",
+        "disabled": "Phetlhelelo e tlositswe.",
+        "language_changed": "Puo ya phetlhelelo e fetotswe go {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Ponalo",
+        "link_background": "Moragonyana",
+        "link_language": "Puo",
+        "link_advanced_appearance": "E Tlhabologile",
+        "header_enhancements": "Ditlhabololo",
+        "link_sdk": "Diphitlhelelo & SDK",
+        "header_application": "Tiriso",
+        "link_updates": "Diphetolo",
+        "link_storage": "Lefelo la Boloko",
+        "header_developers": "Baagisi",
+        "link_testing": "SDK Debug",
+        "link_debug": "Tshedimosetso ya App"
+      },
+      "section_backgrounds": {
+        "title": "Moragonyana",
+        "subtitle": "Ikgatise kopi ya gago ya Doki Doki Mod Manager ka nngwe ya dibakground tse.",
+        "button_none": "Ga go na Moragonyana",
+        "description_credit": "Dibakground tsa semmuso tsa DDLC ka bopelonomi jwa Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "E Tlhabologile",
+        "subtitle": "Fumana dikgetho tse dingwe tsa interface fano.",
+        "button_enable_sysborders": "Dirisa Dikgale tsa System (e tlhoka go simololwa gape)",
+        "button_disable_sysborders": "Tlosa Dikgale tsa System (e tlhoka go simololwa gape)"
+      },
+      "section_storage": {
+        "title": "Lefelo la Boloko",
+        "subtitle": "Fetola kwa data ya papadi ya gago e bolokwang teng.",
+        "description_moving": "Tlhokomelang! Fa o kgetha go fetola lefelo la go tsenya, diphetolo tsa gago tsotlhe, ditlhomamiso le data ya boloko di tla fuduswa. Se se ka tsaya metsotso e le mmalwa, mme ga se ka ke sa kgorelediwa.",
+        "description_current": "Lefelo la jaanong: {0}",
+        "button_change": "Fetola Lefelo la Tsenyo"
+      },
+      "section_updates": {
+        "title": "Diphetolo",
+        "subtitle": "Fumana kgatiso ya bosheng ya Doki Doki Mod Manager.",
+        "description_current_version": "Kgatiso ya jaanong: {0}",
+        "label_channel": "Selo sa Kgolagano",
+        "option_stable": "E sa Fetogeng",
+        "option_beta": "Beta",
+        "button_check": "Lekola diphetolo"
+      },
+      "section_sdk": {
+        "title": "Diphitlhelelo & SDK",
+        "subtitle": "Fetola tsela e diphitlhelelo di tshwarwang ka yona.",
+        "description_mode": "Dirisa diphitlhelelo:",
+        "checkbox_always": "Ka dinako tsotlhe (e kgothaleditswe)",
+        "checkbox_specified": "Fa phetolo e bolela gore e a di tshegetsa",
+        "checkbox_never": "Le ka motlha"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Dirisa logging ya debug go leka diphetolo tsa gago ka Doki Doki Mod Manager SDK.",
+        "button_enable": "Dirisa Debugging",
+        "button_disable": "Tlosa Debugging"
+      },
+      "section_debug": {
+        "title": "Tshedimosetso ya App",
+        "subtitle": "Tshedimosetso ya go lemoga mathata."
+      },
+      "section_language": {
+        "title": "Puo",
+        "subtitle": "Fetola puo ya Doki Doki Mod Manager.",
+        "description_current": "Puo ya jaanong: {0}",
+        "button_apply": "Dirisa Puo",
+        "button_contribute": "Thusa go Ranola",
+        "description_restart": "Diphetogo tsa puo di tla dira morago ga go simolola gape application.",
+        "notification_changed": "Puo e fetotswe go {0}. Tsweetswee simolola gape application go bona diphetogo.",
+        "notification_same": "Puo e setse e setse e le {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Mabapi",
+      "description": "Doki Doki Mod Manager ke porojeke e e dirilweng ke baagi e e go thusang go batla, go tsenya le go tshameka diphetolo tsa Doki Doki Literature Club, papadi ya Visual Novel ya mahala ya Team Salvato.",
+      "title_disclaimer": "Polelo ya Ikganetso",
+      "disclaimer_1": "Doki Doki Mod Manager ke tiro ya balatedi ba Doki Doki Literature Club mme ga e amane le Team Salvato. Ke tiro ya balatedi, jaaka e tlhalosiwa ke Melawana ya IP ya Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager ga e tseye boikarabelo jwa kotsi epe e e bakilweng ke difaelete tsa gago kgotsa khomphutara, ka ntlha ya go tshameka phetolo kgotsa ka tsela e nngwe. Ke boikarabelo jwa gago go netefatsa gore diphetolo di bolokesegile go di tshameka.",
+      "title_socials": "Gokagana le rona",
+      "social_twitter": "Latela @Dynamicxaa mo Twitter",
+      "social_reddit": "Nkwalela molaetsa mo Reddit",
+      "social_email": "Nthomelela imeile"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Bula Doki Doki Mod Manager o bo o simolola {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC e a tsamaya",
+      "title_crashed": "Sengwe se tsamaile botlhatlhatlha",
+      "button_browse": "Bula Foldara ya Papadi",
+      "button_close": "GO LOKILE",
+      "description_running": "Tswala papadi go dira diphetogo mo diphetolong tsa gago.",
+      "install_missing": "Tsenyo ga e a kgona go fumanwa.",
+      "install_corrupt": "Tsenyo ga e a felela kgotsa e sentse.",
+      "install_crashed": "Papadi e paletswe go simolola kgotsa e tsere."
+    },
+    "move_install": {
+      "title": "Kgetha foldara e ntšha ya go tsenya"
+    },
+    "mod_browse_dialog": {
+      "title": "Batla phetolo go e tsenya",
+      "file_format_name": "Diphetolo"
+    },
+    "game_browse_dialog": {
+      "title": "Batla kopi ya faele ya zip ya DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Kgetha kwa o tla bayang khutsufatso ya gago teng",
+      "file_format_name": "Khutsufatso"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager e tsere",
+        "body": "Bothata bo begilwe. Tsweetswee simolola gape o bo o leka gape."
+      },
+      "move_install": {
+        "title": "Go paletswe go fudusa foldara ya go tsenya",
+        "body": "Lekola gore o na le tetla le sebaka se se lekaneng sa go fudusetsa kwa foldareng e."
+      },
+      "shortcut": {
+        "title": "Go paletswe go dira khutsufatso",
+        "body": "Lekola gore o na le tetla ya go dira difaelete mo foldareng e."
+      },
+      "install": {
+        "title": "Go paletswe go tsenya papadi",
+        "body": "Lekola gore o na le tetla le sebaka se se lekaneng sa go tsenya."
+      },
+      "rename": {
+        "title": "Go paletswe go fetola leina",
+        "body": "Lekola gore o tswetse mananeo otlhe a a ka tsenyang letsogo o bo o leka gape."
+      },
+      "uninstall": {
+        "title": "Go paletswe go tsenolola",
+        "body": "Lekola gore o tswetse mananeo otlhe a a ka tsenyang letsogo o bo o leka gape."
+      },
+      "save_delete": {
+        "title": "Go paletswe go tlosa data ya boloko",
+        "body": "Lekola gore o tswetse mananeo otlhe a a ka tsenyang letsogo o bo o leka gape."
+      },
+      "mod_delete": {
+        "title": "Go paletswe go tlosa phetolo",
+        "body": "Lekola gore o tswetse mananeo otlhe a a ka tsenyang letsogo o bo o leka gape."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager e emisitse go araba",
+        "body": "Fa bothata bo bo tsaya nako e telele, tswala app o bo o simolola gape."
+      },
+      "executable_permission": {
+        "title": "Go paletswe go dira gore papadi e kgone go dirisiwa",
+        "body": "Ga go a kgona go dira DDLC.sh e kgone go dirisiwa mo Linux. Papadi e ka nna ya se ka ya simolola sentle."
+      }
+    }
+  }
+}

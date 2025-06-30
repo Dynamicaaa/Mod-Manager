@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "새로운 기능"
     },
-
     "user_menu": {
       "option_rename": "사용자명 변경",
       "option_logout": "로그아웃"
@@ -24,7 +23,6 @@
       "maximise": "최대화",
       "minimise": "최소화",
       "devtools": "개발자 도구 전환 (F12)",
-
       "announcement": "최신 공지사항 읽기",
       "login": "로그인",
       "sayonika_login": "Sayonika 로그인",
@@ -118,7 +116,6 @@
         "button_settings": "설정",
         "tag_global_save": "전역 저장",
         "tag_sdk": "SDK",
-
         "title_achievements": "업적 ({0} / {1})",
         "description_achievements": "더 많은 업적을 잠금 해제하려면 계속 플레이하세요.",
         "description_achievements_complete": "모든 업적을 잠금 해제했습니다. 축하합니다!",
@@ -128,7 +125,6 @@
         "description_screenshots": "플레이 중에 S 키를 눌러 스크린샷을 찍으세요.",
         "description_sdk": "이 모드는 Doki Doki Mod Manager SDK의 특별한 기능을 지원합니다!",
         "description_author": "{0}에 의해 제작됨",
-
         "link_website": "웹사이트 ({0})",
         "description_external": "폴더에서 보기"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "전역 저장",
         "label_has_mod": "모드 설치",
         "label_mod": "모드",
-
         "label_existing_saves": "기존 저장 파일",
         "description_mod": "클릭하여 모드를 찾아보세요.",
         "header_summary": "요약",
         "description_vanilla": "DDLC의 깨끗한 사본이 생성됩니다. 저장 데이터는 게임의 다른 사본과 분리됩니다.",
         "description_vanilla_global_save": "DDLC의 깨끗한 사본이 생성됩니다. 저장 데이터는 게임의 다른 사본과 공유됩니다 (예: Steam)",
-
         "description_modded": "DDLC의 사본이 생성되고 모드가 설치됩니다. 저장 데이터는 게임의 다른 사본과 분리됩니다.",
         "description_modded_global_save": "DDLC의 사본이 생성되고 모드가 설치됩니다. 저장 데이터는 게임의 다른 사본과 공유됩니다 (예: Steam)",
-
         "button_install": "설치",
         "button_installing": "설치 중...",
         "status_exists": "해당 폴더가 이미 있습니다. 다른 폴더 이름을 선택하세요."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "고급",
         "header_enhancements": "향상",
         "link_sdk": "업적 & SDK",
-
         "header_application": "애플리케이션",
         "link_updates": "업데이트",
         "link_storage": "저장 위치",
@@ -218,7 +210,6 @@
         "checkbox_specified": "모드가 지원을 명시할 때",
         "checkbox_never": "안 함"
       },
-
       "section_testing": {
         "title": "SDK 디버그",
         "subtitle": "Doki Doki Mod Manager SDK로 모드를 테스트하기 위해 디버그 로깅을 활성화하세요.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager는 Doki Doki Literature Club의 팬 작품이며 Team Salvato와 관련이 없습니다. 이는 Team Salvato IP 가이드라인에서 정의한 팬 작품입니다.",
       "disclaimer_2": "Doki Doki Mod Manager는 모드 플레이 또는 기타 이유로 인해 파일이나 컴퓨터에 발생한 손상에 대해 책임지지 않습니다. 모드가 안전하게 플레이할 수 있는지 확인하는 것은 사용자의 책임입니다.",
       "title_socials": "연락하기",
-
       "social_twitter": "Twitter에서 @Dynamicxaa 팔로우",
       "social_reddit": "Reddit에서 메시지 보내기",
-      "social_email": "이메일 보내기",
-      "title_support": "개발 지원",
-      "description_support": "Doki Doki Mod Manager는 항상 무료로 다운로드하고 사용할 수 있습니다. 마음에 들고 업데이트를 유지하는 데 도움을 주고 싶다면 다음 방법 중 하나로 지원을 고려해 주세요.",
-      "support_donate": "일회성 기부하기",
-      "support_steelseries": "SteelSeries 게이밍 주변기기 10% 할인 받기 (제휴 링크)",
-      "support_code": "프로젝트에 기여하기 (코드 또는 번역)"
+      "social_email": "이메일 보내기"
     }
   },
   "main": {

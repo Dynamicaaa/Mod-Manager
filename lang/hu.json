@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "mi az újdonság?"
     },
-
     "user_menu": {
       "option_rename": "Felhasználónév Módosítása",
       "option_logout": "Kijelentkezés"
@@ -24,7 +23,6 @@
       "maximise": "Maximalizálás",
       "minimise": "Minimalizálás",
       "devtools": "Fejlesztői Eszközök Kapcsolása (F12)",
-
       "announcement": "Legújabb bejelentés olvasása",
       "login": "Bejelentkezés",
       "sayonika_login": "Sayonika Bejelentkezés",
@@ -118,7 +116,6 @@
         "button_settings": "Beállítások",
         "tag_global_save": "Globális Mentés",
         "tag_sdk": "SDK",
-
         "title_achievements": "Eredmények ({0} / {1})",
         "description_achievements": "Folytassa a játékot további eredmények feloldásához.",
         "description_achievements_complete": "Az összes eredményt feloldotta. Gratulálunk!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Nyomja meg az S-t játék közben képernyőkép készítéséhez.",
         "description_sdk": "Ez a mod speciális funkciókat támogat a Doki Doki Mod Manager SDK-val!",
         "description_author": "Készítette: {0}",
-
         "link_website": "Weboldal ({0})",
         "description_external": "Megjelenítés mappában"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Globális Mentés",
         "label_has_mod": "Mod Telepítése",
         "label_mod": "Mod",
-
         "label_existing_saves": "Meglévő Mentési Fájlok",
         "description_mod": "Kattintson mod tallózásához.",
         "header_summary": "Összefoglaló",
         "description_vanilla": "Egy tiszta DDLC másolat lesz létrehozva. A mentési adatok elkülönülnek a játék bármely más másolatától.",
         "description_vanilla_global_save": "Egy tiszta DDLC másolat lesz létrehozva. A mentési adatok megosztásra kerülnek a játék más másolataival (pl. Steam)",
-
         "description_modded": "Egy DDLC másolat lesz létrehozva, és a mod telepítésre kerül. A mentési adatok elkülönülnek a játék bármely más másolatától.",
         "description_modded_global_save": "Egy DDLC másolat lesz létrehozva, és a mod telepítésre kerül. A mentési adatok megosztásra kerülnek a játék más másolataival (pl. Steam)",
-
         "button_install": "Telepítés",
         "button_installing": "Telepítés...",
         "status_exists": "Ez a mappa már létezik. Válasszon másik mappanevet."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Speciális",
         "header_enhancements": "Fejlesztések",
         "link_sdk": "Eredmények és SDK",
-
         "header_application": "Alkalmazás",
         "link_updates": "Frissítések",
         "link_storage": "Tárolóhely",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Amikor a mod meghatározza, hogy támogatja őket",
         "checkbox_never": "Soha"
       },
-
       "section_testing": {
         "title": "SDK Hibakeresés",
         "subtitle": "Engedélyezze a hibakeresési naplózást a modok teszteléséhez a Doki Doki Mod Manager SDK-val.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "A Doki Doki Mod Manager a Doki Doki Literature Club rajongói műve, és nem kapcsolódik a Team Salvato-hoz. Ez egy rajongói mű, ahogy a Team Salvato IP irányelvei meghatározzák.",
       "disclaimer_2": "A Doki Doki Mod Manager nem vállal felelősséget a fájlokhoz vagy számítógéphez okozott károkért mod játszása vagy egyéb módon. Az Ön felelőssége biztosítani, hogy a modok biztonságosak legyenek a játékhoz.",
       "title_socials": "Lépjen kapcsolatba",
-
       "social_twitter": "Kövesse @Dynamicxaa-ot Twitteren",
       "social_reddit": "Küldjön üzenetet Reddit-en",
-      "social_email": "Küldjön e-mailt",
-      "title_support": "Fejlesztés Támogatása",
-      "description_support": "A Doki Doki Mod Manager mindig ingyenes lesz a letöltéshez és használathoz. Ha tetszik és segíteni szeretne frissíteni, fontolja meg a támogatásomat az alábbi módok egyikével.",
-      "support_donate": "Egyszeri adományt ad",
-      "support_steelseries": "10% kedvezmény a SteelSeries gaming perifériákra (affiliate link)",
-      "support_code": "Hozzájárulás a projekthez (kód vagy fordítások)"
+      "social_email": "Küldjön e-mailt"
     }
   },
   "main": {

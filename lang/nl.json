@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "wat is er nieuw?"
     },
-
     "user_menu": {
       "option_rename": "Gebruikersnaam Wijzigen",
       "option_logout": "Uitloggen"
@@ -24,7 +23,6 @@
       "maximise": "Maximaliseren",
       "minimise": "Minimaliseren",
       "devtools": "Ontwikkelaarstools In-/Uitschakelen (F12)",
-
       "announcement": "Lees de laatste aankondiging",
       "login": "Inloggen",
       "sayonika_login": "Sayonika Inloggen",
@@ -118,7 +116,6 @@
         "button_settings": "Instellingen",
         "tag_global_save": "Globale Opslag",
         "tag_sdk": "SDK",
-
         "title_achievements": "Prestaties ({0} / {1})",
         "description_achievements": "Blijf spelen om meer prestaties te ontgrendelen.",
         "description_achievements_complete": "Je hebt alle prestaties ontgrendeld. Gefeliciteerd!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Druk op S tijdens het spelen om een screenshot te maken.",
         "description_sdk": "Deze mod ondersteunt speciale functies met de Doki Doki Mod Manager SDK!",
         "description_author": "Gemaakt door {0}",
-
         "link_website": "Website ({0})",
         "description_external": "Tonen in map"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Globale Opslag",
         "label_has_mod": "Mod Installeren",
         "label_mod": "Mod",
-
         "label_existing_saves": "Bestaande Opslagbestanden",
         "description_mod": "Klik om naar een mod te bladeren.",
         "header_summary": "Samenvatting",
         "description_vanilla": "Er wordt een schone kopie van DDLC gemaakt. De opslaggegevens zijn gescheiden van elke andere kopie van het spel.",
         "description_vanilla_global_save": "Er wordt een schone kopie van DDLC gemaakt. De opslaggegevens worden gedeeld met andere kopieën van het spel (bijv. Steam)",
-
         "description_modded": "Er wordt een kopie van DDLC gemaakt en de mod wordt geïnstalleerd. De opslaggegevens zijn gescheiden van elke andere kopie van het spel.",
         "description_modded_global_save": "Er wordt een kopie van DDLC gemaakt en de mod wordt geïnstalleerd. De opslaggegevens worden gedeeld met andere kopieën van het spel (bijv. Steam)",
-
         "button_install": "Installeren",
         "button_installing": "Installeren...",
         "status_exists": "Die map bestaat al. Kies een andere mapnaam."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Geavanceerd",
         "header_enhancements": "Verbeteringen",
         "link_sdk": "Prestaties & SDK",
-
         "header_application": "Applicatie",
         "link_updates": "Updates",
         "link_storage": "Opslaglocatie",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Wanneer de mod specificeert dat het ze ondersteunt",
         "checkbox_never": "Nooit"
       },
-
       "section_testing": {
         "title": "SDK Debug",
         "subtitle": "Schakel debug logging in om je mods te testen met de Doki Doki Mod Manager SDK.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager is een fanwerk van Doki Doki Literature Club en is niet geaffilieerd met Team Salvato. Het is een fanwerk, zoals gedefinieerd door Team Salvato's IP Richtlijnen.",
       "disclaimer_2": "Doki Doki Mod Manager neemt geen verantwoordelijkheid voor schade aan je bestanden of computer als gevolg van het spelen van een mod of anderszins. Het is aan jou om ervoor te zorgen dat mods veilig zijn om te spelen.",
       "title_socials": "Contact opnemen",
-
       "social_twitter": "Volg @Dynamicxaa op Twitter",
       "social_reddit": "Stuur me een bericht op Reddit",
-      "social_email": "Stuur me een e-mail",
-      "title_support": "Ontwikkeling Ondersteunen",
-      "description_support": "Doki Doki Mod Manager zal altijd gratis zijn om te downloaden en gebruiken. Als je het leuk vindt en me wilt helpen het up-to-date te houden, overweeg dan me te ondersteunen op een van de volgende manieren.",
-      "support_donate": "Doe een eenmalige donatie",
-      "support_steelseries": "Krijg 10% korting op SteelSeries gaming randapparatuur (affiliate link)",
-      "support_code": "Draag bij aan het project (code of vertalingen)"
+      "social_email": "Stuur me een e-mail"
     }
   },
   "main": {

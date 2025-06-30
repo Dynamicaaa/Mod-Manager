@@ -1,0 +1,393 @@
+{
+  "meta": {
+    "name_en": "Kazakh",
+    "name_local": "Қазақша"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Басты бет",
+      "tab_mods": "Модтар",
+      "tab_store": "Дүкен",
+      "tab_options": "Параметрлер",
+      "tab_about": "Туралы"
+    },
+    "version": {
+      "link_changelog": "не жаңалық?"
+    },
+    "user_menu": {
+      "option_rename": "Пайдаланушы атын өзгерту",
+      "option_logout": "Шығу"
+    },
+    "window_controls": {
+      "close": "Жабу",
+      "maximise": "Үлкейту",
+      "minimise": "Кішірейту",
+      "devtools": "Әзірлеуші құралдарын қосу/өшіру (F12)",
+      "announcement": "Соңғы хабарландыруды оқыңыз",
+      "login": "Кіру",
+      "sayonika_login": "Sayonika жүйесіне кіру",
+      "update": {
+        "checking": "Жаңартулар фондық режимде тексерілуде...",
+        "available": "Жаңарту қолжетімді. Жүктеп алу үшін осы жерді басыңыз.",
+        "downloading": "Жаңарту жүктелуде...",
+        "downloaded": "Жаңарту шыққан кезде орнатуға дайын."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Шығу",
+      "button_continue": "Жалғастыру"
+    },
+    "drop_cover": {
+      "text": "Модты орнату үшін осы жерге апарыңыз"
+    },
+    "announcement": {
+      "button_open": "Сілтемені ашу",
+      "button_close": "Жабу"
+    },
+    "onboarding": {
+      "title": "Қош келдіңіз!",
+      "description_download": "DDLC көшірмесін табайық.",
+      "button_download": "DDLC ресми жүктеп алу бетіне өту",
+      "button_choose": "Көшірмені шолу",
+      "heading_step": "{0}-қадам",
+      "s1_desc": "Сізге Doki Doki Literature Club ойынының көшірмесін жүктеп алу қажет. Оны ресми веб-сайттан (ddlc.moe) табуға болады - сол жерге өту үшін төмендегі түймені басыңыз.",
+      "s1_platform": "Сұралған кезде, \"DDLC ({0})\" деп аталатын файлды жүктеп алуды таңдаңыз.",
+      "s2_desc": "Жүктеп алу аяқталғаннан кейін, оны төмендегі түймені пайдаланып таңдаңыз.",
+      "description_location": "Ойындарыңыз {0} мекенжайында сақталады",
+      "link_change": "(Өзгерту)"
+    },
+    "login_input": {
+      "message": "Электрондық пошта мекенжайыңызды енгізіңіз",
+      "details": "Осы мекенжайға электрондық хат жіберіледі. Кіруді аяқтау үшін электрондық хаттағы сілтемені басыңыз.",
+      "button_affirmative": "Кіру",
+      "button_negative": "Болдырмау"
+    },
+    "change_username_input": {
+      "message": "Жаңа пайдаланушы атыңызды енгізіңіз",
+      "details": "Пайдаланушы аттары бірегей болуы міндетті емес.",
+      "button_affirmative": "Өзгерту",
+      "button_negative": "Болдырмау"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Модтарды іздеу...",
+        "header_new": "Бастау",
+        "link_install": "DDLC орнату",
+        "header_installed": "Орнатылған",
+        "header_downloaded": "Жүктеп алынғандар"
+      },
+      "install_contextmenu": {
+        "launch": "Іске қосу",
+        "rename": "Атын өзгерту",
+        "shortcut": "Жарлық жасау",
+        "delete_save": "Сақталған деректерді жою",
+        "uninstall": "Жою"
+      },
+      "mod_contextmenu": {
+        "install": "Орнату",
+        "delete": "Жою"
+      },
+      "uninstall_confirmation": {
+        "message": "Жоюға сенімдісіз бе?",
+        "details": "{0} үшін сақталған деректеріңіз жойылады, және оны қайта орнату үшін модтың көшірмесі қажет болады.",
+        "button_affirmative": "Жою",
+        "button_negative": "Болдырмау"
+      },
+      "rename_input": {
+        "message": "Орнатудың атын өзгерту",
+        "details": "{0} үшін жаңа атауды енгізіңіз.",
+        "button_affirmative": "Атын өзгерту",
+        "button_negative": "Болдырмау"
+      },
+      "mod_delete_confirmation": {
+        "message": "Модты жоюға сенімдісіз бе?",
+        "details": "Модты қайта орнату үшін оның басқа көшірмесін жүктеп алуыңыз керек болады.",
+        "button_affirmative": "Жою",
+        "button_negative": "Болдырмау"
+      },
+      "save_delete_confirmation": {
+        "message": "Сақталған деректеріңізді жоюға сенімдісіз бе?",
+        "details": "{0} ойынын басынан бастауға тура келеді.",
+        "button_affirmative": "Жою",
+        "button_negative": "Болдырмау"
+      },
+      "install": {
+        "button_launch": "Іске қосу",
+        "button_settings": "Баптаулар",
+        "tag_global_save": "Жалпы сақтау",
+        "tag_sdk": "SDK",
+        "title_achievements": "Жетістіктер ({0} / {1})",
+        "description_achievements": "Көбірек жетістіктерді ашу үшін ойнауды жалғастырыңыз.",
+        "description_achievements_complete": "Сіз барлық жетістіктерді аштыңыз. Құттықтаймыз!",
+        "title_screenshots_none": "Скриншоттар жоқ",
+        "title_screenshots_one": "1 скриншот",
+        "title_screenshots": "{0} скриншот",
+        "description_screenshots": "Скриншот жасау үшін ойнау кезінде S пернесін басыңыз.",
+        "description_sdk": "Бұл мод Doki Doki Mod Manager SDK арқылы арнайы мүмкіндіктерді қолдайды!",
+        "description_author": "Авторы: {0}",
+        "link_website": "Веб-сайт ({0})",
+        "description_external": "Қалтада көрсету"
+      },
+      "mod": {
+        "button_install": "Орнату",
+        "button_settings": "Баптаулар",
+        "description_external": "Қалтада көрсету"
+      },
+      "install_creation": {
+        "title": "DDLC орнату",
+        "label_install_name": "Орнату атауы",
+        "label_folder_name": "Қалта атауы",
+        "label_global_save": "Жалпы сақтау",
+        "label_has_mod": "Мод орнату",
+        "label_mod": "Мод",
+        "label_existing_saves": "Қолданыстағы сақтау файлдары",
+        "description_mod": "Модты шолу үшін басыңыз.",
+        "header_summary": "Қорытынды",
+        "description_vanilla": "DDLC таза көшірмесі жасалады. Сақталған деректер ойынның кез келген басқа көшірмесінен бөлек болады.",
+        "description_vanilla_global_save": "DDLC таза көшірмесі жасалады. Сақталған деректер ойынның басқа көшірмелерімен (мысалы, Steam) ортақ болады.",
+        "description_modded": "DDLC көшірмесі жасалып, мод орнатылады. Сақталған деректер ойынның кез келген басқа көшірмесінен бөлек болады.",
+        "description_modded_global_save": "DDLC көшірмесі жасалып, мод орнатылады. Сақталған деректер ойынның басқа көшірмелерімен (мысалы, Steam) ортақ болады.",
+        "button_install": "Орнату",
+        "button_installing": "Орнатылуда...",
+        "status_exists": "Бұл қалта бұрыннан бар. Басқа қалта атауын таңдаңыз."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Дүкен жақында ашылады!",
+      "description_1": "Sayonika мод дерекқоры DDLC модтарын бөлісуге, жүктеп алуға және қарап шығуға арналған орталық орын болады. Sayonika жалпыға қолжетімді болғанда, сіз Doki Doki Mod Manager ішінде модтарды тікелей қарай аласыз.",
+      "description_2": "Күту кезінде, осы ұсынылған модтардың кейбірін жүктеп алуыңызға болады.",
+      "error": "Модтар тізімін жүктеу мүмкін болмады. Сіз оффлайнсыз ба?",
+      "button_download": "Жүктеп алу"
+    },
+    "tab_store": {
+      "title": "Sayonika дүкені",
+      "subtitle": "DDLC модтарын тауып, жүктеп алыңыз",
+      "search_placeholder": "Модтарды іздеу...",
+      "loading": "Модтар жүктелуде...",
+      "error_title": "Қосылу қатесі",
+      "retry_button": "Қайталау",
+      "offline_title": "Оффлайн",
+      "offline_message": "Сіз қазір оффлайнсыз. Интернет қосылымыңызды тексеріп, қайталап көріңіз.",
+      "check_connection": "Қосылымды тексеру",
+      "maintenance_banner": "Техникалық қызмет көрсетуге байланысты аутентификация қызметтері уақытша қолжетімсіз. Сіз модтарды қарай аласыз, бірақ кіре алмайсыз немесе тіркеле алмайсыз.",
+      "no_mods_title": "Ешқандай мод табылмады",
+      "no_mods_message": "Іздеу немесе сүзгілерді реттеп көріңіз",
+      "filters": {
+        "category": "Санат:",
+        "all_categories": "Барлық санаттар",
+        "sort_by": "Сұрыптау:",
+        "date_created": "Жасалған күні",
+        "date_updated": "Жаңартылған күні",
+        "downloads": "Жүктеп алулар",
+        "rating": "Рейтинг",
+        "title": "Атауы",
+        "order": "Рет:",
+        "descending": "Кему ретімен",
+        "ascending": "Өсу ретімен",
+        "featured_only": "Тек таңдаулылар",
+        "translate_content": "Мазмұнды аудару",
+        "auto_detect": "Автоматты түрде анықтау"
+      },
+      "mod_card": {
+        "featured": "Таңдаулы",
+        "mature": "Ересектерге арналған",
+        "by_author": "авторы: {0}",
+        "download": "Жүктеп алу",
+        "downloading": "Жүктелуде...",
+        "download_mod": "Модты жүктеп алу",
+        "downloads_count": "{0} жүктеп алу",
+        "version": "{0} нұсқасы",
+        "screenshots": "Скриншоттар ({0})",
+        "description": "Сипаттама",
+        "tags": "Тегтер",
+        "requirements": "Талаптар"
+      },
+      "pagination": {
+        "previous": "Алдыңғы",
+        "next": "Келесі",
+        "page_info": "{1} беттің {0}-беті"
+      },
+      "login": {
+        "title": "Sayonika жүйесіне кіру",
+        "discord": "Discord арқылы кіру",
+        "github": "GitHub арқылы кіру",
+        "or": "немесе",
+        "username_label": "Пайдаланушы аты немесе Email:",
+        "username_placeholder": "Пайдаланушы атын немесе email мекенжайын енгізіңіз",
+        "username_help": "Кіру үшін пайдаланушы атыңызды немесе email мекенжайыңызды пайдалана аласыз",
+        "password_label": "Құпия сөз:",
+        "remember_me": "Мені есте сақта",
+        "login_button": "Кіру",
+        "logging_in": "Кіруде...",
+        "register_link": "Аккаунтыңыз жоқ па? Осы жерде тіркеліңіз",
+        "success": "Сәтті кірдіңіз!",
+        "failed": "Кіру сәтсіз аяқталды: {0}"
+      },
+      "translation": {
+        "enabled": "Аударма қосылды. Мазмұн қолжетімді болған кезде аударылады.",
+        "disabled": "Аударма өшірілді.",
+        "language_changed": "Аударма тілі {0} тіліне өзгертілді"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Сыртқы көрініс",
+        "link_background": "Фон",
+        "link_language": "Тіл",
+        "link_advanced_appearance": "Кеңейтілген",
+        "header_enhancements": "Жақсартулар",
+        "link_sdk": "Жетістіктер және SDK",
+        "header_application": "Қосымша",
+        "link_updates": "Жаңартулар",
+        "link_storage": "Сақтау орны",
+        "header_developers": "Әзірлеушілер",
+        "link_testing": "SDK жөндеу",
+        "link_debug": "Қосымша туралы ақпарат"
+      },
+      "section_backgrounds": {
+        "title": "Фон",
+        "subtitle": "Doki Doki Mod Manager көшірмеңізді осы фондардың бірімен реттеңіз.",
+        "button_none": "Фонсыз",
+        "description_credit": "DDLC түпнұсқа фондары Team Salvato ұсынған."
+      },
+      "section_advanced_appearance": {
+        "title": "Кеңейтілген",
+        "subtitle": "Басқа интерфейс параметрлерін осы жерден табыңыз.",
+        "button_enable_sysborders": "Жүйелік жиектерді пайдалану (қайта іске қосуды қажет етеді)",
+        "button_disable_sysborders": "Жүйелік жиектерді өшіру (қайта іске қосуды қажет етеді)"
+      },
+      "section_storage": {
+        "title": "Сақтау орны",
+        "subtitle": "Ойын деректеріңіз сақталатын жерді өзгертіңіз.",
+        "description_moving": "Ескерту! Орнату орнын өзгертуді таңдасаңыз, барлық модтарыңыз, орнатуларыңыз және сақталған деректеріңіз жылжытылады. Бұл бірнеше минут алуы мүмкін және үзуге болмайды.",
+        "description_current": "Ағымдағы орын: {0}",
+        "button_change": "Орнату орнын өзгерту"
+      },
+      "section_updates": {
+        "title": "Жаңартулар",
+        "subtitle": "Doki Doki Mod Manager соңғы нұсқасын алыңыз.",
+        "description_current_version": "Ағымдағы нұсқа: {0}",
+        "label_channel": "Шығарылым арнасы",
+        "option_stable": "Тұрақты",
+        "option_beta": "Бета",
+        "button_check": "Жаңартуларды тексеру"
+      },
+      "section_sdk": {
+        "title": "Жетістіктер және SDK",
+        "subtitle": "Жетістіктердің өңделу жолын өзгертіңіз.",
+        "description_mode": "Жетістіктерді қосу:",
+        "checkbox_always": "Әрқашан (ұсынылады)",
+        "checkbox_specified": "Мод оларды қолдайтынын көрсеткенде",
+        "checkbox_never": "Ешқашан"
+      },
+      "section_testing": {
+        "title": "SDK жөндеу",
+        "subtitle": "Doki Doki Mod Manager SDK арқылы модтарыңызды тексеру үшін жөндеу журналын қосыңыз.",
+        "button_enable": "Жөндеуді қосу",
+        "button_disable": "Жөндеуді өшіру"
+      },
+      "section_debug": {
+        "title": "Қосымша туралы ақпарат",
+        "subtitle": "Мәселелерді диагностикалауға арналған ақпарат."
+      },
+      "section_language": {
+        "title": "Тіл",
+        "subtitle": "Doki Doki Mod Manager тілін өзгертіңіз.",
+        "description_current": "Ағымдағы тіл: {0}",
+        "button_apply": "Тілді қолдану",
+        "button_contribute": "Аударуға көмектесу",
+        "description_restart": "Тіл өзгерістері қосымшаны қайта іске қосқаннан кейін күшіне енеді.",
+        "notification_changed": "Тіл {0} тіліне өзгертілді. Өзгерістерді көру үшін қосымшаны қайта іске қосыңыз.",
+        "notification_same": "Тіл қазірдің өзінде {0} тіліне орнатылған."
+      }
+    },
+    "tab_about": {
+      "title": "Туралы",
+      "description": "Doki Doki Mod Manager - бұл Team Salvato жасаған тегін визуалды роман ойыны Doki Doki Literature Club үшін модтарды табуға, орнатуға және ойнауға көмектесетін қауымдастық әзірлеген жоба.",
+      "title_disclaimer": "Жауапкершіліктен бас тарту",
+      "disclaimer_1": "Doki Doki Mod Manager - Doki Doki Literature Club-тың фанаттық жұмысы және Team Salvato-мен байланысты емес. Бұл Team Salvato-ның зияткерлік меншік нұсқауларында анықталғандай, фанаттық жұмыс болып табылады.",
+      "disclaimer_2": "Doki Doki Mod Manager мод ойнау немесе басқа себептермен файлдарыңызға немесе компьютеріңізге келтірілген кез келген зақым үшін жауапкершілік көтермейді. Модтардың ойнауға қауіпсіз екеніне көз жеткізу сіздің міндетіңіз.",
+      "title_socials": "Байланыста болыңыз",
+      "social_twitter": "Twitter-де @Dynamicxaa-ны оқыңыз",
+      "social_reddit": "Reddit-те маған хабарлама жіберіңіз",
+      "social_email": "Маған электрондық хат жіберіңіз",
+      "title_support": "Әзірлемені қолдау",
+      "description_support": "Doki Doki Mod Manager әрқашан тегін жүктеп алуға және пайдалануға болады. Егер сізге ұнаса және оны жаңартып отыруыма көмектескіңіз келсе, мені келесі жолдардың бірімен қолдауды қарастырыңыз.",
+      "support_donate": "Бір реттік қайырымдылық жасау",
+      "support_steelseries": "SteelSeries ойын перифериялық құрылғыларына 10% жеңілдік алыңыз (серіктестік сілтеме)",
+      "support_code": "Жобаға үлес қосу (код немесе аудармалар)"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager ашып, {0} іске қосыңыз."
+    },
+    "running_cover": {
+      "title_running": "DDLC жұмыс істеп тұр",
+      "title_crashed": "Бірдеңе дұрыс болмады",
+      "button_browse": "Ойын қалтасын ашу",
+      "button_close": "ЖАРАЙДЫ",
+      "description_running": "Модтарыңызға өзгерістер енгізу үшін ойынды жабыңыз.",
+      "install_missing": "Орнату табылмады.",
+      "install_corrupt": "Орнату толық емес немесе бүлінген.",
+      "install_crashed": "Ойын іске қосылмады немесе бұзылды."
+    },
+    "move_install": {
+      "title": "Жаңа орнату қалтасын таңдаңыз"
+    },
+    "mod_browse_dialog": {
+      "title": "Орнату үшін мод табыңыз",
+      "file_format_name": "Модтар"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC zip файлының көшірмесін табыңыз",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Жарлықты орналастыратын жерді таңдаңыз",
+      "file_format_name": "Жарлық"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager бұзылды",
+        "body": "Мәселе туралы хабарланды. Қайта іске қосып, қайталап көріңіз."
+      },
+      "move_install": {
+        "title": "Орнату қалтасын жылжыту сәтсіз аяқталды",
+        "body": "Осы қалтаға жылжуға рұқсатыңыз бен жеткілікті орын бар екенін тексеріңіз."
+      },
+      "shortcut": {
+        "title": "Жарлық жасау сәтсіз аяқталды",
+        "body": "Осы қалтада файлдар жасауға рұқсатыңыз бар екенін тексеріңіз."
+      },
+      "install": {
+        "title": "Ойынды орнату сәтсіз аяқталды",
+        "body": "Орнатуға рұқсатыңыз бен жеткілікті орын бар екенін тексеріңіз."
+      },
+      "rename": {
+        "title": "Атын өзгерту сәтсіз аяқталды",
+        "body": "Кедергі келтіруі мүмкін барлық бағдарламаларды жапқаныңызды тексеріп, қайталап көріңіз."
+      },
+      "uninstall": {
+        "title": "Жою сәтсіз аяқталды",
+        "body": "Кедергі келтіруі мүмкін барлық бағдарламаларды жапқаныңызды тексеріп, қайталап көріңіз."
+      },
+      "save_delete": {
+        "title": "Сақталған деректерді жою сәтсіз аяқталды",
+        "body": "Кедергі келтіруі мүмкін барлық бағдарламаларды жапқаныңызды тексеріп, қайталап көріңіз."
+      },
+      "mod_delete": {
+        "title": "Модты жою сәтсіз аяқталды",
+        "body": "Кедергі келтіруі мүмкін барлық бағдарламаларды жапқаныңызды тексеріп, қайталап көріңіз."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager жауап беруді тоқтатты",
+        "body": "Егер бұл мәселе ұзаққа созылса, қолданбаны жауып, қайта бастаңыз."
+      },
+      "executable_permission": {
+        "title": "Ойынды орындалатын файл ету сәтсіз аяқталды",
+        "body": "Linux жүйесінде DDLC.sh файлын орындалатын ете алмады. Ойын дұрыс іске қосылмауы мүмкін."
+      }
+    }
+  }
+}

@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "co nowego?"
     },
-
     "user_menu": {
       "option_rename": "Zmień nazwę użytkownika",
       "option_logout": "Wyloguj się"
@@ -24,7 +23,6 @@
       "maximise": "Maksymalizuj",
       "minimise": "Minimalizuj",
       "devtools": "Przełącz narzędzia deweloperskie (F12)",
-
       "announcement": "Przeczytaj najnowsze ogłoszenie",
       "login": "Zaloguj się",
       "sayonika_login": "Login Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Ustawienia",
         "tag_global_save": "Globalny zapis",
         "tag_sdk": "SDK",
-
         "title_achievements": "Osiągnięcia ({0} / {1})",
         "description_achievements": "Kontynuuj grę, aby odblokować więcej osiągnięć.",
         "description_achievements_complete": "Odblokowałeś wszystkie osiągnięcia. Gratulacje!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Naciśnij S podczas gry, aby zrobić zrzut ekranu.",
         "description_sdk": "Ten mod obsługuje specjalne funkcje z Doki Doki Mod Manager SDK!",
         "description_author": "Utworzony przez {0}",
-
         "link_website": "Strona internetowa ({0})",
         "description_external": "Pokaż w folderze"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Globalny zapis",
         "label_has_mod": "Zainstaluj moda",
         "label_mod": "Mod",
-
         "label_existing_saves": "Istniejące pliki zapisu",
         "description_mod": "Kliknij, aby przeglądać w poszukiwaniu moda.",
         "header_summary": "Podsumowanie",
         "description_vanilla": "Zostanie utworzona czysta kopia DDLC. Dane zapisu będą oddzielone od wszelkich innych kopii gry.",
         "description_vanilla_global_save": "Zostanie utworzona czysta kopia DDLC. Dane zapisu będą współdzielone z innymi kopiami gry (np. Steam)",
-
         "description_modded": "Zostanie utworzona kopia DDLC i zainstalowany mod. Dane zapisu będą oddzielone od wszelkich innych kopii gry.",
         "description_modded_global_save": "Zostanie utworzona kopia DDLC i zainstalowany mod. Dane zapisu będą współdzielone z innymi kopiami gry (np. Steam)",
-
         "button_install": "Zainstaluj",
         "button_installing": "Instalowanie...",
         "status_exists": "Ten folder już istnieje. Wybierz inną nazwę folderu."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Zaawansowane",
         "header_enhancements": "Ulepszenia",
         "link_sdk": "Osiągnięcia i SDK",
-
         "header_application": "Aplikacja",
         "link_updates": "Aktualizacje",
         "link_storage": "Lokalizacja przechowywania",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Gdy mod określa, że je obsługuje",
         "checkbox_never": "Nigdy"
       },
-
       "section_testing": {
         "title": "Debugowanie SDK",
         "subtitle": "Włącz rejestrowanie debugowania, aby przetestować swoje mody z Doki Doki Mod Manager SDK.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager to fanowskie dzieło Doki Doki Literature Club i nie jest powiązane z Team Salvato. To fanowskie dzieło, zgodnie z definicją wytycznych IP Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager nie ponosi odpowiedzialności za jakiekolwiek szkody wyrządzone twoim plikom lub komputerowi w wyniku grania w moda lub w inny sposób. To do ciebie należy upewnienie się, że mody są bezpieczne do grania.",
       "title_socials": "Skontaktuj się",
-
       "social_twitter": "Śledź @Dynamicxaa na Twitterze",
       "social_reddit": "Wyślij mi wiadomość na Reddit",
-      "social_email": "Wyślij mi e-mail",
-      "title_support": "Wspieraj rozwój",
-      "description_support": "Doki Doki Mod Manager zawsze będzie darmowy do pobrania i użytkowania. Jeśli ci się podoba i chcesz pomóc mi go aktualizować, rozważ wsparcie mnie na jeden z następujących sposobów.",
-      "support_donate": "Zrób jednorazową darowiznę",
-      "support_steelseries": "Otrzymaj 10% zniżki na akcesoria gamingowe SteelSeries (link partnerski)",
-      "support_code": "Weź udział w projekcie (kod lub tłumaczenia)"
+      "social_email": "Wyślij mi e-mail"
     }
   },
   "main": {

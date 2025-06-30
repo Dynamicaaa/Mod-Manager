@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Mongolian",
+    "name_local": "Монгол"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Нүүр",
+      "tab_mods": "Модууд",
+      "tab_store": "Дэлгүүр",
+      "tab_options": "Тохиргоо",
+      "tab_about": "Тухай"
+    },
+    "version": {
+      "link_changelog": "Шинэчлэлтүүд юу вэ?"
+    },
+    "user_menu": {
+      "option_rename": "Хэрэглэгчийн нэр солих",
+      "option_logout": "Гарах"
+    },
+    "window_controls": {
+      "close": "Хаах",
+      "maximise": "Томруулах",
+      "minimise": "Багасгах",
+      "devtools": "Хөгжүүлэгчийн хэрэгслүүдийг асаах/унтраах (F12)",
+      "announcement": "Хамгийн сүүлийн үеийн мэдэгдлийг унших",
+      "login": "Нэвтрэх",
+      "sayonika_login": "Саёника Нэвтрэх",
+      "update": {
+        "checking": "Арын дээр шинэчлэлтүүдийг шалгаж байна...",
+        "available": "Шинэчлэлт бэлэн боллоо. Татаж авахын тулд энд дарна уу.",
+        "downloading": "Шинэчлэлтийг татаж байна...",
+        "downloaded": "Та гарах үед суулгах шинэчлэлт бэлэн боллоо."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Гарах",
+      "button_continue": "Үргэлжлүүлэх"
+    },
+    "drop_cover": {
+      "text": "Мод суулгахын тулд энд татаж оруулна уу"
+    },
+    "announcement": {
+      "button_open": "Холбоос нээх",
+      "button_close": "Хаах"
+    },
+    "onboarding": {
+      "title": "Тавтай морилно уу!",
+      "description_download": "DDLC-ийн хуулбарыг олцгооё.",
+      "button_download": "DDLC-ийн албан ёсны татаж авах хуудас руу зочлох",
+      "button_choose": "Хуулбар хайх",
+      "heading_step": "Алхам {0}",
+      "s1_desc": "Та Doki Doki Literature Club-ийн хуулбарыг татаж авах шаардлагатай. Үүнийг албан ёсны вэбсайтаас (ddlc.moe) олж болно - одоо тийшээ явахын тулд доорх товчийг дарна уу.",
+      "s1_platform": "Танаас асуухад, \"DDLC ({0})\" нэртэй файлыг татаж авахаар сонгоно уу.",
+      "s2_desc": "Таны татаж авах ажил дууссаны дараа доорх товчийг ашиглан сонгоно уу.",
+      "description_location": "Таны тоглоомууд {0} хаягт хадгалагдах болно",
+      "link_change": "(Солих)"
+    },
+    "login_input": {
+      "message": "Цахим шуудангийн хаягаа оруулна уу",
+      "details": "Энэ хаяг руу цахим шуудан илгээгдэнэ. Нэвтрэхийг дуусгахын тулд цахим шуудан дахь холбоосыг дарна уу.",
+      "button_affirmative": "Нэвтрэх",
+      "button_negative": "Цуцлах"
+    },
+    "change_username_input": {
+      "message": "Шинэ хэрэглэгчийн нэрээ оруулна уу",
+      "details": "Хэрэглэгчийн нэрс өвөрмөц байх шаардлагагүй.",
+      "button_affirmative": "Солих",
+      "button_negative": "Цуцлах"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Модууд хайх...",
+        "header_new": "Эхлэх",
+        "link_install": "DDLC суулгах",
+        "header_installed": "Суулгагдсан",
+        "header_downloaded": "Татан авалтууд"
+      },
+      "install_contextmenu": {
+        "launch": "Ажиллуулах",
+        "rename": "Нэр солих",
+        "shortcut": "Товчлох цонх үүсгэх",
+        "delete_save": "Хадгалсан өгөгдлийг устгах",
+        "uninstall": "Устгах"
+      },
+      "mod_contextmenu": {
+        "install": "Суулгах",
+        "delete": "Устгах"
+      },
+      "uninstall_confirmation": {
+        "message": "Та үүнийг устгахдаа итгэлтэй байна уу?",
+        "details": "{0}-ийн таны хадгалсан өгөгдөл устгагдах бөгөөд та дахин суулгахын тулд модын хуулбар хэрэгтэй болно.",
+        "button_affirmative": "Устгах",
+        "button_negative": "Цуцлах"
+      },
+      "rename_input": {
+        "message": "Суулгалтыг нэр солих",
+        "details": "{0}-д зориулсан шинэ нэрийг оруулна уу.",
+        "button_affirmative": "Нэр солих",
+        "button_negative": "Цуцлах"
+      },
+      "mod_delete_confirmation": {
+        "message": "Та модыг устгахдаа итгэлтэй байна уу?",
+        "details": "Та дахин суулгахын тулд модын өөр хуулбарыг татаж авах шаардлагатай болно.",
+        "button_affirmative": "Устгах",
+        "button_negative": "Цуцлах"
+      },
+      "save_delete_confirmation": {
+        "message": "Та хадгалсан өгөгдлөө устгахдаа итгэлтэй байна уу?",
+        "details": "Та {0}-ийг эхнээс нь дахин эхлүүлэх шаардлагатай болно.",
+        "button_affirmative": "Устгах",
+        "button_negative": "Цуцлах"
+      },
+      "install": {
+        "button_launch": "Ажиллуулах",
+        "button_settings": "Тохиргоо",
+        "tag_global_save": "Глобал хадгалах",
+        "tag_sdk": "SDK",
+        "title_achievements": "Амжилтууд ({0} / {1})",
+        "description_achievements": "Илүү олон амжилт нээхийн тулд тоглоорой.",
+        "description_achievements_complete": "Та бүх амжилтыг нээсэн. Баяр хүргэе!",
+        "title_screenshots_none": "Скриншот байхгүй",
+        "title_screenshots_one": "1 скриншот",
+        "title_screenshots": "{0} скриншот",
+        "description_screenshots": "Тоглож байхдаа скриншот авахын тулд S дарна уу.",
+        "description_sdk": "Энэ мод Doki Doki Mod Manager SDK-тай тусгай функцуудыг дэмждэг!",
+        "description_author": "{0}-аар бүтээгдсэн",
+        "link_website": "Вэбсайт ({0})",
+        "description_external": "Хадгалах газарт харуулах"
+      },
+      "mod": {
+        "button_install": "Суулгах",
+        "button_settings": "Тохиргоо",
+        "description_external": "Хадгалах газарт харуулах"
+      },
+      "install_creation": {
+        "title": "DDLC суулгах",
+        "label_install_name": "Суулгах нэр",
+        "label_folder_name": "Хадгалах нэр",
+        "label_global_save": "Глобал хадгалах",
+        "label_has_mod": "Мод суулгах",
+        "label_mod": "Мод",
+        "label_existing_saves": "Одоо байгаа хадгалсан файлууд",
+        "description_mod": "Мод хайхын тулд дарна уу.",
+        "header_summary": "Хуруун мэдээлэл",
+        "description_vanilla": "DDLC-ийн цэвэр хуулбар үүсгэгдэнэ. Хадгалсан өгөгдөл нь тоглоомын бусад хуулбараас тусдаа байх болно.",
+        "description_vanilla_global_save": "DDLC-ийн цэвэр хуулбар үүсгэгдэнэ. Хадгалсан өгөгдөл нь тоглоомын бусад хуулбартай (жишээ нь Steam) хуваалцагдах болно.",
+        "description_modded": "DDLC-ийн хуулбар үүсгэгдэж, мод суулгагдана. Хадгалсан өгөгдөл нь тоглоомын бусад хуулбараас тусдаа байх болно.",
+        "description_modded_global_save": "DDLC-ийн хуулбар үүсгэгдэж, мод суулгагдана. Хадгалсан өгөгдөл нь тоглоомын бусад хуулбартай (жишээ нь Steam) хуваалцагдах болно.",
+        "button_install": "Суулгах",
+        "button_installing": "Суулгаж байна...",
+        "status_exists": "Тэр хавтас аль хэдийн байна. Өөр хавтасны нэр сонгоно уу."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Дэлгүүр удахгүй нээгдэнэ!",
+      "description_1": "Саёника модын мэдээллийн сан нь DDLC модуудыг хуваалцах, татаж авах, хянахад төвлөрсөн байршлыг хангах болно. Саёника олон нийтэд нээлттэй болох үед та Doki Doki Mod Manager-т модуудыг шууд үзэх боломжтой болно.",
+      "description_2": "Хүлээж байхдаа эдгээр санал болгосон модуудыг татаж авахад чөлөөтэй байгаарай.",
+      "error": "Модуудын жагсаалтыг ачаалахад алдаа гарлаа. Та оффлайн байна уу?",
+      "button_download": "Татаж авах"
+    },
+    "tab_store": {
+      "title": "Саёника Дэлгүүр",
+      "subtitle": "DDLC модуудыг нээж, татаж авах",
+      "search_placeholder": "Модууд хайх...",
+      "loading": "Модууд ачаалж байна...",
+      "error_title": "Холболтын алдаа",
+      "retry_button": "Дахин оролдох",
+      "offline_title": "Оффлайн",
+      "offline_message": "Та одоогоор оффлайн байна. Та интернет холболтоо шалгаад дахин оролдоно уу.",
+      "check_connection": "Холболтыг шалгах",
+      "maintenance_banner": "Засвар үйлчилгээний улмаас нэвтрэх үйлчилгээнүүд түр хугацаанд ажиллахгүй байна. Та модуудыг үзэх боломжтой боловч нэвтрэх эсвэл бүртгүүлэх боломжгүй.",
+      "no_mods_title": "Мод олдсонгүй",
+      "no_mods_message": "Хайлтаа эсвэл шүүлтүүрээ тохируулаад үзээрэй",
+      "filters": {
+        "category": "Ангилал:",
+        "all_categories": "Бүх ангилал",
+        "sort_by": "Эрэмбэлэх:",
+        "date_created": "Үүсгэсэн огноо",
+        "date_updated": "Шинэчилсэн огноо",
+        "downloads": "Татан авалтууд",
+        "rating": "Үнэлгээ",
+        "title": "Гарчиг",
+        "order": "Эрэмбэ:",
+        "descending": "Буурах",
+        "ascending": "Өгсөх",
+        "featured_only": "Онцолсон",
+        "translate_content": "Агуулгыг орчуулах",
+        "auto_detect": "Автоматаар илрүүлэх"
+      },
+      "mod_card": {
+        "featured": "Онцолсон",
+        "mature": "Насанд хүрэгчдэд зориулсан",
+        "by_author": "{0}-аар",
+        "download": "Татаж авах",
+        "downloading": "Татаж байна...",
+        "download_mod": "Мод татаж авах",
+        "downloads_count": "{0} татан авалт",
+        "version": "Хувилбар {0}",
+        "screenshots": "Скриншотууд ({0})",
+        "description": "Тайлбар",
+        "tags": "Шошгууд",
+        "requirements": "Шаардлагууд"
+      },
+      "pagination": {
+        "previous": "Өмнөх",
+        "next": "Дараагийн",
+        "page_info": "Хуудас {0} / {1}"
+      },
+      "login": {
+        "title": "Саёника руу нэвтрэх",
+        "discord": "Discord-оор нэвтрэх",
+        "github": "GitHub-аар нэвтрэх",
+        "or": "эсвэл",
+        "username_label": "Хэрэглэгчийн нэр эсвэл цахим шуудан:",
+        "username_placeholder": "Хэрэглэгчийн нэр эсвэл цахим шуудангийн хаяг оруулах",
+        "username_help": "Та хэрэглэгчийн нэр эсвэл цахим шуудангийн хаягаа ашиглан нэвтрэх боломжтой",
+        "password_label": "Нууц үг:",
+        "remember_me": "Намайг санах",
+        "login_button": "Нэвтрэх",
+        "logging_in": "Нэвтэрч байна...",
+        "register_link": "Бүртгэлгүй байна уу? Эндээс бүртгүүлээрэй",
+        "success": "Амжилттай нэвтэрлээ!",
+        "failed": "Нэвтрэх амжилтгүй боллоо: {0}"
+      },
+      "translation": {
+        "enabled": "Орчуулга идэвхжсэн. Агуулга боломжтой үед орчуулагдах болно.",
+        "disabled": "Орчуулга идэвхгүй болсон.",
+        "language_changed": "Орчуулгын хэл {0} болж өөрчлөгдсөн."
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Харагдах байдал",
+        "link_background": "Дэвсгэр",
+        "link_language": "Хэл",
+        "link_advanced_appearance": "Нарийвчилсан",
+        "header_enhancements": "Сайжруулалт",
+        "link_sdk": "Амжилтууд ба SDK",
+        "header_application": "Програм",
+        "link_updates": "Шинэчлэлтүүд",
+        "link_storage": "Хадгалах байршил",
+        "header_developers": "Хөгжүүлэгчид",
+        "link_testing": "SDK Дибаг",
+        "link_debug": "Програмын мэдээлэл"
+      },
+      "section_backgrounds": {
+        "title": "Дэвсгэр",
+        "subtitle": "Эдгээр дэвсгэрүүдийн нэгийг ашиглан Doki Doki Mod Manager-ийн хуулбараа тохируулна уу.",
+        "button_none": "Дэвсгэргүй",
+        "description_credit": "Анхны DDLC дэвсгэрүүд Team Salvato-ийн зөвшөөрөлтэйгээр."
+      },
+      "section_advanced_appearance": {
+        "title": "Нарийвчилсан",
+        "subtitle": "Эндээс бусад интерфэйсийн тохиргоог олно уу.",
+        "button_enable_sysborders": "Системийн хил ашиглах (дахин эхлүүлэх шаардлагатай)",
+        "button_disable_sysborders": "Системийн хилийг идэвхгүй болгох (дахин эхлүүлэх шаардлагатай)"
+      },
+      "section_storage": {
+        "title": "Хадгалах байршил",
+        "subtitle": "Тоглоомын өгөгдөл хадгалагдах газрыг өөрчлөх.",
+        "description_moving": "Анхааруулга! Хэрэв та суулгах байршлыг өөрчлөхөөр сонговол, таны бүх модууд, суулгалтууд болон хадгалсан өгөгдөл нүүх болно. Энэ нь хэдэн минут үргэлжилж болох бөгөөд тасалдуулж болохгүй.",
+        "description_current": "Одоогийн байршил: {0}",
+        "button_change": "Суулгах байршлыг солих"
+      },
+      "section_updates": {
+        "title": "Шинэчлэлтүүд",
+        "subtitle": "Doki Doki Mod Manager-ийн хамгийн сүүлийн хувилбарыг авах.",
+        "description_current_version": "Одоогийн хувилбар: {0}",
+        "label_channel": "Гарсан суваг",
+        "option_stable": "Тогтвортой",
+        "option_beta": "Бета",
+        "button_check": "Шинэчлэлтүүдийг шалгах"
+      },
+      "section_sdk": {
+        "title": "Амжилтууд ба SDK",
+        "subtitle": "Амжилтуудыг хэрхэн зохицуулахыг өөрчлөх.",
+        "description_mode": "Амжилтуудыг идэвхжүүлэх:",
+        "checkbox_always": "Үргэлж (санал болгож байна)",
+        "checkbox_specified": "Мод дэмждэг гэж заасан үед",
+        "checkbox_never": "Хэзээ ч үгүй"
+      },
+      "section_testing": {
+        "title": "SDK Дибаг",
+        "subtitle": "Doki Doki Mod Manager SDK-тай модуудаа туршихын тулд дибаг лог идэвхжүүлнэ үү.",
+        "button_enable": "Дибаг идэвхжүүлэх",
+        "button_disable": "Дибаг идэвхгүй болгох"
+      },
+      "section_debug": {
+        "title": "Програмын мэдээлэл",
+        "subtitle": "Алдаа оношлох мэдээлэл."
+      },
+      "section_language": {
+        "title": "Хэл",
+        "subtitle": "Doki Doki Mod Manager-ийн хэлийг өөрчлөх.",
+        "description_current": "Одоогийн хэл: {0}",
+        "button_apply": "Хэл хэрэглэх",
+        "button_contribute": "Орчуулахад туслах",
+        "description_restart": "Хэлний өөрчлөлтүүд програмыг дахин эхлүүлсний дараа хүчин төгөлдөр болно.",
+        "notification_changed": "Хэл {0} болж өөрчлөгдсөн. Өөрчлөлтийг харахын тулд програмыг дахин эхлүүлнэ үү.",
+        "notification_same": "Хэл аль хэдийн {0} болж тохируулагдсан байна."
+      }
+    },
+    "tab_about": {
+      "title": "Тухай",
+      "description": "Doki Doki Mod Manager нь Team Salvato-ийн үнэгүй Визуал Новелл тоглоом болох Doki Doki Literature Club-д зориулсан модуудыг олох, суулгах, тоглоход тусалдаг олон нийтийн хөгжүүлсэн төсөл юм.",
+      "title_disclaimer": "Анхааруулга",
+      "disclaimer_1": "Doki Doki Mod Manager нь Doki Doki Literature Club-ийн фэн бүтээл бөгөөд Team Salvato-тай хамааралгүй. Энэ нь Team Salvato-ийн IP удирдамжид заасан фэн бүтээл юм.",
+      "disclaimer_2": "Doki Doki Mod Manager нь таны файлууд эсвэл компьютерт мод тоглосноос үүссэн эсвэл бусад байдлаар үүссэн аливаа хохирлыг хариуцахгүй. Модууд тоглоход аюулгүй эсэхийг баталгаажуулах нь таны үүрэг юм.",
+      "title_socials": "Холбоо барих",
+      "social_twitter": "Twitter дээр @Dynamicxaa-г дагах",
+      "social_reddit": "Reddit дээр надад мессеж илгээх",
+      "social_email": "Надад цахим шуудан илгээх"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager-ийг нээж, {0}-ийг ажиллуулах."
+    },
+    "running_cover": {
+      "title_running": "DDLC ажиллаж байна",
+      "title_crashed": "Ямар нэгэн зүйл буруу боллоо",
+      "button_browse": "Тоглоомын хавтас нээх",
+      "button_close": "За",
+      "description_running": "Модууддаа өөрчлөлт оруулахын тулд тоглоомыг хаана уу.",
+      "install_missing": "Суулгацыг олох боломжгүй.",
+      "install_corrupt": "Суулгац дутуу эсвэл гэмтсэн байна.",
+      "install_crashed": "Тоглоом ажиллахгүй болсон эсвэл гацаж унасан."
+    },
+    "move_install": {
+      "title": "Шинэ суулгах хавтас сонгох"
+    },
+    "mod_browse_dialog": {
+      "title": "Суулгах мод олох",
+      "file_format_name": "Модууд"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC-ийн zip файлын хуулбарыг олох",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Товчлох цонхоо хаана байрлуулахаа сонгоно уу",
+      "file_format_name": "Товчлох"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager гацаж уналаа",
+        "body": "Асуудлыг мэдэгдсэн. Дахин эхлүүлээд дахин оролдоно уу."
+      },
+      "move_install": {
+        "title": "Суулгах хавтасыг нүүлгэхэд алдаа гарлаа",
+        "body": "Энэ хавтас руу нүүлгэх зөвшөөрөл болон хангалттай зай байгаа эсэхийг шалгана уу."
+      },
+      "shortcut": {
+        "title": "Товчлох цонх үүсгэхэд алдаа гарлаа",
+        "body": "Энэ хавтас дотор файл үүсгэх зөвшөөрөл байгаа эсэхийг шалгана уу."
+      },
+      "install": {
+        "title": "Тоглоом суулгахад алдаа гарлаа",
+        "body": "Суулгах зөвшөөрөл болон хангалттай зай байгаа эсэхийг шалгана уу."
+      },
+      "rename": {
+        "title": "Нэр солиход алдаа гарлаа",
+        "body": "Саад учруулж болзошгүй бүх програмыг хаасан эсэхийг шалгаад дахин оролдоно уу."
+      },
+      "uninstall": {
+        "title": "Устгахад алдаа гарлаа",
+        "body": "Саад учруулж болзошгүй бүх програмыг хаасан эсэхийг шалгаад дахин оролдоно уу."
+      },
+      "save_delete": {
+        "title": "Хадгалсан өгөгдлийг устгахад алдаа гарлаа",
+        "body": "Саад учруулж болзошгүй бүх програмыг хаасан эсэхийг шалгаад дахин оролдоно уу."
+      },
+      "mod_delete": {
+        "title": "Модыг устгахад алдаа гарлаа",
+        "body": "Саад учруулж болзошгүй бүх програмыг хаасан эсэхийг шалгаад дахин оролдоно уу."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager хариу өгөхөө болив",
+        "body": "Хэрэв энэ асуудал удаан үргэлжилбэл, програмыг хаагаад дахин эхлүүлнэ үү."
+      },
+      "executable_permission": {
+        "title": "Тоглоомыг ажиллуулах боломжгүй",
+        "body": "DDLC.sh-ийг Linux дээр ажиллуулах боломжгүй боллоо. Тоглоом зөв ажиллахгүй байж болно."
+      }
+    }
+  }
+}

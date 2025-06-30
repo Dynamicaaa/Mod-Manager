@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "hva er nytt?"
     },
-
     "user_menu": {
       "option_rename": "Endre Brukernavn",
       "option_logout": "Logg ut"
@@ -24,7 +23,6 @@
       "maximise": "Maksimer",
       "minimise": "Minimer",
       "devtools": "Aktiver/Deaktiver Utviklerverktøy (F12)",
-
       "announcement": "Les den siste kunngjøringen",
       "login": "Logg Inn",
       "sayonika_login": "Sayonika Innlogging",
@@ -118,7 +116,6 @@
         "button_settings": "Innstillinger",
         "tag_global_save": "Global Lagring",
         "tag_sdk": "SDK",
-
         "title_achievements": "Prestater ({0} / {1})",
         "description_achievements": "Fortsett å spille for å låse opp flere prestater.",
         "description_achievements_complete": "Du har låst opp alle prestater. Gratulerer!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Trykk S mens du spiller for å ta et skjermbilde.",
         "description_sdk": "Denne modden støtter spesielle funksjoner med Doki Doki Mod Manager SDK!",
         "description_author": "Laget av {0}",
-
         "link_website": "Nettsted ({0})",
         "description_external": "Vis i mappe"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Global Lagring",
         "label_has_mod": "Installer Mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "Eksisterende Lagrede Filer",
         "description_mod": "Klikk for å bla gjennom for en mod.",
         "header_summary": "Sammendrag",
         "description_vanilla": "En ren kopi av DDLC vil bli opprettet. De lagrede dataene vil være separate fra alle andre kopier av spillet.",
         "description_vanilla_global_save": "En ren kopi av DDLC vil bli opprettet. De lagrede dataene vil bli delt med andre kopier av spillet (f.eks. Steam)",
-
         "description_modded": "En kopi av DDLC vil bli opprettet, og modden vil bli installert. De lagrede dataene vil være separate fra alle andre kopier av spillet.",
         "description_modded_global_save": "En kopi av DDLC vil bli opprettet, og modden vil bli installert. De lagrede dataene vil bli delt med andre kopier av spillet (f.eks. Steam)",
-
         "button_install": "Installer",
         "button_installing": "Installerer...",
         "status_exists": "Den mappen eksisterer allerede. Velg et annet mappenavn."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Avansert",
         "header_enhancements": "Forbedringer",
         "link_sdk": "Prestater & SDK",
-
         "header_application": "Applikasjon",
         "link_updates": "Oppdateringer",
         "link_storage": "Lagringssted",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Når modden spesifiserer at den støtter dem",
         "checkbox_never": "Aldri"
       },
-
       "section_testing": {
         "title": "SDK Debug",
         "subtitle": "Aktiver debug-logging for å teste moddene dine med Doki Doki Mod Manager SDK.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager er et fanverk av Doki Doki Literature Club og er ikke tilknyttet Team Salvato. Det er et fanverk, som definert av Team Salvatos IP-retningslinjer.",
       "disclaimer_2": "Doki Doki Mod Manager tar ikke ansvar for skader på filene eller datamaskinen din som følge av å spille en mod eller på annen måte. Det er opp til deg å sørge for at mods er trygge å spille.",
       "title_socials": "Ta kontakt",
-
       "social_twitter": "Følg @Dynamicxaa på Twitter",
       "social_reddit": "Send meg en melding på Reddit",
-      "social_email": "Send meg en e-post",
-      "title_support": "Støtt Utvikling",
-      "description_support": "Doki Doki Mod Manager vil alltid være gratis å laste ned og bruke. Hvis du liker det og vil hjelpe meg med å holde det oppdatert, vurder å støtte meg på en av følgende måter.",
-      "support_donate": "Gi en engangsdonasjon",
-      "support_steelseries": "Få 10% rabatt på SteelSeries gaming-tilbehør (affiliate-lenke)",
-      "support_code": "Bidra til prosjektet (kode eller oversettelser)"
+      "social_email": "Send meg en e-post"
     }
   },
   "main": {

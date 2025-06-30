@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Thai",
+    "name_local": "ไทย"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "หน้าหลัก",
+      "tab_mods": "ม็อด",
+      "tab_store": "ร้านค้า",
+      "tab_options": "ตัวเลือก",
+      "tab_about": "เกี่ยวกับ"
+    },
+    "version": {
+      "link_changelog": "มีอะไรใหม่?"
+    },
+    "user_menu": {
+      "option_rename": "เปลี่ยนชื่อผู้ใช้",
+      "option_logout": "ออกจากระบบ"
+    },
+    "window_controls": {
+      "close": "ปิด",
+      "maximise": "ขยายเต็มหน้าจอ",
+      "minimise": "ย่อหน้าต่าง",
+      "devtools": "เปิดเครื่องมือสำหรับนักพัฒนา (F12)",
+      "announcement": "อ่านประกาศล่าสุด",
+      "login": "เข้าสู่ระบบ",
+      "sayonika_login": "เข้าสู่ระบบ Sayonika",
+      "update": {
+        "checking": "กำลังตรวจสอบการอัปเดต...",
+        "available": "มีการอัปเดตใหม่ คลิกที่นี่เพื่อดาวน์โหลด",
+        "downloading": "กำลังดาวน์โหลดการอัปเดต...",
+        "downloaded": "การอัปเดตพร้อมติดตั้งเมื่อคุณออกจากโปรแกรม"
+      }
+    },
+    "crash_cover": {
+      "button_close": "ออก",
+      "button_continue": "ดำเนินการต่อ"
+    },
+    "drop_cover": {
+      "text": "ลากม็อดมาวางที่นี่เพื่อทำการติดตั้ง"
+    },
+    "announcement": {
+      "button_open": "เปิดลิงก์",
+      "button_close": "ปิด"
+    },
+    "onboarding": {
+      "title": "ยินดีต้อนรับ!",
+      "description_download": "มาหาสำเนา DDLC กันเถอะ",
+      "button_download": "ไปที่หน้าดาวน์โหลดอย่างเป็นทางการของ DDLC",
+      "button_choose": "เลือกไฟล์",
+      "heading_step": "ขั้นตอนที่ {0}",
+      "s1_desc": "คุณต้องดาวน์โหลด Doki Doki Literature Club จากเว็บไซต์ทางการ (ddlc.moe) - คลิกปุ่มด้านล่างเพื่อไป",
+      "s1_platform": "เมื่อถูกถาม ให้เลือกดาวน์โหลดไฟล์ชื่อ 'DDLC ({0})'",
+      "s2_desc": "เมื่อดาวน์โหลดเสร็จแล้ว ให้เลือกไฟล์โดยใช้ปุ่มด้านล่าง",
+      "description_location": "เกมของคุณจะถูกเก็บไว้ที่ {0}",
+      "link_change": "(เปลี่ยน)"
+    },
+    "login_input": {
+      "message": "กรุณากรอกอีเมลของคุณ",
+      "details": "จะมีอีเมลส่งไปยังที่อยู่นี้ คลิกลิงก์ในอีเมลเพื่อเข้าสู่ระบบ",
+      "button_affirmative": "เข้าสู่ระบบ",
+      "button_negative": "ยกเลิก"
+    },
+    "change_username_input": {
+      "message": "กรุณากรอกชื่อผู้ใช้ใหม่",
+      "details": "ชื่อผู้ใช้ไม่จำเป็นต้องไม่ซ้ำกัน",
+      "button_affirmative": "เปลี่ยน",
+      "button_negative": "ยกเลิก"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "ค้นหาม็อด...",
+        "header_new": "เริ่มต้นใช้งาน",
+        "link_install": "ติดตั้ง DDLC",
+        "header_installed": "ติดตั้งแล้ว",
+        "header_downloaded": "ดาวน์โหลดแล้ว"
+      },
+      "install_contextmenu": {
+        "launch": "เปิดเกม",
+        "rename": "เปลี่ยนชื่อ",
+        "shortcut": "สร้างทางลัด",
+        "delete_save": "ลบข้อมูลเซฟ",
+        "uninstall": "ถอนการติดตั้ง"
+      },
+      "mod_contextmenu": {
+        "install": "ติดตั้ง",
+        "delete": "ลบ"
+      },
+      "uninstall_confirmation": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการถอนการติดตั้ง?",
+        "details": "ข้อมูลเซฟของคุณสำหรับ {0} จะถูกลบ และคุณจะต้องมีสำเนาม็อดเพื่อทำการติดตั้งอีกครั้ง",
+        "button_affirmative": "ถอนการติดตั้ง",
+        "button_negative": "ยกเลิก"
+      },
+      "rename_input": {
+        "message": "เปลี่ยนชื่อการติดตั้ง",
+        "details": "กรอกชื่อใหม่สำหรับ {0}",
+        "button_affirmative": "เปลี่ยนชื่อ",
+        "button_negative": "ยกเลิก"
+      },
+      "mod_delete_confirmation": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบม็อดนี้?",
+        "details": "คุณจะต้องดาวน์โหลดม็อดใหม่เพื่อทำการติดตั้งอีกครั้ง",
+        "button_affirmative": "ลบ",
+        "button_negative": "ยกเลิก"
+      },
+      "save_delete_confirmation": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลเซฟ?",
+        "details": "คุณจะต้องเริ่ม {0} ใหม่ตั้งแต่ต้น",
+        "button_affirmative": "ลบ",
+        "button_negative": "ยกเลิก"
+      },
+      "install": {
+        "button_launch": "เปิดเกม",
+        "button_settings": "การตั้งค่า",
+        "tag_global_save": "เซฟรวม",
+        "tag_sdk": "SDK",
+        "title_achievements": "ความสำเร็จ ({0} / {1})",
+        "description_achievements": "เล่นต่อเพื่อปลดล็อกความสำเร็จเพิ่มเติม",
+        "description_achievements_complete": "คุณปลดล็อกความสำเร็จทั้งหมดแล้ว! ยินดีด้วย!",
+        "title_screenshots_none": "ไม่มีภาพหน้าจอ",
+        "title_screenshots_one": "1 ภาพหน้าจอ",
+        "title_screenshots": "{0} ภาพหน้าจอ",
+        "description_screenshots": "กด S ระหว่างเล่นเพื่อถ่ายภาพหน้าจอ",
+        "description_sdk": "ม็อดนี้รองรับฟีเจอร์พิเศษด้วย SDK!",
+        "description_author": "สร้างโดย {0}",
+        "link_website": "เว็บไซต์ ({0})",
+        "description_external": "แสดงในโฟลเดอร์"
+      },
+      "mod": {
+        "button_install": "ติดตั้ง",
+        "button_settings": "การตั้งค่า",
+        "description_external": "แสดงในโฟลเดอร์"
+      },
+      "install_creation": {
+        "title": "ติดตั้ง DDLC",
+        "label_install_name": "ชื่อการติดตั้ง",
+        "label_folder_name": "ชื่อโฟลเดอร์",
+        "label_global_save": "เซฟรวม",
+        "label_has_mod": "ติดตั้งม็อด",
+        "label_mod": "ม็อด",
+        "label_existing_saves": "ไฟล์เซฟที่มีอยู่",
+        "description_mod": "คลิกเพื่อเลือกม็อด",
+        "header_summary": "สรุป",
+        "description_vanilla": "จะสร้างสำเนา DDLC ใหม่ ข้อมูลเซฟจะแยกจากเกมอื่น",
+        "description_vanilla_global_save": "จะสร้างสำเนา DDLC ใหม่ ข้อมูลเซฟจะใช้ร่วมกับเกมอื่น (เช่น Steam)",
+        "description_modded": "จะสร้างสำเนา DDLC ใหม่และติดตั้งม็อด ข้อมูลเซฟจะแยกจากเกมอื่น",
+        "description_modded_global_save": "จะสร้างสำเนา DDLC ใหม่และติดตั้งม็อด ข้อมูลเซฟจะใช้ร่วมกับเกมอื่น (เช่น Steam)",
+        "button_install": "ติดตั้ง",
+        "button_installing": "กำลังติดตั้ง...",
+        "status_exists": "โฟลเดอร์นี้มีอยู่แล้ว กรุณาเลือกชื่อโฟลเดอร์อื่น"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "ร้านค้ากำลังจะมาเร็ว ๆ นี้!",
+      "description_1": "ฐานข้อมูลม็อด Sayonika จะเป็นศูนย์กลางสำหรับแชร์ ดาวน์โหลด และรีวิวม็อด DDLC เมื่อ Sayonika เปิดให้ใช้งาน คุณจะสามารถเรียกดูม็อดได้ที่นี่ใน Doki Doki Mod Manager",
+      "description_2": "ระหว่างรอ คุณสามารถดาวน์โหลดม็อดแนะนำเหล่านี้ได้",
+      "error": "ไม่สามารถโหลดรายชื่อม็อดได้ คุณออฟไลน์อยู่หรือไม่?",
+      "button_download": "ดาวน์โหลด"
+    },
+    "tab_store": {
+      "title": "ร้าน Sayonika",
+      "subtitle": "ค้นหาและดาวน์โหลดม็อด DDLC",
+      "search_placeholder": "ค้นหาม็อด...",
+      "loading": "กำลังโหลดม็อด...",
+      "error_title": "ข้อผิดพลาดการเชื่อมต่อ",
+      "retry_button": "ลองใหม่",
+      "offline_title": "ออฟไลน์",
+      "offline_message": "คุณออฟไลน์อยู่ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองใหม่อีกครั้ง",
+      "check_connection": "ตรวจสอบการเชื่อมต่อ",
+      "maintenance_banner": "บริการยืนยันตัวตนไม่พร้อมใช้งานชั่วคราวเนื่องจากการบำรุงรักษา คุณยังสามารถเรียกดูม็อดได้แต่ไม่สามารถเข้าสู่ระบบหรือสมัครสมาชิกได้",
+      "no_mods_title": "ไม่พบม็อด",
+      "no_mods_message": "ลองปรับการค้นหาหรือฟิลเตอร์ของคุณ",
+      "filters": {
+        "category": "หมวดหมู่:",
+        "all_categories": "ทุกหมวดหมู่",
+        "sort_by": "เรียงตาม:",
+        "date_created": "วันที่สร้าง",
+        "date_updated": "อัปเดตล่าสุด",
+        "downloads": "ดาวน์โหลด",
+        "rating": "คะแนน",
+        "title": "ชื่อเรื่อง",
+        "order": "ลำดับ:",
+        "descending": "จากมากไปน้อย",
+        "ascending": "จากน้อยไปมาก",
+        "featured_only": "เฉพาะแนะนำ",
+        "translate_content": "แปลเนื้อหา",
+        "auto_detect": "ตรวจจับอัตโนมัติ"
+      },
+      "mod_card": {
+        "featured": "แนะนำ",
+        "mature": "สำหรับผู้ใหญ่",
+        "by_author": "โดย {0}",
+        "download": "ดาวน์โหลด",
+        "downloading": "กำลังดาวน์โหลด...",
+        "download_mod": "ดาวน์โหลดม็อด",
+        "downloads_count": "{0} ดาวน์โหลด",
+        "version": "เวอร์ชัน {0}",
+        "screenshots": "ภาพหน้าจอ ({0})",
+        "description": "คำอธิบาย",
+        "tags": "แท็ก",
+        "requirements": "ข้อกำหนด"
+      },
+      "pagination": {
+        "previous": "ก่อนหน้า",
+        "next": "ถัดไป",
+        "page_info": "หน้า {0} จาก {1}"
+      },
+      "login": {
+        "title": "เข้าสู่ระบบ Sayonika",
+        "discord": "เข้าสู่ระบบด้วย Discord",
+        "github": "เข้าสู่ระบบด้วย GitHub",
+        "or": "หรือ",
+        "username_label": "ชื่อผู้ใช้หรืออีเมล:",
+        "username_placeholder": "กรอกชื่อผู้ใช้หรืออีเมล",
+        "username_help": "คุณสามารถใช้ชื่อผู้ใช้หรืออีเมลเพื่อเข้าสู่ระบบ",
+        "password_label": "รหัสผ่าน:",
+        "remember_me": "จดจำฉัน",
+        "login_button": "เข้าสู่ระบบ",
+        "logging_in": "กำลังเข้าสู่ระบบ...",
+        "register_link": "ยังไม่มีบัญชี? สมัครที่นี่",
+        "success": "เข้าสู่ระบบสำเร็จ!",
+        "failed": "เข้าสู่ระบบล้มเหลว: {0}"
+      },
+      "translation": {
+        "enabled": "เปิดใช้งานการแปลแล้ว เนื้อหาจะถูกแปลเมื่อมีให้บริการ",
+        "disabled": "ปิดใช้งานการแปลแล้ว",
+        "language_changed": "เปลี่ยนภาษาการแปลเป็น {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "รูปลักษณ์",
+        "link_background": "พื้นหลัง",
+        "link_language": "ภาษา",
+        "link_advanced_appearance": "ขั้นสูง",
+        "header_enhancements": "การปรับปรุง",
+        "link_sdk": "ความสำเร็จ & SDK",
+        "header_application": "แอปพลิเคชัน",
+        "link_updates": "อัปเดต",
+        "link_storage": "ตำแหน่งจัดเก็บ",
+        "header_developers": "นักพัฒนา",
+        "link_testing": "ดีบัก SDK",
+        "link_debug": "ข้อมูลแอป"
+      },
+      "section_backgrounds": {
+        "title": "พื้นหลัง",
+        "subtitle": "ปรับแต่งพื้นหลังของคุณ",
+        "button_none": "ไม่มีพื้นหลัง",
+        "description_credit": "พื้นหลังต้นฉบับจาก Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "ขั้นสูง",
+        "subtitle": "ตัวเลือกเพิ่มเติม",
+        "button_enable_sysborders": "ใช้ขอบระบบ (ต้องรีสตาร์ท)",
+        "button_disable_sysborders": "ปิดขอบระบบ (ต้องรีสตาร์ท)"
+      },
+      "section_storage": {
+        "title": "ตำแหน่งจัดเก็บ",
+        "subtitle": "เปลี่ยนตำแหน่งจัดเก็บข้อมูลเกมของคุณ",
+        "description_moving": "คำเตือน! หากคุณเลือกเปลี่ยนตำแหน่งติดตั้ง ม็อด การติดตั้ง และข้อมูลเซฟทั้งหมดจะถูกย้าย อาจใช้เวลาหลายนาทีและไม่สามารถขัดจังหวะได้",
+        "description_current": "ตำแหน่งปัจจุบัน: {0}",
+        "button_change": "เปลี่ยนตำแหน่งติดตั้ง"
+      },
+      "section_updates": {
+        "title": "อัปเดต",
+        "subtitle": "รับเวอร์ชันล่าสุดของ Doki Doki Mod Manager",
+        "description_current_version": "เวอร์ชันปัจจุบัน: {0}",
+        "label_channel": "ช่องทางเผยแพร่",
+        "option_stable": "เสถียร",
+        "option_beta": "เบต้า",
+        "button_check": "ตรวจสอบการอัปเดต"
+      },
+      "section_sdk": {
+        "title": "ความสำเร็จ & SDK",
+        "subtitle": "เปลี่ยนวิธีจัดการความสำเร็จ",
+        "description_mode": "เปิดใช้งานความสำเร็จ:",
+        "checkbox_always": "เสมอ (แนะนำ)",
+        "checkbox_specified": "เมื่อม็อดรองรับ",
+        "checkbox_never": "ไม่เคย"
+      },
+      "section_testing": {
+        "title": "ดีบัก SDK",
+        "subtitle": "เปิดใช้งานการบันทึกดีบักเพื่อทดสอบม็อดของคุณกับ SDK",
+        "button_enable": "เปิดดีบัก",
+        "button_disable": "ปิดดีบัก"
+      },
+      "section_debug": {
+        "title": "ข้อมูลแอป",
+        "subtitle": "ข้อมูลสำหรับวิเคราะห์ปัญหา"
+      },
+      "section_language": {
+        "title": "ภาษา",
+        "subtitle": "เปลี่ยนภาษา Doki Doki Mod Manager",
+        "description_current": "ภาษาปัจจุบัน: {0}",
+        "button_apply": "ใช้ภาษา",
+        "button_contribute": "ช่วยแปลภาษา",
+        "description_restart": "การเปลี่ยนภาษาจะมีผลหลังจากรีสตาร์ทแอปพลิเคชัน",
+        "notification_changed": "เปลี่ยนภาษาเป็น {0} แล้ว กรุณารีสตาร์ทแอปเพื่อดูการเปลี่ยนแปลง",
+        "notification_same": "ตั้งค่าเป็น {0} อยู่แล้ว"
+      }
+    },
+    "tab_about": {
+      "title": "เกี่ยวกับ",
+      "description": "Doki Doki Mod Manager เป็นโปรเจกต์ที่พัฒนาโดยชุมชนเพื่อช่วยคุณค้นหา ติดตั้ง และเล่นม็อดสำหรับ Doki Doki Literature Club ซึ่งเป็นเกมวิชวลโนเวลฟรีโดย Team Salvato",
+      "title_disclaimer": "ข้อจำกัดความรับผิดชอบ",
+      "disclaimer_1": "Doki Doki Mod Manager เป็นแฟนเวิร์กของ Doki Doki Literature Club และไม่ได้มีความเกี่ยวข้องกับ Team Salvato เป็นแฟนเวิร์กตามที่ระบุในแนวทาง IP ของ Team Salvato",
+      "disclaimer_2": "Doki Doki Mod Manager ไม่รับผิดชอบต่อความเสียหายใด ๆ ที่เกิดขึ้นกับไฟล์หรือคอมพิวเตอร์ของคุณจากการเล่นม็อดหรือเหตุผลอื่น ๆ คุณต้องตรวจสอบความปลอดภัยของม็อดด้วยตนเอง",
+      "title_socials": "ติดต่อ",
+      "social_twitter": "ติดตาม @Dynamicxaa บน Twitter",
+      "social_reddit": "ส่งข้อความหาฉันบน Reddit",
+      "social_email": "ส่งอีเมลหาฉัน"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "เปิด Doki Doki Mod Manager และเปิด {0}"
+    },
+    "running_cover": {
+      "title_running": "DDLC กำลังทำงานอยู่",
+      "title_crashed": "เกิดข้อผิดพลาด",
+      "button_browse": "เปิดโฟลเดอร์เกม",
+      "button_close": "ตกลง",
+      "description_running": "ปิดเกมเพื่อเปลี่ยนแปลงม็อดของคุณ",
+      "install_missing": "ไม่พบการติดตั้ง",
+      "install_corrupt": "การติดตั้งไม่สมบูรณ์หรือเสียหาย",
+      "install_crashed": "เกมเปิดไม่สำเร็จหรือเกิดข้อผิดพลาด"
+    },
+    "move_install": {
+      "title": "เลือกโฟลเดอร์ใหม่สำหรับติดตั้ง"
+    },
+    "mod_browse_dialog": {
+      "title": "เลือกม็อดเพื่อติดตั้ง",
+      "file_format_name": "ม็อด"
+    },
+    "game_browse_dialog": {
+      "title": "เลือกไฟล์ zip ของ DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "เลือกตำแหน่งสำหรับทางลัด",
+      "file_format_name": "ทางลัด"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager ขัดข้อง",
+        "body": "ปัญหาได้รับการรายงานแล้ว กรุณารีสตาร์ทและลองใหม่อีกครั้ง"
+      },
+      "move_install": {
+        "title": "ย้ายโฟลเดอร์ติดตั้งล้มเหลว",
+        "body": "โปรดตรวจสอบสิทธิ์และพื้นที่ว่างในโฟลเดอร์นี้"
+      },
+      "shortcut": {
+        "title": "สร้างทางลัดล้มเหลว",
+        "body": "โปรดตรวจสอบสิทธิ์ในการสร้างไฟล์ในโฟลเดอร์นี้"
+      },
+      "install": {
+        "title": "ติดตั้งเกมล้มเหลว",
+        "body": "โปรดตรวจสอบสิทธิ์และพื้นที่ว่างในการติดตั้ง"
+      },
+      "rename": {
+        "title": "เปลี่ยนชื่อล้มเหลว",
+        "body": "โปรดปิดโปรแกรมอื่นที่อาจรบกวนและลองใหม่อีกครั้ง"
+      },
+      "uninstall": {
+        "title": "ถอนการติดตั้งล้มเหลว",
+        "body": "โปรดปิดโปรแกรมอื่นที่อาจรบกวนและลองใหม่อีกครั้ง"
+      },
+      "save_delete": {
+        "title": "ลบข้อมูลเซฟล้มเหลว",
+        "body": "โปรดปิดโปรแกรมอื่นที่อาจรบกวนและลองใหม่อีกครั้ง"
+      },
+      "mod_delete": {
+        "title": "ลบม็อดล้มเหลว",
+        "body": "โปรดปิดโปรแกรมอื่นที่อาจรบกวนและลองใหม่อีกครั้ง"
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager ไม่ตอบสนอง",
+        "body": "หากปัญหานี้เกิดขึ้นนาน ให้ปิดแอปแล้วเปิดใหม่อีกครั้ง"
+      },
+      "executable_permission": {
+        "title": "ทำให้เกมเป็นไฟล์รันไม่ได้ล้มเหลว",
+        "body": "ไม่สามารถทำให้ DDLC.sh เป็นไฟล์รันได้บน Linux เกมอาจไม่เปิดได้อย่างถูกต้อง"
+      }
+    }
+  }
+}

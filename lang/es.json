@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "¿Qué hay de nuevo?"
     },
-
     "user_menu": {
       "option_rename": "Cambiar Nombre de Usuario",
       "option_logout": "Cerrar Sesión"
@@ -24,7 +23,6 @@
       "maximise": "Maximizar",
       "minimise": "Minimizar",
       "devtools": "Alternar Herramientas de Desarrollador (F12)",
-
       "announcement": "Lee los últimos anuncios",
       "login": "Iniciar Sesión",
       "sayonika_login": "Iniciar Sesión en Sayonika",
@@ -127,7 +125,6 @@
         "description_screenshots": "Presiona S mientras juegas para tomar una captura de pantalla.",
         "description_sdk": "¡Este mod utiliza características especiales del SDK de Doki Doki Mod Manager!",
         "description_author": "Creado por {0}",
-
         "link_website": "Sitio Web ({0})",
         "description_external": "Mostrar en carpeta"
       },
@@ -168,7 +165,6 @@
       "maintenance_banner": "Los servicios de autenticación no están disponibles temporalmente debido a mantenimiento. Puedes navegar los mods pero no puedes iniciar sesión o registrarte.",
       "no_mods_title": "No se encontraron mods",
       "no_mods_message": "Intenta ajustar tu búsqueda o filtros",
-      
       "filters": {
         "category": "Categoría:",
         "all_categories": "Todas las Categorías",
@@ -185,7 +181,6 @@
         "translate_content": "Traducir Contenido",
         "auto_detect": "Auto-detectar"
       },
-      
       "mod_card": {
         "featured": "Destacado",
         "mature": "Maduro",
@@ -200,13 +195,11 @@
         "tags": "Etiquetas",
         "requirements": "Requisitos"
       },
-      
       "pagination": {
         "previous": "Anterior",
         "next": "Siguiente",
         "page_info": "Página {0} de {1}"
       },
-      
       "login": {
         "title": "Iniciar Sesión en Sayonika",
         "discord": "Iniciar Sesión con Discord",
@@ -223,7 +216,6 @@
         "success": "¡Sesión iniciada exitosamente!",
         "failed": "Error al iniciar sesión: {0}"
       },
-      
       "translation": {
         "enabled": "Traducción activada. El contenido será traducido cuando esté disponible.",
         "disabled": "Traducción desactivada.",
@@ -238,7 +230,6 @@
         "link_advanced_appearance": "Avanzado",
         "header_enhancements": "Mejoras",
         "link_sdk": "Logros y SDK",
-
         "header_application": "Aplicación",
         "link_updates": "Actualizaciones",
         "link_storage": "Carpeta de Instalación",
@@ -282,7 +273,6 @@
         "checkbox_specified": "Sólo si el mod dice que los tiene",
         "checkbox_never": "Nunca"
       },
-
       "section_testing": {
         "title": "Depuración SDK",
         "subtitle": "Activa los logs de depuración y prueba tus mods con el SDK de Doki Doki Mod Manager.",
@@ -311,15 +301,9 @@
       "disclaimer_1": "Doki Doki Mod Manager es un proyecto hecho por fans de Doki Doki Literature Club y no está afiliado con Team Salvato. Es un proyecto hecho por fans, tal como se define en las Guías de Propiedad Intelectual de Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager no se hace responsable por ningún daño causado a tus archivos o a tu computadora, como resultado de jugar algún mod o por otros medios. Es tu deber asegurarte que los mods que juegas sean seguros.",
       "title_socials": "Contáctanos",
-
       "social_twitter": "Sigue a @Dynamicxaa en Twitter",
       "social_reddit": "Escríbeme en Reddit",
-      "social_email": "Envíame un email",
-      "title_support": "Colabora con el Desarrollador",
-      "description_support": "Doki Doki Mod Manager será siempre un programa gratuito. Si deseas y quieres ayudarme a mantener este programa actualizado, considera ayudarme de una de las siguientes formas.",
-      "support_donate": "Haz una donación única",
-      "support_steelseries": "Obtén 10% de descuento en periféricos de juego SteelSeries (enlace afiliado)",
-      "support_code": "Contribuye al proyecto (código o traducciones)"
+      "social_email": "Envíame un email"
     }
   },
   "main": {

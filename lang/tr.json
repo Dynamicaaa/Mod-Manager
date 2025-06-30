@@ -10,7 +10,6 @@
     "version": {
       "link_changelog": "yenilikler neler?"
     },
-
     "user_menu": {
       "option_rename": "Kullanıcı Adını Değiştir",
       "option_logout": "Çıkış Yap"
@@ -20,7 +19,6 @@
       "maximise": "Büyüt",
       "minimise": "Küçült",
       "devtools": "Geliştirici Araçlarını Aç/Kapat (F12)",
-
       "announcement": "Son duyuruyu oku",
       "login": "Giriş Yap",
       "sayonika_login": "Sayonika Girişi",
@@ -114,7 +112,6 @@
         "button_settings": "Ayarlar",
         "tag_global_save": "Global Kayıt",
         "tag_sdk": "SDK",
-
         "title_achievements": "Başarımlar ({0} / {1})",
         "description_achievements": "Daha fazla başarım açmak için oynamaya devam edin.",
         "description_achievements_complete": "Tüm başarımları açtınız. Tebrikler!",
@@ -124,7 +121,6 @@
         "description_screenshots": "Oynarken ekran görüntüsü almak için S tuşuna basın.",
         "description_sdk": "Bu mod Doki Doki Mod Manager SDK ile özel özellikleri destekliyor!",
         "description_author": "{0} tarafından oluşturuldu",
-
         "link_website": "Web Sitesi ({0})",
         "description_external": "Klasörde göster"
       },
@@ -140,16 +136,13 @@
         "label_global_save": "Global Kayıt",
         "label_has_mod": "Mod Yükle",
         "label_mod": "Mod",
-
         "label_existing_saves": "Mevcut Kayıt Dosyaları",
         "description_mod": "Bir mod aramak için tıklayın.",
         "header_summary": "Özet",
         "description_vanilla": "Temiz bir DDLC kopyası oluşturulacak. Kayıt verileri oyunun diğer kopyalarından ayrı olacak.",
         "description_vanilla_global_save": "Temiz bir DDLC kopyası oluşturulacak. Kayıt verileri oyunun diğer kopyalarıyla paylaşılacak (örn. Steam)",
-
         "description_modded": "Bir DDLC kopyası oluşturulacak ve mod yüklenecek. Kayıt verileri oyunun diğer kopyalarından ayrı olacak.",
         "description_modded_global_save": "Bir DDLC kopyası oluşturulacak ve mod yüklenecek. Kayıt verileri oyunun diğer kopyalarıyla paylaşılacak (örn. Steam)",
-
         "button_install": "Yükle",
         "button_installing": "Yükleniyor...",
         "status_exists": "Bu klasör zaten mevcut. Başka bir klasör adı seçin."
@@ -170,7 +163,6 @@
         "link_advanced_appearance": "Gelişmiş",
         "header_enhancements": "İyileştirmeler",
         "link_sdk": "Başarımlar ve SDK",
-
         "header_application": "Uygulama",
         "link_updates": "Güncellemeler",
         "link_storage": "Depolama Konumu",
@@ -214,7 +206,6 @@
         "checkbox_specified": "Mod bunları desteklediğini belirttiğinde",
         "checkbox_never": "Hiçbir zaman"
       },
-
       "section_testing": {
         "title": "SDK Hata Ayıklama",
         "subtitle": "Modlarınızı Doki Doki Mod Manager SDK ile test etmek için hata ayıklama günlüğünü etkinleştirin.",
@@ -243,15 +234,9 @@
       "disclaimer_1": "Doki Doki Mod Manager, Doki Doki Literature Club'ın bir hayran eseridir ve Team Salvato ile bağlantılı değildir. Team Salvato'nun IP Kılavuzları tarafından tanımlandığı gibi bir hayran eseridir.",
       "disclaimer_2": "Doki Doki Mod Manager, bir mod oynama sonucu veya başka şekilde dosyalarınıza veya bilgisayarınıza verilen zararlardan sorumlu değildir. Modların oynamak için güvenli olduğundan emin olmak sizin sorumluluğunuzdadır.",
       "title_socials": "İletişime geçin",
-
       "social_twitter": "Twitter'da @Dynamicxaa'u takip et",
       "social_reddit": "Reddit'te bana mesaj gönderin",
-      "social_email": "Bana e-posta gönderin",
-      "title_support": "Geliştirmeyi Destekleyin",
-      "description_support": "Doki Doki Mod Manager her zaman indirmek ve kullanmak için ücretsiz olacak. Beğendiyseniz ve güncel tutmamda bana yardım etmek istiyorsanız, aşağıdaki yollardan biriyle beni desteklemeyi düşünün.",
-      "support_donate": "Tek seferlik bağış yapın",
-      "support_steelseries": "SteelSeries oyun çevre birimlerinde %10 indirim alın (bağlı kuruluş linki)",
-      "support_code": "Projeye katkıda bulunun (kod veya çeviriler)"
+      "social_email": "Bana e-posta gönderin"
     }
   },
   "main": {

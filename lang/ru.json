@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "что нового?"
     },
-
     "user_menu": {
       "option_rename": "Изменить имя пользователя",
       "option_logout": "Выйти"
@@ -24,7 +23,6 @@
       "maximise": "Развернуть",
       "minimise": "Свернуть",
       "devtools": "Переключить инструменты разработчика (F12)",
-
       "announcement": "Прочитать последнее объявление",
       "login": "Войти",
       "sayonika_login": "Вход в Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Настройки",
         "tag_global_save": "Глобальное сохранение",
         "tag_sdk": "SDK",
-
         "title_achievements": "Достижения ({0} / {1})",
         "description_achievements": "Продолжайте играть, чтобы разблокировать больше достижений.",
         "description_achievements_complete": "Вы разблокировали все достижения. Поздравляем!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Нажмите S во время игры, чтобы сделать скриншот.",
         "description_sdk": "Этот мод поддерживает специальные функции SDK Doki Doki Mod Manager!",
         "description_author": "Создано {0}",
-
         "link_website": "Сайт ({0})",
         "description_external": "Показать в папке"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Глобальное сохранение",
         "label_has_mod": "Установить мод",
         "label_mod": "Мод",
-
         "label_existing_saves": "Существующие файлы сохранения",
         "description_mod": "Нажмите, чтобы найти мод.",
         "header_summary": "Сводка",
         "description_vanilla": "Будет создана чистая копия DDLC. Данные сохранения будут отделены от любых других копий игры.",
         "description_vanilla_global_save": "Будет создана чистая копия DDLC. Данные сохранения будут разделены с другими копиями игры (например, Steam)",
-
         "description_modded": "Будет создана копия DDLC и установлен мод. Данные сохранения будут отделены от любых других копий игры.",
         "description_modded_global_save": "Будет создана копия DDLC и установлен мод. Данные сохранения будут разделены с другими копиями игры (например, Steam)",
-
         "button_install": "Установить",
         "button_installing": "Установка...",
         "status_exists": "Эта папка уже существует. Выберите другое имя папки."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Дополнительно",
         "header_enhancements": "Улучшения",
         "link_sdk": "Достижения и SDK",
-
         "header_application": "Приложение",
         "link_updates": "Обновления",
         "link_storage": "Место хранения",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Когда моды указывают поддержку",
         "checkbox_never": "Никогда"
       },
-
       "section_testing": {
         "title": "Отладка SDK",
         "subtitle": "Включите ведение журнала отладки для тестирования модов с SDK Doki Doki Mod Manager.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager является фанатской работой по Doki Doki Literature Club и не связан с Team Salvato. Это фанатская работа, как определено в рекомендациях по интеллектуальной собственности Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager не несет ответственности за ущерб вашим файлам или компьютеру в результате игры в моды или по любой другой причине. Вы сами отвечаете за то, чтобы убедиться, что моды безопасны для игры.",
       "title_socials": "Связаться с нами",
-
       "social_twitter": "Подписаться на @Dynamicxaa в Twitter",
       "social_reddit": "Отправить сообщение в Reddit",
-      "social_email": "Отправить email",
-      "title_support": "Поддержать разработку",
-      "description_support": "Doki Doki Mod Manager всегда будет бесплатным для скачивания и использования. Если он вам нравится и вы хотите помочь поддерживать обновления, рассмотрите возможность поддержки нас одним из следующих способов.",
-      "support_donate": "Сделать разовое пожертвование",
-      "support_steelseries": "Получить 10% скидку на игровую периферию SteelSeries (партнерская ссылка)",
-      "support_code": "Внести вклад в проект (код или переводы)"
+      "social_email": "Отправить email"
     }
   },
   "main": {

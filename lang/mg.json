@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Malagasy",
+    "name_local": "Malagasy"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Fandraisana",
+      "tab_mods": "Mods",
+      "tab_store": "Fivarotana",
+      "tab_options": "Safidy",
+      "tab_about": "Momba ny"
+    },
+    "version": {
+      "link_changelog": "Inona no vaovao?"
+    },
+    "user_menu": {
+      "option_rename": "Hanova anarana mpampiasa",
+      "option_logout": "Hiala"
+    },
+    "window_controls": {
+      "close": "Hanidy",
+      "maximise": "Hanamaroana",
+      "minimise": "Hanamoty",
+      "devtools": "Hanamoty fitaovana ho an'ny mpamorona (F12)",
+      "announcement": "Vakio ny filazana farany",
+      "login": "Hiditra",
+      "sayonika_login": "Fidirana Sayonika",
+      "update": {
+        "checking": "Mikatsaka fanavaozana ao ambadika...",
+        "available": "Misy fanavaozana. Kitiho eto raha te-hisintona izany.",
+        "downloading": "Misintona fanavaozana...",
+        "downloaded": "Efa vonona ny hametraka fanavaozana rehefa miala ianao."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Hiala",
+      "button_continue": "Hanohy"
+    },
+    "drop_cover": {
+      "text": "Atsofoka eto ny mod iray hametrahana azy"
+    },
+    "announcement": {
+      "button_open": "Hanokatra rohy",
+      "button_close": "Hanidy"
+    },
+    "onboarding": {
+      "title": "Tongasoa!",
+      "description_download": "Andao hitady dika mitovy amin'ny DDLC.",
+      "button_download": "Tsidiho ny pejy ofisialy DDLC hisintonana",
+      "button_choose": "Katsaho ny dika mitovy",
+      "heading_step": "Dingana {0}",
+      "s1_desc": "Mila misintona dika mitovy amin'ny Doki Doki Literature Club ianao. Azo jerena ao amin'ny tranonkala ofisialy (ddlc.moe) ity - tsindrio ny bokotra etsy ambany handehanana any ankehitriny.",
+      "s1_platform": "Rehefa anontaniana ianao, mifidiana hisintona ny rakitra antsoina hoe \"DDLC ({0})\".",
+      "s2_desc": "Rehefa vita ny fisintonana anao, safidio izany amin'ny alàlan'ny bokotra etsy ambany.",
+      "description_location": "Ny lalao anao dia hotahirizina ao amin'ny {0}",
+      "link_change": "(Hanova)"
+    },
+    "login_input": {
+      "message": "Ampidiro ny adiresy mailaka anao",
+      "details": "Mailaka iray no halefa amin'ity adiresy ity. Tsindrio ny rohy ao amin'ny mailaka hamitana ny fidirana.",
+      "button_affirmative": "Hiditra",
+      "button_negative": "Hanafoana"
+    },
+    "change_username_input": {
+      "message": "Ampidiro ny anarana mpampiasa vaovao anao",
+      "details": "Ny anarana mpampiasa dia tsy voatery ho tokana.",
+      "button_affirmative": "Hanova",
+      "button_negative": "Hanafoana"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Hikatsaka mods...",
+        "header_new": "Atombohy",
+        "link_install": "Mametraka DDLC",
+        "header_installed": "Voapetraka",
+        "header_downloaded": "Fisintonana"
+      },
+      "install_contextmenu": {
+        "launch": "Hanomboka",
+        "rename": "Hanova anarana",
+        "shortcut": "Hamorona hitsin-dalana",
+        "delete_save": "Hamafa angona voatahiry",
+        "uninstall": "Hanala"
+      },
+      "mod_contextmenu": {
+        "install": "Hametraka",
+        "delete": "Hamafa"
+      },
+      "uninstall_confirmation": {
+        "message": "Tena te-hanala tokoa ve ianao?",
+        "details": "Hofafana ny angona voatahiry anao ho an'ny {0}, ary mila dika mitovy amin'ny mod ianao mba hametrahana azy indray.",
+        "button_affirmative": "Hanala",
+        "button_negative": "Hanafoana"
+      },
+      "rename_input": {
+        "message": "Hanova anarana Fametrahana",
+        "details": "Ampidiro ny anarana vaovao ho an'ny {0}.",
+        "button_affirmative": "Hanova anarana",
+        "button_negative": "Hanafoana"
+      },
+      "mod_delete_confirmation": {
+        "message": "Tena te-hamafa ny mod ve ianao?",
+        "details": "Mila misintona dika mitovy hafa amin'ny mod ianao mba hametrahana azy indray.",
+        "button_affirmative": "Hamafa",
+        "button_negative": "Hanafoana"
+      },
+      "save_delete_confirmation": {
+        "message": "Tena te-hamafa ny angona voatahiry anao ve ianao?",
+        "details": "Tsy maintsy manomboka ny {0} indray ianao manomboka amin'ny scratch.",
+        "button_affirmative": "Hamafa",
+        "button_negative": "Hanafoana"
+      },
+      "install": {
+        "button_launch": "Hanomboka",
+        "button_settings": "Fikirana",
+        "tag_global_save": "Tahiry maneran-tany",
+        "tag_sdk": "SDK",
+        "title_achievements": "Zava-bita ({0} / {1})",
+        "description_achievements": "Tohizo ny lalao mba hanokafana zava-bita bebe kokoa.",
+        "description_achievements_complete": "Nahazo ny zava-bita rehetra ianao. Arahabaina!",
+        "title_screenshots_none": "Tsy misy sary pikantsary",
+        "title_screenshots_one": "sary pikantsary 1",
+        "title_screenshots": "Sary pikantsary {0}",
+        "description_screenshots": "Tsindrio S rehefa milalao mba haka sary pikantsary.",
+        "description_sdk": "Ity mod ity dia manohana endri-javatra manokana miaraka amin'ny Doki Doki Mod Manager SDK!",
+        "description_author": "Namboarin'i {0}",
+        "link_website": "Tranonkala ({0})",
+        "description_external": "Asehoy ao anaty lahatahiry"
+      },
+      "mod": {
+        "button_install": "Hametraka",
+        "button_settings": "Fikirana",
+        "description_external": "Asehoy ao anaty lahatahiry"
+      },
+      "install_creation": {
+        "title": "Hametraka DDLC",
+        "label_install_name": "Anaran'ny fametrahana",
+        "label_folder_name": "Anaran'ny lahatahiry",
+        "label_global_save": "Tahiry maneran-tany",
+        "label_has_mod": "Mametraka Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Angona tahiry efa misy",
+        "description_mod": "Tsindrio raha te-hikatsaka mod.",
+        "header_summary": "Famintinana",
+        "description_vanilla": "Hahazoana dika mitovy DDLC madio. Hisaraka amin'ny dika mitovy hafa amin'ny lalao ny angona tahiry.",
+        "description_vanilla_global_save": "Hahazoana dika mitovy DDLC madio. Hizarana amin'ny dika mitovy hafa amin'ny lalao (ohatra Steam) ny angona tahiry.",
+        "description_modded": "Hahazoana dika mitovy DDLC, ary hapetraka ny mod. Hisaraka amin'ny dika mitovy hafa amin'ny lalao ny angona tahiry.",
+        "description_modded_global_save": "Hahazoana dika mitovy DDLC, ary hapetraka ny mod. Hizarana amin'ny dika mitovy hafa amin'ny lalao (ohatra Steam) ny angona tahiry.",
+        "button_install": "Hametraka",
+        "button_installing": "Mametraka...",
+        "status_exists": "Efa misy io lahatahiry io. Misafidiana anarana lahatahiry hafa."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Ho avy tsy ho ela ny fivarotana!",
+      "description_1": "Ny tahiry Sayonika mod dia hanome toerana ifotony hizarana, hisintonana ary hamerenana mods DDLC. Rehefa misy Sayonika ho an'ny besinimaro, afaka mikatsaka mods eto ianao ao amin'ny Doki Doki Mod Manager.",
+      "description_2": "Raha miandry ianao, aza misalasala misintona ny sasany amin'ireo mods natolotra ireo.",
+      "error": "Tsy nahavita nampiditra ny lisitry ny mods. Tsy mifandray an-tserasera ve ianao?",
+      "button_download": "Hisintona"
+    },
+    "tab_store": {
+      "title": "Fivarotana Sayonika",
+      "subtitle": "Hitady sy hisintona mods DDLC",
+      "search_placeholder": "Hikatsaka mods...",
+      "loading": "Mampiditra mods...",
+      "error_title": "Hadisoana amin'ny fifandraisana",
+      "retry_button": "Hamerina",
+      "offline_title": "Tsy mifandray an-tserasera",
+      "offline_message": "Tsy mifandray an-tserasera ianao ankehitriny. Hamarino azafady ny fifandraisanao amin'ny internet ary avereno indray.",
+      "check_connection": "Hamarino ny fifandraisana",
+      "maintenance_banner": "Tsy misy vonjimaika ny serivisy fanamarinana noho ny fikojakojana. Mbola afaka mikatsaka mods ianao fa tsy afaka miditra na misoratra anarana.",
+      "no_mods_title": "Tsy hita ny mods",
+      "no_mods_message": "Andramo manitsy ny fikarohana na ny sivanao",
+      "filters": {
+        "category": "Sokajy:",
+        "all_categories": "Sokajy rehetra",
+        "sort_by": "Handamina araka:",
+        "date_created": "Daty namoronana",
+        "date_updated": "Daty nanavaozana",
+        "downloads": "Fisintonana",
+        "rating": "Naoty",
+        "title": "Lohateny",
+        "order": "Filaharana:",
+        "descending": "Mihidina",
+        "ascending": "Miakatra",
+        "featured_only": "Natolotra ihany",
+        "translate_content": "Handika votoaty",
+        "auto_detect": "Hitady ho azy"
+      },
+      "mod_card": {
+        "featured": "Natolotra",
+        "mature": "Matotra",
+        "by_author": "nataon'i {0}",
+        "download": "Hisintona",
+        "downloading": "Misintona...",
+        "download_mod": "Hisintona Mod",
+        "downloads_count": "Fisintonana {0}",
+        "version": "Version {0}",
+        "screenshots": "Sary pikantsary ({0})",
+        "description": "Famaritana",
+        "tags": "Tags",
+        "requirements": "Fepetra takiana"
+      },
+      "pagination": {
+        "previous": "Teo aloha",
+        "next": "Manaraka",
+        "page_info": "Pejy {0} amin'ny {1}"
+      },
+      "login": {
+        "title": "Midira ao amin'ny Sayonika",
+        "discord": "Midira amin'ny Discord",
+        "github": "Midira amin'ny GitHub",
+        "or": "na",
+        "username_label": "Anarana mpampiasa na mailaka:",
+        "username_placeholder": "Ampidiro anarana mpampiasa na adiresy mailaka",
+        "username_help": "Afaka mampiasa ny anarana mpampiasa na ny adiresy mailaka anao ianao hidirana",
+        "password_label": "Teny miafina:",
+        "remember_me": "Tsarovy aho",
+        "login_button": "Hiditra",
+        "logging_in": "Miditra...",
+        "register_link": "Tsy manana kaonty? Misoratra anarana eto",
+        "success": "Tafiditra soa aman-tsara!",
+        "failed": "Tsy nahomby ny fidirana: {0}"
+      },
+      "translation": {
+        "enabled": "Voahana ny fandikana. Hofana ny votoaty rehefa misy.",
+        "disabled": "Tsy voahidy ny fandikana.",
+        "language_changed": "Niova ho {0} ny fiteny fandikana"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Fisehoana",
+        "link_background": "Fiaviana",
+        "link_language": "Fiteny",
+        "link_advanced_appearance": "Mandroso",
+        "header_enhancements": "Fanatsarana",
+        "link_sdk": "Zava-bita & SDK",
+        "header_application": "Fampiharana",
+        "link_updates": "Fanavaozana",
+        "link_storage": "Toerana fitahirizana",
+        "header_developers": "Mpamorona",
+        "link_testing": "Fanandramana SDK",
+        "link_debug": "Fampahalalana momba ny fampiharana"
+      },
+      "section_backgrounds": {
+        "title": "Fiaviana",
+        "subtitle": "Amboary ny dika mitovy Doki Doki Mod Manager anao amin'ny iray amin'ireo fiaviana ireo.",
+        "button_none": "Tsy misy fiaviana",
+        "description_credit": "Fiaviana DDLC tany am-boalohany avy amin'ny Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Mandroso",
+        "subtitle": "Mitadiava safidy interface hafa eto.",
+        "button_enable_sysborders": "Ampiasao ny sisintany rafitra (mila famerenana)",
+        "button_disable_sysborders": "Atsaharo ny sisintany rafitra (mila famerenana)"
+      },
+      "section_storage": {
+        "title": "Toerana fitahirizana",
+        "subtitle": "Hanova ny toerana fitahirizana ny angona lalao anao.",
+        "description_moving": "Fampitandremana! Raha misafidy ny hanova ny toerana fametrahana anao ianao, dia hafindra ny mods rehetra, ny fametrahana ary ny angona tahiry anao. Mety haharitra minitra maromaro izany, ary tsy azo atsahatra.",
+        "description_current": "Toerana ankehitriny: {0}",
+        "button_change": "Hanova ny toerana fametrahana"
+      },
+      "section_updates": {
+        "title": "Fanavaozana",
+        "subtitle": "Makà ny dika mitovy farany amin'ny Doki Doki Mod Manager.",
+        "description_current_version": "Version ankehitriny: {0}",
+        "label_channel": "Fantsona famoahana",
+        "option_stable": "Miorina",
+        "option_beta": "Beta",
+        "button_check": "Hamarino ny fanavaozana"
+      },
+      "section_sdk": {
+        "title": "Zava-bita & SDK",
+        "subtitle": "Hanova ny fomba fikirakirana ny zava-bita.",
+        "description_mode": "Ampidiro ny zava-bita:",
+        "checkbox_always": "Foana (atsahatra)",
+        "checkbox_specified": "Rehefa mamaritra ny mod fa manohana azy ireo",
+        "checkbox_never": "Tsy misy na oviana na oviana"
+      },
+      "section_testing": {
+        "title": "Fanandramana SDK",
+        "subtitle": "Ampidiro ny logging debugging mba hitsapana ny mods anao amin'ny Doki Doki Mod Manager SDK.",
+        "button_enable": "Ampidiro ny debugging",
+        "button_disable": "Atsaharo ny debugging"
+      },
+      "section_debug": {
+        "title": "Fampahalalana momba ny fampiharana",
+        "subtitle": "Fampahalalana ho an'ny famantarana olana."
+      },
+      "section_language": {
+        "title": "Fiteny",
+        "subtitle": "Hanova ny fitenin'ny Doki Doki Mod Manager.",
+        "description_current": "Fiteny ankehitriny: {0}",
+        "button_apply": "Ampiharo ny fiteny",
+        "button_contribute": "Manampy handika",
+        "description_restart": "Hanjary manan-kery ny fiovan'ny fiteny aorian'ny famerenana ny fampiharana.",
+        "notification_changed": "Niova ho {0} ny fiteny. Avereno azafady ny fampiharana hahitana ny fiovana.",
+        "notification_same": "Efa voafaritra ho {0} ny fiteny."
+      }
+    },
+    "tab_about": {
+      "title": "Momba ny",
+      "description": "Doki Doki Mod Manager dia tetikasa novolavolain'ny fiaraha-monina izay manampy anao hitady, hametraka ary hilalao mods ho an'ny Doki Doki Literature Club, lalao Visual Novel maimaim-poana avy amin'ny Team Salvato.",
+      "title_disclaimer": "Fanamarihana fialana andraikitra",
+      "disclaimer_1": "Doki Doki Mod Manager dia asan'ny mpankafy an'ny Doki Doki Literature Club ary tsy misy fifandraisana amin'ny Team Salvato. Asa an'ny mpankafy izy io, araka ny voafaritry ny torolalana IP an'ny Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager dia tsy mandray andraikitra amin'ny fahasimbana ateraky ny rakitra na solosainao, noho ny filalaovana mod na zavatra hafa. Anjaranao ny miantoka fa azo antoka ny filalaovana mods.",
+      "title_socials": "Mifandray",
+      "social_twitter": "Araho @Dynamicxaa ao amin'ny Twitter",
+      "social_reddit": "Mandefasa hafatra amiko ao amin'ny Reddit",
+      "social_email": "Mandefasa mailaka amiko"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Hanokatra Doki Doki Mod Manager ary hanomboka {0}."
+    },
+    "running_cover": {
+      "title_running": "Mihazakazaka ny DDLC",
+      "title_crashed": "Nisy zavatra tsy nety",
+      "button_browse": "Hanokatra lahatahiry lalao",
+      "button_close": "OK",
+      "description_running": "Akato ny lalao mba hanovana ny mods anao.",
+      "install_missing": "Tsy hita ny fametrahana.",
+      "install_corrupt": "Tsy feno na simba ny fametrahana.",
+      "install_crashed": "Tsy nahavita nanomboka na nianjera ny lalao."
+    },
+    "move_install": {
+      "title": "Misafidiana lahatahiry fametrahana vaovao"
+    },
+    "mod_browse_dialog": {
+      "title": "Mitadiava mod hametrahana",
+      "file_format_name": "Mods"
+    },
+    "game_browse_dialog": {
+      "title": "Mitadiava dika mitovy amin'ny rakitra zip DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Misafidiana toerana hametrahana ny hitsin-dalana anao",
+      "file_format_name": "Hitsin-dalana"
+    },
+    "errors": {
+      "exception": {
+        "title": "Nianjera ny Doki Doki Mod Manager",
+        "body": "Nolazaina ny olana. Avereno azafady ary avereno indray."
+      },
+      "move_install": {
+        "title": "Tsy nahavita namindra lahatahiry fametrahana",
+        "body": "Hamarino fa manana alalana sy toerana ampy hamindrana an'ity lahatahiry ity ianao."
+      },
+      "shortcut": {
+        "title": "Tsy nahavita namorona hitsin-dalana",
+        "body": "Hamarino fa manana alalana hamorona rakitra ao anatin'ity lahatahiry ity ianao."
+      },
+      "install": {
+        "title": "Tsy nahavita nametraka lalao",
+        "body": "Hamarino fa manana alalana sy toerana ampy hametrahana ianao."
+      },
+      "rename": {
+        "title": "Tsy nahavita nanova anarana",
+        "body": "Hamarino fa nakatonao ny programa rehetra mety manelingelina ary avereno indray."
+      },
+      "uninstall": {
+        "title": "Tsy nahavita nanala",
+        "body": "Hamarino fa nakatonao ny programa rehetra mety manelingelina ary avereno indray."
+      },
+      "save_delete": {
+        "title": "Tsy nahavita namafa angona tahiry",
+        "body": "Hamarino fa nakatonao ny programa rehetra mety manelingelina ary avereno indray."
+      },
+      "mod_delete": {
+        "title": "Tsy nahavita namafa ny mod",
+        "body": "Hamarino fa nakatonao ny programa rehetra mety manelingelina ary avereno indray."
+      },
+      "renderer_freeze": {
+        "title": "Nijaly ny Doki Doki Mod Manager",
+        "body": "Raha maharitra ela ity olana ity, akato ny fampiharana ary atombohy indray."
+      },
+      "executable_permission": {
+        "title": "Tsy nahavita nanao executable ny lalao",
+        "body": "Tsy nahavita nanao DDLC.sh executable tao amin'ny Linux. Mety tsy hanomboka tsara ny lalao."
+      }
+    }
+  }
+}

@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "新功能"
     },
-
     "user_menu": {
       "option_rename": "更改用戶名",
       "option_logout": "登出"
@@ -24,7 +23,6 @@
       "maximise": "最大化",
       "minimise": "最小化",
       "devtools": "切換開發者工具 (F12)",
-
       "announcement": "閱讀最新公告",
       "login": "登錄",
       "sayonika_login": "Sayonika 登錄",
@@ -118,7 +116,6 @@
         "button_settings": "設置",
         "tag_global_save": "全局存檔",
         "tag_sdk": "SDK",
-
         "title_achievements": "成就 ({0} / {1})",
         "description_achievements": "繼續遊戲以解鎖更多成就。",
         "description_achievements_complete": "您已解鎖所有成就。恭喜！",
@@ -128,7 +125,6 @@
         "description_screenshots": "遊戲時按 S 鍵截圖。",
         "description_sdk": "此模組支援 Doki Doki Mod Manager SDK 的特殊功能！",
         "description_author": "由 {0} 創作",
-
         "link_website": "網站 ({0})",
         "description_external": "在文件夾中顯示"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "全局存檔",
         "label_has_mod": "安裝模組",
         "label_mod": "模組",
-
         "label_existing_saves": "現有存檔文件",
         "description_mod": "點擊瀏覽模組。",
         "header_summary": "摘要",
         "description_vanilla": "將創建 DDLC 的純淨副本。存檔數據將與遊戲的任何其他副本分開。",
         "description_vanilla_global_save": "將創建 DDLC 的純淨副本。存檔數據將與遊戲的其他副本共享（例如 Steam）",
-
         "description_modded": "將創建 DDLC 的副本，並安裝模組。存檔數據將與遊戲的任何其他副本分開。",
         "description_modded_global_save": "將創建 DDLC 的副本，並安裝模組。存檔數據將與遊戲的其他副本共享（例如 Steam）",
-
         "button_install": "安裝",
         "button_installing": "正在安裝...",
         "status_exists": "該文件夾已存在。請選擇另一個文件夾名稱。"
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "進階",
         "header_enhancements": "增強功能",
         "link_sdk": "成就 & SDK",
-
         "header_application": "應用程式",
         "link_updates": "更新",
         "link_storage": "存儲位置",
@@ -218,7 +210,6 @@
         "checkbox_specified": "當模組指定支援時",
         "checkbox_never": "從不"
       },
-
       "section_testing": {
         "title": "SDK 調試",
         "subtitle": "啟用調試日誌以使用 Doki Doki Mod Manager SDK 測試您的模組。",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager 是 Doki Doki Literature Club 的同人作品，與 Team Salvato 無關。這是 Team Salvato IP 指南定義的同人作品。",
       "disclaimer_2": "Doki Doki Mod Manager 不對因遊玩模組或其他原因而對您的文件或電腦造成的任何損害負責。確保模組安全遊玩是您的責任。",
       "title_socials": "聯繫我們",
-
       "social_twitter": "在 Twitter 上關注 @Dynamicxaa",
       "social_reddit": "在 Reddit 上給我留言",
-      "social_email": "給我發郵件",
-      "title_support": "支援開發",
-      "description_support": "Doki Doki Mod Manager 將始終免費下載和使用。如果您喜歡它並希望幫助我保持更新，請考慮通過以下方式之一支援我。",
-      "support_donate": "進行一次性捐贈",
-      "support_steelseries": "獲得 SteelSeries 遊戲外設 10% 折扣（聯盟鏈接）",
-      "support_code": "為項目做貢獻（代碼或翻譯）"
+      "social_email": "給我發郵件"
     }
   },
   "main": {

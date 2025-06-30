@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "quoi de neuf ?"
     },
-
     "user_menu": {
       "option_rename": "Changer le nom d'utilisateur",
       "option_logout": "Se déconnecter"
@@ -24,7 +23,6 @@
       "maximise": "Maximiser",
       "minimise": "Minimiser",
       "devtools": "Basculer les outils de développement (F12)",
-
       "announcement": "Lire la dernière annonce",
       "login": "Se connecter",
       "sayonika_login": "Connexion Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Paramètres",
         "tag_global_save": "Sauvegarde globale",
         "tag_sdk": "SDK",
-
         "title_achievements": "Succès ({0} / {1})",
         "description_achievements": "Continuez à jouer pour débloquer plus de succès.",
         "description_achievements_complete": "Vous avez débloqué tous les succès. Félicitations !",
@@ -128,7 +125,6 @@
         "description_screenshots": "Appuyez sur S en jouant pour prendre une capture d'écran.",
         "description_sdk": "Ce mod prend en charge les fonctionnalités spéciales du SDK Doki Doki Mod Manager !",
         "description_author": "Créé par {0}",
-
         "link_website": "Site web ({0})",
         "description_external": "Afficher dans le dossier"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Sauvegarde globale",
         "label_has_mod": "Installer un mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "Fichiers de sauvegarde existants",
         "description_mod": "Cliquez pour parcourir un mod.",
         "header_summary": "Résumé",
         "description_vanilla": "Une copie propre de DDLC sera créée. Les données de sauvegarde seront séparées de toute autre copie du jeu.",
         "description_vanilla_global_save": "Une copie propre de DDLC sera créée. Les données de sauvegarde seront partagées avec d'autres copies du jeu (par ex. Steam)",
-
         "description_modded": "Une copie de DDLC sera créée et le mod sera installé. Les données de sauvegarde seront séparées de toute autre copie du jeu.",
         "description_modded_global_save": "Une copie de DDLC sera créée et le mod sera installé. Les données de sauvegarde seront partagées avec d'autres copies du jeu (par ex. Steam)",
-
         "button_install": "Installer",
         "button_installing": "Installation...",
         "status_exists": "Ce dossier existe déjà. Choisissez un nom de dossier différent."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Avancé",
         "header_enhancements": "Améliorations",
         "link_sdk": "Succès et SDK",
-
         "header_application": "Application",
         "link_updates": "Mises à jour",
         "link_storage": "Emplacement de stockage",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Quand les mods spécifient le support",
         "checkbox_never": "Jamais"
       },
-
       "section_testing": {
         "title": "Débogage SDK",
         "subtitle": "Activez la journalisation de débogage pour tester les mods avec le SDK Doki Doki Mod Manager.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager est une œuvre de fan de Doki Doki Literature Club et n'est pas affilié à Team Salvato. C'est une œuvre de fan telle que définie dans les directives IP de Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager n'est pas responsable des dommages causés à vos fichiers ou votre ordinateur à la suite de jouer des mods ou pour toute autre raison. Il est de votre responsabilité de vous assurer que les mods sont sûrs à jouer.",
       "title_socials": "Nous contacter",
-
       "social_twitter": "Suivez @Dynamicxaa sur Twitter",
       "social_reddit": "Envoyez un message sur Reddit",
-      "social_email": "Envoyer un e-mail",
-      "title_support": "Soutenir le développement",
-      "description_support": "Doki Doki Mod Manager sera toujours gratuit à télécharger et utiliser. Si vous l'aimez et voulez aider à maintenir les mises à jour, veuillez considérer nous soutenir de l'une des façons suivantes.",
-      "support_donate": "Faire un don unique",
-      "support_steelseries": "Obtenez 10% de réduction sur les périphériques de jeu SteelSeries (lien d'affiliation)",
-      "support_code": "Contribuer au projet (code ou traductions)"
+      "social_email": "Envoyer un e-mail"
     }
   },
   "main": {

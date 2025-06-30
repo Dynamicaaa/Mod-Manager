@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "mitä uutta?"
     },
-
     "user_menu": {
       "option_rename": "Vaihda käyttäjänimi",
       "option_logout": "Kirjaudu ulos"
@@ -24,7 +23,6 @@
       "maximise": "Suurenna",
       "minimise": "Pienennä",
       "devtools": "Vaihda kehittäjätyökalut (F12)",
-
       "announcement": "Lue viimeisin ilmoitus",
       "login": "Kirjaudu sisään",
       "sayonika_login": "Sayonika-kirjautuminen",
@@ -118,7 +116,6 @@
         "button_settings": "Asetukset",
         "tag_global_save": "Globaali tallennus",
         "tag_sdk": "SDK",
-
         "title_achievements": "Saavutukset ({0} / {1})",
         "description_achievements": "Jatka pelaamista avataksesi lisää saavutuksia.",
         "description_achievements_complete": "Olet avannut kaikki saavutukset. Onnittelut!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Paina S pelatessasi ottaaksesi kuvakaappauksen.",
         "description_sdk": "Tämä modi tukee erityisominaisuuksia Doki Doki Mod Manager SDK:n kanssa!",
         "description_author": "Luonut {0}",
-
         "link_website": "Verkkosivusto ({0})",
         "description_external": "Näytä kansiossa"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Globaali tallennus",
         "label_has_mod": "Asenna modi",
         "label_mod": "Modi",
-
         "label_existing_saves": "Olemassa olevat tallennustiedostot",
         "description_mod": "Napsauta selataksesi modia.",
         "header_summary": "Yhteenveto",
         "description_vanilla": "Puhdas kopio DDLC:stä luodaan. Tallennustiedot ovat erillään muista pelin kopioista.",
         "description_vanilla_global_save": "Puhdas kopio DDLC:stä luodaan. Tallennustiedot jaetaan muiden pelien kopioiden kanssa (esim. Steam)",
-
         "description_modded": "Kopio DDLC:stä luodaan ja modi asennetaan. Tallennustiedot ovat erillään muista pelin kopioista.",
         "description_modded_global_save": "Kopio DDLC:stä luodaan ja modi asennetaan. Tallennustiedot jaetaan muiden pelien kopioiden kanssa (esim. Steam)",
-
         "button_install": "Asenna",
         "button_installing": "Asennetaan...",
         "status_exists": "Tuo kansio on jo olemassa. Valitse toinen kansion nimi."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Lisäasetukset",
         "header_enhancements": "Parannukset",
         "link_sdk": "Saavutukset & SDK",
-
         "header_application": "Sovellus",
         "link_updates": "Päivitykset",
         "link_storage": "Tallennussijainti",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Kun modi määrittelee tukevansa niitä",
         "checkbox_never": "Ei koskaan"
       },
-
       "section_testing": {
         "title": "SDK-debuggaus",
         "subtitle": "Ota debug-lokitus käyttöön testataksesi modejasi Doki Doki Mod Manager SDK:n kanssa.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager on fanityö Doki Doki Literature Clubista eikä ole yhteydessä Team Salvatoon. Se on fanityö, Team Salvaton IP-ohjeiden määrittämänä.",
       "disclaimer_2": "Doki Doki Mod Manager ei ota vastuuta mistään vahingoista tiedostoillesi tai tietokoneellesi, jotka johtuvat modin pelaamisesta tai muutoin. Sinun vastuullasi on varmistaa että modit ovat turvallisia pelata.",
       "title_socials": "Ota yhteyttä",
-
       "social_twitter": "Seuraa @Dynamicxaa Twitterissä",
       "social_reddit": "Lähetä minulle viesti Redditissä",
-      "social_email": "Lähetä minulle sähköposti",
-      "title_support": "Tue kehitystä",
-      "description_support": "Doki Doki Mod Manager on aina ilmainen ladata ja käyttää. Jos pidät siitä ja haluat auttaa minua pitämään sen päivitettynä, harkitse tukemistani yhdellä seuraavista tavoista.",
-      "support_donate": "Tee kertainen lahjoitus",
-      "support_steelseries": "Saa 10% alennus SteelSeries-pelivarusteista (affiliate-linkki)",
-      "support_code": "Osallistu projektiin (koodi tai käännökset)"
+      "social_email": "Lähetä minulle sähköposti"
     }
   },
   "main": {

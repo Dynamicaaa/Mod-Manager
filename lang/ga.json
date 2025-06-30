@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Irish",
+    "name_local": "Gaeilge"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Baile",
+      "tab_mods": "Móid",
+      "tab_store": "Siopa",
+      "tab_options": "Roghanna",
+      "tab_about": "Maidir Leis"
+    },
+    "version": {
+      "link_changelog": "cad atá nua?"
+    },
+    "user_menu": {
+      "option_rename": "Athraigh Ainm Úsáideora",
+      "option_logout": "Logáil Amach"
+    },
+    "window_controls": {
+      "close": "Dún",
+      "maximise": "Méadaigh",
+      "minimise": "Íoslaghdaigh",
+      "devtools": "Lascaigh Uirlisí Forbróra (F12)",
+      "announcement": "Léigh an fógra is déanaí",
+      "login": "Logáil Isteach",
+      "sayonika_login": "Logáil Isteach Sayonika",
+      "update": {
+        "checking": "Ag seiceáil le haghaidh nuashonruithe sa chúlra...",
+        "available": "Tá nuashonrú ar fáil. Cliceáil anseo chun é a íoslódáil.",
+        "downloading": "Ag íoslódáil nuashonrú...",
+        "downloaded": "Tá nuashonrú réidh le suiteáil nuair a scoirfidh tú."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Scoir",
+      "button_continue": "Lean Ar Aghaidh"
+    },
+    "drop_cover": {
+      "text": "Scaoil mód anseo chun é a shuiteáil"
+    },
+    "announcement": {
+      "button_open": "Oscail Nasc",
+      "button_close": "Dún"
+    },
+    "onboarding": {
+      "title": "Fáilte!",
+      "description_download": "Aimsímid cóip de DDLC.",
+      "button_download": "Tabhair cuairt ar leathanach íoslódála oifigiúil DDLC",
+      "button_choose": "Brabhsáil le haghaidh cóipe",
+      "heading_step": "Céim {0}",
+      "s1_desc": "Ní mór duit cóip de Doki Doki Literature Club a íoslódáil. Is féidir é seo a fháil ar an suíomh Gréasáin oifigiúil (ddlc.moe) - cliceáil an cnaipe thíos chun dul ann anois.",
+      "s1_platform": "Nuair a iarrtar ort, roghnaigh an comhad dar teideal \"DDLC ({0})\" a íoslódáil.",
+      "s2_desc": "Nuair a bheidh d'íoslódáil críochnaithe, roghnaigh é ag baint úsáide as an gcnaipe thíos.",
+      "description_location": "Stórálfar do chluichí ag {0}",
+      "link_change": "(Athraigh)"
+    },
+    "login_input": {
+      "message": "Iontráil do sheoladh ríomhphoist",
+      "details": "Seolfar ríomhphost chuig an seoladh seo. Cliceáil an nasc sa ríomhphost chun logáil isteach a chríochnú.",
+      "button_affirmative": "Logáil Isteach",
+      "button_negative": "Cealaigh"
+    },
+    "change_username_input": {
+      "message": "Iontráil d'ainm úsáideora nua",
+      "details": "Ní gá go mbeadh ainmneacha úsáideora uathúil.",
+      "button_affirmative": "Athraigh",
+      "button_negative": "Cealaigh"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Cuardaigh móid...",
+        "header_new": "Tosaigh",
+        "link_install": "Suiteáil DDLC",
+        "header_installed": "Suiteáilte",
+        "header_downloaded": "Íoslódálacha"
+      },
+      "install_contextmenu": {
+        "launch": "Seol",
+        "rename": "Athainmnigh",
+        "shortcut": "Cruthaigh Aicearra",
+        "delete_save": "Scrios Sonraí Sábháilte",
+        "uninstall": "Díshuiteáil"
+      },
+      "mod_contextmenu": {
+        "install": "Suiteáil",
+        "delete": "Scrios"
+      },
+      "uninstall_confirmation": {
+        "message": "An bhfuil tú cinnte gur mian leat díshuiteáil?",
+        "details": "Scriosfar do shonraí sábháilte do {0}, agus beidh cóip den mhód uait chun é a shuiteáil arís.",
+        "button_affirmative": "Díshuiteáil",
+        "button_negative": "Cealaigh"
+      },
+      "rename_input": {
+        "message": "Athainmnigh Suiteáil",
+        "details": "Iontráil an t-ainm nua do {0}.",
+        "button_affirmative": "Athainmnigh",
+        "button_negative": "Cealaigh"
+      },
+      "mod_delete_confirmation": {
+        "message": "An bhfuil tú cinnte gur mian leat an mód a scriosadh?",
+        "details": "Beidh ort cóip eile den mhód a íoslódáil chun é a shuiteáil arís.",
+        "button_affirmative": "Scrios",
+        "button_negative": "Cealaigh"
+      },
+      "save_delete_confirmation": {
+        "message": "An bhfuil tú cinnte gur mian leat do shonraí sábháilte a scriosadh?",
+        "details": "Beidh ort {0} a thosú arís ón tús.",
+        "button_affirmative": "Scrios",
+        "button_negative": "Cealaigh"
+      },
+      "install": {
+        "button_launch": "Seol",
+        "button_settings": "Socruithe",
+        "tag_global_save": "Sábháil Dhomhanda",
+        "tag_sdk": "SDK",
+        "title_achievements": "Éachtaí ({0} / {1})",
+        "description_achievements": "Lean ar aghaidh ag imirt chun níos mó éachtaí a dhíghlasáil.",
+        "description_achievements_complete": "Tá na héachtaí go léir díghlasáilte agat. Comhghairdeas!",
+        "title_screenshots_none": "Gan aon scáileán",
+        "title_screenshots_one": "1 scáileán",
+        "title_screenshots": "{0} scáileán",
+        "description_screenshots": "Brúigh S agus tú ag imirt chun scáileán a thógáil.",
+        "description_sdk": "Tacaíonn an mód seo le gnéithe speisialta le Doki Doki Mod Manager SDK!",
+        "description_author": "Cruthaithe ag {0}",
+        "link_website": "Suíomh Gréasáin ({0})",
+        "description_external": "Taispeáin i bhfillteán"
+      },
+      "mod": {
+        "button_install": "Suiteáil",
+        "button_settings": "Socruithe",
+        "description_external": "Taispeáin i bhfillteán"
+      },
+      "install_creation": {
+        "title": "Suiteáil DDLC",
+        "label_install_name": "Ainm Suiteála",
+        "label_folder_name": "Ainm Fillteáin",
+        "label_global_save": "Sábháil Dhomhanda",
+        "label_has_mod": "Suiteáil Mód",
+        "label_mod": "Mód",
+        "label_existing_saves": "Comhaid Sábháilte Reatha",
+        "description_mod": "Cliceáil chun brabhsáil le haghaidh móid.",
+        "header_summary": "Achoimre",
+        "description_vanilla": "Cruthófar cóip ghlan de DDLC. Beidh na sonraí sábháilte ar leith ó aon chóip eile den chluiche.",
+        "description_vanilla_global_save": "Cruthófar cóip ghlan de DDLC. Déanfar na sonraí sábháilte a roinnt le cóipeanna eile den chluiche (m.sh. Steam)",
+        "description_modded": "Cruthófar cóip de DDLC, agus suiteálfar an mód. Beidh na sonraí sábháilte ar leith ó aon chóip eile den chluiche.",
+        "description_modded_global_save": "Cruthófar cóip de DDLC, agus suiteálfar an mód. Déanfar na sonraí sábháilte a roinnt le cóipeanna eile den chluiche (m.sh. Steam)",
+        "button_install": "Suiteáil",
+        "button_installing": "Ag suiteáil...",
+        "status_exists": "Tá an fillteán sin ann cheana. Roghnaigh ainm fillteán eile."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Tá an siopa ag teacht go luath!",
+      "description_1": "Cuirfidh bunachar sonraí móid Sayonika láthair lárnach ar fáil chun móid DDLC a roinnt, a íoslódáil agus a athbhreithniú. Nuair a bheidh Sayonika ar fáil go poiblí, beidh tú in ann móid a bhrabhsáil anseo i Doki Doki Mod Manager.",
+      "description_2": "Idir an dá linn, is féidir leat cuid de na móid molta seo a íoslódáil.",
+      "error": "Theip ar an liosta móid a luchtú. An bhfuil tú as líne?",
+      "button_download": "Íoslódáil"
+    },
+    "tab_store": {
+      "title": "Siopa Sayonika",
+      "subtitle": "Faigh amach agus íoslódáil móid DDLC",
+      "search_placeholder": "Cuardaigh móid...",
+      "loading": "Ag luchtú móid...",
+      "error_title": "Earráid Ceangail",
+      "retry_button": "Atriail",
+      "offline_title": "As Líne",
+      "offline_message": "Tá tú as líne faoi láthair. Seiceáil do nasc idirlín le do thoil agus bain triail as arís.",
+      "check_connection": "Seiceáil an Nasc",
+      "maintenance_banner": "Níl seirbhísí fíordheimhnithe ar fáil go sealadach mar gheall ar chothabháil. Is féidir leat móid a bhrabhsáil fós ach ní féidir leat logáil isteach nó clárú.",
+      "no_mods_title": "Níor aimsíodh aon mhód",
+      "no_mods_message": "Déan iarracht do chuardach nó do scagairí a choigeartú",
+      "filters": {
+        "category": "Catagóir:",
+        "all_categories": "Gach Catagóir",
+        "sort_by": "Sórtáil de réir:",
+        "date_created": "Dáta Cruthaithe",
+        "date_updated": "Dáta Nuashonraithe",
+        "downloads": "Íoslódálacha",
+        "rating": "Rátáil",
+        "title": "Teideal",
+        "order": "Ord:",
+        "descending": "Ag Dul Síos",
+        "ascending": "Ag Dul Suas",
+        "featured_only": "Gnéithe Amháin",
+        "translate_content": "Aistrigh Ábhar",
+        "auto_detect": "Braith go hUathoibríoch"
+      },
+      "mod_card": {
+        "featured": "Gnéitheach",
+        "mature": "Aibí",
+        "by_author": "le {0}",
+        "download": "Íoslódáil",
+        "downloading": "Ag íoslódáil...",
+        "download_mod": "Íoslódáil Mód",
+        "downloads_count": "{0} íoslódálacha",
+        "version": "Leagan {0}",
+        "screenshots": "Scáileáin ({0})",
+        "description": "Cur Síos",
+        "tags": "Clibeanna",
+        "requirements": "Riachtanais"
+      },
+      "pagination": {
+        "previous": "Roimhe Seo",
+        "next": "Ar Aghaidh",
+        "page_info": "Leathanach {0} de {1}"
+      },
+      "login": {
+        "title": "Logáil Isteach chuig Sayonika",
+        "discord": "Logáil Isteach le Discord",
+        "github": "Logáil Isteach le GitHub",
+        "or": "nó",
+        "username_label": "Ainm Úsáideora nó Ríomhphost:",
+        "username_placeholder": "Iontráil ainm úsáideora nó seoladh ríomhphoist",
+        "username_help": "Is féidir leat d'ainm úsáideora nó do sheoladh ríomhphoist a úsáid chun logáil isteach",
+        "password_label": "Pasfhocal:",
+        "remember_me": "Cuimhnigh Orm",
+        "login_button": "Logáil Isteach",
+        "logging_in": "Ag logáil isteach...",
+        "register_link": "Níl cuntas agat? Cláraigh anseo",
+        "success": "Logáilte isteach go rathúil!",
+        "failed": "Theip ar logáil isteach: {0}"
+      },
+      "translation": {
+        "enabled": "Aistriúchán cumasaithe. Aistreofar ábhar nuair a bheidh sé ar fáil.",
+        "disabled": "Aistriúchán díchumasaithe.",
+        "language_changed": "D'athraigh an teanga aistriúcháin go {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Dealramh",
+        "link_background": "Cúlra",
+        "link_language": "Teanga",
+        "link_advanced_appearance": "Ard-",
+        "header_enhancements": "Feabhsúcháin",
+        "link_sdk": "Éachtaí & SDK",
+        "header_application": "Feidhmchlár",
+        "link_updates": "Nuashonruithe",
+        "link_storage": "Suíomh Stórála",
+        "header_developers": "Forbróirí",
+        "link_testing": "Dífhabhtú SDK",
+        "link_debug": "Eolas Aip"
+      },
+      "section_backgrounds": {
+        "title": "Cúlra",
+        "subtitle": "Saincheap do chóip de Doki Doki Mod Manager le ceann de na cúlraí seo.",
+        "button_none": "Gan Cúlra",
+        "description_credit": "Cúlraí DDLC bunaidh le Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Ard-",
+        "subtitle": "Faigh roghanna comhéadain eile anseo.",
+        "button_enable_sysborders": "Úsáid Teorainneacha Córais (éilíonn atosú)",
+        "button_disable_sysborders": "Díchumasaigh Teorainneacha Córais (éilíonn atosú)"
+      },
+      "section_storage": {
+        "title": "Suíomh Stórála",
+        "subtitle": "Athraigh an áit a stóráiltear do shonraí cluiche.",
+        "description_moving": "Rabhadh! Má roghnaíonn tú do shuíomh suiteála a athrú, bogfar do mhóid, do shuiteálacha agus do shonraí sábháilte go léir. D'fhéadfadh sé seo roinnt nóiméad a thógáil, agus ní féidir é a bhriseadh.",
+        "description_current": "Suíomh reatha: {0}",
+        "button_change": "Athraigh Suíomh Suiteála"
+      },
+      "section_updates": {
+        "title": "Nuashonruithe",
+        "subtitle": "Faigh an leagan is déanaí de Doki Doki Mod Manager.",
+        "description_current_version": "Leagan reatha: {0}",
+        "label_channel": "Cainéal Scaoilte",
+        "option_stable": "Cobhsaí",
+        "option_beta": "Béite",
+        "button_check": "Seiceáil le haghaidh nuashonruithe"
+      },
+      "section_sdk": {
+        "title": "Éachtaí & SDK",
+        "subtitle": "Athraigh an bealach a láimhseáiltear éachtaí.",
+        "description_mode": "Cumasú éachtaí:",
+        "checkbox_always": "I gcónaí (molta)",
+        "checkbox_specified": "Nuair a shonraíonn an mód go dtacaíonn sé leo",
+        "checkbox_never": "Ná riamh"
+      },
+      "section_testing": {
+        "title": "Dífhabhtú SDK",
+        "subtitle": "Cumasú logáil dífhabhtaithe chun do mhóid a thástáil le Doki Doki Mod Manager SDK.",
+        "button_enable": "Cumasú Dífhabhtaithe",
+        "button_disable": "Díchumasaigh Dífhabhtaithe"
+      },
+      "section_debug": {
+        "title": "Eolas Aip",
+        "subtitle": "Eolas chun fadhbanna a dhiagnóiseadh."
+      },
+      "section_language": {
+        "title": "Teanga",
+        "subtitle": "Athraigh teanga Doki Doki Mod Manager.",
+        "description_current": "Teanga reatha: {0}",
+        "button_apply": "Cuir Teanga i bhFeidhm",
+        "button_contribute": "Cabhair Aistrigh",
+        "description_restart": "Tiocfaidh athruithe teanga i bhfeidhm tar éis an feidhmchlár a atosú.",
+        "notification_changed": "D'athraigh an teanga go {0}. Atosaigh an feidhmchlár le do thoil chun na hathruithe a fheiceáil.",
+        "notification_same": "Tá an teanga socraithe cheana féin go {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Maidir Leis",
+      "description": "Is tionscadal forbartha pobail é Doki Doki Mod Manager a chuidíonn leat móid a aimsiú, a shuiteáil agus a imirt le haghaidh Doki Doki Literature Club, cluiche Visual Novel saor in aisce le Team Salvato.",
+      "title_disclaimer": "Séanadh",
+      "disclaimer_1": "Is saothar lucht leanúna de Doki Doki Literature Club é Doki Doki Mod Manager agus níl baint ar bith aige le Team Salvato. Is saothar lucht leanúna é, mar a shainmhínítear ag Treoirlínte IP Team Salvato.",
+      "disclaimer_2": "Ní ghlacann Doki Doki Mod Manager freagracht ar bith as aon damáiste a dhéantar do do chomhaid nó do ríomhaire, mar thoradh ar mhód a imirt nó eile. Is fútsa atá sé a chinntiú go bhfuil móid sábháilte le himirt.",
+      "title_socials": "Téigh i dteagmháil",
+      "social_twitter": "Lean @Dynamicxaa ar Twitter",
+      "social_reddit": "Seol teachtaireacht chugam ar Reddit",
+      "social_email": "Seol ríomhphost chugam"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Oscail Doki Doki Mod Manager agus seol {0}."
+    },
+    "running_cover": {
+      "title_running": "Tá DDLC ag rith",
+      "title_crashed": "Chuaigh rud éigin mícheart",
+      "button_browse": "Oscail Fillteán Cluiche",
+      "button_close": "OK",
+      "description_running": "Dún an cluiche chun athruithe a dhéanamh ar do mhóid.",
+      "install_missing": "Níorbh fhéidir an tsuiteáil a aimsiú.",
+      "install_corrupt": "Tá an tsuiteáil neamhiomlán nó truaillithe.",
+      "install_crashed": "Theip ar an gcluiche seoladh nó thit sé."
+    },
+    "move_install": {
+      "title": "Roghnaigh fillteán suiteála nua"
+    },
+    "mod_browse_dialog": {
+      "title": "Faigh mód le suiteáil",
+      "file_format_name": "Móid"
+    },
+    "game_browse_dialog": {
+      "title": "Aimsigh cóip de chomhad zip DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Roghnaigh an áit a gcuirfidh tú d'aicearra",
+      "file_format_name": "Aicearra"
+    },
+    "errors": {
+      "exception": {
+        "title": "Thit Doki Doki Mod Manager",
+        "body": "Tuairiscíodh an fhadhb. Atosaigh le do thoil agus bain triail as arís."
+      },
+      "move_install": {
+        "title": "Theip ar an bhfillteán suiteála a bhogadh",
+        "body": "Seiceáil go bhfuil cead agat agus go leor spáis chun bogadh chuig an bhfillteán seo."
+      },
+      "shortcut": {
+        "title": "Theip ar an aicearra a chruthú",
+        "body": "Seiceáil go bhfuil cead agat comhaid a chruthú san fhillteán seo."
+      },
+      "install": {
+        "title": "Theip ar an gcluiche a shuiteáil",
+        "body": "Seiceáil go bhfuil cead agat agus go leor spáis agat chun suiteáil."
+      },
+      "rename": {
+        "title": "Theip ar athainmniú",
+        "body": "Seiceáil go bhfuil gach clár a d'fhéadfadh a bheith ag cur isteach dúnta agat agus bain triail as arís."
+      },
+      "uninstall": {
+        "title": "Theip ar dhíshuiteáil",
+        "body": "Seiceáil go bhfuil gach clár a d'fhéadfadh a bheith ag cur isteach dúnta agat agus bain triail as arís."
+      },
+      "save_delete": {
+        "title": "Theip ar shonraí sábháilte a scriosadh",
+        "body": "Seiceáil go bhfuil gach clár a d'fhéadfadh a bheith ag cur isteach dúnta agat agus bain triail as arís."
+      },
+      "mod_delete": {
+        "title": "Theip ar an mód a scriosadh",
+        "body": "Seiceáil go bhfuil gach clár a d'fhéadfadh a bheith ag cur isteach dúnta agat agus bain triail as arís."
+      },
+      "renderer_freeze": {
+        "title": "Stop Doki Doki Mod Manager ag freagairt",
+        "body": "Má mhaireann an fhadhb seo ar feadh i bhfad, dún an aip agus tosú arís."
+      },
+      "executable_permission": {
+        "title": "Theip ar an inrite a dhéanamh inrite",
+        "body": "Níorbh fhéidir DDLC.sh a dhéanamh inrite ar Linux. Seans nach seolfaidh an cluiche i gceart."
+      }
+    }
+  }
+}

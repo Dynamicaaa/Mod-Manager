@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Tibetan",
+    "name_local": "བོད་སྐད།"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "གདོང་ཤོག",
+      "tab_mods": "བཟོ་བཅོས།",
+      "tab_store": "ཚོང་ཁང་།",
+      "tab_options": "འདེམས་ཀ།",
+      "tab_about": "སྐོར་ལ།"
+    },
+    "version": {
+      "link_changelog": "གསར་པ་ག་རེ་ཡོད།"
+    },
+    "user_menu": {
+      "option_rename": "ተጠቃሚའི་མིང་བརྗེ་བ།",
+      "option_logout": "ཕྱིར་ཐོན།"
+    },
+    "window_controls": {
+      "close": "ཁ་རྒྱག",
+      "maximise": "ཆེ་རུ་གཏོང་།",
+      "minimise": "ཆུང་དུ་གཏོང་།",
+      "devtools": " ገንቢ መሣሪያዎችን ቀይር (F12)",
+      "announcement": "ཆེས་གསར་བའི་གསལ་བསྒྲགས་ཀློག",
+      "login": "ནང་འཛུལ།",
+      "sayonika_login": "Sayonika ནང་འཛུལ།",
+      "update": {
+        "checking": "རྒྱབ་ལྗོངས་ནས་གསར་བརྗེ་འཚོལ་བཞིན་པ།...",
+        "available": "གསར་བརྗེ་ཞིག་ཡོད། འདིར་མནན་ནས་ཕབ་ལེན་བྱེད་རོགས།",
+        "downloading": "གསར་བརྗེ་ཕབ་ལེན་བྱེད་བཞིན་པ།...",
+        "downloaded": "ཁྱེད་ཀྱིས་ཕྱིར་ཐོན་སྐབས་སྒྲིག་འཇུག་བྱ་རྒྱུའི་གསར་བརྗེ་ཞིག་གྲ་སྒྲིག་ཡོད།"
+      }
+    },
+    "crash_cover": {
+      "button_close": "ཕྱིར་ཐོན།",
+      "button_continue": "མུ་མཐུད།"
+    },
+    "drop_cover": {
+      "text": "བཟོ་བཅོས་འདིར་བཞག་ནས་སྒྲིག་འཇུག་བྱེད་རོགས།"
+    },
+    "announcement": {
+      "button_open": "སྦྲེལ་མཐུད་ཁ་ཕྱེ།",
+      "button_close": "ཁ་རྒྱག"
+    },
+    "onboarding": {
+      "title": "ཕེབས་པར་དགའ་བསུ་ཞུ།",
+      "description_download": "DDLC ཡི་འདྲ་བཤུས་ཞིག་འཚོལ་བར་བྱ།",
+      "button_download": "DDLC ཡི་གཞུང་འབྲེལ་ཕབ་ལེན་ཤོག་ངོས་སུ་ཕེབས་པ།",
+      "button_choose": "འདྲ་བཤུས་ཞིག་འཚོལ་བ།",
+      "heading_step": "གོ་རིམ་ {0}",
+      "s1_desc": "ཁྱེད་ཀྱིས་ Doki Doki Literature Club ཡི་འདྲ་བཤུས་ཞིག་ཕབ་ལེན་བྱེད་དགོས། འདི་གཞུང་འབྲེལ་དྲ་ཚིགས་ (ddlc.moe) ནས་རግኘትཐུབ། - འོག་གི་མཐེབ་གནོན་མནན་ནས་ད་ལྟ་དེར་ཕེབས་རོགས།",
+      "s1_platform": "ཁྱེད་ལ་དྲི་སྐབས། \"DDLC ({0})\" ཞེས་པའི་ཡིག་ཆ་ཕབ་ལེན་བྱ་རྒྱུ་འདེམས་རོགས།",
+      "s2_desc": "ཁྱེད་ཀྱི་ཕབ་ལེན་ཚར་རྗེས། འོག་གི་མཐེབ་གནོན་སྤྱད་ནས་དེ་འདེམས་རོགས།",
+      "description_location": "ཁྱེད་ཀྱི་རྩེད་མོ་རྣམས་ {0} ལ་ཉར་ཚགས་བྱ་རྒྱུ།",
+      "link_change": "(བརྗེ་བ།)"
+    },
+    "login_input": {
+      "message": "ཁྱེད་ཀྱི་གློག་འཕྲིན་ཁ་བྱང་ནང་འཇུག་བྱེད་རོགས།",
+      "details": "ཁ་བྱང་འདིར་གློག་འཕྲིན་ཞིག་བསྐུར་རྒྱུ་རེད། གློག་འཕྲིན་ནང་གི་སྦྲེལ་མཐུད་ལ་མནན་ནས་ནང་འཛུལ་མཇུག་བསྒྲིལ་རོགས།",
+      "button_affirmative": "ནང་འཛུལ།",
+      "button_negative": "རྩིས་མེད།"
+    },
+    "change_username_input": {
+      "message": "ཁྱེད་ཀྱི་ተጠቃሚའི་མིང་གསར་པ་ནང་འཇུག་བྱེད་རོགས།",
+      "details": "ተጠቃሚའི་མིང་ཁྱད་པར་ཅན་ཡིན་མི་དགོས།",
+      "button_affirmative": "བརྗེ་བ།",
+      "button_negative": "རྩིས་མེད།"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "བཟོ་བཅོས་འཚོལ་བ།...",
+        "header_new": "འགོ་འཛུགས།",
+        "link_install": "DDLC སྒྲིག་འཇུག་བྱེད་པ།",
+        "header_installed": "སྒྲིག་འཇུག་བྱས་ཟིན།",
+        "header_downloaded": "ཕབ་ལེན་བྱས་པ།"
+      },
+      "install_contextmenu": {
+        "launch": "འགོ་འཛུགས།",
+        "rename": "མིང་བརྗེ་བ།",
+        "shortcut": "མགྱོགས་ལམ་བཟོ་བ།",
+        "delete_save": "ཉར་ཚགས་གྲངས་ liệu སུབ་པ།",
+        "uninstall": "སྒྲིག་འཇུག་འདོར་བ།"
+      },
+      "mod_contextmenu": {
+        "install": "སྒྲིག་འཇུག་བྱེད་པ།",
+        "delete": "སུབ་པ།"
+      },
+      "uninstall_confirmation": {
+        "message": "ཁྱེད་ཀྱིས་སྒྲིག་འཇུག་འདོར་རྒྱུར་གཏན་ཁེལ་ཡིན་ནམ།",
+        "details": "ཁྱེད་ཀྱི་ {0} གི་ཉར་ཚགས་གྲངས་ liệu སུབ་རྒྱུ་དང་། ཁྱེད་ཀྱིས་བཟོ་བཅོས་དེ་སླར་ཡང་སྒྲིག་འཇུག་བྱེད་པར་དེའི་འདྲ་བཤུས་ཞིག་དགོས།",
+        "button_affirmative": "སྒྲིག་འཇུག་འདོར་བ།",
+        "button_negative": "རྩིས་མེད།"
+      },
+      "rename_input": {
+        "message": "སྒྲིག་འཇུག་མིང་བརྗེ་བ།",
+        "details": "{0} གི་མིང་གསར་པ་ནང་འཇུག་བྱེད་རོགས།",
+        "button_affirmative": "མིང་བརྗེ་བ།",
+        "button_negative": "རྩིས་མེད།"
+      },
+      "mod_delete_confirmation": {
+        "message": "ཁྱེད་ཀྱིས་བཟོ་བཅོས་འདི་སུབ་རྒྱུར་གཏན་ཁེལ་ཡིན་ནམ།",
+        "details": "ཁྱེད་ཀྱིས་བཟོ་བཅོས་དེ་སླར་ཡང་སྒྲིག་འཇུག་བྱེད་པར་དེའི་འདྲ་བཤུས་གཞན་ཞིག་ཕབ་ལེན་བྱེད་དགོས།",
+        "button_affirmative": "སུབ་པ།",
+        "button_negative": "རྩིས་མེད།"
+      },
+      "save_delete_confirmation": {
+        "message": "ཁྱེད་ཀྱིས་ཉར་ཚགས་གྲངས་ liệu སུབ་རྒྱུར་གཏན་ཁེལ་ཡིན་ནམ།",
+        "details": "ཁྱེད་ཀྱིས་ {0} འགོ་ནས་བསྐྱར་དུ་རྩེད་དགོས་རྒྱུ་རེད།",
+        "button_affirmative": "སུབ་པ།",
+        "button_negative": "རྩིས་མེད།"
+      },
+      "install": {
+        "button_launch": "འགོ་འཛུགས།",
+        "button_settings": "སྒྲིག་འགོད།",
+        "tag_global_save": "སྤྱི་ཡོངས་ཀྱི་ཉར་ཚགས།",
+        "tag_sdk": "SDK",
+        "title_achievements": "གྲུབ་འབྲས། ({0} / {1})",
+        "description_achievements": "གྲུབ་འབྲས་མང་བ་ལེན་པར་མུ་མཐུད་རྩེད་རོགས།",
+        "description_achievements_complete": "ཁྱེད་ཀྱིས་གྲུབ་འབྲས་ཚང་མ་བླངས་ཟིན། བཀྲ་ཤིས་བདེ་ལེགས།",
+        "title_screenshots_none": "བརྙན་རིས་མེད།",
+        "title_screenshots_one": "བརྙན་རིས་ ༡",
+        "title_screenshots": "བརྙན་རིས་ {0}",
+        "description_screenshots": "རྩེད་སྐབས་ S མནན་ནས་བརྙན་རིས་ལེན་རོགས།",
+        "description_sdk": "བཟོ་བཅོས་འདིས་ Doki Doki Mod Manager SDK དང་ལྷན་དུ་ཁྱད་ཆོས་དམིགས་བསལ་ལ་རྒྱབ་སྐྱོར་བྱེད།",
+        "description_author": "{0} གིས་བརྩམས།",
+        "link_website": "དྲ་ཚིགས། ({0})",
+        "description_external": "ཡིག་སྣོད་ནང་སྟོན་པ།"
+      },
+      "mod": {
+        "button_install": "སྒྲིག་འཇུག་བྱེད་པ།",
+        "button_settings": "སྒྲིག་འགོད།",
+        "description_external": "ཡིག་སྣོད་ནང་སྟོན་པ།"
+      },
+      "install_creation": {
+        "title": "DDLC སྒྲིག་འཇུག་བྱེད་པ།",
+        "label_install_name": "སྒྲིག་འཇུག་གི་མིང་།",
+        "label_folder_name": "ཡིག་སྣོད་ཀྱི་མིང་།",
+        "label_global_save": "སྤྱི་ཡོངས་ཀྱི་ཉར་ཚགས།",
+        "label_has_mod": "བཟོ་བཅོས་སྒྲིག་འཇུག་བྱེད་པ།",
+        "label_mod": "བཟོ་བཅོས།",
+        "label_existing_saves": "ཡོད་པའི་ཉར་ཚགས་ཡིག་ཆ།",
+        "description_mod": "བཟོ་བཅོས་ཞིག་འཚོལ་བར་མནན་རོགས།",
+        "header_summary": "སྙིང་བསྡུས།",
+        "description_vanilla": "DDLC ཡི་འདྲ་བཤུས་གཙང་མ་ཞིག་བཟོ་རྒྱུ་རེད། ཉར་ཚགས་གྲངས་ liệu དེ་རྩེད་མོའི་འདྲ་བཤུས་གཞན་དག་དང་ལོགས་སུ་ཡོད།",
+        "description_vanilla_global_save": "DDLC ཡི་འདྲ་བཤུས་གཙང་མ་ཞིག་བཟོ་རྒྱུ་རེད། ཉར་ཚགས་གྲངས་ liệu དེ་རྩེད་མོའི་འདྲ་བཤུས་གཞན་དག་ (དཔེར་ན། Steam) དང་མཉམ་སྤྱོད་བྱ་རྒྱུ་རེད།",
+        "description_modded": "DDLC ཡི་འདྲ་བཤུས་ཞིག་བཟོ་རྒྱུ་དང་བཟོ་བཅོས་དེ་སྒྲིག་འཇུག་བྱ་རྒྱུ་རེད། ཉར་ཚགས་གྲངས་ liệu དེ་རྩེད་མོའི་འདྲ་བཤུས་གཞན་དག་དང་ལོགས་སུ་ཡོད།",
+        "description_modded_global_save": "DDLC ཡི་འདྲ་བཤུས་ཞིག་བཟོ་རྒྱུ་དང་བཟོ་བཅོས་དེ་སྒྲིག་འཇུག་བྱ་རྒྱུ་རེད། ཉར་ཚགས་གྲངས་ liệu དེ་རྩེད་མོའི་འདྲ་བཤུས་གཞན་དག་ (དཔེར་ན། Steam) དང་མཉམ་སྤྱོད་བྱ་རྒྱུ་རེད།",
+        "button_install": "སྒྲིག་འཇུག་བྱེད་པ།",
+        "button_installing": "སྒྲིག་འཇུག་བྱེད་བཞིན་པ།...",
+        "status_exists": "ཡིག་སྣོད་དེ་སྔར་ནས་ཡོད། ཡིག་སྣོད་ཀྱི་མིང་གཞན་ཞིག་འདེམས་རོགས།"
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "ཚོང་ཁང་མི་རིང་བར་འབྱོར་རྒྱུ་རེད།",
+      "description_1": "Sayonika mod database གྱིས་ DDLC བཟོ་བཅོས་མཉམ་སྤྱོད། ཕབ་ལེན། དང་བསྐྱར་ཞིབ་བྱེད་པའི་གནས་གཅིག་གྱུར་ཞིག་མཁོ་འདོན་བྱ་རྒྱུ་རེད། Sayonika སྤྱི་བསྒྲགས་བྱས་རྗེས། ཁྱེད་ཀྱིས་ Doki Doki Mod Manager འདིའི་ནང་ནས་བཟོ་བཅོས་རྣམས་འཚོལ་ཐུབ།",
+      "description_2": "ཁྱེད་ཀྱིས་སྒུག་པའི་རིང་ལ། འོས་སྦྱོར་བྱས་པའི་བཟོ་བཅོས་འདི་དག་ཕབ་ལེན་བྱེད་རོགས།",
+      "error": "བཟོ་བཅོས་ཀྱི་ཐོ་གཞུང་ལེན་མ་ཐུབ། ཁྱེད་དྲ་མེད་ཡིན་ནམ།",
+      "button_download": "ཕབ་ལེན།"
+    },
+    "tab_store": {
+      "title": "Sayonika ཚོང་ཁང་།",
+      "subtitle": "DDLC བཟོ་བཅོས་རྙེད་པ་དང་ཕབ་ལེན་བྱེད་པ།",
+      "search_placeholder": "བཟོ་བཅོས་འཚོལ་བ།...",
+      "loading": "བཟོ་བཅོས་ལེན་བཞིན་པ།...",
+      "error_title": "མཐུད་སྦྲེལ་གྱི་ནོར་འཁྲུལ།",
+      "retry_button": "བསྐྱར་དུ་ཚོད་ལྟ།",
+      "offline_title": "དྲ་མེད།",
+      "offline_message": "ཁྱེད་ད་ལྟ་དྲ་མེད་རེད། ཁྱེད་ཀྱི་དྲ་རྒྱ་མཐུད་སྦྲེལ་ལ་བརྟག་དཔྱད་བྱས་ནས་བསྐྱར་དུ་ཚོད་ལྟ་བྱེད་རོགས།",
+      "check_connection": "མཐུད་སྦྲེལ་བརྟག་དཔྱད།",
+      "maintenance_banner": "བጠገንམཁོ་བའི་རྐྱེན་གྱིས་ངོས་འཛིན་ཞབས་ཞུ་གནས་སྐབས་མི་ཐུབ། ཁྱེད་ཀྱིས་སྔར་བཞིན་བཟོ་བཅོས་བལྟ་ཐུབ་ཀྱང་ནང་འཛུལ་དང་ཐོ་འགོད་བྱེད་མི་ཐུབ།",
+      "no_mods_title": "བཟོ་བཅོས་མ་རྙེད།",
+      "no_mods_message": "ཁྱེད་ཀྱི་འཚོལ་བཤེར་དང་ཚགས་འདེམས་སྒྲིག་སྟངས་བརྗེ་རོགས།",
+      "filters": {
+        "category": "སྡེ་ཚན།:",
+        "all_categories": "སྡེ་ཚན་ཚང་མ།",
+        "sort_by": "འདི་ལྟར་སྒྲིག་པ།:",
+        "date_created": "བཟོས་པའི་ཚེས་གྲངས།",
+        "date_updated": "གསར་བརྗེ་བྱས་པའི་ཚེས་གྲངས།",
+        "downloads": "ཕབ་ལེན།",
+        "rating": "ደረጃ አሰጣጥ",
+        "title": "ཁ་བྱང་།",
+        "order": "གོ་རིམ།:",
+        "descending": "ཐུར་རིམ།",
+        "ascending": "གྱེན་རིམ།",
+        "featured_only": "ཁྱད་འཕགས་ཁོ་ན།",
+        "translate_content": "ནང་དོན་སྐད་སྒྱུར་བྱེད་པ།",
+        "auto_detect": "རང་འགུལ་ངོས་འཛིན།"
+      },
+      "mod_card": {
+        "featured": "ཁྱད་འཕགས།",
+        "mature": "ན་ཚོད་ལོན་པ།",
+        "by_author": "{0} གིས་བརྩམས།",
+        "download": "ཕབ་ལེན།",
+        "downloading": "ཕབ་ལེན་བྱེད་བཞིན་པ།...",
+        "download_mod": "བཟོ་བཅོས་ཕབ་ལེན།",
+        "downloads_count": "ཕབ་ལེན་ {0} ཐེངས།",
+        "version": "པར་གཞི་ {0}",
+        "screenshots": "བརྙན་རིས། ({0})",
+        "description": " ವಿವರಣೆ",
+        "tags": "ស្លាក",
+        "requirements": "требования"
+      },
+      "pagination": {
+        "previous": "སྔོན་མ།",
+        "next": "རྗེས་མ།",
+        "page_info": "ཤོག་ངོས་ {1} ནང་གི་ {0}"
+      },
+      "login": {
+        "title": "Sayonika ལ་ནང་འཛུལ་བྱེད་པ།",
+        "discord": "Discord ནས་ནང་འཛུལ་བྱེད་པ།",
+        "github": "GitHub ནས་ནང་འཛུལ་བྱེད་པ།",
+        "or": "ཡང་ན།",
+        "username_label": "ተጠቃሚའི་མིང་ངམ་གློག་འཕྲིན།:",
+        "username_placeholder": "ተጠቃሚའི་མིང་ངམ་གློག་འཕྲིན་ཁ་བྱང་ནང་འཇུག་བྱེད་རོགས།",
+        "username_help": "ཁྱེད་ཀྱིས་ནང་འཛུལ་བྱེད་པར་ተጠቃሚའི་མིང་ངམ་གློག་འཕྲིན་ཁ་བྱང་གང་རུང་སྤྱོད་ཆོག",
+        "password_label": "Գաղտնաբառ:",
+        "remember_me": "ང་དྲན་པར་གྱིས།",
+        "login_button": "ནང་འཛུལ།",
+        "logging_in": "ནང་འཛུལ་བྱེད་བཞིན་པ།...",
+        "register_link": "རྩིས་ཐོ་མེད་དམ། འདིར་ཐོ་འགོད་བྱེད་རོགས།",
+        "success": "ནང་འཛུལ་ལེགས་འགྲུབ་བྱུང་།",
+        "failed": "ནང་འཛུལ་མ་ཐུབ།: {0}"
+      },
+      "translation": {
+        "enabled": "སྐད་སྒྱུར་སྒུལ་སློང་བྱས་ཡོད། ནང་དོན་ཡོད་ཚེ་སྐད་སྒྱུར་བྱ་རྒྱུ་རེད།",
+        "disabled": "སྐད་སྒྱུར་སྒུལ་སློང་བྱས་མེད།",
+        "language_changed": "སྐད་སྒྱུར་སྐད་ཡིག་ {0} ལ་བརྗེ་སོང་།"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "ཕྱི་ཚུལ།",
+        "link_background": "རྒྱབ་ལྗོངས།",
+        "link_language": "སྐད་ཡིག",
+        "link_advanced_appearance": "མཐོ་རིམ།",
+        "header_enhancements": "ལེགས་བཅོས།",
+        "link_sdk": "གྲུབ་འབྲས་དང་ SDK",
+        "header_application": " εφαρμογή",
+        "link_updates": "གསར་བརྗེ།",
+        "link_storage": "ཉར་ཚགས་བྱེད་ས།",
+        "header_developers": "ገንቢዎች",
+        "link_testing": "SDK Debug",
+        "link_debug": "App Info"
+      },
+      "section_backgrounds": {
+        "title": "རྒྱབ་ལྗོངས།",
+        "subtitle": "Doki Doki Mod Manager ཡི་ཁྱེད་ཀྱི་འདྲ་བཤུས་དེ་རྒྱབ་ལྗོངས་འདི་དག་གི་གཅིག་གིས་སྒྲིག་བཟོ་བྱེད་རོགས།",
+        "button_none": "རྒྱབ་ལྗོངས་མེད།",
+        "description_credit": " ಮೂಲ DDLC ಹಿನ್ನೆಲೆಗಳು ಟೀಮ್ ಸಾಲ್ವೊಟೊ ಅವರ ಕೃಪೆ."
+      },
+      "section_advanced_appearance": {
+        "title": "མཐོ་རིམ།",
+        "subtitle": "འདིར་ངོས་འཛིན་གྱི་འདེམས་ཀ་གཞན་དག་འཚོལ་རོགས།",
+        "button_enable_sysborders": "ប្រព័ន្ធព្រំដែនប្រើ (ចាប់ផ្ដើមឡើងវិញត្រូវ)។",
+        "button_disable_sysborders": "ប្រព័ន្ធព្រំដែនបិទ (ចាប់ផ្ដើមឡើងវិញត្រូវ)។"
+      },
+      "section_storage": {
+        "title": "ཉར་ཚགས་བྱེད་ས།",
+        "subtitle": "ཁྱེད་ཀྱི་རྩེད་མོའི་གྲངས་ liệu ཉར་ས་བརྗེ་བ།",
+        "description_moving": "ཉེན་བརྡ། གལ་ཏེ་ཁྱེད་ཀྱིས་སྒྲིག་འཇུག་བྱེད་ས་བརྗེ་རྒྱུ་འདེམས་ན། ཁྱེད་ཀྱི་བཟོ་བཅོས་དང་། སྒྲིག་འཇུག ཉར་ཚགས་གྲངས་ liệu ཚང་མ་སྤོ་རྒྱུ་རེད། འདི་ལ་སྐར་མ་འགའ་ཤས་འགོར་སྲིད་ལ། བར་ཆད་གཏོང་མི་ཐུབ།",
+        "description_current": "ད་ལྟའི་གནས།: {0}",
+        "button_change": "སྒྲིག་འཇུག་བྱེད་ས་བརྗེ་བ།"
+      },
+      "section_updates": {
+        "title": "གསར་བརྗེ།",
+        "subtitle": "Doki Doki Mod Manager ཡི་པར་གཞི་གསར་ཤོས་ལེན་རོགས།",
+        "description_current_version": "ད་ལྟའི་པར་གཞི།: {0}",
+        "label_channel": "འགྲེམས་སྤེལ་རྒྱུ་ལམ།",
+        "option_stable": "བརྟན་པོ།",
+        "option_beta": "ཚོད་ལྟའི་པར་གཞི།",
+        "button_check": "གསར་བརྗེ་བརྟག་དཔྱད།"
+      },
+      "section_sdk": {
+        "title": "གྲུབ་འབྲས་དང་ SDK",
+        "subtitle": "གྲུབ་འབྲས་ལག་བསྟར་བྱེད་སྟངས་བརྗེ་བ།",
+        "description_mode": "གྲུབ་འབྲས་སྒུལ་སློང་བྱེད་པ།:",
+        "checkbox_always": " ఎల్లప్పుడూ (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)",
+        "checkbox_specified": "བཟོ་བཅོས་ཀྱིས་དེར་རྒྱབ་སྐྱོར་བྱེད་པར་གསལ་བཤད་བྱེད་སྐབས།",
+        "checkbox_never": " ఎప్పటికీ"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Doki Doki Mod Manager SDK དང་ལྷན་དུ་ཁྱེད་ཀྱི་བཟོ་བཅོས་ཚོད་ལྟ་བྱེད་པར་ debug logging སྒུལ་སློང་བྱེད་རོགས།",
+        "button_enable": "Debugging སྒུལ་སློང་བྱེད་པ།",
+        "button_disable": "Debugging སྒུལ་སློང་མི་བྱེད་པ།"
+      },
+      "section_debug": {
+        "title": "App Info",
+        "subtitle": "ບັນຫາໃນການກວດສອບຂໍ້ມູນ."
+      },
+      "section_language": {
+        "title": "སྐད་ཡིག",
+        "subtitle": "Doki Doki Mod Manager ཡི་སྐད་ཡིག་བརྗེ་བ།",
+        "description_current": "ད་ལྟའི་སྐད་ཡིག: {0}",
+        "button_apply": "སྐད་ཡིག་སྤྱོད་པ།",
+        "button_contribute": "སྐད་སྒྱུར་ལ་རོགས་རམ་བྱེད་པ།",
+        "description_restart": "སྐད་ཡིག་བརྗེ་བ་དེ་កម្មវិធីབསྐྱར་འགོ་བརྩམས་རྗེས་ནུས་པ་ཐོན་རྒྱུ་རེད།",
+        "notification_changed": "སྐད་ཡིག་ {0} ལ་བརྗེ་སོང་། བརྗེ་བཅོས་མཐོང་བར་កម្មវិធីབསྐྱར་འགོ་བརྩམས་རོགས།",
+        "notification_same": "སྐད་ཡིག་སྔར་ནས་ {0} ལ་བཞག་ཡོད།"
+      }
+    },
+    "tab_about": {
+      "title": "སྐོར་ལ།",
+      "description": "Doki Doki Mod Manager ནི་སហគមន៍ཀྱིས་བཟོས་པའི་ལས་གཞི་ཞིག་ཡིན་ཞིང་། དེས་ཁྱེད་ལ་ Doki Doki Literature Club གི་བཟོ་བཅོས་འཚོལ་བ། སྒྲིག་འཇུག་བྱེད་པ། དང་རྩེད་པར་རོགས་རམ་བྱེད། དེ་ནི་ Team Salvato ཡིས་བཟོས་པའི་ Visual Novel རྩེད་མོ་རིན་མེད་ཅིག་ཡིན།",
+      "title_disclaimer": "ការបដិសេធ",
+      "disclaimer_1": "Doki Doki Mod Manager ནི་ Doki Doki Literature Club གྱི་དགའ་མོས་པའི་བརྩམས་ཆོས་ཤིག་ཡིན་པ་ལས། Team Salvato དང་འབྲེལ་བ་མེད། འདི་ནི་ Team Salvato ཡི་ IP ལམ་སྟོན་ནང་གསལ་བའི་དགའ་མོས་པའི་བརྩམས་ཆོས་ཤིག་ཡིན།",
+      "disclaimer_2": "Doki Doki Mod Manager གྱིས་བཟོ་བཅོས་རྩེད་པའམ་གཞན་པའི་རྐྱེན་གྱིས་ཁྱེད་ཀྱི་ཡིག་ཆ་དང་གློག་ཀླད་ལ་གནོད་སྐྱོན་བྱུང་བར་འགན་མི་ཁུར། བཟོ་བཅོས་རྩེད་པར་བདེ་འཇགས་ཡིན་མིན་འགན་སྲུང་བྱེད་རྒྱུ་ནི་ཁྱེད་ཀྱི་འགན་འཁྲི་ཡིན།",
+      "title_socials": "Get in touch",
+      "social_twitter": "@Dynamicxaa ལ་ Twitter ནས་རྗེས་འབྲང་བྱེད་པ།",
+      "social_reddit": "Reddit ནས་ང་ལ་འཕྲིན་སྐུར་བ།",
+      "social_email": "ང་ལ་གློག་འཕྲིན་སྐུར་བ།"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Doki Doki Mod Manager ཁ་ཕྱེ་ནས་ {0} འགོ་འཛུགས་བྱེད་པ།"
+    },
+    "running_cover": {
+      "title_running": "DDLC འཁོར་སྐྱོད་བྱེད་བཞིན་པ།",
+      "title_crashed": " የሆነ ችግር አለ",
+      "button_browse": "རྩེད་མོའི་ཡིག་སྣོད་ཁ་ཕྱེ།",
+      "button_close": "හරි",
+      "description_running": "ཁྱེད་ཀྱི་བཟོ་བཅོས་ལ་བརྗེ་བཅོས་བྱེད་པར་རྩེད་མོ་ཁ་རྒྱག་རོགས།",
+      "install_missing": "སྒྲིག་འཇུག་མ་རྙེད།",
+      "install_corrupt": "སྒྲིག་འཇུག་དེ་ཆ་མི་ཚང་བའམ་ཆག་སྐྱོན་ཤོར་འདུག",
+      "install_crashed": "རྩེད་མོ་འགོ་འཛུགས་མ་ཐུབ་པའམ་རྐྱེན་ལམ་དུ་ཤོར།"
+    },
+    "move_install": {
+      "title": "སྒྲིག་འཇུག་ཡིག་སྣོད་གསར་པ་འདེམས་པ།"
+    },
+    "mod_browse_dialog": {
+      "title": "སྒྲིག་འཇུག་བྱ་རྒྱུའི་བཟོ་བཅོས་ཞིག་འཚོལ་བ།",
+      "file_format_name": "བཟོ་བཅོས།"
+    },
+    "game_browse_dialog": {
+      "title": "DDLC ཡི་ zip ཡིག་ཆའི་འདྲ་བཤུས་ཞིག་འཚོལ་བ།",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "ཁྱེད་ཀྱི་མགྱོགས་ལམ་འཇོག་ས་འདེམས་པ།",
+      "file_format_name": "Shortcut"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager འཕྲུལ་འཁོར་རྐྱེན་ལམ་དུ་ཤོར།",
+        "body": "ບັນຫາໄດ້ຖືກລາຍງານແລ້ວ. ກະລຸນາເລີ່ມໃໝ່ແລະລອງອີກຄັ້ງ."
+      },
+      "move_install": {
+        "title": "སྒྲིག་འཇུག་ཡིག་སྣོད་སྤོ་མ་ཐུབ།",
+        "body": "ཁྱེད་ལ་འቃድཡོད་མེད་དང་། ཡིག་སྣོད་འདིར་སྤོ་བར་གནས་ཡངས་ཡོད་མེད་བརྟག་དཔྱད་བྱེད་རོགས།"
+      },
+      "shortcut": {
+        "title": "མགྱོགས་ལམ་བཟོ་མ་ཐུབ།",
+        "body": "Check that you have permission to create files in this folder."
+      },
+      "install": {
+        "title": "རྩེད་མོ་སྒྲིག་འཇུག་མ་ཐུབ།",
+        "body": "Check that you have permission and enough space to install."
+      },
+      "rename": {
+        "title": "མིང་བརྗེ་མ་ཐུབ།",
+        "body": "Check that you have closed all programs that may be interfering and try again."
+      },
+      "uninstall": {
+        "title": "སྒྲིག་འཇུག་འདོར་མ་ཐུབ།",
+        "body": "Check that you have closed all programs that may be interfering and try again."
+      },
+      "save_delete": {
+        "title": "ཉར་ཚགས་གྲངས་ liệu སུབ་མ་ཐུབ།",
+        "body": "Check that you have closed all programs that may be interfering and try again."
+      },
+      "mod_delete": {
+        "title": "བཟོ་བཅོས་སུབ་མ་ཐུབ།",
+        "body": "Check that you have closed all programs that may be interfering and try again."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager ལན་མ་བྱུང་།",
+        "body": "If this issue lasts for a long time, close the app and start again."
+      },
+      "executable_permission": {
+        "title": "རྩེད་མོ་སྤྱོད་རུང་བཟོ་མ་ཐུབ།",
+        "body": "Could not make DDLC.sh executable on Linux. The game may not launch properly."
+      }
+    }
+  }
+}

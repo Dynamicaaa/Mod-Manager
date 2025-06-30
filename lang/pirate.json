@@ -177,7 +177,7 @@
         "all_categories": "All Categories",
         "sort_by": "Sort by:",
         "date_created": "Date Created",
-        "date_updated": "Date Updated", 
+        "date_updated": "Date Updated",
         "downloads": "Downloads",
         "rating": "Rating",
         "title": "Title",
@@ -310,12 +310,7 @@
       "title_socials": "Get in touch",
       "social_twitter": "Follow @Dynamicxaa on Twitter",
       "social_reddit": "Message me on Reddit",
-      "social_email": "Send me a message in a bottle",
-      "title_support": "Support Development",
-      "description_support": "Doki Doki Mod Manager be always free. If ye like it, support me, matey!",
-      "support_donate": "Make a donation",
-      "support_steelseries": "Get 10% off SteelSeries (affiliate link)",
-      "support_code": "Contribute code or translations"
+      "social_email": "Send me a message in a bottle"
     }
   },
   "main": {

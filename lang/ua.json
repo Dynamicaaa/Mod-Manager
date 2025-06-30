@@ -310,12 +310,7 @@
       "title_socials": "Контакти",
       "social_twitter": "Twitter @Dynamicxaa",
       "social_reddit": "Reddit",
-      "social_email": "Email",
-      "title_support": "Підтримка розробки",
-      "description_support": "Програма безкоштовна. Підтримайте розробку:",
-      "support_donate": "Пожертвування",
-      "support_steelseries": "Знижка на SteelSeries",
-      "support_code": "Внесок у код або переклад"
+      "social_email": "Email"
     }
   },
   "main": {

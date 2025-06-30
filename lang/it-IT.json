@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "cosa c'è di nuovo?"
     },
-
     "user_menu": {
       "option_rename": "Cambia Nome Utente",
       "option_logout": "Disconnetti"
@@ -24,7 +23,6 @@
       "maximise": "Massimizza",
       "minimise": "Minimizza",
       "devtools": "Attiva/Disattiva Strumenti Sviluppatore (F12)",
-
       "announcement": "Leggi l'ultimo annuncio",
       "login": "Accedi",
       "sayonika_login": "Accesso Sayonika",
@@ -118,7 +116,6 @@
         "button_settings": "Impostazioni",
         "tag_global_save": "Salvataggio Globale",
         "tag_sdk": "SDK",
-
         "title_achievements": "Obiettivi ({0} / {1})",
         "description_achievements": "Continua a giocare per sbloccare più obiettivi.",
         "description_achievements_complete": "Hai sbloccato tutti gli obiettivi. Congratulazioni!",
@@ -128,7 +125,6 @@
         "description_screenshots": "Premi S durante il gioco per fare uno screenshot.",
         "description_sdk": "Questa mod supporta funzionalità speciali del SDK di Doki Doki Mod Manager!",
         "description_author": "Creato da {0}",
-
         "link_website": "Sito Web ({0})",
         "description_external": "Mostra nella cartella"
       },
@@ -144,16 +140,13 @@
         "label_global_save": "Salvataggio Globale",
         "label_has_mod": "Installa Mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "File di Salvataggio Esistenti",
         "description_mod": "Clicca per cercare una mod.",
         "header_summary": "Riepilogo",
         "description_vanilla": "Sarà creata una copia pulita di DDLC. I dati di salvataggio saranno separati da qualsiasi altra copia del gioco.",
         "description_vanilla_global_save": "Sarà creata una copia pulita di DDLC. I dati di salvataggio saranno condivisi con altre copie del gioco (es. Steam)",
-
         "description_modded": "Sarà creata una copia di DDLC e la mod sarà installata. I dati di salvataggio saranno separati da qualsiasi altra copia del gioco.",
         "description_modded_global_save": "Sarà creata una copia di DDLC e la mod sarà installata. I dati di salvataggio saranno condivisi con altre copie del gioco (es. Steam)",
-
         "button_install": "Installa",
         "button_installing": "Installazione...",
         "status_exists": "Quella cartella esiste già. Scegli un nome cartella diverso."
@@ -174,7 +167,6 @@
         "link_advanced_appearance": "Avanzate",
         "header_enhancements": "Miglioramenti",
         "link_sdk": "Obiettivi e SDK",
-
         "header_application": "Applicazione",
         "link_updates": "Aggiornamenti",
         "link_storage": "Posizione Archivio",
@@ -218,7 +210,6 @@
         "checkbox_specified": "Quando le mod specificano supporto",
         "checkbox_never": "Mai"
       },
-
       "section_testing": {
         "title": "Debug SDK",
         "subtitle": "Abilita il logging di debug per testare mod con il SDK di Doki Doki Mod Manager.",
@@ -247,15 +238,9 @@
       "disclaimer_1": "Doki Doki Mod Manager è un'opera fan di Doki Doki Literature Club e non è affiliato con Team Salvato. È un'opera fan come definita nelle linee guida IP di Team Salvato.",
       "disclaimer_2": "Doki Doki Mod Manager non è responsabile per danni ai tuoi file o computer risultanti dal giocare mod o per qualsiasi altra ragione. È tua responsabilità assicurarti che le mod siano sicure da giocare.",
       "title_socials": "Contattaci",
-
       "social_twitter": "Segui @Dynamicxaa su Twitter",
       "social_reddit": "Invia un messaggio su Reddit",
-      "social_email": "Invia un'email",
-      "title_support": "Supporta lo Sviluppo",
-      "description_support": "Doki Doki Mod Manager sarà sempre gratuito da scaricare e usare. Se ti piace e vuoi aiutare a mantenere gli aggiornamenti, considera di supportarci in uno dei seguenti modi.",
-      "support_donate": "Fai una donazione una tantum",
-      "support_steelseries": "Ottieni il 10% di sconto su periferiche gaming SteelSeries (link affiliato)",
-      "support_code": "Contribuisci al progetto (codice o traduzioni)"
+      "social_email": "Invia un'email"
     }
   },
   "main": {

@@ -14,7 +14,6 @@
     "version": {
       "link_changelog": "what's new?"
     },
-
     "user_menu": {
       "option_rename": "Change Username",
       "option_logout": "Log out"
@@ -24,7 +23,6 @@
       "maximise": "Maximise",
       "minimise": "Minimise",
       "devtools": "Toggle Developer Tools (F12)",
-
       "announcement": "Read the latest announcement",
       "login": "Log In",
       "sayonika_login": "Sayonika Login",
@@ -118,8 +116,6 @@
         "button_settings": "Settings",
         "tag_global_save": "Global Save",
         "tag_sdk": "SDK",
-
-
         "title_achievements": "Achievements ({0} / {1})",
         "description_achievements": "Keep playing to unlock more achievements.",
         "description_achievements_complete": "You've unlocked all achievements. Congratulations!",
@@ -129,7 +125,6 @@
         "description_screenshots": "Press S while playing to take a screenshot.",
         "description_sdk": "This mod supports special features with the Doki Doki Mod Manager SDK!",
         "description_author": "Created by {0}",
-
         "link_website": "Website ({0})",
         "description_external": "Show in folder"
       },
@@ -145,16 +140,13 @@
         "label_global_save": "Global Save",
         "label_has_mod": "Install Mod",
         "label_mod": "Mod",
-
         "label_existing_saves": "Existing Save Files",
         "description_mod": "Click to browse for a mod.",
         "header_summary": "Summary",
         "description_vanilla": "A clean copy of DDLC will be created. The save data will be separate from any other copy of the game.",
         "description_vanilla_global_save": "A clean copy of DDLC will be created. The save data will be shared with other copies of the game (e.g. Steam)",
-
         "description_modded": "A copy of DDLC will be created, and the mod will be installed.  The save data will be separate from any other copy of the game.",
         "description_modded_global_save": "A copy of DDLC will be created, and the mod will be installed.  The save data will be shared with other copies of the game (e.g. Steam)",
-
         "button_install": "Install",
         "button_installing": "Installing...",
         "status_exists": "That folder already exists. Pick another folder name."
@@ -180,13 +172,12 @@
       "maintenance_banner": "Authentication services are temporarily unavailable due to maintenance. You can still browse mods but cannot login or register.",
       "no_mods_title": "No mods found",
       "no_mods_message": "Try adjusting your search or filters",
-      
       "filters": {
         "category": "Category:",
         "all_categories": "All Categories",
         "sort_by": "Sort by:",
         "date_created": "Date Created",
-        "date_updated": "Date Updated", 
+        "date_updated": "Date Updated",
         "downloads": "Downloads",
         "rating": "Rating",
         "title": "Title",
@@ -197,7 +188,6 @@
         "translate_content": "Translate Content",
         "auto_detect": "Auto-detect"
       },
-      
       "mod_card": {
         "featured": "Featured",
         "mature": "Mature",
@@ -212,13 +202,11 @@
         "tags": "Tags",
         "requirements": "Requirements"
       },
-      
       "pagination": {
         "previous": "Previous",
         "next": "Next",
         "page_info": "Page {0} of {1}"
       },
-      
       "login": {
         "title": "Login to Sayonika",
         "discord": "Login with Discord",
@@ -235,7 +223,6 @@
         "success": "Successfully logged in!",
         "failed": "Login failed: {0}"
       },
-      
       "translation": {
         "enabled": "Translation enabled. Content will be translated when available.",
         "disabled": "Translation disabled.",
@@ -250,7 +237,6 @@
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
         "link_sdk": "Achievements & SDK",
-
         "header_application": "Application",
         "link_updates": "Updates",
         "link_storage": "Storage Location",
@@ -294,7 +280,6 @@
         "checkbox_specified": "When the mod specifies it supports them",
         "checkbox_never": "Never"
       },
-
       "section_testing": {
         "title": "SDK Debug",
         "subtitle": "Enable debug logging to test your mods with the Doki Doki Mod Manager SDK.",
@@ -323,15 +308,9 @@
       "disclaimer_1": "Doki Doki Mod Manager is a fan work of Doki Doki Literature Club and is not affiliated with Team Salvato. It is a fan work, as defined by Team Salvato's IP Guidelines.",
       "disclaimer_2": "Doki Doki Mod Manager does not take responsibility for any damage caused to your files or computer, as a result of playing a mod or otherwise. It is up to you to ensure mods are safe to play.",
       "title_socials": "Get in touch",
-
       "social_twitter": "Follow @Dynamicxaa on Twitter",
       "social_reddit": "Message me on Reddit",
-      "social_email": "Send me an email",
-      "title_support": "Support Development",
-      "description_support": "Doki Doki Mod Manager will always be free to download and use. If you like it and want to help me keep it updated, consider supporting me in one of the following ways.",
-      "support_donate": "Make a one-off donation",
-      "support_steelseries": "Get 10% off SteelSeries gaming peripherals (affiliate link)",
-      "support_code": "Contribute to the project (code or translations)"
+      "social_email": "Send me an email"
     }
   },
   "main": {

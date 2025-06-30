@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "name_en": "Javanese",
+    "name_local": "Basa Jawa"
+  },
+  "renderer": {
+    "tabs": {
+      "tab_home": "Ngarep",
+      "tab_mods": "Modifikasi",
+      "tab_store": "Toko",
+      "tab_options": "Pilihan",
+      "tab_about": "Babagan"
+    },
+    "version": {
+      "link_changelog": "ana apa anyar?"
+    },
+    "user_menu": {
+      "option_rename": "Ganti Jeneng Panganggo",
+      "option_logout": "Metu"
+    },
+    "window_controls": {
+      "close": "Tutup",
+      "maximise": "Maksimalke",
+      "minimise": "Minimalke",
+      "devtools": "Pindhah Piranti Pangembang (F12)",
+      "announcement": "Waca pengumuman paling anyar",
+      "login": "Mlebu",
+      "sayonika_login": "Mlebu Sayonika",
+      "update": {
+        "checking": "Mriksa nganyari ing latar mburi...",
+        "available": "Nganyari kasedhiya. Klik ing kene kanggo ngundhuh.",
+        "downloading": "Ngundhuh nganyari...",
+        "downloaded": "Nganyari wis siyap diinstal nalika sampeyan metu."
+      }
+    },
+    "crash_cover": {
+      "button_close": "Metu",
+      "button_continue": "Terusake"
+    },
+    "drop_cover": {
+      "text": "Selehake mod ing kene kanggo nginstal"
+    },
+    "announcement": {
+      "button_open": "Buka Pranala",
+      "button_close": "Tutup"
+    },
+    "onboarding": {
+      "title": "Sugeng Rawuh!",
+      "description_download": "Ayo golek salinan DDLC.",
+      "button_download": "Dolan marang kaca ngundhuh resmi DDLC",
+      "button_choose": "Telusuri salinan",
+      "heading_step": "Langkah {0}",
+      "s1_desc": "Sampeyan kudu ngundhuh salinan Doki Doki Literature Club. Iki bisa ditemokake ing situs web resmi (ddlc.moe) - klik tombol ing ngisor iki kanggo menyang kana saiki.",
+      "s1_platform": "Nalika sampeyan dijaluk, pilih kanggo ngundhuh berkas kanthi jeneng \"DDLC ({0})\".",
+      "s2_desc": "Sawise ngundhuh rampung, pilih nganggo tombol ing ngisor iki.",
+      "description_location": "Game sampeyan bakal disimpen ing {0}",
+      "link_change": "(Ganti)"
+    },
+    "login_input": {
+      "message": "Lebokake alamat email sampeyan",
+      "details": "Email bakal dikirim menyang alamat iki. Klik pranala ing email kanggo ngrampungake mlebu.",
+      "button_affirmative": "Mlebu",
+      "button_negative": "Batal"
+    },
+    "change_username_input": {
+      "message": "Lebokake jeneng panganggo anyar sampeyan",
+      "details": "Jeneng panganggo ora kudu unik.",
+      "button_affirmative": "Ganti",
+      "button_negative": "Batal"
+    },
+    "tab_mods": {
+      "list": {
+        "placeholder_search": "Goleki modifikasi...",
+        "header_new": "Mulai",
+        "link_install": "Instal DDLC",
+        "header_installed": "Diinstal",
+        "header_downloaded": "Unduhan"
+      },
+      "install_contextmenu": {
+        "launch": "Mulai",
+        "rename": "Ganti Jeneng",
+        "shortcut": "Gawe Trabasan",
+        "delete_save": "Busak Data Simpenan",
+        "uninstall": "Busak Instalasi"
+      },
+      "mod_contextmenu": {
+        "install": "Instal",
+        "delete": "Busak"
+      },
+      "uninstall_confirmation": {
+        "message": "Apa sampeyan yakin pengin mbusak instalasi?",
+        "details": "Data simpenan sampeyan kanggo {0} bakal dibusak, lan sampeyan butuh salinan mod kanggo nginstal maneh.",
+        "button_affirmative": "Busak Instalasi",
+        "button_negative": "Batal"
+      },
+      "rename_input": {
+        "message": "Ganti Jeneng Instalasi",
+        "details": "Lebokake jeneng anyar kanggo {0}.",
+        "button_affirmative": "Ganti Jeneng",
+        "button_negative": "Batal"
+      },
+      "mod_delete_confirmation": {
+        "message": "Apa sampeyan yakin pengin mbusak mod?",
+        "details": "Sampeyan kudu ngundhuh salinan mod liyane kanggo nginstal maneh.",
+        "button_affirmative": "Busak",
+        "button_negative": "Batal"
+      },
+      "save_delete_confirmation": {
+        "message": "Apa sampeyan yakin pengin mbusak data simpenan sampeyan?",
+        "details": "Sampeyan kudu miwiti {0} maneh saka awal.",
+        "button_affirmative": "Busak",
+        "button_negative": "Batal"
+      },
+      "install": {
+        "button_launch": "Mulai",
+        "button_settings": "Setelan",
+        "tag_global_save": "Simpenan Global",
+        "tag_sdk": "SDK",
+        "title_achievements": "Prestasi ({0} / {1})",
+        "description_achievements": "Terus muter kanggo mbukak kunci prestasi liyane.",
+        "description_achievements_complete": "Sampeyan wis mbukak kunci kabeh prestasi. Sugeng!",
+        "title_screenshots_none": "Ora ana tangkapan layar",
+        "title_screenshots_one": "1 tangkapan layar",
+        "title_screenshots": "{0} tangkapan layar",
+        "description_screenshots": "Pencet S nalika muter kanggo njupuk tangkapan layar.",
+        "description_sdk": "Mod iki ndhukung fitur khusus karo Doki Doki Mod Manager SDK!",
+        "description_author": "Digawe dening {0}",
+        "link_website": "Situs Web ({0})",
+        "description_external": "Tampilake ing folder"
+      },
+      "mod": {
+        "button_install": "Instal",
+        "button_settings": "Setelan",
+        "description_external": "Tampilake ing folder"
+      },
+      "install_creation": {
+        "title": "Instal DDLC",
+        "label_install_name": "Jeneng Instalasi",
+        "label_folder_name": "Jeneng Folder",
+        "label_global_save": "Simpenan Global",
+        "label_has_mod": "Instal Mod",
+        "label_mod": "Mod",
+        "label_existing_saves": "Berkas Simpenan sing Ana",
+        "description_mod": "Klik kanggo nelusuri mod.",
+        "header_summary": "Ringkesan",
+        "description_vanilla": "Salinan DDLC sing resik bakal digawe. Data simpenan bakal kapisah saka salinan game liyane.",
+        "description_vanilla_global_save": "Salinan DDLC sing resik bakal digawe. Data simpenan bakal dituduhake karo salinan game liyane (contone Steam)",
+        "description_modded": "Salinan DDLC bakal digawe, lan mod bakal diinstal. Data simpenan bakal kapisah saka salinan game liyane.",
+        "description_modded_global_save": "Salinan DDLC bakal digawe, lan mod bakal diinstal. Data simpenan bakal dituduhake karo salinan game liyane (contone Steam)",
+        "button_install": "Instal",
+        "button_installing": "Nginstal...",
+        "status_exists": "Folder kuwi wis ana. Pilih jeneng folder liyane."
+      }
+    },
+    "tab_store_placeholder": {
+      "title": "Toko bakal teka rauh!",
+      "description_1": "Database mod Sayonika bakal nyedhiyakake lokasi pusat kanggo nuduhake, ngundhuh lan mriksa mod DDLC. Nalika Sayonika kasedhiya kanggo umum, sampeyan bakal bisa nelusuri mod ing kene ing Doki Doki Mod Manager.",
+      "description_2": "Nalika sampeyan ngenteni, aja ragu-ragu ngundhuh sawetara mod sing disaranake iki.",
+      "error": "Gagal ngemot dhaptar mod. Apa sampeyan offline?",
+      "button_download": "Undhuh"
+    },
+    "tab_store": {
+      "title": "Toko Sayonika",
+      "subtitle": "Temokake lan undhuh mod DDLC",
+      "search_placeholder": "Goleki modifikasi...",
+      "loading": "Ngemot modifikasi...",
+      "error_title": "Kesalahan Sambungan",
+      "retry_button": "Coba maneh",
+      "offline_title": "Offline",
+      "offline_message": "Sampeyan saiki offline. Mangga priksa sambungan internet lan coba maneh.",
+      "check_connection": "Priksa Sambungan",
+      "maintenance_banner": "Layanan otentikasi sauntara ora kasedhiya amarga pangopènan. Sampeyan isih bisa nelusuri mod nanging ora bisa mlebu utawa ndhaptar.",
+      "no_mods_title": "Ora ana modifikasi sing ditemokake",
+      "no_mods_message": "Coba atur telusuran utawa filter sampeyan",
+      "filters": {
+        "category": "Kategori:",
+        "all_categories": "Kabeh Kategori",
+        "sort_by": "Urutake miturut:",
+        "date_created": "Tanggal Digawe",
+        "date_updated": "Tanggal Dianyari",
+        "downloads": "Unduhan",
+        "rating": "Peringkat",
+        "title": "Judhul",
+        "order": "Urutan:",
+        "descending": "Mudhun",
+        "ascending": "Munggah",
+        "featured_only": "Mung Ditampilake",
+        "translate_content": "Terjemahake Konten",
+        "auto_detect": "Deteksi Otomatis"
+      },
+      "mod_card": {
+        "featured": "Ditampilake",
+        "mature": "Dewasa",
+        "by_author": "dening {0}",
+        "download": "Undhuh",
+        "downloading": "Ngundhuh...",
+        "download_mod": "Undhuh Mod",
+        "downloads_count": "{0} unduhan",
+        "version": "Versi {0}",
+        "screenshots": "Tangkapan layar ({0})",
+        "description": "Katrangan",
+        "tags": "Tag",
+        "requirements": "Syarat"
+      },
+      "pagination": {
+        "previous": "Sadurunge",
+        "next": "Sabanjure",
+        "page_info": "Kaca {0} saka {1}"
+      },
+      "login": {
+        "title": "Mlebu menyang Sayonika",
+        "discord": "Mlebu nganggo Discord",
+        "github": "Mlebu nganggo GitHub",
+        "or": "utawa",
+        "username_label": "Jeneng Panganggo utawa Email:",
+        "username_placeholder": "Lebokake jeneng panganggo utawa alamat email",
+        "username_help": "Sampeyan bisa nggunakake jeneng panganggo utawa alamat email kanggo mlebu",
+        "password_label": "Sandi:",
+        "remember_me": "Elingi aku",
+        "login_button": "Mlebu",
+        "logging_in": "Mlebu...",
+        "register_link": "Ora duwe akun? Ndhaptar ing kene",
+        "success": "Kasil mlebu!",
+        "failed": "Gagal mlebu: {0}"
+      },
+      "translation": {
+        "enabled": "Terjemahan diaktifake. Konten bakal diterjemahake yen kasedhiya.",
+        "disabled": "Terjemahan dipateni.",
+        "language_changed": "Basa terjemahan diganti dadi {0}"
+      }
+    },
+    "tab_options": {
+      "list": {
+        "header_appearance": "Tampilan",
+        "link_background": "Latar mburi",
+        "link_language": "Basa",
+        "link_advanced_appearance": "Lanjut",
+        "header_enhancements": "Peningkatan",
+        "link_sdk": "Prestasi & SDK",
+        "header_application": "Aplikasi",
+        "link_updates": "Nganyari",
+        "link_storage": "Lokasi Panyimpenan",
+        "header_developers": "Pangembang",
+        "link_testing": "SDK Debug",
+        "link_debug": "Info Aplikasi"
+      },
+      "section_backgrounds": {
+        "title": "Latar mburi",
+        "subtitle": "Kustomisasi salinan Doki Doki Mod Manager sampeyan nganggo salah sawijining latar mburi iki.",
+        "button_none": "Ora Ana Latar Mburi",
+        "description_credit": "Latar mburi DDLC asli saka Team Salvato."
+      },
+      "section_advanced_appearance": {
+        "title": "Lanjut",
+        "subtitle": "Temokake pilihan antarmuka liyane ing kene.",
+        "button_enable_sysborders": "Gunakake Wates Sistem (mbutuhake urip maneh)",
+        "button_disable_sysborders": "Pateni Wates Sistem (mbutuhake urip maneh)"
+      },
+      "section_storage": {
+        "title": "Lokasi Panyimpenan",
+        "subtitle": "Ganti ngendi data game sampeyan disimpen.",
+        "description_moving": "Peringatan! Yen sampeyan milih ngganti lokasi instalasi, kabeh mod, instalasi, lan data simpenan sampeyan bakal dipindah. Iki bisa njupuk sawetara menit, lan ora bisa diganggu.",
+        "description_current": "Lokasi saiki: {0}",
+        "button_change": "Ganti Lokasi Instalasi"
+      },
+      "section_updates": {
+        "title": "Nganyari",
+        "subtitle": "Entuk versi paling anyar saka Doki Doki Mod Manager.",
+        "description_current_version": "Versi saiki: {0}",
+        "label_channel": "Saluran Rilis",
+        "option_stable": "Stabil",
+        "option_beta": "Beta",
+        "button_check": "Priksa nganyari"
+      },
+      "section_sdk": {
+        "title": "Prestasi & SDK",
+        "subtitle": "Ganti cara prestasi ditangani.",
+        "description_mode": "Aktifake prestasi:",
+        "checkbox_always": "Tansah (dianjurake)",
+        "checkbox_specified": "Nalika mod nemtokake ndhukung",
+        "checkbox_never": "Ora tau"
+      },
+      "section_testing": {
+        "title": "SDK Debug",
+        "subtitle": "Aktifake log debug kanggo nguji mod sampeyan nganggo Doki Doki Mod Manager SDK.",
+        "button_enable": "Aktifake Debugging",
+        "button_disable": "Pateni Debugging"
+      },
+      "section_debug": {
+        "title": "Info Aplikasi",
+        "subtitle": "Informasi kanggo ndiagnosis masalah."
+      },
+      "section_language": {
+        "title": "Basa",
+        "subtitle": "Ganti basa Doki Doki Mod Manager.",
+        "description_current": "Basa saiki: {0}",
+        "button_apply": "Terapake Basa",
+        "button_contribute": "Bantu Nerjemahake",
+        "description_restart": "Owah-owahan basa bakal efektif sawise miwiti maneh aplikasi.",
+        "notification_changed": "Basa diganti dadi {0}. Mangga wiwiti maneh aplikasi kanggo ndeleng owah-owahan.",
+        "notification_same": "Basa wis disetel dadi {0}."
+      }
+    },
+    "tab_about": {
+      "title": "Babagan",
+      "description": "Doki Doki Mod Manager minangka proyek sing dikembangake komunitas sing mbantu sampeyan nemokake, nginstal lan muter mod kanggo Doki Doki Literature Club, game Novel Visual gratis dening Team Salvato.",
+      "title_disclaimer": "Penafian",
+      "disclaimer_1": "Doki Doki Mod Manager minangka karya penggemar saka Doki Doki Literature Club lan ora ana hubungane karo Team Salvato. Iki minangka karya penggemar, kaya sing ditemtokake dening Pedoman IP Team Salvato.",
+      "disclaimer_2": "Doki Doki Mod Manager ora tanggung jawab kanggo karusakan apa wae sing disebabake ing berkas utawa komputer sampeyan, minangka asil saka muter mod utawa liya-liyane. Terserah sampeyan kanggo mesthekake mod aman kanggo muter.",
+      "title_socials": "Hubungi",
+      "social_twitter": "Follow @Dynamicxaa ing Twitter",
+      "social_reddit": "Kirim pesen marang aku ing Reddit",
+      "social_email": "Kirim email marang aku"
+    }
+  },
+  "main": {
+    "jumplist": {
+      "task_launch": "Buka Doki Doki Mod Manager lan mulai {0}."
+    },
+    "running_cover": {
+      "title_running": "DDLC lagi mlaku",
+      "title_crashed": "Ana sing salah",
+      "button_browse": "Buka Folder Game",
+      "button_close": "OK",
+      "description_running": "Tutup game kanggo nggawe owah-owahan ing mod sampeyan.",
+      "install_missing": "Instalasi ora bisa ditemokake.",
+      "install_corrupt": "Instalasi ora lengkap utawa rusak.",
+      "install_crashed": "Game gagal diluncurake utawa macet."
+    },
+    "move_install": {
+      "title": "Pilih folder instalasi anyar"
+    },
+    "mod_browse_dialog": {
+      "title": "Goleki mod kanggo nginstal",
+      "file_format_name": "Modifikasi"
+    },
+    "game_browse_dialog": {
+      "title": "Temokake salinan berkas zip DDLC",
+      "file_format_name": "DDLC"
+    },
+    "shortcut_dialog": {
+      "title": "Pilih ngendi kanggo nyelehake trabasan sampeyan",
+      "file_format_name": "Trabasan"
+    },
+    "errors": {
+      "exception": {
+        "title": "Doki Doki Mod Manager macet",
+        "body": "Masalah wis dilaporake. Mangga wiwiti maneh lan coba maneh."
+      },
+      "move_install": {
+        "title": "Gagal mindhah folder instalasi",
+        "body": "Priksa manawa sampeyan duwe ijin lan cukup papan kanggo pindhah menyang folder iki."
+      },
+      "shortcut": {
+        "title": "Gagal nggawe trabasan",
+        "body": "Priksa manawa sampeyan duwe ijin kanggo nggawe berkas ing folder iki."
+      },
+      "install": {
+        "title": "Gagal nginstal game",
+        "body": "Priksa manawa sampeyan duwe ijin lan cukup papan kanggo nginstal."
+      },
+      "rename": {
+        "title": "Gagal ngganti jeneng",
+        "body": "Priksa manawa sampeyan wis nutup kabeh program sing bisa ngganggu lan coba maneh."
+      },
+      "uninstall": {
+        "title": "Gagal mbusak instalasi",
+        "body": "Priksa manawa sampeyan wis nutup kabeh program sing bisa ngganggu lan coba maneh."
+      },
+      "save_delete": {
+        "title": "Gagal mbusak data simpenan",
+        "body": "Priksa manawa sampeyan wis nutup kabeh program sing bisa ngganggu lan coba maneh."
+      },
+      "mod_delete": {
+        "title": "Gagal mbusak mod",
+        "body": "Priksa manawa sampeyan wis nutup kabeh program sing bisa ngganggu lan coba maneh."
+      },
+      "renderer_freeze": {
+        "title": "Doki Doki Mod Manager mandheg nanggapi",
+        "body": "Yen masalah iki tetep suwe, tutup aplikasi lan mulai maneh."
+      },
+      "executable_permission": {
+        "title": "Gagal nggawe game bisa dieksekusi",
+        "body": "Ora bisa nggawe DDLC.sh bisa dieksekusi ing Linux. Game bisa uga ora diluncurake kanthi bener."
+      }
+    }
+  }
+}
