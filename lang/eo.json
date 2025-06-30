@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Esperanto",
+    "name_local": "Esperanto"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Hejmo",

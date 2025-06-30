@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Spanish (Latin America)",
+    "name_local": "Español (Latinoamérica)"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Inicio",

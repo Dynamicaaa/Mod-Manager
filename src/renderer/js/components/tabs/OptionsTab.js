@@ -1480,7 +1480,7 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
         },
 
         "openLanguageContribution": function() {
-            const url = "https://github.com/Dynamicaaa/Mod-Manager/tree/master/lang";
+            const url = "https://github.com/Dynamicaaa/Mod-Manager/tree/main/lang";
             if (typeof ddmm !== 'undefined' && ddmm.app && ddmm.app.openURL) {
                 ddmm.app.openURL(url);
             } else if (typeof require !== 'undefined') {

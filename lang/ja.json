@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Japanese",
+    "name_local": "日本語"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "ホーム",

@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Valley",
+    "name_local": "Valley"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Like, Home",

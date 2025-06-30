@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Romanian",
+    "name_local": "Română"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Acasă",

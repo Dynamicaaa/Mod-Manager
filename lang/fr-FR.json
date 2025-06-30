@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "French",
+    "name_local": "Français"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Accueil",

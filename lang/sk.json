@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Slovak",
+    "name_local": "Slovenčina"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Domov",

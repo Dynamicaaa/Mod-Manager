@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Korean",
+    "name_local": "한국어"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "홈",

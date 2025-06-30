@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Norwegian Bokmål",
+    "name_local": "Norsk bokmål"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Hjem",

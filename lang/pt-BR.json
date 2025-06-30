@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Portuguese (Brazil)",
+    "name_local": "Português (Brasil)"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Início",

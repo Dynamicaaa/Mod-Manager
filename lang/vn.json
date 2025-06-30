@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Vietnamese",
+    "name_local": "Tiếng Việt"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Trang chủ",

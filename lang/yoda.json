@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Yoda",
+    "name_local": "Yoda"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Home, it is",

@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "English (US)",
+    "name_local": "English (US)"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Home",

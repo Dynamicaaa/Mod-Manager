@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Minion",
+    "name_local": "Minion"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Bello!",

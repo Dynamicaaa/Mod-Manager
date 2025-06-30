@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Bulgarian",
+    "name_local": "Български"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Начало",

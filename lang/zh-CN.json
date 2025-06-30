@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Chinese (Simplified)",
+    "name_local": "简体中文"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "主页",

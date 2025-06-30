@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Pirate",
+    "name_local": "Pirate"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Homeport",

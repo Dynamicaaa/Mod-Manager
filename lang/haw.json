@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Hawaiian",
+    "name_local": "ʻŌlelo Hawaiʻi"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Piko",

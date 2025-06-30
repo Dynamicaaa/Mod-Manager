@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Ukrainian",
+    "name_local": "Українська"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Головна",

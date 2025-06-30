@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Dutch",
+    "name_local": "Nederlands"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Start",

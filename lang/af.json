@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Afrikaans",
+    "name_local": "Afrikaans"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Tuis",

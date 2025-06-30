@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Indonesian",
+    "name_local": "Bahasa Indonesia"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Beranda",

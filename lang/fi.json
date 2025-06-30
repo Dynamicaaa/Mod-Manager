@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Finnish",
+    "name_local": "Suomi"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Koti",

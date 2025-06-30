@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Emoji",
+    "name_local": "Emoji"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "🏠",

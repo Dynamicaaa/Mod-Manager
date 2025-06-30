@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Hacker",
+    "name_local": "Hacker"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "h0m3",

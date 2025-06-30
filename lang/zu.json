@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Zulu",
+    "name_local": "isiZulu"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Ikhaya",

@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "name_en": "Hungarian",
+    "name_local": "Magyar"
+  },
   "renderer": {
     "tabs": {
       "tab_home": "Főoldal",

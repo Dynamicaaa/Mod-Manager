@@ -170,58 +170,13 @@ ipcMain.on("get available languages", (ev: IpcMainEvent) => {
                 try {
                     const langData = JSON.parse(require('fs').readFileSync(langFile, 'utf8'));
                     // Try to get language name from the file itself, or use a lookup
-                    const languageNames = {
-                        'en-US': { name: 'English', nativeName: 'English (US)' },
-                        'es-419': { name: 'Spanish', nativeName: 'Español (América Latina)' },
-                        'fr-FR': { name: 'French', nativeName: 'Français' },
-                        'de-DE': { name: 'German', nativeName: 'Deutsch' },
-                        'fi': { name: 'Finnish', nativeName: 'Suomi' },
-                        'ja': { name: 'Japanese', nativeName: '日本語' },
-                        'ko': { name: 'Korean', nativeName: '한국어' },
-                        'zh-CN': { name: 'Chinese (Simplified)', nativeName: '简体中文' },
-                        'zh-TW': { name: 'Chinese (Traditional)', nativeName: '繁體中文' },
-                        'ru': { name: 'Russian', nativeName: 'Русский' },
-                        'pt-BR': { name: 'Portuguese (Brazil)', nativeName: 'Português (Brasil)' },
-                        'it-IT': { name: 'Italian', nativeName: 'Italiano' },
-                        'nl': { name: 'Dutch', nativeName: 'Nederlands' },
-                        'nb': { name: 'Norwegian', nativeName: 'Norsk (Bokmål)' },
-                        'pl': { name: 'Polish', nativeName: 'Polski' },
-                        'cs': { name: 'Czech', nativeName: 'Čeština' },
-                        'da': { name: 'Danish', nativeName: 'Dansk' },
-                        'hu': { name: 'Hungarian', nativeName: 'Magyar' },
-                        'sv': { name: 'Swedish', nativeName: 'Svenska' },
-                        'tr': { name: 'Turkish', nativeName: 'Türkçe' },
-                        'ar': { name: 'Arabic', nativeName: 'العربية' },
-                        'ua': { name: 'Ukrainian', nativeName: 'Українська' },
-                        'sk': { name: 'Slovak', nativeName: 'Slovenčina' },
-                        'vn': { name: 'Vietnamese', nativeName: 'Tiếng Việt' },
-                        'ro': { name: 'Romanian', nativeName: 'Română' },
-                        'el': { name: 'Greek', nativeName: 'Ελληνικά' },
-                        'bg': { name: 'Bulgarian', nativeName: 'Български' },
-                        'hi': { name: 'Hindi', nativeName: 'हिन्दी' },
-                        'id': { name: 'Indonesian', nativeName: 'Bahasa Indonesia' },
-                        'tl': { name: 'Tagalog', nativeName: 'Tagalog' },
-                        'haw': { name: 'Hawaiian', nativeName: 'ʻŌlelo Hawaiʻi' },
-                        'eo': { name: 'Esperanto', nativeName: 'Esperanto' },
-                        'ms': { name: 'Malay', nativeName: 'Bahasa Melayu' },
-                        'ur': { name: 'Urdu', nativeName: 'اردو' },
-                        'pa': { name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ' },
-                        'zu': { name: 'Zulu', nativeName: 'isiZulu' },
-                        'af': { name: 'Afrikaans', nativeName: 'Afrikaans' },
-                        'uwu': { name: 'UwU', nativeName: 'UwU' },
-                        'emoji': { name: 'Emoji', nativeName: 'Emoji' },
-                        'yoda': { name: 'Yoda', nativeName: 'Yoda' },
-                        'pirate': { name: 'Pirate', nativeName: 'Pirate' },
-                        'hacker': { name: 'Hacker', nativeName: 'Hacker' },
-                        'shakespeare': { name: 'Shakespeare', nativeName: 'Shakespeare' },
-                        'valley': { name: 'Valley', nativeName: 'Valley' },
-                        'minion': { name: 'Minion', nativeName: 'Minion' }
-                    };
-                    
-                    languages[langCode] = languageNames[langCode] || { 
-                        name: langCode, 
-                        nativeName: langCode 
-                    };
+                    // Use meta block from language file if available
+                    if (langData.meta && langData.meta.name_en && langData.meta.name_local) {
+                        languages[langCode] = {
+                            name: langData.meta.name_en,
+                            nativeName: langData.meta.name_local
+                        };
+                    }
                 } catch (err) {
                     console.warn(`Failed to parse language file ${file}:`, err);
                 }
