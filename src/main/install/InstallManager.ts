@@ -2,6 +2,9 @@ import {remove, emptyDir} from "fs-extra";
 import {join as joinPath} from "path";
 import Config from "../utils/Config";
 import {existsSync, readFileSync, writeFileSync} from "fs";
+import * as Archiver from "archiver";
+import * as StreamZip from "node-stream-zip";
+import {createWriteStream, createReadStream} from "fs";
 
 export default class InstallManager {
 
@@ -65,6 +68,47 @@ export default class InstallManager {
             } else {
                 rj(new Error("Install does not exist."))
             }
+        });
+    }
+
+    /**
+     * Backup an install to a zip file
+     * @param folderName The folder containing the install
+     * @param outPath The output zip file path
+     */
+    public static backupInstall(folderName: string, outPath: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const dirPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
+            if (!existsSync(dirPath)) return reject(new Error("Install does not exist."));
+            const output = createWriteStream(outPath);
+            const archive = Archiver("zip", { zlib: { level: 9 } });
+            output.on("close", () => resolve());
+            archive.on("error", err => reject(err));
+            archive.pipe(output);
+            archive.directory(dirPath, false);
+            archive.finalize();
+        });
+    }
+
+    /**
+     * Restore an install from a zip file
+     * @param zipPath The zip file path
+     * @param folderName The folder to restore to (will be overwritten)
+     */
+    public static restoreInstall(zipPath: string, folderName: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const destPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
+            // Remove existing folder if present
+            remove(destPath).then(() => {
+                const zip = new StreamZip.async({ file: zipPath });
+                zip.extract(null, destPath).then(() => {
+                    zip.close();
+                    resolve();
+                }).catch(err => {
+                    zip.close();
+                    reject(err);
+                });
+            }).catch(reject);
         });
     }
 }

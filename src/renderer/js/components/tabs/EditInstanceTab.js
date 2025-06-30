@@ -91,6 +91,16 @@ const EditInstanceTab = Vue.component("ddmm-edit-instance-tab", {
                         Open Folder
                     </button>
 
+                    <button class="secondary" @click="backupInstance">
+                        <i class="fas fa-download"></i>
+                        Backup Instance
+                    </button>
+
+                    <button class="secondary" @click="restoreInstance">
+                        <i class="fas fa-upload"></i>
+                        Restore Instance
+                    </button>
+
                     <button class="warning" @click="resetInstance">
                         <i class="fas fa-undo"></i>
                         Reset Instance
@@ -229,6 +239,49 @@ const EditInstanceTab = Vue.component("ddmm-edit-instance-tab", {
                     alert("Error deleting instance: " + error.message);
                 }
             }
+        },
+
+        "backupInstance": function() {
+            if (!this.instanceData.folderName || !window.ddmm || !window.ddmm.app || !window.ddmm.app.showSaveDialog) {
+                alert('Backup not supported in this environment.');
+                return;
+            }
+            window.ddmm.app.showSaveDialog({
+                title: 'Backup Mod Instance',
+                defaultPath: this.instanceData.folderName + '-backup.zip',
+                filters: [{ name: 'Zip Files', extensions: ['zip'] }]
+            }).then(result => {
+                if (!result.canceled && result.filePath) {
+                    const res = ddmm.mods.backupInstall(this.instanceData.folderName, result.filePath);
+                    if (res.success) {
+                        alert('Backup completed!');
+                    } else {
+                        alert('Backup failed: ' + res.error);
+                    }
+                }
+            });
+        },
+
+        "restoreInstance": function() {
+            if (!this.instanceData.folderName || !window.ddmm || !window.ddmm.app || !window.ddmm.app.showOpenDialog) {
+                alert('Restore not supported in this environment.');
+                return;
+            }
+            window.ddmm.app.showOpenDialog({
+                title: 'Restore Mod Instance',
+                filters: [{ name: 'Zip Files', extensions: ['zip'] }],
+                properties: ['openFile']
+            }).then(result => {
+                if (!result.canceled && result.filePaths && result.filePaths[0]) {
+                    const res = ddmm.mods.restoreInstall(result.filePaths[0], this.instanceData.folderName);
+                    if (res.success) {
+                        alert('Restore completed!');
+                        if (ddmm.mods.refreshInstallList) ddmm.mods.refreshInstallList();
+                    } else {
+                        alert('Restore failed: ' + res.error);
+                    }
+                }
+            });
         }
     },
 

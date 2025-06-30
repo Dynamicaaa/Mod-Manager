@@ -377,6 +377,14 @@ api.mods.createShortcut = function (folderName, installName) {
     ipcRenderer.send("create shortcut", {folderName, installName});
 };
 
+// Backup install
+api.mods.backupInstall = function(folderName, outPath) {
+    return ipcRenderer.sendSync("backup install", {folderName, outPath});
+};
+// Restore install
+api.mods.restoreInstall = function(zipPath, folderName) {
+    return ipcRenderer.sendSync("restore install", {zipPath, folderName});
+};
 
 
 // User menu
@@ -409,7 +417,6 @@ api.app.getBackgrounds = function () {
 api.app.toggleDevTools = function () {
     ipcRenderer.send("toggle devtools");
 };
-
 
 
 // Handler for crashes / errors
@@ -582,3 +589,13 @@ console.info(`%cWarning! This is the developer console!
 
 Before you type anything here, make sure you know what you're doing. Certain commands could do damage to your game installs or even your computer.`,
     "font-size: 16px");
+
+// Show a save dialog
+api.app.showSaveDialog = function(options) {
+    return ipcRenderer.invoke("showSaveDialog", options);
+};
+
+// Show an open dialog
+api.app.showOpenDialog = function(options) {
+    return ipcRenderer.invoke("showOpenDialog", options);
+};

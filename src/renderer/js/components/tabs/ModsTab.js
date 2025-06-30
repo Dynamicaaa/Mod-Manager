@@ -529,6 +529,47 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             }, 150); // 150ms debounce for smooth real-time search
         },
         // getSaveFiles function removed - cloud saves disabled
+        backupInstall: function(folderName) {
+            if (!window.ddmm || !window.ddmm.app || !window.ddmm.app.showSaveDialog) {
+                alert('Backup not supported in this environment.');
+                return;
+            }
+            window.ddmm.app.showSaveDialog({
+                title: 'Backup Mod Install',
+                defaultPath: folderName + '-backup.zip',
+                filters: [{ name: 'Zip Files', extensions: ['zip'] }]
+            }).then(result => {
+                if (!result.canceled && result.filePath) {
+                    const res = ddmm.mods.backupInstall(folderName, result.filePath);
+                    if (res.success) {
+                        alert('Backup completed!');
+                    } else {
+                        alert('Backup failed: ' + res.error);
+                    }
+                }
+            });
+        },
+        restoreInstall: function(folderName) {
+            if (!window.ddmm || !window.ddmm.app || !window.ddmm.app.showOpenDialog) {
+                alert('Restore not supported in this environment.');
+                return;
+            }
+            window.ddmm.app.showOpenDialog({
+                title: 'Restore Mod Install',
+                filters: [{ name: 'Zip Files', extensions: ['zip'] }],
+                properties: ['openFile']
+            }).then(result => {
+                if (!result.canceled && result.filePaths && result.filePaths[0]) {
+                    const res = ddmm.mods.restoreInstall(result.filePaths[0], folderName);
+                    if (res.success) {
+                        alert('Restore completed!');
+                        ddmm.mods.refreshInstallList();
+                    } else {
+                        alert('Restore failed: ' + res.error);
+                    }
+                }
+            });
+        },
     },
     "computed": {
         "selectedInstall": function () {

@@ -940,3 +940,35 @@ app.on("ready", async () => {
     }
 });
 // endregion
+
+// Backup an install to a zip file
+ipcMain.on("backup install", async (ev: IpcMainEvent, {folderName, outPath}) => {
+    try {
+        await InstallManager.backupInstall(folderName, outPath);
+        ev.returnValue = { success: true };
+    } catch (e) {
+        ev.returnValue = { success: false, error: e.toString() };
+    }
+});
+
+// Restore an install from a zip file
+ipcMain.on("restore install", async (ev: IpcMainEvent, {zipPath, folderName}) => {
+    try {
+        await InstallManager.restoreInstall(zipPath, folderName);
+        ev.returnValue = { success: true };
+    } catch (e) {
+        ev.returnValue = { success: false, error: e.toString() };
+    }
+});
+
+// Show a save dialog and return the result
+ipcMain.handle("showSaveDialog", async (ev, options) => {
+    const result = await dialog.showSaveDialog(appWindow, options);
+    return result;
+});
+
+// Show an open dialog and return the result
+ipcMain.handle("showOpenDialog", async (ev, options) => {
+    const result = await dialog.showOpenDialog(appWindow, options);
+    return result;
+});
