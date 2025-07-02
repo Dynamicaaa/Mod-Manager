@@ -50,40 +50,32 @@
 
 </div>
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 🌟 **Core Features**
-
-<div align="left">
-
-- 🎯 **Integrated Sayonika Store** - Browse and download mods directly
-- 📦 **Smart Mod Management** - Install, organize, and launch with ease
-- 🔐 **Multiple Authentication** - GitHub or email/password login
-- 🖥️ **Cross-Platform Support** - Windows, macOS, and Linux
-- 🎨 **Modern Interface** - Clean, responsive DDLC-themed design
-
-</div>
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 🚀 **Advanced Features**
-
-<div align="left">
-
-- 🔍 **Powerful Search** - Find mods quickly with filters
-- ⭐ **Ratings & Reviews** - Community-driven mod discovery
-- 🏷️ **Category Filtering** - Browse by genre and tags
-- 📱 **One-Click Install** - Seamless mod installation
-- 👤 **User Profiles** - Personalized mod collections
-
-</div>
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>🌟 <b>Core Features</b></h3>
+        <ul align="left">
+          <li>🎯 <b>Integrated Sayonika Store</b> - Browse and download mods directly</li>
+          <li>📦 <b>Smart Mod Management</b> - Install, organize, and launch with ease</li>
+          <li>🔐 <b>Multiple Authentication</b> - GitHub or email/password login</li>
+          <li>🖥️ <b>Cross-Platform Support</b> - Windows, macOS, and Linux</li>
+          <li>🎨 <b>Modern Interface</b> - Clean, responsive DDLC-themed design</li>
+        </ul>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>🚀 <b>Advanced Features</b></h3>
+        <ul align="left">
+          <li>🔍 <b>Powerful Search</b> - Find mods quickly with filters</li>
+          <li>⭐ <b>Ratings & Reviews</b> - Community-driven mod discovery</li>
+          <li>🏷️ <b>Category Filtering</b> - Browse by genre and tags</li>
+          <li>📱 <b>One-Click Install</b> - Seamless mod installation</li>
+          <li>👤 <b>User Profiles</b> - Personalized mod collections</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
 
 <div align="center">
 
@@ -127,36 +119,38 @@ While [Doki Doki Mod Docker](https://github.com/Bronya-Rand/DDModDocker) exists 
 
 <div align="center">
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🏆 <strong>This Mod Manager</strong></th>
-<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🐳 <strong>Docker Version</strong></th>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Native Performance</strong><br/><em>Runs directly on your system</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Containerization Overhead</strong><br/><em>Slower due to Docker layers</em></td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Simple Installation</strong><br/><em>Download and run executable</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Complex Setup</strong><br/><em>Requires Docker knowledge</em></td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>OS Integration</strong><br/><em>File associations & shortcuts</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Integration</strong><br/><em>Isolated container environment</em></td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Low Resource Usage</strong><br/><em>Minimal system impact</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>High Overhead</strong><br/><em>Docker daemon always running</em></td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Sayonika Store Built-in</strong><br/><em>Integrated mod browsing</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>No Store Integration</strong><br/><em>Manual mod sourcing</em></td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Active Development</strong><br/><em>Regular updates & features</em></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Updates</strong><br/><em>Slower development cycle</em></td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🏆 <strong>This Mod Manager</strong></th>
+      <th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🐳 <strong>Docker Version</strong></th>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Native Performance</strong><br/><em>Runs directly on your system</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Containerization Overhead</strong><br/><em>Slower due to Docker layers</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Simple Installation</strong><br/><em>Download and run executable</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Complex Setup</strong><br/><em>Requires Docker knowledge</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>OS Integration</strong><br/><em>File associations & shortcuts</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Integration</strong><br/><em>Isolated container environment</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Low Resource Usage</strong><br/><em>Minimal system impact</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>High Overhead</strong><br/><em>Docker daemon always running</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Sayonika Store Built-in</strong><br/><em>Integrated mod browsing</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>No Store Integration</strong><br/><em>Manual mod sourcing</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">✅ <strong>Active Development</strong><br/><em>Regular updates & features</em></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">❌ <strong>Limited Updates</strong><br/><em>Slower development cycle</em></td>
+    </tr>
+  </table>
+</p>
 
 <br>
 
@@ -218,36 +212,28 @@ This version of DDMM includes **full integration** with the Sayonika mod store a
 
 </div>
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 🎯 **Discovery Features**
-
-<div align="left">
-
-- 🔍 **Browse & Search** - Thousands of DDLC mods at your fingertips
-- 📊 **Trending Mods** - Discover what's popular in the community
-- 🏷️ **Smart Filtering** - Find mods by category, tags, and popularity
-
-</div>
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### ⚡ **User Features**
-
-<div align="left">
-
-- ⚡ **One-Click Downloads** - Instant mod installation
-- 👤 **User Authentication** - Personalized profiles and collections
-- ⭐ **Community Reviews** - Ratings and feedback from players
-
-</div>
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>🎯 <b>Discovery Features</b></h3>
+        <ul align="left">
+          <li>🔍 <b>Browse & Search</b> - Thousands of DDLC mods at your fingertips</li>
+          <li>📊 <b>Trending Mods</b> - Discover what's popular in the community</li>
+          <li>🏷️ <b>Smart Filtering</b> - Find mods by category, tags, and popularity</li>
+        </ul>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>⚡ <b>User Features</b></h3>
+        <ul align="left">
+          <li>⚡ <b>One-Click Downloads</b> - Instant mod installation</li>
+          <li>👤 <b>User Authentication</b> - Personalized profiles and collections</li>
+          <li>⭐ <b>Community Reviews</b> - Ratings and feedback from players</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
 
 <div align="center">
 
@@ -340,34 +326,66 @@ bun rebuild-css.js --production   # Production build
 bun rebuild-css.js --watch        # Watch mode
 ```
 
+---
+<div align="center">
+
+<h2>🛠️ Migration/Update Steps</h2>
+
+<blockquote>
+  <b>Note:</b> Please follow these steps to ensure a smooth upgrade from previous versions to the latest versions.
+</blockquote>
+
+<ol align="left">
+  <li><b>Backup your mods and saves:</b><br>
+    Before upgrading, back up your existing mods and save files from your DDLC directory.
+  </li>
+  <li><b>Uninstall previous versions:</b><br>
+    Remove any older installations of Doki Doki Mod Manager to prevent conflicts.
+  </li>
+  <li><b>Install updated version:</b><br>
+    Download the latest release from <a href="https://github.com/Dynamicaaa/Mod-Manager/releases">GitHub Releases</a> and install the appropriate version for your platform.
+  </li>
+  <li><b>Restore your mods and saves:</b><br>
+    Copy your backed-up mods and save files into the new installation's DDLC directory if needed.
+  </li>
+  <li><b>Review new settings:</b><br>
+    Open the application and review new configuration options or permissions.
+  </li>
+  <li><b>Check for deprecated features:</b><br>
+    Some legacy features may be removed or replaced. Refer to the <a href="https://github.com/Dynamicaaa/Mod-Manager/releases/latest">release notes</a> for details.
+  </li>
+  <li><b>Report issues:</b><br>
+    If you encounter problems, please <a href="https://github.com/Dynamicaaa/Mod-Manager/issues">open an issue</a>.
+  </li>
+</ol>
+
+</div>
+
+---
 <div align="center">
 
 **📁 CSS File Structure:**
 
 </div>
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-[`app.scss`](src/renderer/css/app.scss)
-*Main application styles*
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-[`fonts.scss`](src/renderer/css/fonts.scss)
-*Font definitions*
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-[`sayonika-store.scss`](src/renderer/css/sayonika-store.scss)
-*Sayonika integration styles*
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
+        <a href="src/renderer/css/app.scss"><code>app.scss</code></a><br>
+        <em>Main application styles</em>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
+        <a href="src/renderer/css/fonts.scss"><code>fonts.scss</code></a><br>
+        <em>Font definitions</em>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
+        <a href="src/renderer/css/sayonika-store.scss"><code>sayonika-store.scss</code></a><br>
+        <em>Sayonika integration styles</em>
+      </td>
+    </tr>
+  </table>
+</p>
 
 <div align="center">
 
@@ -383,28 +401,30 @@ Set these environment variables to enable debugging features:
 
 </div>
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🔧 <strong>Variable</strong></th>
-<th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">📋 <strong>Purpose</strong></th>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG_PROOF</code></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔤 Adds prefixes to all localized strings</td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_DEVTOOLS</code></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔧 Opens developer tools on launch</td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_INCOGNITO</code></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🕶️ Removes app name from title bar</td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG</code></td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🌍 Sets language (see <a href="lang/"><code>lang/</code></a> folder)</td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">🔧 <strong>Variable</strong></th>
+      <th style="text-align: center; padding: 12px; border: 1px solid #ddd; background-color: #f8f9fa; font-weight: bold;">📋 <strong>Purpose</strong></th>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG_PROOF</code></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔤 Adds prefixes to all localized strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_DEVTOOLS</code></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🔧 Opens developer tools on launch</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_INCOGNITO</code></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🕶️ Removes app name from title bar</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;"><code>DDMM_LANG</code></td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd;">🌍 Sets language (see <a href="lang/"><code>lang/</code></a> folder)</td>
+    </tr>
+  </table>
+</p>
 
 <div align="center">
 
@@ -420,60 +440,42 @@ We welcome contributions! Here's how you can help:
 
 </div>
 
-<table style="margin: 0 auto; border-collapse: collapse; width: 90%; max-width: 800px; margin-left: auto; margin-right: auto; display: table;">
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 🐛 **Bug Reports**
-
-<div align="left">
-
-- 🔍 **Find Issues** - Help us identify problems
-- 📝 **[Create Reports](https://github.com/Dynamicaaa/Mod-Manager/issues/new)** - Detailed bug descriptions
-
-</div>
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 💡 **Feature Requests**
-
-<div align="left">
-
-- 🚀 **Suggest Features** - Share your creative ideas
-- 🎯 **Improve UX** - Help make the app better
-
-</div>
-
-</td>
-</tr>
-<tr>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 🔧 **Code Contributions**
-
-<div align="left">
-
-- 📄 **Submit Pull Requests** - Help improve the codebase
-- 🧪 **Write Tests** - Ensure code quality
-
-</div>
-
-</td>
-<td style="text-align: center; padding: 12px; border: 1px solid #ddd;">
-
-### 📖 **Documentation**
-
-<div align="left">
-
-- ✍️ **Improve Docs** - Make things clearer for everyone
-- 🌍 **Translations** - Help localize the app
-
-</div>
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <table>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>🐛 <b>Bug Reports</b></h3>
+        <ul align="left">
+          <li>🔍 <b>Find Issues</b> - Help us identify problems</li>
+          <li>📝 <b><a href="https://github.com/Dynamicaaa/Mod-Manager/issues/new">Create Reports</a></b> - Detailed bug descriptions</li>
+        </ul>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>💡 <b>Feature Requests</b></h3>
+        <ul align="left">
+          <li>🚀 <b>Suggest Features</b> - Share your creative ideas</li>
+          <li>🎯 <b>Improve UX</b> - Help make the app better</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>🔧 <b>Code Contributions</b></h3>
+        <ul align="left">
+          <li>📄 <b>Submit Pull Requests</b> - Help improve the codebase</li>
+          <li>🧪 <b>Write Tests</b> - Ensure code quality</li>
+        </ul>
+      </td>
+      <td style="text-align: center; padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+        <h3>📖 <b>Documentation</b></h3>
+        <ul align="left">
+          <li>✍️ <b>Improve Docs</b> - Make things clearer for everyone</li>
+          <li>🌍 <b>Translations</b> - Help localize the app</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
 
 <div align="center">
 

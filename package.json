@@ -2,7 +2,7 @@
   "name": "doki-doki-mod-manager",
   "productName": "Doki Doki Mod Manager",
   "description": "Mod Manager for Doki Doki Literature Club",
-  "author": "Dynamicaaa",
+  "author": "Dynamicaaa <CanaryZen@proton.me>",
   "version": "5.0.0",
   "license": "MIT",
   "main": "lib/src/main/index.js",
@@ -153,12 +153,6 @@
           ]
         },
         {
-          "target": "rpm",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
           "target": "tar.gz",
           "arch": [
             "x64"
@@ -197,7 +191,6 @@
     "dmg": {
       "title": "Doki Doki Mod Manager ${version}",
       "icon": "build/icon.icns",
-      "background": "build/background.png",
       "contents": [
         {
           "x": 130,
