@@ -40,6 +40,11 @@
   
   <br>
   
+  <p align="center">
+    <img src="https://i.ibb.co/Q3XVZDvs/Screenshot-From-2025-07-02-14-00-59.png" alt="Screenshot 1" width="600" />
+    <br>
+    <img src="https://i.ibb.co/mrvMYJmd/Screenshot-From-2025-07-02-14-04-07.png" alt="Screenshot 2" width="600" />
+  </p>
 </div>
 
 <div align="center">
