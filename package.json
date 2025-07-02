@@ -6,8 +6,14 @@
   "version": "5.0.0",
   "license": "MIT",
   "main": "lib/src/main/index.js",
-  "repository": "https://github.com/Dynamicaaa/Mod-Manager",
-  "bugs": "CanaryZen@proton.me",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dynamicaaa/Mod-Manager.git"
+  },
+  "bugs": {
+    "email": "CanaryZen@proton.me",
+    "url": "https://github.com/Dynamicaaa/Mod-Manager/issues"
+  },
   "scripts": {
     "start": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --no-sandbox .",
     "start-dev": "npm run clean && npm run build-css-once && tsc && npm run copy-assets && electron --inspect=5858 --no-sandbox .",
