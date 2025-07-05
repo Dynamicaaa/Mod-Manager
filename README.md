@@ -19,9 +19,6 @@
     <a href="https://github.com/Dynamicaaa/Mod-Manager/releases">
       <img src="https://img.shields.io/badge/🪟_Windows_|_🍎_macOS_|_🐧_Linux-Supported-32cd32?style=for-the-badge&labelColor=228b22" alt="Platform Support">
     </a>
-    <a href="https://discord.gg/ktd9NR2XA2">
-      <img src="https://img.shields.io/badge/Join_Our_Discord!-454fbf?style=for-the-badge&logo=discord&logoColor=white" alt="Join Our Discord!">
-    </a>
   </p>
   
   <p>
