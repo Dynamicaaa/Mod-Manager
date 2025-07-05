@@ -24,28 +24,42 @@ export default class InstallList {
 
         for (let folder of installs) {
             const dataFilePath: string = joinPath(installFolder, folder, "install", "install.json");
-
+            let data: any = null;
+            let fileContents: string | null = null;
             try {
-                const fileContents: string = readFileSync(dataFilePath, "utf8");
-                const data: any = JSON.parse(fileContents);
-
-                let screenshots: string[] = [];
-
-                try {
-                    screenshots = readdirSync(joinPath(installFolder, folder, "install")).filter(fn => {
-                        return fn.match(/^screenshot(\d+)\.png$/);
-                    });
-                } catch (e) {
-                    console.log("Could not load screenshots due to an IO error", e.message);
-                }
-
-                if (data.name) {
-                    returned.push(new Install(data.name, folder, data.globalSave, screenshots, data.achievements, data.mod));
-                }
+                // Try new location first
+                fileContents = readFileSync(dataFilePath, "utf8");
+                data = JSON.parse(fileContents);
             } catch (e) {
-                console.info("Failed to read install data from " + dataFilePath, e.message);
-                console.log("Ignoring the folder.");
-                // do nothing, the folder should be ignored
+                // Fallback: try old install.json in instance folder
+                const legacyPath = joinPath(installFolder, folder, "install.json");
+                try {
+                    fileContents = readFileSync(legacyPath, "utf8");
+                    data = JSON.parse(fileContents);
+                    // Adapt old format to new Install constructor
+                    if (data && typeof data === "object" && data.name) {
+                        data.globalSave = data.globalSave ?? false;
+                        data.mod = data.mod ?? null;
+                        data.achievements = [];
+                    }
+                } catch (legacyErr) {
+                    console.info("Failed to read install data from both new and legacy locations for " + folder, legacyErr.message);
+                    console.log("Ignoring the folder.");
+                    continue;
+                }
+            }
+
+            let screenshots: string[] = [];
+            try {
+                screenshots = readdirSync(joinPath(installFolder, folder, "install")).filter(fn => {
+                    return fn.match(/^screenshot(\d+)\.png$/);
+                });
+            } catch (e) {
+                console.log("Could not load screenshots due to an IO error", e.message);
+            }
+
+            if (data && data.name) {
+                returned.push(new Install(data.name, folder, data.globalSave, screenshots, data.achievements, data.mod));
             }
         }
 

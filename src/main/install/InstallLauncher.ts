@@ -83,12 +83,23 @@ export default class InstallLauncher {
             let startSDKServer: boolean = false;
 
             try {
-                installData =
-                    JSON.parse(readFileSync(joinPath(installFolder, "install", "install.json")).toString("utf8"));
+                // Try new location first
+                installData = JSON.parse(readFileSync(joinPath(installFolder, "install", "install.json")).toString("utf8"));
             } catch (e) {
-                logToConsole("Install directory " + installFolder + " does not exist!", LogClass.ERROR);
-                rj(lang.translate("main.running_cover.install_corrupt"));
-                return;
+                // Fallback: try old install.json in instance folder
+                try {
+                    installData = JSON.parse(readFileSync(joinPath(installFolder, "install.json")).toString("utf8"));
+                    // Adapt old format if needed
+                    if (installData && typeof installData === "object" && installData.name) {
+                        installData.globalSave = installData.globalSave ?? false;
+                        installData.mod = installData.mod ?? null;
+                        installData.achievements = [];
+                    }
+                } catch (legacyErr) {
+                    logToConsole("Install directory " + installFolder + " does not exist!", LogClass.ERROR);
+                    rj(lang.translate("main.running_cover.install_corrupt"));
+                    return;
+                }
             }
 
 
