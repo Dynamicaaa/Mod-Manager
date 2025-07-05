@@ -128,7 +128,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
 
                 <div class="form-group">
                     <p><label>{{_("renderer.tab_mods.install_creation.label_install_name")}}</label></p>
-                    <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.label_install_name')" v-model="install_creation.install_name" @keyup="generateInstallFolderName"></p>
+                    <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.label_install_name')" v-model="install_creation.install_name" @input="generateInstallFolderName"></p>
                 </div>
 
                 <div class="form-group">
@@ -325,12 +325,24 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             ddmm.mods.launchInstall(install);
         },
         "generateInstallFolderName": function () {
-            this.install_creation.folder_name = this.install_creation.install_name
-                .trim()
-                .toLowerCase()
-                .replace(/\W/g, "-")
-                .replace(/-+/g, "-")
-                .substring(0, 32);
+            // Always sync folder name with install name unless the user has manually edited it
+            if (
+                !this.install_creation.folder_name ||
+                this.install_creation.folder_name === "" ||
+                this.install_creation.folder_name === this.install_creation.install_name_prev ||
+                this.install_creation.folder_name === this.install_creation.install_name_prev_folder
+            ) {
+                const generated = this.install_creation.install_name
+                    .trim()
+                    .toLowerCase()
+                    .replace(/\W/g, "-")
+                    .replace(/-+/g, "-")
+                    .substring(0, 32);
+                this.install_creation.folder_name = generated;
+                this.install_creation.install_name_prev_folder = generated;
+            }
+            // Track the last install_name used for auto-generation
+            this.install_creation.install_name_prev = this.install_creation.install_name;
         },
         "installCreationSelectMod": function () {
             const mod = ddmm.mods.browseForMod();

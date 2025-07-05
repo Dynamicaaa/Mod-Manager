@@ -1,5 +1,5 @@
 import {Notification} from "electron";
-import {readFileSync, writeFileSync} from "fs";
+import {readFileSync, writeFileSync, existsSync} from "fs";
 import {createServer, Server} from "http";
 import {join as joinPath} from "path";
 import Config from "../utils/Config";
@@ -84,7 +84,7 @@ export default class SDKServer extends EventEmitter {
             const installData = JSON.parse(readFileSync(joinPath(Config.readConfigValue("installFolder"),
                 "installs",
                 this.install,
-                "install.json")).toString("utf8"));
+                "install", "install.json")).toString("utf8"));
 
             const achievement = {
                 description: body.payload.description,
@@ -113,10 +113,30 @@ export default class SDKServer extends EventEmitter {
                 installData.achievements.push(achievement);
             }
 
-            writeFileSync(joinPath(Config.readConfigValue("installFolder"),
+            // Preserve existing mapper field if present
+            const installJsonPath = joinPath(Config.readConfigValue("installFolder"),
                 "installs",
                 this.install,
-                "install.json"), JSON.stringify(installData));
+                "install", "install.json");
+            let existingInstallData: { mapper?: string; [key: string]: any } = {};
+            if (existsSync(installJsonPath)) {
+                try {
+                    existingInstallData = JSON.parse(readFileSync(installJsonPath).toString("utf8")) as { mapper?: string; [key: string]: any };
+                } catch (e) {
+                    console.warn("Could not read existing install.json:", e.message);
+                }
+            }
+            if (existingInstallData.mapper && !installData.mapper) {
+                installData.mapper = existingInstallData.mapper;
+            }
+            writeFileSync(installJsonPath, JSON.stringify(installData, null, 2));
+            // Debug log: output final install.json contents
+            try {
+                const writtenData = readFileSync(installJsonPath).toString("utf8");
+                console.debug("install.json written. Contents:", writtenData);
+            } catch (e) {
+                console.warn("Could not read back written install.json:", e.message);
+            }
 
             this.emit("log", {
                 text: "Registered achievement " + achievement.id + " (" + achievement.name + ")"
@@ -129,7 +149,7 @@ export default class SDKServer extends EventEmitter {
             const installData = JSON.parse(readFileSync(joinPath(Config.readConfigValue("installFolder"),
                 "installs",
                 this.install,
-                "install.json")).toString("utf8"));
+                "install", "install.json")).toString("utf8"));
 
             const achievement = installData.achievements.find((ach) => ach.id === body.payload.id);
 
@@ -166,10 +186,30 @@ export default class SDKServer extends EventEmitter {
                 return;
             }
 
-            writeFileSync(joinPath(Config.readConfigValue("installFolder"),
+            // Preserve existing mapper field if present
+            const installJsonPath2 = joinPath(Config.readConfigValue("installFolder"),
                 "installs",
                 this.install,
-                "install.json"), JSON.stringify(installData));
+                "install", "install.json");
+            let existingInstallData2: { mapper?: string; [key: string]: any } = {};
+            if (existsSync(installJsonPath2)) {
+                try {
+                    existingInstallData2 = JSON.parse(readFileSync(installJsonPath2).toString("utf8")) as { mapper?: string; [key: string]: any };
+                } catch (e) {
+                    console.warn("Could not read existing install.json:", e.message);
+                }
+            }
+            if (existingInstallData2.mapper && !installData.mapper) {
+                installData.mapper = existingInstallData2.mapper;
+            }
+            writeFileSync(installJsonPath2, JSON.stringify(installData, null, 2));
+            // Debug log: output final install.json contents
+            try {
+                const writtenData2 = readFileSync(installJsonPath2).toString("utf8");
+                console.debug("install.json written. Contents:", writtenData2);
+            } catch (e) {
+                console.warn("Could not read back written install.json:", e.message);
+            }
 
             res.write(JSON.stringify({
                 ok: true,

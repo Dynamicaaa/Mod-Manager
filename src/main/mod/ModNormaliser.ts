@@ -77,7 +77,7 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
 
             zipfile.on("end", () => {
                 console.log("Analyzing mod structure:", {
-                    hasModJson,
+                    hasModJson: hasModJson,
                     hasGameFolder,
                     hasCharactersFolder,
                     hasNestedStructure,
@@ -89,9 +89,30 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
 
                 let mapper: ModMapper;
 
+                // Final DDLC Mod Template 2.0 detection logic:
+                // - No mod.json at root
+                // - At least one .exe file anywhere in the mod archive, but not in the "game" folder
+                let isDDLCModTemplate2 = false;
+                if (!hasModJson) {
+                    // Only consider .exe files that are NOT in the top-level "game" folder
+                    const hasExeOutsideGame = fileList.some(f => {
+                        const lower = f.toLowerCase();
+                        if (!lower.endsWith(".exe")) return false;
+                        // Check if the .exe is in the top-level game folder
+                        const parts = lower.split("/");
+                        return !(parts[0] === "game");
+                    });
+                    if (hasExeOutsideGame) {
+                        isDDLCModTemplate2 = true;
+                    }
+                }
+                if (isDDLCModTemplate2) {
+                    const DDLCModTemplate2Format = require("./mappers/DDLCModTemplate2Format").default;
+                    mapper = new DDLCModTemplate2Format();
+                }
                 // Decision logic for mapper selection
                 // On macOS, prefer autorun format for better mod compatibility
-                if (process.platform === "darwin" && (gameFiles > 0 || characterFiles > 0)) {
+                else if (process.platform === "darwin" && (gameFiles > 0 || characterFiles > 0)) {
                     // MacOSAutorunFormat: Use autorun folder for automatic mod loading on macOS
                     mapper = new MacOSAutorunFormat();
                 } else if (hasModJson && (hasGameFolder || hasCharactersFolder)) {

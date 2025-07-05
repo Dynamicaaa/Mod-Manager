@@ -1,6 +1,6 @@
 import * as yauzl from "yauzl";
 import * as chmodr from "chmodr";
-import {createWriteStream, writeFileSync, existsSync, accessSync, constants} from "fs";
+import {createWriteStream, writeFileSync, existsSync, accessSync, constants, readFileSync} from "fs";
 import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
 import Config from "../utils/Config";
@@ -51,7 +51,7 @@ export default class InstallCreator {
      * @param installName The user facing name of the install
      * @param globalSave Whether it should use the global save
      */
-    public static createInstall(folderName: string, installName: string, globalSave: boolean): Promise<null> {
+    public static createInstall(folderName: string, installName: string, globalSave: boolean, mapperFriendlyName: string): Promise<null> {
         return new Promise((ff, rj) => {
             console.log("Creating clean install in " + folderName);
             const canonicalPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
@@ -69,6 +69,37 @@ export default class InstallCreator {
                     mkdirsSync(joinPath(canonicalPath, "install", "game", "autorun"));
                 } else {
                     mkdirsSync(joinPath(canonicalPath, "appdata", ".renpy"));
+                }
+
+                // Write minimal install.json for onboarding
+                const fs = require("fs");
+                const path = require("path");
+                const installJsonPath = joinPath(canonicalPath, "install", "install.json");
+                // Always use the installName (from Mod Name textbox) for install.json
+                // Always use the installName (from Mod Name textbox) for install.json, preserving case and spaces
+                let modName = installName && installName.trim() ? installName.trim() : path.basename(canonicalPath);
+                // If the installName is the same as the folderName (auto-generated), try to recover the original input from the renderer
+                if (
+                    modName.replace(/\W/g, "-").replace(/-+/g, "-").toLowerCase() === folderName.toLowerCase() &&
+                    installName !== folderName
+                ) {
+                    // Use the original installName as entered by the user
+                    modName = installName;
+                }
+                if (modName === "ddlc-default") {
+                    modName = "Doki Doki Literature Club";
+                }
+                const minimalInstallJson = {
+                    name: modName,
+                    globalSave: false,
+                    mod: null
+                };
+                try {
+                    fs.writeFileSync(installJsonPath, JSON.stringify(minimalInstallJson, null, 2), "utf8");
+                    fs.fsyncSync(fs.openSync(installJsonPath, "r"));
+                    console.debug("Wrote minimal install.json at onboarding:", installJsonPath);
+                } catch (e) {
+                    console.warn("Failed to write minimal install.json during onboarding:", e.message);
                 }
 
                 // Extract DDLC zip file to install directory
@@ -174,12 +205,7 @@ export default class InstallCreator {
                             console.log("Created autorun directory for macOS mod support");
                         }
 
-                        // write the install data file
-                        writeFileSync(joinPath(canonicalPath, "install.json"), JSON.stringify({
-                            globalSave,
-                            mod: null,
-                            name: installName,
-                        }));
+                        // Step-by-step debug logs for install.json writing
 
                         // Ensure DDLC.sh is executable on Linux
                         this.ensureDDLCExecutable(joinPath(canonicalPath, "install")).then((result) => {

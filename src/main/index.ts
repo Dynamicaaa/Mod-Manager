@@ -302,7 +302,7 @@ ipcMain.on("create install", (ev: IpcMainEvent, install: { folderName: string, i
     windowClosable = false;
     appWindow.setClosable(false);
     console.log("[IPC create install] Creating install in " + install.folderName);
-    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave).then(() => {
+    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave, "").then(() => {
         if (!install.mod) {
             appWindow.webContents.send("got installs", InstallList.getInstallList());
             windowClosable = true;
@@ -582,7 +582,7 @@ ipcMain.on("onboarding browse", async () => {
 
                 // Automatically create a default DDLC install
                 console.log("Main: Creating default DDLC install...");
-                InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false).then(() => {
+                InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false, "").then(() => {
                     console.log("Main: Default DDLC install created successfully");
                     appWindow.webContents.send("onboarding downloaded");
                     // Refresh the install list

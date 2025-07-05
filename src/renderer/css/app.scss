@@ -193,6 +193,11 @@ div, section, main, article {
 [class*="-overlay"],
 [class*="-modal"],
 [class*="-dialog"] {
+  // Add blur and dark background for overlays
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   // Override any inherited background sizing to ensure proper scaling
   &[style*="background-image"] {
     // Fix the background to properly fit the entire window

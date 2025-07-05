@@ -599,3 +599,25 @@ api.app.showSaveDialog = function(options) {
 api.app.showOpenDialog = function(options) {
     return ipcRenderer.invoke("showOpenDialog", options);
 };
+// Expose WineAPI to renderer
+try {
+    const WineAPI = remote.require("../main/sdk/WineAPI");
+    if (!window.ddmm) window.ddmm = {};
+    window.ddmm.WineAPI = {
+        getWineVersion: (...args) => WineAPI.getWineVersion(...args),
+        ensureWine: (...args) => WineAPI.ensureWine(...args),
+        getWineBinPath: (...args) => WineAPI.getWineBinPath(...args),
+        getWineDir: (...args) => WineAPI.getWineDir(...args),
+        isWineInstalled: (...args) => WineAPI.isWineInstalled(...args),
+        getPrefixPath: (...args) => WineAPI.getPrefixPath(...args),
+        setPrefixPath: (...args) => WineAPI.setPrefixPath(...args),
+        getEnvVars: (...args) => WineAPI.getEnvVars(...args),
+        setEnvVars: (...args) => WineAPI.setEnvVars(...args),
+        getWineEnv: (...args) => WineAPI.getWineEnv(...args),
+        runWithWine: (...args) => WineAPI.runWithWine(...args),
+        checkForWineUpdate: (...args) => WineAPI.checkForWineUpdate(...args)
+    };
+    console.log("Preload: Exposed WineAPI to window.ddmm.WineAPI");
+} catch (e) {
+    console.error("Preload: Failed to expose WineAPI to renderer:", e);
+}

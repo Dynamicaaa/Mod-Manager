@@ -35,6 +35,40 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
                 <p>{{_("renderer.tab_options.section_backgrounds.description_credit")}}</p>
             </div>
+            <div v-else-if="selected_option === 'wine_config'">
+                <h1>{{_("renderer.tab_options.section_wine.title")}}</h1>
+                <p>{{_("renderer.tab_options.section_wine.subtitle")}}</p>
+                <br>
+                <div>
+                    <label>
+                        {{_("renderer.tab_options.section_wine.prefix_path")}}:
+                        <input type="text" v-model="wine_prefix" style="width: 60%;" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        {{_("renderer.tab_options.section_wine.env")}}:
+                        <input type="text" v-model="wine_env" style="width: 60%;" />
+                    </label>
+                </div>
+                <div class="option-section">
+                    <div>
+                        <button class="primary" @click="saveWineConfig"><i class="fas fa-save"></i> {{_("renderer.tab_options.section_wine.save")}}</button>
+                    </div>
+                    <br>
+                    <div>
+                        <b>{{_("renderer.tab_options.section_wine.version")}}:</b>
+                        <span>{{wine_version || _("renderer.tab_options.section_wine.version_unknown")}}</span>
+                        <button class="secondary" @click="refreshWineVersion"><i class="fas fa-sync"></i> {{_("renderer.tab_options.section_wine.refresh_version")}}</button>
+                    </div>
+                    <div>
+                        <button class="primary" @click="updateWine" :disabled="wine_update_in_progress">
+                            <i class="fas fa-download"></i> {{_("renderer.tab_options.section_wine.update")}}
+                        </button>
+                        <span v-if="wine_update_status" style="margin-left:1em;">{{wine_update_status}}</span>
+                    </div>
+                </div>
+            </div>
             <div v-else-if="selected_option === 'ui_theme'">
                 <h1><i class="fas fa-palette"></i> UI Theme</h1>
                 <p>Choose from a variety of themes to customize your experience.</p>
@@ -659,6 +693,11 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
         `,
     "data": function () {
         return {
+            wine_prefix: "",
+            wine_env: "",
+            wine_version: "",
+            wine_update_in_progress: false,
+            wine_update_status: "",
             "version": (function() {
                 // Method 1: Try standalone app config (most reliable)
                 if (typeof window.APP_CONFIG !== 'undefined' && window.APP_CONFIG.version && window.APP_CONFIG.version !== "0.0.0") {
@@ -726,6 +765,15 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     ]
                 },
                 {
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_wine") : "Wine",
+                    "contents": [
+                        {
+                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.menu.wine") : "Wine Configuration",
+                            "id": "wine_config"
+                        }
+                    ]
+                },
+                {
                     "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
                     "contents": [
                         {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
@@ -746,8 +794,78 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             return (typeof ddmm !== 'undefined' && ddmm.config) ? ddmm.config.readConfigValue("installFolder") : "Unknown";
         }
     },
+    "watch": {
+        selected_option(val) {
+            if (val === "wine_config") {
+                this.refreshWineVersion();
+                this.loadWineConfig && this.loadWineConfig();
+            }
+        }
+    },
 
     "methods": {
+        async refreshWineVersion() {
+            if (window.ddmm && window.ddmm.WineAPI && window.ddmm.WineAPI.getWineVersion) {
+                this.wine_version = await window.ddmm.WineAPI.getWineVersion();
+            } else {
+                this.wine_version = "";
+            }
+        },
+        async loadWineConfig() {
+            if (window.ddmm && window.ddmm.WineAPI) {
+                if (window.ddmm.WineAPI.getPrefixPath) {
+                    this.wine_prefix = await window.ddmm.WineAPI.getPrefixPath();
+                }
+                if (window.ddmm.WineAPI.getEnvVars) {
+                    const envVars = await window.ddmm.WineAPI.getEnvVars();
+                    this.wine_env = Object.entries(envVars).map(([k, v]) => `${k}=${v}`).join("; ");
+                }
+            }
+        },
+        async updateWine() {
+            this.wine_update_in_progress = true;
+            this.wine_update_status = this._("renderer.tab_options.section_wine.updating");
+            try {
+                if (window.ddmm && window.ddmm.WineAPI && typeof window.ddmm.WineAPI.checkForWineUpdate === "function") {
+                    console.debug("[OptionsTab] Calling WineAPI.checkForWineUpdate...");
+                    const result = await window.ddmm.WineAPI.checkForWineUpdate();
+                    console.debug("[OptionsTab] WineAPI.checkForWineUpdate result:", result);
+                    if (result && result.updated) {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_success", { version: result.latestVersion });
+                        await this.refreshWineVersion();
+                    } else if (result && result.latestVersion) {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_nonew");
+                    } else {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                        console.error("[OptionsTab] WineAPI.checkForWineUpdate returned unexpected result:", result);
+                    }
+                } else {
+                    this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                    console.error("[OptionsTab] window.ddmm.WineAPI.checkForWineUpdate is not available.");
+                }
+            } catch (e) {
+                this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                console.error("[OptionsTab] Exception in updateWine:", e);
+            }
+            this.wine_update_in_progress = false;
+        },
+        saveWineConfig() {
+            if (window.ddmm && window.ddmm.WineAPI) {
+                if (window.ddmm.WineAPI.setPrefixPath) {
+                    window.ddmm.WineAPI.setPrefixPath(this.wine_prefix);
+                }
+                if (window.ddmm.WineAPI.setEnvVars) {
+                    // Parse env string to object
+                    const envObj = {};
+                    this.wine_env.split(";").forEach(pair => {
+                        const [k, v] = pair.split("=").map(s => s && s.trim());
+                        if (k) envObj[k] = v || "";
+                    });
+                    window.ddmm.WineAPI.setEnvVars(envObj);
+                }
+            }
+            this.$root.$emit("show-toast", this._("renderer.tab_options.section_wine.saved"));
+        },
         "_": function(key, ...args) {
             if (typeof ddmm !== 'undefined' && ddmm.translate) {
                 try {

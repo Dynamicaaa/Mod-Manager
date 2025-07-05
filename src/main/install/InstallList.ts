@@ -23,7 +23,7 @@ export default class InstallList {
         let returned: Install[] = [];
 
         for (let folder of installs) {
-            const dataFilePath: string = joinPath(installFolder, folder, "install.json");
+            const dataFilePath: string = joinPath(installFolder, folder, "install", "install.json");
 
             try {
                 const fileContents: string = readFileSync(dataFilePath, "utf8");

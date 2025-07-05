@@ -239,10 +239,30 @@
         "link_sdk": "Achievements & SDK",
         "header_application": "Application",
         "link_updates": "Updates",
+        "header_wine": "Wine",
         "link_storage": "Storage Location",
         "header_developers": "Developers",
         "link_testing": "SDK Debug",
         "link_debug": "App Info"
+      },
+      "menu": {
+        "wine": "Wine Configuration"
+      },
+      "section_wine": {
+        "title": "Wine Configuration",
+        "subtitle": "Configure Wine settings for running Windows programs.",
+        "prefix_path": "Wine Prefix Path",
+        "env": "Wine Environment Variables",
+        "save": "Save",
+        "saved": "Wine configuration saved.",
+        "version": "Wine Version",
+        "version_unknown": "Unknown",
+        "refresh_version": "Refresh Version",
+        "update": "Update Wine",
+        "updating": "Updating Wine...",
+        "update_success": "Wine updated to version {version}.",
+        "update_nonew": "Wine is already up to date.",
+        "update_error": "Failed to update Wine."
       },
       "section_backgrounds": {
         "title": "Background",

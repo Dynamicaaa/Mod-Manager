@@ -1,5 +1,5 @@
-import {remove, emptyDir} from "fs-extra";
-import {join as joinPath} from "path";
+import {remove, emptyDir, mkdirsSync} from "fs-extra";
+import {join as joinPath, sep as pathSep} from "path";
 import Config from "../utils/Config";
 import {existsSync, readFileSync, writeFileSync} from "fs";
 import * as Archiver from "archiver";
@@ -23,7 +23,7 @@ export default class InstallManager {
      */
     public static renameInstall(folderName: string, newName: string): Promise<null> {
         return new Promise((ff, rj) => {
-            const installDataPath: string = joinPath(Config.readConfigValue("installFolder"), "installs", folderName, "install.json");
+            const installDataPath: string = joinPath(Config.readConfigValue("installFolder"), "installs", folderName, "install", "install.json");
             if (existsSync(installDataPath)) {
                 const data: any = JSON.parse(readFileSync(installDataPath, "utf8"));
                 data.name = newName;
@@ -99,15 +99,29 @@ export default class InstallManager {
         return new Promise((resolve, reject) => {
             const destPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
             // Remove existing folder if present
-            remove(destPath).then(() => {
+            remove(destPath).then(async () => {
                 const zip = new StreamZip.async({ file: zipPath });
-                zip.extract(null, destPath).then(() => {
-                    zip.close();
+                try {
+                    const entries = await zip.entries();
+                    for (const entryName in entries) {
+                        const entry = entries[entryName];
+                        // Always split entryName by '/' to preserve zip structure
+                        const entryPath = joinPath(destPath, ...entryName.split("/"));
+                        if (entry.isDirectory) {
+                            mkdirsSync(entryPath);
+                        } else {
+                            // Ensure directory exists
+                            const dirPath = entryPath.split(pathSep).slice(0, -1).join(pathSep);
+                            mkdirsSync(dirPath);
+                            await zip.extract(entryName, entryPath);
+                        }
+                    }
+                    await zip.close();
                     resolve();
-                }).catch(err => {
-                    zip.close();
+                } catch (err) {
+                    await zip.close();
                     reject(err);
-                });
+                }
             }).catch(reject);
         });
     }
