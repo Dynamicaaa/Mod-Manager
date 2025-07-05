@@ -3,7 +3,7 @@
   "productName": "Doki Doki Mod Manager",
   "description": "Mod Manager for Doki Doki Literature Club",
   "author": "Dynamicaaa <CanaryZen@proton.me>",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "MIT",
   "main": "lib/src/main/index.js",
   "repository": {

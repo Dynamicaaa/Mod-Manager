@@ -91,23 +91,6 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                     <!--suppress RequiredAttributes, HtmlRequiredAltAttribute -->
                     <img v-for="img in selectedInstall.screenshots" :alt="img" :src="getURLToScreenshot(selectedInstall.folderName, img)" @click="openScreenshot(selectedInstall.folderName, img)" width="150">
                 </div>
-
-                <template v-if="selectedInstall.achievements">
-                    <h2>{{_("renderer.tab_mods.install.title_achievements", selectedInstall.achievements.filter(a => a.earned).length, selectedInstall.achievements.length)}}</h2>
-                    <p v-if="selectedInstall.achievements.filter(a => a.earned).length < selectedInstall.achievements.length">{{_("renderer.tab_mods.install.description_achievements")}}</p>
-                    <p v-else>{{_("renderer.tab_mods.install.description_achievements_complete")}}</p>
-
-                    <template v-for="achievement in selectedInstall.achievements">
-                        <br>
-
-                        <div :style="{'color': !achievement.earned ? '#777' : 'inherit'}">
-                            <p><strong>{{achievement.name}}</strong></p>
-                            <p>{{achievement.description}}</p>
-                        </div>
-
-                    </template>
-
-                    <br>
                 </template>
             </div>
             <div v-else-if="selected_item.type === 'mod'">
@@ -148,8 +131,6 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                     <p><label>{{_("renderer.tab_mods.install_creation.label_mod")}}</label></p>
                     <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.description_mod')" v-model="install_creation.mod" readonly @click="installCreationSelectMod" style="cursor: pointer;"></p>
                 </div>
-
-                <!-- Cloud save option removed -->
 
                 <div class="form-group">
                     <p><label><input type="checkbox" v-model="install_creation.global_save"> {{_("renderer.tab_mods.install_creation.label_global_save")}}</label></p>
@@ -230,9 +211,6 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "renderer.tab_mods.install.title_screenshots_one": "1 screenshot",
                 "renderer.tab_mods.install.title_screenshots_none": "No screenshots",
                 "renderer.tab_mods.install.description_screenshots": "Press S while playing to take a screenshot.",
-                "renderer.tab_mods.install.title_achievements": "Achievements ({0} / {1})",
-                "renderer.tab_mods.install.description_achievements": "Keep playing to unlock more achievements.",
-                "renderer.tab_mods.install.description_achievements_complete": "You've unlocked all achievements. Congratulations!",
                 "renderer.tab_mods.mod.button_install": "Install",
                 "renderer.tab_mods.mod.button_settings": "Settings",
                 "renderer.tab_mods.mod.description_external": "Show in folder",
@@ -242,7 +220,6 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "renderer.tab_mods.install_creation.label_has_mod": "Install Mod",
                 "renderer.tab_mods.install_creation.label_mod": "Mod",
                 "renderer.tab_mods.install_creation.description_mod": "Click to browse for a mod.",
-                // Cloud save translations removed
                 "renderer.tab_mods.install_creation.label_existing_saves": "Existing Save Files",
                 "renderer.tab_mods.install_creation.label_global_save": "Global Save",
                 "renderer.tab_mods.install_creation.header_summary": "Summary",
@@ -255,15 +232,12 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "renderer.tab_mods.install_creation.button_install": "Install",
                 "renderer.tab_mods.install_creation.button_installing": "Installing...",
                 "renderer.tab_mods.install_creation.status_exists": "That folder already exists. Pick another folder name.",
-                // Cloud save launch confirmations removed
-                // Cloud save offline confirmation translations removed
             };
             return fallbacks[key] || key;
         },
         "installExists": (typeof ddmm !== 'undefined' && ddmm.mods) ? ddmm.mods.installExists : () => false,
         "browseForMod": (typeof ddmm !== 'undefined' && ddmm.mods) ? ddmm.mods.browseForMod : () => null,
         "openURL": (typeof ddmm !== 'undefined' && ddmm.app) ? ddmm.app.openURL : () => {},
-        // isSaveLocked function removed - cloud saves disabled
         "showCreateInstall": function (mod) {
             this.install_creation.has_mod = !!mod;
             this.install_creation.mod = mod || "";
@@ -321,7 +295,6 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             ddmm.app.showFile(folder);
         },
         "launchInstall": function (install) {
-            // Cloud save logic removed - launch directly
             ddmm.mods.launchInstall(install);
         },
         "generateInstallFolderName": function () {
@@ -540,7 +513,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 }
             }, 150); // 150ms debounce for smooth real-time search
         },
-        // getSaveFiles function removed - cloud saves disabled
+
         backupInstall: function(folderName) {
             if (!window.ddmm || !window.ddmm.app || !window.ddmm.app.showSaveDialog) {
                 alert('Backup not supported in this environment.');

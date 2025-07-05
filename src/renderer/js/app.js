@@ -1093,8 +1093,6 @@ window.addEventListener('ddmm-ready', (event) => {
     window.ThemeManager.loadUITheme();
 });
 
-// Window animation functionality has been removed
-
 // Simplified titlebar drag functionality
 function setupTitlebarDragListeners() {
     const titlebar = document.querySelector('.titlebar');

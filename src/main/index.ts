@@ -82,8 +82,6 @@ function showError(title: string, body: string, stacktrace: string, fatal: boole
     appWindow.setClosable(true);
 }
 
-// Cloud save function removed
-
 /**
  * Launches an install, handling frontend functionality automatically
  * @param folderName The folder containing the install

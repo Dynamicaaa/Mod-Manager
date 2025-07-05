@@ -13,11 +13,6 @@ interface AppConfigData {
     updateUrl?: string;
     features: {
         autoUpdates: boolean;
-        cloudSaves: boolean;
-        achievements: boolean;
-        analytics?: boolean;
-        crashReporting?: boolean;
-        betaFeatures?: boolean;
     };
     defaults: {
         sdkMode: string;
@@ -136,11 +131,6 @@ export default class AppConfig {
             updateUrl: localConfig.updateUrl,
             features: {
                 autoUpdates: localConfig.features?.autoUpdates !== false,
-                cloudSaves: localConfig.features?.cloudSaves !== false,
-                achievements: localConfig.features?.achievements !== false,
-                analytics: localConfig.features?.analytics,
-                crashReporting: localConfig.features?.crashReporting,
-                betaFeatures: localConfig.features?.betaFeatures
             },
             defaults: {
                 sdkMode: localConfig.defaults?.sdkMode || "always",

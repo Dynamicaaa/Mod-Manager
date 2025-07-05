@@ -40,7 +40,6 @@ export default class InstallList {
                     if (data && typeof data === "object" && data.name) {
                         data.globalSave = data.globalSave ?? false;
                         data.mod = data.mod ?? null;
-                        data.achievements = [];
                     }
                 } catch (legacyErr) {
                     console.info("Failed to read install data from both new and legacy locations for " + folder, legacyErr.message);
@@ -59,7 +58,7 @@ export default class InstallList {
             }
 
             if (data && data.name) {
-                returned.push(new Install(data.name, folder, data.globalSave, screenshots, data.achievements, data.mod));
+                returned.push(new Install(data.name, folder, data.globalSave, screenshots, data.mod));
             }
         }
 

@@ -116,9 +116,6 @@
         "button_settings": "Settings",
         "tag_global_save": "Global Save",
         "tag_sdk": "SDK",
-        "title_achievements": "Achievements ({0} / {1})",
-        "description_achievements": "Continue thy play to unlock more achievements.",
-        "description_achievements_complete": "All achievements unlocked. Huzzah!",
         "title_screenshots_none": "No screenshots",
         "title_screenshots_one": "1 screenshot",
         "title_screenshots": "{0} screenshots",
@@ -236,7 +233,6 @@
         "link_language": "Language",
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
-        "link_sdk": "Achievements & SDK",
         "header_application": "Application",
         "link_updates": "Updates",
         "link_storage": "Storage Location",
@@ -271,14 +267,6 @@
         "option_stable": "Stable",
         "option_beta": "Beta",
         "button_check": "Check for updates"
-      },
-      "section_sdk": {
-        "title": "Achievements & SDK",
-        "subtitle": "Change how achievements are handled.",
-        "description_mode": "Enable achievements:",
-        "checkbox_always": "Always (recommended)",
-        "checkbox_specified": "When the mod supports them",
-        "checkbox_never": "Never"
       },
       "section_testing": {
         "title": "SDK Debug",

@@ -116,9 +116,6 @@
         "button_settings": "Settigns",
         "tag_global_save": "Gwobaw Save",
         "tag_sdk": "SDK",
-        "title_achievements": "Achievements ({0} / {1})",
-        "description_achievements": "Keep pwaying to unwock mowe achievements.",
-        "description_achievements_complete": "You'we unwocked aww achievements. Congwatuwations!",
         "title_screenshots_none": "No scweenshots",
         "title_screenshots_one": "1 scweenshot",
         "title_screenshots": "{0} scweenshots",
@@ -236,7 +233,6 @@
         "link_language": "Wanguage",
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
-        "link_sdk": "Achievements & SDK",
         "header_application": "Appwication",
         "link_updates": "Updates",
         "link_storage": "Stowage Location",
@@ -271,14 +267,6 @@
         "option_stable": "Stabwe",
         "option_beta": "Beta",
         "button_check": "Check fow updates"
-      },
-      "section_sdk": {
-        "title": "Achievements & SDK",
-        "subtitle": "Change the way achievements awe handwed.",
-        "description_mode": "Enabwe achievements:",
-        "checkbox_always": "Awways (wecommended)",
-        "checkbox_specified": "When the mod specifies it suppowts them",
-        "checkbox_never": "Nevew"
       },
       "section_testing": {
         "title": "SDK Debug",

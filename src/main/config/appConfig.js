@@ -3,7 +3,7 @@
 
 const APP_CONFIG = {
     name: "Doki Doki Mod Manager",
-    version: "5.0.0",
+    version: "5.0.1",
     description: "Mod Manager for Doki Doki Literature Club",
     author: "Dynamicaaa",
 
@@ -13,11 +13,6 @@ const APP_CONFIG = {
 
     features: {
         autoUpdates: true,
-        cloudSaves: false,
-        achievements: true,
-        analytics: false,
-        crashReporting: false,
-        betaFeatures: false
     },
     defaults: {
         sdkMode: "always",

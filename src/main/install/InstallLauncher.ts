@@ -93,7 +93,6 @@ export default class InstallLauncher {
                     if (installData && typeof installData === "object" && installData.name) {
                         installData.globalSave = installData.globalSave ?? false;
                         installData.mod = installData.mod ?? null;
-                        installData.achievements = [];
                     }
                 } catch (legacyErr) {
                     logToConsole("Install directory " + installFolder + " does not exist!", LogClass.ERROR);

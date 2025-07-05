@@ -660,15 +660,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     <p><small>Since Sayonika is open source, you can run your own server or connect to community-hosted instances.</small></p>
                 </div>
             </div>
-            <div v-else-if="selected_option === 'sdk'">
-                <h1>{{_("renderer.tab_options.section_sdk.title")}}</h1>
-                <p>{{_("renderer.tab_options.section_sdk.subtitle")}}</p>
-                <br>
-                <p><strong>{{_("renderer.tab_options.section_sdk.description_mode")}}</strong></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="always" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_always")}}</label></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="specified" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_specified")}}</label></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="never" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_never")}}</label></p>
-            </div>
 
             <div v-else-if="selected_option === 'testing'">
                 <h1>{{_("renderer.tab_options.section_testing.title")}}</h1>
@@ -771,12 +762,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                             "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.menu.wine") : "Wine Configuration",
                             "id": "wine_config"
                         }
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
                     ]
                 },
                 {
@@ -1387,7 +1372,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             const iconMap = {
                 "Appearance": "fas fa-palette",
                 "Application": "fas fa-cog",
-                "Enhancements": "fas fa-magic",
                 "Developers": "fas fa-code"
             };
             return iconMap[sectionHeader] || "fas fa-star";
@@ -1630,12 +1614,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                         {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
                         {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
                         {"title": "Sayonika Server", "id": "sayonika_server"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
                     ]
                 },
                 {
