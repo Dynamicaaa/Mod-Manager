@@ -44,7 +44,7 @@ export function getWineVersion(): Promise<string | null> {
   return new Promise((resolve) => {
     if (!isWineInstalled()) {
       console.warn("[Wine] getWineVersion: Wine binary not found.");
-      return resolve("Unknown");
+      return resolve("Not Installed");
     }
     const winePath = getWineBinPath();
     const proc = spawn(winePath, ["--version"]);
@@ -169,6 +169,14 @@ export async function checkForWineUpdate(): Promise<{ updated: boolean, latestVe
   let currentVersion = "";
   try {
     const ver = await getWineVersion();
+    if (ver === "Not Installed") {
+      console.warn("[Wine] Wine is not installed, aborting update check.");
+      return {
+        updated: false,
+        latestVersion: "",
+        currentVersion: "Not Installed"
+      };
+    }
     if (ver) {
       currentVersion = ver.replace(/^wine-?/i, "").split(" ")[0];
       console.debug("[Wine] Detected current Wine version:", currentVersion);
