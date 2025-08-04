@@ -44,6 +44,7 @@
     "file-url": "^4.0.0",
     "fs-extra": "^11.2.0",
     "fuse.js": "^7.0.0",
+    "lzma-native": "^8.0.6",
     "node-stream-zip": "^1.15.0",
     "semver": "^7.5.0",
     "tar": "^7.4.3",
@@ -52,6 +53,7 @@
     "yauzl": "^3.0.0"
   },
   "devDependencies": {
+    "adm-zip": "^0.5.16",
     "electron": "^28.0.0",
     "electron-builder": "^24.13.3",
     "mocha": "^10.2.0",

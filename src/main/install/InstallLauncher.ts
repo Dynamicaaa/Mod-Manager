@@ -5,6 +5,7 @@ import {spawn} from "child_process";
 import * as chmodr from "chmodr";
 import I18n from "../utils/i18n";
 import Config from "../utils/Config";
+import MacOSFileCleanup from "../utils/MacOSFileCleanup";
 
 import SDKDebugConsole from "../sdk/SDKDebugConsole";
 import {LogClass} from "../sdk/LogClass";
@@ -292,6 +293,9 @@ export default class InstallLauncher {
             }
 
             logToConsole("Launching game...");
+
+            // Clean up macOS resource fork files before launching
+            MacOSFileCleanup.cleanGameInstallation(joinPath(installFolder, "install"));
 
             // Ensure the game executable is executable before launching
             this.ensureExecutableBeforeLaunch(gameExecutable).then((result) => {

@@ -7,6 +7,7 @@ import ArchiveConverter from "../archive/ArchiveConverter";
 import {app} from "electron";
 import {randomBytes} from "crypto";
 import DDLCModTemplate2Format from "./mappers/DDLCModTemplate2Format";
+import MacOSFileCleanup from "../utils/MacOSFileCleanup";
 
 export default class ModInstaller {
 
@@ -146,6 +147,7 @@ export default class ModInstaller {
                             const processNextEntry = () => {
                                 zipfile2.readEntry();
                             };
+                            let appBundleDeleted = false; // Track if DDLC.app has been deleted for replacement
                             zipfile2.readEntry();
                             zipfile2.on("entry", (entry) => {
                                 let fileName = entry.fileName;
@@ -190,13 +192,63 @@ export default class ModInstaller {
                                     }
                                     return;
                                 }
+                                
+                                // Handle app bundle replacement for macOS (only delete once)
+                                if (process.platform === "darwin" && mapper.requiresAppBundleReplacement && mapper.requiresAppBundleReplacement() && !appBundleDeleted) {
+                                    const appBundle = mapper.getAppBundleToReplace(fileName);
+                                    if (appBundle) {
+                                        console.log("App bundle replacement: Deleting existing DDLC.app and will replace with", appBundle);
+                                        const ddlcAppPath = joinPath(installPath, "DDLC.app");
+                                        try {
+                                            if (require("fs").existsSync(ddlcAppPath)) {
+                                                console.log("Deleting existing DDLC.app:", ddlcAppPath);
+                                                removeSync(ddlcAppPath);
+                                                appBundleDeleted = true; // Mark as deleted so we don't delete again
+                                            }
+                                        } catch (e) {
+                                            console.warn("Could not delete existing DDLC.app:", e.message);
+                                        }
+                                    }
+                                }
+                                
                                 const outputPath = joinPath(installPath, mappedPath);
                                 console.log("Extracting:", fileName, "->", mappedPath);
                                 const outputDir = outputPath.split(pathSep).slice(0, -1).join(pathSep);
+                                
+                                // Enhanced conflict resolution function
+                                const resolvePathConflicts = (targetDir: string) => {
+                                    const fs = require("fs");
+                                    const pathParts = targetDir.split(pathSep);
+                                    for (let i = 1; i <= pathParts.length; i++) {
+                                        const partialPath = pathParts.slice(0, i).join(pathSep);
+                                        try {
+                                            const stats = fs.statSync(partialPath);
+                                            if (stats.isFile()) {
+                                                console.warn("Found file blocking directory creation:", partialPath);
+                                                console.warn("Removing conflicting file to allow directory creation");
+                                                fs.unlinkSync(partialPath);
+                                            }
+                                        } catch (statErr) {
+                                            // Path doesn't exist, continue checking
+                                        }
+                                    }
+                                };
+                                
+                                // First, resolve any conflicts in the path
+                                resolvePathConflicts(outputDir);
+                                
+                                // Then try to create the directory
                                 try {
                                     mkdirsSync(outputDir);
                                 } catch (e) {
                                     console.warn("Could not create directory " + outputDir + ":", e.message);
+                                    // Try conflict resolution again and retry
+                                    resolvePathConflicts(outputDir);
+                                    try {
+                                        mkdirsSync(outputDir);
+                                    } catch (retryErr) {
+                                        console.error("Failed to create directory after conflict resolution:", retryErr.message);
+                                    }
                                 }
                                 zipfile2.openReadStream(entry, (err, readStream) => {
                                     if (err) {
@@ -204,7 +256,23 @@ export default class ModInstaller {
                                         rj(err);
                                         return;
                                     }
-                                    const writeStream = createWriteStream(outputPath);
+                                    let writeStream;
+                                    try {
+                                        writeStream = createWriteStream(outputPath);
+                                    } catch (createErr) {
+                                        console.error("Failed to create write stream for " + outputPath + ":", createErr);
+                                        // Try resolving conflicts one more time
+                                        resolvePathConflicts(outputDir);
+                                        try {
+                                            mkdirsSync(outputDir);
+                                            writeStream = createWriteStream(outputPath);
+                                        } catch (finalErr) {
+                                            console.error("Final attempt failed for " + outputPath + ":", finalErr);
+                                            rj(finalErr);
+                                            return;
+                                        }
+                                    }
+                                    
                                     readStream.pipe(writeStream);
                                     writeStream.on('close', () => {
                                         console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
@@ -221,6 +289,10 @@ export default class ModInstaller {
                                             } catch (e) {
                                                 console.warn("Failed to write mod instance config:", e.message);
                                             }
+                                            
+                                            // Clean up macOS resource fork files that can interfere with game execution
+                                            MacOSFileCleanup.cleanGameInstallation(installPath);
+                                            
                                             ff(undefined);
                                         } else {
                                             processNextEntry();
@@ -228,7 +300,43 @@ export default class ModInstaller {
                                     });
                                     writeStream.on('error', (err) => {
                                         console.error("Failed to write file " + outputPath + ":", err);
-                                        rj(err);
+                                        // If writing fails, try resolving conflicts and retrying
+                                        if (err.code === 'ENOTDIR') {
+                                            console.log("ENOTDIR error detected, attempting conflict resolution and retry");
+                                            resolvePathConflicts(outputDir);
+                                            try {
+                                                mkdirsSync(outputDir);
+                                                // Restart the extraction for this file
+                                                zipfile2.openReadStream(entry, (retryErr, retryReadStream) => {
+                                                    if (retryErr) {
+                                                        console.error("Failed to retry read stream:", retryErr);
+                                                        rj(retryErr);
+                                                        return;
+                                                    }
+                                                    const retryWriteStream = createWriteStream(outputPath);
+                                                    retryReadStream.pipe(retryWriteStream);
+                                                    retryWriteStream.on('close', () => {
+                                                        console.log("Retry successful for:", outputPath);
+                                                        console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
+                                                        if (entriesProcessed >= totalEntries) {
+                                                            console.log("Mod installation completed successfully");
+                                                            ff(undefined);
+                                                        } else {
+                                                            processNextEntry();
+                                                        }
+                                                    });
+                                                    retryWriteStream.on('error', (retryWriteErr) => {
+                                                        console.error("Retry also failed:", retryWriteErr);
+                                                        rj(retryWriteErr);
+                                                    });
+                                                });
+                                            } catch (resolveErr) {
+                                                console.error("Conflict resolution failed:", resolveErr);
+                                                rj(err);
+                                            }
+                                        } else {
+                                            rj(err);
+                                        }
                                     });
                                     readStream.on('error', (err) => {
                                         console.error("Failed to read from zip stream for " + fileName + ":", err);

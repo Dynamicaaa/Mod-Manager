@@ -1,6 +1,6 @@
 import {app} from "electron";
 import {join as joinPath} from "path";
-import {readdirSync, readFileSync} from "fs";
+import {readdirSync, readFileSync, statSync} from "fs";
 import Install from "../types/Install";
 import Config from "../utils/Config";
 import I18n from "../utils/i18n";
@@ -23,6 +23,25 @@ export default class InstallList {
         let returned: Install[] = [];
 
         for (let folder of installs) {
+            // Skip system files and hidden files that aren't valid install directories
+            if (folder.startsWith('.') || folder === 'Thumbs.db') {
+                console.log("Skipping system file:", folder);
+                continue;
+            }
+
+            // Verify this is actually a directory before trying to read install data
+            try {
+                const folderPath = joinPath(installFolder, folder);
+                const folderStats = statSync(folderPath);
+                if (!folderStats.isDirectory()) {
+                    console.log("Skipping non-directory:", folder);
+                    continue;
+                }
+            } catch (e) {
+                console.log("Could not stat folder:", folder, e.message);
+                continue;
+            }
+
             const dataFilePath: string = joinPath(installFolder, folder, "install", "install.json");
             let data: any = null;
             let fileContents: string | null = null;

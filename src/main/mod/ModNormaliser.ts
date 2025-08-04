@@ -33,6 +33,7 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
             let topLevelDirs = new Set<string>();
             let gameFiles = 0;
             let characterFiles = 0;
+            let hasAppFile = false;
 
             zipfile.readEntry();
             zipfile.on("entry", (entry) => {
@@ -71,6 +72,11 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
                 if (fileExtension === "chr") {
                     characterFiles++;
                 }
+                
+                // Check for .app files (macOS app bundles)
+                if (fileName.toLowerCase().endsWith(".app") || fileName.toLowerCase().includes(".app/")) {
+                    hasAppFile = true;
+                }
 
                 zipfile.readEntry();
             });
@@ -84,6 +90,7 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
                     topLevelDirs: Array.from(topLevelDirs),
                     gameFiles,
                     characterFiles,
+                    hasAppFile,
                     totalFiles: fileList.length
                 });
 
@@ -106,15 +113,13 @@ export function inferMapper(zipPath: string): Promise<ModMapper> {
                         isDDLCModTemplate2 = true;
                     }
                 }
-                if (isDDLCModTemplate2) {
+                // On macOS, always prioritize MacOSAutorunFormat for proper app bundle structure
+                if (process.platform === "darwin" && (gameFiles > 0 || characterFiles > 0)) {
+                    // MacOSAutorunFormat: Use autorun folder and app bundle structure for macOS compatibility
+                    mapper = new MacOSAutorunFormat(hasAppFile);
+                } else if (isDDLCModTemplate2) {
                     const DDLCModTemplate2Format = require("./mappers/DDLCModTemplate2Format").default;
                     mapper = new DDLCModTemplate2Format();
-                }
-                // Decision logic for mapper selection
-                // On macOS, prefer autorun format for better mod compatibility
-                else if (process.platform === "darwin" && (gameFiles > 0 || characterFiles > 0)) {
-                    // MacOSAutorunFormat: Use autorun folder for automatic mod loading on macOS
-                    mapper = new MacOSAutorunFormat();
                 } else if (hasModJson && (hasGameFolder || hasCharactersFolder)) {
                     // ModManagerFormat: has mod.json and proper folder structure
                     mapper = new ModManagerFormat();

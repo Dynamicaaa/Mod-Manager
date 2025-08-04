@@ -4,73 +4,82 @@ import {ModMapper} from "../ModMapper";
 /*
     macOS Autorun Format: Optimized for macOS Ren'Py mod compatibility
     
-    This mapper ensures better mod compatibility on macOS by placing Ren'Py script files
-    (.rpy and .rpyc) into the game/autorun directory. This helps with mod loading issues
-    that can occur on macOS systems.
+    This mapper ensures better mod compatibility on macOS with two different extraction modes:
     
-    Mapping behavior:
-    - .rpy/.rpyc files go to game/autorun/ (for better macOS compatibility)
-    - .chr files go to characters/
-    - .rpa files go to game/
-    - Files already in game/ or characters/ directories are preserved
-    - Other files are ignored
+    1. Standard Mode (no .app file in mod):
+       - ALL files and folders are extracted to DDLC.app/Contents/Resources/autorun/
+       - Complete directory structure is preserved within the autorun folder
+    
+    2. App Bundle Mode (.app file present in mod):
+       - Files within .app bundles overwrite DDLC.app structure
+       - Other files and game/ folder are extracted to the root install directory
+       - This is because custom modded .app files don't have an autorun directory structure
+    
+    This ensures maximum compatibility with all mod types on macOS.
  */
 export default class MacOSAutorunFormat extends ModMapper {
+    private hasAppFile: boolean;
+
+    constructor(hasAppFile: boolean = false) {
+        super();
+        this.hasAppFile = hasAppFile;
+    }
 
     public mapFile(path: string): string {
-        const pathParts = path.split("/");
-        const filename = pathParts[pathParts.length - 1];
-
         // Skip directories
         if (path.endsWith("/")) {
             return null;
         }
 
-        // Handle files already in structured directories
-        if (pathParts[0] === "game") {
-            // For Ren'Py scripts in game folder, move to autorun for better macOS compatibility
-            if (filename.match(/\.rp(y|yc)$/)) {
-                return joinPath("game", "autorun", filename);
+        // App Bundle Mode: Handle mods that contain .app files
+        if (this.hasAppFile) {
+            // If this is a .app directory, map it to replace DDLC.app
+            if (path.toLowerCase().endsWith(".app")) {
+                return "DDLC.app";
+            }
+            // If this is a file within a .app bundle, map it to overwrite DDLC.app structure
+            else if (path.toLowerCase().includes(".app/")) {
+                // Handle files within .app bundle (e.g., "CustomMod.app/Contents/Resources/file.txt")
+                const appIndex = path.toLowerCase().indexOf(".app/");
+                const pathWithinApp = path.substring(appIndex + 5); // Remove "*.app/" prefix
+                return joinPath("DDLC.app", pathWithinApp);
             } else {
-                // Keep other game files in their original location
+                // All other files (including game/ folder) go to root install directory
                 return path;
             }
-        } else if (pathParts[0] === "characters") {
-            // Keep character files in characters folder
-            return path;
-        } else if (this.isAssetFolder(pathParts[0])) {
-            // Include asset folders (audio, images, fonts, videos, etc.)
-            return path;
-        } else if (filename.match(/\.rp(y|yc)$/)) {
-            // Place loose Ren'Py scripts in autorun for macOS compatibility
-            return joinPath("game", "autorun", filename);
-        } else if (filename.match(/\.chr$/)) {
-            // Place character files in characters folder
-            return joinPath("characters", filename);
-        } else if (filename.match(/\.rpa$/)) {
-            // Place archive files in game folder
-            return joinPath("game", filename);
         }
 
-        // Ignore all other files
-        return null;
+        // Standard Mode: Extract ALL files to the autorun directory
+        return joinPath("DDLC.app", "Contents", "Resources", "autorun", path);
     }
 
-    private isAssetFolder(folderName: string): boolean {
-        // Common asset folder names that should be preserved
-        const assetFolders = [
-            "audio", "music", "sound", "sounds",
-            "images", "img", "sprites", "backgrounds", "bg", "cg",
-            "fonts", "font",
-            "videos", "video", "movies", "movie",
-            "data", "assets", "resources",
-            "gui", "interface",
-            "tl", "translations", "lang", "locale"
-        ];
-        return assetFolders.includes(folderName.toLowerCase());
-    }
+
 
     public getFriendlyName(): string {
         return "macOS Autorun Mod";
+    }
+
+    /**
+     * Returns true if this mapper requires app bundle replacement
+     */
+    public requiresAppBundleReplacement(): boolean {
+        return this.hasAppFile;
+    }
+
+    /**
+     * Gets the app bundle file that should replace DDLC.app
+     * Returns null if no app bundle replacement is needed
+     */
+    public getAppBundleToReplace(fileName: string): string | null {
+        if (!this.hasAppFile) {
+            return null;
+        }
+        
+        // Check if this is a .app directory
+        if (fileName.toLowerCase().endsWith(".app")) {
+            return fileName;
+        }
+        
+        return null;
     }
 }

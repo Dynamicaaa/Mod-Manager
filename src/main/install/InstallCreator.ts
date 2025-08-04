@@ -4,6 +4,7 @@ import {createWriteStream, writeFileSync, existsSync, accessSync, constants, rea
 import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
 import Config from "../utils/Config";
+import MacOSFileCleanup from "../utils/MacOSFileCleanup";
 
 export default class InstallCreator {
 
@@ -206,6 +207,9 @@ export default class InstallCreator {
                         }
 
                         // Step-by-step debug logs for install.json writing
+
+                        // Clean up macOS resource fork files that can interfere with game execution
+                        MacOSFileCleanup.cleanGameInstallation(joinPath(canonicalPath, "install"));
 
                         // Ensure DDLC.sh is executable on Linux
                         this.ensureDDLCExecutable(joinPath(canonicalPath, "install")).then((result) => {
