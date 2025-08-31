@@ -87,7 +87,7 @@ export default class ArchiveConverter {
         });
     }
     
-    private static createZip(sourceDir: string, outputPath: string): Promise<void> {
+    public static createZip(sourceDir: string, outputPath: string): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
                 const output = require("fs").createWriteStream(outputPath);

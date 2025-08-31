@@ -110,7 +110,17 @@ const app = new Vue({
             "title": "Sayonika Maintenance",
             "message": "",
             "estimatedTime": null
-        }
+        },
+        "progress_overlay": {
+            "display": false,
+            "sessionId": null,
+            "phase": "analyzing",
+            "progress": 0,
+            "message": "",
+            "currentFile": null,
+            "cancellable": true
+        },
+        "active_installations": new Map()
     },
     "computed": {
         "currentTabComponent": function () {
@@ -447,12 +457,88 @@ const app = new Vue({
                return `Expected completion: ${this.maintenance_cover.estimatedTime}`;
            }
        },
-        "showInstallMod": function (mod) {
-            this.tab = "mods";
-            this.$nextTick(() => {
-                ddmm.emit("create install", mod);
-            });
-        },
+
+       // Progress tracking methods
+       "showProgressOverlay": function(sessionId, initialData) {
+           console.log("Showing progress overlay for session:", sessionId);
+           this.progress_overlay = {
+               display: true,
+               sessionId: sessionId,
+               phase: initialData.phase || "analyzing",
+               progress: initialData.progress || 0,
+               message: initialData.message || "Starting installation...",
+               currentFile: initialData.currentFile || null,
+               cancellable: true
+           };
+       },
+
+       "updateProgress": function(progressEvent) {
+           console.log("Updating progress:", progressEvent);
+           if (this.progress_overlay.sessionId === progressEvent.sessionId) {
+               this.progress_overlay.phase = progressEvent.phase;
+               this.progress_overlay.progress = progressEvent.progress;
+               this.progress_overlay.message = progressEvent.message;
+               this.progress_overlay.currentFile = progressEvent.currentFile;
+               
+               // Auto-hide when complete
+               if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
+                   setTimeout(() => {
+                       this.hideProgressOverlay();
+                   }, 2000);
+               }
+           }
+           
+           // Track active installations
+           this.active_installations.set(progressEvent.sessionId, progressEvent);
+       },
+
+       "hideProgressOverlay": function() {
+           console.log("Hiding progress overlay");
+           this.progress_overlay.display = false;
+           this.progress_overlay.sessionId = null;
+       },
+
+       "cancelInstallation": function() {
+           if (this.progress_overlay.sessionId && typeof ddmm !== 'undefined' && ddmm.progress) {
+               console.log("Cancelling installation:", this.progress_overlay.sessionId);
+               ddmm.progress.cancelInstallation(this.progress_overlay.sessionId).then((success) => {
+                   if (success) {
+                       this.hideProgressOverlay();
+                   }
+               }).catch((error) => {
+                   console.error("Failed to cancel installation:", error);
+               });
+           }
+       },
+
+       "getProgressPhaseIcon": function(phase) {
+           const icons = {
+               'analyzing': '🔍',
+               'extracting': '📦',
+               'mapping': '🗺️',
+               'installing': '⚙️',
+               'verifying': '✅'
+           };
+           return icons[phase] || '⚙️';
+       },
+
+       "getProgressPhaseDescription": function(phase) {
+           const descriptions = {
+               'analyzing': 'Analyzing mod structure',
+               'extracting': 'Extracting archive files',
+               'mapping': 'Mapping file destinations',
+               'installing': 'Installing mod files',
+               'verifying': 'Verifying installation'
+           };
+           return descriptions[phase] || 'Processing';
+       },
+
+       "showInstallMod": function (mod) {
+           this.tab = "mods";
+           this.$nextTick(() => {
+               ddmm.emit("create install", mod);
+           });
+       },
 
         "showUserMenu": function (ev) {
             ddmm.app.showUserMenu(ev.clientX, ev.clientY);
@@ -724,6 +810,22 @@ const app = new Vue({
             console.log("Window language-changed event received:", event.detail);
             this.refreshTabNames();
             this.$forceUpdate();
+        });
+
+        // Set up progress tracking event listeners
+        if (typeof ddmm !== 'undefined' && ddmm.on) {
+            ddmm.on('installation-progress', (progressEvent) => {
+                console.log("Installation progress event received:", progressEvent);
+                this.updateProgress(progressEvent);
+            });
+        }
+
+        // Also listen for progress events on window (fallback)
+        window.addEventListener('installation-progress', (event) => {
+            console.log("Window installation-progress event received:", event.detail);
+            if (event.detail) {
+                this.updateProgress(event.detail);
+            }
         });
     }
 });

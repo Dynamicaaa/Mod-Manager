@@ -1,5 +1,7 @@
 import {join as joinPath} from "path";
 import {ModMapper} from "../ModMapper";
+import {CrossPlatformPathResolver} from "../../utils/CrossPlatformPathResolver";
+import {RenpyVersionInfo} from "../../version/RenpyVersionDetector";
 
 /*
     macOS Autorun Format: Optimized for macOS Ren'Py mod compatibility
@@ -38,7 +40,7 @@ export default class MacOSAutorunFormat extends ModMapper {
                 return "DDLC.app";
             }
             // If this is a file within a .app bundle, map it to overwrite DDLC.app structure
-            else if (path.toLowerCase().includes(".app/")) {
+            else if (CrossPlatformPathResolver.isAppBundle(path)) {
                 // Handle files within .app bundle (e.g., "CustomMod.app/Contents/Resources/file.txt")
                 const appIndex = path.toLowerCase().indexOf(".app/");
                 const pathWithinApp = path.substring(appIndex + 5); // Remove "*.app/" prefix
@@ -49,8 +51,14 @@ export default class MacOSAutorunFormat extends ModMapper {
             }
         }
 
-        // Standard Mode: Extract ALL files to the autorun directory
-        return joinPath("DDLC.app", "Contents", "Resources", "autorun", path);
+        // Standard Mode: Use CrossPlatformPathResolver for consistent macOS path handling
+        // For macOS, files should go to the autorun directory for maximum compatibility
+        if (process.platform === "darwin") {
+            return joinPath("DDLC.app", "Contents", "Resources", "autorun", path);
+        } else {
+            // For other platforms, use standard mapping
+            return path;
+        }
     }
 
 
@@ -81,5 +89,52 @@ export default class MacOSAutorunFormat extends ModMapper {
         }
         
         return null;
+    }
+
+    /**
+     * Checks if this mapper supports the detected Ren'Py version
+     * MacOSAutorunFormat works best with Ren'Py 7.x and 8.x
+     */
+    public supportsVersion(versionInfo: RenpyVersionInfo): boolean {
+        if (!versionInfo) {
+            return true; // Support unknown versions
+        }
+
+        // MacOSAutorunFormat works well with modern Ren'Py versions
+        if (versionInfo.majorVersion >= 7) {
+            return true;
+        }
+
+        // Ren'Py 6.x may have compatibility issues with modern macOS app bundle structure
+        if (versionInfo.majorVersion === 6) {
+            console.warn(`MacOSAutorunFormat: Ren'Py ${versionInfo.version} may have compatibility issues on macOS`);
+            return true; // Still allow but with warning
+        }
+
+        return true;
+    }
+
+    /**
+     * Gets version-specific installation notes
+     */
+    public getVersionNotes(): string[] {
+        const notes: string[] = [];
+        
+        if (this.versionInfo) {
+            if (this.versionInfo.majorVersion === 6) {
+                notes.push('Legacy Ren\'Py 6.x detected - may require manual path adjustments');
+                notes.push('Consider testing mod functionality after installation');
+            } else if (this.versionInfo.majorVersion === 7) {
+                notes.push('Ren\'Py 7.x detected - good compatibility with macOS autorun structure');
+            } else if (this.versionInfo.majorVersion === 8) {
+                notes.push('Ren\'Py 8.x detected - optimal compatibility with modern macOS');
+            }
+
+            if (this.hasAppFile && this.versionInfo.majorVersion >= 7) {
+                notes.push('App bundle replacement mode - mod will replace DDLC.app structure');
+            }
+        }
+
+        return notes;
     }
 }

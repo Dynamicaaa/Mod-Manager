@@ -3,35 +3,446 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Enhanced Debug Console</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-size: 16px;
-            font-family: monospace;
-            background-color: #000;
-            color: #eee;
-            overflow-y: scroll;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
+        .header {
+            background: #2d2d30;
+            padding: 10px 15px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: #1177bb;
+        }
+
+        .btn.secondary {
+            background: #5a5a5a;
+        }
+
+        .btn.secondary:hover {
+            background: #6a6a6a;
+        }
+
+        .filters {
+            background: #252526;
+            padding: 8px 15px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: #cccccc;
+        }
+
+        .filter-checkbox {
+            margin-right: 5px;
+        }
+
+        .log-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: #1e1e1e;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-family: inherit;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            word-wrap: break-word;
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+
+        .log-entry.hidden {
+            display: none;
+        }
+
+        .log-entry:hover {
+            background: #2a2a2a;
+        }
+
+        .timestamp {
+            color: #6a9955;
+            font-size: 11px;
+            white-space: nowrap;
+            min-width: 85px;
+        }
+
+        .level {
+            font-weight: bold;
+            min-width: 70px;
+            text-align: center;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .level.DEBUG { background: #404040; color: #cccccc; }
+        .level.INFO { background: #0e639c; color: #ffffff; }
+        .level.SUCCESS { background: #107c10; color: #ffffff; }
+        .level.WARN { background: #ffd700; color: #000000; }
+        .level.ERROR { background: #e51400; color: #ffffff; }
+        .level.PROGRESS { background: #17a2b8; color: #ffffff; }
+        .level.NETWORK { background: #6f42c1; color: #ffffff; }
+        .level.FILE { background: #fd7e14; color: #ffffff; }
+        .level.INSTALL { background: #28a745; color: #ffffff; }
+        .level.ARCHIVE { background: #007bff; color: #ffffff; }
+
+        .module {
+            color: #4ec9b0;
+            font-weight: bold;
+            min-width: 80px;
+            font-size: 12px;
+        }
+
+        .message {
+            flex: 1;
+            color: #d4d4d4;
+            line-height: 1.4;
+        }
+
+        .data {
+            margin-top: 5px;
+            padding: 5px;
+            background: #2d2d30;
+            border-radius: 3px;
+            border-left: 3px solid #0e639c;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+
+        .progress-bar {
+            display: inline-block;
+            width: 100px;
+            height: 8px;
+            background: #3e3e42;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 8px;
+            vertical-align: middle;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #17a2b8;
+            transition: width 0.3s ease;
+        }
+
+        .separator {
+            text-align: center;
+            color: #6a9955;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 5px;
+            border-top: 1px solid #3e3e42;
+            border-bottom: 1px solid #3e3e42;
+        }
+
+        /* Old compatibility classes */
         .warning {
-            color: #ff4;
+            color: #ffd700;
         }
 
         .error {
-            color: #f44;
+            color: #f44336;
+        }
+
+        .stats {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .search-box {
+            padding: 4px 8px;
+            background: #3c3c3c;
+            border: 1px solid #555;
+            color: #d4d4d4;
+            border-radius: 3px;
+            font-size: 12px;
+            width: 200px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0e639c;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>🔧 Enhanced Debug Console</h1>
+        <div class="controls">
+            <button class="btn secondary" onclick="clearConsole()">Clear</button>
+            <button class="btn secondary" onclick="exportLogs()">Export</button>
+            <button class="btn secondary" onclick="toggleAutoscroll()">Auto-scroll: ON</button>
+        </div>
+    </div>
 
-<div id="log"></div>
+    <div class="filters">
+        <div class="filter-group">
+            <span class="filter-label">Filter:</span>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search logs..." oninput="filterLogs()">
+        </div>
+        <div class="filter-group">
+            <span class="filter-label">Levels:</span>
+            <label><input type="checkbox" class="filter-checkbox" data-level="DEBUG" checked onchange="filterLogs()"> DEBUG</label>
+            <label><input type="checkbox" class="filter-checkbox" data-level="INFO" checked onchange="filterLogs()"> INFO</label>
+            <label><input type="checkbox" class="filter-checkbox" data-level="SUCCESS" checked onchange="filterLogs()"> SUCCESS</label>
+            <label><input type="checkbox" class="filter-checkbox" data-level="WARN" checked onchange="filterLogs()"> WARN</label>
+            <label><input type="checkbox" class="filter-checkbox" data-level="ERROR" checked onchange="filterLogs()"> ERROR</label>
+            <label><input type="checkbox" class="filter-checkbox" data-level="PROGRESS" checked onchange="filterLogs()"> PROGRESS</label>
+        </div>
+        <div class="stats" id="stats">
+            Total: 0 | Visible: 0
+        </div>
+    </div>
+
+    <div class="log-container" id="logContainer">
+        <!-- Log entries will be inserted here -->
+    </div>
 
 <script>
+    let logEntries = [];
+    let autoScroll = true;
+    let maxEntries = 1000;
 
+    // Enhanced log entry rendering
+    function addLogEntry(entry) {
+        logEntries.push(entry);
+        
+        // Keep only the last N entries
+        if (logEntries.length > maxEntries) {
+            logEntries = logEntries.slice(-maxEntries);
+            // Clear and re-render all entries
+            renderAllEntries();
+            return;
+        }
+
+        renderLogEntry(entry);
+        updateStats();
+        
+        if (autoScroll) {
+            scrollToBottom();
+        }
+    }
+
+    function renderLogEntry(entry) {
+        const container = document.getElementById('logContainer');
+        const entryDiv = document.createElement('div');
+        entryDiv.className = `log-entry level-${entry.level}`;
+        entryDiv.dataset.level = entry.level;
+        entryDiv.dataset.module = entry.module;
+
+        // Handle separator entries
+        if (entry.data && entry.data.separator) {
+            entryDiv.innerHTML = `<div class="separator">${entry.message}</div>`;
+            container.appendChild(entryDiv);
+            return;
+        }
+
+        // Format timestamp
+        const timestamp = new Date(entry.timestamp).toLocaleTimeString();
+        
+        // Build entry HTML
+        let html = `
+            <span class="timestamp">${timestamp}</span>
+            <span class="level ${entry.level}">${entry.level}</span>
+            <span class="module">[${entry.module}]</span>
+            <div class="message">${escapeHtml(entry.message)}`;
+
+        // Add progress bar for progress entries
+        if (entry.level === 'PROGRESS' && entry.data && entry.data.percentage !== undefined) {
+            html += `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${entry.data.percentage}%"></div>
+                </div>
+                ${entry.data.percentage}%`;
+        }
+
+        html += '</div>';
+
+        // Add data section if present
+        if (entry.data && !entry.data.separator) {
+            html += `<div class="data">${escapeHtml(JSON.stringify(entry.data, null, 2))}</div>`;
+        }
+
+        entryDiv.innerHTML = html;
+        container.appendChild(entryDiv);
+    }
+
+    function renderAllEntries() {
+        const container = document.getElementById('logContainer');
+        container.innerHTML = '';
+        logEntries.forEach(entry => renderLogEntry(entry));
+        filterLogs();
+    }
+
+    function clearConsole() {
+        logEntries = [];
+        document.getElementById('logContainer').innerHTML = '';
+        updateStats();
+    }
+
+    function exportLogs() {
+        const data = JSON.stringify(logEntries, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `debug-logs-${new Date().toISOString().slice(0, 19)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function toggleAutoscroll() {
+        autoScroll = !autoScroll;
+        const btn = event.target;
+        btn.textContent = `Auto-scroll: ${autoScroll ? 'ON' : 'OFF'}`;
+        btn.className = autoScroll ? 'btn secondary' : 'btn';
+    }
+
+    function filterLogs() {
+        const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+        const levelFilters = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(cb => cb.dataset.level);
+        const entries = document.querySelectorAll('.log-entry');
+        let visibleCount = 0;
+
+        entries.forEach(entry => {
+            const level = entry.dataset.level;
+            const module = entry.dataset.module;
+            const text = entry.textContent.toLowerCase();
+            
+            const levelMatch = levelFilters.includes(level);
+            const searchMatch = !searchTerm || text.includes(searchTerm);
+            
+            if (levelMatch && searchMatch) {
+                entry.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                entry.classList.add('hidden');
+            }
+        });
+
+        updateStats(visibleCount);
+    }
+
+    function updateStats(visibleCount = null) {
+        const total = logEntries.length;
+        const visible = visibleCount !== null ? visibleCount : document.querySelectorAll('.log-entry:not(.hidden)').length;
+        document.getElementById('stats').textContent = `Total: ${total} | Visible: ${visible}`;
+    }
+
+    function scrollToBottom() {
+        const container = document.getElementById('logContainer');
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // IPC Event Handlers
+    if (typeof require !== 'undefined') {
+        const { ipcRenderer } = require('electron');
+
+        // Enhanced log entry
+        ipcRenderer.on('enhanced-log', (event, entry) => {
+            addLogEntry(entry);
+        });
+
+        // Log history (when console opens)
+        ipcRenderer.on('log-history', (event, history) => {
+            logEntries = history;
+            renderAllEntries();
+            updateStats();
+            if (autoScroll) {
+                scrollToBottom();
+            }
+        });
+
+        // Clear console
+        ipcRenderer.on('clear-console', () => {
+            clearConsole();
+        });
+
+        // Legacy log support
+        ipcRenderer.on('log', (event, data) => {
+            const entry = {
+                timestamp: new Date().toISOString(),
+                level: data.clazz === 'error' ? 'ERROR' : data.clazz === 'warning' ? 'WARN' : 'INFO',
+                module: 'Legacy',
+                message: data.text
+            };
+            addLogEntry(entry);
+        });
+    }
+
+    // Initialize
+    updateStats();
 </script>
 </body>
 </html>

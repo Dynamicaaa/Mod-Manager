@@ -135,6 +135,31 @@
         </div>
     </div>
 
+    <!-- Progress Overlay -->
+    <div class="cover progress-overlay" v-if="progress_overlay.display" :style="{'background-image': backgroundImageStyle}">
+        <div class="progress-dialog-content">
+            <h1><i :class="['fas', getProgressPhaseIcon(progress_overlay.phase)]"></i> {{getProgressPhaseDescription(progress_overlay.phase)}}</h1>
+            <p>{{progress_overlay.message}}</p>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" :style="{width: progress_overlay.progress + '%'}"></div>
+                </div>
+                <span class="progress-percentage">{{progress_overlay.progress}}%</span>
+            </div>
+
+            <p v-if="progress_overlay.currentFile" class="current-file">
+                <small>Processing: {{progress_overlay.currentFile}}</small>
+            </p>
+
+            <div class="progress-actions" v-if="progress_overlay.cancellable">
+                <button class="secondary" @click="cancelInstallation">
+                    <i class="fas fa-times fa-fw"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="titlebar">
         <div class="app-title">
             <span>{{app_name}}</span>

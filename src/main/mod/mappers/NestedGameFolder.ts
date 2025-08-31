@@ -4,6 +4,7 @@
  */
 import {sep as pathSep, join as joinPath} from "path";
 import {ModMapper} from "../ModMapper";
+import {CrossPlatformPathResolver} from "../../utils/CrossPlatformPathResolver";
 
 export default class NestedGameFolder extends ModMapper {
 
@@ -13,18 +14,18 @@ export default class NestedGameFolder extends ModMapper {
 
         // Check if this is in an asset folder that should be preserved
         if (pathParts.length > 1 && this.isAssetFolder(pathParts[0])) {
-            return path;
+            return CrossPlatformPathResolver.normalizePath(path);
         }
 
         // On macOS, place Ren'Py scripts in autorun for better compatibility
         if (process.platform === "darwin" && filename && filename.match(/\.rp(y|yc)$/)) {
-            return joinPath("game", "autorun", filename);
+            return CrossPlatformPathResolver.normalizePath(joinPath("game", "autorun", filename));
         }
 
         // For everything else, treat the first folder as the game folder
         pathParts[0] = "game";
 
-        return pathParts.join(pathSep);
+        return CrossPlatformPathResolver.normalizePath(pathParts.join(pathSep));
     }
 
     private isAssetFolder(folderName: string): boolean {

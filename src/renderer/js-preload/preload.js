@@ -621,3 +621,31 @@ try {
 } catch (e) {
     console.error("Preload: Failed to expose WineAPI to renderer:", e);
 }
+
+// Progress tracking support
+api.progress = {};
+
+// Get installation progress
+api.progress.getInstallationProgress = function(sessionId) {
+    return ipcRenderer.invoke("get-installation-progress", sessionId);
+};
+
+// Cancel installation
+api.progress.cancelInstallation = function(sessionId) {
+    return ipcRenderer.invoke("cancel-installation", sessionId);
+};
+
+// Listen for progress updates
+ipcRenderer.on("mod-installation-progress", (event, progressEvent) => {
+    api.emit("installation-progress", progressEvent);
+});
+
+// Expose progress events to window for Vue components
+if (typeof window !== 'undefined') {
+    window.addEventListener('installation-progress', (event) => {
+        // Forward to Vue app if available
+        if (window.app && window.app.$emit) {
+            window.app.$emit('installation-progress', event.detail);
+        }
+    });
+}

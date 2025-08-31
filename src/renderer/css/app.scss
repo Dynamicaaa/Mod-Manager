@@ -1569,6 +1569,141 @@ input[type="radio"]:focus {
   color: $ui-muted-text-colour;
 }
 
+// Version Compatibility Styles
+.version-compatibility-info {
+  margin-top: 1em;
+  padding: 1.2em;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.compatibility-detected {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 1em;
+  padding: 0.8em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.compatibility-detected i {
+  color: $ddlc-yuri;
+  font-size: 1.1em;
+}
+
+.confidence-badge {
+  padding: 0.2em 0.6em;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.confidence-badge.confidence-high {
+  background: linear-gradient(135deg, $ddlc-monika, rgba(0, 209, 102, 0.8));
+  color: white;
+}
+
+.confidence-badge.confidence-medium {
+  background: linear-gradient(135deg, $ui-warning-colour-bg, rgba(240, 147, 43, 0.8));
+  color: white;
+}
+
+.confidence-badge.confidence-low {
+  background: linear-gradient(135deg, $ui-danger-colour-bg, rgba(235, 77, 75, 0.8));
+  color: white;
+}
+
+.compatibility-notes {
+  margin-bottom: 1em;
+}
+
+.compatibility-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.6em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.compatibility-note i {
+  color: $ddlc-sayori;
+  margin-top: 0.1em;
+  flex-shrink: 0;
+}
+
+.compatibility-check {
+  margin-top: 1em;
+}
+
+.compatibility-warning {
+  padding: 1em;
+  background: rgba(235, 77, 75, 0.15);
+  border: 1px solid rgba(235, 77, 75, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-warning i {
+  color: $ui-danger-colour-bg;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.compatibility-warning ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.compatibility-warning li {
+  margin-bottom: 0.3em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.compatibility-caution {
+  padding: 1em;
+  background: rgba(240, 147, 43, 0.15);
+  border: 1px solid rgba(240, 147, 43, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-caution i {
+  color: $ui-warning-colour-bg;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.compatibility-caution ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.compatibility-caution li {
+  margin-bottom: 0.3em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.compatibility-good {
+  padding: 1em;
+  background: rgba(0, 209, 102, 0.15);
+  border: 1px solid rgba(0, 209, 102, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-good i {
+  color: $ddlc-monika;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
 // endregion
 
 // region DDLC-Themed Menu Enhancements
@@ -4346,4 +4481,83 @@ body.sunset-theme {
   margin: 0;
   opacity: 0.7;
   font-size: 0.9em;
+}
+
+// Progress Overlay Styles
+.cover.progress-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 160; // Higher than maintenance cover
+}
+
+.progress-dialog-content {
+  background: rgba(30, 30, 30, 0.95);
+  border: 2px solid $ui-primary-colour-bg;
+  border-radius: 12px;
+  padding: 2em;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 105, 180, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.progress-dialog-content h1 {
+  color: $ui-primary-colour-bg;
+  margin-bottom: 1em;
+  text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.progress-dialog-content h1 i {
+  margin-right: 0.5em;
+}
+
+.progress-dialog-content p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+.progress-bar-container {
+  width: 80%;
+  margin: 1.5em auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $ui-primary-colour-bg, $ui-secondary-colour-bg);
+  transition: width 0.3s ease-out;
+  border-radius: 10px 0 0 10px;
+}
+
+.progress-percentage {
+  color: $ui-highlight-text-colour;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.current-file {
+  font-size: 0.85em;
+  color: $ui-muted-text-colour;
+  margin-top: 1em;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-actions {
+  margin-top: 1.5em;
+}
+
+.progress-actions button {
+  margin: 0 0.5em;
 }

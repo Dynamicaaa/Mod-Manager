@@ -4,10 +4,23 @@ import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
 import {inferMapper} from "./ModNormaliser";
 import ArchiveConverter from "../archive/ArchiveConverter";
+import {UniversalArchiveExtractor} from "../archive/UniversalArchiveExtractor";
+import {InstallationProgressManager} from "../progress/InstallationProgressManager";
+import {
+    ModInstallationError,
+    UnsupportedArchiveError,
+    ExtractionError,
+    FileOperationError,
+    PathConflictError,
+    ErrorHandlerUtils
+} from "../errors/ModInstallationError";
 import {app} from "electron";
 import {randomBytes} from "crypto";
 import DDLCModTemplate2Format from "./mappers/DDLCModTemplate2Format";
 import MacOSFileCleanup from "../utils/MacOSFileCleanup";
+import {ModContainerManager} from "../container/ModContainerManager";
+import {ModContainer, ModManifest} from "../container/ModContainer";
+import { AdvancedBackupManager } from "../backup/BackupManager";
 
 export default class ModInstaller {
 
@@ -15,36 +28,240 @@ export default class ModInstaller {
      * Installs a mod into a copy of DDLC by guessing which files should go where
      * @param modPath The path to the mod
      * @param installPath The path to the game installation
+     * @param instanceName The name of the instance
+     * @param createBackup Whether to create a backup before installation
      */
-    public static installMod(modPath: string, installPath: string, instanceName?: string): Promise<null> {
-        if (modPath.endsWith(".zip")) {
-            return ModInstaller.installZip(modPath, installPath, instanceName);
-        } else if (ModInstaller.isArchive(modPath)) { // Fix: use class name for static method
-            return new Promise((ff, rj) => {
-                const tempZipPath: string = joinPath(app.getPath("temp"), "ddmm" + randomBytes(8).toString("hex") + ".zip");
-                ArchiveConverter.convertToZip(modPath, tempZipPath).then(() => {
-                    ModInstaller.installZip(tempZipPath, installPath, instanceName).then(() => {
-                        removeSync(tempZipPath);
-                        ff(undefined);
+    public static async installMod(modPath: string, installPath: string, instanceName?: string, createBackup: boolean = true): Promise<null> {
+        const sessionId = randomBytes(8).toString("hex");
+        const progressReporter = InstallationProgressManager.createReporter(sessionId);
+        
+        try {
+            // Create automatic backup before mod installation
+            if (createBackup && existsSync(installPath)) {
+                progressReporter.updatePhase('analyzing', 'Creating pre-installation backup...', 2);
+                
+                try {
+                    const modFileName = modPath.split(pathSep).pop() || 'unknown-mod';
+                    await AdvancedBackupManager.createAutomaticBackup(
+                        installPath,
+                        `Pre-installation backup for ${modFileName} on ${instanceName || 'unnamed instance'}`
+                    );
+                    console.log(`Created automatic backup before installing mod: ${modFileName}`);
+                } catch (backupError) {
+                    console.warn('Failed to create pre-installation backup:', backupError.message);
+                    // Continue with installation even if backup fails
+                }
+            }
+            
+            if (modPath.endsWith(".zip")) {
+                return await ModInstaller.installZip(modPath, installPath, instanceName, progressReporter);
+            } else if (ModInstaller.isArchive(modPath)) {
+                return new Promise((ff, rj) => {
+                    const tempDir: string = joinPath(app.getPath("temp"), "ddmm-extract-" + randomBytes(8).toString("hex"));
+                    
+                    progressReporter.updatePhase('extracting', 'Extracting archive with universal extractor...', 10);
+                    
+                    // Extract using UniversalArchiveExtractor directly, then process the extracted files
+                    UniversalArchiveExtractor.extract(modPath, tempDir).then(() => {
+                        progressReporter.updatePhase('installing', 'Processing extracted files...', 30);
+                        
+                        // Process extracted files directly without zip conversion
+                        ModInstaller.installFromDirectory(tempDir, installPath, instanceName, progressReporter).then(() => {
+                            removeSync(tempDir);
+                            ff(undefined);
+                        }).catch(e => {
+                            removeSync(tempDir);
+                            const wrappedError = ErrorHandlerUtils.wrapError(e, 'installing', modPath);
+                            progressReporter.error(wrappedError, 'installing');
+                            rj(wrappedError);
+                        });
                     }).catch(e => {
-                        rj(e);
+                        const wrappedError = new ExtractionError(modPath, e);
+                        progressReporter.error(wrappedError, 'extracting');
+                        rj(wrappedError);
                     });
-                }).catch(e => {
-                    rj(e);
                 });
-            });
-        } else {
-            return new Promise((ff, rj) => {
-                rj(new Error("File was not an archive."));
-            })
+            } else {
+                const error = new UnsupportedArchiveError(modPath);
+                progressReporter.error(error, 'analyzing');
+                throw error;
+            }
+        } catch (error) {
+            if (error instanceof ModInstallationError) {
+                throw error;
+            }
+            const wrappedError = ErrorHandlerUtils.wrapError(error, 'analyzing', modPath);
+            progressReporter.error(wrappedError);
+            throw wrappedError;
         }
     }
 
-    private static installZip(modPath: string, installPath: string, instanceName?: string): Promise<null> {
+    /**
+     * Installs a mod using the container system for better isolation and management
+     * @param modPath The path to the mod
+     * @param installPath The path to the game installation
+     * @param instanceName The name of the mod instance
+     * @param isolationMode The isolation mode for the container
+     * @returns Promise resolving to the created container
+     */
+    public static async installModWithContainer(
+        modPath: string,
+        installPath: string,
+        instanceName: string,
+        isolationMode: 'full' | 'partial' | 'none' = 'partial'
+    ): Promise<ModContainer> {
+        const sessionId = randomBytes(8).toString("hex");
+        const progressReporter = InstallationProgressManager.createReporter(sessionId);
+        
+        try {
+            // Initialize container manager
+            ModContainerManager.initialize();
+            
+            progressReporter.updatePhase('analyzing', 'Analyzing mod structure...', 5);
+            
+            // Extract mod to temporary directory
+            const tempDir: string = joinPath(app.getPath("temp"), "ddmm-container-" + randomBytes(8).toString("hex"));
+            
+            if (modPath.endsWith(".zip")) {
+                progressReporter.updatePhase('extracting', 'Extracting ZIP archive...', 10);
+                await ModInstaller.extractZipToDirectory(modPath, tempDir);
+            } else if (ModInstaller.isArchive(modPath)) {
+                progressReporter.updatePhase('extracting', 'Extracting archive...', 10);
+                await UniversalArchiveExtractor.extract(modPath, tempDir);
+            } else {
+                throw new UnsupportedArchiveError(modPath);
+            }
+            
+            progressReporter.updatePhase('analyzing', 'Detecting mod format...', 20);
+            
+            // Infer mapper from the extracted files
+            const mapper = await inferMapper(tempDir);
+            
+            // Collect mod files
+            const modFiles = await ModInstaller.collectModFiles(tempDir);
+            
+            progressReporter.updatePhase('analyzing', 'Creating mod manifest...', 30);
+            
+            // Create mod manifest
+            const manifest = ModContainerManager.createModManifest({
+                name: instanceName,
+                version: "1.0.0", // Could be extracted from mod metadata if available
+                files: modFiles,
+                originalModPath: modPath,
+                mapper: mapper.getFriendlyName()
+            });
+            
+            progressReporter.updatePhase('installing', 'Creating container...', 40);
+            
+            // Create container
+            const container = await ModContainerManager.createContainer(
+                tempDir,
+                installPath,
+                manifest,
+                isolationMode
+            );
+            
+            progressReporter.updatePhase('installing', 'Activating container...', 80);
+            
+            // Activate the container
+            await ModContainerManager.activateContainer(container.id, installPath);
+            
+            progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
+            
+            // Clean up temporary directory
+            removeSync(tempDir);
+            
+            progressReporter.updatePhase('verifying', 'Installation complete', 100);
+            progressReporter.complete();
+            
+            console.log(`Mod installed successfully in container: ${container.id}`);
+            return container;
+            
+        } catch (error) {
+            const wrappedError = ErrorHandlerUtils.wrapError(error, 'installing', modPath);
+            progressReporter.error(wrappedError);
+            throw wrappedError;
+        }
+    }
+
+    /**
+     * Activates a specific mod container
+     * @param containerId The container ID to activate
+     * @param installPath The installation path where the container should be applied
+     */
+    public static async activateModContainer(containerId: string, installPath: string): Promise<void> {
+        try {
+            ModContainerManager.initialize();
+            await ModContainerManager.activateContainer(containerId, installPath);
+            console.log(`Container activated: ${containerId}`);
+        } catch (error) {
+            console.error(`Failed to activate container ${containerId}:`, error);
+            throw error;
+        }
+    }
+
+    /**
+     * Deactivates the currently active container
+     * @param containerId Optional specific container to deactivate
+     */
+    public static async deactivateModContainer(containerId?: string): Promise<void> {
+        try {
+            ModContainerManager.initialize();
+            await ModContainerManager.deactivateContainer(containerId);
+            console.log(`Container deactivated: ${containerId || 'current active'}`);
+        } catch (error) {
+            console.error(`Failed to deactivate container:`, error);
+            throw error;
+        }
+    }
+
+    /**
+     * Lists all available mod containers
+     * @returns Array of all containers
+     */
+    public static listModContainers(): ModContainer[] {
+        ModContainerManager.initialize();
+        return ModContainerManager.listContainers();
+    }
+
+    /**
+     * Gets the currently active container
+     * @returns The active container or undefined
+     */
+    public static getActiveModContainer(): ModContainer | undefined {
+        ModContainerManager.initialize();
+        return ModContainerManager.getActiveContainer();
+    }
+
+    /**
+     * Removes a mod container
+     * @param containerId The container ID to remove
+     */
+    public static async removeModContainer(containerId: string): Promise<void> {
+        try {
+            ModContainerManager.initialize();
+            await ModContainerManager.removeContainer(containerId);
+            console.log(`Container removed: ${containerId}`);
+        } catch (error) {
+            console.error(`Failed to remove container ${containerId}:`, error);
+            throw error;
+        }
+    }
+
+    private static installZip(modPath: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
         return new Promise((ff, rj) => {
+            // Create progress reporter if not provided
+            if (!progressReporter) {
+                const sessionId = randomBytes(8).toString("hex");
+                progressReporter = InstallationProgressManager.createReporter(sessionId);
+            }
+            
+            progressReporter.updatePhase('analyzing', 'Preparing installation directory...', 5);
             mkdirsSync(installPath);
             const installJsonPath = joinPath(installPath, "install.json");
             console.log("Preparing to install mod from " + modPath);
+            
+            progressReporter.updatePhase('analyzing', 'Detecting mod format...', 10);
             inferMapper(modPath).then(async (mapper) => {
                 let modName = instanceName ?? "";
                 if (!instanceName && existsSync(installJsonPath)) {
@@ -70,6 +287,7 @@ export default class ModInstaller {
                     await WineAPI.ensureWine();
                 }
                 installJson.mapper = mapper.getFriendlyName();
+                progressReporter.updatePhase('analyzing', 'Writing installation metadata...', 20);
                 try {
                     const fs = require("fs");
                     const fd = fs.openSync(installJsonPath, "w");
@@ -92,10 +310,13 @@ export default class ModInstaller {
                     }
                 }
                 console.log("Installing with mapper: " + mapper.getFriendlyName());
+                progressReporter.updatePhase('analyzing', 'Opening archive for analysis...', 25);
                 yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
                     if (err) {
                         console.error("Failed to open mod zip file:", err);
-                        rj(err);
+                        const wrappedError = new ExtractionError(modPath, err);
+                        progressReporter.error(wrappedError, 'analyzing');
+                        rj(wrappedError);
                         return;
                     }
                     let entriesProcessed = 0;
@@ -138,6 +359,7 @@ export default class ModInstaller {
                             modRootDir = Array.from(modRootCandidates).sort((a, b) => b.length - a.length)[0];
                         }
                         console.log("Total entries to process:", totalEntries, "Top-level dirs:", Array.from(topLevelCandidates), "Mod root dir:", modRootDir);
+                        progressReporter.updatePhase('installing', `Installing ${totalEntries} files...`, 30);
                         yauzl.open(modPath, {lazyEntries: true}, (err, zipfile2) => {
                             if (err) {
                                 console.error("Failed to reopen mod zip file:", err);
@@ -253,7 +475,9 @@ export default class ModInstaller {
                                 zipfile2.openReadStream(entry, (err, readStream) => {
                                     if (err) {
                                         console.error("Failed to open read stream for " + fileName + ":", err);
-                                        rj(err);
+                                        const wrappedError = new FileOperationError("read", fileName, err);
+                                        progressReporter.error(wrappedError, 'installing');
+                                        rj(wrappedError);
                                         return;
                                     }
                                     let writeStream;
@@ -268,15 +492,20 @@ export default class ModInstaller {
                                             writeStream = createWriteStream(outputPath);
                                         } catch (finalErr) {
                                             console.error("Final attempt failed for " + outputPath + ":", finalErr);
-                                            rj(finalErr);
+                                            const wrappedError = new FileOperationError("write", outputPath, finalErr);
+                                            progressReporter.error(wrappedError, 'installing');
+                                            rj(wrappedError);
                                             return;
                                         }
                                     }
                                     
                                     readStream.pipe(writeStream);
                                     writeStream.on('close', () => {
+                                        const fileProgress = Math.round((entriesProcessed / totalEntries) * 60) + 30; // 30-90% range
+                                        progressReporter.updateProgress(fileProgress, fileName, `Processing file ${entriesProcessed} of ${totalEntries}`);
                                         console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
                                         if (entriesProcessed >= totalEntries) {
+                                            progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
                                             console.log("Mod installation completed successfully");
                                             // Write mod instance config with mapper info
                                             const configPath = joinPath(installPath, "game", "mod.json");
@@ -291,8 +520,10 @@ export default class ModInstaller {
                                             }
                                             
                                             // Clean up macOS resource fork files that can interfere with game execution
+                                            progressReporter.updatePhase('verifying', 'Cleaning up macOS files...', 95);
                                             MacOSFileCleanup.cleanGameInstallation(installPath);
                                             
+                                            progressReporter.complete();
                                             ff(undefined);
                                         } else {
                                             processNextEntry();
@@ -310,16 +541,22 @@ export default class ModInstaller {
                                                 zipfile2.openReadStream(entry, (retryErr, retryReadStream) => {
                                                     if (retryErr) {
                                                         console.error("Failed to retry read stream:", retryErr);
-                                                        rj(retryErr);
+                                                        const wrappedError = new FileOperationError("retry read", fileName, retryErr);
+                                                        progressReporter.error(wrappedError, 'installing');
+                                                        rj(wrappedError);
                                                         return;
                                                     }
                                                     const retryWriteStream = createWriteStream(outputPath);
                                                     retryReadStream.pipe(retryWriteStream);
                                                     retryWriteStream.on('close', () => {
                                                         console.log("Retry successful for:", outputPath);
+                                                        const fileProgress = Math.round((entriesProcessed / totalEntries) * 60) + 30;
+                                                        progressReporter.updateProgress(fileProgress, fileName);
                                                         console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
                                                         if (entriesProcessed >= totalEntries) {
+                                                            progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
                                                             console.log("Mod installation completed successfully");
+                                                            progressReporter.complete();
                                                             ff(undefined);
                                                         } else {
                                                             processNextEntry();
@@ -327,54 +564,213 @@ export default class ModInstaller {
                                                     });
                                                     retryWriteStream.on('error', (retryWriteErr) => {
                                                         console.error("Retry also failed:", retryWriteErr);
-                                                        rj(retryWriteErr);
+                                                        const wrappedError = new FileOperationError("retry write", outputPath, retryWriteErr);
+                                                        progressReporter.error(wrappedError, 'installing');
+                                                        rj(wrappedError);
                                                     });
                                                 });
                                             } catch (resolveErr) {
                                                 console.error("Conflict resolution failed:", resolveErr);
-                                                rj(err);
+                                                const wrappedError = new PathConflictError(outputPath);
+                                                progressReporter.error(wrappedError, 'installing');
+                                                rj(wrappedError);
                                             }
                                         } else {
-                                            rj(err);
+                                            const wrappedError = new FileOperationError("write", outputPath, err);
+                                            progressReporter.error(wrappedError, 'installing');
+                                            rj(wrappedError);
                                         }
                                     });
                                     readStream.on('error', (err) => {
                                         console.error("Failed to read from zip stream for " + fileName + ":", err);
-                                        rj(err);
+                                        const wrappedError = new FileOperationError("read", fileName, err);
+                                        progressReporter.error(wrappedError, 'installing');
+                                        rj(wrappedError);
                                     });
                                 });
                             });
                             zipfile2.on("end", () => {
                                 if (totalEntries === 0) {
                                     console.log("No entries to process - mod installation completed");
+                                    progressReporter.complete();
                                     ff(undefined);
                                 }
                             });
                             zipfile2.on("error", (err) => {
                                 console.error("Error during mod extraction:", err);
-                                rj(err);
+                                const wrappedError = ErrorHandlerUtils.wrapError(err, 'installing', modPath);
+                                progressReporter.error(wrappedError, 'installing');
+                                rj(wrappedError);
                             });
                         });
                     });
                     zipfile.on("error", (err) => {
                         console.error("Error counting files in zip:", err);
-                        rj(err);
+                        const wrappedError = new ExtractionError(modPath, err);
+                        progressReporter.error(wrappedError, 'analyzing');
+                        rj(wrappedError);
                     });
                 });
             }).catch((err) => {
                 console.error("Error during mod installation:", err);
-                rj(err);
+                const wrappedError = ErrorHandlerUtils.wrapError(err, 'analyzing', modPath);
+                progressReporter.error(wrappedError);
+                rj(wrappedError);
             });
         });
     }
 
-    private static isArchive(filename: string): boolean {
-        const lowerFilename = filename.toLowerCase();
-        const archiveExtensions = [
-            "zip", "rar", "7z",
-            "tar", "tar.gz", "tgz", "tar.bz2", "tar.xz", "tar.Z"
-        ];
+    /**
+     * Installs a mod from an already extracted directory
+     * @param sourceDir The directory containing extracted mod files
+     * @param installPath The path to the game installation
+     * @param instanceName Optional instance name
+     * @param progressReporter Progress reporter instance
+     */
+    private static installFromDirectory(sourceDir: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
+        return new Promise((ff, rj) => {
+            const archiver = require('archiver');
+            const fs = require('fs');
+            const tempZipPath: string = joinPath(app.getPath("temp"), "ddmm-temp-" + randomBytes(8).toString("hex") + ".zip");
+            
+            try {
+                progressReporter.updatePhase('extracting', 'Preparing extracted files for installation...', 40);
+                
+                // Create a temporary zip from the extracted directory
+                const output = fs.createWriteStream(tempZipPath);
+                const archive = archiver('zip', { zlib: { level: 9 } });
+                
+                output.on('close', () => {
+                    // Install the temporary zip file
+                    ModInstaller.installZip(tempZipPath, installPath, instanceName, progressReporter).then(() => {
+                        // Clean up temporary zip
+                        try { unlinkSync(tempZipPath); } catch (e) {}
+                        ff(undefined);
+                    }).catch(e => {
+                        try { unlinkSync(tempZipPath); } catch (cleanupErr) {}
+                        rj(e);
+                    });
+                });
+                
+                output.on('error', (err) => {
+                    const wrappedError = new ExtractionError(sourceDir, err);
+                    progressReporter.error(wrappedError, 'extracting');
+                    rj(wrappedError);
+                });
+                
+                archive.on('error', (err) => {
+                    const wrappedError = new ExtractionError(sourceDir, err);
+                    progressReporter.error(wrappedError, 'extracting');
+                    rj(wrappedError);
+                });
+                
+                archive.pipe(output);
+                archive.directory(sourceDir, false);
+                archive.finalize();
+                
+            } catch (error) {
+                const wrappedError = new ExtractionError(sourceDir, error);
+                progressReporter.error(wrappedError, 'extracting');
+                rj(wrappedError);
+            }
+        });
+    }
+
+    /**
+     * Extracts a ZIP file to a directory
+     * @param zipPath The path to the ZIP file
+     * @param outputDir The directory to extract to
+     */
+    private static async extractZipToDirectory(zipPath: string, outputDir: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            mkdirsSync(outputDir);
+            
+            yauzl.open(zipPath, { lazyEntries: true }, (err, zipfile) => {
+                if (err) {
+                    reject(new ExtractionError(zipPath, err));
+                    return;
+                }
+                
+                zipfile.readEntry();
+                zipfile.on("entry", (entry) => {
+                    if (/\/$/.test(entry.fileName)) {
+                        // Directory entry
+                        const dirPath = joinPath(outputDir, entry.fileName);
+                        mkdirsSync(dirPath);
+                        zipfile.readEntry();
+                    } else {
+                        // File entry
+                        const filePath = joinPath(outputDir, entry.fileName);
+                        const fileDir = filePath.split(pathSep).slice(0, -1).join(pathSep);
+                        mkdirsSync(fileDir);
+                        
+                        zipfile.openReadStream(entry, (err, readStream) => {
+                            if (err) {
+                                reject(new FileOperationError("read", entry.fileName, err));
+                                return;
+                            }
+                            
+                            const writeStream = createWriteStream(filePath);
+                            readStream.pipe(writeStream);
+                            
+                            writeStream.on('close', () => {
+                                zipfile.readEntry();
+                            });
+                            
+                            writeStream.on('error', (writeErr) => {
+                                reject(new FileOperationError("write", filePath, writeErr));
+                            });
+                        });
+                    }
+                });
+                
+                zipfile.on("end", () => {
+                    resolve();
+                });
+                
+                zipfile.on("error", (zipErr) => {
+                    reject(new ExtractionError(zipPath, zipErr));
+                });
+            });
+        });
+    }
+
+    /**
+     * Recursively collects all files in a directory
+     * @param dirPath The directory to scan
+     * @returns Array of relative file paths
+     */
+    private static async collectModFiles(dirPath: string): Promise<string[]> {
+        const fs = require('fs');
+        const path = require('path');
+        const files: string[] = [];
         
-        return archiveExtensions.some(ext => lowerFilename.endsWith("." + ext));
+        function walkDir(currentPath: string, relativePath: string = '') {
+            const items = fs.readdirSync(currentPath);
+            
+            for (const item of items) {
+                const itemPath = path.join(currentPath, item);
+                const itemRelativePath = relativePath ? path.join(relativePath, item) : item;
+                
+                const stats = fs.statSync(itemPath);
+                if (stats.isDirectory()) {
+                    walkDir(itemPath, itemRelativePath);
+                } else if (stats.isFile()) {
+                    files.push(itemRelativePath);
+                }
+            }
+        }
+        
+        try {
+            walkDir(dirPath);
+            return files;
+        } catch (error) {
+            console.error('Error collecting mod files:', error);
+            return [];
+        }
+    }
+
+    private static isArchive(filename: string): boolean {
+        return UniversalArchiveExtractor.isSupportedArchive(filename);
     }
 }

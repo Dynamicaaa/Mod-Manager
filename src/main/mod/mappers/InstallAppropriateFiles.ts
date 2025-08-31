@@ -1,5 +1,6 @@
 import {join as joinPath} from "path";
 import {ModMapper} from "../ModMapper";
+import {CrossPlatformPathResolver} from "../../utils/CrossPlatformPathResolver";
 
 /*
     Take files and put them in their appropriate directories.
@@ -15,19 +16,19 @@ export default class InstallAppropriateFiles extends ModMapper {
         
         // Check if this file is in an asset folder that should be preserved
         if (pathParts.length > 1 && this.isAssetFolder(pathParts[0])) {
-            return path;
+            return CrossPlatformPathResolver.normalizePath(path);
         }
         
         if (filename.match(/\.rp(y|yc)$/)) { // it is a ren'py script file
             // On macOS, place scripts in autorun for better compatibility
             if (process.platform === "darwin") {
-                return joinPath("game", "autorun", filename);
+                return CrossPlatformPathResolver.normalizePath(joinPath("game", "autorun", filename));
             }
-            return joinPath("game", filename);
+            return CrossPlatformPathResolver.normalizePath(joinPath("game", filename));
         } else if (filename.match(/\.rpa$/)) { // it is a ren'py archive file
-            return joinPath("game", filename);
+            return CrossPlatformPathResolver.normalizePath(joinPath("game", filename));
         } else if (filename.match(/\.chr$/)) { // it is a character file
-            return joinPath("characters", filename);
+            return CrossPlatformPathResolver.normalizePath(joinPath("characters", filename));
         }
 
         return null; // ignore it

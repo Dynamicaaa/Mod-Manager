@@ -1,5 +1,6 @@
 import {join as joinPath} from "path";
 import {ModMapper} from "../ModMapper";
+import {CrossPlatformPathResolver} from "../../utils/CrossPlatformPathResolver";
 
 /*
     A last resort attempt to install a mod by dumping everything in the game folder.
@@ -13,16 +14,16 @@ export default class DumpAndHopeForTheBest extends ModMapper {
         
         // If the file is in a recognized asset folder, preserve the folder structure
         if (pathParts.length > 1 && this.isAssetFolder(pathParts[0])) {
-            return path;
+            return CrossPlatformPathResolver.normalizePath(path);
         }
         
         // On macOS, place Ren'Py scripts in autorun for better compatibility
         if (process.platform === "darwin" && filename && filename.match(/\.rp(y|yc)$/)) {
-            return joinPath("game", "autorun", filename);
+            return CrossPlatformPathResolver.normalizePath(joinPath("game", "autorun", filename));
         }
         
         // For everything else, put it in the game folder as a fallback
-        return joinPath("game", path);
+        return CrossPlatformPathResolver.normalizePath(joinPath("game", path));
     }
 
     private isAssetFolder(folderName: string): boolean {

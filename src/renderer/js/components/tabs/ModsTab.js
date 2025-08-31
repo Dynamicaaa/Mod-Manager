@@ -130,6 +130,49 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 <div class="form-group" v-if="install_creation.has_mod">
                     <p><label>{{_("renderer.tab_mods.install_creation.label_mod")}}</label></p>
                     <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.description_mod')" v-model="install_creation.mod" readonly @click="installCreationSelectMod" style="cursor: pointer;"></p>
+                    <div v-if="install_creation.mod && install_creation.version_info" class="version-compatibility-info">
+                        <div class="compatibility-detected">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Detected Ren'Py Version:</strong> {{install_creation.version_info.version}}
+                            <span class="confidence-badge" :class="'confidence-' + install_creation.version_info.confidence">
+                                {{install_creation.version_info.confidence}} confidence
+                            </span>
+                        </div>
+                        <div v-if="install_creation.version_info.compatibilityNotes && install_creation.version_info.compatibilityNotes.length > 0" class="compatibility-notes">
+                            <div v-for="note in install_creation.version_info.compatibilityNotes" class="compatibility-note">
+                                <i class="fas fa-lightbulb"></i> {{note}}
+                            </div>
+                        </div>
+                        <div v-if="install_creation.compatibility_check" class="compatibility-check">
+                            <div v-if="!install_creation.compatibility_check.isCompatible" class="compatibility-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Compatibility Issues Detected:</strong>
+                                <ul>
+                                    <li v-for="issue in install_creation.compatibility_check.issues">{{issue}}</li>
+                                </ul>
+                                <div v-if="install_creation.compatibility_check.recommendations && install_creation.compatibility_check.recommendations.length > 0">
+                                    <strong>Recommendations:</strong>
+                                    <ul>
+                                        <li v-for="rec in install_creation.compatibility_check.recommendations">{{rec}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div v-else-if="install_creation.compatibility_check.confidence === 'medium' || install_creation.compatibility_check.confidence === 'low'" class="compatibility-caution">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Compatibility Notes:</strong>
+                                <ul v-if="install_creation.compatibility_check.issues.length > 0">
+                                    <li v-for="issue in install_creation.compatibility_check.issues">{{issue}}</li>
+                                </ul>
+                                <ul v-if="install_creation.compatibility_check.recommendations.length > 0">
+                                    <li v-for="rec in install_creation.compatibility_check.recommendations">{{rec}}</li>
+                                </ul>
+                            </div>
+                            <div v-else class="compatibility-good">
+                                <i class="fas fa-check-circle"></i>
+                                <strong>Good compatibility expected</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -150,7 +193,11 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
 
                 </p>
 
-                <div v-if="is_installing" class="form-group"><button class="primary" disabled><i class="fas fa-spinner fa-spin fa-fw"></i> {{_("renderer.tab_mods.install_creation.button_installing")}}</button></div>
+                <div v-if="is_installing" class="form-group">
+                    <button class="primary" disabled>
+                        <i class="fas fa-spinner fa-spin fa-fw"></i> {{_("renderer.tab_mods.install_creation.button_installing")}} {{ installation_progress > 0 ? installation_progress + '%' : '' }}
+                    </button>
+                </div>
 
                 <div v-else class="form-group"><button class="primary" @click="createInstallSubmit" :disabled="shouldDisableCreation"><i class="fas fa-bolt fa-fw"></i> {{_("renderer.tab_mods.install_creation.button_install")}}</button></div>
             </div>
@@ -163,6 +210,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             "installs": [],
             "mods": [],
             "is_installing": false,
+            "installation_progress": 0, // New data property for installation progress
             "selected_item": {
                 "id": "",
                 "type": ""
@@ -172,7 +220,9 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "folder_name": "",
                 "global_save": false,
                 "has_mod": false,
-                "mod": ""
+                "mod": "",
+                "version_info": null,
+                "compatibility_check": null
             },
             "search": "",
             "searchTimeout": null,
@@ -241,11 +291,26 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         "showCreateInstall": function (mod) {
             this.install_creation.has_mod = !!mod;
             this.install_creation.mod = mod || "";
-            if (this.selected_item.type === "create") return;
+            this.install_creation.version_info = null;
+            this.install_creation.compatibility_check = null;
+            
+            if (this.selected_item.type === "create") {
+                // If we're already on the create page, analyze the new mod
+                if (mod) {
+                    this.analyzeModVersionCompatibility(mod);
+                }
+                return;
+            }
+            
             this.install_creation.install_name = "";
             this.install_creation.folder_name = "";
             this.install_creation.global_save = false;
             this.selectItem("", "create");
+            
+            // Analyze mod version compatibility if a mod is provided
+            if (mod) {
+                this.analyzeModVersionCompatibility(mod);
+            }
         },
         "selectItem": function (id, type) {
             if (this.selected_item.id === id && this.selected_item.type === type) return;
@@ -321,6 +386,42 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             const mod = ddmm.mods.browseForMod();
             if (mod) {
                 this.install_creation.mod = mod;
+                this.analyzeModVersionCompatibility(mod);
+            }
+        },
+        "analyzeModVersionCompatibility": function(modPath) {
+            // Reset version info
+            this.install_creation.version_info = null;
+            this.install_creation.compatibility_check = null;
+            
+            if (!modPath || typeof ddmm === 'undefined' || !ddmm.mods || !ddmm.mods.analyzeModVersion) {
+                return;
+            }
+            
+            try {
+                // Call backend to analyze the mod's Ren'Py version
+                ddmm.mods.analyzeModVersion(modPath).then((result) => {
+                    if (result && result.versionInfo) {
+                        this.install_creation.version_info = result.versionInfo;
+                        
+                        // If we have game version info, check compatibility
+                        if (result.gameVersion) {
+                            this.install_creation.compatibility_check = ddmm.mods.checkVersionCompatibility(
+                                result.versionInfo.version,
+                                result.gameVersion
+                            );
+                        }
+                        
+                        console.log("Mod version analysis complete:", {
+                            versionInfo: this.install_creation.version_info,
+                            compatibilityCheck: this.install_creation.compatibility_check
+                        });
+                    }
+                }).catch((error) => {
+                    console.warn("Failed to analyze mod version compatibility:", error);
+                });
+            } catch (error) {
+                console.warn("Error during mod version analysis:", error);
             }
         },
         "createInstallSubmit": function () {
@@ -335,6 +436,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             });
             ddmm.once("install list", () => {
                 this.is_installing = false;
+                this.installation_progress = 0; // Reset progress on completion
                 if (this.installs.find(i => i.folderName === this.install_creation.folder_name)) {
                     this.selectItem(this.install_creation.folder_name, "install");
                 }
@@ -359,6 +461,17 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             // Event handler for refreshed install list
             this.installs = installs;
             console.log("ModsTab: Refreshed install list with", installs.length, "installs");
+
+            // Check for any active installations and update progress
+            if (typeof window.app !== 'undefined' && window.app.active_installations) {
+                window.app.active_installations.forEach((progressEvent, sessionId) => {
+                    if (progressEvent.progress < 100) {
+                        this.is_installing = true;
+                        this.installation_progress = progressEvent.progress;
+                        // Optionally, you could store the sessionId to track multiple installations
+                    }
+                });
+            }
 
             // select something to avoid leaving a blank area
             if (!this.selected_item.type) {
@@ -606,6 +719,23 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             ddmm.on("create install", (mod) => {
                 this.showCreateInstall(mod ? this.getPathToMod(mod) : null);
             });
+
+            // Listen for installation progress events
+            ddmm.on('installation-progress', (progressEvent) => {
+                // Only update if this is the active installation being tracked by this tab
+                // For simplicity, we assume only one installation can be initiated from this tab at a time
+                if (this.is_installing) { // && progressEvent.sessionId === this.currentInstallationSessionId
+                    this.installation_progress = progressEvent.progress;
+                    if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
+                        this.is_installing = false;
+                        this.installation_progress = 0;
+                    } else if (progressEvent.phase === 'error') {
+                        this.is_installing = false;
+                        this.installation_progress = 0;
+                    }
+                }
+            });
+
         } else {
             console.warn("ModsTab: ddmm not available in mounted hook, will retry");
             // Retry after a short delay
@@ -617,6 +747,19 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                     ddmm.on("mod list", this._refreshModList);
                     ddmm.on("create install", (mod) => {
                         this.showCreateInstall(mod ? this.getPathToMod(mod) : null);
+                    });
+                    // Re-attach progress listener on retry
+                    ddmm.on('installation-progress', (progressEvent) => {
+                        if (this.is_installing) { // && progressEvent.sessionId === this.currentInstallationSessionId
+                            this.installation_progress = progressEvent.progress;
+                            if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
+                                this.is_installing = false;
+                                this.installation_progress = 0;
+                            } else if (progressEvent.phase === 'error') {
+                                this.is_installing = false;
+                                this.installation_progress = 0;
+                            }
+                        }
                     });
                 }
             }, 100);
@@ -632,6 +775,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         if (typeof ddmm !== 'undefined' && ddmm.off) {
             ddmm.off("install list", this._refreshInstallList);
             ddmm.off("mod list", this._refreshModList);
+            ddmm.off("installation-progress", this._updateInstallationProgress); // Remove progress listener
         }
         document.body.removeEventListener("keyup", this._keyPressHandler);
     }

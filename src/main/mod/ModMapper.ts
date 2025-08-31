@@ -1,6 +1,9 @@
+import { RenpyVersionInfo } from "../version/RenpyVersionDetector";
+
 export abstract class ModMapper {
 
     private readonly filesToDelete: string[];
+    protected versionInfo?: RenpyVersionInfo;
 
     // no it can't
     // noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
@@ -31,5 +34,28 @@ export abstract class ModMapper {
      */
     public getAppBundleToReplace(fileName: string): string | null {
         return null;
+    }
+
+    /**
+     * Sets the detected Ren'Py version information for this mod
+     */
+    public setVersionInfo(versionInfo: RenpyVersionInfo): void {
+        this.versionInfo = versionInfo;
+    }
+
+    /**
+     * Gets the detected Ren'Py version information
+     */
+    public getVersionInfo(): RenpyVersionInfo | undefined {
+        return this.versionInfo;
+    }
+
+    /**
+     * Checks if this mapper supports the detected Ren'Py version
+     * Override in subclasses for version-specific logic
+     */
+    public supportsVersion(versionInfo: RenpyVersionInfo): boolean {
+        // Default implementation: support all versions
+        return true;
     }
 }
