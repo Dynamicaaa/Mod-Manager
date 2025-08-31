@@ -1,5 +1,6 @@
 import {readdirSync, statSync, unlinkSync} from "fs";
 import {join as joinPath} from "path";
+import {SafeFileOperations} from "./SafeFileOperations";
 
 /**
  * Utility class for cleaning up macOS-specific files that can interfere with game execution
@@ -29,9 +30,19 @@ export default class MacOSFileCleanup {
                         // Recursively clean subdirectories
                         this.cleanMacOSFiles(fullPath, recursive);
                     } else if (stats.isFile() && this.shouldRemoveFile(file)) {
-                        // Remove problematic files
+                        // Remove problematic files safely
                         console.log("Removing macOS resource fork file:", fullPath);
-                        unlinkSync(fullPath);
+                        SafeFileOperations.deleteFile(fullPath, {
+                            createBackup: false,
+                            validatePath: true
+                        }).catch(deleteError => {
+                            console.warn("Failed to delete safely, using fallback:", deleteError);
+                            try {
+                                unlinkSync(fullPath);
+                            } catch (fallbackError) {
+                                console.warn("Fallback deletion also failed:", fallbackError);
+                            }
+                        });
                     }
                 } catch (fileError) {
                     console.warn("Could not process file during cleanup:", fullPath, fileError.message);

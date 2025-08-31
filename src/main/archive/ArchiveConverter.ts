@@ -2,6 +2,7 @@ import { mkdtempSync, removeSync } from "fs-extra";
 import { join as joinPath, extname } from "path";
 import { app } from "electron";
 import * as archiver from "archiver";
+import {SafeFileOperations} from "../utils/SafeFileOperations";
 
 export default class ArchiveConverter {
 
@@ -58,7 +59,11 @@ export default class ArchiveConverter {
                                     relPath = relPath.substring(commonRoot.length + 1);
                                 }
                                 outPath = path.join(tempDir, relPath);
-                                fs.mkdirSync(path.dirname(outPath), { recursive: true });
+                                // Use SafeFileOperations for better error handling
+                                SafeFileOperations.ensureDirectoryExists(path.dirname(outPath)).catch(dirError => {
+                                    console.warn(`Failed to create directory safely, using fallback:`, dirError);
+                                    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+                                });
                                 zipfile2.openReadStream(entry, (err: any, readStream: any) => {
                                     if (err) return rj(err);
                                     const writeStream = fs.createWriteStream(outPath);

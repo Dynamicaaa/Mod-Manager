@@ -901,6 +901,130 @@ input[type="radio"]:focus {
   box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.3);
 }
 
+// Validation States for Input Fields
+.form-group.validation-error input,
+.form-group.validation-error textarea,
+.form-group.validation-error select {
+  border-color: $ui-danger-colour-bg;
+  box-shadow: 0 0 0 3px rgba(235, 77, 75, 0.2), 0 4px 12px rgba(235, 77, 75, 0.15);
+  background: rgba(235, 77, 75, 0.05);
+}
+
+.form-group.validation-warning input,
+.form-group.validation-warning textarea,
+.form-group.validation-warning select {
+  border-color: $ui-warning-colour-bg;
+  box-shadow: 0 0 0 3px rgba(240, 147, 43, 0.2), 0 4px 12px rgba(240, 147, 43, 0.15);
+  background: rgba(240, 147, 43, 0.05);
+}
+
+.form-group.validation-success input,
+.form-group.validation-success textarea,
+.form-group.validation-success select {
+  border-color: $ui-success-colour-bg;
+  box-shadow: 0 0 0 3px rgba(0, 209, 102, 0.2), 0 4px 12px rgba(0, 209, 102, 0.15);
+  background: rgba(0, 209, 102, 0.05);
+}
+
+.validation-message {
+  margin-top: 0.5em;
+  padding: 0.5em 0.8em;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  animation: validation-fade-in 0.3s ease-out;
+}
+
+.validation-message.error {
+  background: rgba(235, 77, 75, 0.15);
+  border: 1px solid rgba(235, 77, 75, 0.3);
+  color: #ff6b6b;
+}
+
+.validation-message.warning {
+  background: rgba(240, 147, 43, 0.15);
+  border: 1px solid rgba(240, 147, 43, 0.3);
+  color: #ffa502;
+}
+
+.validation-message.success {
+  background: rgba(0, 209, 102, 0.15);
+  border: 1px solid rgba(0, 209, 102, 0.3);
+  color: #2ed573;
+}
+
+.validation-message i {
+  font-size: 1em;
+  flex-shrink: 0;
+}
+
+@keyframes validation-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Real-time validation feedback animations
+.input-validating {
+  position: relative;
+}
+
+.input-validating::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid $ui-primary-colour-bg;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+// Success/Error Icons for validated inputs
+.form-group.validation-success .validation-icon,
+.form-group.validation-error .validation-icon,
+.form-group.validation-warning .validation-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.form-group.validation-success .validation-icon {
+  color: $ui-success-colour-bg;
+}
+
+.form-group.validation-error .validation-icon {
+  color: $ui-danger-colour-bg;
+}
+
+.form-group.validation-warning .validation-icon {
+  color: $ui-warning-colour-bg;
+}
+
+// Position form groups relatively for icon positioning
+.form-group {
+  position: relative;
+}
+
 // endregion
 
 // region running and crash covers

@@ -89,7 +89,20 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
 
                 <div class="screenshots" v-if="selectedInstall.screenshots.length > 0">
                     <!--suppress RequiredAttributes, HtmlRequiredAltAttribute -->
-                    <img v-for="img in selectedInstall.screenshots" :alt="img" :src="getURLToScreenshot(selectedInstall.folderName, img)" @click="openScreenshot(selectedInstall.folderName, img)" width="150">
+                    <img v-for="img in visibleScreenshots"
+                         :key="img"
+                         :alt="img"
+                         :src="getURLToScreenshot(selectedInstall.folderName, img)"
+                         @click="openScreenshot(selectedInstall.folderName, img)"
+                         width="150"
+                         loading="lazy"
+                         @load="onImageLoad(img)"
+                         @error="onImageError(img)">
+                    <div v-if="selectedInstall.screenshots.length > visibleScreenshots.length" class="load-more-screenshots">
+                        <button @click="loadMoreScreenshots" class="secondary">
+                            <i class="fas fa-images"></i> Load More Screenshots ({{selectedInstall.screenshots.length - visibleScreenshots.length}} remaining)
+                        </button>
+                    </div>
                 </div>
                 </template>
             </div>
@@ -111,12 +124,44 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
 
                 <div class="form-group">
                     <p><label>{{_("renderer.tab_mods.install_creation.label_install_name")}}</label></p>
-                    <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.label_install_name')" v-model="install_creation.install_name" @input="generateInstallFolderName"></p>
+                    <p>
+                        <input type="text"
+                               :placeholder="_('renderer.tab_mods.install_creation.label_install_name')"
+                               v-model="install_creation.install_name"
+                               @input="handleInstallNameInput"
+                               :class="{'validation-error': install_creation.validation.installName.errors.length > 0}">
+                    </p>
+                    <div v-if="install_creation.validation.installName.errors.length > 0" class="validation-errors">
+                        <div v-for="error in install_creation.validation.installName.errors" class="validation-error-message">
+                            <i class="fas fa-exclamation-triangle"></i> {{error}}
+                        </div>
+                    </div>
+                    <div v-if="install_creation.validation.installName.warnings.length > 0" class="validation-warnings">
+                        <div v-for="warning in install_creation.validation.installName.warnings" class="validation-warning-message">
+                            <i class="fas fa-exclamation-circle"></i> {{warning}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <p><label>{{_("renderer.tab_mods.install_creation.label_folder_name")}}</label></p>
-                    <p><input type="text" :placeholder="_('renderer.tab_mods.install_creation.label_folder_name')" v-model="install_creation.folder_name"></p>
+                    <p>
+                        <input type="text"
+                               :placeholder="_('renderer.tab_mods.install_creation.label_folder_name')"
+                               v-model="install_creation.folder_name"
+                               @input="handleFolderNameInput"
+                               :class="{'validation-error': install_creation.validation.folderName.errors.length > 0}">
+                    </p>
+                    <div v-if="install_creation.validation.folderName.errors.length > 0" class="validation-errors">
+                        <div v-for="error in install_creation.validation.folderName.errors" class="validation-error-message">
+                            <i class="fas fa-exclamation-triangle"></i> {{error}}
+                        </div>
+                    </div>
+                    <div v-if="install_creation.validation.folderName.warnings.length > 0" class="validation-warnings">
+                        <div v-for="warning in install_creation.validation.folderName.warnings" class="validation-warning-message">
+                            <i class="fas fa-exclamation-circle"></i> {{warning}}
+                        </div>
+                    </div>
                 </div>
 
                 <p v-if="!is_installing && install_creation.folder_name.length > 2 && installExists(install_creation.folder_name)">
@@ -222,12 +267,20 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 "has_mod": false,
                 "mod": "",
                 "version_info": null,
-                "compatibility_check": null
+                "compatibility_check": null,
+                "validation": {
+                    "installName": { errors: [], warnings: [] },
+                    "folderName": { errors: [], warnings: [] },
+                    "mod": { errors: [], warnings: [] }
+                }
             },
             "search": "",
             "searchTimeout": null,
             "_fuseMods": null,
-            "_fuseInstalls": null
+            "_fuseInstalls": null,
+            "screenshotsPerLoad": 6, // Number of screenshots to load at once
+            "loadedScreenshots": new Set(), // Track loaded screenshots
+            "visibleScreenshotCount": 6 // Initial number of visible screenshots
         }
     },
     "methods": {
@@ -318,6 +371,11 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
             this.selected_item.type = type;
             sessionStorage.setItem("mod_list_last_id", id);
             sessionStorage.setItem("mod_list_last_type", type);
+            
+            // Reset screenshot lazy loading when changing selection
+            if (type === 'install') {
+                this.resetScreenshotLazyLoading();
+            }
         },
         "handleInstallClick": function (installFolder, installName, ev) {
             this.selectItem(installFolder, "install");
@@ -370,17 +428,114 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 this.install_creation.folder_name === this.install_creation.install_name_prev ||
                 this.install_creation.folder_name === this.install_creation.install_name_prev_folder
             ) {
-                const generated = this.install_creation.install_name
-                    .trim()
-                    .toLowerCase()
-                    .replace(/\W/g, "-")
-                    .replace(/-+/g, "-")
-                    .substring(0, 32);
-                this.install_creation.folder_name = generated;
-                this.install_creation.install_name_prev_folder = generated;
+                // Use the validation system to sanitize the folder name
+                if (typeof ddmm !== 'undefined' && ddmm.sanitizeFilename) {
+                    ddmm.sanitizeFilename(this.install_creation.install_name).then(sanitized => {
+                        const generated = sanitized
+                            .toLowerCase()
+                            .replace(/\W/g, "-")
+                            .replace(/-+/g, "-")
+                            .substring(0, 32);
+                        this.install_creation.folder_name = generated;
+                        this.install_creation.install_name_prev_folder = generated;
+                        this.validateFolderName();
+                    }).catch(error => {
+                        console.warn("Failed to sanitize filename:", error);
+                        // Fallback to original logic
+                        const generated = this.install_creation.install_name
+                            .trim()
+                            .toLowerCase()
+                            .replace(/\W/g, "-")
+                            .replace(/-+/g, "-")
+                            .substring(0, 32);
+                        this.install_creation.folder_name = generated;
+                        this.install_creation.install_name_prev_folder = generated;
+                        this.validateFolderName();
+                    });
+                } else {
+                    // Fallback to original logic
+                    const generated = this.install_creation.install_name
+                        .trim()
+                        .toLowerCase()
+                        .replace(/\W/g, "-")
+                        .replace(/-+/g, "-")
+                        .substring(0, 32);
+                    this.install_creation.folder_name = generated;
+                    this.install_creation.install_name_prev_folder = generated;
+                    this.validateFolderName();
+                }
             }
             // Track the last install_name used for auto-generation
             this.install_creation.install_name_prev = this.install_creation.install_name;
+        },
+
+        "handleInstallNameInput": function(event) {
+            this.install_creation.install_name = event.target.value;
+            this.validateInstallName();
+            this.generateInstallFolderName();
+        },
+
+        "handleFolderNameInput": function(event) {
+            this.install_creation.folder_name = event.target.value;
+            this.validateFolderName();
+        },
+
+        "validateInstallName": async function() {
+            if (typeof ddmm === 'undefined' || !ddmm.validateString) {
+                return;
+            }
+
+            try {
+                const result = await ddmm.validateString(this.install_creation.install_name, {
+                    minLength: 1,
+                    maxLength: 100,
+                    trimWhitespace: true,
+                    normalizeSpaces: true
+                });
+
+                this.install_creation.validation.installName = {
+                    errors: result.isValid ? [] : result.errors,
+                    warnings: result.warnings || []
+                };
+            } catch (error) {
+                console.warn("Install name validation failed:", error);
+                this.install_creation.validation.installName = {
+                    errors: ["Validation temporarily unavailable"],
+                    warnings: []
+                };
+            }
+        },
+
+        "validateFolderName": async function() {
+            if (typeof ddmm === 'undefined' || !ddmm.validateString) {
+                return;
+            }
+
+            try {
+                const result = await ddmm.validateString(this.install_creation.folder_name, {
+                    minLength: 1,
+                    maxLength: 50,
+                    allowedCharacters: /^[a-zA-Z0-9\-_]+$/,
+                    trimWhitespace: true
+                });
+
+                // Check if folder already exists
+                const errors = result.isValid ? [] : [...result.errors];
+                const warnings = [...(result.warnings || [])];
+
+                if (result.isValid && this.install_creation.folder_name.length > 2 &&
+                    this.installExists(this.install_creation.folder_name)) {
+                    errors.push("Folder name already exists. Please choose a different name.");
+                }
+
+                this.install_creation.validation.folderName = { errors, warnings };
+            } catch (error) {
+                console.warn("Folder name validation failed:", error);
+                this.install_creation.validation.folderName = {
+                    errors: ["Validation temporarily unavailable"],
+                    warnings: []
+                };
+            }
         },
         "installCreationSelectMod": function () {
             const mod = ddmm.mods.browseForMod();
@@ -424,21 +579,120 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 console.warn("Error during mod version analysis:", error);
             }
         },
-        "createInstallSubmit": function () {
+        "createInstallSubmit": async function () {
             if (this.shouldDisableCreation) return;
+
+            // Perform final validation before submission
+            await this.validateInstallName();
+            await this.validateFolderName();
+
+            // Check if there are any validation errors
+            const hasErrors = this.install_creation.validation.installName.errors.length > 0 ||
+                             this.install_creation.validation.folderName.errors.length > 0;
+
+            if (hasErrors) {
+                ddmm.window.prompt({
+                    title: "Validation Errors",
+                    description: "Please fix the validation errors before proceeding.",
+                    affirmative_style: "danger",
+                    button_affirmative: "OK",
+                    button_negative: null,
+                    callback: () => {}
+                });
+                return;
+            }
+
+            // Validate the complete installation configuration
+            if (typeof ddmm !== 'undefined' && ddmm.validateInstallationConfig) {
+                try {
+                    const configValidation = await ddmm.validateInstallationConfig({
+                        installName: this.install_creation.install_name,
+                        folderName: this.install_creation.folder_name,
+                        globalSave: this.install_creation.global_save,
+                        modPath: this.install_creation.has_mod ? this.install_creation.mod : null
+                    });
+
+                    if (!configValidation.isValid) {
+                        ddmm.window.prompt({
+                            title: "Configuration Validation Failed",
+                            description: "Installation configuration errors:\n" + configValidation.errors.join('\n'),
+                            affirmative_style: "danger",
+                            button_affirmative: "OK",
+                            button_negative: null,
+                            callback: () => {}
+                        });
+                        return;
+                    }
+
+                    // Show warnings if any
+                    if (configValidation.warnings && configValidation.warnings.length > 0) {
+                        ddmm.window.prompt({
+                            title: "Configuration Warnings",
+                            description: "The following warnings were detected:\n" + configValidation.warnings.join('\n') + "\n\nDo you want to continue?",
+                            affirmative_style: "warning",
+                            button_affirmative: "Continue",
+                            button_negative: "Cancel",
+                            callback: (proceed) => {
+                                if (proceed) {
+                                    this.performInstallation(configValidation.sanitized || {
+                                        installName: this.install_creation.install_name,
+                                        folderName: this.install_creation.folder_name,
+                                        globalSave: this.install_creation.global_save,
+                                        modPath: this.install_creation.has_mod ? this.install_creation.mod : null
+                                    });
+                                }
+                            }
+                        });
+                        return;
+                    }
+
+                    // Use sanitized values if available
+                    const sanitizedConfig = configValidation.sanitized || {
+                        installName: this.install_creation.install_name,
+                        folderName: this.install_creation.folder_name,
+                        globalSave: this.install_creation.global_save,
+                        modPath: this.install_creation.has_mod ? this.install_creation.mod : null
+                    };
+
+                    this.performInstallation(sanitizedConfig);
+
+                } catch (error) {
+                    console.warn("Configuration validation failed:", error);
+                    // Proceed with original values if validation fails
+                    this.performInstallation({
+                        installName: this.install_creation.install_name,
+                        folderName: this.install_creation.folder_name,
+                        globalSave: this.install_creation.global_save,
+                        modPath: this.install_creation.has_mod ? this.install_creation.mod : null
+                    });
+                }
+            } else {
+                // Fallback if validation API is not available
+                this.performInstallation({
+                    installName: this.install_creation.install_name,
+                    folderName: this.install_creation.folder_name,
+                    globalSave: this.install_creation.global_save,
+                    modPath: this.install_creation.has_mod ? this.install_creation.mod : null
+                });
+            }
+        },
+
+        "performInstallation": function(config) {
             this.is_installing = true;
 
             ddmm.mods.createInstall({
-                folderName: this.install_creation.folder_name,
-                installName: this.install_creation.install_name,
-                globalSave: this.install_creation.global_save,
-                mod: (this.install_creation.has_mod ? this.install_creation.mod : null)
+                folderName: config.folderName || this.install_creation.folder_name,
+                installName: config.installName || this.install_creation.install_name,
+                globalSave: config.globalSave !== undefined ? config.globalSave : this.install_creation.global_save,
+                mod: config.modPath || (this.install_creation.has_mod ? this.install_creation.mod : null)
             });
+            
             ddmm.once("install list", () => {
                 this.is_installing = false;
                 this.installation_progress = 0; // Reset progress on completion
-                if (this.installs.find(i => i.folderName === this.install_creation.folder_name)) {
-                    this.selectItem(this.install_creation.folder_name, "install");
+                const targetFolder = config.folderName || this.install_creation.folder_name;
+                if (this.installs.find(i => i.folderName === targetFolder)) {
+                    this.selectItem(targetFolder, "install");
                 }
             });
         },
@@ -668,15 +922,47 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                 }
             });
         },
+
+        // Lazy loading methods for screenshots
+        "loadMoreScreenshots": function() {
+            this.visibleScreenshotCount += this.screenshotsPerLoad;
+        },
+
+        "onImageLoad": function(imageName) {
+            this.loadedScreenshots.add(imageName);
+            console.log(`Screenshot loaded: ${imageName}`);
+        },
+
+        "onImageError": function(imageName) {
+            console.warn(`Failed to load screenshot: ${imageName}`);
+        },
+
+        "resetScreenshotLazyLoading": function() {
+            this.visibleScreenshotCount = this.screenshotsPerLoad;
+            this.loadedScreenshots.clear();
+        },
     },
     "computed": {
         "selectedInstall": function () {
             return this.installs.find(i => i.folderName === this.selected_item.id);
         },
+        "visibleScreenshots": function () {
+            if (!this.selectedInstall || !this.selectedInstall.screenshots) {
+                return [];
+            }
+            return this.selectedInstall.screenshots.slice(0, this.visibleScreenshotCount);
+        },
         "shouldDisableCreation": function () {
-            return this.is_installing || (this.install_creation.has_mod && !this.install_creation.mod)
-                || this.install_creation.install_name.length < 2 || this.install_creation.folder_name.length < 2
-                || ddmm.mods.installExists(this.install_creation.folder_name);
+            // Check for validation errors in addition to existing checks
+            const hasValidationErrors = this.install_creation.validation.installName.errors.length > 0 ||
+                                       this.install_creation.validation.folderName.errors.length > 0;
+            
+            return this.is_installing ||
+                   hasValidationErrors ||
+                   (this.install_creation.has_mod && !this.install_creation.mod) ||
+                   this.install_creation.install_name.length < 2 ||
+                   this.install_creation.folder_name.length < 2 ||
+                   (typeof ddmm !== 'undefined' && ddmm.mods && ddmm.mods.installExists(this.install_creation.folder_name));
         },
         "searchResultsMods": function () {
             if (!this.search || this.search.length === 0) {

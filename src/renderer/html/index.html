@@ -222,22 +222,74 @@
 </div>
 
 
-<script src="../../../vendor/fuse.js"></script>
+<!-- Core libraries loaded immediately -->
 <script src="../../../vendor/vue.js"></script>
 <script>
 // Set Vue to production mode to suppress development warnings
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 </script>
+
+<!-- Lazy loading management script -->
+<script>
+window.LazyLoader = {
+    loadedScripts: new Set(),
+    loadedComponents: new Set(),
+    pendingLoads: new Map(),
+
+    async loadScript(src) {
+        if (this.loadedScripts.has(src)) {
+            return Promise.resolve();
+        }
+
+        if (this.pendingLoads.has(src)) {
+            return this.pendingLoads.get(src);
+        }
+
+        const promise = new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => {
+                this.loadedScripts.add(src);
+                this.pendingLoads.delete(src);
+                resolve();
+            };
+            script.onerror = (error) => {
+                this.pendingLoads.delete(src);
+                reject(error);
+            };
+            document.head.appendChild(script);
+        });
+
+        this.pendingLoads.set(src, promise);
+        return promise;
+    },
+
+    async loadComponent(componentName, scriptPath) {
+        if (this.loadedComponents.has(componentName)) {
+            return Promise.resolve();
+        }
+
+        await this.loadScript(scriptPath);
+        this.loadedComponents.add(componentName);
+    },
+
+    async loadLibrary(libraryName, scriptPath) {
+        if (window[libraryName]) {
+            return Promise.resolve();
+        }
+        return this.loadScript(scriptPath);
+    }
+};
+</script>
+
+<!-- Essential components loaded immediately -->
 <script src="../js/sayonika-config.js"></script>
 <script src="../js/sayonika-auth.js"></script>
 <script src="../js/components/OnboardingOverlay.js"></script>
 <script src="../js/components/DropOverlay.js"></script>
-<script src="../js/components/tabs/ModsTab.js"></script>
-<script src="../js/components/tabs/StorePlaceholderTab.js"></script>
-<script src="../js/components/tabs/OptionsTab.js"></script>
-<script src="../js/components/tabs/AboutTab.js"></script>
-<script src="../js/components/tabs/EditInstanceTab.js"></script>
+
+<!-- Main app script (handles lazy loading of other components) -->
 <script src="../js/app.js"></script>
 </body>
 </html>

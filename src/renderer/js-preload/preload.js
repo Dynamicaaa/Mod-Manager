@@ -76,6 +76,7 @@ api.app = {};
 api.window = {};
 api.config = {};
 api.onboarding = {};
+api.validation = {};
 
 // Called when the UI wants to refresh the mod list
 api.mods.refreshModList = function () {
@@ -649,3 +650,28 @@ if (typeof window !== 'undefined') {
         }
     });
 }
+
+// Input validation API
+api.validateModArchive = function(filePath) {
+    return ipcRenderer.invoke("validate-mod-archive", filePath);
+};
+
+api.validateFilePath = function(filePath, options) {
+    return ipcRenderer.invoke("validate-file-path", filePath, options);
+};
+
+api.validateDirectoryPath = function(dirPath, options) {
+    return ipcRenderer.invoke("validate-directory-path", dirPath, options);
+};
+
+api.validateString = function(input, options) {
+    return ipcRenderer.invoke("validate-string", input, options);
+};
+
+api.validateInstallationConfig = function(config) {
+    return ipcRenderer.invoke("validate-installation-config", config);
+};
+
+api.sanitizeFilename = function(filename) {
+    return ipcRenderer.invoke("sanitize-filename", filename);
+};

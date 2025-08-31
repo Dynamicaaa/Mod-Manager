@@ -13,7 +13,29 @@ window.updateAppVersion = function(version) {
     }
 };
 
-console.log("Creating Vue app...");
+console.log("Pre-loading essential components before creating Vue app...");
+
+// Pre-load the mods tab component before creating the Vue app to prevent lazy loading issues
+async function preloadEssentialComponents() {
+    try {
+        // Load Fuse.js first
+        await window.LazyLoader.loadScript('../../../vendor/fuse.js');
+        // Then load ModsTab component
+        await window.LazyLoader.loadScript('../js/components/tabs/ModsTab.js');
+        window.LazyLoader.loadedComponents.add('ddmm-mods-tab');
+        console.log("Essential components pre-loaded successfully");
+    } catch (error) {
+        console.error("Failed to pre-load essential components:", error);
+    }
+}
+
+// Pre-load components and then create Vue app
+preloadEssentialComponents().then(() => {
+    console.log("Creating Vue app...");
+    createVueApp();
+});
+
+function createVueApp() {
 const app = new Vue({
     "el": "#app",
     "data": {
@@ -124,7 +146,8 @@ const app = new Vue({
     },
     "computed": {
         "currentTabComponent": function () {
-            return this.tabs.find(t => t.id === this.tab).component;
+            const tab = this.tabs.find(t => t.id === this.tab);
+            return tab ? tab.component : null;
         },
         "backgroundImageStyle": function () {
             if (this.background_image && this.background_image !== "none") {
@@ -300,13 +323,64 @@ const app = new Vue({
             this.background_image = image;
         },
 
-        // Page transition methods
-        "navigateToTab": function(tabId, transition = "fade") {
+        // Page transition methods with lazy loading
+        "navigateToTab": async function(tabId, transition = "fade") {
             if (this.tab === tabId) return;
+
+            // Load component lazily if not already loaded
+            await this.ensureComponentLoaded(tabId);
 
             this.previousTab = this.tab;
             this.pageTransition = transition;
             this.tab = tabId;
+        },
+
+        "ensureComponentLoaded": async function(tabId) {
+            const componentMap = {
+                'mods': {
+                    component: 'ddmm-mods-tab',
+                    scripts: [
+                        '../../../vendor/fuse.js',
+                        '../js/components/tabs/ModsTab.js'
+                    ]
+                },
+                'store': {
+                    component: 'ddmm-store-placeholder-tab',
+                    scripts: ['../js/components/tabs/StorePlaceholderTab.js']
+                },
+                'options': {
+                    component: 'ddmm-options-tab',
+                    scripts: ['../js/components/tabs/OptionsTab.js']
+                },
+                'about': {
+                    component: 'ddmm-about-tab',
+                    scripts: ['../js/components/tabs/AboutTab.js']
+                },
+                'edit-instance': {
+                    component: 'ddmm-edit-instance-tab',
+                    scripts: ['../js/components/tabs/EditInstanceTab.js']
+                }
+            };
+
+            const config = componentMap[tabId];
+            if (!config) return;
+
+            // Check if component is already loaded
+            if (window.LazyLoader.loadedComponents.has(config.component)) {
+                return;
+            }
+
+            try {
+                // Load required scripts sequentially
+                for (const script of config.scripts) {
+                    await window.LazyLoader.loadScript(script);
+                }
+                
+                window.LazyLoader.loadedComponents.add(config.component);
+                console.log(`Lazy loaded component: ${config.component}`);
+            } catch (error) {
+                console.error(`Failed to lazy load component ${config.component}:`, error);
+            }
         },
 
         // Refresh tab names when language changes
@@ -796,6 +870,9 @@ const app = new Vue({
         // Initialize tab names with current translations
         this.refreshTabNames();
 
+        // Components are already pre-loaded, no need to load again
+        console.log("Vue app mounted - components already pre-loaded");
+
         // Listen for language changes to update tab names
         if (typeof ddmm !== 'undefined' && ddmm.on) {
             ddmm.on('language-changed', (newLanguage) => {
@@ -832,6 +909,7 @@ const app = new Vue({
 
 // Make the Vue app instance available globally
 window.app = app;
+}
 
 // Global Theme Manager
 window.ThemeManager = {

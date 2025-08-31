@@ -4,6 +4,7 @@ import {join as joinPath} from "path";
 import {autoUpdater} from "electron-updater";
 import * as semver from "semver";
 import * as remoteMain from "@electron/remote/main";
+import {SafeFileOperations} from "./utils/SafeFileOperations";
 
 // Check if running from Windows Store
 const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
@@ -28,6 +29,7 @@ import ModInstaller from "./mod/ModInstaller";
 import InstallManager from "./install/InstallManager";
 import {InstallationProgressManager} from "./progress/InstallationProgressManager";
 import { logger } from "./utils/EnhancedLogger";
+import {InputValidator} from "./utils/InputValidator";
 
 import DownloadManager from "./net/DownloadManager";
 import OnboardingManager from "./onboarding/OnboardingManager";
@@ -371,19 +373,32 @@ ipcMain.on("delete install", (ev: IpcMainEvent, folderName: string) => {
 // Delete a mod
 ipcMain.on("delete mod", (ev: IpcMainEvent, fileName: string) => {
     logger.file('ModManager', `Deleting mod ${fileName}`);
-    try {
-        unlinkSync(joinPath(Config.readConfigValue("installFolder"), "mods", fileName));
+    const modPath = joinPath(Config.readConfigValue("installFolder"), "mods", fileName);
+    
+    // Use SafeFileOperations for better error handling and backup
+    SafeFileOperations.deleteFile(modPath, {
+        createBackup: true,
+        validatePath: true
+    }).then(() => {
         logger.success('ModManager', `Deleted mod ${fileName}`);
         appWindow.webContents.send("got modlist", modList.getModList());
-    } catch (e: any) {
-        showError(
-            lang.translate("main.errors.mod_delete.title"),
-            lang.translate("main.errors.mod_delete.body"),
-            e.toString(),
-            false
-        );
-        logger.error('ModManager', `Failed to delete mod ${fileName}:`, e);
-    }
+    }).catch((e: any) => {
+        logger.error('ModManager', `Failed to delete mod safely, trying fallback:`, e);
+        // Fallback to original method
+        try {
+            unlinkSync(modPath);
+            logger.success('ModManager', `Deleted mod ${fileName} with fallback method`);
+            appWindow.webContents.send("got modlist", modList.getModList());
+        } catch (fallbackError: any) {
+            showError(
+                lang.translate("main.errors.mod_delete.title"),
+                lang.translate("main.errors.mod_delete.body"),
+                fallbackError.toString(),
+                false
+            );
+            logger.error('ModManager', `Failed to delete mod ${fileName}:`, fallbackError);
+        }
+    });
 });
 
 // Delete a save file for an install
@@ -578,30 +593,49 @@ ipcMain.on("onboarding browse", async () => {
     if (result.filePaths && result.filePaths[0] && result.filePaths[0].endsWith(".zip")) {
         try {
             console.log("Main: Copying selected DDLC file:", result.filePaths[0]);
-            copyFileSync(result.filePaths[0], joinPath(Config.readConfigValue("installFolder"), "ddlc.zip"));
+            const targetPath = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
+            
+            // Use SafeFileOperations for better error handling
+            SafeFileOperations.copyFile(result.filePaths[0], targetPath, {
+                createBackup: true,
+                validateChecksums: true,
+                validatePath: true
+            }).then(() => {
+                console.log("Main: DDLC file copied successfully");
+                handleOnboardingSuccess();
+            }).catch(copyError => {
+                console.warn("Main: Safe copy failed, using fallback:", copyError);
+                // Fallback to original method
+                copyFileSync(result.filePaths[0], targetPath);
+                handleOnboardingSuccess();
+            });
+            
+            // Extract success handling into a function
+            function handleOnboardingSuccess() {
 
-            // Check if onboarding is still required after copying
-            const stillNeedsOnboarding = OnboardingManager.isOnboardingRequired();
-            console.log("Main: After copying, still needs onboarding:", stillNeedsOnboarding);
+                // Check if onboarding is still required after copying
+                const stillNeedsOnboarding = OnboardingManager.isOnboardingRequired();
+                console.log("Main: After copying, still needs onboarding:", stillNeedsOnboarding);
 
-            if (!stillNeedsOnboarding) {
-                console.log("Main: Onboarding completed successfully");
+                if (!stillNeedsOnboarding) {
+                    console.log("Main: Onboarding completed successfully");
 
-                // Automatically create a default DDLC install
-                console.log("Main: Creating default DDLC install...");
-                InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false, "").then(() => {
-                    console.log("Main: Default DDLC install created successfully");
-                    appWindow.webContents.send("onboarding downloaded");
-                    // Refresh the install list
-                    appWindow.webContents.send("got installs", InstallList.getInstallList());
-                }).catch((error) => {
-                    console.error("Main: Failed to create default DDLC install:", error);
-                    // Still send onboarding completed event even if install creation fails
-                    appWindow.webContents.send("onboarding downloaded");
-                });
-            } else {
-                console.log("Main: Onboarding still required after file copy");
-                // TODO: show a message and try again
+                    // Automatically create a default DDLC install
+                    console.log("Main: Creating default DDLC install...");
+                    InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false, "").then(() => {
+                        console.log("Main: Default DDLC install created successfully");
+                        appWindow.webContents.send("onboarding downloaded");
+                        // Refresh the install list
+                        appWindow.webContents.send("got installs", InstallList.getInstallList());
+                    }).catch((error) => {
+                        console.error("Main: Failed to create default DDLC install:", error);
+                        // Still send onboarding completed event even if install creation fails
+                        appWindow.webContents.send("onboarding downloaded");
+                    });
+                } else {
+                    console.log("Main: Onboarding still required after file copy");
+                    // TODO: show a message and try again
+                }
             }
         } catch (e) {
             console.error("Main: Error copying DDLC file:", e);
@@ -724,9 +758,22 @@ app.on("ready", async () => {
         !existsSync(joinPath(Config.readConfigValue("installFolder"), "installs"))
     ) {
         logger.file('App', "Creating directory structure for mods and installs.");
-        mkdirpSync(joinPath(Config.readConfigValue("installFolder"), "mods"));
-        mkdirpSync(joinPath(Config.readConfigValue("installFolder"), "installs"));
-        logger.success('App', "Directory structure created.");
+        
+        // Use SafeFileOperations for better error handling
+        const modsDir = joinPath(Config.readConfigValue("installFolder"), "mods");
+        const installsDir = joinPath(Config.readConfigValue("installFolder"), "installs");
+        
+        Promise.all([
+            SafeFileOperations.ensureDirectoryExists(modsDir),
+            SafeFileOperations.ensureDirectoryExists(installsDir)
+        ]).then(() => {
+            logger.success('App', "Directory structure created safely.");
+        }).catch(dirError => {
+            logger.warn('App', "Safe directory creation failed, using fallback:", dirError);
+            mkdirpSync(modsDir);
+            mkdirpSync(installsDir);
+            logger.success('App', "Directory structure created with fallback.");
+        });
     }
 
     // set protocol handler
@@ -955,4 +1002,97 @@ ipcMain.handle("showSaveDialog", async (ev, options) => {
 ipcMain.handle("showOpenDialog", async (ev, options) => {
     const result = await dialog.showOpenDialog(appWindow, options);
     return result;
+});
+
+// Input validation IPC handlers
+ipcMain.handle("validate-mod-archive", async (ev, filePath: string) => {
+    try {
+        logger.debug('InputValidator', `Validating mod archive: ${filePath}`);
+        const result = InputValidator.validateModArchive(filePath);
+        logger.debug('InputValidator', `Validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating mod archive ${filePath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-file-path", async (ev, filePath: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating file path: ${filePath}`, options);
+        const result = InputValidator.validateFilePath(filePath, options);
+        logger.debug('InputValidator', `File path validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating file path ${filePath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-directory-path", async (ev, dirPath: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating directory path: ${dirPath}`, options);
+        const result = InputValidator.validateDirectoryPath(dirPath, options);
+        logger.debug('InputValidator', `Directory path validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating directory path ${dirPath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-string", async (ev, input: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating string input:`, options);
+        const result = InputValidator.validateString(input, options);
+        logger.debug('InputValidator', `String validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating string input:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-installation-config", async (ev, config: any) => {
+    try {
+        logger.debug('InputValidator', `Validating installation config:`, config);
+        const result = InputValidator.validateInstallationConfig(config);
+        logger.debug('InputValidator', `Installation config validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating installation config:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("sanitize-filename", async (ev, filename: string) => {
+    try {
+        logger.debug('InputValidator', `Sanitizing filename: ${filename}`);
+        const result = InputValidator.sanitizeFilename(filename);
+        logger.debug('InputValidator', `Sanitized filename: ${result}`);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error sanitizing filename ${filename}:`, error);
+        return filename; // Return original filename as fallback
+    }
 });

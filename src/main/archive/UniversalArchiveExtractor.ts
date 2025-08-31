@@ -5,6 +5,8 @@ import * as mime from "mime-types";
 import * as tar from "tar";
 import * as yauzl from "yauzl";
 import { UnsupportedArchiveError, ExtractionError } from "../errors/ModInstallationError";
+import {InputValidator} from "../utils/InputValidator";
+import {SafeFileOperations} from "../utils/SafeFileOperations";
 
 const Seven = require("node-7z");
 
@@ -77,31 +79,61 @@ export class UniversalArchiveExtractor {
      * @param outputPath Directory to extract files to
      */
     public static async extract(archivePath: string, outputPath: string): Promise<void> {
-        const format = await this.detectFormat(archivePath);
+        // Validate input parameters before extraction
+        const archiveValidation = InputValidator.validateFilePath(archivePath, {
+            requireExists: true,
+            allowedExtensions: this.SUPPORTED_FORMATS,
+            maxFileSize: 2 * 1024 * 1024 * 1024 // 2GB limit
+        });
         
-        // Ensure output directory exists
-        if (!existsSync(outputPath)) {
-            mkdirsSync(outputPath);
+        if (!archiveValidation.isValid) {
+            throw new UnsupportedArchiveError(archivePath,
+                `Archive validation failed: ${archiveValidation.errors.join(', ')}`);
+        }
+        
+        const outputValidation = InputValidator.validateDirectoryPath(outputPath, {
+            mustBeWritable: true,
+            allowRelative: false,
+            maxLength: 260
+        });
+        
+        if (!outputValidation.isValid) {
+            throw new ExtractionError(archivePath,
+                new Error(`Output path validation failed: ${outputValidation.errors.join(', ')}`));
+        }
+        
+        // Use sanitized paths
+        const sanitizedArchivePath = archiveValidation.sanitized;
+        const sanitizedOutputPath = outputValidation.sanitized;
+        
+        const format = await this.detectFormat(sanitizedArchivePath);
+        
+        // Ensure output directory exists safely
+        try {
+            await SafeFileOperations.ensureDirectoryExists(sanitizedOutputPath);
+        } catch (error) {
+            throw new ExtractionError(archivePath,
+                new Error(`Failed to create output directory: ${error.message}`));
         }
 
-        console.log(`Extracting ${format} archive: ${archivePath} to ${outputPath}`);
+        console.log(`Extracting ${format} archive: ${sanitizedArchivePath} to ${sanitizedOutputPath}`);
 
         switch (format) {
             case "zip":
-                return this.extractZip(archivePath, outputPath);
+                return this.extractZip(sanitizedArchivePath, sanitizedOutputPath);
             case "rar":
-                return this.extractRar(archivePath, outputPath);
+                return this.extractRar(sanitizedArchivePath, sanitizedOutputPath);
             case "7z":
-                return this.extract7z(archivePath, outputPath);
+                return this.extract7z(sanitizedArchivePath, sanitizedOutputPath);
             case "tar":
-                return this.extractTar(archivePath, outputPath);
+                return this.extractTar(sanitizedArchivePath, sanitizedOutputPath);
             case "tar.gz":
             case "tar.bz2":
             case "tar.xz":
             case "tar.Z":
-                return this.extractCompressedTar(archivePath, outputPath, format);
+                return this.extractCompressedTar(sanitizedArchivePath, sanitizedOutputPath, format);
             default:
-                throw new UnsupportedArchiveError(archivePath, format);
+                throw new UnsupportedArchiveError(sanitizedArchivePath, format);
         }
     }
 
@@ -132,13 +164,31 @@ export class UniversalArchiveExtractor {
                         // Directory entry
                         zipfile.readEntry();
                     } else {
-                        // File entry
-                        const outputFilePath = joinPath(outputPath, entry.fileName);
-                        const outputDir = joinPath(outputPath, entry.fileName.split('/').slice(0, -1).join('/'));
+                        // File entry - validate the file path for security
+                        const fileValidation = InputValidator.validateFilePath(entry.fileName, {
+                            restrictToBasePath: outputPath,
+                            allowExecutables: false,
+                            maxFileSize: 100 * 1024 * 1024 // 100MB per file
+                        });
                         
-                        if (!existsSync(outputDir)) {
-                            mkdirsSync(outputDir);
+                        if (!fileValidation.isValid) {
+                            console.warn(`Skipping file with invalid path: ${entry.fileName}. Errors: ${fileValidation.errors.join(', ')}`);
+                            zipfile.readEntry();
+                            return;
                         }
+                        
+                        const sanitizedFileName = fileValidation.sanitized;
+                        const outputFilePath = joinPath(outputPath, sanitizedFileName);
+                        const outputDir = joinPath(outputPath, sanitizedFileName.split('/').slice(0, -1).join('/'));
+                        
+                        // Use Promise-based directory creation with fallback
+                        SafeFileOperations.ensureDirectoryExists(outputDir).catch(dirError => {
+                            console.warn(`Failed to create directory ${outputDir}:`, dirError);
+                            // Fallback to original method
+                            if (!existsSync(outputDir)) {
+                                mkdirsSync(outputDir);
+                            }
+                        });
 
                         zipfile.openReadStream(entry, (err, readStream) => {
                             if (err) return reject(new ExtractionError(archivePath, err));

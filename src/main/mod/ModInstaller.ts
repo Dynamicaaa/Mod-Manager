@@ -21,6 +21,8 @@ import MacOSFileCleanup from "../utils/MacOSFileCleanup";
 import {ModContainerManager} from "../container/ModContainerManager";
 import {ModContainer, ModManifest} from "../container/ModContainer";
 import { AdvancedBackupManager } from "../backup/BackupManager";
+import {InputValidator} from "../utils/InputValidator";
+import {SafeFileOperations} from "../utils/SafeFileOperations";
 
 export default class ModInstaller {
 
@@ -36,6 +38,41 @@ export default class ModInstaller {
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
         
         try {
+            // Validate inputs before proceeding
+            progressReporter.updatePhase('analyzing', 'Validating input parameters...', 1);
+            
+            // Validate mod path
+            const modValidation = InputValidator.validateModArchive(modPath);
+            if (!modValidation.isValid) {
+                const error = new Error(`Invalid mod file: ${modValidation.errors.join(', ')}`);
+                progressReporter.error(error, 'analyzing');
+                throw error;
+            }
+            
+            // Validate install path
+            const installValidation = InputValidator.validateDirectoryPath(installPath, {
+                mustBeWritable: true,
+                allowRelative: false,
+                maxLength: 260
+            });
+            if (!installValidation.isValid) {
+                const error = new Error(`Invalid installation path: ${installValidation.errors.join(', ')}`);
+                progressReporter.error(error, 'analyzing');
+                throw error;
+            }
+            
+            // Validate instance name if provided
+            if (instanceName) {
+                const nameValidation = InputValidator.validateInstallationName(instanceName);
+                if (!nameValidation.isValid) {
+                    const error = new Error(`Invalid instance name: ${nameValidation.errors.join(', ')}`);
+                    progressReporter.error(error, 'analyzing');
+                    throw error;
+                }
+                instanceName = nameValidation.sanitized;
+            }
+            
+            console.log(`ModInstaller: Starting installation with validated inputs - Mod: ${modValidation.sanitized}, Install: ${installValidation.sanitized}, Instance: ${instanceName}`);
             // Create automatic backup before mod installation
             if (createBackup && existsSync(installPath)) {
                 progressReporter.updatePhase('analyzing', 'Creating pre-installation backup...', 2);
@@ -114,6 +151,31 @@ export default class ModInstaller {
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
         
         try {
+            // Validate all inputs for container installation
+            progressReporter.updatePhase('analyzing', 'Validating container installation parameters...', 2);
+            
+            const modValidation = InputValidator.validateModArchive(modPath);
+            if (!modValidation.isValid) {
+                throw new Error(`Invalid mod file: ${modValidation.errors.join(', ')}`);
+            }
+            
+            const installValidation = InputValidator.validateDirectoryPath(installPath, {
+                mustBeWritable: true,
+                allowRelative: false
+            });
+            if (!installValidation.isValid) {
+                throw new Error(`Invalid installation path: ${installValidation.errors.join(', ')}`);
+            }
+            
+            const nameValidation = InputValidator.validateInstallationName(instanceName);
+            if (!nameValidation.isValid) {
+                throw new Error(`Invalid instance name: ${nameValidation.errors.join(', ')}`);
+            }
+            
+            // Use sanitized values
+            modPath = modValidation.sanitized;
+            installPath = installValidation.sanitized;
+            instanceName = nameValidation.sanitized;
             // Initialize container manager
             ModContainerManager.initialize();
             
@@ -289,17 +351,32 @@ export default class ModInstaller {
                 installJson.mapper = mapper.getFriendlyName();
                 progressReporter.updatePhase('analyzing', 'Writing installation metadata...', 20);
                 try {
-                    const fs = require("fs");
-                    const fd = fs.openSync(installJsonPath, "w");
-                    fs.writeSync(fd, JSON.stringify(installJson, null, 2), null, "utf8");
-                    fs.fsyncSync(fd);
-                    fs.closeSync(fd);
-                    const dirFd = fs.openSync(installPath, "r");
-                    fs.fsyncSync(dirFd);
-                    fs.closeSync(dirFd);
-                    console.debug("[install.json] install.json written and flushed successfully. Contents:", installJson);
+                    // Use SafeFileOperations for atomic write with backup
+                    SafeFileOperations.writeFile(
+                        installJsonPath,
+                        JSON.stringify(installJson, null, 2),
+                        {
+                            createBackup: true,
+                            atomicOperation: true,
+                            validatePath: true
+                        }
+                    ).then(() => {
+                        console.debug("[install.json] install.json written and flushed successfully. Contents:", installJson);
+                    }).catch(e => {
+                        console.error("[install.json] Failed to write and flush install.json:", e);
+                        // Fallback to synchronous write
+                        try {
+                            const fs = require("fs");
+                            const fd = fs.openSync(installJsonPath, "w");
+                            fs.writeSync(fd, JSON.stringify(installJson, null, 2), null, "utf8");
+                            fs.fsyncSync(fd);
+                            fs.closeSync(fd);
+                        } catch (fallbackError) {
+                            console.error("[install.json] Fallback write also failed:", fallbackError);
+                        }
+                    });
                 } catch (e) {
-                    console.error("[install.json] Failed to write and flush install.json:", e);
+                    console.error("[install.json] Failed to initiate safe write:", e);
                 }
                 for (const file of mapper.getFilesToDelete()) {
                     console.log("Deleting " + file);
@@ -433,8 +510,26 @@ export default class ModInstaller {
                                     }
                                 }
                                 
-                                const outputPath = joinPath(installPath, mappedPath);
-                                console.log("Extracting:", fileName, "->", mappedPath);
+                                // Validate the mapped path for security
+                                const pathValidation = InputValidator.validateFilePath(mappedPath, {
+                                    restrictToBasePath: installPath,
+                                    allowExecutables: false,
+                                    maxFileSize: 100 * 1024 * 1024 // 100MB per file
+                                });
+                                
+                                if (!pathValidation.isValid) {
+                                    console.warn("Skipping file with invalid path:", fileName, "->", mappedPath, "Errors:", pathValidation.errors);
+                                    if (entriesProcessed >= totalEntries) {
+                                        console.log("Mod installation completed successfully");
+                                        ff(undefined);
+                                    } else {
+                                        processNextEntry();
+                                    }
+                                    return;
+                                }
+                                
+                                const outputPath = joinPath(installPath, pathValidation.sanitized);
+                                console.log("Extracting:", fileName, "->", pathValidation.sanitized);
                                 const outputDir = outputPath.split(pathSep).slice(0, -1).join(pathSep);
                                 
                                 // Enhanced conflict resolution function
@@ -513,10 +608,28 @@ export default class ModInstaller {
                                                 mapper: mapper.getFriendlyName ? mapper.getFriendlyName() : (mapper.constructor?.name || "unknown")
                                             };
                                             try {
-                                                writeFileSync(configPath, JSON.stringify(configData, null, 2));
-                                                console.log("Wrote mod instance config:", configPath);
+                                                // Use SafeFileOperations for better error handling
+                                                SafeFileOperations.writeFile(
+                                                    configPath,
+                                                    JSON.stringify(configData, null, 2),
+                                                    {
+                                                        createBackup: false,
+                                                        atomicOperation: true,
+                                                        validatePath: true
+                                                    }
+                                                ).then(() => {
+                                                    console.log("Wrote mod instance config:", configPath);
+                                                }).catch(e => {
+                                                    console.warn("Failed to write mod instance config:", e.message);
+                                                    // Fallback to synchronous write
+                                                    try {
+                                                        writeFileSync(configPath, JSON.stringify(configData, null, 2));
+                                                    } catch (fallbackError) {
+                                                        console.warn("Fallback config write failed:", fallbackError.message);
+                                                    }
+                                                });
                                             } catch (e) {
-                                                console.warn("Failed to write mod instance config:", e.message);
+                                                console.warn("Failed to initiate safe config write:", e.message);
                                             }
                                             
                                             // Clean up macOS resource fork files that can interfere with game execution
