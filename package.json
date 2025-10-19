@@ -38,7 +38,7 @@
   "dependencies": {
     "@electron/remote": "^2.1.2",
     "@fortawesome/fontawesome-free": "^6.5.0",
-    "@dynamicaaa/rpx": "file:rpx",
+    "@dynamicaaa/rpx": "^1.1.0",
     "archiver": "^6.0.0",
     "axios": "^1.10.0",
     "chmodr": "^1.2.0",
