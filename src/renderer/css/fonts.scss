@@ -11,3 +11,13 @@
   font-weight: 400;
   src: local('Open Sans Regular'), local('OpenSans-Regular'), url(../fonts/OpenSans-Regular.ttf);
 }
+
+:root {
+  --ddlc-font-primary: 'Open Sans', 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  font-family: var(--ddlc-font-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

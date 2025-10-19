@@ -1,7 +1,5 @@
-import {existsSync} from "fs";
-import {join as joinPath} from "path";
-import Config from "../utils/Config";
 import IntegrityCheck from "./IntegrityCheck";
+import GameArchiveResolver from "../utils/GameArchiveResolver";
 
 export default class OnboardingManager {
 
@@ -10,10 +8,10 @@ export default class OnboardingManager {
      */
     public static isOnboardingRequired(): boolean {
         try {
-            const path: string = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
-            console.log("OnboardingManager: Checking for DDLC at path:", path);
+            const archiveInfo = GameArchiveResolver.resolveArchivePath();
+            console.log("OnboardingManager: Checking for DDLC at path:", archiveInfo.path);
 
-            const exists = existsSync(path);
+            const exists = archiveInfo.found;
             console.log("OnboardingManager: DDLC file exists:", exists);
 
             if (!exists) {
@@ -49,12 +47,12 @@ export default class OnboardingManager {
      */
     public static async validateGameIntegrity(): Promise<boolean> {
         try {
-            const path: string = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
-            if (!existsSync(path)) {
+            const archiveInfo = GameArchiveResolver.resolveArchivePath();
+            if (!archiveInfo.found) {
                 return false;
             }
 
-            await IntegrityCheck.checkGameIntegrity(path);
+            await IntegrityCheck.checkGameIntegrity(archiveInfo.path);
             return true;
         } catch (error) {
             console.warn("OnboardingManager: Game integrity check failed:", error);

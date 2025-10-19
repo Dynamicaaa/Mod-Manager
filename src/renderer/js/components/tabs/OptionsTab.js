@@ -733,46 +733,13 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             },
             "language_interim": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
             "current_language": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
-            
-            "menu": [
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
-                        {"title": "UI Theme", "id": "ui_theme"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
-                        {
-                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
-                            "id": "advanced_appearance"
-                        }
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
-                        {"title": "Sayonika Server", "id": "sayonika_server"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_wine") : "Wine",
-                    "contents": [
-                        {
-                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.menu.wine") : "Wine Configuration",
-                            "id": "wine_config"
-                        }
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
-                    ]
-                }
-            ]
+            "isLinux": (typeof ddmm !== 'undefined' && ddmm.platform === 'linux') || (typeof process !== 'undefined' && process.platform === 'linux'),
+            "menu": []
         }
+    },
+    "created": function () {
+        this.menu = this.buildMenu();
+        this.ensureValidSelectedOption();
     },
     "computed": {
         "installFolder": function () {
@@ -1595,35 +1562,64 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
         "refreshMenuTranslations": function() {
             // Refresh menu translations
-            this.menu = [
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
+            this.menu = this.buildMenu();
+            this.ensureValidSelectedOption();
+        },
+        "buildMenu": function() {
+            const appearanceSection = {
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
+                    {"title": "UI Theme", "id": "ui_theme"},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
+                    {
+                        "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
+                        "id": "advanced_appearance"
+                    }
+                ]
+            };
+
+            const applicationSection = {
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
+                    {"title": "Sayonika Server", "id": "sayonika_server"}
+                ]
+            };
+
+            const sections = [appearanceSection, applicationSection];
+
+            if (this.isLinux) {
+                sections.push({
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_wine") : "Wine",
                     "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
-                        {"title": "UI Theme", "id": "ui_theme"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
                         {
-                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
-                            "id": "advanced_appearance"
+                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.menu.wine") : "Wine Configuration",
+                            "id": "wine_config"
                         }
                     ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
-                        {"title": "Sayonika Server", "id": "sayonika_server"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
-                    ]
-                }
-            ];
+                });
+            }
+
+            sections.push({
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
+                ]
+            });
+
+            return sections;
+        },
+        "ensureValidSelectedOption": function() {
+            const menuHasSelection = this.menu.some(section => {
+                return Array.isArray(section.contents) && section.contents.some(item => item.id === this.selected_option);
+            });
+
+            if (!menuHasSelection && this.menu.length > 0 && Array.isArray(this.menu[0].contents) && this.menu[0].contents.length > 0) {
+                this.selected_option = this.menu[0].contents[0].id;
+            }
         },
 
         "loadAvailableLanguages": async function() {
@@ -1699,14 +1695,17 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
     },
 
     "mounted": function () {
-        if (!this.selected_option) {
-            this.selected_option = this.menu[0].contents[0].id;
-        }
+        this.ensureValidSelectedOption();
 
         // Listen for the ddmm-ready event to update version and refresh data
         window.addEventListener('ddmm-ready', () => {
             console.log("OptionsTab: ddmm-ready event received");
             if (typeof ddmm !== 'undefined') {
+                if (typeof ddmm.platform !== 'undefined') {
+                    this.isLinux = ddmm.platform === 'linux';
+                    this.menu = this.buildMenu();
+                    this.ensureValidSelectedOption();
+                }
                 // Update version using the getVersionFromConfig method
                 this.version = this.getVersionFromConfig();
                 console.log("OptionsTab: Updated version to:", this.version);

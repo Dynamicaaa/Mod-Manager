@@ -5,6 +5,7 @@ import {autoUpdater} from "electron-updater";
 import * as semver from "semver";
 import * as remoteMain from "@electron/remote/main";
 import {SafeFileOperations} from "./utils/SafeFileOperations";
+import GameArchiveResolver from "./utils/GameArchiveResolver";
 
 // Check if running from Windows Store
 const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
@@ -25,7 +26,7 @@ import InstallList from "./install/InstallList";
 import InstallLauncher from "./install/InstallLauncher";
 import Config from "./utils/Config";
 import InstallCreator from "./install/InstallCreator";
-import ModInstaller from "./mod/ModInstaller";
+import ModInstaller, { RenpyDecompileOptions } from "./mod/ModInstaller";
 import InstallManager from "./install/InstallManager";
 import {InstallationProgressManager} from "./progress/InstallationProgressManager";
 import { logger } from "./utils/EnhancedLogger";
@@ -593,7 +594,7 @@ ipcMain.on("onboarding browse", async () => {
     if (result.filePaths && result.filePaths[0] && result.filePaths[0].endsWith(".zip")) {
         try {
             console.log("Main: Copying selected DDLC file:", result.filePaths[0]);
-            const targetPath = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
+            const targetPath = GameArchiveResolver.getWriteTargetPath();
             
             // Use SafeFileOperations for better error handling
             SafeFileOperations.copyFile(result.filePaths[0], targetPath, {
@@ -989,6 +990,19 @@ ipcMain.on("restore install", async (ev: IpcMainEvent, {zipPath, folderName}) =>
     } catch (e: any) {
         ev.returnValue = { success: false, error: e.toString() };
         logger.error('BackupManager', `Restore of install ${folderName} failed:`, e);
+    }
+});
+
+// Trigger Ren'Py decompilation for an existing install
+ipcMain.handle("decompile install", async (_event, payload: { folderName: string; options?: RenpyDecompileOptions }) => {
+    const { folderName, options } = payload || { folderName: "", options: undefined };
+    logger.install('ModInstaller', `Starting manual decompilation for install ${folderName}`);
+    try {
+        const sessionId = InstallManager.initiateDecompileInstall(folderName, options);
+        return { success: true, sessionId };
+    } catch (error: any) {
+        logger.error('ModInstaller', `Failed to start decompilation for ${folderName}:`, error);
+        return { success: false, error: error?.message || String(error) };
     }
 });
 

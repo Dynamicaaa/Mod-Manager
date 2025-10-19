@@ -1,5 +1,5 @@
-import {join as joinPath} from "path";
-import {readFileSync, existsSync, accessSync, constants} from "fs";
+import {join as joinPath, dirname as pathDirname} from "path";
+import {readFileSync, existsSync, accessSync, constants, readdirSync, statSync} from "fs";
 import {app} from "electron";
 import {spawn} from "child_process";
 import * as chmodr from "chmodr";
@@ -147,6 +147,7 @@ export default class InstallLauncher {
             let WineAPI: typeof import("../sdk/WineAPI") | null = null;
             let winePath = "";
             let launchArgs: string[] = [];
+            let launchWorkingDirectory = joinPath(installFolder, "install");
 
             // Prefer customLauncher (new)
             let customLauncher = installData.customLauncher;
@@ -200,10 +201,10 @@ export default class InstallLauncher {
                         gameExecutable = joinPath(installDir, "ddlc.exe");
                     }
                 } else if (process.platform === "linux") {
-                    if (
-                        typeof installData.mapper === "string" &&
-                        installData.mapper.trim() === "DDLC Mod Template 2.0"
-                    ) {
+                    const requiresWine = installData?.requiresWine === true ||
+                        (typeof installData.mapper === "string" &&
+                         installData.mapper.trim() === "DDLC Mod Template 2.0");
+                    if (requiresWine) {
                         useWine = true;
                         WineAPI = require("../sdk/WineAPI");
                         await WineAPI.ensureWine();
@@ -254,21 +255,76 @@ export default class InstallLauncher {
                         gameExecutable = joinPath(installFolder, "install", "DDLC.sh");
                     }
                 } else if (process.platform === "darwin") {
-                    const possiblePaths = [
-                        joinPath(installFolder, "install", "DDLC.app", "Contents", "MacOS", "DDLC"),
-                        joinPath(installFolder, "install", "MacOS", "DDLC"),
-                        joinPath(installFolder, "install", "DDLC")
-                    ];
-                    gameExecutable = null;
-                    for (const path of possiblePaths) {
-                        if (existsSync(path)) {
-                            gameExecutable = path;
-                            break;
+                    const installDir = joinPath(installFolder, "install");
+                    const appBundlePath = joinPath(installDir, "DDLC.app");
+                    const macosDir = joinPath(appBundlePath, "Contents", "MacOS");
+
+                    const pickExecutableFromMacOSDir = (dir: string): string | null => {
+                        try {
+                            const entries = readdirSync(dir);
+                            const executableEntries: string[] = [];
+
+                            for (const entry of entries) {
+                                const fullPath = joinPath(dir, entry);
+                                try {
+                                    const stats = statSync(fullPath);
+                                    if (stats.isFile()) {
+                                        executableEntries.push(entry);
+                                    }
+                                } catch {
+                                    // Ignore errors and continue scanning
+                                }
+                            }
+
+                            if (executableEntries.length === 0) {
+                                return null;
+                            }
+
+                            const customExecutable = executableEntries.find(name => name.toLowerCase() !== "ddlc");
+                            if (customExecutable) {
+                                return joinPath(dir, customExecutable);
+                            }
+
+                            const ddlcExecutable = executableEntries.find(name => name.toLowerCase() === "ddlc");
+                            if (ddlcExecutable) {
+                                return joinPath(dir, ddlcExecutable);
+                            }
+
+                            return joinPath(dir, executableEntries[0]);
+                        } catch (error) {
+                            console.warn("InstallLauncher: Failed to inspect macOS executable directory:", error);
+                            return null;
+                        }
+                    };
+
+                    let candidateExecutable: string | null = null;
+
+                    if (existsSync(macosDir)) {
+                        candidateExecutable = pickExecutableFromMacOSDir(macosDir);
+                        if (candidateExecutable) {
+                            launchWorkingDirectory = macosDir;
                         }
                     }
-                    if (!gameExecutable) {
-                        gameExecutable = possiblePaths[0];
+
+                    if (!candidateExecutable) {
+                        const fallbackPaths = [
+                            joinPath(installDir, "MacOS", "DDLC"),
+                            joinPath(installDir, "DDLC")
+                        ];
+                        for (const fallback of fallbackPaths) {
+                            if (existsSync(fallback)) {
+                                candidateExecutable = fallback;
+                                break;
+                            }
+                        }
                     }
+
+                    if (!candidateExecutable) {
+                        candidateExecutable = joinPath(appBundlePath, "Contents", "MacOS", "DDLC");
+                        launchWorkingDirectory = pathDirname(candidateExecutable);
+                    }
+
+                    gameExecutable = candidateExecutable;
                 } else {
                     throw new Error("I have no idea what kind of computer you're using!");
                 }
@@ -310,12 +366,12 @@ export default class InstallLauncher {
                     // Launch with Wine
                     console.debug("[Wine] Launching", gameExecutable, "with Wine at", winePath);
                     procHandle = WineAPI.runWithWine(gameExecutable, launchArgs, {
-                        cwd: joinPath(installFolder, "install"),
+                        cwd: launchWorkingDirectory,
                         env,
                     });
                 } else {
                     procHandle = spawn(gameExecutable, launchArgs, {
-                        cwd: joinPath(installFolder, "install"),
+                        cwd: launchWorkingDirectory,
                         env,
                     });
                 }

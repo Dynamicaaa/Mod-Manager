@@ -24,6 +24,7 @@
     "build-css-once": "sass src/renderer/css:src/renderer/css --no-source-map",
     "rebuild-css": "npm run build-css-once",
     "clean": "rm -rf lib",
+    "clean:user-data": "node scripts/clean-user-data.js",
     "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.min.js lib/vendor/vue.js && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
     "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets",
     "dist": "npm run build && electron-builder",
@@ -37,6 +38,7 @@
   "dependencies": {
     "@electron/remote": "^2.1.2",
     "@fortawesome/fontawesome-free": "^6.5.0",
+    "@dynamicaaa/rpx": "file:rpx",
     "archiver": "^6.0.0",
     "axios": "^1.10.0",
     "chmodr": "^1.2.0",

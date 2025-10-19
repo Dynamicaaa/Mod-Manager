@@ -1,10 +1,12 @@
 import * as yauzl from "yauzl";
 import {createWriteStream, unlinkSync, removeSync, readFileSync, writeFileSync, existsSync} from "fs-extra";
 import {mkdirsSync} from "fs-extra";
-import {join as joinPath, sep as pathSep, dirname} from "path";
+import {promises as fsPromises, Dirent} from "fs";
+import {join as joinPath, sep as pathSep, dirname, basename} from "path";
+import {pathToFileURL} from "url";
 import ArchiveConverter from "../archive/ArchiveConverter";
 import {UniversalArchiveExtractor} from "../archive/UniversalArchiveExtractor";
-import {InstallationProgressManager} from "../progress/InstallationProgressManager";
+import {InstallationProgressManager, ProgressReporter} from "../progress/InstallationProgressManager";
 import {
     ModInstallationError,
     UnsupportedArchiveError,
@@ -53,7 +55,26 @@ interface ResolutionResult {
     relativePath: string;
 }
 
+export interface RenpyDecompileOptions {
+    deleteRpa?: boolean;
+    deleteRpyc?: boolean;
+    tryHarder?: boolean;
+    overwriteExistingRpy?: boolean;
+}
+
 export default class ModInstaller {
+    private static readonly importShim: (specifier: string) => Promise<any> =
+        new Function("specifier", "return import(specifier);") as any;
+
+    private static async importEsmModule<T = any>(specifier: string): Promise<T> {
+        try {
+            const resolvedPath = require.resolve(specifier);
+            const moduleUrl = pathToFileURL(resolvedPath).href;
+            return await ModInstaller.importShim(moduleUrl);
+        } catch {
+            return await ModInstaller.importShim(specifier);
+        }
+    }
 
     /**
      * Installs a mod into a copy of DDLC by guessing which files should go where
@@ -254,6 +275,7 @@ export default class ModInstaller {
             
             // Activate the container
             await ModContainerManager.activateContainer(container.id, installPath);
+            await ModInstaller.processRenpyContent(installPath, progressReporter);
             
             progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
             
@@ -443,6 +465,7 @@ export default class ModInstaller {
 
                             progressReporter.updatePhase('installing', 'Extracting mod files...', 30);
                             await ModInstaller.extractArchive(modPath, analysis, extractionContext, progressReporter);
+                            await ModInstaller.processRenpyContent(installPath, progressReporter);
 
                             progressReporter.updatePhase('verifying', 'Writing mod configuration...', 85);
                             await ModInstaller.writeModConfiguration(installPath, installJson.mapper);
@@ -797,7 +820,21 @@ export default class ModInstaller {
             return null;
         }
 
-        const relativeSegments = stripSegments > 0 ? sanitizedOriginal.slice(stripSegments) : sanitizedOriginal.slice();
+        let relativeSegments = stripSegments > 0 ? sanitizedOriginal.slice(stripSegments) : sanitizedOriginal.slice();
+
+        if (stripSegments > 0) {
+            const strippedSegments = sanitizedOriginal.slice(0, stripSegments).filter(Boolean);
+            if (strippedSegments.length > 0) {
+                const lastStripped = strippedSegments[strippedSegments.length - 1];
+                const lowerLastStripped = lastStripped.toLowerCase();
+                const reinstateSegments = new Set(["game", "renpy", "python-packages", "update", "updates"]);
+                if (reinstateSegments.has(lowerLastStripped)) {
+                    if (relativeSegments.length === 0 || relativeSegments[0].toLowerCase() !== lowerLastStripped) {
+                        relativeSegments = [lastStripped, ...relativeSegments];
+                    }
+                }
+            }
+        }
 
         if (relativeSegments.length === 0 && !sanitizedOriginal.some(segment => segment.toLowerCase().endsWith(".app"))) {
             return null;
@@ -841,6 +878,7 @@ export default class ModInstaller {
             relativePath: normalizedRelative
         };
     }
+
 
     private static extractArchive(modPath: string, analysis: ArchiveAnalysisResult, context: ExtractionContext, progressReporter: any): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -1025,6 +1063,250 @@ export default class ModInstaller {
                 });
             });
         });
+    }
+
+    public static async processRenpyContent(
+        installPath: string,
+        progressReporter?: ProgressReporter,
+        options: RenpyDecompileOptions = {}
+    ): Promise<'success' | 'skipped' | 'failed'> {
+        try {
+            const effectiveOptions: Required<Pick<RenpyDecompileOptions, 'deleteRpa' | 'deleteRpyc' | 'tryHarder' | 'overwriteExistingRpy'>> = {
+                deleteRpa: Boolean(options.deleteRpa),
+                deleteRpyc: Boolean(options.deleteRpyc),
+                tryHarder: Boolean(options.tryHarder),
+                overwriteExistingRpy: options.overwriteExistingRpy !== false
+            };
+
+            const searchRoots = new Set<string>([installPath]);
+
+            const additionalRoots = [
+                joinPath(installPath, "game"),
+                joinPath(installPath, "game", "autorun"),
+                joinPath(installPath, "autorun"),
+                joinPath(dirname(installPath), "game"),
+                joinPath(dirname(installPath), "game", "autorun"),
+                joinPath(dirname(installPath), "autorun")
+            ];
+
+            for (const candidate of additionalRoots) {
+                if (candidate && existsSync(candidate)) {
+                    searchRoots.add(candidate);
+                }
+            }
+
+            const aggregatedRpa = new Set<string>();
+            const aggregatedRpyc = new Set<string>();
+
+            for (const root of searchRoots) {
+                if (!existsSync(root)) {
+                    continue;
+                }
+                const { rpaFiles: rootRpa, rpycFiles: rootRpyc } = await ModInstaller.collectRenpyTargets(root);
+                rootRpa.forEach(file => aggregatedRpa.add(file));
+                rootRpyc.forEach(file => aggregatedRpyc.add(file));
+            }
+
+            const rpaFiles = Array.from(aggregatedRpa);
+            const rpycFiles = Array.from(aggregatedRpyc);
+
+            if (rpaFiles.length === 0 && rpycFiles.length === 0) {
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'No Ren\'Py archives detected.', 90);
+                }
+                return 'skipped';
+            }
+
+            let rpxModule: any;
+            try {
+                rpxModule = await ModInstaller.importEsmModule("@dynamicaaa/rpx");
+            } catch (importError) {
+                console.warn("[ModInstaller] RPX tooling not available; skipping Ren'Py processing.", importError);
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'Ren\'Py tooling unavailable.', 90);
+                }
+                return 'skipped';
+            }
+
+            const RPXClass = rpxModule?.RPX || rpxModule?.default;
+            if (!RPXClass) {
+                console.warn("[ModInstaller] RPX module did not expose an RPX extractor; skipping Ren'Py processing.");
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'Ren\'Py tooling unavailable.', 90);
+                }
+                return 'skipped';
+            }
+
+            if (progressReporter) {
+                progressReporter.updatePhase('installing', 'Processing Ren\'Py archives...', 55);
+            }
+
+            let extractedArchives = 0;
+            let decompiledScripts = 0;
+
+            if (rpaFiles.length > 0) {
+                for (let index = 0; index < rpaFiles.length; index++) {
+                    const rpaPath = rpaFiles[index];
+                    const label = basename(rpaPath);
+                    const extractionProgress = 55 + Math.round(((index + 1) / rpaFiles.length) * 15);
+                    if (progressReporter) {
+                        progressReporter.updateProgress(extractionProgress, label, `Extracting ${label}`);
+                    }
+
+                    try {
+                        const extractor = new RPXClass(rpaPath, {
+                            decompileRPYC: true,
+                            keepRpycFiles: !effectiveOptions.deleteRpyc,
+                            overwriteRPY: effectiveOptions.overwriteExistingRpy,
+                            tryHarder: effectiveOptions.tryHarder
+                        });
+                        await extractor.extractAll(dirname(rpaPath));
+                        extractedArchives++;
+                        if (effectiveOptions.deleteRpa) {
+                            try {
+                                await fsPromises.unlink(rpaPath);
+                                if (progressReporter) {
+                                    progressReporter.updateProgress(
+                                        extractionProgress,
+                                        label,
+                                        `Extracted and removed ${label}`
+                                    );
+                                }
+                            } catch (unlinkError) {
+                                console.warn(`[ModInstaller] Failed to delete RPA archive ${rpaPath}:`, unlinkError);
+                            }
+                        }
+                    } catch (extractError) {
+                        console.warn(`[ModInstaller] Failed to extract RPA archive ${rpaPath}:`, extractError);
+                    }
+                }
+            }
+
+            if (rpycFiles.length > 0) {
+                let decompilerModule: any;
+                try {
+                    decompilerModule = await ModInstaller.importEsmModule("@dynamicaaa/rpx/src/decompiler.js");
+                } catch (importError) {
+                    console.warn("[ModInstaller] RPYC decompiler unavailable; skipping standalone RPYC processing.", importError);
+                    if (progressReporter) {
+                        progressReporter.updateProgress(75, undefined, "Ren'Py archive extraction complete");
+                    }
+                    return extractedArchives > 0 ? 'success' : 'skipped';
+                }
+
+                const RPYCDecompilerClass = decompilerModule?.RPYCDecompiler || decompilerModule?.default;
+                if (!RPYCDecompilerClass) {
+                    console.warn("[ModInstaller] RPYC decompiler module missing expected export; skipping RPYC processing.");
+                } else {
+                    const decompiler = new RPYCDecompilerClass({
+                        autoDecompile: true,
+                        overwrite: effectiveOptions.overwriteExistingRpy,
+                        tryHarder: effectiveOptions.tryHarder,
+                        keepRpycFiles: !effectiveOptions.deleteRpyc
+                    });
+                    try {
+                        if (typeof decompiler.init === "function") {
+                            await decompiler.init();
+                        }
+                    } catch (initError) {
+                        console.warn("[ModInstaller] Failed to initialize RPYC decompiler; skipping standalone RPYC processing.", initError);
+                    }
+
+                    for (let index = 0; index < rpycFiles.length; index++) {
+                        const rpycPath = rpycFiles[index];
+                        const label = basename(rpycPath);
+                        const decompileProgress = 70 + Math.round(((index + 1) / rpycFiles.length) * 10);
+                        if (progressReporter) {
+                            progressReporter.updateProgress(decompileProgress, label, `Decompiling ${label}`);
+                        }
+
+                        try {
+                            const result = await decompiler.decompileFile(rpycPath);
+                            if (!result?.success) {
+                                console.warn(`[ModInstaller] Failed to decompile ${rpycPath}:`, result?.error || "Unknown error");
+                            } else {
+                                decompiledScripts++;
+                                if (effectiveOptions.deleteRpyc) {
+                                    try {
+                                        await fsPromises.unlink(rpycPath);
+                                    } catch (unlinkError) {
+                                        console.warn(`[ModInstaller] Failed to delete RPYC file ${rpycPath}:`, unlinkError);
+                                    }
+                                }
+                            }
+                        } catch (decompileError) {
+                            console.warn(`[ModInstaller] Exception decompiling ${rpycPath}:`, decompileError);
+                        }
+                    }
+                }
+            }
+
+            if (progressReporter) {
+                const summaryParts: string[] = [];
+                if (extractedArchives > 0) {
+                    summaryParts.push(`${extractedArchives} RPA extracted`);
+                }
+                if (decompiledScripts > 0) {
+                    summaryParts.push(`${decompiledScripts} script${decompiledScripts === 1 ? '' : 's'} decompiled`);
+                }
+                const summary = summaryParts.length > 0 ? summaryParts.join(", ") : "No actionable Ren'Py resources found";
+                progressReporter.updatePhase('verifying', `Ren'Py processing complete (${summary}).`, 90);
+            }
+            return extractedArchives > 0 || decompiledScripts > 0 ? 'success' : 'skipped';
+        } catch (error) {
+            console.warn("[ModInstaller] Unexpected error while processing Ren'Py resources:", error);
+            if (progressReporter) {
+                const wrappedError = error instanceof Error ? error : new Error(String(error));
+                progressReporter.error(wrappedError, 'installing');
+            }
+            return 'failed';
+        }
+    }
+
+    private static async collectRenpyTargets(root: string): Promise<{ rpaFiles: string[]; rpycFiles: string[] }> {
+        const rpaFiles: string[] = [];
+        const rpycFiles: string[] = [];
+        const pending: string[] = [root];
+
+        while (pending.length > 0) {
+            const currentDir = pending.pop();
+            if (!currentDir) {
+                continue;
+            }
+
+            let entries: Dirent[];
+            try {
+                entries = await fsPromises.readdir(currentDir, { withFileTypes: true });
+            } catch (error) {
+                console.warn(`[ModInstaller] Could not read directory ${currentDir}:`, error instanceof Error ? error.message : error);
+                continue;
+            }
+
+            for (const entry of entries) {
+                const fullPath = joinPath(currentDir, entry.name);
+                if (entry.isSymbolicLink()) {
+                    continue;
+                }
+
+                if (entry.isDirectory()) {
+                    pending.push(fullPath);
+                    continue;
+                }
+
+                if (!entry.isFile()) {
+                    continue;
+                }
+
+                const lowerName = entry.name.toLowerCase();
+                if (lowerName.endsWith(".rpa")) {
+                    rpaFiles.push(fullPath);
+                } else if (lowerName.endsWith(".rpyc") || lowerName.endsWith(".rpymc")) {
+                    rpycFiles.push(fullPath);
+                }
+            }
+        }
+
+        return { rpaFiles, rpycFiles };
     }
 
     /**

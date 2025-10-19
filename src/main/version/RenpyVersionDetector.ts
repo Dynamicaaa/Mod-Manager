@@ -1,6 +1,7 @@
 import { readFileSync, existsSync } from "fs";
 import { join as joinPath } from "path";
 import { CrossPlatformPathResolver } from "../utils/CrossPlatformPathResolver";
+import { RPXRuntimeDetector, RuntimeDetectionResult } from "./RPXRuntimeDetector";
 
 /**
  * Information about detected Ren'Py version
@@ -11,7 +12,7 @@ export interface RenpyVersionInfo {
     minorVersion: number;
     patchVersion: number;
     buildInfo?: string;
-    detectionMethod: 'executable' | 'script' | 'manifest' | 'heuristic';
+    detectionMethod: 'executable' | 'script' | 'manifest' | 'heuristic' | 'runtime';
     confidence: 'high' | 'medium' | 'low';
     compatibilityNotes?: string[];
 }
@@ -70,6 +71,7 @@ export class RenpyVersionDetector {
         detectionResults.push(...await this.detectFromScripts(modPath));
         detectionResults.push(...await this.detectFromManifests(modPath));
         detectionResults.push(...await this.detectFromHeuristics(modPath));
+        detectionResults.push(...await this.detectFromRuntimeArtifacts(modPath));
 
         // Return the highest confidence result
         if (detectionResults.length === 0) {
@@ -104,6 +106,9 @@ export class RenpyVersionDetector {
         
         // Try to detect from Ren'Py library
         detectionResults.push(...await this.detectFromRenpyLibrary(renpyPath));
+        
+        // Try runtime detection via compiled artefacts
+        detectionResults.push(...await this.detectFromRuntimeArtifacts(gamePath));
 
         if (detectionResults.length === 0) {
             return this.createUnknownVersionInfo();
@@ -287,6 +292,25 @@ export class RenpyVersionDetector {
         return results;
     }
 
+    private static async detectFromRuntimeArtifacts(path: string): Promise<RenpyVersionInfo[]> {
+        const results: RenpyVersionInfo[] = [];
+
+        if (!path) {
+            return results;
+        }
+
+        try {
+            const runtimeDetection = await RPXRuntimeDetector.detectFromDirectory(path);
+            if (runtimeDetection) {
+                results.push(this.createVersionInfoFromRuntime(runtimeDetection));
+            }
+        } catch (error) {
+            console.warn("Error detecting runtime from compiled assets:", error instanceof Error ? error.message : error);
+        }
+
+        return results;
+    }
+
     private static async extractVersionFromExecutable(exePath: string): Promise<RenpyVersionInfo | null> {
         try {
             // Read binary file and search for version strings
@@ -389,6 +413,41 @@ export class RenpyVersionDetector {
         }
         
         return null;
+    }
+
+    public static createVersionInfoFromRuntime(runtime: RuntimeDetectionResult): RenpyVersionInfo {
+        const version = this.runtimeInfoToVersion(runtime);
+        const parsed = this.parseVersionString(version);
+        const notes = runtime.notes && runtime.notes.length > 0
+            ? [...runtime.notes]
+            : this.getCompatibilityNotes(parsed.majorVersion);
+
+        const runtimeLabel = runtime.label || "Ren'Py runtime";
+        notes.unshift(`Runtime analysis: ${runtimeLabel}`);
+
+        return {
+            version,
+            majorVersion: parsed.majorVersion,
+            minorVersion: parsed.minorVersion,
+            patchVersion: parsed.patchVersion,
+            buildInfo: runtime.build ?? undefined,
+            detectionMethod: 'runtime',
+            confidence: runtime.confidence,
+            compatibilityNotes: notes
+        };
+    }
+
+    private static runtimeInfoToVersion(runtime: RuntimeDetectionResult): string {
+        if (typeof runtime.renpyMajor === 'number' && runtime.renpyMajor > 0) {
+            return `${runtime.renpyMajor}.0`;
+        }
+
+        const renpyLabel = runtime.renpyMajor?.toString() ?? 'unknown';
+        if (/^\d+(\.\d+)?$/.test(renpyLabel)) {
+            return renpyLabel;
+        }
+
+        return 'unknown';
     }
 
     private static createVersionInfo(

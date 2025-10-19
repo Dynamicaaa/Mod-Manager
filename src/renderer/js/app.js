@@ -542,24 +542,33 @@ const app = new Vue({
                progress: initialData.progress || 0,
                message: initialData.message || "Starting installation...",
                currentFile: initialData.currentFile || null,
-               cancellable: true
+               cancellable: initialData.cancellable === undefined ? true : initialData.cancellable
            };
        },
 
        "updateProgress": function(progressEvent) {
            console.log("Updating progress:", progressEvent);
-           if (this.progress_overlay.sessionId === progressEvent.sessionId) {
-               this.progress_overlay.phase = progressEvent.phase;
-               this.progress_overlay.progress = progressEvent.progress;
-               this.progress_overlay.message = progressEvent.message;
-               this.progress_overlay.currentFile = progressEvent.currentFile;
-               
-               // Auto-hide when complete
-               if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
-                   setTimeout(() => {
-                       this.hideProgressOverlay();
-                   }, 2000);
-               }
+           if (!this.progress_overlay.sessionId || this.progress_overlay.sessionId !== progressEvent.sessionId) {
+               this.showProgressOverlay(progressEvent.sessionId, {
+                   phase: progressEvent.phase,
+                   progress: progressEvent.progress,
+                   message: progressEvent.message,
+                   currentFile: progressEvent.currentFile
+               });
+           }
+
+           const clampedProgress = Math.min(100, Math.max(0, Number(progressEvent.progress || 0)));
+
+           this.progress_overlay.phase = progressEvent.phase;
+           this.progress_overlay.progress = clampedProgress;
+           this.progress_overlay.message = progressEvent.message;
+           this.progress_overlay.currentFile = progressEvent.currentFile;
+           
+           // Auto-hide when complete
+           if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
+               setTimeout(() => {
+                   this.hideProgressOverlay();
+               }, 2000);
            }
            
            // Track active installations
@@ -598,11 +607,11 @@ const app = new Vue({
 
        "getProgressPhaseDescription": function(phase) {
            const descriptions = {
-               'analyzing': 'Analyzing mod structure',
-               'extracting': 'Extracting archive files',
-               'mapping': 'Mapping file destinations',
-               'installing': 'Installing mod files',
-               'verifying': 'Verifying installation'
+               'analyzing': 'Analyzing content',
+               'extracting': 'Extracting files',
+               'mapping': 'Organizing output',
+               'installing': 'Running task',
+               'verifying': 'Finalizing operation'
            };
            return descriptions[phase] || 'Processing';
        },
