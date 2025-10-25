@@ -23,9 +23,9 @@
     "build-css-prod": "sass src/renderer/css:src/renderer/css --style compressed --no-source-map",
     "build-css-once": "sass src/renderer/css:src/renderer/css --no-source-map",
     "rebuild-css": "npm run build-css-once",
-    "clean": "rm -rf lib",
+    "clean": "shx rm -rf lib",
     "clean:user-data": "node scripts/clean-user-data.js",
-    "copy-assets": "cp -r lang lib/ && cp -r src/renderer lib/src/ && mkdir -p lib/vendor && cp node_modules/vue/dist/vue.min.js lib/vendor/vue.js && cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
+    "copy-assets": "shx mkdir -p lib && shx mkdir -p lib/src && shx mkdir -p lib/vendor && shx cp -r lang lib/ && shx cp -r src/renderer lib/src/ && shx cp node_modules/vue/dist/vue.min.js lib/vendor/vue.js && shx cp node_modules/fuse.js/dist/fuse.js lib/vendor/ && shx cp -r node_modules/@fortawesome/fontawesome-free lib/vendor/fontawesome-free",
     "build": "npm run clean && npm run build-css-once && tsc && npm run copy-assets",
     "dist": "npm run build && electron-builder",
     "dist:win": "npm run build && electron-builder --win",
@@ -33,7 +33,7 @@
     "dist:linux": "npm run build && electron-builder --linux",
     "dist:all": "npm run build && electron-builder --win --mac --linux",
     "pack": "npm run build && electron-builder --dir",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "node scripts/postinstall.js"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
@@ -65,6 +65,7 @@
     "electron-builder": "^24.13.3",
     "mocha": "^10.2.0",
     "sass": "^1.69.0",
+    "shx": "^0.3.4",
     "typescript": "^5.3.0"
   },
   "build": {
