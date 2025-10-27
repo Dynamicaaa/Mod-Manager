@@ -112,6 +112,49 @@ const EditInstanceTab = Vue.component("ddmm-edit-instance-tab", {
                     </button>
                 </div>
             </div>
+
+            <div class="ddlc-mod-card">
+                <h2><i class="fas fa-file-code"></i> Decompile Mod</h2>
+                <p class="card-subtitle">Use the bundled RPX toolchain to extract archives and rebuild readable scripts.</p>
+
+                <div class="decompile-menu">
+                    <label class="decompile-option">
+                        <input type="checkbox" v-model="decompileOptions.deleteRpa">
+                        <div>
+                            <span class="option-title">Delete .rpa archives after extraction</span>
+                            <small>Removes packed archives once their contents are unpacked.</small>
+                        </div>
+                    </label>
+                    <label class="decompile-option">
+                        <input type="checkbox" v-model="decompileOptions.deleteRpyc">
+                        <div>
+                            <span class="option-title">Delete .rpyc files after decompiling</span>
+                            <small>Keeps only the recovered .rpy sources to simplify editing.</small>
+                        </div>
+                    </label>
+                    <label class="decompile-option">
+                        <input type="checkbox" v-model="decompileOptions.overwriteExistingRpy">
+                        <div>
+                            <span class="option-title">Overwrite existing .rpy files</span>
+                            <small>Refreshes any scripts that were previously decompiled.</small>
+                        </div>
+                    </label>
+                    <label class="decompile-option">
+                        <input type="checkbox" v-model="decompileOptions.tryHarder">
+                        <div>
+                            <span class="option-title">Use try-harder mode</span>
+                            <small>Enables slower heuristics for stubborn or legacy Ren&rsquo;Py builds.</small>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="decompile-actions">
+                    <button class="primary glass" :disabled="decompileInProgress" @click="decompileInstance">
+                        <i class="fas fa-magic"></i>
+                        {{ decompileInProgress ? 'Preparing…' : 'Start Decompilation' }}
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="edit-content" v-else>
@@ -131,7 +174,14 @@ const EditInstanceTab = Vue.component("ddmm-edit-instance-tab", {
         return {
             "instanceData": {},
             "editableData": {},
-            "originalData": {}
+            "originalData": {},
+            "decompileOptions": {
+                "deleteRpa": false,
+                "deleteRpyc": false,
+                "tryHarder": false,
+                "overwriteExistingRpy": true
+            },
+            "decompileInProgress": false
         }
     },
     "computed": {
@@ -281,6 +331,58 @@ const EditInstanceTab = Vue.component("ddmm-edit-instance-tab", {
                         alert('Restore failed: ' + res.error);
                     }
                 }
+            });
+        },
+
+        "decompileInstance": function() {
+            if (!this.instanceData.folderName) {
+                alert('No instance selected.');
+                return;
+            }
+
+            if (typeof ddmm === 'undefined' || !ddmm.mods || !ddmm.mods.decompileInstall) {
+                alert('Decompilation is not supported in this environment.');
+                return;
+            }
+
+            const destructive = this.decompileOptions.deleteRpa || this.decompileOptions.deleteRpyc;
+            const confirmationMessage = destructive
+                ? 'This will remove the selected archive or compiled script files after decompiling. Continue?'
+                : 'Start decompiling this mod? This may take several minutes.';
+
+            if (!confirm(confirmationMessage)) {
+                return;
+            }
+
+            const requestOptions = {
+                deleteRpa: this.decompileOptions.deleteRpa,
+                deleteRpyc: this.decompileOptions.deleteRpyc,
+                tryHarder: this.decompileOptions.tryHarder,
+                overwriteExistingRpy: this.decompileOptions.overwriteExistingRpy
+            };
+
+            this.decompileInProgress = true;
+
+            ddmm.mods.decompileInstall(this.instanceData.folderName, requestOptions).then((result) => {
+                if (result && result.success) {
+                    if (window.app && window.app.showProgressOverlay) {
+                        window.app.showProgressOverlay(result.sessionId, {
+                            phase: 'analyzing',
+                            progress: 0,
+                            message: 'Preparing mod decompilation...',
+                            currentFile: null,
+                            cancellable: false
+                        });
+                    }
+                } else {
+                    const message = (result && result.error) ? result.error : 'Unknown error';
+                    alert('Failed to start decompilation: ' + message);
+                }
+            }).catch((error) => {
+                console.error("Error starting decompilation:", error);
+                alert("Error starting decompilation: " + error.message);
+            }).finally(() => {
+                this.decompileInProgress = false;
             });
         }
     },

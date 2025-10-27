@@ -996,18 +996,9 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         }
     },
     "mounted": function () {
-        // Check if ddmm is available before using it
-        if (typeof ddmm !== 'undefined' && ddmm.mods) {
-            ddmm.mods.refreshInstallList();
-            ddmm.mods.refreshModList();
-            ddmm.on("install list", this._refreshInstallList);
-            ddmm.on("mod list", this._refreshModList);
-            ddmm.on("create install", (mod) => {
-                this.showCreateInstall(mod ? this.getPathToMod(mod) : null);
-            });
-
-            // Listen for installation progress events
-            ddmm.on('installation-progress', (progressEvent) => {
+        // Ensure we always remove the same handler reference when the component is destroyed
+        if (!this._installationProgressHandler) {
+            this._installationProgressHandler = (progressEvent) => {
                 // Only update if this is the active installation being tracked by this tab
                 // For simplicity, we assume only one installation can be initiated from this tab at a time
                 if (this.is_installing) { // && progressEvent.sessionId === this.currentInstallationSessionId
@@ -1020,7 +1011,21 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                         this.installation_progress = 0;
                     }
                 }
+            };
+        }
+
+        // Check if ddmm is available before using it
+        if (typeof ddmm !== 'undefined' && ddmm.mods) {
+            ddmm.mods.refreshInstallList();
+            ddmm.mods.refreshModList();
+            ddmm.on("install list", this._refreshInstallList);
+            ddmm.on("mod list", this._refreshModList);
+            ddmm.on("create install", (mod) => {
+                this.showCreateInstall(mod ? this.getPathToMod(mod) : null);
             });
+
+            // Listen for installation progress events
+            ddmm.on('installation-progress', this._installationProgressHandler);
 
         } else {
             console.warn("ModsTab: ddmm not available in mounted hook, will retry");
@@ -1035,18 +1040,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
                         this.showCreateInstall(mod ? this.getPathToMod(mod) : null);
                     });
                     // Re-attach progress listener on retry
-                    ddmm.on('installation-progress', (progressEvent) => {
-                        if (this.is_installing) { // && progressEvent.sessionId === this.currentInstallationSessionId
-                            this.installation_progress = progressEvent.progress;
-                            if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
-                                this.is_installing = false;
-                                this.installation_progress = 0;
-                            } else if (progressEvent.phase === 'error') {
-                                this.is_installing = false;
-                                this.installation_progress = 0;
-                            }
-                        }
-                    });
+                    ddmm.on('installation-progress', this._installationProgressHandler);
                 }
             }, 100);
         }
@@ -1061,7 +1055,7 @@ const ModsTab = Vue.component("ddmm-mods-tab", {
         if (typeof ddmm !== 'undefined' && ddmm.off) {
             ddmm.off("install list", this._refreshInstallList);
             ddmm.off("mod list", this._refreshModList);
-            ddmm.off("installation-progress", this._updateInstallationProgress); // Remove progress listener
+            ddmm.off("installation-progress", this._installationProgressHandler); // Remove progress listener
         }
         document.body.removeEventListener("keyup", this._keyPressHandler);
     }

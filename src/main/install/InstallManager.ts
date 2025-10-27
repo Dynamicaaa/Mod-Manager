@@ -7,6 +7,9 @@ import * as Archiver from "archiver";
 import * as StreamZip from "node-stream-zip";
 import {createWriteStream, createReadStream} from "fs";
 import { AdvancedBackupManager, BackupMetadata } from "../backup/BackupManager";
+import { randomBytes } from "crypto";
+import ModInstaller, { RenpyDecompileOptions } from "../mod/ModInstaller";
+import { InstallationProgressManager } from "../progress/InstallationProgressManager";
 
 export default class InstallManager {
 
@@ -309,5 +312,52 @@ export default class InstallManager {
         }
 
         return await AdvancedBackupManager.createManualBackup(dirPath, backupName, description);
+    }
+
+    /**
+     * Initiates Ren'Py decompilation for an existing install.
+     * @param folderName The folder containing the install
+     * @returns The progress session identifier for UI tracking
+     */
+    public static initiateDecompileInstall(folderName: string, options: RenpyDecompileOptions = {}): string {
+        const installPath = joinPath(
+            Config.readConfigValue("installFolder"),
+            "installs",
+            folderName,
+            "install"
+        );
+
+        if (!existsSync(installPath)) {
+            throw new Error("Install does not exist.");
+        }
+
+        const sessionId = randomBytes(8).toString("hex");
+        const reporter = InstallationProgressManager.createReporter(sessionId);
+
+        setImmediate(() => {
+            (async () => {
+                try {
+                    reporter.updatePhase('analyzing', 'Preparing mod decompilation...', 5);
+                    const outcome = await ModInstaller.processRenpyContent(installPath, reporter, options);
+
+                    if (outcome === 'success') {
+                        reporter.updatePhase('verifying', 'Decompilation complete.', 100);
+                        setTimeout(() => InstallationProgressManager.removeReporter(sessionId), 1000);
+                    } else if (outcome === 'skipped') {
+                        reporter.updatePhase('verifying', 'No Ren\'Py archives detected.', 100);
+                        setTimeout(() => InstallationProgressManager.removeReporter(sessionId), 1000);
+                    } else {
+                        reporter.updatePhase('verifying', 'Decompilation failed. Check logs for details.', 100);
+                        setTimeout(() => InstallationProgressManager.removeReporter(sessionId), 5000);
+                    }
+                } catch (error: any) {
+                    const wrappedError = error instanceof Error ? error : new Error(String(error));
+                    reporter.error(wrappedError, 'installing');
+                    InstallationProgressManager.removeReporter(sessionId);
+                }
+            })();
+        });
+
+        return sessionId;
     }
 }
