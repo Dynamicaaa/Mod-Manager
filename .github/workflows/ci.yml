@@ -2,9 +2,9 @@ name: CI Build
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
 
 jobs:
   test:
@@ -17,11 +17,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Run tests
         run: npm test
@@ -37,11 +38,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Build application
         run: npm run build
@@ -67,11 +69,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Build application
         run: npm run build
@@ -97,11 +100,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Build application
         run: npm run build
