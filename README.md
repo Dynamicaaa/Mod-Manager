@@ -100,7 +100,7 @@
 
 </div>
 
-The original [**Doki Doki Mod Manager by proudust**](https://github.com/proudust/ddmm) was once the go-to solution for managing DDLC mods. However, it has been **abandoned and is no longer maintained**. Over time, the original DDMM has developed several critical issues:
+The original [**Doki Doki Mod Manager**](https://github.com/proudust/Mod-Manager) was once the go-to solution for managing DDLC mods. However, it has been **abandoned and is no longer maintained**. Over time, the original DDMM has developed several critical issues:
 
 <div align="center">
 
