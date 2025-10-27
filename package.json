@@ -103,13 +103,7 @@
         ]
       }
     ],
-    "publish": [
-      {
-        "provider": "github",
-        "repo": "Mod-Manager",
-        "owner": "Dynamicaaa"
-      }
-    ],
+    "publish": null,
     "win": {
       "icon": "build/icon.ico",
       "target": [
