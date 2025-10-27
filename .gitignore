@@ -7,4 +7,5 @@ yarn-error.log
 yarn.lock
 package-lock.json
 bun.lock
+.DS_Store
 *.css

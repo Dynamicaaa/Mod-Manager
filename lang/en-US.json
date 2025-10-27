@@ -116,9 +116,6 @@
         "button_settings": "Settings",
         "tag_global_save": "Global Save",
         "tag_sdk": "SDK",
-        "title_achievements": "Achievements ({0} / {1})",
-        "description_achievements": "Keep playing to unlock more achievements.",
-        "description_achievements_complete": "You've unlocked all achievements. Congratulations!",
         "title_screenshots_none": "No screenshots",
         "title_screenshots_one": "1 screenshot",
         "title_screenshots": "{0} screenshots",
@@ -236,13 +233,33 @@
         "link_language": "Language",
         "link_advanced_appearance": "Advanced",
         "header_enhancements": "Enhancements",
-        "link_sdk": "Achievements & SDK",
+        "link_sdk": "SDK",
         "header_application": "Application",
         "link_updates": "Updates",
+        "header_wine": "Wine",
         "link_storage": "Storage Location",
         "header_developers": "Developers",
         "link_testing": "SDK Debug",
         "link_debug": "App Info"
+      },
+      "menu": {
+        "wine": "Wine Configuration"
+      },
+      "section_wine": {
+        "title": "Wine Configuration",
+        "subtitle": "Configure Wine settings for running Windows programs.",
+        "prefix_path": "Wine Prefix Path",
+        "env": "Wine Environment Variables",
+        "save": "Save",
+        "saved": "Wine configuration saved.",
+        "version": "Wine Version",
+        "version_unknown": "Unknown",
+        "refresh_version": "Refresh Version",
+        "update": "Update Wine",
+        "updating": "Updating Wine...",
+        "update_success": "Wine updated to version {version}.",
+        "update_nonew": "Wine is already up to date.",
+        "update_error": "Failed to update Wine."
       },
       "section_backgrounds": {
         "title": "Background",
@@ -271,14 +288,6 @@
         "option_stable": "Stable",
         "option_beta": "Beta",
         "button_check": "Check for updates"
-      },
-      "section_sdk": {
-        "title": "Achievements & SDK",
-        "subtitle": "Change the way achievements are handled.",
-        "description_mode": "Enable achievements:",
-        "checkbox_always": "Always (recommended)",
-        "checkbox_specified": "When the mod specifies it supports them",
-        "checkbox_never": "Never"
       },
       "section_testing": {
         "title": "SDK Debug",

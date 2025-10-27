@@ -13,7 +13,29 @@ window.updateAppVersion = function(version) {
     }
 };
 
-console.log("Creating Vue app...");
+console.log("Pre-loading essential components before creating Vue app...");
+
+// Pre-load the mods tab component before creating the Vue app to prevent lazy loading issues
+async function preloadEssentialComponents() {
+    try {
+        // Load Fuse.js first
+        await window.LazyLoader.loadScript('../../../vendor/fuse.js');
+        // Then load ModsTab component
+        await window.LazyLoader.loadScript('../js/components/tabs/ModsTab.js');
+        window.LazyLoader.loadedComponents.add('ddmm-mods-tab');
+        console.log("Essential components pre-loaded successfully");
+    } catch (error) {
+        console.error("Failed to pre-load essential components:", error);
+    }
+}
+
+// Pre-load components and then create Vue app
+preloadEssentialComponents().then(() => {
+    console.log("Creating Vue app...");
+    createVueApp();
+});
+
+function createVueApp() {
 const app = new Vue({
     "el": "#app",
     "data": {
@@ -110,11 +132,22 @@ const app = new Vue({
             "title": "Sayonika Maintenance",
             "message": "",
             "estimatedTime": null
-        }
+        },
+        "progress_overlay": {
+            "display": false,
+            "sessionId": null,
+            "phase": "analyzing",
+            "progress": 0,
+            "message": "",
+            "currentFile": null,
+            "cancellable": true
+        },
+        "active_installations": new Map()
     },
     "computed": {
         "currentTabComponent": function () {
-            return this.tabs.find(t => t.id === this.tab).component;
+            const tab = this.tabs.find(t => t.id === this.tab);
+            return tab ? tab.component : null;
         },
         "backgroundImageStyle": function () {
             if (this.background_image && this.background_image !== "none") {
@@ -290,13 +323,64 @@ const app = new Vue({
             this.background_image = image;
         },
 
-        // Page transition methods
-        "navigateToTab": function(tabId, transition = "fade") {
+        // Page transition methods with lazy loading
+        "navigateToTab": async function(tabId, transition = "fade") {
             if (this.tab === tabId) return;
+
+            // Load component lazily if not already loaded
+            await this.ensureComponentLoaded(tabId);
 
             this.previousTab = this.tab;
             this.pageTransition = transition;
             this.tab = tabId;
+        },
+
+        "ensureComponentLoaded": async function(tabId) {
+            const componentMap = {
+                'mods': {
+                    component: 'ddmm-mods-tab',
+                    scripts: [
+                        '../../../vendor/fuse.js',
+                        '../js/components/tabs/ModsTab.js'
+                    ]
+                },
+                'store': {
+                    component: 'ddmm-store-placeholder-tab',
+                    scripts: ['../js/components/tabs/StorePlaceholderTab.js']
+                },
+                'options': {
+                    component: 'ddmm-options-tab',
+                    scripts: ['../js/components/tabs/OptionsTab.js']
+                },
+                'about': {
+                    component: 'ddmm-about-tab',
+                    scripts: ['../js/components/tabs/AboutTab.js']
+                },
+                'edit-instance': {
+                    component: 'ddmm-edit-instance-tab',
+                    scripts: ['../js/components/tabs/EditInstanceTab.js']
+                }
+            };
+
+            const config = componentMap[tabId];
+            if (!config) return;
+
+            // Check if component is already loaded
+            if (window.LazyLoader.loadedComponents.has(config.component)) {
+                return;
+            }
+
+            try {
+                // Load required scripts sequentially
+                for (const script of config.scripts) {
+                    await window.LazyLoader.loadScript(script);
+                }
+                
+                window.LazyLoader.loadedComponents.add(config.component);
+                console.log(`Lazy loaded component: ${config.component}`);
+            } catch (error) {
+                console.error(`Failed to lazy load component ${config.component}:`, error);
+            }
         },
 
         // Refresh tab names when language changes
@@ -447,12 +531,97 @@ const app = new Vue({
                return `Expected completion: ${this.maintenance_cover.estimatedTime}`;
            }
        },
-        "showInstallMod": function (mod) {
-            this.tab = "mods";
-            this.$nextTick(() => {
-                ddmm.emit("create install", mod);
-            });
-        },
+
+       // Progress tracking methods
+       "showProgressOverlay": function(sessionId, initialData) {
+           console.log("Showing progress overlay for session:", sessionId);
+           this.progress_overlay = {
+               display: true,
+               sessionId: sessionId,
+               phase: initialData.phase || "analyzing",
+               progress: initialData.progress || 0,
+               message: initialData.message || "Starting installation...",
+               currentFile: initialData.currentFile || null,
+               cancellable: initialData.cancellable === undefined ? true : initialData.cancellable
+           };
+       },
+
+       "updateProgress": function(progressEvent) {
+           console.log("Updating progress:", progressEvent);
+           if (!this.progress_overlay.sessionId || this.progress_overlay.sessionId !== progressEvent.sessionId) {
+               this.showProgressOverlay(progressEvent.sessionId, {
+                   phase: progressEvent.phase,
+                   progress: progressEvent.progress,
+                   message: progressEvent.message,
+                   currentFile: progressEvent.currentFile
+               });
+           }
+
+           const clampedProgress = Math.min(100, Math.max(0, Number(progressEvent.progress || 0)));
+
+           this.progress_overlay.phase = progressEvent.phase;
+           this.progress_overlay.progress = clampedProgress;
+           this.progress_overlay.message = progressEvent.message;
+           this.progress_overlay.currentFile = progressEvent.currentFile;
+           
+           // Auto-hide when complete
+           if (progressEvent.progress >= 100 && progressEvent.phase === 'verifying') {
+               setTimeout(() => {
+                   this.hideProgressOverlay();
+               }, 2000);
+           }
+           
+           // Track active installations
+           this.active_installations.set(progressEvent.sessionId, progressEvent);
+       },
+
+       "hideProgressOverlay": function() {
+           console.log("Hiding progress overlay");
+           this.progress_overlay.display = false;
+           this.progress_overlay.sessionId = null;
+       },
+
+       "cancelInstallation": function() {
+           if (this.progress_overlay.sessionId && typeof ddmm !== 'undefined' && ddmm.progress) {
+               console.log("Cancelling installation:", this.progress_overlay.sessionId);
+               ddmm.progress.cancelInstallation(this.progress_overlay.sessionId).then((success) => {
+                   if (success) {
+                       this.hideProgressOverlay();
+                   }
+               }).catch((error) => {
+                   console.error("Failed to cancel installation:", error);
+               });
+           }
+       },
+
+       "getProgressPhaseIcon": function(phase) {
+           const icons = {
+               'analyzing': '🔍',
+               'extracting': '📦',
+               'mapping': '🗺️',
+               'installing': '⚙️',
+               'verifying': '✅'
+           };
+           return icons[phase] || '⚙️';
+       },
+
+       "getProgressPhaseDescription": function(phase) {
+           const descriptions = {
+               'analyzing': 'Analyzing content',
+               'extracting': 'Extracting files',
+               'mapping': 'Organizing output',
+               'installing': 'Running task',
+               'verifying': 'Finalizing operation'
+           };
+           return descriptions[phase] || 'Processing';
+       },
+
+       "showInstallMod": function (mod) {
+           this.tab = "mods";
+           this.$nextTick(() => {
+               ddmm.emit("create install", mod);
+           });
+       },
 
         "showUserMenu": function (ev) {
             ddmm.app.showUserMenu(ev.clientX, ev.clientY);
@@ -710,6 +879,9 @@ const app = new Vue({
         // Initialize tab names with current translations
         this.refreshTabNames();
 
+        // Components are already pre-loaded, no need to load again
+        console.log("Vue app mounted - components already pre-loaded");
+
         // Listen for language changes to update tab names
         if (typeof ddmm !== 'undefined' && ddmm.on) {
             ddmm.on('language-changed', (newLanguage) => {
@@ -725,11 +897,28 @@ const app = new Vue({
             this.refreshTabNames();
             this.$forceUpdate();
         });
+
+        // Set up progress tracking event listeners
+        if (typeof ddmm !== 'undefined' && ddmm.on) {
+            ddmm.on('installation-progress', (progressEvent) => {
+                console.log("Installation progress event received:", progressEvent);
+                this.updateProgress(progressEvent);
+            });
+        }
+
+        // Also listen for progress events on window (fallback)
+        window.addEventListener('installation-progress', (event) => {
+            console.log("Window installation-progress event received:", event.detail);
+            if (event.detail) {
+                this.updateProgress(event.detail);
+            }
+        });
     }
 });
 
 // Make the Vue app instance available globally
 window.app = app;
+}
 
 // Global Theme Manager
 window.ThemeManager = {
@@ -1092,8 +1281,6 @@ window.addEventListener('ddmm-ready', (event) => {
     console.log("DDMM ready, reloading theme...");
     window.ThemeManager.loadUITheme();
 });
-
-// Window animation functionality has been removed
 
 // Simplified titlebar drag functionality
 function setupTitlebarDragListeners() {

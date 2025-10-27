@@ -193,6 +193,11 @@ div, section, main, article {
 [class*="-overlay"],
 [class*="-modal"],
 [class*="-dialog"] {
+  // Add blur and dark background for overlays
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   // Override any inherited background sizing to ensure proper scaling
   &[style*="background-image"] {
     // Fix the background to properly fit the entire window
@@ -896,6 +901,130 @@ input[type="radio"]:focus {
   box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.3);
 }
 
+// Validation States for Input Fields
+.form-group.validation-error input,
+.form-group.validation-error textarea,
+.form-group.validation-error select {
+  border-color: $ui-danger-colour-bg;
+  box-shadow: 0 0 0 3px rgba(235, 77, 75, 0.2), 0 4px 12px rgba(235, 77, 75, 0.15);
+  background: rgba(235, 77, 75, 0.05);
+}
+
+.form-group.validation-warning input,
+.form-group.validation-warning textarea,
+.form-group.validation-warning select {
+  border-color: $ui-warning-colour-bg;
+  box-shadow: 0 0 0 3px rgba(240, 147, 43, 0.2), 0 4px 12px rgba(240, 147, 43, 0.15);
+  background: rgba(240, 147, 43, 0.05);
+}
+
+.form-group.validation-success input,
+.form-group.validation-success textarea,
+.form-group.validation-success select {
+  border-color: $ui-success-colour-bg;
+  box-shadow: 0 0 0 3px rgba(0, 209, 102, 0.2), 0 4px 12px rgba(0, 209, 102, 0.15);
+  background: rgba(0, 209, 102, 0.05);
+}
+
+.validation-message {
+  margin-top: 0.5em;
+  padding: 0.5em 0.8em;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  animation: validation-fade-in 0.3s ease-out;
+}
+
+.validation-message.error {
+  background: rgba(235, 77, 75, 0.15);
+  border: 1px solid rgba(235, 77, 75, 0.3);
+  color: #ff6b6b;
+}
+
+.validation-message.warning {
+  background: rgba(240, 147, 43, 0.15);
+  border: 1px solid rgba(240, 147, 43, 0.3);
+  color: #ffa502;
+}
+
+.validation-message.success {
+  background: rgba(0, 209, 102, 0.15);
+  border: 1px solid rgba(0, 209, 102, 0.3);
+  color: #2ed573;
+}
+
+.validation-message i {
+  font-size: 1em;
+  flex-shrink: 0;
+}
+
+@keyframes validation-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Real-time validation feedback animations
+.input-validating {
+  position: relative;
+}
+
+.input-validating::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid $ui-primary-colour-bg;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+// Success/Error Icons for validated inputs
+.form-group.validation-success .validation-icon,
+.form-group.validation-error .validation-icon,
+.form-group.validation-warning .validation-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.form-group.validation-success .validation-icon {
+  color: $ui-success-colour-bg;
+}
+
+.form-group.validation-error .validation-icon {
+  color: $ui-danger-colour-bg;
+}
+
+.form-group.validation-warning .validation-icon {
+  color: $ui-warning-colour-bg;
+}
+
+// Position form groups relatively for icon positioning
+.form-group {
+  position: relative;
+}
+
 // endregion
 
 // region running and crash covers
@@ -1562,6 +1691,141 @@ input[type="radio"]:focus {
 .info-box p {
   margin: 0.5em 0 0 0;
   color: $ui-muted-text-colour;
+}
+
+// Version Compatibility Styles
+.version-compatibility-info {
+  margin-top: 1em;
+  padding: 1.2em;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.compatibility-detected {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 1em;
+  padding: 0.8em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.compatibility-detected i {
+  color: $ddlc-yuri;
+  font-size: 1.1em;
+}
+
+.confidence-badge {
+  padding: 0.2em 0.6em;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.confidence-badge.confidence-high {
+  background: linear-gradient(135deg, $ddlc-monika, rgba(0, 209, 102, 0.8));
+  color: white;
+}
+
+.confidence-badge.confidence-medium {
+  background: linear-gradient(135deg, $ui-warning-colour-bg, rgba(240, 147, 43, 0.8));
+  color: white;
+}
+
+.confidence-badge.confidence-low {
+  background: linear-gradient(135deg, $ui-danger-colour-bg, rgba(235, 77, 75, 0.8));
+  color: white;
+}
+
+.compatibility-notes {
+  margin-bottom: 1em;
+}
+
+.compatibility-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.6em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.compatibility-note i {
+  color: $ddlc-sayori;
+  margin-top: 0.1em;
+  flex-shrink: 0;
+}
+
+.compatibility-check {
+  margin-top: 1em;
+}
+
+.compatibility-warning {
+  padding: 1em;
+  background: rgba(235, 77, 75, 0.15);
+  border: 1px solid rgba(235, 77, 75, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-warning i {
+  color: $ui-danger-colour-bg;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.compatibility-warning ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.compatibility-warning li {
+  margin-bottom: 0.3em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.compatibility-caution {
+  padding: 1em;
+  background: rgba(240, 147, 43, 0.15);
+  border: 1px solid rgba(240, 147, 43, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-caution i {
+  color: $ui-warning-colour-bg;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.compatibility-caution ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.compatibility-caution li {
+  margin-bottom: 0.3em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.compatibility-good {
+  padding: 1em;
+  background: rgba(0, 209, 102, 0.15);
+  border: 1px solid rgba(0, 209, 102, 0.4);
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.compatibility-good i {
+  color: $ddlc-monika;
+  font-size: 1.2em;
+  margin-right: 0.5em;
 }
 
 // endregion
@@ -3719,6 +3983,88 @@ body.classic-theme {
   margin-right: 0.5em;
 }
 
+.card-subtitle {
+  margin-top: -0.25em;
+  margin-bottom: 1.25em;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95em;
+}
+
+.decompile-menu {
+  display: grid;
+  gap: 0.85em;
+  margin-bottom: 1.5em;
+}
+
+.decompile-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85em;
+  padding: 0.9em 1.1em;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.decompile-option:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.25);
+}
+
+.decompile-option input[type="checkbox"] {
+  margin-top: 0.25em;
+  transform: scale(1.05);
+  accent-color: var(--accent-color, #ff8ad4);
+}
+
+.decompile-option .option-title {
+  display: block;
+  font-weight: 600;
+  color: var(--text-color, #ffffff);
+}
+
+.decompile-option small {
+  display: block;
+  margin-top: 0.25em;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85em;
+}
+
+.decompile-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.glass {
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.12));
+  color: #0f172a;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+button.glass:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  box-shadow: none;
+}
+
+button.glass:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.18));
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.28);
+}
+
+button.primary.glass {
+  color: var(--bg-color, #0f172a);
+}
+
 // Responsive design for edit page
 @media (max-width: 768px) {
   .edit-header {
@@ -4275,6 +4621,222 @@ body.sunset-theme {
   }
 }
 
+// Glassmorphism refresh for modern themes
+body.ddlc-theme,
+body.monika-theme,
+body.sayori-theme,
+body.natsuki-theme,
+body.yuri-theme,
+body.cyberpunk-theme,
+body.retro-theme,
+body.midnight-theme,
+body.sunset-theme {
+  background-color: var(--bg-color, #111827);
+  color: var(--text-color, #f8fafc);
+  background-image: var(--background-image, linear-gradient(180deg, #111827 0%, #1f2937 100%));
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--background-overlay, linear-gradient(120deg, rgba(148, 187, 233, 0.18), rgba(238, 174, 202, 0.16)));
+    opacity: 0.9;
+  }
+
+  .ddlc-mod-card,
+  .text-container,
+  .edit-instance-container .ddlc-mod-card,
+  .maintenance-dialog-content,
+  .progress-dialog-content {
+    background: var(--surface-color, rgba(17, 25, 40, 0.58));
+    color: inherit;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.25));
+    box-shadow: 0 24px 48px var(--shadow-color, rgba(15, 23, 42, 0.35));
+    backdrop-filter: blur(24px);
+  }
+
+  .navbar {
+    background: var(--navbar-background, rgba(255, 255, 255, 0.09));
+    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.28));
+    box-shadow: 0 18px 32px var(--shadow-color, rgba(15, 23, 42, 0.28));
+    backdrop-filter: blur(22px);
+    color: inherit;
+  }
+
+  .nav-links div {
+    color: rgba(255, 255, 255, 0.75);
+
+    &.active {
+      color: var(--accent-color, #fce7f3);
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.55);
+    }
+  }
+
+  button.primary {
+    background: var(--button-gradient, linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72)));
+    border-color: var(--border-color, rgba(255, 255, 255, 0.28));
+    color: var(--button-text-color, #0f172a);
+    box-shadow: 0 18px 36px var(--shadow-color, rgba(15, 23, 42, 0.32));
+  }
+
+  button.primary:hover {
+    box-shadow: 0 24px 44px var(--shadow-color, rgba(15, 23, 42, 0.38));
+  }
+
+  a:not(.ddlc-theme-selector *) {
+    color: var(--accent-color, #fce7f3);
+  }
+}
+
+body.ddlc-theme {
+  --primary-color: #9ae6ff;
+  --secondary-color: #f5a3ff;
+  --accent-color: #ffe6ff;
+  --bg-color: #0a1324;
+  --surface-color: rgba(12, 24, 48, 0.6);
+  --text-color: #f5faff;
+  --border-color: rgba(158, 206, 255, 0.42);
+  --shadow-color: rgba(88, 120, 247, 0.3);
+  --background-image: radial-gradient(circle at 18% 20%, rgba(154, 230, 255, 0.32), transparent 55%), radial-gradient(circle at 82% 15%, rgba(245, 163, 255, 0.3), transparent 60%), radial-gradient(circle at 70% 80%, rgba(148, 187, 233, 0.24), transparent 55%), linear-gradient(185deg, #0a1324 0%, #0f172a 100%);
+  --background-overlay: linear-gradient(120deg, rgba(148, 187, 233, 0.18), rgba(238, 174, 202, 0.16));
+  --navbar-background: linear-gradient(90deg, rgba(148, 187, 233, 0.28), rgba(238, 174, 202, 0.18));
+  --button-gradient: linear-gradient(135deg, rgba(154, 230, 255, 0.92), rgba(245, 163, 255, 0.82));
+  --button-text-color: #082032;
+}
+
+body.monika-theme {
+  --primary-color: #5af29a;
+  --secondary-color: #2bd6a2;
+  --accent-color: #c4ffe6;
+  --bg-color: #02160d;
+  --surface-color: rgba(8, 36, 22, 0.62);
+  --text-color: #e8ffee;
+  --border-color: rgba(90, 242, 154, 0.3);
+  --shadow-color: rgba(5, 102, 68, 0.32);
+  --background-image: radial-gradient(circle at 10% 18%, rgba(90, 242, 154, 0.28), transparent 55%), radial-gradient(circle at 78% 22%, rgba(0, 201, 167, 0.26), transparent 58%), linear-gradient(195deg, #02160d 0%, #03100a 100%);
+  --background-overlay: linear-gradient(125deg, rgba(90, 242, 154, 0.16), rgba(0, 201, 167, 0.12));
+  --navbar-background: linear-gradient(90deg, rgba(90, 242, 154, 0.26), rgba(0, 201, 167, 0.16));
+  --button-gradient: linear-gradient(135deg, rgba(90, 242, 154, 0.9), rgba(0, 201, 167, 0.78));
+  --button-text-color: #052414;
+}
+
+body.sayori-theme {
+  --primary-color: #82c4ff;
+  --secondary-color: #fba4d6;
+  --accent-color: #d4f1ff;
+  --bg-color: #102238;
+  --surface-color: rgba(20, 48, 78, 0.62);
+  --text-color: #e9f6ff;
+  --border-color: rgba(130, 196, 255, 0.3);
+  --shadow-color: rgba(26, 64, 118, 0.32);
+  --background-image: radial-gradient(circle at 12% 18%, rgba(130, 196, 255, 0.26), transparent 58%), radial-gradient(circle at 78% 26%, rgba(251, 164, 214, 0.28), transparent 62%), linear-gradient(200deg, #102238 0%, #0c1726 100%);
+  --background-overlay: linear-gradient(125deg, rgba(130, 196, 255, 0.18), rgba(251, 164, 214, 0.14));
+  --navbar-background: linear-gradient(90deg, rgba(130, 196, 255, 0.24), rgba(251, 164, 214, 0.16));
+  --button-gradient: linear-gradient(135deg, rgba(130, 196, 255, 0.9), rgba(251, 164, 214, 0.82));
+  --button-text-color: #0b1a2d;
+}
+
+body.natsuki-theme {
+  --primary-color: #ff9ed6;
+  --secondary-color: #ff7ab8;
+  --accent-color: #ffe0f0;
+  --bg-color: #2a0f23;
+  --surface-color: rgba(46, 15, 33, 0.62);
+  --text-color: #ffeaf5;
+  --border-color: rgba(255, 156, 207, 0.32);
+  --shadow-color: rgba(130, 24, 78, 0.3);
+  --background-image: radial-gradient(circle at 18% 22%, rgba(255, 156, 207, 0.3), transparent 55%), radial-gradient(circle at 78% 28%, rgba(255, 122, 184, 0.26), transparent 58%), linear-gradient(205deg, #2a0f23 0%, #1a0814 100%);
+  --background-overlay: linear-gradient(125deg, rgba(255, 156, 207, 0.18), rgba(255, 122, 184, 0.14));
+  --navbar-background: linear-gradient(90deg, rgba(255, 156, 207, 0.24), rgba(255, 122, 184, 0.16));
+  --button-gradient: linear-gradient(135deg, rgba(255, 156, 207, 0.92), rgba(255, 122, 184, 0.82));
+  --button-text-color: #2a0f23;
+}
+
+body.yuri-theme {
+  --primary-color: #b794f4;
+  --secondary-color: #8b5cf6;
+  --accent-color: #e4d6ff;
+  --bg-color: #1b1230;
+  --surface-color: rgba(35, 20, 58, 0.64);
+  --text-color: #f6efff;
+  --border-color: rgba(183, 148, 244, 0.32);
+  --shadow-color: rgba(80, 45, 140, 0.32);
+  --background-image: radial-gradient(circle at 16% 18%, rgba(183, 148, 244, 0.3), transparent 55%), radial-gradient(circle at 76% 24%, rgba(139, 92, 246, 0.26), transparent 60%), linear-gradient(205deg, #1b1230 0%, #120a24 100%);
+  --background-overlay: linear-gradient(125deg, rgba(183, 148, 244, 0.2), rgba(139, 92, 246, 0.16));
+  --navbar-background: linear-gradient(90deg, rgba(183, 148, 244, 0.24), rgba(139, 92, 246, 0.16));
+  --button-gradient: linear-gradient(135deg, rgba(183, 148, 244, 0.92), rgba(139, 92, 246, 0.84));
+  --button-text-color: #160b28;
+}
+
+body.cyberpunk-theme {
+  --primary-color: #38f8ff;
+  --secondary-color: #ff43ff;
+  --accent-color: #faff6b;
+  --bg-color: #050510;
+  --surface-color: rgba(10, 10, 28, 0.68);
+  --text-color: #e9fbff;
+  --border-color: rgba(56, 248, 255, 0.3);
+  --shadow-color: rgba(4, 178, 191, 0.3);
+  --background-image: radial-gradient(circle at 12% 14%, rgba(56, 248, 255, 0.28), transparent 52%), radial-gradient(circle at 80% 28%, rgba(255, 67, 255, 0.26), transparent 60%), linear-gradient(195deg, #050510 0%, #09071a 100%);
+  --background-overlay: linear-gradient(125deg, rgba(56, 248, 255, 0.24), rgba(255, 67, 255, 0.2));
+  --navbar-background: linear-gradient(90deg, rgba(56, 248, 255, 0.3), rgba(255, 67, 255, 0.22));
+  --button-gradient: linear-gradient(135deg, rgba(56, 248, 255, 0.92), rgba(255, 67, 255, 0.82));
+  --button-text-color: #031319;
+}
+
+body.retro-theme {
+  --primary-color: #ff8f5c;
+  --secondary-color: #ffbf4d;
+  --accent-color: #ffe066;
+  --bg-color: #2b1a66;
+  --surface-color: rgba(45, 30, 104, 0.64);
+  --text-color: #fff5d6;
+  --border-color: rgba(255, 143, 92, 0.32);
+  --shadow-color: rgba(104, 46, 158, 0.34);
+  --background-image: radial-gradient(circle at 14% 18%, rgba(255, 143, 92, 0.28), transparent 55%), radial-gradient(circle at 82% 26%, rgba(255, 191, 77, 0.24), transparent 60%), linear-gradient(205deg, #2b1a66 0%, #1b0d42 100%);
+  --background-overlay: linear-gradient(125deg, rgba(255, 143, 92, 0.2), rgba(255, 224, 102, 0.16));
+  --navbar-background: linear-gradient(90deg, rgba(255, 143, 92, 0.28), rgba(255, 224, 102, 0.18));
+  --button-gradient: linear-gradient(135deg, rgba(255, 143, 92, 0.9), rgba(255, 191, 77, 0.8));
+  --button-text-color: #3a1a00;
+}
+
+body.midnight-theme {
+  --primary-color: #3b82f6;
+  --secondary-color: #60a5fa;
+  --accent-color: #a5b4fc;
+  --bg-color: #0b1224;
+  --surface-color: rgba(15, 23, 42, 0.64);
+  --text-color: #dee9ff;
+  --border-color: rgba(59, 130, 246, 0.32);
+  --shadow-color: rgba(22, 63, 162, 0.32);
+  --background-image: radial-gradient(circle at 22% 18%, rgba(59, 130, 246, 0.3), transparent 55%), radial-gradient(circle at 80% 25%, rgba(96, 165, 250, 0.26), transparent 60%), linear-gradient(205deg, #0b1224 0%, #07101c 100%);
+  --background-overlay: linear-gradient(125deg, rgba(59, 130, 246, 0.2), rgba(96, 165, 250, 0.16));
+  --navbar-background: linear-gradient(90deg, rgba(59, 130, 246, 0.26), rgba(96, 165, 250, 0.18));
+  --button-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(96, 165, 250, 0.8));
+  --button-text-color: #081022;
+}
+
+body.sunset-theme {
+  --primary-color: #ff8a5c;
+  --secondary-color: #ffb876;
+  --accent-color: #ffe6b7;
+  --bg-color: #321834;
+  --surface-color: rgba(48, 20, 46, 0.64);
+  --text-color: #ffe9d6;
+  --border-color: rgba(255, 138, 92, 0.32);
+  --shadow-color: rgba(110, 40, 58, 0.32);
+  --background-image: radial-gradient(circle at 22% 18%, rgba(255, 138, 92, 0.3), transparent 55%), radial-gradient(circle at 82% 26%, rgba(255, 184, 118, 0.26), transparent 60%), linear-gradient(205deg, #321834 0%, #220f23 100%);
+  --background-overlay: linear-gradient(125deg, rgba(255, 138, 92, 0.2), rgba(255, 184, 118, 0.16));
+  --navbar-background: linear-gradient(90deg, rgba(255, 138, 92, 0.28), rgba(255, 184, 118, 0.18));
+  --button-gradient: linear-gradient(135deg, rgba(255, 138, 92, 0.9), rgba(255, 184, 118, 0.82));
+  --button-text-color: #31110f;
+}
+
 // Maintenance Mode Dialog Styles
 .cover.maintenance {
   display: flex;
@@ -4341,4 +4903,97 @@ body.sunset-theme {
   margin: 0;
   opacity: 0.7;
   font-size: 0.9em;
+}
+
+// Progress Overlay Styles
+.cover.progress-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 160; // Higher than maintenance cover
+}
+
+.progress-dialog-content {
+  background: rgba(30, 30, 30, 0.95);
+  border: 2px solid $ui-primary-colour-bg;
+  border-radius: 12px;
+  padding: 2em;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 105, 180, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.progress-dialog-content h1 {
+  color: $ui-primary-colour-bg;
+  margin-bottom: 1em;
+  text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.progress-dialog-content h1 i {
+  margin-right: 0.5em;
+}
+
+.progress-dialog-content p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+.progress-bar-container {
+  width: 80%;
+  margin: 1.5em auto;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  height: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(14px);
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, lighten($ui-primary-colour-bg, 5%), lighten($ui-secondary-colour-bg, 8%));
+  transition: width 0.35s ease-out;
+  border-radius: 12px;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.45), transparent 65%);
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.progress-percentage {
+  color: $ui-highlight-text-colour;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.current-file {
+  font-size: 0.85em;
+  color: $ui-muted-text-colour;
+  margin-top: 1em;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-actions {
+  margin-top: 1.5em;
+}
+
+.progress-actions button {
+  margin: 0 0.5em;
 }

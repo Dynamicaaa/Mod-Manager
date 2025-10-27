@@ -1,204 +1,101 @@
-import {mkdtempSync, removeSync, createWriteStream, mkdirsSync} from "fs-extra";
-import {join as joinPath, extname, dirname} from "path";
-import {app} from "electron";
-import * as StreamZip from "node-stream-zip";
-import * as tar from "tar";
+import { mkdtempSync, removeSync } from "fs-extra";
+import { join as joinPath, extname } from "path";
+import { app } from "electron";
 import * as archiver from "archiver";
-import {createReadStream} from "fs";
+import {SafeFileOperations} from "../utils/SafeFileOperations";
 
 export default class ArchiveConverter {
 
     public static convertToZip(pathToArchive: string, output: string) {
         return new Promise((ff, rj) => {
             const tempDir: string = mkdtempSync(joinPath(app.getPath("temp"), "ddmm-archive"));
-            const fileExt = extname(pathToArchive).toLowerCase();
 
             console.log("Converting " + pathToArchive + " to " + output);
 
-            // Extract based on file type
-            let extractPromise: Promise<void>;
+            // Use yauzl to extract zip files
+            const yauzl = require("yauzl");
+            const fs = require("fs");
+            const path = require("path");
 
-            if (fileExt === '.rar') {
-                extractPromise = ArchiveConverter.extractRar(pathToArchive, tempDir);
-            } else if (fileExt === '.7z') {
-                extractPromise = ArchiveConverter.extract7z(pathToArchive, tempDir);
-            } else if (ArchiveConverter.isTarFormat(pathToArchive)) {
-                extractPromise = ArchiveConverter.extractTar(pathToArchive, tempDir);
-            } else {
-                // Default to zip/general extraction using StreamZip
-                extractPromise = ArchiveConverter.extractZip(pathToArchive, tempDir);
-            }
+            yauzl.open(pathToArchive, { lazyEntries: true }, (err: any, zipfile: any) => {
+                if (err) return rj(err);
 
-            extractPromise.then(() => {
-                // Create zip from extracted files
-                ArchiveConverter.createZip(tempDir, output).then(() => {
-                    // Clean up temp directory
-                    removeSync(tempDir);
-                    ff(undefined);
-                }).catch(rj);
-            }).catch(rj);
-        });
-    }
+                // First, collect all file entry paths to determine common root
+                const entryPaths: string[] = [];
+                const entries: any[] = [];
 
-    private static isTarFormat(pathToArchive: string): boolean {
-        const filename = pathToArchive.toLowerCase();
-        return filename.endsWith('.tar') || 
-               filename.endsWith('.tar.gz') || 
-               filename.endsWith('.tgz') ||
-               filename.endsWith('.tar.bz2') ||
-               filename.endsWith('.tar.xz') ||
-               filename.endsWith('.tar.Z');
-    }
-
-    private static extractRar(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            // Try to use node-rar if available, otherwise try unrar command line tool
-            try {
-                const rar = require('node-rar');
-                const archive = rar.createReadStream(pathToArchive);
-                let entriesProcessed = 0;
-                let totalEntries = 0;
-                
-                // First pass to count entries
-                archive.on('entry', () => {
-                    totalEntries++;
-                });
-                
-                archive.on('end', () => {
-                    // Second pass to extract
-                    const extractArchive = rar.createReadStream(pathToArchive);
-                    
-                    extractArchive.on('entry', (entry: any) => {
-                        if (entry.type === 'File') {
-                            const entryPath = joinPath(tempDir, entry.name);
-
-                            if (!entryPath.startsWith(tempDir)) {
-                                return reject(new Error("Potential zip slip vulnerability detected."));
-                            }
-
-                            if (entry.isDirectory) {
-                                mkdirsSync(entryPath);
-                                return;
-                            }
-
-                            mkdirsSync(dirname(entryPath));
-                            
-                            const writeStream = createWriteStream(entryPath);
-                            entry.pipe(writeStream);
-                            
-                            writeStream.on('close', () => {
-                                entriesProcessed++;
-                                if (entriesProcessed >= totalEntries) {
-                                    resolve();
-                                }
-                            });
-                            
-                            writeStream.on('error', reject);
-                        } else {
-                            entriesProcessed++;
-                            if (entriesProcessed >= totalEntries) {
-                                resolve();
-                            }
-                        }
-                    });
-                    
-                    extractArchive.on('error', reject);
-                });
-                
-                archive.on('error', reject);
-            } catch (error) {
-                // Fallback: Try using command line unrar if available
-                const { spawn } = require('child_process');
-                const unrar = spawn('unrar', ['x', '-y', pathToArchive, tempDir + '/']);
-                
-                unrar.on('close', (code) => {
-                    if (code === 0) {
-                        resolve();
+                zipfile.on("entry", (entry: any) => {
+                    if (/\/$/.test(entry.fileName)) {
+                        // Directory entry, skip
+                        zipfile.readEntry();
                     } else {
-                        reject(new Error(`RAR extraction failed. Please install unrar or convert the RAR file to ZIP format. Error code: ${code}`));
+                        entryPaths.push(entry.fileName);
+                        entries.push(entry);
+                        zipfile.readEntry();
                     }
                 });
-                
-                unrar.on('error', () => {
-                    reject(new Error('RAR extraction failed. RAR support requires additional dependencies. Please convert the RAR file to ZIP, 7Z, or TAR format.'));
-                });
-            }
-        });
-    }
 
-    private static extract7z(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            const zip = new StreamZip.async({file: pathToArchive});
-            const entries = await zip.entries();
-
-            for (const entry of Object.values(entries)) {
-                const entryPath = joinPath(tempDir, entry.name);
-
-                if (!entryPath.startsWith(tempDir)) {
-                    return reject(new Error("Potential zip slip vulnerability detected."));
-                }
-
-                if (entry.isDirectory) {
-                    mkdirsSync(entryPath);
-                    continue;
-                }
-
-                mkdirsSync(dirname(entryPath));
-                await zip.extract(entry, entryPath);
-            }
-
-            await zip.close();
-            resolve();
-        });
-    }
-
-    private static extractTar(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            tar.x({
-                file: pathToArchive,
-                cwd: tempDir,
-                onentry: (entry) => {
-                    const entryPath = joinPath(tempDir, entry.path);
-                    if (!entryPath.startsWith(tempDir)) {
-                        // With the tar package, this should not be hittable.
-                        // However, it is better to be safe than sorry.
-                        return reject(new Error("Potential zip slip vulnerability detected."));
+                zipfile.on("end", () => {
+                    // Determine if all files share a single top-level directory
+                    let commonRoot: string | null = null;
+                    if (entryPaths.length > 0) {
+                        const first = entryPaths[0].split('/')[0];
+                        if (entryPaths.every(p => p.startsWith(first + '/'))) {
+                            commonRoot = first;
+                        }
                     }
-                }
-            }).then(resolve).catch(reject);
+
+                    // Re-open the archive to actually extract files
+                    yauzl.open(pathToArchive, { lazyEntries: true }, (err2: any, zipfile2: any) => {
+                        if (err2) return rj(err2);
+                        zipfile2.readEntry();
+                        zipfile2.on("entry", (entry: any) => {
+                            if (/\/$/.test(entry.fileName)) {
+                                zipfile2.readEntry();
+                            } else {
+                                let outPath;
+                                let relPath = entry.fileName;
+                                if (commonRoot && relPath.startsWith(commonRoot + '/')) {
+                                    relPath = relPath.substring(commonRoot.length + 1);
+                                }
+                                outPath = path.join(tempDir, relPath);
+                                // Use SafeFileOperations for better error handling
+                                SafeFileOperations.ensureDirectoryExists(path.dirname(outPath)).catch(dirError => {
+                                    console.warn(`Failed to create directory safely, using fallback:`, dirError);
+                                    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+                                });
+                                zipfile2.openReadStream(entry, (err: any, readStream: any) => {
+                                    if (err) return rj(err);
+                                    const writeStream = fs.createWriteStream(outPath);
+                                    readStream.pipe(writeStream);
+                                    writeStream.on("finish", () => {
+                                        zipfile2.readEntry();
+                                    });
+                                });
+                            }
+                        });
+                        zipfile2.on("end", () => {
+                            // Create zip from extracted files
+                            ArchiveConverter.createZip(tempDir, output).then(() => {
+                                // Clean up temp directory
+                                removeSync(tempDir);
+                                ff(undefined);
+                            }).catch(rj);
+                        });
+                        zipfile2.on("error", rj);
+                    });
+                });
+
+                zipfile.on("error", rj);
+                zipfile.readEntry();
+            });
         });
     }
-
-    private static extractZip(pathToArchive: string, tempDir: string): Promise<void> {
-        return new Promise(async (resolve, reject) => {
-            const zip = new StreamZip.async({file: pathToArchive});
-            const entries = await zip.entries();
-
-            for (const entry of Object.values(entries)) {
-                const entryPath = joinPath(tempDir, entry.name);
-
-                if (!entryPath.startsWith(tempDir)) {
-                    return reject(new Error("Potential zip slip vulnerability detected."));
-                }
-
-                if (entry.isDirectory) {
-                    mkdirsSync(entryPath);
-                    continue;
-                }
-
-                mkdirsSync(dirname(entryPath));
-                await zip.extract(entry, entryPath);
-            }
-
-            await zip.close();
-            resolve();
-        });
-    }
-
-    private static createZip(sourceDir: string, outputPath: string): Promise<void> {
+    
+    public static createZip(sourceDir: string, outputPath: string): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
-                const output = createWriteStream(outputPath);
+                const output = require("fs").createWriteStream(outputPath);
                 const archive = archiver('zip', {
                     zlib: { level: 9 } // Sets the compression level
                 });

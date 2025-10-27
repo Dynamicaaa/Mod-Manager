@@ -4,6 +4,8 @@ import {join as joinPath} from "path";
 import {autoUpdater} from "electron-updater";
 import * as semver from "semver";
 import * as remoteMain from "@electron/remote/main";
+import {SafeFileOperations} from "./utils/SafeFileOperations";
+import GameArchiveResolver from "./utils/GameArchiveResolver";
 
 // Check if running from Windows Store
 const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
@@ -11,7 +13,7 @@ const isAppx: boolean = (process.execPath.indexOf("WindowsApps") !== -1);
 // One of my major regrets in life is putting an ! at the end of the application name
 // This should allow me to use a sane directory name but not break old installs.
 if (existsSync(joinPath(app.getPath("appData"), "Doki Doki Mod Manager!"))) {
-    console.log("Overriding app data path");
+    logger.info('App', "Overriding app data path");
     app.setPath("userData", joinPath(app.getPath("appData"), "Doki Doki Mod Manager!"));
 } else {
     app.setPath("userData", joinPath(app.getPath("appData"), "DokiDokiModManager"));
@@ -24,8 +26,11 @@ import InstallList from "./install/InstallList";
 import InstallLauncher from "./install/InstallLauncher";
 import Config from "./utils/Config";
 import InstallCreator from "./install/InstallCreator";
-import ModInstaller from "./mod/ModInstaller";
+import ModInstaller, { RenpyDecompileOptions } from "./mod/ModInstaller";
 import InstallManager from "./install/InstallManager";
+import {InstallationProgressManager} from "./progress/InstallationProgressManager";
+import { logger } from "./utils/EnhancedLogger";
+import {InputValidator} from "./utils/InputValidator";
 
 import DownloadManager from "./net/DownloadManager";
 import OnboardingManager from "./onboarding/OnboardingManager";
@@ -60,7 +65,7 @@ let windowClosable: boolean = true;
 const savedLanguage = Config.readConfigValue("language");
 const defaultLanguage = process.env.DDMM_LANG || savedLanguage || app.getLocale();
 const lang: I18n = new I18n(defaultLanguage);
-console.log(`Initialized I18n with language: ${defaultLanguage} (saved: ${savedLanguage}, system: ${app.getLocale()})`);
+logger.info('I18n', `Initialized I18n with language: ${defaultLanguage} (saved: ${savedLanguage}, system: ${app.getLocale()})`);
 
 // endregion
 
@@ -81,8 +86,6 @@ function showError(title: string, body: string, stacktrace: string, fatal: boole
     windowClosable = true;
     appWindow.setClosable(true);
 }
-
-// Cloud save function removed
 
 /**
  * Launches an install, handling frontend functionality automatically
@@ -111,7 +114,7 @@ async function launchInstall(folderName: string): Promise<void> {
 
         // Check if this is a crash with enhanced information
         if (err && typeof err === 'object' && err.crashed) {
-            console.log("DDLC crashed with enhanced crash info:", err.crashInfo);
+            logger.error('InstallLauncher', "DDLC crashed with enhanced crash info:", err.crashInfo);
 
             // Send crash dialog to renderer
             appWindow.webContents.send("ddlc-crash", {
@@ -178,14 +181,14 @@ ipcMain.on("get available languages", (ev: IpcMainEvent) => {
                         };
                     }
                 } catch (err) {
-                    console.warn(`Failed to parse language file ${file}:`, err);
+                    logger.warn('I18n', `Failed to parse language file ${file}:`, err);
                 }
             }
         });
         
         ev.returnValue = languages;
     } catch (err) {
-        console.error("Failed to read language directory:", err);
+        logger.error('I18n', "Failed to read language directory:", err);
         ev.returnValue = {
             'en-US': { name: 'English', nativeName: 'English (US)' }
         };
@@ -202,7 +205,7 @@ ipcMain.on("reload language", (ev: IpcMainEvent, newLanguage: string) => {
         Object.setPrototypeOf(lang, Object.getPrototypeOf(newLang));
         Object.assign(lang, newLang);
         
-        console.log(`Language reloaded to: ${newLanguage}`);
+        logger.info('I18n', `Language reloaded to: ${newLanguage}`);
         ev.returnValue = { success: true };
         
         // Notify renderer that language has been reloaded
@@ -210,7 +213,7 @@ ipcMain.on("reload language", (ev: IpcMainEvent, newLanguage: string) => {
             appWindow.webContents.send('language-reloaded', newLanguage);
         }
     } catch (err) {
-        console.error("Failed to reload language:", err);
+        logger.error('I18n', "Failed to reload language:", err);
         ev.returnValue = { success: false, error: err.message };
     }
 });
@@ -237,19 +240,19 @@ ipcMain.on("read config", (ev: IpcMainEvent, key: string) => {
 // App config IPC functions
 ipcMain.on("get app version", (ev: IpcMainEvent) => {
     const version = appConfig.getVersion();
-    console.log("IPC get app version called, returning:", version);
+    logger.debug('AppConfig', "IPC get app version called, returning:", version);
     ev.returnValue = version;
 });
 
 ipcMain.on("get app name", (ev: IpcMainEvent) => {
     const name = appConfig.getName();
-    console.log("IPC get app name called, returning:", name);
+    logger.debug('AppConfig', "IPC get app name called, returning:", name);
     ev.returnValue = name;
 });
 
 ipcMain.on("get app config", (ev: IpcMainEvent) => {
     const config = appConfig.getFullConfig();
-    console.log("IPC get app config called, returning full config");
+    logger.debug('AppConfig', "IPC get app config called, returning full config");
     ev.returnValue = config;
 });
 
@@ -260,22 +263,22 @@ ipcMain.on("launch install", (ev: IpcMainEvent, folderName: string) => {
 
 // Handle crash dialog actions
 ipcMain.on("crash-dialog-action", (ev: IpcMainEvent, action: { type: string, folderName?: string }) => {
-    console.log("Crash dialog action received:", action);
+    logger.info('CrashHandler', "Crash dialog action received:", action);
 
     switch (action.type) {
         case 'relaunch':
             if (action.folderName) {
-                console.log("Relaunching DDLC install:", action.folderName);
+                logger.info('CrashHandler', "Relaunching DDLC install:", action.folderName);
                 launchInstall(action.folderName);
             }
             break;
         case 'back-to-menu':
-            console.log("User chose to go back to menu after crash");
+            logger.info('CrashHandler', "User chose to go back to menu after crash");
             // Just dismiss the crash dialog - the running cover will be hidden
             appWindow.webContents.send("running cover", {display: false});
             break;
         default:
-            console.warn("Unknown crash dialog action:", action.type);
+            logger.warn('CrashHandler', "Unknown crash dialog action:", action.type);
     }
 });
 
@@ -302,14 +305,14 @@ ipcMain.on("create install", (ev: IpcMainEvent, install: { folderName: string, i
     windowClosable = false;
     appWindow.setClosable(false);
     console.log("[IPC create install] Creating install in " + install.folderName);
-    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave).then(() => {
+    InstallCreator.createInstall(install.folderName, install.installName, install.globalSave, "").then(() => {
         if (!install.mod) {
             appWindow.webContents.send("got installs", InstallList.getInstallList());
             windowClosable = true;
             appWindow.setClosable(true);
         } else {
             console.log("[IPC create install] Installing mod " + install.mod + " in " + install.folderName);
-            ModInstaller.installMod(install.mod, joinPath(Config.readConfigValue("installFolder"), "installs", install.folderName, "install")).then(() => {
+            ModInstaller.installMod(install.mod, joinPath(Config.readConfigValue("installFolder"), "installs", install.folderName, "install"), undefined, true, true).then(() => {
                 appWindow.webContents.send("got installs", InstallList.getInstallList());
                 windowClosable = true;
                 appWindow.setClosable(true);
@@ -336,9 +339,9 @@ ipcMain.on("create install", (ev: IpcMainEvent, install: { folderName: string, i
 
 // Rename an install
 ipcMain.on("rename install", (ev: IpcMainEvent, options: { folderName: string, newName: string }) => {
-    console.log("[IPC rename install] Renaming " + options.folderName);
+    logger.install('InstallManager', `Renaming install ${options.folderName} to ${options.newName}`);
     InstallManager.renameInstall(options.folderName, options.newName).then(() => {
-        console.log("[IPC rename install] Renamed " + options.folderName);
+        logger.success('InstallManager', `Renamed install ${options.folderName} to ${options.newName}`);
         appWindow.webContents.send("got installs", InstallList.getInstallList());
     }).catch((e: Error) => {
         showError(
@@ -347,14 +350,15 @@ ipcMain.on("rename install", (ev: IpcMainEvent, options: { folderName: string, n
             e.toString(),
             false
         );
+        logger.error('InstallManager', `Failed to rename install ${options.folderName}:`, e);
     });
 });
 
 // Delete an install permanently
 ipcMain.on("delete install", (ev: IpcMainEvent, folderName: string) => {
-    console.log("[IPC delete install] Deleting " + folderName);
+    logger.install('InstallManager', `Deleting install ${folderName}`);
     InstallManager.deleteInstall(folderName).then(() => {
-        console.log("[IPC delete install] Deleted " + folderName);
+        logger.success('InstallManager', `Deleted install ${folderName}`);
         appWindow.webContents.send("got installs", InstallList.getInstallList());
     }).catch((e: Error) => {
         showError(
@@ -363,31 +367,46 @@ ipcMain.on("delete install", (ev: IpcMainEvent, folderName: string) => {
             e.toString(),
             false
         );
+        logger.error('InstallManager', `Failed to delete install ${folderName}:`, e);
     });
 });
 
 // Delete a mod
 ipcMain.on("delete mod", (ev: IpcMainEvent, fileName: string) => {
-    console.log("[IPC delete mod] Deleting " + fileName);
-    try {
-        unlinkSync(joinPath(Config.readConfigValue("installFolder"), "mods", fileName));
-        console.log("[IPC delete mod] Deleted " + fileName);
+    logger.file('ModManager', `Deleting mod ${fileName}`);
+    const modPath = joinPath(Config.readConfigValue("installFolder"), "mods", fileName);
+    
+    // Use SafeFileOperations for better error handling and backup
+    SafeFileOperations.deleteFile(modPath, {
+        createBackup: true,
+        validatePath: true
+    }).then(() => {
+        logger.success('ModManager', `Deleted mod ${fileName}`);
         appWindow.webContents.send("got modlist", modList.getModList());
-    } catch (e) {
-        showError(
-            lang.translate("main.errors.mod_delete.title"),
-            lang.translate("main.errors.mod_delete.body"),
-            e.toString(),
-            false
-        );
-    }
+    }).catch((e: any) => {
+        logger.error('ModManager', `Failed to delete mod safely, trying fallback:`, e);
+        // Fallback to original method
+        try {
+            unlinkSync(modPath);
+            logger.success('ModManager', `Deleted mod ${fileName} with fallback method`);
+            appWindow.webContents.send("got modlist", modList.getModList());
+        } catch (fallbackError: any) {
+            showError(
+                lang.translate("main.errors.mod_delete.title"),
+                lang.translate("main.errors.mod_delete.body"),
+                fallbackError.toString(),
+                false
+            );
+            logger.error('ModManager', `Failed to delete mod ${fileName}:`, fallbackError);
+        }
+    });
 });
 
 // Delete a save file for an install
 ipcMain.on("delete save", (ev: IpcMainEvent, folderName: string) => {
-    console.log("[IPC delete save] Deleting save data for " + folderName);
+    logger.file('InstallManager', `Deleting save data for ${folderName}`);
     InstallManager.deleteSaveData(folderName).then(() => {
-        console.log("[IPC delete save] Deleted save data for " + folderName);
+        logger.success('InstallManager', `Deleted save data for ${folderName}`);
         appWindow.webContents.send("got installs", InstallList.getInstallList());
     }).catch((e: Error) => {
         showError(
@@ -396,6 +415,7 @@ ipcMain.on("delete save", (ev: IpcMainEvent, folderName: string) => {
             e.toString(),
             false
         );
+        logger.error('InstallManager', `Failed to delete save data for ${folderName}:`, e);
     });
 });
 
@@ -411,7 +431,7 @@ ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: st
         });
 
         if (result.filePath) {
-            console.log("[IPC create shortcut] Writing shortcut to " + result.filePath);
+            logger.file('Shortcut', `Writing shortcut to ${result.filePath}`);
             if (!shell.writeShortcutLink(result.filePath, "create", {
                 target: "ddmm://launch-install/" + options.folderName,
                 icon: process.execPath,
@@ -423,8 +443,9 @@ ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: st
                     null,
                     false
                 );
+                logger.error('Shortcut', `Failed to write shortcut to ${result.filePath}`);
             } else {
-                console.log("[IPC create shortcut] Written shortcut to " + result.filePath);
+                logger.success('Shortcut', `Written shortcut to ${result.filePath}`);
             }
         }
     } else if (process.platform === "darwin") {
@@ -438,13 +459,13 @@ ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: st
         });
 
         if (result.filePath) {
-            console.log("[IPC create shortcut] Creating macOS app bundle at " + result.filePath);
+            logger.file('Shortcut', `Creating macOS app bundle at ${result.filePath}`);
             try {
                 const {createMacOSShortcut} = require("./utils/MacOSShortcut");
                 await createMacOSShortcut(result.filePath, options.folderName, options.installName);
-                console.log("[IPC create shortcut] Created macOS app bundle at " + result.filePath);
-            } catch (error) {
-                console.error("[IPC create shortcut] Failed to create macOS shortcut:", error);
+                logger.success('Shortcut', `Created macOS app bundle at ${result.filePath}`);
+            } catch (error: any) {
+                logger.error('Shortcut', `Failed to create macOS shortcut:`, error);
                 showError(
                     lang.translate("main.errors.shortcut.title"),
                     lang.translate("main.errors.shortcut.body"),
@@ -464,13 +485,13 @@ ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: st
         });
 
         if (result.filePath) {
-            console.log("[IPC create shortcut] Creating Linux desktop entry at " + result.filePath);
+            logger.file('Shortcut', `Creating Linux desktop entry at ${result.filePath}`);
             try {
                 const {createLinuxShortcut} = require("./utils/LinuxShortcut");
                 await createLinuxShortcut(result.filePath, options.folderName, options.installName);
-                console.log("[IPC create shortcut] Created Linux desktop entry at " + result.filePath);
-            } catch (error) {
-                console.error("[IPC create shortcut] Failed to create Linux shortcut:", error);
+                logger.success('Shortcut', `Created Linux desktop entry at ${result.filePath}`);
+            } catch (error: any) {
+                logger.error('Shortcut', `Failed to create Linux shortcut:`, error);
                 showError(
                     lang.translate("main.errors.shortcut.title"),
                     lang.translate("main.errors.shortcut.body"),
@@ -481,13 +502,14 @@ ipcMain.on("create shortcut", async (ev: IpcMainEvent, options: { folderName: st
         }
     } else {
         dialog.showErrorBox("Shortcut creation not supported", "Shortcut creation is not supported on this platform.");
+        logger.warn('Shortcut', "Shortcut creation not supported on this platform.");
     }
 });
 
 // Check if install exists
 ipcMain.on("install exists", (ev: IpcMainEvent, folderName: string) => {
     if (!folderName || typeof folderName !== "string") {
-        console.warn("[IPC install exists] Folder name should be a string, received " + typeof folderName);
+        logger.warn('InstallManager', `Folder name should be a string, received ${typeof folderName}`);
         ev.returnValue = false;
         return;
     }
@@ -527,6 +549,7 @@ ipcMain.on("get backgrounds", (ev: IpcMainEvent) => {
 
 // Crash for debugging
 ipcMain.on("debug crash", () => {
+    logger.error('Debug', "User forced debug crash with DevTools");
     throw new Error("User forced debug crash with DevTools")
 });
 
@@ -571,30 +594,49 @@ ipcMain.on("onboarding browse", async () => {
     if (result.filePaths && result.filePaths[0] && result.filePaths[0].endsWith(".zip")) {
         try {
             console.log("Main: Copying selected DDLC file:", result.filePaths[0]);
-            copyFileSync(result.filePaths[0], joinPath(Config.readConfigValue("installFolder"), "ddlc.zip"));
+            const targetPath = GameArchiveResolver.getWriteTargetPath();
+            
+            // Use SafeFileOperations for better error handling
+            SafeFileOperations.copyFile(result.filePaths[0], targetPath, {
+                createBackup: true,
+                validateChecksums: true,
+                validatePath: true
+            }).then(() => {
+                console.log("Main: DDLC file copied successfully");
+                handleOnboardingSuccess();
+            }).catch(copyError => {
+                console.warn("Main: Safe copy failed, using fallback:", copyError);
+                // Fallback to original method
+                copyFileSync(result.filePaths[0], targetPath);
+                handleOnboardingSuccess();
+            });
+            
+            // Extract success handling into a function
+            function handleOnboardingSuccess() {
 
-            // Check if onboarding is still required after copying
-            const stillNeedsOnboarding = OnboardingManager.isOnboardingRequired();
-            console.log("Main: After copying, still needs onboarding:", stillNeedsOnboarding);
+                // Check if onboarding is still required after copying
+                const stillNeedsOnboarding = OnboardingManager.isOnboardingRequired();
+                console.log("Main: After copying, still needs onboarding:", stillNeedsOnboarding);
 
-            if (!stillNeedsOnboarding) {
-                console.log("Main: Onboarding completed successfully");
+                if (!stillNeedsOnboarding) {
+                    console.log("Main: Onboarding completed successfully");
 
-                // Automatically create a default DDLC install
-                console.log("Main: Creating default DDLC install...");
-                InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false).then(() => {
-                    console.log("Main: Default DDLC install created successfully");
-                    appWindow.webContents.send("onboarding downloaded");
-                    // Refresh the install list
-                    appWindow.webContents.send("got installs", InstallList.getInstallList());
-                }).catch((error) => {
-                    console.error("Main: Failed to create default DDLC install:", error);
-                    // Still send onboarding completed event even if install creation fails
-                    appWindow.webContents.send("onboarding downloaded");
-                });
-            } else {
-                console.log("Main: Onboarding still required after file copy");
-                // TODO: show a message and try again
+                    // Automatically create a default DDLC install
+                    console.log("Main: Creating default DDLC install...");
+                    InstallCreator.createInstall("ddlc-default", "Doki Doki Literature Club", false, "").then(() => {
+                        console.log("Main: Default DDLC install created successfully");
+                        appWindow.webContents.send("onboarding downloaded");
+                        // Refresh the install list
+                        appWindow.webContents.send("got installs", InstallList.getInstallList());
+                    }).catch((error) => {
+                        console.error("Main: Failed to create default DDLC install:", error);
+                        // Still send onboarding completed event even if install creation fails
+                        appWindow.webContents.send("onboarding downloaded");
+                    });
+                } else {
+                    console.log("Main: Onboarding still required after file copy");
+                    // TODO: show a message and try again
+                }
             }
         } catch (e) {
             console.error("Main: Error copying DDLC file:", e);
@@ -622,14 +664,14 @@ function checkForUpdate() {
     if (isAppx) return; // don't update if windows store
     showUpdating("checking");
     autoUpdater.checkForUpdatesAndNotify().then(update => {
-        console.log(update);
+        logger.debug('Updater', "Update check result:", update);
         if (update && semver.gt(update.updateInfo.version, app.getVersion())) {
             showUpdating("available");
         } else {
             showUpdating("none");
         }
     }).catch(err => {
-        console.warn("Error checking for updates", err);
+        logger.warn('Updater', "Error checking for updates", err);
         showUpdating("none");
     });
 }
@@ -655,8 +697,7 @@ checkForUpdate();
 
 // region Global exception handler
 process.on("uncaughtException", (e: Error) => {
-    console.log("Uncaught exception occurred - treating this as a crash.");
-    console.error(e);
+    logger.errorWithStack('Global', "Uncaught exception occurred - treating this as a crash.", e);
     showError(
         lang.translate("main.errors.exception.title"),
         lang.translate("main.errors.exception.body"),
@@ -690,17 +731,17 @@ app.on("second-instance", (ev: Event, argv: string[]) => {
 });
 
 app.on("ready", async () => {
-    console.log("App ready, loading configuration...");
+    logger.info('App', "App ready, loading configuration...");
 
     // Load remote configuration first
     try {
         await appConfig.loadConfig();
         USER_AGENT = `DokiDokiModManager/${appConfig.getVersion()} (${appConfig.get('author')})`;
-        console.log("Configuration loaded successfully");
-        console.log("USER_AGENT set to:", USER_AGENT);
+        logger.info('App', "Configuration loaded successfully");
+        logger.info('App', `USER_AGENT set to: ${USER_AGENT}`);
 
-    } catch (error) {
-        console.error("Failed to load configuration:", error);
+    } catch (error: any) {
+        logger.error('App', "Failed to load configuration:", error);
     }
 
     // Initialize remote module
@@ -708,7 +749,7 @@ app.on("ready", async () => {
 
     if (!app.requestSingleInstanceLock()) {
         // we should quit, as another instance is running
-        console.log("App already running.");
+        logger.warn('App', "App already running. Quitting this instance.");
         app.quit();
         return; // avoid running for longer than needed
     }
@@ -717,9 +758,23 @@ app.on("ready", async () => {
         !existsSync(joinPath(Config.readConfigValue("installFolder"), "mods")) ||
         !existsSync(joinPath(Config.readConfigValue("installFolder"), "installs"))
     ) {
-        console.log("Creating directory structure");
-        mkdirpSync(joinPath(Config.readConfigValue("installFolder"), "mods"));
-        mkdirpSync(joinPath(Config.readConfigValue("installFolder"), "installs"));
+        logger.file('App', "Creating directory structure for mods and installs.");
+        
+        // Use SafeFileOperations for better error handling
+        const modsDir = joinPath(Config.readConfigValue("installFolder"), "mods");
+        const installsDir = joinPath(Config.readConfigValue("installFolder"), "installs");
+        
+        Promise.all([
+            SafeFileOperations.ensureDirectoryExists(modsDir),
+            SafeFileOperations.ensureDirectoryExists(installsDir)
+        ]).then(() => {
+            logger.success('App', "Directory structure created safely.");
+        }).catch(dirError => {
+            logger.warn('App', "Safe directory creation failed, using fallback:", dirError);
+            mkdirpSync(modsDir);
+            mkdirpSync(installsDir);
+            logger.success('App', "Directory structure created with fallback.");
+        });
     }
 
     // set protocol handler
@@ -727,9 +782,9 @@ app.on("ready", async () => {
 
     // create browser window
     const preloadPath = joinPath(__dirname, "../../src/renderer/js-preload/preload.js");
-    console.log("Main: Preload script path:", preloadPath);
-    console.log("Main: Preload script exists:", existsSync(preloadPath));
-    console.log("Main: __dirname:", __dirname);
+    logger.debug('App', `Preload script path: ${preloadPath}`);
+    logger.debug('App', `Preload script exists: ${existsSync(preloadPath)}`);
+    logger.debug('App', `__dirname: ${__dirname}`);
 
     appWindow = new BrowserWindow({
         title: `${appConfig.getName()} v${appConfig.getVersion()}`,
@@ -759,7 +814,17 @@ app.on("ready", async () => {
 
     // Listen for console messages from renderer process
     appWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
-        console.log(`Renderer Console [${level}]: ${message} (${sourceId}:${line})`);
+        // Map Electron console levels to EnhancedLogger methods
+        const logMessage = `Renderer: ${message} (${sourceId}:${line})`;
+        if (level === 4) { // error
+            logger.error('Renderer', logMessage);
+        } else if (level === 3) { // warning
+            logger.warn('Renderer', logMessage);
+        } else if (level === 0) { // debug
+            logger.debug('Renderer', logMessage);
+        } else { // info, log, etc.
+            logger.info('Renderer', logMessage);
+        }
     });
 
     // Activate download manager
@@ -767,6 +832,9 @@ app.on("ready", async () => {
 
     // ...and the mod list
     modList = new ModList(downloadManager);
+
+    // Initialize progress reporting IPC handlers
+    InstallationProgressManager.initializeIPC();
 
     downloadManager.on("download progress", (data: { filename: string, downloaded: number, total: number, startTime: number, meta?: any }) => {
         appWindow.webContents.send("download progress", data);
@@ -792,24 +860,27 @@ app.on("ready", async () => {
     console.log("Setting User-Agent to:", USER_AGENT);
     appWindow.webContents.setUserAgent(USER_AGENT);
 
+    logger.info('App', "Setting User-Agent to:", USER_AGENT);
+    appWindow.webContents.setUserAgent(USER_AGENT);
+
     appWindow.webContents.on("will-navigate", (ev, url) => {
-        console.warn("Prevented navigation from app container", url);
+        logger.warn('App', `Prevented navigation from app container: ${url}`);
         ev.preventDefault(); // prevent navigation
     });
 
     appWindow.webContents.on("did-finish-load", () => {
-        console.log("Main: Window did-finish-load event fired");
+        logger.debug('App', "Window did-finish-load event fired");
 
         // Check if preload script executed successfully
         appWindow.webContents.executeJavaScript('typeof ddmm !== "undefined"')
             .then(ddmmExists => {
-                console.log("Main: DDMM object exists in renderer:", ddmmExists);
+                logger.debug('App', `DDMM object exists in renderer: ${ddmmExists}`);
                 if (!ddmmExists) {
-                    console.error("Main: DDMM object not found - preload script may have failed");
+                    logger.error('App', "DDMM object not found - preload script may have failed");
                 }
             })
             .catch(err => {
-                console.error("Main: Failed to check DDMM object:", err);
+                logger.error('App', "Failed to check DDMM object:", err);
             });
 
         if (!appWindow.isVisible()) {
@@ -830,21 +901,21 @@ app.on("ready", async () => {
         });
 
         // Check onboarding requirements immediately
-        console.log("Main: Checking onboarding requirements...");
+        logger.info('Onboarding', "Checking onboarding requirements...");
         const needsOnboarding = OnboardingManager.isOnboardingRequired();
-        console.log("Main: Onboarding required:", needsOnboarding);
+        logger.info('Onboarding', `Onboarding required: ${needsOnboarding}`);
 
         if (needsOnboarding) {
-            console.log("Main: Sending 'start onboarding' event to renderer");
+            logger.info('Onboarding', "Sending 'start onboarding' event to renderer");
             appWindow.webContents.send("start onboarding");
 
             // Also send it with a delay as a backup
             setTimeout(() => {
-                console.log("Main: Sending backup 'start onboarding' event");
+                logger.warn('Onboarding', "Sending backup 'start onboarding' event");
                 appWindow.webContents.send("start onboarding");
             }, 1000);
         } else {
-            console.log("Main: No onboarding required, proceeding normally");
+            logger.info('Onboarding', "No onboarding required, proceeding normally");
         }
     });
 
@@ -898,21 +969,40 @@ app.on("ready", async () => {
 
 // Backup an install to a zip file
 ipcMain.on("backup install", async (ev: IpcMainEvent, {folderName, outPath}) => {
+    logger.install('BackupManager', `Starting backup of install ${folderName} to ${outPath}`);
     try {
         await InstallManager.backupInstall(folderName, outPath);
         ev.returnValue = { success: true };
-    } catch (e) {
+        logger.success('BackupManager', `Backup of install ${folderName} completed successfully.`);
+    } catch (e: any) {
         ev.returnValue = { success: false, error: e.toString() };
+        logger.error('BackupManager', `Backup of install ${folderName} failed:`, e);
     }
 });
 
 // Restore an install from a zip file
 ipcMain.on("restore install", async (ev: IpcMainEvent, {zipPath, folderName}) => {
+    logger.install('BackupManager', `Starting restore of install ${folderName} from ${zipPath}`);
     try {
         await InstallManager.restoreInstall(zipPath, folderName);
         ev.returnValue = { success: true };
-    } catch (e) {
+        logger.success('BackupManager', `Restore of install ${folderName} completed successfully.`);
+    } catch (e: any) {
         ev.returnValue = { success: false, error: e.toString() };
+        logger.error('BackupManager', `Restore of install ${folderName} failed:`, e);
+    }
+});
+
+// Trigger Ren'Py decompilation for an existing install
+ipcMain.handle("decompile install", async (_event, payload: { folderName: string; options?: RenpyDecompileOptions }) => {
+    const { folderName, options } = payload || { folderName: "", options: undefined };
+    logger.install('ModInstaller', `Starting manual decompilation for install ${folderName}`);
+    try {
+        const sessionId = InstallManager.initiateDecompileInstall(folderName, options);
+        return { success: true, sessionId };
+    } catch (error: any) {
+        logger.error('ModInstaller', `Failed to start decompilation for ${folderName}:`, error);
+        return { success: false, error: error?.message || String(error) };
     }
 });
 
@@ -926,4 +1016,97 @@ ipcMain.handle("showSaveDialog", async (ev, options) => {
 ipcMain.handle("showOpenDialog", async (ev, options) => {
     const result = await dialog.showOpenDialog(appWindow, options);
     return result;
+});
+
+// Input validation IPC handlers
+ipcMain.handle("validate-mod-archive", async (ev, filePath: string) => {
+    try {
+        logger.debug('InputValidator', `Validating mod archive: ${filePath}`);
+        const result = InputValidator.validateModArchive(filePath);
+        logger.debug('InputValidator', `Validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating mod archive ${filePath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-file-path", async (ev, filePath: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating file path: ${filePath}`, options);
+        const result = InputValidator.validateFilePath(filePath, options);
+        logger.debug('InputValidator', `File path validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating file path ${filePath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-directory-path", async (ev, dirPath: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating directory path: ${dirPath}`, options);
+        const result = InputValidator.validateDirectoryPath(dirPath, options);
+        logger.debug('InputValidator', `Directory path validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating directory path ${dirPath}:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-string", async (ev, input: string, options: any) => {
+    try {
+        logger.debug('InputValidator', `Validating string input:`, options);
+        const result = InputValidator.validateString(input, options);
+        logger.debug('InputValidator', `String validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating string input:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("validate-installation-config", async (ev, config: any) => {
+    try {
+        logger.debug('InputValidator', `Validating installation config:`, config);
+        const result = InputValidator.validateInstallationConfig(config);
+        logger.debug('InputValidator', `Installation config validation result:`, result);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error validating installation config:`, error);
+        return {
+            isValid: false,
+            errors: [`Validation error: ${error.message}`],
+            warnings: []
+        };
+    }
+});
+
+ipcMain.handle("sanitize-filename", async (ev, filename: string) => {
+    try {
+        logger.debug('InputValidator', `Sanitizing filename: ${filename}`);
+        const result = InputValidator.sanitizeFilename(filename);
+        logger.debug('InputValidator', `Sanitized filename: ${result}`);
+        return result;
+    } catch (error: any) {
+        logger.error('InputValidator', `Error sanitizing filename ${filename}:`, error);
+        return filename; // Return original filename as fallback
+    }
 });

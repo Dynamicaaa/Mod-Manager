@@ -1,9 +1,11 @@
 import * as yauzl from "yauzl";
 import * as chmodr from "chmodr";
-import {createWriteStream, writeFileSync, existsSync, accessSync, constants} from "fs";
+import {createWriteStream, writeFileSync, existsSync, accessSync, constants, readFileSync} from "fs";
 import {mkdirsSync} from "fs-extra";
 import {join as joinPath, sep as pathSep} from "path";
 import Config from "../utils/Config";
+import MacOSFileCleanup from "../utils/MacOSFileCleanup";
+import GameArchiveResolver from "../utils/GameArchiveResolver";
 
 export default class InstallCreator {
 
@@ -51,7 +53,7 @@ export default class InstallCreator {
      * @param installName The user facing name of the install
      * @param globalSave Whether it should use the global save
      */
-    public static createInstall(folderName: string, installName: string, globalSave: boolean): Promise<null> {
+    public static createInstall(folderName: string, installName: string, globalSave: boolean, mapperFriendlyName: string): Promise<null> {
         return new Promise((ff, rj) => {
             console.log("Creating clean install in " + folderName);
             const canonicalPath = joinPath(Config.readConfigValue("installFolder"), "installs", folderName);
@@ -71,11 +73,49 @@ export default class InstallCreator {
                     mkdirsSync(joinPath(canonicalPath, "appdata", ".renpy"));
                 }
 
-                // Extract DDLC zip file to install directory
-                const ddlcZipPath = joinPath(Config.readConfigValue("installFolder"), "ddlc.zip");
-                console.log("Extracting DDLC from:", ddlcZipPath);
+                // Write minimal install.json for onboarding
+                const fs = require("fs");
+                const path = require("path");
+                const installJsonPath = joinPath(canonicalPath, "install", "install.json");
+                // Always use the installName (from Mod Name textbox) for install.json
+                // Always use the installName (from Mod Name textbox) for install.json, preserving case and spaces
+                let modName = installName && installName.trim() ? installName.trim() : path.basename(canonicalPath);
+                // If the installName is the same as the folderName (auto-generated), try to recover the original input from the renderer
+                if (
+                    modName.replace(/\W/g, "-").replace(/-+/g, "-").toLowerCase() === folderName.toLowerCase() &&
+                    installName !== folderName
+                ) {
+                    // Use the original installName as entered by the user
+                    modName = installName;
+                }
+                if (modName === "ddlc-default") {
+                    modName = "Doki Doki Literature Club";
+                }
+                const minimalInstallJson = {
+                    name: modName,
+                    globalSave: false,
+                    mod: null
+                };
+                try {
+                    fs.writeFileSync(installJsonPath, JSON.stringify(minimalInstallJson, null, 2), "utf8");
+                    fs.fsyncSync(fs.openSync(installJsonPath, "r"));
+                    console.debug("Wrote minimal install.json at onboarding:", installJsonPath);
+                } catch (e) {
+                    console.warn("Failed to write minimal install.json during onboarding:", e.message);
+                }
 
-                yauzl.open(ddlcZipPath, {lazyEntries: true}, (err, zipfile) => {
+                // Extract DDLC zip file to install directory
+                const archiveInfo = GameArchiveResolver.resolveArchivePath();
+                console.log(`Extracting DDLC from: ${archiveInfo.path} (source: ${archiveInfo.source}, exists: ${archiveInfo.found})`);
+
+                if (!archiveInfo.found) {
+                    const error = new Error(`DDLC archive not found at expected location: ${archiveInfo.path}`);
+                    console.error(error.message);
+                    rj(error);
+                    return;
+                }
+
+                yauzl.open(archiveInfo.path, {lazyEntries: true}, (err, zipfile) => {
                     if (err) {
                         console.error("Failed to open DDLC zip file:", err);
                         rj(err);
@@ -83,21 +123,48 @@ export default class InstallCreator {
                     }
 
                     let topLevelDir: string = null;
+                    let shouldStripTopLevel = false;
+                    let topLevelLocked = false;
 
                     zipfile.readEntry();
                     zipfile.on("entry", (entry) => {
+                        // Skip macOS resource fork folders
+                        if (entry.fileName.startsWith("__MACOSX/")) {
+                            zipfile.readEntry();
+                            return;
+                        }
+
+                        const isDirectory = /\/$/.test(entry.fileName);
+
                         // Detect and strip the top-level directory (e.g., "DDLC-1.1.1-pc/")
-                        if (!topLevelDir) {
+                        if (!topLevelLocked) {
                             const firstSlash = entry.fileName.indexOf("/");
                             if (firstSlash > 0) {
-                                topLevelDir = entry.fileName.substring(0, firstSlash + 1);
-                                console.log("Detected top-level directory in zip:", topLevelDir);
+                                const candidate = entry.fileName.substring(0, firstSlash + 1);
+                                if (!topLevelDir) {
+                                    topLevelDir = candidate;
+                                    shouldStripTopLevel = !candidate.toLowerCase().endsWith(".app/");
+                                    if (shouldStripTopLevel) {
+                                        console.log("Detected top-level directory in zip:", topLevelDir);
+                                    } else {
+                                        console.log("Detected macOS app bundle at root – preserving bundle structure:", topLevelDir);
+                                    }
+                                } else if (candidate !== topLevelDir) {
+                                    // Multiple top-level directories detected – keep structure intact
+                                    shouldStripTopLevel = false;
+                                    topLevelLocked = true;
+                                    console.log("Multiple top-level directories detected, preserving original structure.");
+                                }
+                            } else if (!isDirectory) {
+                                // Found a file at root – do not strip top-level folder
+                                shouldStripTopLevel = false;
+                                topLevelLocked = true;
                             }
                         }
 
                         // Strip the top-level directory from the path
                         let relativePath = entry.fileName;
-                        if (topLevelDir && relativePath.startsWith(topLevelDir)) {
+                        if (shouldStripTopLevel && topLevelDir && relativePath.startsWith(topLevelDir)) {
                             relativePath = relativePath.substring(topLevelDir.length);
                         }
 
@@ -107,7 +174,7 @@ export default class InstallCreator {
                             return;
                         }
 
-                        if (/\/$/.test(entry.fileName)) {
+                        if (isDirectory) {
                             // Directory entry
                             mkdirsSync(joinPath(canonicalPath, "install", relativePath));
                             zipfile.readEntry();
@@ -174,12 +241,10 @@ export default class InstallCreator {
                             console.log("Created autorun directory for macOS mod support");
                         }
 
-                        // write the install data file
-                        writeFileSync(joinPath(canonicalPath, "install.json"), JSON.stringify({
-                            globalSave,
-                            mod: null,
-                            name: installName,
-                        }));
+                        // Step-by-step debug logs for install.json writing
+
+                        // Clean up macOS resource fork files that can interfere with game execution
+                        MacOSFileCleanup.cleanGameInstallation(joinPath(canonicalPath, "install"));
 
                         // Ensure DDLC.sh is executable on Linux
                         this.ensureDDLCExecutable(joinPath(canonicalPath, "install")).then((result) => {

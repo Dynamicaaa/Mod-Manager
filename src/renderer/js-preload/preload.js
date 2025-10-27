@@ -76,6 +76,7 @@ api.app = {};
 api.window = {};
 api.config = {};
 api.onboarding = {};
+api.validation = {};
 
 // Called when the UI wants to refresh the mod list
 api.mods.refreshModList = function () {
@@ -385,6 +386,10 @@ api.mods.backupInstall = function(folderName, outPath) {
 api.mods.restoreInstall = function(zipPath, folderName) {
     return ipcRenderer.sendSync("restore install", {zipPath, folderName});
 };
+// Decompile install
+api.mods.decompileInstall = function(folderName, options = {}) {
+    return ipcRenderer.invoke("decompile install", { folderName, options });
+};
 
 
 // User menu
@@ -598,4 +603,79 @@ api.app.showSaveDialog = function(options) {
 // Show an open dialog
 api.app.showOpenDialog = function(options) {
     return ipcRenderer.invoke("showOpenDialog", options);
+};
+// Expose WineAPI to renderer
+try {
+    const WineAPI = remote.require("../main/sdk/WineAPI");
+    if (!window.ddmm) window.ddmm = {};
+    window.ddmm.WineAPI = {
+        getWineVersion: (...args) => WineAPI.getWineVersion(...args),
+        ensureWine: (...args) => WineAPI.ensureWine(...args),
+        getWineBinPath: (...args) => WineAPI.getWineBinPath(...args),
+        getWineDir: (...args) => WineAPI.getWineDir(...args),
+        isWineInstalled: (...args) => WineAPI.isWineInstalled(...args),
+        getPrefixPath: (...args) => WineAPI.getPrefixPath(...args),
+        setPrefixPath: (...args) => WineAPI.setPrefixPath(...args),
+        getEnvVars: (...args) => WineAPI.getEnvVars(...args),
+        setEnvVars: (...args) => WineAPI.setEnvVars(...args),
+        getWineEnv: (...args) => WineAPI.getWineEnv(...args),
+        runWithWine: (...args) => WineAPI.runWithWine(...args),
+        checkForWineUpdate: (...args) => WineAPI.checkForWineUpdate(...args)
+    };
+    console.log("Preload: Exposed WineAPI to window.ddmm.WineAPI");
+} catch (e) {
+    console.error("Preload: Failed to expose WineAPI to renderer:", e);
+}
+
+// Progress tracking support
+api.progress = {};
+
+// Get installation progress
+api.progress.getInstallationProgress = function(sessionId) {
+    return ipcRenderer.invoke("get-installation-progress", sessionId);
+};
+
+// Cancel installation
+api.progress.cancelInstallation = function(sessionId) {
+    return ipcRenderer.invoke("cancel-installation", sessionId);
+};
+
+// Listen for progress updates
+ipcRenderer.on("mod-installation-progress", (event, progressEvent) => {
+    api.emit("installation-progress", progressEvent);
+});
+
+// Expose progress events to window for Vue components
+if (typeof window !== 'undefined') {
+    window.addEventListener('installation-progress', (event) => {
+        // Forward to Vue app if available
+        if (window.app && window.app.$emit) {
+            window.app.$emit('installation-progress', event.detail);
+        }
+    });
+}
+
+// Input validation API
+api.validateModArchive = function(filePath) {
+    return ipcRenderer.invoke("validate-mod-archive", filePath);
+};
+
+api.validateFilePath = function(filePath, options) {
+    return ipcRenderer.invoke("validate-file-path", filePath, options);
+};
+
+api.validateDirectoryPath = function(dirPath, options) {
+    return ipcRenderer.invoke("validate-directory-path", dirPath, options);
+};
+
+api.validateString = function(input, options) {
+    return ipcRenderer.invoke("validate-string", input, options);
+};
+
+api.validateInstallationConfig = function(config) {
+    return ipcRenderer.invoke("validate-installation-config", config);
+};
+
+api.sanitizeFilename = function(filename) {
+    return ipcRenderer.invoke("sanitize-filename", filename);
 };

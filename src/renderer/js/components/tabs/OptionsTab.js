@@ -35,6 +35,40 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
                 <p>{{_("renderer.tab_options.section_backgrounds.description_credit")}}</p>
             </div>
+            <div v-else-if="selected_option === 'wine_config'">
+                <h1>{{_("renderer.tab_options.section_wine.title")}}</h1>
+                <p>{{_("renderer.tab_options.section_wine.subtitle")}}</p>
+                <br>
+                <div>
+                    <label>
+                        {{_("renderer.tab_options.section_wine.prefix_path")}}:
+                        <input type="text" v-model="wine_prefix" style="width: 60%;" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        {{_("renderer.tab_options.section_wine.env")}}:
+                        <input type="text" v-model="wine_env" style="width: 60%;" />
+                    </label>
+                </div>
+                <div class="option-section">
+                    <div>
+                        <button class="primary" @click="saveWineConfig"><i class="fas fa-save"></i> {{_("renderer.tab_options.section_wine.save")}}</button>
+                    </div>
+                    <br>
+                    <div>
+                        <b>{{_("renderer.tab_options.section_wine.version")}}:</b>
+                        <span>{{wine_version || _("renderer.tab_options.section_wine.version_unknown")}}</span>
+                        <button class="secondary" @click="refreshWineVersion"><i class="fas fa-sync"></i> {{_("renderer.tab_options.section_wine.refresh_version")}}</button>
+                    </div>
+                    <div>
+                        <button class="primary" @click="updateWine" :disabled="wine_update_in_progress">
+                            <i class="fas fa-download"></i> {{_("renderer.tab_options.section_wine.update")}}
+                        </button>
+                        <span v-if="wine_update_status" style="margin-left:1em;">{{wine_update_status}}</span>
+                    </div>
+                </div>
+            </div>
             <div v-else-if="selected_option === 'ui_theme'">
                 <h1><i class="fas fa-palette"></i> UI Theme</h1>
                 <p>Choose from a variety of themes to customize your experience.</p>
@@ -626,15 +660,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
                     <p><small>Since Sayonika is open source, you can run your own server or connect to community-hosted instances.</small></p>
                 </div>
             </div>
-            <div v-else-if="selected_option === 'sdk'">
-                <h1>{{_("renderer.tab_options.section_sdk.title")}}</h1>
-                <p>{{_("renderer.tab_options.section_sdk.subtitle")}}</p>
-                <br>
-                <p><strong>{{_("renderer.tab_options.section_sdk.description_mode")}}</strong></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="always" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_always")}}</label></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="specified" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_specified")}}</label></p>
-                <p><label><input type="radio" name="sdk_mode_checkbox" value="never" v-model="sdk_mode_interim" @change="updateSDKMode"> {{_("renderer.tab_options.section_sdk.checkbox_never")}}</label></p>
-            </div>
 
             <div v-else-if="selected_option === 'testing'">
                 <h1>{{_("renderer.tab_options.section_testing.title")}}</h1>
@@ -659,6 +684,11 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
         `,
     "data": function () {
         return {
+            wine_prefix: "",
+            wine_env: "",
+            wine_version: "",
+            wine_update_in_progress: false,
+            wine_update_status: "",
             "version": (function() {
                 // Method 1: Try standalone app config (most reliable)
                 if (typeof window.APP_CONFIG !== 'undefined' && window.APP_CONFIG.version && window.APP_CONFIG.version !== "0.0.0") {
@@ -703,51 +733,91 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             },
             "language_interim": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
             "current_language": (typeof ddmm !== 'undefined' && ddmm.config) ? (ddmm.config.readConfigValue("language") || "en-US") : "en-US",
-            
-            "menu": [
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
-                        {"title": "UI Theme", "id": "ui_theme"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
-                        {
-                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
-                            "id": "advanced_appearance"
-                        }
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
-                        {"title": "Sayonika Server", "id": "sayonika_server"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
-                    ]
-                }
-            ]
+            "isLinux": (typeof ddmm !== 'undefined' && ddmm.platform === 'linux') || (typeof process !== 'undefined' && process.platform === 'linux'),
+            "menu": []
         }
+    },
+    "created": function () {
+        this.menu = this.buildMenu();
+        this.ensureValidSelectedOption();
     },
     "computed": {
         "installFolder": function () {
             return (typeof ddmm !== 'undefined' && ddmm.config) ? ddmm.config.readConfigValue("installFolder") : "Unknown";
         }
     },
+    "watch": {
+        selected_option(val) {
+            if (val === "wine_config") {
+                this.refreshWineVersion();
+                this.loadWineConfig && this.loadWineConfig();
+            }
+        }
+    },
 
     "methods": {
+        async refreshWineVersion() {
+            if (window.ddmm && window.ddmm.WineAPI && window.ddmm.WineAPI.getWineVersion) {
+                this.wine_version = await window.ddmm.WineAPI.getWineVersion();
+            } else {
+                this.wine_version = "";
+            }
+        },
+        async loadWineConfig() {
+            if (window.ddmm && window.ddmm.WineAPI) {
+                if (window.ddmm.WineAPI.getPrefixPath) {
+                    this.wine_prefix = await window.ddmm.WineAPI.getPrefixPath();
+                }
+                if (window.ddmm.WineAPI.getEnvVars) {
+                    const envVars = await window.ddmm.WineAPI.getEnvVars();
+                    this.wine_env = Object.entries(envVars).map(([k, v]) => `${k}=${v}`).join("; ");
+                }
+            }
+        },
+        async updateWine() {
+            this.wine_update_in_progress = true;
+            this.wine_update_status = this._("renderer.tab_options.section_wine.updating");
+            try {
+                if (window.ddmm && window.ddmm.WineAPI && typeof window.ddmm.WineAPI.checkForWineUpdate === "function") {
+                    console.debug("[OptionsTab] Calling WineAPI.checkForWineUpdate...");
+                    const result = await window.ddmm.WineAPI.checkForWineUpdate();
+                    console.debug("[OptionsTab] WineAPI.checkForWineUpdate result:", result);
+                    if (result && result.updated) {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_success", { version: result.latestVersion });
+                        await this.refreshWineVersion();
+                    } else if (result && result.latestVersion) {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_nonew");
+                    } else {
+                        this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                        console.error("[OptionsTab] WineAPI.checkForWineUpdate returned unexpected result:", result);
+                    }
+                } else {
+                    this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                    console.error("[OptionsTab] window.ddmm.WineAPI.checkForWineUpdate is not available.");
+                }
+            } catch (e) {
+                this.wine_update_status = this._("renderer.tab_options.section_wine.update_error");
+                console.error("[OptionsTab] Exception in updateWine:", e);
+            }
+            this.wine_update_in_progress = false;
+        },
+        saveWineConfig() {
+            if (window.ddmm && window.ddmm.WineAPI) {
+                if (window.ddmm.WineAPI.setPrefixPath) {
+                    window.ddmm.WineAPI.setPrefixPath(this.wine_prefix);
+                }
+                if (window.ddmm.WineAPI.setEnvVars) {
+                    // Parse env string to object
+                    const envObj = {};
+                    this.wine_env.split(";").forEach(pair => {
+                        const [k, v] = pair.split("=").map(s => s && s.trim());
+                        if (k) envObj[k] = v || "";
+                    });
+                    window.ddmm.WineAPI.setEnvVars(envObj);
+                }
+            }
+            this.$root.$emit("show-toast", this._("renderer.tab_options.section_wine.saved"));
+        },
         "_": function(key, ...args) {
             if (typeof ddmm !== 'undefined' && ddmm.translate) {
                 try {
@@ -1269,7 +1339,6 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
             const iconMap = {
                 "Appearance": "fas fa-palette",
                 "Application": "fas fa-cog",
-                "Enhancements": "fas fa-magic",
                 "Developers": "fas fa-code"
             };
             return iconMap[sectionHeader] || "fas fa-star";
@@ -1493,41 +1562,64 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
 
         "refreshMenuTranslations": function() {
             // Refresh menu translations
-            this.menu = [
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
+            this.menu = this.buildMenu();
+            this.ensureValidSelectedOption();
+        },
+        "buildMenu": function() {
+            const appearanceSection = {
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_appearance") : "Appearance",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
+                    {"title": "UI Theme", "id": "ui_theme"},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
+                    {
+                        "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
+                        "id": "advanced_appearance"
+                    }
+                ]
+            };
+
+            const applicationSection = {
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
+                    {"title": "Sayonika Server", "id": "sayonika_server"}
+                ]
+            };
+
+            const sections = [appearanceSection, applicationSection];
+
+            if (this.isLinux) {
+                sections.push({
+                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_wine") : "Wine",
                     "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_background") : "Background", "id": "background"},
-                        {"title": "UI Theme", "id": "ui_theme"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_language") : "Language", "id": "language"},
                         {
-                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_advanced_appearance") : "Advanced",
-                            "id": "advanced_appearance"
+                            "title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.menu.wine") : "Wine Configuration",
+                            "id": "wine_config"
                         }
                     ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_application") : "Application",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_updates") : "Updates", "id": "updates", "hideAppx": true},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_storage") : "Storage", "id": "storage"},
-                        {"title": "Sayonika Server", "id": "sayonika_server"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_enhancements") : "Enhancements",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_sdk") : "SDK", "id": "sdk"}
-                    ]
-                },
-                {
-                    "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
-                    "contents": [
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
-                        {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
-                    ]
-                }
-            ];
+                });
+            }
+
+            sections.push({
+                "header": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.header_developers") : "Developers",
+                "contents": [
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_testing") : "Testing", "id": "testing"},
+                    {"title": (typeof ddmm !== 'undefined' && ddmm.translate) ? ddmm.translate("renderer.tab_options.list.link_debug") : "Debug", "id": "debug"}
+                ]
+            });
+
+            return sections;
+        },
+        "ensureValidSelectedOption": function() {
+            const menuHasSelection = this.menu.some(section => {
+                return Array.isArray(section.contents) && section.contents.some(item => item.id === this.selected_option);
+            });
+
+            if (!menuHasSelection && this.menu.length > 0 && Array.isArray(this.menu[0].contents) && this.menu[0].contents.length > 0) {
+                this.selected_option = this.menu[0].contents[0].id;
+            }
         },
 
         "loadAvailableLanguages": async function() {
@@ -1603,14 +1695,17 @@ const OptionsTab = Vue.component("ddmm-options-tab", {
     },
 
     "mounted": function () {
-        if (!this.selected_option) {
-            this.selected_option = this.menu[0].contents[0].id;
-        }
+        this.ensureValidSelectedOption();
 
         // Listen for the ddmm-ready event to update version and refresh data
         window.addEventListener('ddmm-ready', () => {
             console.log("OptionsTab: ddmm-ready event received");
             if (typeof ddmm !== 'undefined') {
+                if (typeof ddmm.platform !== 'undefined') {
+                    this.isLinux = ddmm.platform === 'linux';
+                    this.menu = this.buildMenu();
+                    this.ensureValidSelectedOption();
+                }
                 // Update version using the getVersionFromConfig method
                 this.version = this.getVersionFromConfig();
                 console.log("OptionsTab: Updated version to:", this.version);

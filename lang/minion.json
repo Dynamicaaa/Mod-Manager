@@ -116,9 +116,6 @@
         "button_settings": "Settings, banana!",
         "tag_global_save": "Global Save, banana!",
         "tag_sdk": "SDK, banana!",
-        "title_achievements": "Achievements ({0} / {1}), banana!",
-        "description_achievements": "Keep playing to unlock more achievements, banana!",
-        "description_achievements_complete": "You unlocked all achievements! Bello!",
         "title_screenshots_none": "No screenshots, banana!",
         "title_screenshots_one": "1 screenshot, banana!",
         "title_screenshots": "{0} screenshots, banana!",
@@ -236,7 +233,6 @@
         "link_language": "Language, banana!",
         "link_advanced_appearance": "Advanced, banana!",
         "header_enhancements": "Enhancements, banana!",
-        "link_sdk": "Achievements & SDK, banana!",
         "header_application": "Application, banana!",
         "link_updates": "Updates, banana!",
         "link_storage": "Storage Location, banana!",
@@ -271,14 +267,6 @@
         "option_stable": "Stable, banana!",
         "option_beta": "Beta, banana!",
         "button_check": "Check for updates, banana!"
-      },
-      "section_sdk": {
-        "title": "Achievements & SDK, banana!",
-        "subtitle": "Change how achievements work, banana!",
-        "description_mode": "Enable achievements, banana:",
-        "checkbox_always": "Always (recommended), banana!",
-        "checkbox_specified": "When the mod supports them, banana!",
-        "checkbox_never": "Never, banana!"
       },
       "section_testing": {
         "title": "SDK Debug, banana!",
