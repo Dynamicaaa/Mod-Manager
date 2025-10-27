@@ -83,7 +83,7 @@ export default class ModInstaller {
      * @param instanceName The name of the instance
      * @param createBackup Whether to create a backup before installation
      */
-    public static async installMod(modPath: string, installPath: string, instanceName?: string, createBackup: boolean = true): Promise<null> {
+    public static async installMod(modPath: string, installPath: string, instanceName?: string, createBackup: boolean = true, skipDecompilation: boolean = false): Promise<null> {
         const sessionId = randomBytes(8).toString("hex");
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
         
@@ -141,19 +141,19 @@ export default class ModInstaller {
             }
             
             if (modPath.endsWith(".zip")) {
-                return await ModInstaller.installZip(modPath, installPath, instanceName, progressReporter);
+                return await ModInstaller.installZip(modPath, installPath, instanceName, progressReporter, skipDecompilation);
             } else if (ModInstaller.isArchive(modPath)) {
                 return new Promise((ff, rj) => {
                     const tempDir: string = joinPath(app.getPath("temp"), "ddmm-extract-" + randomBytes(8).toString("hex"));
                     
                     progressReporter.updatePhase('extracting', 'Extracting archive with universal extractor...', 10);
-                    
+
                     // Extract using UniversalArchiveExtractor directly, then process the extracted files
                     UniversalArchiveExtractor.extract(modPath, tempDir).then(() => {
                         progressReporter.updatePhase('installing', 'Processing extracted files...', 30);
                         
                         // Process extracted files directly without zip conversion
-                        ModInstaller.installFromDirectory(tempDir, installPath, instanceName, progressReporter).then(() => {
+                        ModInstaller.installFromDirectory(tempDir, installPath, instanceName, progressReporter, skipDecompilation).then(() => {
                             removeSync(tempDir);
                             ff(undefined);
                         }).catch(e => {
@@ -195,7 +195,8 @@ export default class ModInstaller {
         modPath: string,
         installPath: string,
         instanceName: string,
-        isolationMode: 'full' | 'partial' | 'none' = 'partial'
+        isolationMode: 'full' | 'partial' | 'none' = 'partial',
+        skipDecompilation: boolean = false
     ): Promise<ModContainer> {
         const sessionId = randomBytes(8).toString("hex");
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
@@ -275,7 +276,9 @@ export default class ModInstaller {
             
             // Activate the container
             await ModContainerManager.activateContainer(container.id, installPath);
-            await ModInstaller.processRenpyContent(installPath, progressReporter);
+            if (!skipDecompilation) {
+                await ModInstaller.processRenpyContent(installPath, progressReporter);
+            }
             
             progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
             
@@ -359,7 +362,7 @@ export default class ModInstaller {
         }
     }
 
-    private static installZip(modPath: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
+    private static installZip(modPath: string, installPath: string, instanceName?: string, progressReporter?: any, skipDecompilation: boolean = false): Promise<null> {
         return new Promise((resolve, reject) => {
             if (!progressReporter) {
                 const sessionId = randomBytes(8).toString("hex");
@@ -464,8 +467,10 @@ export default class ModInstaller {
                             }
 
                             progressReporter.updatePhase('installing', 'Extracting mod files...', 30);
-                            await ModInstaller.extractArchive(modPath, analysis, extractionContext, progressReporter);
-                            await ModInstaller.processRenpyContent(installPath, progressReporter);
+                            await ModInstaller.extractArchive(modPath, analysis, extractionContext, progressReporter, skipDecompilation);
+                            if (!skipDecompilation) {
+                                await ModInstaller.processRenpyContent(installPath, progressReporter);
+                            }
 
                             progressReporter.updatePhase('verifying', 'Writing mod configuration...', 85);
                             await ModInstaller.writeModConfiguration(installPath, installJson.mapper);
@@ -492,7 +497,7 @@ export default class ModInstaller {
      * @param instanceName Optional instance name
      * @param progressReporter Progress reporter instance
      */
-    private static installFromDirectory(sourceDir: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
+    private static installFromDirectory(sourceDir: string, installPath: string, instanceName?: string, progressReporter?: any, skipDecompilation: boolean = false): Promise<null> {
         return new Promise((ff, rj) => {
             const archiver = require('archiver');
             const fs = require('fs');
@@ -507,7 +512,7 @@ export default class ModInstaller {
                 
                 output.on('close', () => {
                     // Install the temporary zip file
-                    ModInstaller.installZip(tempZipPath, installPath, instanceName, progressReporter).then(() => {
+                    ModInstaller.installZip(tempZipPath, installPath, instanceName, progressReporter, skipDecompilation).then(() => {
                         // Clean up temporary zip
                         try { unlinkSync(tempZipPath); } catch (e) {}
                         ff(undefined);
@@ -880,7 +885,7 @@ export default class ModInstaller {
     }
 
 
-    private static extractArchive(modPath: string, analysis: ArchiveAnalysisResult, context: ExtractionContext, progressReporter: any): Promise<void> {
+    private static extractArchive(modPath: string, analysis: ArchiveAnalysisResult, context: ExtractionContext, progressReporter: any, skipDecompilation: boolean = false): Promise<void> {
         return new Promise((resolve, reject) => {
             yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
                 if (err) {

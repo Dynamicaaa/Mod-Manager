@@ -312,7 +312,7 @@ ipcMain.on("create install", (ev: IpcMainEvent, install: { folderName: string, i
             appWindow.setClosable(true);
         } else {
             console.log("[IPC create install] Installing mod " + install.mod + " in " + install.folderName);
-            ModInstaller.installMod(install.mod, joinPath(Config.readConfigValue("installFolder"), "installs", install.folderName, "install")).then(() => {
+            ModInstaller.installMod(install.mod, joinPath(Config.readConfigValue("installFolder"), "installs", install.folderName, "install"), undefined, true, true).then(() => {
                 appWindow.webContents.send("got installs", InstallList.getInstallList());
                 windowClosable = true;
                 appWindow.setClosable(true);

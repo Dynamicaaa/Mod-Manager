@@ -58,7 +58,7 @@ export class InputValidator {
     // Common dangerous patterns to check for
     private static readonly DANGEROUS_PATTERNS = [
         /\.\./,                    // Directory traversal
-        /[<>:"|?*]/,              // Invalid filename characters on Windows
+        /[<>:"|?*]/,              // Invalid filename characters on Windows (but allow in full paths)
         /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i, // Windows reserved names
         /[\x00-\x1f\x7f]/,        // Control characters
         /^\.+$/,                  // Only dots
@@ -127,6 +127,11 @@ export class InputValidator {
         // Check for dangerous patterns
         for (const pattern of this.DANGEROUS_PATTERNS) {
             if (pattern.test(normalizedPath)) {
+                // Special case: Allow Windows drive letters (C:, D:, etc.)
+                if (pattern.source === '[<>:"|?*]' && /^[A-Za-z]:[\\/]/.test(normalizedPath)) {
+                    // This is a Windows drive letter, which is safe
+                    continue;
+                }
                 result.isValid = false;
                 result.errors.push(`File path contains dangerous pattern: ${pattern.source}`);
             }
@@ -236,6 +241,11 @@ export class InputValidator {
         // Check for dangerous patterns
         for (const pattern of this.DANGEROUS_PATTERNS) {
             if (pattern.test(normalizedPath)) {
+                // Special case: Allow Windows drive letters (C:, D:, etc.)
+                if (pattern.source === '[<>:"|?*]' && /^[A-Za-z]:[\\/]/.test(normalizedPath)) {
+                    // This is a Windows drive letter, which is safe
+                    continue;
+                }
                 result.isValid = false;
                 result.errors.push(`Directory path contains dangerous pattern: ${pattern.source}`);
             }
