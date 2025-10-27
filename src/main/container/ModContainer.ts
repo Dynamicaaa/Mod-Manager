@@ -19,7 +19,7 @@ export interface ModManifest {
     lastActivated?: Date;
     files: string[];
     originalModPath: string;
-    mapper: string;
+    mapper?: string;
 }
 
 /**

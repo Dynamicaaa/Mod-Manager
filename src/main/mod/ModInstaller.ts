@@ -1,11 +1,12 @@
 import * as yauzl from "yauzl";
 import {createWriteStream, unlinkSync, removeSync, readFileSync, writeFileSync, existsSync} from "fs-extra";
 import {mkdirsSync} from "fs-extra";
-import {join as joinPath, sep as pathSep} from "path";
-import {inferMapper} from "./ModNormaliser";
+import {promises as fsPromises, Dirent} from "fs";
+import {join as joinPath, sep as pathSep, dirname, basename} from "path";
+import {pathToFileURL} from "url";
 import ArchiveConverter from "../archive/ArchiveConverter";
 import {UniversalArchiveExtractor} from "../archive/UniversalArchiveExtractor";
-import {InstallationProgressManager} from "../progress/InstallationProgressManager";
+import {InstallationProgressManager, ProgressReporter} from "../progress/InstallationProgressManager";
 import {
     ModInstallationError,
     UnsupportedArchiveError,
@@ -16,15 +17,64 @@ import {
 } from "../errors/ModInstallationError";
 import {app} from "electron";
 import {randomBytes} from "crypto";
-import DDLCModTemplate2Format from "./mappers/DDLCModTemplate2Format";
 import MacOSFileCleanup from "../utils/MacOSFileCleanup";
+import {CrossPlatformPathResolver} from "../utils/CrossPlatformPathResolver";
 import {ModContainerManager} from "../container/ModContainerManager";
 import {ModContainer, ModManifest} from "../container/ModContainer";
 import { AdvancedBackupManager } from "../backup/BackupManager";
 import {InputValidator} from "../utils/InputValidator";
 import {SafeFileOperations} from "../utils/SafeFileOperations";
 
+interface ArchiveAnalysisState {
+    totalEntries: number;
+    topLevelCandidates: Set<string>;
+    hasRootFiles: boolean;
+    modRootCandidates: Set<string>;
+    modRootDir: string | null;
+    topLevelAppBundles: Set<string>;
+    containsExecutables: boolean;
+}
+
+interface ArchiveAnalysisResult {
+    totalEntries: number;
+    stripSegments: number;
+    modRootDir: string | null;
+    topLevelAppBundles: Set<string>;
+    containsExecutables: boolean;
+}
+
+interface ExtractionContext {
+    installPath: string;
+    platform: NodeJS.Platform;
+    appDestinationName?: string;
+    defaultAppName?: string;
+}
+
+interface ResolutionResult {
+    absolutePath: string;
+    relativePath: string;
+}
+
+export interface RenpyDecompileOptions {
+    deleteRpa?: boolean;
+    deleteRpyc?: boolean;
+    tryHarder?: boolean;
+    overwriteExistingRpy?: boolean;
+}
+
 export default class ModInstaller {
+    private static readonly importShim: (specifier: string) => Promise<any> =
+        new Function("specifier", "return import(specifier);") as any;
+
+    private static async importEsmModule<T = any>(specifier: string): Promise<T> {
+        try {
+            const resolvedPath = require.resolve(specifier);
+            const moduleUrl = pathToFileURL(resolvedPath).href;
+            return await ModInstaller.importShim(moduleUrl);
+        } catch {
+            return await ModInstaller.importShim(specifier);
+        }
+    }
 
     /**
      * Installs a mod into a copy of DDLC by guessing which files should go where
@@ -33,7 +83,7 @@ export default class ModInstaller {
      * @param instanceName The name of the instance
      * @param createBackup Whether to create a backup before installation
      */
-    public static async installMod(modPath: string, installPath: string, instanceName?: string, createBackup: boolean = true): Promise<null> {
+    public static async installMod(modPath: string, installPath: string, instanceName?: string, createBackup: boolean = true, skipDecompilation: boolean = false): Promise<null> {
         const sessionId = randomBytes(8).toString("hex");
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
         
@@ -91,19 +141,19 @@ export default class ModInstaller {
             }
             
             if (modPath.endsWith(".zip")) {
-                return await ModInstaller.installZip(modPath, installPath, instanceName, progressReporter);
+                return await ModInstaller.installZip(modPath, installPath, instanceName, progressReporter, skipDecompilation);
             } else if (ModInstaller.isArchive(modPath)) {
                 return new Promise((ff, rj) => {
                     const tempDir: string = joinPath(app.getPath("temp"), "ddmm-extract-" + randomBytes(8).toString("hex"));
                     
                     progressReporter.updatePhase('extracting', 'Extracting archive with universal extractor...', 10);
-                    
+
                     // Extract using UniversalArchiveExtractor directly, then process the extracted files
                     UniversalArchiveExtractor.extract(modPath, tempDir).then(() => {
                         progressReporter.updatePhase('installing', 'Processing extracted files...', 30);
                         
                         // Process extracted files directly without zip conversion
-                        ModInstaller.installFromDirectory(tempDir, installPath, instanceName, progressReporter).then(() => {
+                        ModInstaller.installFromDirectory(tempDir, installPath, instanceName, progressReporter, skipDecompilation).then(() => {
                             removeSync(tempDir);
                             ff(undefined);
                         }).catch(e => {
@@ -145,7 +195,8 @@ export default class ModInstaller {
         modPath: string,
         installPath: string,
         instanceName: string,
-        isolationMode: 'full' | 'partial' | 'none' = 'partial'
+        isolationMode: 'full' | 'partial' | 'none' = 'partial',
+        skipDecompilation: boolean = false
     ): Promise<ModContainer> {
         const sessionId = randomBytes(8).toString("hex");
         const progressReporter = InstallationProgressManager.createReporter(sessionId);
@@ -197,8 +248,6 @@ export default class ModInstaller {
             progressReporter.updatePhase('analyzing', 'Detecting mod format...', 20);
             
             // Infer mapper from the extracted files
-            const mapper = await inferMapper(tempDir);
-            
             // Collect mod files
             const modFiles = await ModInstaller.collectModFiles(tempDir);
             
@@ -210,7 +259,7 @@ export default class ModInstaller {
                 version: "1.0.0", // Could be extracted from mod metadata if available
                 files: modFiles,
                 originalModPath: modPath,
-                mapper: mapper.getFriendlyName()
+                mapper: "Unified Extractor"
             });
             
             progressReporter.updatePhase('installing', 'Creating container...', 40);
@@ -227,6 +276,9 @@ export default class ModInstaller {
             
             // Activate the container
             await ModContainerManager.activateContainer(container.id, installPath);
+            if (!skipDecompilation) {
+                await ModInstaller.processRenpyContent(installPath, progressReporter);
+            }
             
             progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
             
@@ -310,429 +362,134 @@ export default class ModInstaller {
         }
     }
 
-    private static installZip(modPath: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
-        return new Promise((ff, rj) => {
-            // Create progress reporter if not provided
+    private static installZip(modPath: string, installPath: string, instanceName?: string, progressReporter?: any, skipDecompilation: boolean = false): Promise<null> {
+        return new Promise((resolve, reject) => {
             if (!progressReporter) {
                 const sessionId = randomBytes(8).toString("hex");
                 progressReporter = InstallationProgressManager.createReporter(sessionId);
             }
-            
+
             progressReporter.updatePhase('analyzing', 'Preparing installation directory...', 5);
             mkdirsSync(installPath);
             const installJsonPath = joinPath(installPath, "install.json");
             console.log("Preparing to install mod from " + modPath);
-            
-            progressReporter.updatePhase('analyzing', 'Detecting mod format...', 10);
-            inferMapper(modPath).then(async (mapper) => {
-                let modName = instanceName ?? "";
-                if (!instanceName && existsSync(installJsonPath)) {
-                    try {
-                        const parsed = JSON.parse(readFileSync(installJsonPath, "utf8"));
-                        if (parsed && parsed.name) {
-                            modName = parsed.name;
-                        }
-                    } catch (e) {}
-                }
-                if (!modName) {
-                    throw new Error("No instance name provided and install.json does not contain a name.");
-                }
-                const installJson = {
-                    name: modName,
-                    globalSave: false,
-                    mod: null,
-                    mapper: ""
-                };
-                if (process.platform === "linux" && mapper instanceof DDLCModTemplate2Format) {
-                    const WineAPI = require("../sdk/WineAPI");
-                    console.debug("[Wine] Ensuring Wine is set up for Linux install...");
-                    await WineAPI.ensureWine();
-                }
-                installJson.mapper = mapper.getFriendlyName();
-                progressReporter.updatePhase('analyzing', 'Writing installation metadata...', 20);
+
+            let modName = instanceName ?? "";
+            if (!instanceName && existsSync(installJsonPath)) {
                 try {
-                    // Use SafeFileOperations for atomic write with backup
-                    SafeFileOperations.writeFile(
-                        installJsonPath,
-                        JSON.stringify(installJson, null, 2),
-                        {
-                            createBackup: true,
-                            atomicOperation: true,
-                            validatePath: true
-                        }
-                    ).then(() => {
-                        console.debug("[install.json] install.json written and flushed successfully. Contents:", installJson);
-                    }).catch(e => {
-                        console.error("[install.json] Failed to write and flush install.json:", e);
-                        // Fallback to synchronous write
-                        try {
-                            const fs = require("fs");
-                            const fd = fs.openSync(installJsonPath, "w");
-                            fs.writeSync(fd, JSON.stringify(installJson, null, 2), null, "utf8");
-                            fs.fsyncSync(fd);
-                            fs.closeSync(fd);
-                        } catch (fallbackError) {
-                            console.error("[install.json] Fallback write also failed:", fallbackError);
-                        }
-                    });
+                    const parsed = JSON.parse(readFileSync(installJsonPath, "utf8"));
+                    if (parsed && parsed.name) {
+                        modName = parsed.name;
+                    }
                 } catch (e) {
-                    console.error("[install.json] Failed to initiate safe write:", e);
+                    console.warn("Could not read existing install.json:", e.message);
                 }
-                for (const file of mapper.getFilesToDelete()) {
-                    console.log("Deleting " + file);
-                    try {
-                        unlinkSync(joinPath(installPath, "game", file));
-                    } catch (e) {
-                        console.warn("Could not delete file " + file + ":", e.message);
-                    }
+            }
+
+            if (!modName) {
+                const error = new Error("No instance name provided and install.json does not contain a name.");
+                progressReporter.error(error, 'analyzing');
+                reject(error);
+                return;
+            }
+
+            const installJson: any = {
+                name: modName,
+                globalSave: false,
+                mod: null,
+                mapper: "Unified Extractor",
+                requiresWine: false
+            };
+
+            const analysisState: ArchiveAnalysisState = {
+                totalEntries: 0,
+                topLevelCandidates: new Set<string>(),
+                hasRootFiles: false,
+                modRootCandidates: new Set<string>(),
+                modRootDir: null,
+                topLevelAppBundles: new Set<string>(),
+                containsExecutables: false
+            };
+
+            const extractionContext: ExtractionContext = {
+                installPath,
+                platform: process.platform,
+                appDestinationName: process.platform === "darwin" ? ModInstaller.locateExistingAppBundleName(installPath) ?? undefined : undefined,
+                defaultAppName: process.platform === "darwin" ? "DDLC.app" : undefined
+            };
+
+            progressReporter.updatePhase('analyzing', 'Scanning archive contents...', 10);
+
+            yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
+                if (err) {
+                    const wrappedError = new ExtractionError(modPath, err);
+                    progressReporter.error(wrappedError, 'analyzing');
+                    reject(wrappedError);
+                    return;
                 }
-                console.log("Installing with mapper: " + mapper.getFriendlyName());
-                progressReporter.updatePhase('analyzing', 'Opening archive for analysis...', 25);
-                yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
-                    if (err) {
-                        console.error("Failed to open mod zip file:", err);
-                        const wrappedError = new ExtractionError(modPath, err);
-                        progressReporter.error(wrappedError, 'analyzing');
-                        rj(wrappedError);
-                        return;
-                    }
-                    let entriesProcessed = 0;
-                    let totalEntries = 0;
-                    let topLevelDir: string | null = null;
-                    let allShareTopLevel = true;
-                    const topLevelCandidates = new Set<string>();
-                    let hasRootFiles = false;
-                    const modRootCandidates = new Set<string>();
-                    const parentToChildren = new Map<string, Set<string>>();
-                    // First pass: count total entries and detect top-level dirs
+
+                zipfile.readEntry();
+                zipfile.on("entry", (entry) => {
+                    ModInstaller.handleAnalysisEntry(entry, analysisState);
                     zipfile.readEntry();
-                    zipfile.on("entry", (entry) => {
-                        totalEntries++;
-                        const parts = entry.fileName.split("/");
-                        if (parts.length > 1) {
-                            topLevelCandidates.add(parts[0]);
-                            if (!parentToChildren.has(parts[0])) parentToChildren.set(parts[0], new Set());
-                            parentToChildren.get(parts[0]).add(parts[1]);
-                            if (parts[1] === "game" || parts[1] === "characters") {
-                                modRootCandidates.add(parts[0]);
-                            }
-                            // Detect nested mod root: e.g. CupcakeDelivery-v1.0-Renpy7Mod/CupcakeDelivery-1.0.1-pc/game
-                            if (parts.length > 2 && (parts[2] === "game" || parts[2] === "characters")) {
-                                if (!parentToChildren.has(parts[0] + "/" + parts[1])) parentToChildren.set(parts[0] + "/" + parts[1], new Set());
-                                parentToChildren.get(parts[0] + "/" + parts[1]).add(parts[2]);
-                                modRootCandidates.add(parts[0] + "/" + parts[1]);
-                            }
-                        } else {
-                            hasRootFiles = true;
-                            allShareTopLevel = false;
-                        }
-                        zipfile.readEntry();
-                    });
-                    zipfile.on("end", () => {
-                        // Pick the deepest mod root directory if there is one
-                        let modRootDir = null;
-                        if (modRootCandidates.size > 0) {
-                            // Prefer the deepest (longest) candidate
-                            modRootDir = Array.from(modRootCandidates).sort((a, b) => b.length - a.length)[0];
-                        }
-                        console.log("Total entries to process:", totalEntries, "Top-level dirs:", Array.from(topLevelCandidates), "Mod root dir:", modRootDir);
-                        progressReporter.updatePhase('installing', `Installing ${totalEntries} files...`, 30);
-                        yauzl.open(modPath, {lazyEntries: true}, (err, zipfile2) => {
-                            if (err) {
-                                console.error("Failed to reopen mod zip file:", err);
-                                rj(err);
-                                return;
-                            }
-                            const processNextEntry = () => {
-                                zipfile2.readEntry();
-                            };
-                            let appBundleDeleted = false; // Track if DDLC.app has been deleted for replacement
-                            zipfile2.readEntry();
-                            zipfile2.on("entry", (entry) => {
-                                let fileName = entry.fileName;
-                                entriesProcessed++;
-                                if (/\/$/.test(fileName)) {
-                                    console.log("Skipping directory:", fileName);
-                                    if (entriesProcessed >= totalEntries) {
-                                        console.log("Mod installation completed successfully");
-                                        ff(undefined);
-                                    } else {
-                                        processNextEntry();
-                                    }
-                                    return;
-                                }
-                                // Calculate how many segments to strip
-                                let stripSegments = 0;
-                                if (modRootDir) {
-                                    stripSegments = modRootDir.split("/").length;
-                                }
-                                // If this file is under the mod root dir, strip it
-                                if (modRootDir && fileName.startsWith(modRootDir + "/")) {
-                                    fileName = fileName.split("/").slice(stripSegments).join("/");
-                                } else {
-                                    // For .app bundles at the same level as mod root, also strip
-                                    const appDirMatch = entry.fileName.match(/^((?:[^/]+\/){0,})([^/]+\.app)\//);
-                                    if (appDirMatch) {
-                                        const appPathSegments = appDirMatch[1].split("/").filter(Boolean);
-                                        if (appPathSegments.length === stripSegments - 1) {
-                                            // Place .app at top level
-                                            fileName = fileName.split("/").slice(stripSegments - 1).join("/");
-                                        }
-                                    }
-                                }
-                                const mappedPath = mapper.mapFile(fileName);
-                                if (mappedPath === null) {
-                                    console.log("Ignoring file:", fileName);
-                                    if (entriesProcessed >= totalEntries) {
-                                        console.log("Mod installation completed successfully");
-                                        ff(undefined);
-                                    } else {
-                                        processNextEntry();
-                                    }
-                                    return;
-                                }
-                                
-                                // Handle app bundle replacement for macOS (only delete once)
-                                if (process.platform === "darwin" && mapper.requiresAppBundleReplacement && mapper.requiresAppBundleReplacement() && !appBundleDeleted) {
-                                    const appBundle = mapper.getAppBundleToReplace(fileName);
-                                    if (appBundle) {
-                                        console.log("App bundle replacement: Deleting existing DDLC.app and will replace with", appBundle);
-                                        const ddlcAppPath = joinPath(installPath, "DDLC.app");
-                                        try {
-                                            if (require("fs").existsSync(ddlcAppPath)) {
-                                                console.log("Deleting existing DDLC.app:", ddlcAppPath);
-                                                removeSync(ddlcAppPath);
-                                                appBundleDeleted = true; // Mark as deleted so we don't delete again
-                                            }
-                                        } catch (e) {
-                                            console.warn("Could not delete existing DDLC.app:", e.message);
-                                        }
-                                    }
-                                }
-                                
-                                // Validate the mapped path for security
-                                const pathValidation = InputValidator.validateFilePath(mappedPath, {
-                                    restrictToBasePath: installPath,
-                                    allowExecutables: false,
-                                    maxFileSize: 100 * 1024 * 1024 // 100MB per file
-                                });
-                                
-                                if (!pathValidation.isValid) {
-                                    console.warn("Skipping file with invalid path:", fileName, "->", mappedPath, "Errors:", pathValidation.errors);
-                                    if (entriesProcessed >= totalEntries) {
-                                        console.log("Mod installation completed successfully");
-                                        ff(undefined);
-                                    } else {
-                                        processNextEntry();
-                                    }
-                                    return;
-                                }
-                                
-                                const outputPath = joinPath(installPath, pathValidation.sanitized);
-                                console.log("Extracting:", fileName, "->", pathValidation.sanitized);
-                                const outputDir = outputPath.split(pathSep).slice(0, -1).join(pathSep);
-                                
-                                // Enhanced conflict resolution function
-                                const resolvePathConflicts = (targetDir: string) => {
-                                    const fs = require("fs");
-                                    const pathParts = targetDir.split(pathSep);
-                                    for (let i = 1; i <= pathParts.length; i++) {
-                                        const partialPath = pathParts.slice(0, i).join(pathSep);
-                                        try {
-                                            const stats = fs.statSync(partialPath);
-                                            if (stats.isFile()) {
-                                                console.warn("Found file blocking directory creation:", partialPath);
-                                                console.warn("Removing conflicting file to allow directory creation");
-                                                fs.unlinkSync(partialPath);
-                                            }
-                                        } catch (statErr) {
-                                            // Path doesn't exist, continue checking
-                                        }
-                                    }
-                                };
-                                
-                                // First, resolve any conflicts in the path
-                                resolvePathConflicts(outputDir);
-                                
-                                // Then try to create the directory
-                                try {
-                                    mkdirsSync(outputDir);
-                                } catch (e) {
-                                    console.warn("Could not create directory " + outputDir + ":", e.message);
-                                    // Try conflict resolution again and retry
-                                    resolvePathConflicts(outputDir);
-                                    try {
-                                        mkdirsSync(outputDir);
-                                    } catch (retryErr) {
-                                        console.error("Failed to create directory after conflict resolution:", retryErr.message);
-                                    }
-                                }
-                                zipfile2.openReadStream(entry, (err, readStream) => {
-                                    if (err) {
-                                        console.error("Failed to open read stream for " + fileName + ":", err);
-                                        const wrappedError = new FileOperationError("read", fileName, err);
-                                        progressReporter.error(wrappedError, 'installing');
-                                        rj(wrappedError);
-                                        return;
-                                    }
-                                    let writeStream;
-                                    try {
-                                        writeStream = createWriteStream(outputPath);
-                                    } catch (createErr) {
-                                        console.error("Failed to create write stream for " + outputPath + ":", createErr);
-                                        // Try resolving conflicts one more time
-                                        resolvePathConflicts(outputDir);
-                                        try {
-                                            mkdirsSync(outputDir);
-                                            writeStream = createWriteStream(outputPath);
-                                        } catch (finalErr) {
-                                            console.error("Final attempt failed for " + outputPath + ":", finalErr);
-                                            const wrappedError = new FileOperationError("write", outputPath, finalErr);
-                                            progressReporter.error(wrappedError, 'installing');
-                                            rj(wrappedError);
-                                            return;
-                                        }
-                                    }
-                                    
-                                    readStream.pipe(writeStream);
-                                    writeStream.on('close', () => {
-                                        const fileProgress = Math.round((entriesProcessed / totalEntries) * 60) + 30; // 30-90% range
-                                        progressReporter.updateProgress(fileProgress, fileName, `Processing file ${entriesProcessed} of ${totalEntries}`);
-                                        console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
-                                        if (entriesProcessed >= totalEntries) {
-                                            progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
-                                            console.log("Mod installation completed successfully");
-                                            // Write mod instance config with mapper info
-                                            const configPath = joinPath(installPath, "game", "mod.json");
-                                            const configData = {
-                                                mapper: mapper.getFriendlyName ? mapper.getFriendlyName() : (mapper.constructor?.name || "unknown")
-                                            };
-                                            try {
-                                                // Use SafeFileOperations for better error handling
-                                                SafeFileOperations.writeFile(
-                                                    configPath,
-                                                    JSON.stringify(configData, null, 2),
-                                                    {
-                                                        createBackup: false,
-                                                        atomicOperation: true,
-                                                        validatePath: true
-                                                    }
-                                                ).then(() => {
-                                                    console.log("Wrote mod instance config:", configPath);
-                                                }).catch(e => {
-                                                    console.warn("Failed to write mod instance config:", e.message);
-                                                    // Fallback to synchronous write
-                                                    try {
-                                                        writeFileSync(configPath, JSON.stringify(configData, null, 2));
-                                                    } catch (fallbackError) {
-                                                        console.warn("Fallback config write failed:", fallbackError.message);
-                                                    }
-                                                });
-                                            } catch (e) {
-                                                console.warn("Failed to initiate safe config write:", e.message);
-                                            }
-                                            
-                                            // Clean up macOS resource fork files that can interfere with game execution
-                                            progressReporter.updatePhase('verifying', 'Cleaning up macOS files...', 95);
-                                            MacOSFileCleanup.cleanGameInstallation(installPath);
-                                            
-                                            progressReporter.complete();
-                                            ff(undefined);
-                                        } else {
-                                            processNextEntry();
-                                        }
-                                    });
-                                    writeStream.on('error', (err) => {
-                                        console.error("Failed to write file " + outputPath + ":", err);
-                                        // If writing fails, try resolving conflicts and retrying
-                                        if (err.code === 'ENOTDIR') {
-                                            console.log("ENOTDIR error detected, attempting conflict resolution and retry");
-                                            resolvePathConflicts(outputDir);
-                                            try {
-                                                mkdirsSync(outputDir);
-                                                // Restart the extraction for this file
-                                                zipfile2.openReadStream(entry, (retryErr, retryReadStream) => {
-                                                    if (retryErr) {
-                                                        console.error("Failed to retry read stream:", retryErr);
-                                                        const wrappedError = new FileOperationError("retry read", fileName, retryErr);
-                                                        progressReporter.error(wrappedError, 'installing');
-                                                        rj(wrappedError);
-                                                        return;
-                                                    }
-                                                    const retryWriteStream = createWriteStream(outputPath);
-                                                    retryReadStream.pipe(retryWriteStream);
-                                                    retryWriteStream.on('close', () => {
-                                                        console.log("Retry successful for:", outputPath);
-                                                        const fileProgress = Math.round((entriesProcessed / totalEntries) * 60) + 30;
-                                                        progressReporter.updateProgress(fileProgress, fileName);
-                                                        console.log(`Progress: ${entriesProcessed}/${totalEntries} entries processed`);
-                                                        if (entriesProcessed >= totalEntries) {
-                                                            progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
-                                                            console.log("Mod installation completed successfully");
-                                                            progressReporter.complete();
-                                                            ff(undefined);
-                                                        } else {
-                                                            processNextEntry();
-                                                        }
-                                                    });
-                                                    retryWriteStream.on('error', (retryWriteErr) => {
-                                                        console.error("Retry also failed:", retryWriteErr);
-                                                        const wrappedError = new FileOperationError("retry write", outputPath, retryWriteErr);
-                                                        progressReporter.error(wrappedError, 'installing');
-                                                        rj(wrappedError);
-                                                    });
-                                                });
-                                            } catch (resolveErr) {
-                                                console.error("Conflict resolution failed:", resolveErr);
-                                                const wrappedError = new PathConflictError(outputPath);
-                                                progressReporter.error(wrappedError, 'installing');
-                                                rj(wrappedError);
-                                            }
-                                        } else {
-                                            const wrappedError = new FileOperationError("write", outputPath, err);
-                                            progressReporter.error(wrappedError, 'installing');
-                                            rj(wrappedError);
-                                        }
-                                    });
-                                    readStream.on('error', (err) => {
-                                        console.error("Failed to read from zip stream for " + fileName + ":", err);
-                                        const wrappedError = new FileOperationError("read", fileName, err);
-                                        progressReporter.error(wrappedError, 'installing');
-                                        rj(wrappedError);
-                                    });
-                                });
-                            });
-                            zipfile2.on("end", () => {
-                                if (totalEntries === 0) {
-                                    console.log("No entries to process - mod installation completed");
-                                    progressReporter.complete();
-                                    ff(undefined);
-                                }
-                            });
-                            zipfile2.on("error", (err) => {
-                                console.error("Error during mod extraction:", err);
-                                const wrappedError = ErrorHandlerUtils.wrapError(err, 'installing', modPath);
-                                progressReporter.error(wrappedError, 'installing');
-                                rj(wrappedError);
-                            });
-                        });
-                    });
-                    zipfile.on("error", (err) => {
-                        console.error("Error counting files in zip:", err);
-                        const wrappedError = new ExtractionError(modPath, err);
-                        progressReporter.error(wrappedError, 'analyzing');
-                        rj(wrappedError);
-                    });
                 });
-            }).catch((err) => {
-                console.error("Error during mod installation:", err);
-                const wrappedError = ErrorHandlerUtils.wrapError(err, 'analyzing', modPath);
-                progressReporter.error(wrappedError);
-                rj(wrappedError);
+
+                zipfile.on("error", (zipErr) => {
+                    const wrappedError = new ExtractionError(modPath, zipErr);
+                    progressReporter.error(wrappedError, 'analyzing');
+                    reject(wrappedError);
+                });
+
+                zipfile.on("end", () => {
+                    zipfile.close();
+                    const analysis = ModInstaller.finalizeAnalysis(analysisState);
+
+                    (async () => {
+                        try {
+                            if (process.platform === "linux" && analysis.containsExecutables) {
+                                installJson.requiresWine = true;
+                                progressReporter.updatePhase('analyzing', 'Preparing Wine compatibility...', 20);
+                                const WineAPI = require("../sdk/WineAPI");
+                                await WineAPI.ensureWine();
+                            }
+
+                            progressReporter.updatePhase('analyzing', 'Writing installation metadata...', 25);
+                            await ModInstaller.writeInstallJson(installJsonPath, installJson);
+
+                            if (process.platform === "darwin") {
+                                if (!extractionContext.appDestinationName) {
+                                    if (analysis.topLevelAppBundles.size > 0) {
+                                        extractionContext.appDestinationName = Array.from(analysis.topLevelAppBundles)[0];
+                                    } else {
+                                        extractionContext.appDestinationName = extractionContext.defaultAppName;
+                                    }
+                                }
+                            }
+
+                            progressReporter.updatePhase('installing', 'Extracting mod files...', 30);
+                            await ModInstaller.extractArchive(modPath, analysis, extractionContext, progressReporter, skipDecompilation);
+                            if (!skipDecompilation) {
+                                await ModInstaller.processRenpyContent(installPath, progressReporter);
+                            }
+
+                            progressReporter.updatePhase('verifying', 'Writing mod configuration...', 85);
+                            await ModInstaller.writeModConfiguration(installPath, installJson.mapper);
+
+                            progressReporter.updatePhase('verifying', 'Cleaning up macOS files...', 95);
+                            MacOSFileCleanup.cleanGameInstallation(installPath);
+
+                            progressReporter.complete();
+                            resolve(undefined);
+                        } catch (error) {
+                            const wrapped = ErrorHandlerUtils.wrapError(error, 'installing', modPath);
+                            progressReporter.error(wrapped, 'installing');
+                            reject(wrapped);
+                        }
+                    })().catch(reject);
+                });
             });
         });
     }
-
     /**
      * Installs a mod from an already extracted directory
      * @param sourceDir The directory containing extracted mod files
@@ -740,7 +497,7 @@ export default class ModInstaller {
      * @param instanceName Optional instance name
      * @param progressReporter Progress reporter instance
      */
-    private static installFromDirectory(sourceDir: string, installPath: string, instanceName?: string, progressReporter?: any): Promise<null> {
+    private static installFromDirectory(sourceDir: string, installPath: string, instanceName?: string, progressReporter?: any, skipDecompilation: boolean = false): Promise<null> {
         return new Promise((ff, rj) => {
             const archiver = require('archiver');
             const fs = require('fs');
@@ -755,7 +512,7 @@ export default class ModInstaller {
                 
                 output.on('close', () => {
                     // Install the temporary zip file
-                    ModInstaller.installZip(tempZipPath, installPath, instanceName, progressReporter).then(() => {
+                    ModInstaller.installZip(tempZipPath, installPath, instanceName, progressReporter, skipDecompilation).then(() => {
                         // Clean up temporary zip
                         try { unlinkSync(tempZipPath); } catch (e) {}
                         ff(undefined);
@@ -846,6 +603,715 @@ export default class ModInstaller {
                 });
             });
         });
+    }
+
+    private static handleAnalysisEntry(entry: yauzl.Entry, state: ArchiveAnalysisState): void {
+        state.totalEntries++;
+
+        if (!entry || !entry.fileName) {
+            return;
+        }
+
+        const normalized = entry.fileName.replace(/\\/g, "/");
+        if (!normalized) {
+            return;
+        }
+
+        const isDirectory = /\/$/.test(normalized);
+        const parts = normalized.split("/").filter(part => part && part !== ".");
+
+        if (parts.length === 0) {
+            return;
+        }
+
+        const firstSegment = parts[0];
+        if (firstSegment === "__MACOSX") {
+            return;
+        }
+
+        if (!isDirectory && parts.length === 1) {
+            state.hasRootFiles = true;
+        } else if (parts.length > 0) {
+            state.topLevelCandidates.add(firstSegment);
+        }
+
+        if (parts.length > 1) {
+            const second = parts[1].toLowerCase();
+            if (["game", "characters", "autorun", "renpy", "lib", "libs", "python-packages"].includes(second)) {
+                state.modRootCandidates.add(parts[0]);
+            }
+            if (parts.length > 2) {
+                const third = parts[2].toLowerCase();
+                if (["game", "characters"].includes(third)) {
+                    state.modRootCandidates.add(parts[0] + "/" + parts[1]);
+                }
+            }
+        }
+
+        const appIndex = parts.findIndex(segment => segment.toLowerCase().endsWith(".app"));
+        if (appIndex === 0) {
+            state.topLevelAppBundles.add(parts[0]);
+        }
+
+        if (!isDirectory) {
+            const filename = parts[parts.length - 1].toLowerCase();
+            if (filename.endsWith(".exe")) {
+                state.containsExecutables = true;
+            }
+        }
+    }
+
+    private static finalizeAnalysis(state: ArchiveAnalysisState): ArchiveAnalysisResult {
+        let stripSegments = 0;
+        let modRootDir: string | null = null;
+
+        if (state.modRootCandidates.size > 0) {
+            modRootDir = Array.from(state.modRootCandidates).sort((a, b) => b.length - a.length)[0];
+            stripSegments = modRootDir.split("/").length;
+        } else {
+            const filteredTopLevel = Array.from(state.topLevelCandidates).filter(name => name && name !== "__MACOSX");
+            if (!state.hasRootFiles && filteredTopLevel.length === 1) {
+                stripSegments = 1;
+            }
+        }
+
+        return {
+            totalEntries: state.totalEntries,
+            stripSegments,
+            modRootDir,
+            topLevelAppBundles: state.topLevelAppBundles,
+            containsExecutables: state.containsExecutables
+        };
+    }
+
+    private static async writeInstallJson(installJsonPath: string, installJson: any): Promise<void> {
+        const payload = JSON.stringify(installJson, null, 2);
+        try {
+            await SafeFileOperations.writeFile(installJsonPath, payload, {
+                createBackup: true,
+                atomicOperation: true,
+                validatePath: true
+            });
+            console.debug("[install.json] install.json written:", installJsonPath);
+        } catch (error) {
+            console.error("[install.json] Safe write failed:", error);
+            try {
+                writeFileSync(installJsonPath, payload, "utf8");
+            } catch (fallbackError) {
+                console.error("[install.json] Fallback write failed:", fallbackError);
+                throw fallbackError;
+            }
+        }
+    }
+
+    private static async writeModConfiguration(installPath: string, mapperName: string): Promise<void> {
+        const configPath = joinPath(installPath, "game", "mod.json");
+        try {
+            mkdirsSync(dirname(configPath));
+        } catch {
+            // Ignore errors when directory already exists
+        }
+
+        const configData = {
+            mapper: mapperName
+        };
+        const payload = JSON.stringify(configData, null, 2);
+
+        try {
+            await SafeFileOperations.writeFile(configPath, payload, {
+                createBackup: false,
+                atomicOperation: true,
+                validatePath: false
+            });
+            console.log("Wrote mod instance config:", configPath);
+        } catch (error) {
+            console.warn("Failed to write mod instance config safely:", error.message ?? error);
+            try {
+                writeFileSync(configPath, payload);
+            } catch (fallbackError) {
+                console.warn("Fallback mod config write failed:", fallbackError.message ?? fallbackError);
+            }
+        }
+    }
+
+    private static locateExistingAppBundleName(installPath: string): string | null {
+        if (process.platform !== "darwin") {
+            return null;
+        }
+
+        try {
+            const fs = require("fs");
+            const entries = fs.readdirSync(installPath);
+            for (const entry of entries) {
+                if (entry.toLowerCase().endsWith(".app")) {
+                    const fullPath = joinPath(installPath, entry);
+                    try {
+                        const stats = fs.statSync(fullPath);
+                        if (stats.isDirectory()) {
+                            return entry;
+                        }
+                    } catch {
+                        // Ignore stat errors
+                    }
+                }
+            }
+        } catch (error) {
+            console.warn("Unable to detect existing app bundle:", error.message ?? error);
+        }
+
+        return null;
+    }
+
+    private static joinPathSegments(base: string, segments: string[]): string {
+        return segments.reduce((current, segment) => joinPath(current, segment), base);
+    }
+
+    private static resolveMacAppSegments(appName: string, segments: string[]): string[] {
+        const sanitized = segments.filter(segment => segment && segment !== ".");
+
+        if (sanitized.length === 0) {
+            return [appName];
+        }
+
+        const lower = sanitized[0].toLowerCase();
+
+        if (lower === "contents") {
+            return [appName, ...sanitized];
+        }
+
+        if (lower === "macos") {
+            return [appName, "Contents", ...sanitized];
+        }
+
+        if (lower === "resources") {
+            return [appName, "Contents", ...sanitized];
+        }
+
+        const baseResources = [appName, "Contents", "Resources"];
+        const baseMacOS = [appName, "Contents", "MacOS"];
+
+        if (lower === "frameworks") {
+            return [appName, "Contents", ...sanitized];
+        }
+
+        if (lower === "lib") {
+            return [...baseMacOS, ...sanitized];
+        }
+
+        if (lower === "autorun") {
+            return [...baseResources, "autorun", ...sanitized.slice(1)];
+        }
+
+        if (["renpy", "game", "python-packages", "update", "updates"].includes(lower)) {
+            return [...baseResources, "autorun", ...sanitized];
+        }
+
+        // Default: treat as autorun payload
+        return [...baseResources, "autorun", ...sanitized];
+    }
+
+    public static resolveExtractionPath(originalSegments: string[], stripSegments: number, context: ExtractionContext): ResolutionResult | null {
+        if (!originalSegments || originalSegments.length === 0) {
+            return null;
+        }
+
+        const sanitizedOriginal = originalSegments.filter(segment => segment && segment !== ".");
+        if (sanitizedOriginal.length === 0) {
+            return null;
+        }
+
+        const lowerFirst = sanitizedOriginal[0].toLowerCase();
+        if (lowerFirst === "__macosx") {
+            return null;
+        }
+
+        let relativeSegments = stripSegments > 0 ? sanitizedOriginal.slice(stripSegments) : sanitizedOriginal.slice();
+
+        if (stripSegments > 0) {
+            const strippedSegments = sanitizedOriginal.slice(0, stripSegments).filter(Boolean);
+            if (strippedSegments.length > 0) {
+                const lastStripped = strippedSegments[strippedSegments.length - 1];
+                const lowerLastStripped = lastStripped.toLowerCase();
+                const reinstateSegments = new Set(["game", "renpy", "python-packages", "update", "updates"]);
+                if (reinstateSegments.has(lowerLastStripped)) {
+                    if (relativeSegments.length === 0 || relativeSegments[0].toLowerCase() !== lowerLastStripped) {
+                        relativeSegments = [lastStripped, ...relativeSegments];
+                    }
+                }
+            }
+        }
+
+        if (relativeSegments.length === 0 && !sanitizedOriginal.some(segment => segment.toLowerCase().endsWith(".app"))) {
+            return null;
+        }
+
+        if (relativeSegments.some(segment => segment === "..")) {
+            console.warn("[Installer] Skipping path with traversal attempt:", sanitizedOriginal.join("/"));
+            return null;
+        }
+
+        if (context.platform === "darwin") {
+            const appIndex = sanitizedOriginal.findIndex(segment => segment.toLowerCase().endsWith(".app"));
+            if (appIndex !== -1) {
+                const insideSegments = sanitizedOriginal.slice(appIndex + 1);
+                const targetAppName = context.appDestinationName || context.defaultAppName || "DDLC.app";
+                const segments = ModInstaller.resolveMacAppSegments(targetAppName, insideSegments);
+                return {
+                    absolutePath: ModInstaller.joinPathSegments(context.installPath, segments.filter(Boolean)),
+                    relativePath: segments.filter(Boolean).join("/")
+                };
+            }
+
+            const firstRelative = (relativeSegments[0] || "").toLowerCase();
+            const targetAppName = context.appDestinationName || context.defaultAppName || "DDLC.app";
+            const segments = ModInstaller.resolveMacAppSegments(targetAppName, relativeSegments);
+
+            return {
+                absolutePath: ModInstaller.joinPathSegments(context.installPath, segments.filter(Boolean)),
+                relativePath: segments.filter(Boolean).join("/")
+            };
+        }
+
+        const normalizedRelative = relativeSegments.join("/");
+        if (!normalizedRelative) {
+            return null;
+        }
+
+        const destination = CrossPlatformPathResolver.resolveModInstallPath(context.installPath, normalizedRelative);
+        return {
+            absolutePath: destination,
+            relativePath: normalizedRelative
+        };
+    }
+
+
+    private static extractArchive(modPath: string, analysis: ArchiveAnalysisResult, context: ExtractionContext, progressReporter: any, skipDecompilation: boolean = false): Promise<void> {
+        return new Promise((resolve, reject) => {
+            yauzl.open(modPath, {lazyEntries: true}, (err, zipfile) => {
+                if (err) {
+                    const wrappedError = new ExtractionError(modPath, err);
+                    progressReporter.error(wrappedError, 'installing');
+                    reject(wrappedError);
+                    return;
+                }
+
+                let entriesProcessed = 0;
+                const totalEntries = analysis.totalEntries || 0;
+                let extractionCompleted = false;
+
+                const finalize = () => {
+                    if (extractionCompleted) {
+                        return;
+                    }
+                    extractionCompleted = true;
+                    progressReporter.updatePhase('verifying', 'Finalizing installation...', 90);
+                    try {
+                        zipfile.close();
+                    } catch {
+                        // ignore
+                    }
+                    resolve();
+                };
+
+                const fail = (error: Error) => {
+                    if (extractionCompleted) {
+                        return;
+                    }
+                    extractionCompleted = true;
+                    try {
+                        zipfile.close();
+                    } catch {
+                        // ignore
+                    }
+                    reject(error);
+                };
+
+                const processNextEntry = () => {
+                    if (!extractionCompleted) {
+                        zipfile.readEntry();
+                    }
+                };
+
+                zipfile.readEntry();
+                zipfile.on("entry", (entry) => {
+                    if (extractionCompleted) {
+                        return;
+                    }
+
+                    entriesProcessed++;
+
+                    const normalized = entry.fileName.replace(/\\/g, "/");
+                    const originalSegments = normalized.split("/").filter(segment => segment && segment !== ".");
+
+                    if (originalSegments.length === 0 || originalSegments[0] === "__MACOSX") {
+                        if (entriesProcessed >= totalEntries) {
+                            finalize();
+                        } else {
+                            processNextEntry();
+                        }
+                        return;
+                    }
+
+                    const resolution = ModInstaller.resolveExtractionPath(originalSegments, analysis.stripSegments, context);
+                    if (!resolution) {
+                        if (entriesProcessed >= totalEntries) {
+                            finalize();
+                        } else {
+                            processNextEntry();
+                        }
+                        return;
+                    }
+
+                    const isDirectory = /\/$/.test(entry.fileName);
+
+                    if (isDirectory) {
+                        try {
+                            mkdirsSync(resolution.absolutePath);
+                        } catch (dirErr) {
+                            console.warn("Failed to ensure directory:", resolution.absolutePath, dirErr.message);
+                        }
+                        if (entriesProcessed >= totalEntries) {
+                            finalize();
+                        } else {
+                            processNextEntry();
+                        }
+                        return;
+                    }
+
+                    const outputDir = dirname(resolution.absolutePath);
+                    const resolvePathConflicts = (targetDir: string) => {
+                        const fs = require("fs");
+                        const pathParts = targetDir.split(pathSep);
+                        for (let i = 1; i <= pathParts.length; i++) {
+                            const partialPath = pathParts.slice(0, i).join(pathSep);
+                            try {
+                                const stats = fs.statSync(partialPath);
+                                if (stats.isFile()) {
+                                    console.warn("Found file blocking directory creation:", partialPath);
+                                    fs.unlinkSync(partialPath);
+                                }
+                            } catch {
+                                // ignore missing paths
+                            }
+                        }
+                    };
+
+                    resolvePathConflicts(outputDir);
+
+                    try {
+                        mkdirsSync(outputDir);
+                    } catch (dirErr) {
+                        console.warn("Could not create directory " + outputDir + ":", dirErr.message);
+                        resolvePathConflicts(outputDir);
+                        try {
+                            mkdirsSync(outputDir);
+                        } catch (retryErr) {
+                            console.error("Failed to create directory after conflict resolution:", retryErr.message);
+                        }
+                    }
+
+                    zipfile.openReadStream(entry, (errStream, readStream) => {
+                        if (errStream) {
+                            fail(new FileOperationError("read", resolution.relativePath, errStream));
+                            return;
+                        }
+
+                        let writeStream;
+                        try {
+                            writeStream = createWriteStream(resolution.absolutePath);
+                        } catch (createErr) {
+                            console.error("Failed to create write stream for " + resolution.absolutePath + ":", createErr);
+                            resolvePathConflicts(outputDir);
+                            try {
+                                mkdirsSync(outputDir);
+                                writeStream = createWriteStream(resolution.absolutePath);
+                            } catch (finalErr) {
+                                fail(new FileOperationError("write", resolution.relativePath, finalErr));
+                                return;
+                            }
+                        }
+
+                        readStream.pipe(writeStream);
+
+                        readStream.on("error", (streamErr) => {
+                            fail(new FileOperationError("read", resolution.relativePath, streamErr));
+                        });
+
+                        writeStream.on("error", (streamErr) => {
+                            fail(new FileOperationError("write", resolution.relativePath, streamErr));
+                        });
+
+                        writeStream.on("close", () => {
+                            const progressValue = totalEntries > 0
+                                ? Math.min(90, Math.round((entriesProcessed / totalEntries) * 60) + 30)
+                                : 90;
+                            const message = `Processing entry ${entriesProcessed} of ${totalEntries}`;
+                            progressReporter.updateProgress(progressValue, resolution.relativePath, message);
+                            console.log(`[Installation] ${message}`);
+                            if (entriesProcessed >= totalEntries) {
+                                finalize();
+                            } else {
+                                processNextEntry();
+                            }
+                        });
+                    });
+                });
+
+                zipfile.on("end", () => {
+                    if (!extractionCompleted) {
+                        finalize();
+                    }
+                });
+
+                zipfile.on("error", (zipErr) => {
+                    fail(new ExtractionError(modPath, zipErr));
+                });
+            });
+        });
+    }
+
+    public static async processRenpyContent(
+        installPath: string,
+        progressReporter?: ProgressReporter,
+        options: RenpyDecompileOptions = {}
+    ): Promise<'success' | 'skipped' | 'failed'> {
+        try {
+            const effectiveOptions: Required<Pick<RenpyDecompileOptions, 'deleteRpa' | 'deleteRpyc' | 'tryHarder' | 'overwriteExistingRpy'>> = {
+                deleteRpa: Boolean(options.deleteRpa),
+                deleteRpyc: Boolean(options.deleteRpyc),
+                tryHarder: Boolean(options.tryHarder),
+                overwriteExistingRpy: options.overwriteExistingRpy !== false
+            };
+
+            const searchRoots = new Set<string>([installPath]);
+
+            const additionalRoots = [
+                joinPath(installPath, "game"),
+                joinPath(installPath, "game", "autorun"),
+                joinPath(installPath, "autorun"),
+                joinPath(dirname(installPath), "game"),
+                joinPath(dirname(installPath), "game", "autorun"),
+                joinPath(dirname(installPath), "autorun")
+            ];
+
+            for (const candidate of additionalRoots) {
+                if (candidate && existsSync(candidate)) {
+                    searchRoots.add(candidate);
+                }
+            }
+
+            const aggregatedRpa = new Set<string>();
+            const aggregatedRpyc = new Set<string>();
+
+            for (const root of searchRoots) {
+                if (!existsSync(root)) {
+                    continue;
+                }
+                const { rpaFiles: rootRpa, rpycFiles: rootRpyc } = await ModInstaller.collectRenpyTargets(root);
+                rootRpa.forEach(file => aggregatedRpa.add(file));
+                rootRpyc.forEach(file => aggregatedRpyc.add(file));
+            }
+
+            const rpaFiles = Array.from(aggregatedRpa);
+            const rpycFiles = Array.from(aggregatedRpyc);
+
+            if (rpaFiles.length === 0 && rpycFiles.length === 0) {
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'No Ren\'Py archives detected.', 90);
+                }
+                return 'skipped';
+            }
+
+            let rpxModule: any;
+            try {
+                rpxModule = await ModInstaller.importEsmModule("@dynamicaaa/rpx");
+            } catch (importError) {
+                console.warn("[ModInstaller] RPX tooling not available; skipping Ren'Py processing.", importError);
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'Ren\'Py tooling unavailable.', 90);
+                }
+                return 'skipped';
+            }
+
+            const RPXClass = rpxModule?.RPX || rpxModule?.default;
+            if (!RPXClass) {
+                console.warn("[ModInstaller] RPX module did not expose an RPX extractor; skipping Ren'Py processing.");
+                if (progressReporter) {
+                    progressReporter.updatePhase('verifying', 'Ren\'Py tooling unavailable.', 90);
+                }
+                return 'skipped';
+            }
+
+            if (progressReporter) {
+                progressReporter.updatePhase('installing', 'Processing Ren\'Py archives...', 55);
+            }
+
+            let extractedArchives = 0;
+            let decompiledScripts = 0;
+
+            if (rpaFiles.length > 0) {
+                for (let index = 0; index < rpaFiles.length; index++) {
+                    const rpaPath = rpaFiles[index];
+                    const label = basename(rpaPath);
+                    const extractionProgress = 55 + Math.round(((index + 1) / rpaFiles.length) * 15);
+                    if (progressReporter) {
+                        progressReporter.updateProgress(extractionProgress, label, `Extracting ${label}`);
+                    }
+
+                    try {
+                        const extractor = new RPXClass(rpaPath, {
+                            decompileRPYC: true,
+                            keepRpycFiles: !effectiveOptions.deleteRpyc,
+                            overwriteRPY: effectiveOptions.overwriteExistingRpy,
+                            tryHarder: effectiveOptions.tryHarder
+                        });
+                        await extractor.extractAll(dirname(rpaPath));
+                        extractedArchives++;
+                        if (effectiveOptions.deleteRpa) {
+                            try {
+                                await fsPromises.unlink(rpaPath);
+                                if (progressReporter) {
+                                    progressReporter.updateProgress(
+                                        extractionProgress,
+                                        label,
+                                        `Extracted and removed ${label}`
+                                    );
+                                }
+                            } catch (unlinkError) {
+                                console.warn(`[ModInstaller] Failed to delete RPA archive ${rpaPath}:`, unlinkError);
+                            }
+                        }
+                    } catch (extractError) {
+                        console.warn(`[ModInstaller] Failed to extract RPA archive ${rpaPath}:`, extractError);
+                    }
+                }
+            }
+
+            if (rpycFiles.length > 0) {
+                let decompilerModule: any;
+                try {
+                    decompilerModule = await ModInstaller.importEsmModule("@dynamicaaa/rpx/src/decompiler.js");
+                } catch (importError) {
+                    console.warn("[ModInstaller] RPYC decompiler unavailable; skipping standalone RPYC processing.", importError);
+                    if (progressReporter) {
+                        progressReporter.updateProgress(75, undefined, "Ren'Py archive extraction complete");
+                    }
+                    return extractedArchives > 0 ? 'success' : 'skipped';
+                }
+
+                const RPYCDecompilerClass = decompilerModule?.RPYCDecompiler || decompilerModule?.default;
+                if (!RPYCDecompilerClass) {
+                    console.warn("[ModInstaller] RPYC decompiler module missing expected export; skipping RPYC processing.");
+                } else {
+                    const decompiler = new RPYCDecompilerClass({
+                        autoDecompile: true,
+                        overwrite: effectiveOptions.overwriteExistingRpy,
+                        tryHarder: effectiveOptions.tryHarder,
+                        keepRpycFiles: !effectiveOptions.deleteRpyc
+                    });
+                    try {
+                        if (typeof decompiler.init === "function") {
+                            await decompiler.init();
+                        }
+                    } catch (initError) {
+                        console.warn("[ModInstaller] Failed to initialize RPYC decompiler; skipping standalone RPYC processing.", initError);
+                    }
+
+                    for (let index = 0; index < rpycFiles.length; index++) {
+                        const rpycPath = rpycFiles[index];
+                        const label = basename(rpycPath);
+                        const decompileProgress = 70 + Math.round(((index + 1) / rpycFiles.length) * 10);
+                        if (progressReporter) {
+                            progressReporter.updateProgress(decompileProgress, label, `Decompiling ${label}`);
+                        }
+
+                        try {
+                            const result = await decompiler.decompileFile(rpycPath);
+                            if (!result?.success) {
+                                console.warn(`[ModInstaller] Failed to decompile ${rpycPath}:`, result?.error || "Unknown error");
+                            } else {
+                                decompiledScripts++;
+                                if (effectiveOptions.deleteRpyc) {
+                                    try {
+                                        await fsPromises.unlink(rpycPath);
+                                    } catch (unlinkError) {
+                                        console.warn(`[ModInstaller] Failed to delete RPYC file ${rpycPath}:`, unlinkError);
+                                    }
+                                }
+                            }
+                        } catch (decompileError) {
+                            console.warn(`[ModInstaller] Exception decompiling ${rpycPath}:`, decompileError);
+                        }
+                    }
+                }
+            }
+
+            if (progressReporter) {
+                const summaryParts: string[] = [];
+                if (extractedArchives > 0) {
+                    summaryParts.push(`${extractedArchives} RPA extracted`);
+                }
+                if (decompiledScripts > 0) {
+                    summaryParts.push(`${decompiledScripts} script${decompiledScripts === 1 ? '' : 's'} decompiled`);
+                }
+                const summary = summaryParts.length > 0 ? summaryParts.join(", ") : "No actionable Ren'Py resources found";
+                progressReporter.updatePhase('verifying', `Ren'Py processing complete (${summary}).`, 90);
+            }
+            return extractedArchives > 0 || decompiledScripts > 0 ? 'success' : 'skipped';
+        } catch (error) {
+            console.warn("[ModInstaller] Unexpected error while processing Ren'Py resources:", error);
+            if (progressReporter) {
+                const wrappedError = error instanceof Error ? error : new Error(String(error));
+                progressReporter.error(wrappedError, 'installing');
+            }
+            return 'failed';
+        }
+    }
+
+    private static async collectRenpyTargets(root: string): Promise<{ rpaFiles: string[]; rpycFiles: string[] }> {
+        const rpaFiles: string[] = [];
+        const rpycFiles: string[] = [];
+        const pending: string[] = [root];
+
+        while (pending.length > 0) {
+            const currentDir = pending.pop();
+            if (!currentDir) {
+                continue;
+            }
+
+            let entries: Dirent[];
+            try {
+                entries = await fsPromises.readdir(currentDir, { withFileTypes: true });
+            } catch (error) {
+                console.warn(`[ModInstaller] Could not read directory ${currentDir}:`, error instanceof Error ? error.message : error);
+                continue;
+            }
+
+            for (const entry of entries) {
+                const fullPath = joinPath(currentDir, entry.name);
+                if (entry.isSymbolicLink()) {
+                    continue;
+                }
+
+                if (entry.isDirectory()) {
+                    pending.push(fullPath);
+                    continue;
+                }
+
+                if (!entry.isFile()) {
+                    continue;
+                }
+
+                const lowerName = entry.name.toLowerCase();
+                if (lowerName.endsWith(".rpa")) {
+                    rpaFiles.push(fullPath);
+                } else if (lowerName.endsWith(".rpyc") || lowerName.endsWith(".rpymc")) {
+                    rpycFiles.push(fullPath);
+                }
+            }
+        }
+
+        return { rpaFiles, rpycFiles };
     }
 
     /**

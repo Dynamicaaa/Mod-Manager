@@ -1,11 +1,25 @@
 import { join as joinPath, sep as pathSep } from "path";
 import { platform } from "os";
+import { existsSync } from "fs";
 
 /**
  * Cross-platform path resolver for handling platform-specific game installation paths
  * Provides centralized logic for resolving game paths, script paths, and save data paths
  */
 export class CrossPlatformPathResolver {
+    
+    private static pickExistingPath(candidates: string[], fallback?: string): string {
+        for (const candidate of candidates) {
+            try {
+                if (existsSync(candidate)) {
+                    return candidate;
+                }
+            } catch {
+                // Ignore filesystem errors (permissions, etc.)
+            }
+        }
+        return fallback ?? candidates[0];
+    }
     
     /**
      * Resolves the main game path based on platform and installation structure
@@ -17,25 +31,16 @@ export class CrossPlatformPathResolver {
         
         switch (currentPlatform) {
             case 'darwin':
-                // macOS: Check for app bundle structure first
-                const appBundlePath = joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun");
-                const directGamePath = joinPath(installPath, "game");
-                
-                // Prefer app bundle structure for macOS
-                try {
-                    const fs = require("fs");
-                    if (fs.existsSync(appBundlePath)) {
-                        return appBundlePath;
-                    } else if (fs.existsSync(directGamePath)) {
-                        return directGamePath;
-                    } else {
-                        // Default to app bundle path for new installations
-                        return appBundlePath;
-                    }
-                } catch (error) {
-                    console.warn("Error checking game path existence:", error);
-                    return appBundlePath;
-                }
+                // macOS: Support multiple bundle layouts (App bundle or extracted)
+                const macCandidates = [
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun"),
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "game"),
+                    joinPath(installPath, "Contents", "Resources", "autorun"),
+                    joinPath(installPath, "Contents", "Resources", "game"),
+                    joinPath(installPath, "autorun"),
+                    joinPath(installPath, "game")
+                ];
+                return this.pickExistingPath(macCandidates);
                 
             case 'win32':
                 // Windows: Standard game folder
@@ -61,21 +66,18 @@ export class CrossPlatformPathResolver {
         
         switch (currentPlatform) {
             case 'darwin':
-                // macOS: Scripts are in the app bundle or root
-                const appBundleScriptPath = joinPath(installPath, "DDLC.app", "Contents", "MacOS");
-                const rootScriptPath = installPath;
-                
-                try {
-                    const fs = require("fs");
-                    if (fs.existsSync(joinPath(appBundleScriptPath, "DDLC"))) {
-                        return appBundleScriptPath;
-                    } else {
-                        return rootScriptPath;
+                // macOS: Executables typically live inside the app bundle, but fall back gracefully
+                const macScriptCandidates = [
+                    joinPath(installPath, "DDLC.app", "Contents", "MacOS"),
+                    joinPath(installPath, "Contents", "MacOS"),
+                    installPath
+                ];
+                for (const candidate of macScriptCandidates) {
+                    if (existsSync(joinPath(candidate, "DDLC"))) {
+                        return candidate;
                     }
-                } catch (error) {
-                    console.warn("Error checking script path existence:", error);
-                    return appBundleScriptPath;
                 }
+                return this.pickExistingPath(macScriptCandidates);
                 
             case 'win32':
                 // Windows: Executables in root
@@ -100,24 +102,15 @@ export class CrossPlatformPathResolver {
         
         switch (currentPlatform) {
             case 'darwin':
-                // macOS: Save data can be in multiple locations
-                const appBundleSavePath = joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun", "game", "saves");
-                const directSavePath = joinPath(installPath, "game", "saves");
-                
-                try {
-                    const fs = require("fs");
-                    if (fs.existsSync(appBundleSavePath)) {
-                        return appBundleSavePath;
-                    } else if (fs.existsSync(directSavePath)) {
-                        return directSavePath;
-                    } else {
-                        // Default to app bundle structure for consistency
-                        return appBundleSavePath;
-                    }
-                } catch (error) {
-                    console.warn("Error checking save data path existence:", error);
-                    return appBundleSavePath;
-                }
+                // macOS: Support autorun/game as well as extracted structures
+                const macSaveCandidates = [
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun", "game", "saves"),
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "game", "saves"),
+                    joinPath(installPath, "Contents", "Resources", "autorun", "game", "saves"),
+                    joinPath(installPath, "autorun", "game", "saves"),
+                    joinPath(installPath, "game", "saves")
+                ];
+                return this.pickExistingPath(macSaveCandidates);
                 
             case 'win32':
                 // Windows: Standard saves folder
@@ -142,29 +135,39 @@ export class CrossPlatformPathResolver {
         
         switch (currentPlatform) {
             case 'darwin':
-                // macOS: RenPy libs can be in app bundle or root
-                const appBundleRenpyPath = joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun", "renpy");
-                const directRenpyPath = joinPath(installPath, "renpy");
-                
-                try {
-                    const fs = require("fs");
-                    if (fs.existsSync(appBundleRenpyPath)) {
-                        return appBundleRenpyPath;
-                    } else if (fs.existsSync(directRenpyPath)) {
-                        return directRenpyPath;
-                    } else {
-                        return appBundleRenpyPath;
-                    }
-                } catch (error) {
-                    console.warn("Error checking RenPy path existence:", error);
-                    return appBundleRenpyPath;
-                }
+                // macOS: Ren'Py libraries can appear in several bundle layouts
+                const macRenpyCandidates = [
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun", "renpy"),
+                    joinPath(installPath, "DDLC.app", "Contents", "Resources", "renpy"),
+                    joinPath(installPath, "Contents", "Resources", "autorun", "renpy"),
+                    joinPath(installPath, "autorun", "renpy"),
+                    joinPath(installPath, "renpy")
+                ];
+                return this.pickExistingPath(macRenpyCandidates);
                 
             case 'win32':
             case 'linux':
             default:
                 return joinPath(installPath, "renpy");
         }
+    }
+
+    /**
+     * Resolves the autorun directory used for mod content placement.
+     * On macOS this targets the app bundle, other platforms fall back to the game directory.
+     */
+    public static resolveAutorunPath(installPath: string): string {
+        if (platform() === 'darwin') {
+            const macAutorunCandidates = [
+                joinPath(installPath, "DDLC.app", "Contents", "Resources", "autorun"),
+                joinPath(installPath, "Contents", "Resources", "autorun"),
+                joinPath(installPath, "autorun"),
+                joinPath(installPath, "game")
+            ];
+            return this.pickExistingPath(macAutorunCandidates);
+        }
+
+        return joinPath(installPath, "game");
     }
 
     /**
@@ -176,38 +179,67 @@ export class CrossPlatformPathResolver {
     public static resolveModInstallPath(installPath: string, relativePath: string): string {
         const currentPlatform = platform();
         
-        // Determine if this is a game file, script file, or other type
-        const isGameFile = relativePath.startsWith("game/") || 
-                          relativePath.includes(".rpy") || 
-                          relativePath.includes(".rpyc") ||
-                          relativePath.includes(".png") ||
-                          relativePath.includes(".jpg") ||
-                          relativePath.includes(".ogg") ||
-                          relativePath.includes(".mp3");
+        const normalizedRelative = relativePath.replace(/^[\\/]+/, "").replace(/\\/g, "/");
+        const lower = normalizedRelative.toLowerCase();
+
+        const assetExtensions = [
+            ".rpy",
+            ".rpyc",
+            ".rpa",
+            ".txt",
+            ".json",
+            ".py",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".ogg",
+            ".mp3",
+            ".wav",
+            ".flac",
+            ".mp4",
+            ".webm",
+            ".avi",
+            ".chr"
+        ];
+
+        const gameDirectoryPrefixes = [
+            "game/",
+            "characters/",
+            "autorun/",
+            "scripts/",
+            "tl/",
+            "mod/",
+            "mods/",
+            "renpy/"
+        ];
         
-        const isScriptFile = relativePath.includes(".exe") || 
-                           relativePath.includes(".sh") ||
-                           relativePath.includes(".app/");
+        const isGameDirectory = gameDirectoryPrefixes.some(prefix => lower.startsWith(prefix));
+        const isGameExtension = assetExtensions.some(ext => lower.endsWith(ext));
+        const isGameFile = isGameDirectory || isGameExtension;
+        
+        const isScriptFile = lower.endsWith(".exe") ||
+            lower.endsWith(".sh") ||
+            lower.endsWith(".bat") ||
+            lower.includes(".app/");
+        
+        const normalizedPath = this.normalizePath(normalizedRelative);
         
         switch (currentPlatform) {
             case 'darwin':
-                if (isGameFile) {
-                    // Game files go to the autorun directory for macOS compatibility
-                    const basePath = this.resolveGamePath(installPath);
-                    return joinPath(basePath, relativePath.replace(/^game\//, ""));
-                } else if (isScriptFile) {
-                    // Script files and app bundles go to appropriate locations
-                    return joinPath(installPath, relativePath);
-                } else {
-                    // Other files (configs, etc.) go to root
-                    return joinPath(installPath, relativePath);
+                if (isScriptFile) {
+                    // Maintain executable placement beside the app bundle
+                    return joinPath(installPath, normalizedPath);
                 }
+                // Route all mod/game assets into the autorun directory for compatibility
+                const autorunBase = this.resolveAutorunPath(installPath);
+                return joinPath(autorunBase, normalizedPath);
                 
             case 'win32':
             case 'linux':
             default:
                 // Standard structure for Windows and Linux
-                return joinPath(installPath, relativePath);
+                return joinPath(installPath, normalizedPath);
         }
     }
 

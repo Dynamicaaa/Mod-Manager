@@ -386,6 +386,10 @@ api.mods.backupInstall = function(folderName, outPath) {
 api.mods.restoreInstall = function(zipPath, folderName) {
     return ipcRenderer.sendSync("restore install", {zipPath, folderName});
 };
+// Decompile install
+api.mods.decompileInstall = function(folderName, options = {}) {
+    return ipcRenderer.invoke("decompile install", { folderName, options });
+};
 
 
 // User menu

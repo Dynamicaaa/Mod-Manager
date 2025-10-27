@@ -132,15 +132,15 @@ export class ProgressReporter extends EventEmitter {
     private getDefaultPhaseMessage(): string {
         switch (this.currentPhase) {
             case 'analyzing':
-                return 'Analyzing mod structure...';
+                return 'Analyzing content...';
             case 'extracting':
-                return 'Extracting archive files...';
+                return 'Extracting files...';
             case 'mapping':
-                return 'Mapping file destinations...';
+                return 'Organizing output...';
             case 'installing':
-                return 'Installing mod files...';
+                return 'Processing task...';
             case 'verifying':
-                return 'Verifying installation...';
+                return 'Finalizing operation...';
             default:
                 return 'Processing...';
         }
