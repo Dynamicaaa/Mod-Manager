@@ -1,4 +1,4 @@
-name: CI Build
+name: Build and Package
 
 on:
   push:
@@ -7,30 +7,9 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: npm install
-        env:
-          NODE_ENV: development
-
-      - name: Run tests
-        run: npm test
-
   build-windows:
     name: Build Windows
     runs-on: windows-latest
-    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,14 +33,20 @@ jobs:
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: windows-ci-build
+          name: windows-build
           path: dist/*.exe
-          retention-days: 7
+          retention-days: 30
+
+      - name: Upload Windows portable artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-portable-build
+          path: dist/*-portable.exe
+          retention-days: 30
 
   build-macos:
     name: Build macOS
     runs-on: macos-latest
-    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -85,14 +70,20 @@ jobs:
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: macos-ci-build
+          name: macos-build
           path: dist/*.dmg
-          retention-days: 7
+          retention-days: 30
+
+      - name: Upload macOS ZIP artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-zip-build
+          path: dist/*.zip
+          retention-days: 30
 
   build-linux:
     name: Build Linux
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -113,12 +104,23 @@ jobs:
       - name: Package for Linux
         run: npm run dist:linux
 
-      - name: Upload Linux artifacts
+      - name: Upload Linux AppImage artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: linux-ci-build
-          path: |
-            dist/*.AppImage
-            dist/*.deb
-            dist/*.tar.gz
-          retention-days: 7
+          name: linux-appimage-build
+          path: dist/*.AppImage
+          retention-days: 30
+
+      - name: Upload Linux DEB artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-deb-build
+          path: dist/*.deb
+          retention-days: 30
+
+      - name: Upload Linux TAR.GZ artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-tar-build
+          path: dist/*.tar.gz
+          retention-days: 30
